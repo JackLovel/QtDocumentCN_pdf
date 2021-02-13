@@ -1,0 +1,81 @@
+\chapter{QSql}
+QSql 命名空间\\
+
+QSql 命名空间 里的 各种名样的标识符，已经被运用在 Qt SQL 各个模块中。\href{https://doc.qt.io/qt-5/qsql.html#details}{更多} \\
+
+\begin{tabular}{|c|c|p{1.5cm}|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSql>\\      
+	\hline
+	qmake & QT += sql\\      
+	\hline
+\end{tabular}\\
+
+类型\\
+
+\begin{tabular}{|c|c|}
+	\hline
+	 &  \\
+	\hline
+	enum & Location \{ BeforeFirstRow, AfterLastRow \}\\      
+	\hline
+	enum & NumericalPrecisionPolicy \{ LowPrecisionInt32, LowPrecisionInt64,LowPrecisionDouble,HighPrecision\}\\      
+	\hline
+	flags & ParamType \\
+	\hline 
+	enum & ParamTypeFlag \{ In, Out, InOut, Binary \} \\ 
+	\hline
+	enum & TableType \{ Tables, SystemTables, Views, AllTables \}\\
+	\hline
+\end{tabular}\\
+
+细节的介绍 \\
+
+查看 \href{https://doc.qt.io/qt-5/qtsql-index.html}{Qt SQL}
+
+类型 文档\\ 
+
+enum QSql::Location
+
+
+此枚举类型描述特殊的sql导航位置
+
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	常量	& 值 & 介绍 \\
+	\hline
+	QSql::BeforeFirstRow&-1&在第一个记录之前\\
+	\hline
+	QSql::AfterLastRow&-2&在最后一个记录之后\\
+	\hline
+\end{tabular}\\
+
+另请参阅 \href{https://doc.qt.io/qt-5/qsqlquery.html#at}{QSqlQuery::at()}
+
+enum QSql::NumericalPrecisionPolicy
+
+
+数据库中的数值可以比它们对应的C++类型更精确。此枚举列出在应用程序中表示此类值的策略。
+
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	常量	& 值 & 介绍 \\
+	\hline
+	QSql::LowPrecisionInt32	&0x01 &对于32位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
+	\hline
+	QSql::LowPrecisionInt64	&0x02 &对于64位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
+	\hline
+	QSql::LowPrecisionDouble&0x04 &强制双精度值。这个默认的规则\\
+	\hline
+	QSql::HighPrecision	&0&字符串将会维技精度\\
+	\hline
+\end{tabular}\\
+
+注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。
+
+
+

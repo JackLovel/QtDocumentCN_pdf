@@ -1,0 +1,73 @@
+\documentclass[a4paper,titlepage,UTF8, openany]{ctexbook}
+
+% 导言区
+% 包
+\usepackage{xeCJK} % 导入中文支持包
+\usepackage[colorlinks, linkcolor=blue]{hyperref} % 超链接的颜色设置为红色
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{cite}
+\usepackage[super]{gbt7714} % 中文文献包
+\usepackage{graphicx} % 导入图片包
+\graphicspath{{img/game/},{img/install/},{img/screenfetch/}}
+
+\usepackage{subfig}
+
+% consolas
+\newfontfamily\consolas{Consolas}
+
+% green
+\definecolor{mygreen}{rgb}{0, 0.6, 0}
+
+% 页边距
+\geometry{left=2.5cm,right=2.5cm,top=2.0cm,bottom=2cm}
+
+% 页眉页脚
+\pagestyle{empty}
+
+% 代码块设置
+% \lstset{
+%     basicstyle=\small\consolas, % 代码字体设置
+%     columns=flexible,       
+%     numbers=none,                                        % 在左侧显示行号
+%     frame=single,                                          % 不显示背景边框
+%     backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+%     keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+%     numberstyle=\footnotesize\color{darkgray},           % 设定行号格式
+%     commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
+%     stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+%     showstringspaces=false,                             % 不显示字符串中的空格
+%     language=bash,                                        % 设置语言
+%     breaklines=true, % 自动换行
+%     tabsize=4,
+% }
+
+\lstset{
+	basicstyle=\small\consolas,
+	numberstyle= \tiny, 
+	keywordstyle= \color{ blue!70},
+	commentstyle=\color{mygreen},
+	frame=shadowbox, 
+	rulesepcolor= \color{ red!20!green!20!blue!20},
+	columns=flexible, % 等宽字体
+} 
+
+% 中文设置
+\setCJKmainfont{思源宋体}
+
+% 英文设置
+\setmainfont{JetBrains Mono}
+
+% 标题页
+\title{QtDocumentCN}
+\CTEXoptions[today=small]
+
+\CTEXsetup[format={\Large}]{section} % 标题左对齐
+
+% %导入数据库的参考文献模板
+%\bibliographystyle{gbt7714-numerical}
+\begin{document}
+\include{./chapter/QSql}
+\end{document}
