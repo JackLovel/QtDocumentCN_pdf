@@ -5,28 +5,90 @@ QSqlDatabase 类 用于处理数据库的连接
 	\hline
 	属性 & 方法 \\
 	\hline
-	头文件 & \#include <QSql>\\      
+	头文件 & \#include <QSqlDatabase>\\      
 	\hline
 	qmake & QT += sql\\      
 	\hline
 \end{tabular}\\
 
-类型
+\href{https://doc.qt.io/qt-5/qsqldatabase-members.html}{列出所有的成员，包括继承成员}
+
+公共类型
 
 \begin{tabular}{|c|c|}
-	\hline
-	&  \\
-	\hline
-	enum & Location \{ BeforeFirstRow, AfterLastRow \}\\      
-	\hline
-	enum & NumericalPrecisionPolicy \{ LowPrecisionInt32, LowPrecisionInt64,LowPrecisionDouble,HighPrecision\}\\      
-	\hline
-	flags & ParamType \\
-	\hline 
-	enum & ParamTypeFlag \{ In, Out, InOut, Binary \} \\ 
-	\hline
-	enum & TableType \{ Tables, SystemTables, Views, AllTables \}\\
-	\hline
+\hline
+返回值 & 函数名 \\
+\hline
+ & QSqlDatabase(const QSqlDatabase \&other) \\ 
+\hline
+ & QSqlDatabase()\\
+\hline
+QSqlDatabase \&	&operator=(const QSqlDatabase \&other)\\
+\hline
+ & ~QSqlDatabase()\\
+\hline
+void& close()\\
+\hline
+bool&commit()\\
+\hline
+QString	&connectOptions() const\\
+\hline
+QString	&connectionName() const\\
+\hline
+QString	&databaseName() const\\
+\hline
+QSqlDriver *&	driver() const\\
+\hline
+QString	&driverName() const\\
+\hline
+QSqlQuery&	exec(const QString \&query = QString()) const\\
+\hline
+QString	&hostName() const\\
+\hline
+bool	&isOpen() const\\
+\hline
+bool	&isOpenError() const\\
+\hline
+bool	&isValid() const\\
+\hline
+QSqlError&	lastError() const\\
+\hline
+QSql::NumericalPrecisionPolicy & numericalPrecisionPolicy() const\\
+\hline
+bool	&open()\\
+\hline
+bool&	open(const QString \&user, const QString \&password)\\
+\hline
+QString&	password() const\\
+\hline
+int	&port() const\\
+\hline
+QSqlIndex&	primaryIndex(const QString \&tablename) const\\
+\hline
+QSqlRecord&	record(const QString \&tablename) const\\
+\hline
+bool	&rollback()\\
+\hline
+void	&setConnectOptions(const QString \&options = QString())\\
+\hline
+void	&setDatabaseName(const QString \&name)\\
+\hline
+void	&setHostName(const QString \&host)\\
+\hline
+void	& setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy    precisionPolicy)\\
+\hline
+void	&setPassword(const QString \&password)\\
+\hline
+void	&setPort(int port)\\
+\hline
+void	&setUserName(const QString \&name)\\
+\hline
+QStringList	&tables(QSql::TableType type = QSql::Tables) const\\
+\hline
+bool&	transaction()\\
+\hline
+QString	&userName() const\\
+\hline
 \end{tabular}\\
 
 细节的介绍 \\
