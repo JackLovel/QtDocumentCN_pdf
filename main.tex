@@ -27,23 +27,6 @@
 % 页眉页脚
 \pagestyle{empty}
 
-% 代码块设置
-% \lstset{
-%     basicstyle=\small\consolas, % 代码字体设置
-%     columns=flexible,       
-%     numbers=none,                                        % 在左侧显示行号
-%     frame=single,                                          % 不显示背景边框
-%     backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
-%     keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
-%     numberstyle=\footnotesize\color{darkgray},           % 设定行号格式
-%     commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
-%     stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
-%     showstringspaces=false,                             % 不显示字符串中的空格
-%     language=bash,                                        % 设置语言
-%     breaklines=true, % 自动换行
-%     tabsize=4,
-% }
-
 \lstset{
 	basicstyle=\small\consolas,
 	numberstyle= \tiny, 
@@ -69,5 +52,25 @@
 % %导入数据库的参考文献模板
 %\bibliographystyle{gbt7714-numerical}
 \begin{document}
+% 正文区（文稿区）
+% 页眉页脚
+\pagestyle{fancy}
+\lhead{Qt中文文档}
+\renewcommand{\headrulewidth}{0.4pt}
+
+
+% 段间距
+\setlength\parskip{5mm plus 5mm minus 5mm} % 基础距离2cm,可上下浮动5mm
+
+% 行距
+\linespread{1.5} % 1.5倍行距
+
+% 首行缩进
+\setlength\parindent{1em}
+
+\maketitle
+\tableofcontents
+\thispagestyle{empty} % 目录页不显示页码
+
 \include{./chapter/QSql}
 \end{document}
