@@ -75,7 +75,34 @@ enum QSql::NumericalPrecisionPolicy
 	\hline
 \end{tabular}\\
 
-注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。
+注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。\\
+
+
+enum QSql::ParamTypeFlag
+
+
+flags QSql::ParamType
+
+
+这个枚举用于指定绑定参数的类型
+
+\begin{tabular}{|l|l|l|}
+	\hline
+		常量	& 值 & 介绍 \\
+	\hline
+	QSql::In&0x00000001&这个参数被用于向数据库里写入数据\\
+	\hline
+	QSql::Out&0x00000002&这个参数被用于向数据库里获得数据\\
+	\hline
+	QSql::InOut&In | Out&这个参数被用于向数据库里写入数据;使用 查询 来向数据库里，重写数据\\
+	\hline
+	QSql::Binary&0x00000004&如果您想 显示数据为 原始的二进制数据，那么必须是 OR'd 和其他的标志一 起使用\\
+	\hline
+\end{tabular}
+
+类型参数 类型定义为 \href{https://doc.qt.io/qt-5/qflags.html}{QFlags}. 它被存放在 一个 OR与 类型参数标志的值 的组合。
+
+
 
 
 
