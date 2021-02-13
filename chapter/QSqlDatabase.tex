@@ -9,9 +9,10 @@ QSqlDatabase 类 用于处理数据库的连接
 	\hline
 	qmake & QT += sql\\      
 	\hline
-\end{tabular}\\
+\end{tabular}
 
 \href{https://doc.qt.io/qt-5/qsqldatabase-members.html}{列出所有的成员，包括继承成员}
+
 
 公共类型
 
@@ -91,78 +92,47 @@ QString	&userName() const\\
 \hline
 \end{tabular}\\
 
-细节的介绍 \\
+静态公共成员
 
-查看 \href{https://doc.qt.io/qt-5/qtsql-index.html}{Qt SQL}
-
-类型 文档\\ 
-
-enum QSql::Location
-
-
-此枚举类型描述特殊的sql导航位置
-
-
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|r|l|}
 	\hline
-	常量	& 值 & 介绍 \\
+	返回值 & 函数名 \\
 	\hline
-	QSql::BeforeFirstRow&-1&在第一个记录之前\\
-	\hline
-	QSql::AfterLastRow&-2&在最后一个记录之后\\
-	\hline
-\end{tabular}\\
-
-另请参阅 \href{https://doc.qt.io/qt-5/qsqlquery.html#at}{QSqlQuery::at()}
-
-enum QSql::NumericalPrecisionPolicy
-
-
-数据库中的数值可以比它们对应的C++类型更精确。此枚举列出在应用程序中表示此类值的策略。
-
-
-\begin{tabular}{|c|c|c|}
-	\hline
-	常量	& 值 & 介绍 \\
-	\hline
-	QSql::LowPrecisionInt32	&0x01 &对于32位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
-	\hline
-	QSql::LowPrecisionInt64	&0x02 &对于64位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
-	\hline
-	QSql::LowPrecisionDouble&0x04 &强制双精度值。这个默认的规则\\
-	\hline
-	QSql::HighPrecision	&0&字符串将会维技精度\\
-	\hline
-\end{tabular}\\
-
-注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。\\
-
-
-enum QSql::ParamTypeFlag
-
-
-flags QSql::ParamType
-
-
-这个枚举用于指定绑定参数的类型
-
-\begin{tabular}{|l|l|l|}
-	\hline
-	常量	& 值 & 介绍 \\
-	\hline
-	QSql::In&0x00000001&这个参数被用于向数据库里写入数据\\
-	\hline
-	QSql::Out&0x00000002&这个参数被用于向数据库里获得数据\\
-	\hline
-	QSql::InOut&In | Out&这个参数被用于向数据库里写入数据;使用 查询 来向数据库里，重写数据\\
-	\hline
-	QSql::Binary&0x00000004&如果您想 显示数据为 原始的二进制数据，那么必须是 OR'd 和其他的标志一 起使用\\
+	QSqlDatabase&	addDatabase(const QString \&type, const QString \&connectionName = QLatin1String(defaultConnection))\\
+		\hline
+	QSqlDatabase&	addDatabase(QSqlDriver *driver, const QString \&connectionName = QLatin1String(defaultConnection))\\
+		\hline
+	QSqlDatabase&	cloneDatabase(const QSqlDatabase \&other, const QString \&connectionName)\\
+		\hline
+	QSqlDatabase&	cloneDatabase(const QString \&other, const QString \&connectionName)\\
+		\hline
+	QStringList&	connectionNames()\\
+		\hline
+	bool&	contains(const QString \&connectionName = QLatin1String(defaultConnection))\\
+		\hline
+	QSqlDatabase&	database(const QString \&connectionName = QLatin1String(defaultConnection), bool open = true)\\
+		\hline
+	QStringList&	drivers()\\
+		\hline
+	bool&	isDriverAvailable(const QString \&name)\\
+		\hline
+	void&	registerSqlDriver(const QString \&name, QSqlDriverCreatorBase *creator)\\
+		\hline
+	void&	removeDatabase(const QString \&connectionName)\\
 	\hline
 \end{tabular}
 
-类型参数 类型定义为 \href{https://doc.qt.io/qt-5/qflags.html}{QFlags}. 它被存放在 一个 OR与 类型参数标志的值 的组合。
+受保护的成员函数
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回值 & 函数名 \\
+	\hline
+	&QSqlDatabase(QSqlDriver *driver)\\
+	\hline
+	&QSqlDatabase(const QString \&type)\\
+	\hline
+\end{tabular}
 
 
-
-
-
+	
