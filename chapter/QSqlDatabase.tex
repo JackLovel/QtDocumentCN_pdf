@@ -230,6 +230,29 @@ QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接
 	\hline
 \end{tabular}
 
+其他第三方驱动程序，包括自己自定义的驱动程序，都可以动态加载。
+
+请参阅 \href{https://doc.qt.io/qt-5/sql-driver.html}{SQL Database Drivers}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseregistersqldriverconst-qstring-name-qsqldrivercreatorbase-creator}{registerSqlDriver()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qstringlist-qsqldatabasedrivers}{drivers()}。
+
+QSqlDatabase::QSqlDatabase(const QSqlDatabase \&other)
+
+创建一个其它的副本
+
+QSqlDatabase::QSqlDatabase()
+创建一个 无效的 QSqlDatabase 空对象。
+使用\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabaseadddatabaseconst-qstring-type-const-qstring-connectionname--qlatin1stringdefaultconnection}{addDatabase()},  \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseremovedatabaseconst-qstring-connectionname}{removeDatabase()} 和\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabasedatabaseconst-qstring-connectionname--qlatin1stringdefaultconnection-bool-open--true}{database()} 来获得一个有效的 QSqlDatabase 对象。
+
+QSqlDatabase \&QSqlDatabase::operator=(const QSqlDatabase \&other)
+
+给这个对象赋一个其他其他对象的值
+
+QSqlDatabase::~QSqlDatabase()
+
+销毁这个对象，并且释放所有配置的资源 注意： 当最后的连接被销毁，这个折构函数就会暗中的调用 close()函数，去删除这个数据库的其他连接。
+
+另请参阅 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabaseclose}{close()}。
+
+
 
 
 	
