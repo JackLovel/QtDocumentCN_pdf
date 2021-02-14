@@ -151,4 +151,32 @@ QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接
 如果您想创建多个数据库连接，可以调用 addDatabase(), 并且给一个独一无二的参数(即：连接名称)。使用 带有连接名的database() 函数，来获取该连接。使用 带有连接名的removeDatabase() 函数，来删除 一个连接。如果尝试删除由其他QSqlDatabase对象引用的连接，QSqlDatabase将输出警告。可以使用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-bool-qsqldatabasecontainsconst-qstring-connectionname--qlatin1stringdefaultconnection}{contains()}查看给定的连接名是否在连接列表中。
 
 
+\begin{tabular}{|c|c|}
+	\hline	
+		& 一些实用的方法\\
+	\hline
+	\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#qstringlist-qsqldatabasetablesqsqltabletype-type--qsqltables-const}{tables()} &	返回 数据表的列表\\
+		\hline
+	\href{URL}{primaryIndex()} &返回数据表的主索引\\
+		\hline
+	record()&	返回数据表字段的元信息\\
+		\hline
+	transaction()	&开始一个事务\\
+		\hline
+	commit()&	保存并完成一个事务\\
+		\hline
+	rollback()&	取消一个事务\\
+		\hline
+	hasFeature()&	检查驱动程序是否支持事务\\
+		\hline
+	lastError()	&返回有关上一个错误的信息\\
+		\hline
+	drivers()	&返回可用的数据库驱动名称\\
+		\hline
+	isDriverAvailable()	&检查特定驱动程序是否可用\\
+		\hline
+	registerSqlDriver()	&注册自定义驱动程序\\
+		\hline
+\end{tabular}
+
 	
