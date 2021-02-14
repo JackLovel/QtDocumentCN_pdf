@@ -163,26 +163,73 @@ QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接
 	\hline
 	\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#qstringlist-qsqldatabasetablesqsqltabletype-type--qsqltables-const}{tables()} &	返回 数据表的列表\\
 		\hline
-	\href{URL}{primaryIndex()} &返回数据表的主索引\\
+	\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#qsqlindex-qsqldatabaseprimaryindexconst-qstring-tablename-const}{primaryIndex()} &返回数据表的主索引\\
 		\hline
-	record()&	返回数据表字段的元信息\\
+	\href{URL}{record()} &	返回数据表字段的元信息\\
 		\hline
-	transaction()	&开始一个事务\\
+	\href{URL}{transaction()} &开始一个事务\\
 		\hline
-	commit()&	保存并完成一个事务\\
+	\href{URL}{commit()}&	保存并完成一个事务\\
 		\hline
-	rollback()&	取消一个事务\\
+	\href{URL}{rollback()}&	取消一个事务\\
 		\hline
-	hasFeature()&	检查驱动程序是否支持事务\\
+	\href{URL}{hasFeature()}&	检查驱动程序是否支持事务\\
 		\hline
-	lastError()	&返回有关上一个错误的信息\\
+	\href{URL}{lastError()}	&返回有关上一个错误的信息\\
 		\hline
-	drivers()	&返回可用的数据库驱动名称\\
+	\href{URL}{drivers()}	&返回可用的数据库驱动名称\\
 		\hline
-	isDriverAvailable()	&检查特定驱动程序是否可用\\
+	\href{URL}{isDriverAvailable()}	&检查特定驱动程序是否可用\\
 		\hline
-	registerSqlDriver()	&注册自定义驱动程序\\
+	\href{URL}{registerSqlDriver()}	&注册自定义驱动程序\\
 		\hline
 \end{tabular}
+
+注意： QSqlDatabase::exec() 方法已经被弃用。请使用 QSqlQuery::exec()
+
+注意： 使用事务时，必须在创建查询之前启动事务。
+
+
+成员函数文档
+
+[protected] QSqlDatabase::QSqlDatabase(QSqlDriver *driver)
+
+这是一个重载函数
+
+使用给定驱动程序来创建连接
+
+[protected] QSqlDatabase::QSqlDatabase(const \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QString/QString.md}{QString} \&type)
+
+这是一个重载函数
+
+通过引用所给的数据库驱动类型来创建一个连接。如果不给定 数据库驱动类型 ，那么这个数据库连接将会没有什么作用。
+
+当前可用的驱动类型：
+
+\begin{tabular}{|r|l|}
+	\hline	
+	驱动类别& 介绍\\
+	\hline
+	QDB2&	IBM DB2\\
+		\hline
+	QIBASE	&Borland InterBase 驱动\\
+		\hline
+	QMYSQL	&MySQL 驱动\\
+		\hline
+	QOCI	&Oracle 调用的接口驱动\\
+		\hline
+	QODBC	&ODBC 驱动 (包含 Microsoft SQL Server)\\
+		\hline
+	QPSQL	&PostgreSQL 驱动\\
+		\hline
+	QSQLITE	&SQLite 第三版本 或者 以上\\
+		\hline
+	QSQLITE2&	SQLite 第二版本\\
+		\hline
+	QTDS	&Sybase Adaptive Server\\
+	\hline
+\end{tabular}
+
+
 
 	
