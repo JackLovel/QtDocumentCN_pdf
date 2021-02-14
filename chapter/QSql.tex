@@ -13,9 +13,10 @@ QSql 命名空间 里的 各种名样的标识符，已经被运用在 Qt SQL �
 	\hline
 \end{tabular}\\
 
-类型\\
+类型
 
-\begin{tabular}{|c|c|}
+\resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
+\begin{tabular}{|c|l|}
 	\hline
 	 &  \\
 	\hline
@@ -29,7 +30,9 @@ QSql 命名空间 里的 各种名样的标识符，已经被运用在 Qt SQL �
 	\hline
 	enum & TableType \{ Tables, SystemTables, Views, AllTables \}\\
 	\hline
-\end{tabular}\\
+\end{tabular}
+}
+
 
 细节的介绍 \\
 
@@ -61,6 +64,7 @@ enum QSql::NumericalPrecisionPolicy
 数据库中的数值可以比它们对应的C++类型更精确。此枚举列出在应用程序中表示此类值的策略。
 
 
+\resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
 \begin{tabular}{|c|c|c|}
 	\hline
 	常量	& 值 & 介绍 \\
@@ -74,6 +78,7 @@ enum QSql::NumericalPrecisionPolicy
 	QSql::HighPrecision	&0&字符串将会维技精度\\
 	\hline
 \end{tabular}\\
+}
 
 注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。\\
 
