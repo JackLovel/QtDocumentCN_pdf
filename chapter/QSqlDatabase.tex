@@ -252,7 +252,35 @@ QSqlDatabase::~QSqlDatabase()
 
 另请参阅 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabaseclose}{close()}。
 
+[static] QSqlDatabase QSqlDatabase::addDatabase(const QString \&type,const QString \&connectionName = QLatin1String(defaultConnection))
 
+使用驱动程序类型和连接名称，将数据库添加到数据库连接列表中。如果存在相同的连接名，那么这个连接将会被删除。
+
+通过引用连接名，来返回一个新的连接。
+
+如果数据库的类别不存在或者没有被加载，那么 isValid()函数将会返回 false
+
+如果我们没有指定连接名参数，那么应用程序就会返回默认连接。 如果我们提供了连接名参数，那么可以使用database(connectionName) 函数来获取该连接。
+
+警告： 如果您指定了 相同的连接名参数，那么就会替换之前的那个相同的连接。如果您多次调用这个函数而不指定 连接名参数，则默认连接将被替换。
+
+在使用连接之前，它必须经过初始化。比如： 调用下面一些或者全部 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetdatabasenameconst-qstring-name}{setDatabaseName()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetusernameconst-qstring-name}{setUserName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetpasswordconst-qstring-password}{setPassword()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesethostnameconst-qstring-host}{setHostName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetportint-port}{setPort()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetconnectoptionsconst-qstring-options--qstring}{setConnectOptions()}，并最终调用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#bool-qsqldatabaseopen}{open()}
+
+注意： 这个函数是线程安全的
+
+请查看 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabasedatabaseconst-qstring-connectionname--qlatin1stringdefaultconnection-bool-open--true}{database()}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseremovedatabaseconst-qstring-connectionname}{removeDatabase()} 以及 \href{https://doc.qt.io/qt-5/threads-modules.html#threads-and-the-sql-module}{ 线程和SQL 单元}。
+
+[static] QSqlDatabase QSqlDatabase::addDatabase(QSqlDriver *driver, const QString \&connectionName = QLatin1String(defaultConnection))
+
+这个重载函数是非常有用的，当您想创建一个带有\href{https://doc.qt.io/qt-5/qsqldriver.html}{驱动} 连接时，您可以实例化它。有可能您想拥有自己的数据库驱动，或者去实例化 Qt自带的驱动。如果您真的想这样做，我非常建议您把驱动的代码导入到您的应用程序中。例如，您可用自已的 QPSQL 驱动来创建一个 PostgreSQL 连接，像下面这样:
+
+\begin{lstlisting}
+PGconn *con = PQconnectdb("host=server user=bart password=simpson dbname=springfield");
+QPSQLDriver *drv = new QPSQLDriver(con);
+QSqlDatabase db = QSqlDatabase::addDatabase(drv); // 产生成新的默认连接
+QSqlQuery query;
+query.exec("SELECT NAME, ID FROM STAFF");	
+\end{lstlisting}
 
 
 	
