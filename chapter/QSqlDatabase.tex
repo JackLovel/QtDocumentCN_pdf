@@ -282,5 +282,172 @@ QSqlQuery query;
 query.exec("SELECT NAME, ID FROM STAFF");	
 \end{lstlisting}
 
+上面的代码用于设置一个 PostgreSQL 连接和实例化一个 QPSQLDriver 对象。接下来，addDatabase() 被调用产生一个已知的连接，以便于它可以使用 Qt SQL 相关的类。Qt假定您已经打开了数据库连接，当使用连接句柄（或一组句柄）实例化驱动程序时。
 
-	
+注意： 我们假设qtdir是安装Qt的目录。假定您的PostgreSQL头文件己经包含在搜索路径中，然后这里才能引用所需要的PostgreSQL客户端库和去实例化QPSQLDriver对象。
+
+请记住，必须将数据库客户端库到您的程序里。确保客户端库在您的链接器的搜索路径中，并且像下面这样添加到您的 .pro 文件里：
+
+\begin{lstlisting}
+unix:LIBS += -lpq
+win32:LIBS += libpqdll.lib
+\end{lstlisting}
+
+这里介绍了所有驱动支持的方法。只有驱动的构造参数有所不同。列举了一个关于 Qt附带的程序，以及它们的源代码文件，和它们的构造函数参数的列表：
+
+\resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	驱动	&类名	& 构造器参数	& 用于导入的文件\\
+	\hline
+QPSQL	&QPSQLDriver	&PGconn *connection	&qsql\_psql.cpp \\
+\hline
+QMYSQL	&QMYSQLDriver	&MYSQL *connection	&qsql\_mysql.cpp\\
+\hline
+QOCI	&QOCIDriver	&OCIEnv *environment, OCISvcCtx *serviceContext	&qsql\_oci.cpp\\
+\hline
+QODBC	&QODBCDriver	&SQLHANDLE environment, SQLHANDLE connection	&qsql\_odbc.cpp\\
+\hline
+QDB2	&QDB2	&SQLHANDLE environment, SQLHANDLE connection	&qsql\_db2.cpp\\
+\hline
+QTDS	&QTDSDriver	&LOGINREC *loginRecord, DBPROCESS *dbProcess, const QString \&hostName	&qsql\_tds.cpp\\
+\hline
+QSQLITE	&QSQLiteDriver	&sqlite *connection	&qsql\_sqlite.cpp\\
+\hline
+QIBASE	&QIBaseDriver	&isc\_db\_handle connection	&qsql\_ibase.cpp\\
+ 
+	\hline
+\end{tabular}}
+
+当构造用于为内部查询创建新连接的QTDSDriver时，需要主机名（或服务名）。这是为了防止在同时使用多个QSqlQuery对象时发生阻塞。
+
+警告： 添加一个存在连接名的连接时，这个新添加的连接将会替换另一个。 警告： SQL框架拥有驱动程序的所有权。它不能被删除。可以使用removeDatabase()，去删除这个连接。 另请参阅drivers()
+
+[protected] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
+
+克隆其他数据库连接并将其存储为connectionName。原始数据库中的所有设置，例如databaseName()、hostName()等，都会被复制。如果其他数据库无效，则不执行任何操作。返回最新被创建的数据库连接。
+
+注意： 这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
+
+[static] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
+这是个重载函数。
+
+克隆其他数据库连接并将其存储为connectionName。原始数据库中的所有设置，例如databaseName()、hostName()等，都会被复制。如果其他数据库无效，则不执行任何操作。返回最新被创建的数据库连接。
+
+注意： 这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
+
+当我们在另一个线程克隆这个数据库，这个重载是非常有用的。
+
+qt5.13中引入了这个函数。
+
+void QSqlDatabase::close()
+关闭数据库连接，释放获取的所有资源，并使与数据库一起使用的任何现有QSqlQuery对象无效
+
+这个函数也会影响它的QSqlDatabase对象副本。
+
+另请参阅 removeDatabase()
+
+bool QSqlDatabase::commit()
+如果驱动支持事务和一个transaction()已经被启动，那就可以提交一个事务到这个数据库中。如果这个操作成功，就会返回 true。否则返回 false。
+
+注意： 对于一些数据库，如果对数据库使用SELECT进行查询操作，将会提交失败并且返回false。在执行提交之前，使查询处于非活动状态。
+
+调用 lastError() 函数获取错误信息。
+
+另请参阅 QSqlQuery::isActive()， QSqlDriver::hasFeature()，和 rollback()。
+
+QString QSqlDatabase::connectOptions() const
+返回用于此连接的连接选项字符串。这个字符串可能是空。
+
+另请参阅 setConnectOptions()
+
+QString QSqlDatabase::connectionName() const
+返回连接名，它有可能为空。
+
+注意： 这个连接名不是 数据库名
+
+qt4.4 中引入了这个函数。
+
+另请参阅 addDatabase()
+
+[static] QStringList QSqlDatabase::connectionNames()
+返回包含所有连接名称的列表。
+
+注意： 这个函数是线程安全的。
+
+另请参阅 contains()，database()， 和 线程和SQL模块
+
+[static] bool QSqlDatabase::contains(const QString \&connectionName = QLatin1String(defaultConnection))
+
+如果所给的连接名，包含在所给的数据库连接列表里，那么就返回 true；否则返回 false。
+
+注意： 这个函数是 线程安全的
+
+另请参阅 connectionNames(), database() 和 线程和SQL模块。
+
+[static] QSqlDatabase QSqlDatabase::database(const QString \&connectionName = QLatin1String(defaultConnection), bool open = true)
+返回一个调用 connectionName 参数的数据库连接。这个数据库连接使用之前，必须已经通过 addDatabase() 函数进行添加。如果open为true（默认值），并且数据库连接尚未打开，则现在打开它。如果未指定连接名参数，则使用默认连接。如果连接名不存在数据库列表中，那么将会返回一个非法的连接。
+
+注意： 这个函数是 线程安全的
+
+另请参阅 isOpen() 和 线程和SQL模块。
+
+QString QSqlDatabase::databaseName() const
+返回连接的连接数据库名称，当然它也可能是空的。
+
+注意： 这个数据库名不是连接名
+
+另请参阅 setDatabaseName()。
+
+QSqlDriver *QSqlDatabase::driver() const
+返回被使用的数据库连接的所使用的数据库驱动。
+
+另请参阅 addDatabase() 和 drivers()
+
+QString QSqlDatabase::driverName() const
+返回连接的驱动名称
+
+另请参阅 addDatabase() 和 driver()
+
+[static] QStringList QSqlDatabase::drivers()
+返回一个可使用的数据库驱动列表 另请参阅 registerSqlDriver()
+
+QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
+在这个数据库里执行 SQL 表达式和 返回一个 QSqhttps://doc.qt.io/qt-5/qsqlquery.html 对象。使用 lastError() 来获取错误的信息。
+
+如果查询为空，则返回一个空的、无效的查询。并且 lastError()。
+
+另请参阅 QSqlQuery 和 lastError()。
+
+QString QSqlDatabase::hostName() const
+返回连接的主机名；它有可能为空。
+
+另请参阅 setHostName()
+
+[static] bool QSqlDatabase::isDriverAvailable(const QString \&name)
+如果调用一个叫 name 的驱动，是可以使用的，那么就返回 true；反之返回 false。
+
+另请参阅 drivers()。
+
+bool QSqlDatabase::isOpen() const
+如果当前数据库连接是打开的，那么就返回 true，否则返回 false。
+
+bool QSqlDatabase::isOpenError() const
+如果打开数据库的连接有错误，那么就返回 true，否则返回 false。可以调用 lastError() 函数去获取相关的错误信息。
+
+bool QSqlDatabase::isValid() const
+如果 QSqlDatabase() 有一个有效的驱动，那么就返回 true。
+
+例子：
+
+\begin{lstlisting}
+QSqlDatabase db;
+qDebug() << db.isValid();    // 返回 false
+
+db = QSqlDatabase::database("sales");
+qDebug() << db.isValid();    // 如果 "sales" 连接存在，就返回 true
+
+QSqlDatabase::removeDatabase("sales");
+qDebug() << db.isValid();    // 返回 false
+\end{lstlisting}
+
