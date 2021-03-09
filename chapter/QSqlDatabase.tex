@@ -379,6 +379,7 @@ qt4.4 中引入了这个函数。
 
 [static] bool QSqlDatabase::contains(const QString \&connectionName = QLatin1String(defaultConnection))
 
+
 如果所给的连接名，包含在所给的数据库连接列表里，那么就返回 true；否则返回 false。
 
 注意： 这个函数是 线程安全的
@@ -386,6 +387,8 @@ qt4.4 中引入了这个函数。
 另请参阅 connectionNames(), database() 和 线程和SQL模块。
 
 [static] QSqlDatabase QSqlDatabase::database(const QString \&connectionName = QLatin1String(defaultConnection), bool open = true)
+
+
 返回一个调用 connectionName 参数的数据库连接。这个数据库连接使用之前，必须已经通过 addDatabase() 函数进行添加。如果open为true（默认值），并且数据库连接尚未打开，则现在打开它。如果未指定连接名参数，则使用默认连接。如果连接名不存在数据库列表中，那么将会返回一个非法的连接。
 
 注意： 这个函数是 线程安全的
@@ -393,6 +396,8 @@ qt4.4 中引入了这个函数。
 另请参阅 isOpen() 和 线程和SQL模块。
 
 QString QSqlDatabase::databaseName() const
+
+
 返回连接的连接数据库名称，当然它也可能是空的。
 
 注意： 这个数据库名不是连接名
@@ -400,19 +405,27 @@ QString QSqlDatabase::databaseName() const
 另请参阅 setDatabaseName()。
 
 QSqlDriver *QSqlDatabase::driver() const
+
+
 返回被使用的数据库连接的所使用的数据库驱动。
 
 另请参阅 addDatabase() 和 drivers()
 
 QString QSqlDatabase::driverName() const
+
+
 返回连接的驱动名称
 
 另请参阅 addDatabase() 和 driver()
 
 [static] QStringList QSqlDatabase::drivers()
+
+
 返回一个可使用的数据库驱动列表 另请参阅 registerSqlDriver()
 
 QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
+
+
 在这个数据库里执行 SQL 表达式和 返回一个 QSqhttps://doc.qt.io/qt-5/qsqlquery.html 对象。使用 lastError() 来获取错误的信息。
 
 如果查询为空，则返回一个空的、无效的查询。并且 lastError()。
@@ -420,22 +433,32 @@ QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
 另请参阅 QSqlQuery 和 lastError()。
 
 QString QSqlDatabase::hostName() const
+
+
 返回连接的主机名；它有可能为空。
 
 另请参阅 setHostName()
 
 [static] bool QSqlDatabase::isDriverAvailable(const QString \&name)
+
+
 如果调用一个叫 name 的驱动，是可以使用的，那么就返回 true；反之返回 false。
 
 另请参阅 drivers()。
 
 bool QSqlDatabase::isOpen() const
+
+
 如果当前数据库连接是打开的，那么就返回 true，否则返回 false。
 
 bool QSqlDatabase::isOpenError() const
+
+
 如果打开数据库的连接有错误，那么就返回 true，否则返回 false。可以调用 lastError() 函数去获取相关的错误信息。
 
 bool QSqlDatabase::isValid() const
+
+
 如果 QSqlDatabase() 有一个有效的驱动，那么就返回 true。
 
 例子：
@@ -451,3 +474,53 @@ QSqlDatabase::removeDatabase("sales");
 qDebug() << db.isValid();    // 返回 false
 \end{lstlisting}
 
+\href{https://doc.qt.io/qt-5/qsqlerror.html}{QSqlError} QSqlDatabase::lastError() const
+
+返回这个数据库出现的最新错误信息。
+
+使用 QSqlQuery::lastError() 函数来获取一个单个查询上的错误。
+
+另请参阅 QSqlError and QSqlQuery::lastError()。
+
+QSql::NumericalPrecisionPolicyQSqlDatabase::numericalPrecisionPolicy() const
+返回数据库连接的当前默认精度策略。
+
+qt4.6中引入了这个函数。
+
+另请参阅 QSql::NumericalPrecisionPolicy, setNumericalPrecisionPolicy()、
+
+QSqlQuery::numericalPrecisionPolicy() 和 QSqlQuery::setNumericalPrecisionPolicy()。
+
+bool QSqlDatabase::open()
+
+
+使用当前连接值打开数据库连接。如果操作成功就返回 true; 反之返回 false。可以调用 lastError()来获取错误的信息。
+
+另请参阅 lastError()、 setDatabaseName()、setUserName()、
+
+setPassword()、setHostName()、setPort()和 setConnectOptions()。
+
+bool QSqlDatabase::open(const QString \&user, const QString \&password)
+
+
+这是一个重载函数。
+
+使用所给的 username 和 password 两个参数，打开数据连接，如果成功就返回 true; 反之返回 false。使用 [lastError()]QSqlDatabase.md\#qsqlerror-qsqldatabaselasterror-const) 来获取错误的信息。
+
+这个函数不存放所给的 password 参数，相反的它会把 password 参数直接传给驱动用于打连接，然后销毁这个参数。
+
+另请参阅 lastError()。
+
+QString QSqlDatabase::password() const
+
+
+返回连接的密码。如果没有使用setPassword() 函数进行密码的设置 并且 没有调用 open() 以及 没有使用密码，那么就返回空的字符串。
+
+另请参阅 setPassword()
+
+int QSqlDatabase::port() const
+
+
+返回连接的端口号。如果端口号没有设置，那么这个值就是未定义的。
+
+另请参阅 setPort()
