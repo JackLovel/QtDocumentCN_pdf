@@ -659,4 +659,65 @@ void QSqlDatabase::setConnectOptions(const QString \&options = QString())
 	\hline
 \end{tabular}
 
+\begin{tabular}{|c|c|c|}
+	\hline
+	DB2	&OCI	&TDS \\ 
+	\hline
+	SQL\_ATTR\_ACCESS\_MODE & OCI\_ATTR\_PREFETCH\_ROWS	& 无 \\
+	\hline
+	SQL\_ATTR\_LOGIN\_TIMEOUT & OCI\_ATTR\_PREFETCH\_MEMORY& \\	
+	\hline
+\end{tabular}
+
+\begin{tabular}{|c|c|}
+	\hline
+	\href{https://doc.qt.io/qt-5/qtsql-attribution-sqlite.html#sqlite}{SQLite} & Interbase \\ 
+	\hline
+	QSQLITE\_BUSY\_TIMEOUT & ISC\_DPB\_LC\_CTYPE \\ 
+	\hline
+	QSQLITE\_OPEN\_READONLY	& ISC\_DPB\_SQL\_ROLE\_NAME \\ 
+	\hline
+	QSQLITE\_OPEN\_URI&	\\ 
+	\hline
+	QSQLITE\_ENABLE\_SHARED\_CACHE	& \\
+	\hline
+	QSQLITE\_ENABLE\_REGEXP &  \\
+	\hline
+\end{tabular}
+
+\clearpage
+
+例子：
+
+\begin{lstlisting}
+db.setConnectOptions("SSL_KEY=client-key.pem;SSL_CERT=client-cert.pem;SSL_CA=ca-cert.pem;CLIENT_IGNORE_SPACE=1"); // 使用安全套连字进行连接
+if (!db.open()) {
+	db.setConnectOptions(); // 清除连接的字符串
+	// ...
+}
+// ...
+// PostgreSQL 连接
+db.setConnectOptions("requiressl=1"); // 确保 PostgreSQL 安全套接字连接
+if (!db.open()) {
+	db.setConnectOptions(); // 清除可选
+	// ...
+}
+// ...
+// ODBC 连接
+db.setConnectOptions("SQL_ATTR_ACCESS_MODE=SQL_MODE_READ_ONLY;SQL_ATTR_TRACE=SQL_OPT_TRACE_ON"); // 设置 ODBC 连项
+if (!db.open()) {
+	db.setConnectOptions(); // 不要尝试去设置这个选项。
+	// ...
+}
+}
+\end{lstlisting}
+
+查阅这个客户端库文档，获得更多关于不同可选项的更多信息。
+
+另请查阅 connectOptions()。
+
+
+
+
+
 
