@@ -379,6 +379,7 @@ qt4.4 中引入了这个函数。
 
 [static] bool QSqlDatabase::contains(const QString \&connectionName = QLatin1String(defaultConnection))
 
+
 如果所给的连接名，包含在所给的数据库连接列表里，那么就返回 true；否则返回 false。
 
 注意： 这个函数是 线程安全的
@@ -386,6 +387,8 @@ qt4.4 中引入了这个函数。
 另请参阅 connectionNames(), database() 和 线程和SQL模块。
 
 [static] QSqlDatabase QSqlDatabase::database(const QString \&connectionName = QLatin1String(defaultConnection), bool open = true)
+
+
 返回一个调用 connectionName 参数的数据库连接。这个数据库连接使用之前，必须已经通过 addDatabase() 函数进行添加。如果open为true（默认值），并且数据库连接尚未打开，则现在打开它。如果未指定连接名参数，则使用默认连接。如果连接名不存在数据库列表中，那么将会返回一个非法的连接。
 
 注意： 这个函数是 线程安全的
@@ -393,6 +396,8 @@ qt4.4 中引入了这个函数。
 另请参阅 isOpen() 和 线程和SQL模块。
 
 QString QSqlDatabase::databaseName() const
+
+
 返回连接的连接数据库名称，当然它也可能是空的。
 
 注意： 这个数据库名不是连接名
@@ -400,19 +405,27 @@ QString QSqlDatabase::databaseName() const
 另请参阅 setDatabaseName()。
 
 QSqlDriver *QSqlDatabase::driver() const
+
+
 返回被使用的数据库连接的所使用的数据库驱动。
 
 另请参阅 addDatabase() 和 drivers()
 
 QString QSqlDatabase::driverName() const
+
+
 返回连接的驱动名称
 
 另请参阅 addDatabase() 和 driver()
 
 [static] QStringList QSqlDatabase::drivers()
+
+
 返回一个可使用的数据库驱动列表 另请参阅 registerSqlDriver()
 
 QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
+
+
 在这个数据库里执行 SQL 表达式和 返回一个 QSqhttps://doc.qt.io/qt-5/qsqlquery.html 对象。使用 lastError() 来获取错误的信息。
 
 如果查询为空，则返回一个空的、无效的查询。并且 lastError()。
@@ -420,22 +433,32 @@ QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
 另请参阅 QSqlQuery 和 lastError()。
 
 QString QSqlDatabase::hostName() const
+
+
 返回连接的主机名；它有可能为空。
 
 另请参阅 setHostName()
 
 [static] bool QSqlDatabase::isDriverAvailable(const QString \&name)
+
+
 如果调用一个叫 name 的驱动，是可以使用的，那么就返回 true；反之返回 false。
 
 另请参阅 drivers()。
 
 bool QSqlDatabase::isOpen() const
+
+
 如果当前数据库连接是打开的，那么就返回 true，否则返回 false。
 
 bool QSqlDatabase::isOpenError() const
+
+
 如果打开数据库的连接有错误，那么就返回 true，否则返回 false。可以调用 lastError() 函数去获取相关的错误信息。
 
 bool QSqlDatabase::isValid() const
+
+
 如果 QSqlDatabase() 有一个有效的驱动，那么就返回 true。
 
 例子：
@@ -450,4 +473,251 @@ qDebug() << db.isValid();    // 如果 "sales" 连接存在，就返回 true
 QSqlDatabase::removeDatabase("sales");
 qDebug() << db.isValid();    // 返回 false
 \end{lstlisting}
+
+\href{https://doc.qt.io/qt-5/qsqlerror.html}{QSqlError} QSqlDatabase::lastError() const
+
+返回这个数据库出现的最新错误信息。
+
+使用 QSqlQuery::lastError() 函数来获取一个单个查询上的错误。
+
+另请参阅 QSqlError and QSqlQuery::lastError()。
+
+QSql::NumericalPrecisionPolicyQSqlDatabase::numericalPrecisionPolicy() const
+返回数据库连接的当前默认精度策略。
+
+qt4.6中引入了这个函数。
+
+另请参阅 QSql::NumericalPrecisionPolicy, setNumericalPrecisionPolicy()、
+
+QSqlQuery::numericalPrecisionPolicy() 和 QSqlQuery::setNumericalPrecisionPolicy()。
+
+bool QSqlDatabase::open()
+
+
+使用当前连接值打开数据库连接。如果操作成功就返回 true; 反之返回 false。可以调用 lastError()来获取错误的信息。
+
+另请参阅 lastError()、 setDatabaseName()、setUserName()、
+
+setPassword()、setHostName()、setPort()和 setConnectOptions()。
+
+bool QSqlDatabase::open(const QString \&user, const QString \&password)
+
+
+这是一个重载函数。
+
+使用所给的 username 和 password 两个参数，打开数据连接，如果成功就返回 true; 反之返回 false。使用 [lastError()]QSqlDatabase.md\#qsqlerror-qsqldatabaselasterror-const) 来获取错误的信息。
+
+这个函数不存放所给的 password 参数，相反的它会把 password 参数直接传给驱动用于打连接，然后销毁这个参数。
+
+另请参阅 lastError()。
+
+QString QSqlDatabase::password() const
+
+
+返回连接的密码。如果没有使用setPassword() 函数进行密码的设置 并且 没有调用 open() 以及 没有使用密码，那么就返回空的字符串。
+
+另请参阅 setPassword()
+
+int QSqlDatabase::port() const
+
+
+返回连接的端口号。如果端口号没有设置，那么这个值就是未定义的。
+
+另请参阅 setPort()
+
+
+QSqlIndex QSqlDatabase::primaryIndex(const QString \&tablename) const
+
+
+返回所给表格名的索引。如果索引不存在，那么就返回一个空的 QSqlIndex
+
+注意： 如果表在创建时没有被引用，一些驱动程序（如 QPSQL 驱动程序）可能要求您以小写的形式传递表格名。
+
+查看关于 Qt SQL driver 文档的更多信息。
+
+另请参阅 tables() 和 record()。
+
+QSqlRecord QSqlDatabase::record(const QString \&tablename) const
+
+
+返回一个QSqlRecord，其中填充了名为tablename的表（或视图）中所有字段的名称。字段在记录中出现的顺序未定义。如果没有这样的表格（或者视图）存在，将会返回一个空的记录。
+
+注意： 如果表在创建时没有被引用，一些驱动程序（如 QPSQL 驱动程序）可能要求您以小写的形式传递表格名。
+
+查看 Qt SQL driver 文档的更多信息。
+
+[static] void QSqlDatabase::registerSqlDriver(const QString &name, QSqlDriverCreatorBase *creator)
+
+
+这个函数在 SQL框架中注册一个名为 name 的新 SQL 驱动程序。这个是非常有用的，如果您有一个自定义的驱动，并且您并不想把它编译作为一个插件。
+
+例如：
+
+
+\begin{lstlisting}
+QSqlDatabase::registerSqlDriver("MYDRIVER", new QSqlDriverCreator<QSqlDriver>);
+QVERIFY(QSqlDatabase::drivers().contains("MYDRIVER"));
+QSqlDatabase db = QSqlDatabase::addDatabase("MYDRIVER");
+QVERIFY(db.isValid());
+\end{lstlisting}
+
+QSqlDatabase拥有 creator 指针的所有权，因此您不能自己删除它。
+
+另请参阅 drivers()。
+
+[static] void QSqlDatabase::removeDatabase(const QString \&connectionName)
+
+
+从数据库列表中，删除一个叫 connectionName 数据库连接。
+
+警告： 不应在数据库连接上打开查询的情况下调用此函数，否则将发生资源泄漏。
+
+\clearpage
+
+例子：
+
+\begin{lstlisting}
+// 错误
+QSqlDatabase db = QSqlDatabase::database("sales");
+QSqlQuery query("SELECT NAME, DOB FROM EMPLOYEES", db);
+QSqlDatabase::removeDatabase("sales"); // 将会输出警告
+// “db”现在是一个悬而未决的无效数据库连接，
+// “查询”包含无效的结果集
+\end{lstlisting}
+
+
+正确的做法：
+
+\begin{lstlisting}
+{
+    QSqlDatabase db = QSqlDatabase::database("sales");
+    QSqlQuery query("SELECT NAME, DOB FROM EMPLOYEES", db);
+}
+// “db”和“query”都被销毁，因为它们超出了范围
+QSqlDatabase::removeDatabase("sales"); // 正确的
+\end{lstlisting}
+
+如果要删除默认连接，这个连接可能是通过调用 addDatabase() 函数而创建的，但未指定连接名称，可以通过对database()返回的数据库调用connectionName() 来检索默认连接名称。注意，如果没有创建默认数据库，将返回一个无效的数据库。
+
+注意： 这个函数是线程安全的
+
+另请查阅 database()，connectionName()，和 线程和SQL模块。
+
+bool QSqlDatabase::rollback()
+
+
+在数据库里回滚一个事务，如果驱动支持一个事务以及一个 transaction() 已经被启动。如果操作成功返回 true。否则返回 false。
+
+注意： 对于某些数据库，如果存在使用数据库进行选择的活动查询，则回滚将失败并返回false。确保在执行回滚操作之前，查询是 非活动 的状态。
+
+调用 lastError() 操作获得错误的相关信息。
+
+另请查阅 QSqlQuery::isActive()，QSqlDriver::hasFeature() 和 commit()。
+
+void QSqlDatabase::setConnectOptions(const QString \&options = QString())
+
+
+设置一组数据库的具体的可选项。它必须在打之这个连接之前执行这个操作，否则是无效的。另一个可能的原因是调用 QSqlDatabase::setConnectOptions() 去关闭这个连接，并且调用 open() 再次关闭这个连接。
+
+选项字符串的格式是以分号分隔的选项名称，或选项=值对的列表。这个选项依赖于所使用的客户端：
+
+\begin{tabular}{|c|c|c|}
+	\hline
+    ODBC & MySQL & PostgreSQL \\
+	\hline
+    SQL\_ATTR\_ACCESS\_MODE & CLIENT\_COMPRESS	& connect\_timeout \\
+    \hline
+    SQL\_ATTR\_LOGIN\_TIMEOUT & CLIENT\_FOUND\_ROWS &	options \\
+    \hline
+    SQL\_ATTR\_CONNECTION\_TIMEOUT	& CLIENT\_IGNORE\_SPACE &	tty \\
+    \hline
+    SQL\_ATTR\_CURRENT\_CATALOG &	CLIENT\_ODBC &	requiressl \\
+\hline
+    SQL\_ATTR\_METADATA\_ID &	CLIENT\_NO\_SCHEMA&	service \\
+\hline
+    SQL\_ATTR\_PACKET\_SIZE&	CLIENT\_INTERACTIVE&\\	
+\hline
+    SQL\_ATTR\_TRACEFILE&	UNIX\_SOCKET&	\\
+\hline
+    SQL\_ATTR\_TRACE&	MYSQL\_OPT\_RECONNECT& \\	
+\hline
+    SQL\_ATTR\_CONNECTION\_POOLING	&MYSQL\_OPT\_CONNECT\_TIMEOUT& \\	
+\hline
+    SQL\_ATTR\_ODBC\_VERSION&	MYSQL\_OPT\_READ\_TIMEOUT&\\	
+\hline
+                         &MYSQL\_OPT\_WRITE\_TIMEOUT&	\\
+\hline
+                         &SSL\_KEY&	 \\
+\hline
+                         &SSL\_CERT&\\	
+\hline
+                         &SSL\_CA&	\\
+\hline
+                         &SSL\_CAPATH&\\
+\hline
+                         &SSL\_CIPHER&\\
+	\hline
+\end{tabular}
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	DB2	&OCI	&TDS \\ 
+	\hline
+	SQL\_ATTR\_ACCESS\_MODE & OCI\_ATTR\_PREFETCH\_ROWS	& 无 \\
+	\hline
+	SQL\_ATTR\_LOGIN\_TIMEOUT & OCI\_ATTR\_PREFETCH\_MEMORY& \\	
+	\hline
+\end{tabular}
+
+\begin{tabular}{|c|c|}
+	\hline
+	\href{https://doc.qt.io/qt-5/qtsql-attribution-sqlite.html#sqlite}{SQLite} & Interbase \\ 
+	\hline
+	QSQLITE\_BUSY\_TIMEOUT & ISC\_DPB\_LC\_CTYPE \\ 
+	\hline
+	QSQLITE\_OPEN\_READONLY	& ISC\_DPB\_SQL\_ROLE\_NAME \\ 
+	\hline
+	QSQLITE\_OPEN\_URI&	\\ 
+	\hline
+	QSQLITE\_ENABLE\_SHARED\_CACHE	& \\
+	\hline
+	QSQLITE\_ENABLE\_REGEXP &  \\
+	\hline
+\end{tabular}
+
+\clearpage
+
+例子：
+
+\begin{lstlisting}
+db.setConnectOptions("SSL_KEY=client-key.pem;SSL_CERT=client-cert.pem;SSL_CA=ca-cert.pem;CLIENT_IGNORE_SPACE=1"); // 使用安全套连字进行连接
+if (!db.open()) {
+	db.setConnectOptions(); // 清除连接的字符串
+	// ...
+}
+// ...
+// PostgreSQL 连接
+db.setConnectOptions("requiressl=1"); // 确保 PostgreSQL 安全套接字连接
+if (!db.open()) {
+	db.setConnectOptions(); // 清除可选
+	// ...
+}
+// ...
+// ODBC 连接
+db.setConnectOptions("SQL_ATTR_ACCESS_MODE=SQL_MODE_READ_ONLY;SQL_ATTR_TRACE=SQL_OPT_TRACE_ON"); // 设置 ODBC 连项
+if (!db.open()) {
+	db.setConnectOptions(); // 不要尝试去设置这个选项。
+	// ...
+}
+}
+\end{lstlisting}
+
+查阅这个客户端库文档，获得更多关于不同可选项的更多信息。
+
+另请查阅 connectOptions()。
+
+
+
+
+
 
