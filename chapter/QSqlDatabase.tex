@@ -716,8 +716,107 @@ if (!db.open()) {
 
 另请查阅 connectOptions()。
 
+void QSqlDatabase::setDatabaseName(const QString \&name)
+
+通过所给的 name 参数来设置所连接的数据库名称。必须在打开连接之前设置数据库名称。 或者，可以调用close()函数关闭连接，设置数据库名称，然后再次调用open() 。
+
+注意： 这个数据库名不是连接名。必须在创建连接对象时将连接名称传递给 addDatabase()。
+
+对于 QSQLITE 驱动，如果数据库名指定的名字不存在，然后它将会创建这个文件，除非您设置了 QSQLITE\_OPEN\_READONLY
+
+此外，可以把 name 参数设置为 :memory:, 可以创建一个临时数据库，该数据库仅在应用程序的生命周期内可用。
+
+对于 QOCI (Oracle) 驱动，这个数据库名是 TNS Service Name。
+
+对于 QODBC 驱动程序，名称可以是DSN，DSN文件名（在这种情况下，文件扩展名必须为.DSN）或者是一个连接字符串。
+
+例如，Microsoft Access 可以使用下面的连接方式来直接打开 .mdb 文件，而不是在 ODBC 管理工具里创建一个 DSN 对象：
+
+\clearpage
+
+\begin{lstlisting}
+// ...
+QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+db.setDatabaseName("DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};
+FIL={MS Access};DBQ=myaccessfile.mdb");
+if (db.open()) {
+	// 成功!
+}
+// ...
+\end{lstlisting}
+
+这个没有默认的值
+
+另请查阅 databaseName()、setUserName()、 setPassword()、 setHostName()、 
+
+setPort()、setConnectOptions() 和 open()。
 
 
+void QSqlDatabase::setHostName(const QString \&host)
+
+通过 host 参数来设置连接的主机名。为了生效，必须在打开连接之前，设置主机名。或者，可以调用close()关闭连接，然后设置主机名，再次调用open()函数。
+
+这个没有默认值。
+
+另请查阅 hostName()， setUserName(), setPassword()，setDatabaseName()，setPort()， setConnectOptions() 和 open()。
+
+void QSqlDatabase::setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy precisionPolicy)
 
 
+设置在此数据库连接上创建的查询使用的默认数值精度策略。
+
+注意： 驱动程序不支持以低精度获取数值，将忽略精度策略。您可以使用 QSqlDriver::hasFeature()来查找一个驱动是否支持这个功能。
+
+注意： 通过 precisionPolicy 来设置这个默认的精度策略，将不会响影任何当前的活动查询。
+
+qt4.6中引入了这个函数。
+
+另请查阅 QSql::NumericalPrecisionPolicy，
+numericalPrecisionPolicy()，QSqlQuery::setNumericalPrecisionPolicy 和 QSqlQuery::numericalPrecisionPolicy.
+
+void QSqlDatabase::setPassword(const QString \&password)
+通过 password 参数来设置连接的密码。为了生效，必须在打开连接之前来设置密码。或者，您可以调用close()关闭连接，然后设置密码，再次调用open()函数。
+
+这个没有默认值。
+
+警告： 这个函数以明文的形式把密码存放到qt里。 将密码作为参数来避免这个行为，然后使用 open()进行调用。
+
+另请查阅 password()，setUserName()，setDatabaseName()，setHostName(),
+
+setPort(), setConnectOptions()和 open()。
+
+void QSqlDatabase::setPort(int port)
+
+通过port参数设置连接的端口号。为了生效，您必须在打开连接之前，进行端口号的设置。或者，您可以调用close()关闭连接，然后设置端口号，再次调用open()函数
+
+这个没有默认的值。
+
+另请查阅 port(), setUserName()， setPassword(),
+
+setHostName()，setDatabaseName(), setConnectOptions() 和 open()。
+
+void QSqlDatabase::setUserName(const QString \&name)
+
+通过 name 参数来设置连接的用户名。为了生效，必须在打开连接之前设置用户名。或者，您可以调用 close()函数来关闭连接，设置用户，然后再次调用 open()
+
+这个没有默认值。
+
+另请查阅 userName()，setDatabaseName()，setPassword()，
+
+setHostName()，setPort()，setConnectOptions() 和 open()。
+
+QStringList QSqlDatabase::tables(QSql::TableType type = QSql::Tables) const
+返回由 parameter type 参数 指定的数据库的表格、系统表和视图的列表。
+
+另请查阅 primaryIndex() 和 record()。
+
+bool QSqlDatabase::transaction()
+如果驱动程序支持事务，则在数据库上开始事务。如果操作成功的话，返回 true, 否则返回 false。
+
+另请查阅 QSqlDriver::hasFeature()， commit() 和 rollback()。
+
+QString QSqlDatabase::userName() const
+返回连接的用户名; 它也许为空。
+
+另请查阅 setUserName()。
 
