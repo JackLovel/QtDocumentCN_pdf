@@ -546,7 +546,7 @@ QSqlRecord QSqlDatabase::record(const QString \&tablename) const
 
 查看 Qt SQL driver 文档的更多信息。
 
-[static] void QSqlDatabase::registerSqlDriver(const QString &name, QSqlDriverCreatorBase *creator)
+[static] void QSqlDatabase::registerSqlDriver(const QString \&name, QSqlDriverCreatorBase *creator)
 
 
 这个函数在 SQL框架中注册一个名为 name 的新 SQL 驱动程序。这个是非常有用的，如果您有一个自定义的驱动，并且您并不想把它编译作为一个插件。
