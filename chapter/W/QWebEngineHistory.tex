@@ -1,0 +1,60 @@
+\chapter{QWebEngineHistory}
+
+QWebEngineHistory 
+
+表示Web引擎页面的历史记录。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QX11Info>\\      
+	\hline
+	qmake & QT + = webenginewidgets \\      
+	\hline
+\end{tabular}
+
+该类在Qt 5.4中引入。
+
+公有成员函数
+
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 函数名 \\
+	\hline
+	void	& back()\\
+	\hline
+	QWebEngineHistoryItem	& backItem() const \\
+	\hline
+	QList&	backItems(int maxItems) const \\
+	\hline
+	bool	&canGoBack() const \\
+	\hline
+	bool & canGoForward() const \\ 
+	\hline
+	void &	clear()\\ 
+	\hline
+	int &	count() const \\
+	\hline
+	QWebEngineHistoryItem &currentItem()
+	 const \\
+	\hline
+	int &	currentItemIndex() const \\ 
+	\hline
+	void &	forward() \\ 
+	\hline
+	QWebEngineHistoryItem &	forwardItem() const \\ 
+	\hline
+	QList &	forwardItems(int maxItems) const \\
+	\hline
+	void &	goToItem(const
+    QWebEngineHistoryItem \&item)\\
+	\hline
+	QWebEngineHistoryItem &	itemAt(int i) const \\ 
+	\hline
+	QList &	items() const \\ 
+	\hline
+\end{tabular}
+
+相关非成员函数
