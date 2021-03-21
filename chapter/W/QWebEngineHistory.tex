@@ -1,0 +1,181 @@
+\chapter{QWebEngineHistory}
+
+QWebEngineHistory 
+
+表示Web引擎页面的历史记录。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QX11Info>\\      
+	\hline
+	qmake & QT + = webenginewidgets \\      
+	\hline
+\end{tabular}
+
+该类在Qt 5.4中引入。
+
+公有成员函数
+
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 函数名 \\
+	\hline
+	void	& back()\\
+	\hline
+	QWebEngineHistoryItem	& backItem() const \\
+	\hline
+	QList&	backItems(int maxItems) const \\
+	\hline
+	bool	&canGoBack() const \\
+	\hline
+	bool & canGoForward() const \\ 
+	\hline
+	void &	clear()\\ 
+	\hline
+	int &	count() const \\
+	\hline
+	QWebEngineHistoryItem &currentItem()
+	 const \\
+	\hline
+	int &	currentItemIndex() const \\ 
+	\hline
+	void &	forward() \\ 
+	\hline
+	QWebEngineHistoryItem &	forwardItem() const \\ 
+	\hline
+	QList &	forwardItems(int maxItems) const \\
+	\hline
+	void &	goToItem(const
+    QWebEngineHistoryItem \&item)\\
+	\hline
+	QWebEngineHistoryItem &	itemAt(int i) const \\ 
+	\hline
+	QList &	items() const \\ 
+	\hline
+\end{tabular}
+
+相关非成员函数
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 方法 \\
+	\hline
+	QDataStream \&	& operator<<(QDataStream \&stream, const QWebEngineHistory \&history)\\
+	\hline
+	QDataStream \&	&operator>>(QDataStream \&stream, QWebEngineHistory \&history) \\
+	\hline
+\end{tabular}
+
+详细描述
+
+成员函数文档
+
+每个Web引擎页面都包含访问过的页面的历史记录，可以由QWebEnginePage::history()得到。
+
+历史记录使用当前项目的概念，通过使用back() 和 forward()函数来回导航，将访问的页面划分为可以访问的页面。 当前项目可以通过调用 currentItem()获得，并且历史记录中的任意项目都可以通过将其传递给goToItem()使其成为当前项目。
+
+可以通过调用backItems()函数获得描述可以返回的页面的项目列表。类似的，可以使用forwardItems()函数获得描述当前页面之前页面的项目。 项目的总列表是通过 items()函数获得的。
+
+与容器一样，可以使用函数来检查列表中的历史记录。可以使用itemAt()获得历史记录中的任意项目，通过 count()给出项目的总数，并可以使用 clear() 函数清除历史记录。
+
+可以使用>>运算符将QWebEngineHistory的状态保存到QDataStream 中，并使用<<操作符进行加载。
+
+另外参见 QWebEngineHistoryItem and QWebEnginePage。
+
+成员函数文档
+
+void QWebEngineHistory::back()
+将当前项目设置为历史记录中的前一个项目，然后转到相应页面； 也就是说，返回一个历史项目。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#forward}{forward()}  and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#goToItem}{goToItem()} .
+
+
+QWebEngineHistoryItem QWebEngineHistory::backItem() const
+
+返回历史记录中当前项目之前的项目。
+
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/L/QList/QList.md}{QList}<\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineHistoryItem/QWebEngineHistoryItem.md}{QWebEngineHistoryItem}> QWebEngineHistory::backItems(int maxItems) const
+
+
+返回向后历史记录列表中的项目列表。 最多返回maxItems条目。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#forwardItems}{forwardItems()}。
+
+bool QWebEngineHistory::canGoBack() const
+
+如果历史记录中当前项目之前有一个项目，则返回true， 否则返回false。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#canGoForward}{canGoForward}()。
+
+
+bool QWebEngineHistory::canGoForward() const
+
+如果我们有一个项目可以前进，则返回true，否则返回false。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#canGoBack}{canGoBack}()。
+
+void QWebEngineHistory::clear()
+
+清除历史记录。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#count}{count}() and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#items}{items}()。
+
+int QWebEngineHistory::count() const
+
+返回历史记录中的项目总数。
+
+QWebEngineHistoryItem QWebEngineHistory::currentItem() const
+
+返回历史记录中的当前项目。
+
+int QWebEngineHistory::currentItemIndex() const
+
+返回历史记录中当前项目的索引。
+
+void QWebEngineHistory::forward()
+
+将当前项目设置为历史记录中的下一个项目，然后转到相应页面； 即，前进一个历史项目。
+
+See also back() and goToItem()。
+
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineHistoryItem/QWebEngineHistoryItem.md}{QWebEngineHistoryItem} QWebEngineHistory::forwardItem() const
+
+返回历史记录中当前项目之后的项目。
+
+QList<QWebEngineHistoryItem> QWebEngineHistory::forwardItems(int maxItems) const
+
+返回转发历史记录列表中的项目列表。 最多返回maxItems条目。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#backItems}{backItems}().
+
+void QWebEngineHistory::goToItem(const QWebEngineHistoryItem \&item)
+
+将当前项目设置为历史记录中的指定项目，然后转到页面。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#back}{back}() and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#forward}{forward}()。
+
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineHistoryItem/QWebEngineHistoryItem.md}{QWebEngineHistoryItem} QWebEngineHistory::itemAt(int i) const
+
+返回历史记录中索引i处的项目。
+
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/L/QList/QList.md}{QList} <\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineHistoryItem/QWebEngineHistoryItem.md}{QWebEngineHistoryItem}> QWebEngineHistory::items() const
+
+返回历史记录中当前所有项目的列表。
+
+See also \href{https://doc.qt.io/qt-5/qwebenginehistory.html#count}{count}() and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#clear}{clear}()。
+
+相关非成员函数
+
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/D/QDataStream/QDataStream.md}{QDataStream}  \&operator<<(\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/D/QDataStream/QDataStream.md}{QDataStream} \&stream, const QWebEngineHistory \&history)
+
+
+将Web引擎历史记录历史记录保存到流中。
+
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/D/QDataStream/QDataStream.md}{QDataStream} \&operator>>(\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/D/QDataStream/QDataStream.md}{QDataStream} \&stream, QWebEngineHistory \&history)
+
+
+将Web引擎历史记录从流加载到历史记录中。
+
