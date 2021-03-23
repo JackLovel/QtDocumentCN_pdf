@@ -1,0 +1,88 @@
+\chapter{QWebEngineView}
+
+QWebEngineView 
+
+QWebEngineView类提供了一个widget, 被使用去查看和编辑web元素。
+
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QWebEngineView>\\      
+	\hline
+	qmake & QT += webenginewidgets\\      
+	\hline
+	继承: & QWidget\\
+	\hline
+\end{tabular}
+
+特性
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性名 & 类型 \\
+	\hline
+	hasSelection&	const bool \\
+	\hline
+	title	&const QString\\
+	\hline
+	icon	&const QIcon\\
+	\hline
+	zoomFactor&	qreal\\
+	\hline
+	selectedText&	const QString\\
+	\hline
+\end{tabular}
+
+公共成员函数
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|r|l|}
+	\hline
+	 类型&  函数名\\
+	\hline
+	&	QWebEngineView(QWidget *parent = Q\_NULLPTR)] \\
+	\hline
+virtual	&$\sim$QWebEngineView() \\
+\hline
+void	&findText(const QString \&subString, QWebEnginePage::FindFlags options = ..., const QWebEngineCallback \&resultCallback = ...)] \\
+\hline
+bool&	hasSelection() const\\
+\hline
+QWebEngineHostory *&	history() const\\
+\hline
+QIcon&	icon() const\\
+\hline
+QUrl&	iconUrl() const\\
+\hline
+void&	load(const QUrl \&url)\\
+\hline
+void&	load(const  QWebEngineHttpRequest \&request)
+QWebEnginePage *page() const\\
+\hline
+QAction * &	pageAction(QWebEnginePage::WebAction action) const \\
+\hline
+QString	&selectedText() const\\
+\hline
+void&	setContent(const QByteArray \&data, const QString \&mimeType = QString(), const QUrl \&baseUrl = QUrl()) \\
+\hline
+void &	setHtml(const QString \&html, const QUrl \&baseUrl = QUrl())\\
+\hline
+void &	setPage(QWebEnginePage *page) \\
+\hline
+void &	setUrl(const QUrl \&url) \\
+\hline 
+void &	setZoomFactor(qreal factor) \\
+\hline
+QWebEngineSettings * &	settings() const \\
+\hline
+QString	&title() const \\
+\hline
+void &	triggerPageAction(QWebEnginePage::WebAction action, bool checked = false)\\
+\hline
+QUrl &	url() const\\
+\hline
+qreal&	zoomFactor() const\\
+\hline
+\end{tabular}}
