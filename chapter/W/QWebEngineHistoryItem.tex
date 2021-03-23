@@ -1,0 +1,45 @@
+\chapter{QWebEngineHistoryItem}
+
+QWebEngineHistoryItem类表示Web引擎页面历史记录中的一项。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QWebEngineHistoryItem>\\      
+	\hline
+	qmake & QT += webenginewidgets\\      
+	\hline
+	Since: & Qt 5.4\\
+	\hline
+\end{tabular}
+
+
+公有成员函数
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 函数名 \\
+	\hline
+		&QWebEngineHistoryItem(const QWebEngineHistoryItem \&other) \\
+	\hline
+	 &$\sim$QWebEngineHistoryItem() \\ 
+	 \hline
+	QUrl&	iconUrl() const\\
+	\hline
+	bool&	isValid() const\\
+	\hline
+	QDateTime&	lastVisited() const\\
+	\hline
+	QUrl&	originalUrl() const\\
+	\hline
+	void&	swap(QWebEngineHistoryItem \&other)\\
+	\hline
+	QString	&title() const\\
+	\hline
+	QUrl&	url() const\\
+	\hline
+	QWebEngineHistoryItem \&	&operator=(const QWebEngineHistoryItem \&other)\\
+	\hline
+\end{tabular}}
