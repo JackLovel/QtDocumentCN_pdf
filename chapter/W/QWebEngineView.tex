@@ -86,3 +86,87 @@ QUrl &	url() const\\
 qreal&	zoomFactor() const\\
 \hline
 \end{tabular}}
+
+重实现公共成员函数
+
+virtual QSize sizeHint() const override
+
+\begin{itemize}
+\item 216 个公共成员函数继承自 QWidget
+\item 31 个公共成员函数继承自 QObject
+\item 14 个公共成员函数继承自 QPaintDevice
+\end{itemize}
+
+公有槽函数
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型&  函数名\\
+	\hline
+	void&	back()\\
+	\hline
+	void&	forward()\\
+	\hline
+	void&	reload()\\
+	\hline
+	void&	stop()\\
+	\hline
+\end{tabular}
+
+\begin{itemize}
+\item 19 个公共槽函数继承自 QWidget
+\item 1 个公共槽函数继承自 QObject
+\end{itemize}
+
+信号
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|r|l|}
+	\hline
+	类型&  函数名\\
+	\hline
+void&	iconChanged(const QIcon \&icon)\\
+	\hline
+void&	iconUrlChanged(const QUrl \&url)\\
+	\hline
+void&	iconUrlChanged(const QUrl \&url)\\
+	\hline
+void&	loadProgress(int progress)\\
+	\hline
+void&	loadStarted() \\
+	\hline
+void &	renderProcessTerminated(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int exitCode)\\
+\hline
+void &	selectionChanged()\\
+	\hline
+void&	titleChanged(const QString \&title)\\
+	\hline
+void&	urlChanged(const QUrl \&url)\\
+	\hline
+\end{tabular}}
+
+\begin{itemize}
+	\item 3 信号继承自 QWidget
+	\item 2 信号继承自 QObject
+\end{itemize}
+
+
+静态公有成员函数
+
+\begin{itemize}
+	\item 5 个静态公有成员函数继承自 QWidget
+	\item 9 个静态公有成员函数 QObject
+\end{itemize}
+
+保护成员函数
+
+
+virtual QWebEngineView * createWindow(QWebEnginePage::WebWindowType type)
+
+重实现保护成员函数
+
+
+
+
+
+
