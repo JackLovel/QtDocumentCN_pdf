@@ -1,0 +1,119 @@
+\chapter{API Design Principles}
+
+API 设计规范
+
+\begin{quote}
+译者注：
+
+本文不来自于 Qt 文档，而是来自于 Qt Wiki：\href{https://wiki.qt.io/API_Design_Principles}{API\_Design\_Principles}
+
+API(Application Programming Interface)，应用开发接口，本文中也将 P 解释为 Programmer（开发者）。	
+\end{quote}
+
+Qt 最出名的特点之一是一致性强、易于学习、功能强大的 API。本文尝试对我们在设计 Qt 风格的 API 中积累的诀窍进行总结。其中许多准则都是通用的，其它的则是习惯性用法，我们主要为了保持接口一致性而继续遵循。
+
+尽管这些准则主要面向公共接口，但也鼓励您在设计内部接口时使用相同的技术，这对与您合作开发的同僚会更加友好。
+
+您可能也会有兴趣查阅 Jasmin Blanchette 的 
+\href{https://people.mpi-inf.mpg.de/~jblanche/api-design.pdf}{Little Manual of API Design (PDF)}，或它的前身，由 Matthias Ettrich 编写的 \href{https://doc.qt.io/archives/qq/qq13-apis.html}{Designing Qt-Style C++ APIs} 。
+
+优秀接口的六大特点
+
+API 是面向开发者的，而 GUI 则是面向终端用户。API 中的 P 代表开发者(Programmer)，而非程序(Program)，目的是指出 API 由开发者，即人类（而非计算机）所使用这一特点。
+
+Matthias 在 Qt 季刊弟13期，关于 API 设计的文章中，声称他坚信 API 应该是最小化但完备的，具备清晰而简洁的语义，符合直觉，被开发者，易于记忆，能够引导开发者编写高可读性的代码。
+
+最小化
+
+最小化的 API 指包含尽可能少的公共成员和最少的类。这可让 API 更易于理解、记忆、调试和修改。
+
+完备性
+完备的 API 意味着具备所有应有的功能。这可能会与最小化产生冲突。此外，若一个成员函数位于错误的类中，则大多数潜在的用户回无法找到它。
+
+清晰简洁的语义
+
+与其它设计协作时，应该让您的设计做到最小例外。通用化会让事情更简单。特例可能存在，但不应成为关注的焦点。在处理特定问题时，不应让解决方案过度泛化。（例如，Qt 3 中的 QMineSourceFactory 本该被称作 QImageLoader，并且具备另一套 API。）
+
+复合直觉
+
+如同计算机上其它内容，API 应复合直觉。不同的开发经验和技术背景会导致对复合直觉与否有不同的感知。复合直觉的 API 应能让中等经验的开发者无需阅读文档并直接使用，并让不知道这个 API 的开发者可以理解使用它编写的代码。
+
+易于记忆
+
+为了让 API 易于记忆，请选择一组保持一致并足够精确的命名约定。使用可理解的模式和概念，并且避免缩写。
+
+可读性导向
+
+编写代码只需要一次，但阅读（以及调试和修改）则会非常频繁。高可读性的代码通常需要花更多时间编写，但可以在产品的生命周期中节约更多的时间。
+
+最后需要谨记，不同类型的用户会使用 API 的不同部分。在单纯地创建一个 Qt 类实例能非常直观的同时，希望用户在尝试继承它之前先阅读文档则是很合理的。
+
+静态多态
+
+相似的代码类应具有相似的 API。可以使用继承来实现——当运行时多态支持时，这是很合理的。但多态同时也可以体现在设计截断。例如，若将代码中的 QProgressBar 换为 QSlider，或将 QString 换为 QByteArray，他们间相似的 API 会另替换操作变得非常容易。这便是为何我们称之为“静态多态”。
+
+静态多态同样可让记忆 API 和开发模式变得更加简单。结果是，对于一组有关联的类，相似的 API 通常比为每个类独立设计的完美 API 更加好用。
+
+在 Qt 中，当不具备有足够说服力的原因时，我们更倾向于使用静态多态，而非继承。这减少了 Qt 的公共类数量，并让新用户更容易在文档中找到需要的内容。
+
+好的
+
+​ QDialogBox 和 QMessageBox 具有相似的 APi，以用于处理按钮（addButton(), setStandardButtons()，但无需继承自某些 "QAbstractButtonBox" 类。
+
+坏的
+
+​ QAbstractSocket 被 QTcpSOcket 和 QUdpSocket 所继承，但这两个类的交互方式差异很大。看起来并没有人使用过（或能够使用） QAbstractSocket 指针来进行通用且有效的操作。
+
+存疑
+
+​ QBoxLayout 是 QHBoxLayout 和 QVBoxLayout 的基类。优点：可以在工具栏中使用 QBoxLayout，调用 setOrientation() 来令其水平/垂直排布。缺点：引入额外的类，用户可能会写出形如 ((QBoxLayout *)hbox)->setOrientation(Qt::Vertical) 的代码，而这是不合理的。
+
+基于属性的 API
+比较新的 Qt 类倾向于使用基于属性的 API，例如：
+
+\begin{lstlisting}
+QTimer timer;
+timer.setInterval(1000);
+timer.setSingleShot(true);
+timer.start(); 
+\end{lstlisting}
+
+此处的属性，指的是作为对象状态一部分的任何概念性的特征——无论是否是实际的 Q\_PROPERTY。只要可行，用户都应该允许以任何顺序设置属性，也就是说，这些属性应该是正交的。例如，上文的代码也可以写为：
+
+\begin{lstlisting}
+QTimer timer;
+timer.setSingleShot(true);
+timer.setInterval(1000);
+timer.start(); 
+\end{lstlisting}
+
+为了方便，我们也可以这样写：
+
+\begin{lstlisting}
+timer.start(1000);
+\end{lstlisting}
+
+类似的，对于 QRegExp，我们可以：
+
+\begin{lstlisting}
+QRegExp regExp;
+regExp.setCaseSensitive(Qt::CaseInsensitive);
+regExp.setPattern(".");
+regExp.setPatternSyntax(Qt::WildcardSyntax);
+\end{lstlisting}
+
+为了实现此类 API，内部的对象需要被惰性构造。例如在 QRegExp 的案例中，不应该在还不知道表达式使用何种语法之前，就在 setPattern() 中过早地编译 . 表达式。
+
+属性通常是级联的，此时我们应该谨慎地处理。仔细考虑下当前样式提供的“默认图标大小”与 QToolButton 的 iconSize 属性：
+
+\begin{lstlisting}
+toolButton->iconSize(); // 返回当前样式表的默认大小
+toolButton->setStyle(otherStyle);
+toolButton->iconSize(); // 返回 otherStyle 的默认大小
+toolButton->setIconSize(QSize(52, 52));
+toolButton->iconSize(); // 返回 (52, 52)
+toolButton->setStyle(yetAnotherStyle);
+toolButton->iconSize(); // 返回 (52, 52) 
+\end{lstlisting}
+
+
