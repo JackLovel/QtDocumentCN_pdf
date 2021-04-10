@@ -207,5 +207,151 @@ virtual void setCurrentFont( const QFont &f );
 virtual void setOverwriteMode( bool b ) { overWrite = b; }
 \end{lstlisting}
 
+当 QTextEdit 从 Qt 3 迁移至 Qt 4 时，几乎所有虚函数都被移除。有趣的是（但并未预料到），并没有大量的抱怨。为什么？因为 Qt 3 并未使用 QTextEdit 的多态性，Qt 3 并不会调用这些函数——只有使用者会。简单来说，否则并没有任何理由去继承 QTextEdit 并重写这些方法——除非您自己会通过多态去调用它们。若您需要在您的应用程序，也就是 Qt 之外使用多态机制，您应该自行添加。
 
+避免使用虚函数
 
+在 Qt 中，我们因为多种原因而尝试最小化虚函数的数量。每个虚函数调用都会让缺陷修复变得更难，因为会在调用图中插入一个不受控制的节点（使得调用结果无法预测）。人们会在虚函数中做非常疯狂的举措，例如：
+
+\begin{itemize}
+\item 发送事件
+\item 发送信号
+\item 重入事件循环（例如，打开一个模态文件对话框）
+\item 删除对象（例如，某些导致 delete this 的操作）
+\end{itemize}
+
+此外还有一些避免过度使用虚函数的原因：
+
+\begin{itemize}
+\item 无法在不破坏二进制兼容性的前提下增加、移动或删除虚函数
+\item 无法简便地重写虚函数
+\item 编译器通常几乎不会内敛虚函数调用
+\item 调用虚函数需要查询虚表，导致其比常规函数调用慢2-3倍
+\item 虚函数另类对象更难进行值拷贝（可能做到，但会表现得很混乱且不被推荐）
+\end{itemize}
+
+过去的经验告诉我们，没有虚函数地类会产生更少的错误，通常也导致更少的维护。
+
+一个通用的经验法则是，除非从工具集或该类的主要使用者角度需要调用它，否则一个函数不应该是虚函数。
+
+虚对象 与 可复制性
+
+多态对象和值类型的类并不是好朋友。
+
+包含虚函数的类会有虚析构函数来避免基类析构时未清理子类数据导致的内存泄漏。
+
+若需要以值语义拷贝、复制和对比一个类，则可能需要拷贝构造函数、赋值运算符重载和等于运算符重载：
+
+\begin{lstlisting}
+class CopyClass {
+	public:
+	CopyClass();
+	CopyClass(const CopyClass &other);
+	~CopyClass();
+	CopyClass &operator=(const CopyClass &other);
+	bool operator== (const CopyClass &other) const;
+	bool operator!=(const CopyClass &other) const;
+	virtual void setValue(int v);
+};
+\end{lstlisting}
+
+若创建该类的子类，则代码中会开始发生意料外的行为。通常来说，若没有虚函数和虚构造函数，则人们无法创建依赖于多态特性的子类。因此一旦虚函数或虚析构函数被添加，这会马上成为建立子类的理由，事情从此变得复杂。乍一看来，很容易觉得可以简单定义一下虚运算符重载。但顺着这条路深入下去，会导致混乱和毁灭（例如无可读性的代码）。请研究下这段代码：
+
+\begin{lstlisting}
+class OtherClass {
+	public:
+	const CopyClass &instance() const; // 此处会返回什么？我应该将返回值赋值给谁？
+};
+\end{lstlisting}
+（此小节正在施工中）
+
+不变性
+
+C++ 提供了 const 关键字来标识不会改变或不会产生副作用的事物。它可被用于数值、指针和倍只想的内容，也可被作为成员函数的特殊属性来标识它不会修改对象的状态。
+
+注意，const 自身并不提供太大的价值——许多语言甚至并未提供 const 关键字，但这并不会自动导致它们存在缺陷。事实上，若移除所有函数重载，并通过搜索替换移除 C++ 代码中的所有 const 标识，代码很可能依然能够编译并正确执行。使用实用主义导向来使用 const 是很重要的。
+
+让我们看看 Qt 中使用 const 的 API 设计：
+
+输入参数：const 指针
+
+使用指针输入参数的 const 成员函数几乎总是使用 const 指针。
+
+若一个成员函数确实被声明为 const，这意味着它不具有副作用，也不会修改对象对外可见的状态。那么，为什么要需要非 const 的输入参数？需要牢记，const 成员函数经常会被其它 const 成员函数，在这些调用场合中，非 const 的指针并不容易得到（除非使用 const\_cast，而我们应该尽可能避免使用它）。
+
+修改之前：
+
+\begin{lstlisting}
+bool QWidget::isVisibleTo(const QWidget *ancestor) const;
+bool QWidget::isEnabledTo(const QWidget *ancestor) const;
+QPoint QWidget::mapFrom(const QWidget *ancestor, const QPoint &pos) const;
+\end{lstlisting}
+
+注意，我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
+
+\begin{lstlisting}
+bool isVisibleTo(const QGraphicsItem *parent) const;
+QPointF mapFromItem (const QGraphicsItem *item, const QPointF &point) const; 
+\end{lstlisting}
+
+返回值：const 值
+
+函数的返回值，要么是引用类型，要么是右值。
+
+非类类型的右值是不受cv限定符影响的。因此，即使在语法上允许为其添加 const 修饰，这并不会产生效果，因为由于其访问权不允许对其做出修改。大多数现代编译器在编译此类代码时会打印警告信息。
+
+当为类类型的右值添加 const 时，对该类的非 const 的成员函数的访问会被禁止，对其成员变量的直接操作也会被禁止。
+
+不添加 const 允许此类操作，但很少有此类需求，因为这些修改会伴随右值对象生命周期的结束而消失，这会在当前语句的分号结束后发生。
+
+例如：
+
+\begin{lstlisting}
+struct Foo {
+	void setValue(int v) { value = v; } int value;
+};
+
+Foo foo() { return Foo(); }
+const Foo cfoo() { return Foo(); }
+int main() {
+	// 下述代码可以编译，foo() 返回非 const 右值，无法
+	// 成为赋值目标（这通常需要左值），但对成员变量的访问
+	// 是左值：
+	foo().value = 1; // 可以编译，但该临时值在这个完整的表达式结束后会被抛弃
+	
+	// 下述代码可以编译，foo() 返回非 const 右值，无法
+	// 成为赋值目标，但可以调用（甚至于非 const 的)成员函数：
+	foo().setValue(1); // 可以编译，但该临时值在这个完整的表达式结束后会被抛弃
+	
+	// 下述代码无法编译，cfoo() 返回 const 右值，因此其
+	// 成员变量是 const 授权，无法被赋值：
+	cfoo().value = 1; // 无法编译
+	
+	// 下述代码无法编译，cfoo() 返回 const 右值，无法调用
+	// 其非 const 的成员函数：
+	cfoo().setValue(1); // 无法编译
+}
+\end{lstlisting}
+
+返回值：指针与 const 指针
+
+const 成员函数应该返回指针还是 const 指针这个问题，令许多人发现 C++ 的“const 正确性”被瓦解了。该问题源于某些 const 成员函数，并不修改它们的内部状态，而是返回成员变量的非 const 指针。单纯返回一个指针并不会影响对象对外可见的状态，也不会修改它正在维护的状态。但这会令程序员获得间接地修改对象数据的权限。
+
+下述范例展示了通过 const 成员函数返回的非 const 指针来规避不可变性的诸多方法之一：
+
+\begin{lstlisting}
+QVariant CustomWidget::inputMethodQuery(Qt::InputMethodQuery query) const {
+	moveBy(10, 10); // 无法编译！
+	window()->childAt(mapTo(window(), rect().center()))->moveBy(10, 10); // 可以编译！
+}
+\end{lstlisting}
+
+返回 const 指针的函数，至少在一定程度上，避免了此类（可能并不希望/非预期的）副作用。但哪些函数会考虑返回 const 指针，或一组 const 指针？若我们使用 const正确 的方案，即令任何 const 成员函数返回成员变量（或一组成员变量的指针）时都是用 const 指针形式。很不幸的是，实际中这会造就无法使用的 API：
+
+\begin{lstlisting}
+QGraphicsScene scene;
+// … 初始化场景
+foreach (const QGraphicsItem *item, scene.items()) {
+	item->setPos(qrand() % 500, qrand() % 500); // 无法编译！item 是 const 指针
+}
+\end{lstlisting}
