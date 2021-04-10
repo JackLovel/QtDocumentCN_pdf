@@ -117,3 +117,95 @@ toolButton->iconSize(); // 返回 (52, 52)
 \end{lstlisting}
 
 
+注意，一旦 iconSize 被设置，它会被一直留存，此时修改当前样式不会影响它。这是 好的。有时，提供重置属性的渠道会很方便，这有两种实现方式：
+
+\begin{itemize}
+	\item 传递一个特定值（如 QSIze()、-1 或 Qt::Alignment(0)）来指代“重置”；
+	\item 提供显示的 resetFoo() 或 unsetFoo() 函数。
+\end{itemize}
+
+对于 iconSize，将 QSize()（即 QSize(-1, -1)）设为“重置”便足够了。
+
+某些场景中，取值方法会返回值会与设置的内容不同。例如，若调用 widget->setEnabled(true)，可能通过 widget->isEnabled() 获得的依然是 false，因为父控件被禁用了。这并没问题，因为通常这正是我们要检查的状态（父控件被禁用时，子控件也应该变灰，表现为也被禁用，但同时在它内部，应该知道自己实际是“可用”的，并等待父控件可用后恢复状态），但必须在文档中正确地进行描述。
+
+QProperty
+
+\begin{quote}
+译者注：该类型为 Qt 6.0 引入，需要参见 Qt 6 类文档。
+
+本文原文中的内容与现有的 Qt 6.0 预览版存在出入，因此暂不翻译本节，待官方进一步维护更新原文。
+\end{quote}
+
+C++ 特性
+
+值 与 对象
+
+\begin{quote}
+译者注：此条原文无内容，待官方更新
+\end{quote}
+
+指针 与 引用
+
+作为输出参数，指针与引用哪个更好？
+
+\begin{lstlisting}
+void getHsv(int *h, int *s, int *v) const void getHsv(int &h, int &s, int &v) const
+\end{lstlisting}
+
+绝大多数 C++ 数据都推荐尽可能使用引用，因为引用在感知上比指针“更安全更漂亮”。事实上，我们在 Qt 软件中更倾向于使用指针，因为这会令代码更加已读。如对比：
+
+\begin{lstlisting}
+color.getHsv(&h, &s, &v);
+color.getHsv(h, s, v);
+\end{lstlisting}
+
+第一行代码能很清晰地表示，h、s、v 对象有很大概率会被该函数调用所修改。
+
+即便如此，由于编译器并不喜欢输出参数，在新 APi 中应该避免此用法，而是返回一个小结构体：
+
+\begin{lstlisting}
+struct Hsv { int hue, saturation, value }; Hsv getHsv() const;
+\end{lstlisting}
+
+\begin{quote}
+	译者注：对于可能失败的带返回值的函数，Qt 倾向于返回数值，使用 bool* ok = 0 参数来存储调用结果，以便在不关心时忽略之。同样在 Qt 6 以后，该方式不再被建议使用，而是改用 std::optional<T> 返回类型。
+\end{quote}
+
+传递常引用 与 传递值
+若类型大于16字节，传递常引用。
+
+若类型具有非平凡的拷贝构造函数或非平凡的析构函数，传递常引用来避免执行这些方法。
+
+所有其它类型都应使用值传递。
+
+范例：
+
+\begin{lstlisting}
+void setAge(int age);
+void setCategory(QChar cat);
+void setName(QLatin1String name);
+void setAlarm(const QSharedPointer<Alarm> &alarm); // 常引用远快于拷贝构造和析构
+// QDate, QTime, QPoint, QPointF, QSize, QSizeF, QRect 都是其它应该值传递的好例子
+\end{lstlisting}
+
+虚函数
+
+当 C++ 中的一个成员函数被声明为虚函数，这主要用于通过在子类中重写来自定义该函数的行为。将函数设为虚函数的目的是让对该函数的现有调用会被替代为访问自定义的代码分支。若在该类之外没人调用此函数，则在将其声明为虚函数之前需要小心斟酌：
+
+\begin{lstlisting}
+// Qt 3 中的 QTextEdit: 成员函数不需要作为虚函数的成员函数
+virtual void resetFormat();
+virtual void setUndoDepth( int d );
+virtual void setFormat( QTextFormat &f, int flags );
+virtual void ensureCursorVisible();
+virtual void placeCursor( const QPoint &pos;, QTextCursorc = 0 );
+virtual void moveCursor( CursorAction action, bool select );
+virtual void doKeyboardAction( KeyboardAction action );
+virtual void removeSelectedText( int selNum = 0 );
+virtual void removeSelection( int selNum = 0 );
+virtual void setCurrentFont( const QFont &f );
+virtual void setOverwriteMode( bool b ) { overWrite = b; }
+\end{lstlisting}
+
+
+
