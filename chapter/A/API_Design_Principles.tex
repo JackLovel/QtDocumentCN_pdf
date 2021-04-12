@@ -1,4 +1,4 @@
-\chapter{API Design Principles}
+\chapter{API Design Principles(未完结)}
 
 API 设计规范
 
@@ -355,3 +355,38 @@ foreach (const QGraphicsItem *item, scene.items()) {
 	item->setPos(qrand() % 500, qrand() % 500); // 无法编译！item 是 const 指针
 }
 \end{lstlisting}
+
+QGraphicsScene::items() 是 const 成员函数，这可能会让人觉得应该返回 const 指针。
+
+在 Qt 中，我们近乎只使用非 const 的模式。我们选择了实用主义之路：返回 const 指针更容易导致 const\_cast 的过度使用，这比滥用返回的非 const 指针引发的问题更加频繁。
+
+返回类型：值 或 const 引用？
+
+如果我们在返回对象时还保留了它的副本，返回 const 引用是最快的方法；然而，这在我们之后打算重构这个类时成为了限制（使用 d 指针惯用法，我们可以在任何时候修改 Qt 类的内存结构；但我们无法在不破坏二进制兼容性的前提下，将函数签名从 const QFoo\& 改为 QFoo）。出于此原因，我们通常返回 QFoo 而非 const QFoo\&，除了性能极端敏感，而重构并不是问题的少数场合（例如 QList::at()）。
+
+const 与 对象的状态
+
+const正确性 是 C 中的一场“圣战”（译者注：原文为 vi-emacs discussion），因为该原则在一些领域（如基于指针的函数）中是失效了。
+
+但 const 成员函数的常规含义是值不会修改一个类对外可见的状态，状态在此处值“我自己的和我负责的”。这并不意味着 const 成员函数会改变它们自己的私有成员变量，但也不代表不能这么做。但通常来说，const 成员函数不会产生可见的副作用。例如：
+
+\begin{lstlisting}
+QSize size = widget->sizeHint(); // const
+widget->move(10, 10); // 非 const
+\end{lstlisting}
+
+代理对象负责处理对另一个对象的绘制工作，它的状态包含了它负责的内容，也就是包含它的绘制目标的状态。请求代理进行绘制是具有副作用的：这会改变正在被绘制的设备的外观（也意味着状态）。正因如此，令 paint() 成为 const 并不合理。任何视图控件或 QIcon 的 paint() 作为 const 都很不合理。没人会在 const 成员函数中去调用 QIcon::paint()，除非他们明确地像规避当前函数的 const 性质。而在这种场景中，显示的 const\_cast 会是更好的选择：
+
+\begin{lstlisting}
+// QAbstractItemDelegate::paint 是 const
+void QAbstractItemDelegate::paint(QPainter *painter,
+const QStyleOptionViewItem &option,
+const QModelIndex &index) const
+ 
+// QGraphicsItem::paint 不是 const
+void QGraphicsItem::paint(QPainter &painter, 
+const QStyleOptionGraphicsItem &option, 
+QWidget &widget = 0)
+\end{lstlisting}
+
+const 关键字不会为你做任何事，考虑将其移除，而非为一个成员函数提供 const/非 const 的重载版本。
