@@ -45,7 +45,7 @@ QWriteLocker（和 QReadLocker）的目的是简化 QReadWriteLock 的锁定和�
 下面是一个使用 QWriteLocker 锁定和解锁读写锁的示例：
 
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QReadWriteLock lock;
 
 void writeData(const QByteArray &data)
@@ -57,7 +57,7 @@ void writeData(const QByteArray &data)
 
 等价于以下代码：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QReadWriteLock lock;
 	
 void writeData(const QByteArray &data)

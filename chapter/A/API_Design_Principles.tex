@@ -71,7 +71,7 @@ Matthias 在 Qt 季刊弟13期，关于 API 设计的文章中，声称他坚信
 基于属性的 API
 比较新的 Qt 类倾向于使用基于属性的 API，例如：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QTimer timer;
 timer.setInterval(1000);
 timer.setSingleShot(true);
@@ -80,7 +80,7 @@ timer.start();
 
 此处的属性，指的是作为对象状态一部分的任何概念性的特征——无论是否是实际的 Q\_PROPERTY。只要可行，用户都应该允许以任何顺序设置属性，也就是说，这些属性应该是正交的。例如，上文的代码也可以写为：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QTimer timer;
 timer.setSingleShot(true);
 timer.setInterval(1000);
@@ -89,13 +89,13 @@ timer.start();
 
 为了方便，我们也可以这样写：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 timer.start(1000);
 \end{lstlisting}
 
 类似的，对于 QRegExp，我们可以：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QRegExp regExp;
 regExp.setCaseSensitive(Qt::CaseInsensitive);
 regExp.setPattern(".");
@@ -106,7 +106,7 @@ regExp.setPatternSyntax(Qt::WildcardSyntax);
 
 属性通常是级联的，此时我们应该谨慎地处理。仔细考虑下当前样式提供的“默认图标大小”与 QToolButton 的 iconSize 属性：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 toolButton->iconSize(); // 返回当前样式表的默认大小
 toolButton->setStyle(otherStyle);
 toolButton->iconSize(); // 返回 otherStyle 的默认大小
@@ -148,13 +148,13 @@ C++ 特性
 
 作为输出参数，指针与引用哪个更好？
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 void getHsv(int *h, int *s, int *v) const void getHsv(int &h, int &s, int &v) const
 \end{lstlisting}
 
 绝大多数 C++ 数据都推荐尽可能使用引用，因为引用在感知上比指针“更安全更漂亮”。事实上，我们在 Qt 软件中更倾向于使用指针，因为这会令代码更加已读。如对比：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 color.getHsv(&h, &s, &v);
 color.getHsv(h, s, v);
 \end{lstlisting}
@@ -163,7 +163,7 @@ color.getHsv(h, s, v);
 
 即便如此，由于编译器并不喜欢输出参数，在新 APi 中应该避免此用法，而是返回一个小结构体：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 struct Hsv { int hue, saturation, value }; Hsv getHsv() const;
 \end{lstlisting}
 
@@ -180,7 +180,7 @@ struct Hsv { int hue, saturation, value }; Hsv getHsv() const;
 
 范例：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 void setAge(int age);
 void setCategory(QChar cat);
 void setName(QLatin1String name);
@@ -192,7 +192,7 @@ void setAlarm(const QSharedPointer<Alarm> &alarm); // 常引用远快于拷贝�
 
 当 C++ 中的一个成员函数被声明为虚函数，这主要用于通过在子类中重写来自定义该函数的行为。将函数设为虚函数的目的是让对该函数的现有调用会被替代为访问自定义的代码分支。若在该类之外没人调用此函数，则在将其声明为虚函数之前需要小心斟酌：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 // Qt 3 中的 QTextEdit: 成员函数不需要作为虚函数的成员函数
 virtual void resetFormat();
 virtual void setUndoDepth( int d );
@@ -242,7 +242,7 @@ virtual void setOverwriteMode( bool b ) { overWrite = b; }
 
 若需要以值语义拷贝、复制和对比一个类，则可能需要拷贝构造函数、赋值运算符重载和等于运算符重载：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 class CopyClass {
 	public:
 	CopyClass();
@@ -257,7 +257,7 @@ class CopyClass {
 
 若创建该类的子类，则代码中会开始发生意料外的行为。通常来说，若没有虚函数和虚构造函数，则人们无法创建依赖于多态特性的子类。因此一旦虚函数或虚析构函数被添加，这会马上成为建立子类的理由，事情从此变得复杂。乍一看来，很容易觉得可以简单定义一下虚运算符重载。但顺着这条路深入下去，会导致混乱和毁灭（例如无可读性的代码）。请研究下这段代码：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 class OtherClass {
 	public:
 	const CopyClass &instance() const; // 此处会返回什么？我应该将返回值赋值给谁？
@@ -281,7 +281,7 @@ C++ 提供了 const 关键字来标识不会改变或不会产生副作用的事
 
 修改之前：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 bool QWidget::isVisibleTo(const QWidget *ancestor) const;
 bool QWidget::isEnabledTo(const QWidget *ancestor) const;
 QPoint QWidget::mapFrom(const QWidget *ancestor, const QPoint &pos) const;
@@ -289,7 +289,7 @@ QPoint QWidget::mapFrom(const QWidget *ancestor, const QPoint &pos) const;
 
 注意，我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 bool isVisibleTo(const QGraphicsItem *parent) const;
 QPointF mapFromItem (const QGraphicsItem *item, const QPointF &point) const; 
 \end{lstlisting}
@@ -306,7 +306,7 @@ QPointF mapFromItem (const QGraphicsItem *item, const QPointF &point) const;
 
 例如：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 struct Foo {
 	void setValue(int v) { value = v; } int value;
 };
@@ -339,7 +339,7 @@ const 成员函数应该返回指针还是 const 指针这个问题，令许多�
 
 下述范例展示了通过 const 成员函数返回的非 const 指针来规避不可变性的诸多方法之一：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QVariant CustomWidget::inputMethodQuery(Qt::InputMethodQuery query) const {
 	moveBy(10, 10); // 无法编译！
 	window()->childAt(mapTo(window(), rect().center()))->moveBy(10, 10); // 可以编译！
@@ -348,7 +348,7 @@ QVariant CustomWidget::inputMethodQuery(Qt::InputMethodQuery query) const {
 
 返回 const 指针的函数，至少在一定程度上，避免了此类（可能并不希望/非预期的）副作用。但哪些函数会考虑返回 const 指针，或一组 const 指针？若我们使用 const正确 的方案，即令任何 const 成员函数返回成员变量（或一组成员变量的指针）时都是用 const 指针形式。很不幸的是，实际中这会造就无法使用的 API：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QGraphicsScene scene;
 // … 初始化场景
 foreach (const QGraphicsItem *item, scene.items()) {
@@ -370,14 +370,14 @@ const正确性 是 C 中的一场“圣战”（译者注：原文为 vi-emacs d
 
 但 const 成员函数的常规含义是值不会修改一个类对外可见的状态，状态在此处值“我自己的和我负责的”。这并不意味着 const 成员函数会改变它们自己的私有成员变量，但也不代表不能这么做。但通常来说，const 成员函数不会产生可见的副作用。例如：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QSize size = widget->sizeHint(); // const
 widget->move(10, 10); // 非 const
 \end{lstlisting}
 
 代理对象负责处理对另一个对象的绘制工作，它的状态包含了它负责的内容，也就是包含它的绘制目标的状态。请求代理进行绘制是具有副作用的：这会改变正在被绘制的设备的外观（也意味着状态）。正因如此，令 paint() 成为 const 并不合理。任何视图控件或 QIcon 的 paint() 作为 const 都很不合理。没人会在 const 成员函数中去调用 QIcon::paint()，除非他们明确地像规避当前函数的 const 性质。而在这种场景中，显示的 const\_cast 会是更好的选择：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 // QAbstractItemDelegate::paint 是 const
 void QAbstractItemDelegate::paint(QPainter *painter,
 const QStyleOptionViewItem &option,

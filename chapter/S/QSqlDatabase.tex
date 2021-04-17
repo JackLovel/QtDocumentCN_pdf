@@ -146,7 +146,7 @@ QSqlDatabase 类提供接口用于数据库的连接 。一个 QSqlDatabase 实�
 
 通过调用一个静态的 addDatabase()函数，来创建一个连接（即：实例化一个QSqlDatabase类）,并且可以指定驱动或者驱动类型去使用（依赖于数据库的类型 ）和 一个连接的名称。 一个连接是通过它自已的名称，而不是通过数据库的名称去连接的。对于一个数据库您可以有多个连接。QSqlDatabase 也支持默认连接，您可以不 传递连接名参数给 addDatabase() 来创建 它。随后，这个默认连接假定您 在调用任何静态函数情况下，而不去指定连接名称。 下面的一段代码片段展示了 如何去创建 和打开一个默认连接，去连接 PostgreSQL 数据库：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QSqlDatabase db = QSqlDatabase::database();
 \end{lstlisting}
 
@@ -274,7 +274,7 @@ QSqlDatabase::~QSqlDatabase()
 
 这个重载函数是非常有用的，当您想创建一个带有\href{https://doc.qt.io/qt-5/qsqldriver.html}{驱动} 连接时，您可以实例化它。有可能您想拥有自己的数据库驱动，或者去实例化 Qt自带的驱动。如果您真的想这样做，我非常建议您把驱动的代码导入到您的应用程序中。例如，您可用自已的 QPSQL 驱动来创建一个 PostgreSQL 连接，像下面这样:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 PGconn *con = PQconnectdb("host=server user=bart password=simpson dbname=springfield");
 QPSQLDriver *drv = new QPSQLDriver(con);
 QSqlDatabase db = QSqlDatabase::addDatabase(drv); // 产生成新的默认连接
@@ -288,7 +288,7 @@ query.exec("SELECT NAME, ID FROM STAFF");
 
 请记住，必须将数据库客户端库到您的程序里。确保客户端库在您的链接器的搜索路径中，并且像下面这样添加到您的 .pro 文件里：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 unix:LIBS += -lpq
 win32:LIBS += libpqdll.lib
 \end{lstlisting}
@@ -463,7 +463,7 @@ bool QSqlDatabase::isValid() const
 
 例子：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QSqlDatabase db;
 qDebug() << db.isValid();    // 返回 false
 
@@ -554,7 +554,7 @@ QSqlRecord QSqlDatabase::record(const QString \&tablename) const
 例如：
 
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QSqlDatabase::registerSqlDriver("MYDRIVER", new QSqlDriverCreator<QSqlDriver>);
 QVERIFY(QSqlDatabase::drivers().contains("MYDRIVER"));
 QSqlDatabase db = QSqlDatabase::addDatabase("MYDRIVER");
@@ -576,7 +576,7 @@ QSqlDatabase拥有 creator 指针的所有权，因此您不能自己删除它�
 
 例子：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 // 错误
 QSqlDatabase db = QSqlDatabase::database("sales");
 QSqlQuery query("SELECT NAME, DOB FROM EMPLOYEES", db);
@@ -588,7 +588,7 @@ QSqlDatabase::removeDatabase("sales"); // 将会输出警告
 
 正确的做法：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 {
     QSqlDatabase db = QSqlDatabase::database("sales");
     QSqlQuery query("SELECT NAME, DOB FROM EMPLOYEES", db);
@@ -689,7 +689,7 @@ void QSqlDatabase::setConnectOptions(const QString \&options = QString())
 
 例子：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 db.setConnectOptions("SSL_KEY=client-key.pem;SSL_CERT=client-cert.pem;SSL_CA=ca-cert.pem;CLIENT_IGNORE_SPACE=1"); // 使用安全套连字进行连接
 if (!db.open()) {
 	db.setConnectOptions(); // 清除连接的字符串
@@ -734,7 +734,7 @@ void QSqlDatabase::setDatabaseName(const QString \&name)
 
 \clearpage
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 // ...
 QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 db.setDatabaseName("DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};

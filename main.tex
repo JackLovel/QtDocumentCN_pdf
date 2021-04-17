@@ -19,6 +19,7 @@
 \usepackage{chngpage}
 \usepackage{array}
 \usepackage{parskip}
+\usepackage{booktabs}
 
 \newfontfamily\consolas{Consolas}
 
@@ -67,8 +68,10 @@
 \maketitle
 \tableofcontents
 \thispagestyle{empty} % 目录页不显示页码
-\include{./contributors}
+%\include{./contributors}
+\include{./contributors_table}
 \include{./chapter/A/API_Design_Principles}
+\include{./chapter/A/QAbstractAnimation}
 \include{./chapter/S/QSql}
 \include{./chapter/S/QSqlDatabase}
 \include{./chapter/W/QWaitCondition}

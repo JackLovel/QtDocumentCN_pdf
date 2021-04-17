@@ -1,0 +1,106 @@
+\chapter{QAbstractAnimation}
+
+QAbstractAnimation 是所有的动画相关的基类。
+
+QAbstractAnimation 定义了所有动画类相关的基础功能，通过继承该类，您可以实现动画的其它功能，或者添加自定义的特效。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include<QAbstractAnimation>\\      
+	\hline
+	qmake & QT+=core\\      
+	\hline
+	自从 & Qt 4.6\\
+	\hline
+	继承&QObject \\
+	\hline
+	派生 & QAnimationGroup，QPauseAnimation，QVariantAnimation \\
+	\hline
+\end{tabular}
+
+公共成员类型
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 方法 \\
+	\hline
+	enum & DeletionPolicy \{ KeepWhenStopped, DeleteWhenStopped \}\\      
+	\hline
+	enum & Direction \{ Forward, Backward \}\\      
+	\hline
+	enum & State \{ Stopped, Paused, Running \}\\
+	\hline
+\end{tabular}
+
+属性
+
+\begin{tabular}{|l|l|l|l|}
+	\hline
+	属性 & 类型 &属性 &类型 \\
+	\hline
+		currentLoop & const int &duration &const int \\
+	\hline
+	currentTime	&int&	loopCount&	int\\
+	\hline
+	direction	&Direction	&state&	const State\\
+	\hline
+\end{tabular}
+
+
+公共成员函数
+
+\begin{tabular}{|r|l|}
+
+\hline
+返回类型 &	函数名\\
+\hline
+& QAbstractAnimation(QObject *parent = Q\_NULLPTR)\\
+\hline
+virtual&$\sim$QAbstractAnimation()\\
+\hline
+int	& currentLoop() const\\
+\hline
+int	& currentLoopTime() const\\
+\hline
+int	& currentTime() const\\
+\hline
+Direction& direction() const\\
+\hline
+virtual int	&duration() const = 0\\
+\hline
+QAnimationGroup *&	group() const\\
+\hline
+int	&loopCount() const\\
+\hline
+void&	setDirection(Direction direction)\\
+\hline
+void&	setLoopCount(int loopCount)\\
+\hline
+State&	state() const\\
+\hline
+int	& totalDuration() const\\
+\hline
+\end{tabular}
+
+公共槽
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型&	函数名 \\
+\hline
+void&	pause()\\
+\hline
+void&	resume()\\
+\hline
+void&	setCurrentTime(int msecs)\\
+\hline
+void&	setPaused(bool paused)\\
+\hline
+void&	start(QAbstractAnimation::DeletionPolicy policy = KeepWhenStopped)\\
+\hline
+void&	stop() \\
+\hline
+\end{tabular}
+
