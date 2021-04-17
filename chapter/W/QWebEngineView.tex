@@ -209,7 +209,7 @@ QWebEngineView类提供了一个小部件, 被用去查看和编辑web文档。
 
 像所有Qt小部件一样，必须调用\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineView}{show()}函数才能显示Web视图。 下面的代码段说明了这一点：
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 QWebEngineView *view = new QWebEngineView(parent);
 view->load(QUrl("http://qt-project.org/"));
 view->show();
