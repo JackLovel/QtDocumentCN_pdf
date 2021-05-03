@@ -16,21 +16,21 @@ QSql 命名空间 里的 各种名样的标识符，已经被运用在 Qt SQL �
 类型
 
 \resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
-\begin{tabular}{|c|l|}
-	\hline
-	 &  \\
-	\hline
-	enum & Location \{ BeforeFirstRow, AfterLastRow \}\\      
-	\hline
-	enum & NumericalPrecisionPolicy \{ LowPrecisionInt32, LowPrecisionInt64,LowPrecisionDouble,HighPrecision\}\\      
-	\hline
-	flags & ParamType \\
-	\hline 
-	enum & ParamTypeFlag \{ In, Out, InOut, Binary \} \\ 
-	\hline
-	enum & TableType \{ Tables, SystemTables, Views, AllTables \}\\
-	\hline
-\end{tabular}
+	\begin{tabular}{|c|l|}
+		\hline
+		&  \\
+		\hline
+		enum & Location \{ BeforeFirstRow, AfterLastRow \}\\      
+		\hline
+		enum & NumericalPrecisionPolicy \{ LowPrecisionInt32, LowPrecisionInt64,LowPrecisionDouble,HighPrecision\}\\      
+		\hline
+		flags & ParamType \\
+		\hline 
+		enum & ParamTypeFlag \{ In, Out, InOut, Binary \} \\ 
+		\hline
+		enum & TableType \{ Tables, SystemTables, Views, AllTables \}\\
+		\hline
+	\end{tabular}
 }
 
 
@@ -65,19 +65,19 @@ enum QSql::NumericalPrecisionPolicy
 
 
 \resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
-\begin{tabular}{|c|c|c|}
-	\hline
-	常量	& 值 & 介绍 \\
-	\hline
-	QSql::LowPrecisionInt32	&0x01 &对于32位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
-	\hline
-	QSql::LowPrecisionInt64	&0x02 &对于64位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
-	\hline
-	QSql::LowPrecisionDouble&0x04 &强制双精度值。这个默认的规则\\
-	\hline
-	QSql::HighPrecision	&0&字符串将会维技精度\\
-	\hline
-\end{tabular}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		常量	& 值 & 介绍 \\
+		\hline
+		QSql::LowPrecisionInt32	&0x01 &对于32位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
+		\hline
+		QSql::LowPrecisionInt64	&0x02 &对于64位的整形数值。在浮点数的情况下，小数部分将会被舍去。\\
+		\hline
+		QSql::LowPrecisionDouble&0x04 &强制双精度值。这个默认的规则\\
+		\hline
+		QSql::HighPrecision	&0&字符串将会维技精度\\
+		\hline
+	\end{tabular}
 }
 
 注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。
@@ -93,7 +93,7 @@ flags QSql::ParamType
 
 \begin{tabular}{|l|l|l|}
 	\hline
-		常量	& 值 & 介绍 \\
+	常量	& 值 & 介绍 \\
 	\hline
 	QSql::In&0x00000001&这个参数被用于向数据库里写入数据\\
 	\hline
@@ -106,7 +106,6 @@ flags QSql::ParamType
 \end{tabular}
 
 类型参数 类型定义为 \href{https://doc.qt.io/qt-5/qflags.html}{QFlags}. 它被存放在 一个 OR与 类型参数标志的值 的组合。
-
 
 
 
