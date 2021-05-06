@@ -1,0 +1,79 @@
+\chapter{QAbstractAudioInput}
+
+QAbstractAudioInput类为QAudioInput类提供了访问音频设备的方法。（通过插件的形式）
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QAbstractAudioInput>\\      
+	\hline
+	qmake &QT += multimedia\\      
+	\hline
+	继承&QObject \\
+	\hline
+\end{tabular}
+
+简述
+
+公有有函数
+
+\begin{tabular}{|r|l|}
+  \hline
+  类型&方法\\
+  \hline
+  virtual int	&bufferSize() const = 0\\
+  \hline
+  virtual int	&bytesReady() const = 0 \\
+ \hline
+  virtual qint64	&elapsedUSecs() const = 0\\
+  \hline
+  virtual QAudio::Error&	error() const = 0\\
+  \hline
+virtual QAudioFormat&	format() const = 0\\
+\hline
+  virtual int&	notifyInterval() const = 0\\
+\hline
+  virtual int&	periodSize() const = 0\\
+\hline
+  virtual qint64&	processedUSecs() const = 0\\
+  \hline
+  virtual void	&reset() = 0\\
+  \hline
+  virtual void&	resume() = 0\\
+  \hline
+  virtual void	&setBufferSize(int value) = 0\\
+  \hline
+  virtual void	&setFormat(const QAudioFormat \&fmt) = 0 \\
+  \hline
+  virtual void	&setNotifyInterval(int ms) = 0\\
+  \hline
+  virtual void	&setVolume(qreal) = 0\\
+  \hline
+  virtual void	&start(QIODevice *device) = 0\\
+  \hline
+  virtual QIODevice*	&start() = 0\\
+  \hline
+  virtual QAudio::State	&state() const = 0\\
+  \hline
+virtual void	&stop() = 0\\
+\hline
+  virtual void	&suspend() = 0\\
+  \hline
+virtual qreal	&volume() const = 0\\
+  \hline
+\end{tabular}
+
+信号
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 方法 \\
+	\hline
+	void & errorChanged(QAudio::Error error)\\      
+	\hline
+	void & notify()\\
+	\hline
+	void & stateChanged(QAudio::State state)\\      
+        \hline
+\end{tabular}
