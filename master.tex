@@ -18,6 +18,7 @@
 \usepackage{array}
 \usepackage{parskip}
 \usepackage{booktabs}
+\usepackage{longtable}
 
 \newfontfamily\consolas{Consolas}
 %fc-list :lang=zh >> c:\font.txt
@@ -57,6 +58,7 @@
 % 首行缩进两个字符
 %\setlength{\parindent}{2em}
 
+\setlength{\headheight}{20pt}
 \begin{document}
 % 正文区（文稿区）
 % 页眉页脚
@@ -67,7 +69,6 @@
 \maketitle
 \tableofcontents
 \thispagestyle{empty} % 目录页不显示页码
-%\include{./contributors}
 \include{./contributors_table}
 \include{./chapter/A/API_Design_Principles}
 \include{./chapter/A/QAbstractAnimation}

@@ -20,7 +20,6 @@ QAbstractAxis类是用于专门处理坐标轴的类
 
 公共类型
 
-\resizebox{\textwidth}{!}{% Latex表格宽度超出文本宽度
 \begin{tabular}{|r|l|}
 \hline
 类型 & 方法 \\
@@ -30,7 +29,7 @@ enum&	AxisType { AxisTypeNoAxis, AxisTypeValue, AxisTypeBarCategory,
 \hline
 flags&	AxisTypes\\
 \hline
-\end{tabular}}
+\end{tabular}
 
 属性
 
@@ -94,8 +93,135 @@ visible :&	bool\\
 \hline
 \end{tabular}
 
+公共函数
+
+
+\begin{longtable}{|r|l|}
+\hline
+类型  & 函数名\\
+\hline
+& $\sim$QAbstractAxis() \\
+\hline
+Qt::Alignment&	alignment() const \\
+\hline
+QColor&	gridLineColor()\\
+\hline
+QPen&	gridLinePen() const\\
+\hline
+void&	hide()\\
+\hline
+bool&	isGridLineVisible() const\\
+\hline
+bool&	isLineVisible() const\\
+\hline
+bool&	isMinorGridLineVisible() const\\
+\hline
+bool&	isReverse() const\\
+\hline
+bool&	isTitleVisible() const\\
+\hline
+bool&	isVisible() const\\
+\hline
+int&	labelsAngle() const\\
+\hline
+QBrush&	labelsBrush() const\\
+\hline
+QColor&	labelsColor() const\\
+\hline
+QFont&	labelsFont() const\\
+\hline
+bool&	labelsVisible() const\\
+\hline
+QPen&	linePen() const\\
+\hline
+QColor&	linePenColor() const\\
+\hline
+QColor&	minorGridLineColor()\\
+\hline
+QPen&	minorGridLinePen() const\\
+\hline
+Qt::Orientation &orientation() const\\
+\hline
+void&	setGridLineColor(const QColor \&color)\\
+\hline
+void&	setGridLinePen(const QPen \&pen)\\
+\hline
+void&	setGridLineVisible(bool visible = true)\\
+\hline
+void&	setLabelsAngle(int angle)\\
+\hline
+void&	setLabelsBrush(const QBrush \&brush)\\
+\hline
+void&	setLabelsColor(QColor color)\\
+\hline
+void&	setLabelsFont(const QFont \&font)\\
+\hline
+void	&setLabelsVisible(bool visible = true)\\
+\hline
+void	&setLinePen(const QPen \&pen)\\
+\hline
+void	&setLinePenColor(QColor color)\\
+\hline
+void	&setLineVisible(bool visible = true)\\
+\hline
+void	&setMax(const QVariant \&max)\\
+\hline
+void	&setMin(const QVariant \&min)\\
+\hline
+void	&setMinorGridLineColor(const QColor \&color)\\
+\hline
+void	&setMinorGridLinePen(const QPen \&pen)\\
+\hline
+void	&setMinorGridLineVisible(bool visible = true)\\
+\hline
+void	&setRange(const QVariant \&min, const QVariant \&max)\\
+\hline
+void	&setReverse(bool reverse = true)\\
+\hline
+void	&setShadesBorderColor(QColor color)\\
+\hline
+void	&setShadesBrush(const QBrush \&brush)\\
+\hline
+void	&setShadesColor(QColor color)\\
+\hline
+void	&setShadesPen(const QPen \&pen)\\
+\hline
+void&	setShadesVisible(bool visible = true)\\
+\hline
+void&	setTitleBrush(const QBrush \&brush)\\
+\hline
+void&	setTitleFont(const QFont \&font)\\
+\hline
+void&	setTitleText(const QString \&title)\\
+\hline
+void&	setTitleVisible(bool visible = true)\\
+\hline
+void&	setVisible(bool visible = true)\\
+\hline
+QColor&	shadesBorderColor() const\\
+\hline
+QBrush&	shadesBrush() const\\
+\hline
+QColor&	shadesColor() const\\
+\hline
+QPen&	shadesPen() const\\
+\hline
+bool&	shadesVisible() const\\
+\hline
+void&	show()\\
+\hline
+QBrush&	titleBrush() const\\
+\hline
+QFont&	titleFont() const\\
+\hline
+QString&	titleText() const\\
+\hline
+virtual AxisType &type() const = 0\\
+\hline
+\end{longtable}
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
 %%% End:
+ 
