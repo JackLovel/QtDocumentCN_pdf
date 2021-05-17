@@ -3,8 +3,98 @@
 QAbstractAxis类是用于专门处理坐标轴的类
 
 \begin{tabular}{|r|l|}
-
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QAbstractAxis>\\      
+	\hline
+	实例化 & AbstractAxis\\      
+	\hline
+	继承&QObject \\
+	\hline
+	派生 & QBarCategoryAxis, QDateTimeAxis, QLogValueAxis, and QValueAxis \\
+	\hline
 \end{tabular}
+
+简述
+
+公共类型
+
+\resizebox{\textwidth}{!}{% Latex表格宽度超出文本宽度
+\begin{tabular}{|r|l|}
+\hline
+类型 & 方法 \\
+\hline
+enum&	AxisType { AxisTypeNoAxis, AxisTypeValue, AxisTypeBarCategory,
+      AxisTypeCategory, AxisTypeDateTime, AxisTypeLogValue }\\
+\hline
+flags&	AxisTypes\\
+\hline
+\end{tabular}}
+
+属性
+
+\begin{tabular}{|r|l|}
+\hline
+函数名 & 类型 \\
+\hline
+alignment :&	const Qt::Alignment\\
+\hline
+color :&	QColor\\
+\hline
+gridLineColor :&	QColor\\
+\hline
+gridLinePen :&	QPen\\
+\hline
+gridVisible :&	bool\\
+\hline
+labelsAngle :&	int\\
+\hline
+labelsBrush :&	QBrush\\
+\hline
+labelsColor :&	QColor\\
+\hline
+labelsFont :&	QFont\\
+\hline
+labelsVisible :&	bool\\
+\hline
+linePen :&	QPen\\
+\hline
+lineVisible :&	bool\\
+\hline
+minorGridLineColor :&	QColor\\
+\hline
+minorGridLinePen :&	QPen\\
+\hline
+minorGridVisible :&	bool\\
+\hline
+orientation :&	const Qt::Orientation\\
+\hline
+reverse :&	bool\\
+\hline
+shadesBorderColor :&	QColor\\
+\hline
+shadesBrush :&	QBrush\\
+\hline
+shadesColor :&	QColor\\
+\hline
+shadesPen :&	QPen\\
+\hline
+shadesVisible :&	bool\\
+\hline
+titleBrush :&	QBrush\\
+\hline
+titleFont :&	QFont\\
+\hline
+titleText :&	QString\\
+\hline
+titleVisible :&	bool\\
+\hline
+visible :&	bool\\
+\hline
+\end{tabular}
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
