@@ -277,8 +277,19 @@ void&	titleVisibleChanged(bool visible)\\
 void&	visibleChanged(bool visible)\\
 \hline
 \end{tabular}
+
+详细说明
+
+QAbstractAxis是专门用于处理坐标轴的基类。
+
+每一个连续的序列可以绑定到一个或者多个水平轴和垂直轴，但是不同域的混合轴的类型是不支持的。比如在同一个方向指定QValueAxis和QLogValueAxis。
+
+每个轴的元素（比如轴线，标题，标签，网格线，阴影，可见性）都是可以控制的。
+
+成员变量
+enum QAbstractAxis::AxisType flags QAbstractAxis::AxisTypes
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
 %%% End:
- 
