@@ -289,6 +289,63 @@ QAbstractAxis是专门用于处理坐标轴的基类。
 成员变量
 enum QAbstractAxis::AxisType flags QAbstractAxis::AxisTypes
 
+这个枚举类型指定了轴对象的类型
+
+\begin{tabular}{|r|l|}
+\hline
+变量&值\\
+\hline
+QAbstractAxis::AxisTypeNoAxis&	0x0\\
+\hline
+QAbstractAxis::AxisTypeValue&	0x1\\
+\hline
+QAbstractAxis::AxisTypeBarCategory&	0x2\\
+\hline
+QAbstractAxis::AxisTypeCategory&	0x4\\
+\hline
+QAbstractAxis::AxisTypeDateTime&	0x8\\
+\hline
+QAbstractAxis::AxisTypeLogValue&	0x10\\
+\hline
+\end{tabular}
+
+AxisTypes是QFlags<AxisType>的typedef。它是AxisType类型的组合。 （也就是个宏呗）
+
+alignment : const Qt::Alignment 该属性是轴的对齐属性 其值可以为
+Qt::AlignLeft, Qt::AlignRight, Qt::AlignBottom, or Qt::AlignTop. 相关
+函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\
+\hline
+Qt::Alignment&	alignment() const\\
+\hline
+\end{tabular}
+
+color : QColor 该属性是指坐标轴与刻度的颜色
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型 & 函数名\\
+\hline
+QColor&	linePenColor() const\\
+\hline
+void&	setLinePenColor(QColor color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void	&colorChanged(QColor color)\\
+\hline
+\end{tabular}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
