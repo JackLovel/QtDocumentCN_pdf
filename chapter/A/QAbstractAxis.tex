@@ -323,6 +323,8 @@ Qt::Alignment&	alignment() const\\
 \hline
 \end{tabular}
 
+\splitLine
+
 color : QColor 该属性是指坐标轴与刻度的颜色
 
 相关函数
@@ -347,6 +349,8 @@ void	&colorChanged(QColor color)\\
 \hline
 \end{tabular}
 
+\splitLine
+
 gridLinePen : QPen 该属性是指绘制网格线的笔
 
 相关函数
@@ -370,6 +374,8 @@ void&	setGridLinePen(const QPen \&pen)\\
 void	&gridLinePenChanged(const QPen \&pen)\\
 \hline
 \end{tabular}
+
+\splitLine
 
 labelsAngle : int 该属性以度数保存轴坐标的角度
 
@@ -396,11 +402,12 @@ void & labelsAngleChanged(int angle)\\
 \hline
 \end{tabular}
 
+\splitLine
+
 labelsBrush : QBrush 该属性表示用于绘制标签的画笔 只有画刷的颜色是相关的（这句话其实我不太理解Only the color of the brush is relevant.）
 
 相关函数
 
-%gog
 \begin{tabular}{|r|l|}
 \hline
 类型&函数名\\ 
@@ -420,6 +427,8 @@ void & setLabelsBrush(const QBrush \&brush)\\
 void &	labelsBrushChanged(const QBrush \&brush)\\
 \hline
 \end{tabular}
+
+\splitLine
 
 labelsColor : QColor 该属性表示轴标签的颜色
 
@@ -445,6 +454,8 @@ void &	labelsColorChanged(QColor color)\\
 \hline
 \end{tabular}
 
+\splitLine
+
 labelsFont : QFont 该属性表示轴标签的字体信息
 
 相关函数
@@ -468,6 +479,8 @@ void	&setLabelsFont(const QFont \&font)\\
 void	&labelsFontChanged(const QFont \&font)\\
 \hline
 \end{tabular}
+
+\splitLine
 
 labelsVisible : bool 该属性表示轴标签是否可见
 
@@ -493,6 +506,8 @@ void	&labelsVisibleChanged(bool visible)\\
 \hline
 \end{tabular}
 
+\splitLine
+
 linePen : QPen 该属性表示绘制轴线的笔相关
 
 相关函数
@@ -516,6 +531,8 @@ void	& setLinePen(const QPen \&pen)\\
 void &	linePenChanged(const QPen \&pen)\\
 \hline
 \end{tabular}
+
+\splitLine
 
 lineVisible : bool 该属性表示轴线是否可见
 
@@ -541,6 +558,8 @@ void &	lineVisibleChanged(bool visible)\\
 \hline
 \end{tabular}
 
+\splitLine
+
 minorGridLineColor : QColor 该属性表示副格线的颜色 仅适用于支持副网格线的轴
 
 相关函数
@@ -564,6 +583,289 @@ void &	setMinorGridLineColor(const QColor \&color)\\
 void &	minorGridLineColorChanged(const QColor \&color)\\
 \hline
 \end{tabular}
+
+\splitLine
+
+minorGridVisible : bool 该属性表示副格线是否可见 仅适用于支持副网格线的轴
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isMinorGridLineVisible() const\\
+\hline
+void & setMinorGridLineVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& minorGridVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+orientation : const Qt::Orientation 该属性表示坐标轴的方向。 当坐标轴被添加到图表时，该属性为Qt::Horizontal或者Qt::Vertical
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+Qt::Orientation	&orientation() const\\
+\hline
+\end{tabular}
+
+\splitLine
+
+reverse : bool 该属性表示是否使用反转轴。 该值默认为false。 
+反转轴由直线，样条，散列图系列以及笛卡尔图表组成的区域支持。
+如果一个方向相反，或者行为为定义，则所有相同方向的所有轴必须保持一致。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isReverse() const\\
+\hline
+void&	setReverse(bool reverse = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void&	reverseChanged(bool reverse)\\
+\hline
+\end{tabular}
+
+%\hrulefill %实线
+\splitLine % 虚线
+ 
+shadesBorderColor : QColor 该属性表示坐标轴阴影的边框（笔）颜色
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QColor	&shadesBorderColor() const\\
+\hline
+void&	setShadesBorderColor(QColor color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& shadesBorderColorChanged(QColor color)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+% wcc 
+
+shadesBrush : QBrush 该属性表示用于绘制轴阴影的画笔（网格线之间的区域）
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QPen&	shadesPen() const\\
+\hline
+void& setShadesPen(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& 	shadesPenChanged(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+shadesVisible : bool 该属性表示轴阴影是否可见
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool& 	shadesVisible() const\\
+\hline
+void & setShadesVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& 	shadesVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine 
+
+titleBrush : QBrush 该属性表示用于绘制坐标轴标题文本的画笔。 只影响画刷的颜色。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QBrush	&titleBrush() const\\
+\hline
+void & setTitleBrush(const QBrush \&brush)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleBrushChanged(const QBrush \&brush)\\
+\hline
+\end{tabular}
+
+\splitLine 
+
+titleFont : QFont 该属性表示坐标轴标题的字体。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QFont&	titleFont() const\\
+\hline
+void & setTitleFont(const QFont \&font)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleFontChanged(const QFont \&font)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+titleText : QString 该属性表示坐标轴的标题 默认为空，坐标轴的标题支持HTML的格式。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QString & titleText() const\\ 
+\hline
+void & setTitleText(const QString \&title)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleTextChanged(const QString \&text)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+titleVisible : bool 该属性表示坐标轴的可见性。 默认值为true。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool & isTitleVisible() const\\
+\hline
+void & setTitleVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+visible : bool 该属性表示坐标轴的可见性。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool & isVisible() const\\
+\hline
+void & 	setVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool & isVisible() const\\
+\hline
+void & 	visibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
 
 成员函数
 
