@@ -493,6 +493,78 @@ void	&labelsVisibleChanged(bool visible)\\
 \hline
 \end{tabular}
 
+linePen : QPen 该属性表示绘制轴线的笔相关
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QPen	&linePen() const\\
+\hline
+void	& setLinePen(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	linePenChanged(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+lineVisible : bool 该属性表示轴线是否可见
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isLineVisible() const\\
+\hline
+void &	setLineVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	lineVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+minorGridLineColor : QColor 该属性表示副格线的颜色 仅适用于支持副网格线的轴
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QColor	&minorGridLineColor()\\
+\hline
+void &	setMinorGridLineColor(const QColor \&color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	minorGridLineColorChanged(const QColor \&color)\\
+\hline
+\end{tabular}
+
 成员函数
 
 QAbstractAxis::$\sim$QAbstractAxis() 
