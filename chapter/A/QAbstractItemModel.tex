@@ -1,5 +1,93 @@
 \chapter{QAbstractItemModel}
 
+QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/A/QAbstractItemModel}{更多...} 
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QAbstractItemModel>\\      
+	\hline
+	qmake & QT+=core\\      
+	\hline
+	自从 & Qt 4.6\\
+	\hline
+	继承&QObject \\
+	\hline
+	派生 & QAbstractListModel、QAbstractProxyModel、QAbstractTableModel、QConcatenateTablesProxyModel、QDirModel、QFileSystemModel 和 QStandardItemModel \\
+	\hline
+\end{tabular}
+
+\splitLine
+
+公有成员类型
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 类型名称 \\
+	\hline
+enum class&	CheckIndexOption { NoOption, IndexIsValid, DoNotUseParent,
+            ParentIsInvalid }\\
+\hline
+flags&	CheckIndexOptions\\
+\hline
+enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHint }\\
+\hline
+\end{tabular}
+
+公共成员函数
+
+%gog 
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 函数名称 \\
+	\hline
+	QAbstractItemModel(QObject *parent = nullptr)
+virtual	~QAbstractItemModel()
+virtual QModelIndex	buddy(const QModelIndex \&index) const
+virtual bool	canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex \&parent) const s
+virtual bool	canFetchMore(const QModelIndex \&parent) const
+bool	checkIndex(const QModelIndex \&index, QAbstractItemModel::CheckIndexOptions options = CheckIndexOption::NoOption) const
+virtual int	columnCount(const QModelIndex \&parent = QModelIndex()) const = 0
+virtual QVariant	data(const QModelIndex \&index, int role = Qt::DisplayRole) const = 0
+virtual bool	dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
+virtual void	fetchMore(const QModelIndex &parent)
+virtual Qt::ItemFlags	flags(const QModelIndex &index) const
+virtual bool	hasChildren QModelIndex &parent = QModelIndex()) const
+bool	hasIndex row, int column, const QModelIndex &parent = QModelIndex()) const
+virtual QVariant	headerData section, Qt::Orientation orientation, int role = Qt::DisplayRole) const
+virtual QModelIndex	index row, int column, const QModelIndex &parent = QModelIndex()) const = 0
+bool	insertColumn column, const QModelIndex &parent = QModelIndex())
+virtual bool	insertColumns column, int count, const QModelIndex &parent = QModelIndex())
+bool	insertRow(int row, const QModelIndex &parent = QModelIndex())
+virtual bool	insertRows row, int count, const QModelIndex &parent = QModelIndex())
+virtual QMap<int, QVariant>	itemData QModelIndex &index) const
+virtual QModelIndexList	match QModelIndex &start, int role, const QVariant &value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags (Qt::MatchStartsWith
+virtual QMimeData *	mimeData QModelIndexList &indexes) const
+virtual QStringList	mimeTypes const
+bool	moveColumn QModelIndex &sourceParent, int sourceColumn, const QModelIndex &destinationParent, int destinationChild)
+virtual bool	moveColumns QModelIndex &sourceParent, int sourceColumn, int count, const QModelIndex &destinationParent, int destinationChild)
+bool	moveRow QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild)
+virtual bool	moveRows QModelIndex &sourceParent, int sourceRow, int count, const QModelIndex &destinationParent, int destinationChild)
+virtual QModelIndex	parent QModelIndex \&index) const = 0
+bool	removeColumn column, const QModelIndex \&parent = QModelIndex())
+virtual bool	removeColumns column, int count, const QModelIndex \&parent = QModelIndex())
+bool	removeRow row, const QModelIndex \&parent = QModelIndex())
+virtual bool	removeRows row, int count, const QModelIndex \&parent = QModelIndex())
+virtual QHash<int, QByteArray>	roleNames const
+virtual int	rowCount QModelIndex \&parent = QModelIndex()) const = 0
+virtual bool	setData QModelIndex \&index, const QVariant \&value, int role = Qt::EditRole)
+virtual bool	setHeaderData section, Qt::Orientation orientation, const QVariant \&value, int role = Qt::EditRole)
+virtual bool	setItemData QModelIndex \&index, const QMap<int, QVariant> \&roles)
+virtual QModelIndex	sibling row, int column, const QModelIndex \&index) const
+virtual void	sort column, Qt::SortOrder order = Qt::AscendingOrder)
+virtual QSize	span QModelIndex \&index) const
+virtual Qt::DropActions	supportedDragActions const
+virtual Qt::DropActions	supportedDropActions const
+
+\hline
+\end{tabular}
 
 %%% Local Variables:
 %%% mode: latex
