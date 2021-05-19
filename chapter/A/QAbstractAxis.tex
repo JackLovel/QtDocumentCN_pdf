@@ -565,6 +565,99 @@ void &	minorGridLineColorChanged(const QColor \&color)\\
 \hline
 \end{tabular}
 
+minorGridVisible : bool 该属性表示副格线是否可见 仅适用于支持副网格线的轴
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isMinorGridLineVisible() const\\
+\hline
+void & setMinorGridLineVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& minorGridVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+orientation : const Qt::Orientation 该属性表示坐标轴的方向。 当坐标轴被添加到图表时，该属性为Qt::Horizontal或者Qt::Vertical
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+Qt::Orientation	&orientation() const\\
+\hline
+\end{tabular}
+
+\splitLine
+
+reverse : bool 该属性表示是否使用反转轴。 该值默认为false。 
+反转轴由直线，样条，散列图系列以及笛卡尔图表组成的区域支持。
+如果一个方向相反，或者行为为定义，则所有相同方向的所有轴必须保持一致。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isReverse() const\\
+\hline
+void&	setReverse(bool reverse = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void&	reverseChanged(bool reverse)\\
+\hline
+\end{tabular}
+
+%\hrulefill %实线
+\splitLine % 虚线
+ 
+shadesBorderColor : QColor 该属性表示坐标轴阴影的边框（笔）颜色
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QColor	&shadesBorderColor() const\\
+\hline
+void&	setShadesBorderColor(QColor color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& shadesBorderColorChanged(QColor color)\\
+\hline
+\end{tabular}
+
+\splitLine
+
 成员函数
 
 QAbstractAxis::$\sim$QAbstractAxis() 
