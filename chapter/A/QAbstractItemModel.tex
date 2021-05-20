@@ -37,55 +37,172 @@ enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHin
 
 公共成员函数
 
-%gog 
+\begin{tabular}{|r|l|}
+\hline
+类型 & 函数名称 \\
+\hline
+& QAbstractItemModel(QObject *parent = nullptr)\\
+\hline
+virtual	& $\sim$QAbstractItemModel()\\
+\hline
+virtual QModelIndex	& buddy(const QModelIndex \&index) const\\
+\hline
+virtual bool & canDropMimeData(const QMimeData *data, Qt::DropAction
+               action, int row, int column, const QModelIndex
+               \&parent) const s\\
+\hline
+virtual bool &canFetchMore(const QModelIndex \&parent) const\\
+\hline
+bool & checkIndex(const QModelIndex \&index,
+       QAbstractItemModel::CheckIndexOptions options =
+       CheckIndexOption::NoOption) const\\
+\hline
+virtual int&columnCount(const QModelIndex \&parent = QModelIndex())
+             const = 0\\
+\hline
+virtual QVariant&	data(const QModelIndex \&index, int role =
+                  Qt::DisplayRole) const = 0\\
+\hline
+virtual bool&	dropMimeData(const QMimeData *data, Qt::DropAction
+              action, int row, int column, const QModelIndex
+              \&parent)\\
+\hline
+virtual void&	fetchMore(const QModelIndex \&parent)\\
+\hline
+virtual Qt::ItemFlags&	flags(const QModelIndex \&index) const\\
+\hline
+virtual bool&	hasChildren QModelIndex \&parent = QModelIndex())
+              const\\
+\hline
+bool	&hasIndex row, int column, const QModelIndex \&parent = QModelIndex()) const\\
+\hline
+virtual QVariant	&headerData section, Qt::Orientation orientation,
+                   int role = Qt::DisplayRole) const\\
+\hline
+virtual QModelIndex& index row, int column, const QModelIndex \&parent = QModelIndex()) const = 0\\
+\hline
+bool	&insertColumn column, const QModelIndex \&parent = QModelIndex())\\
+\hline
+virtual bool & insertColumns column, int count, const QModelIndex \&parent = QModelIndex())\\
+\hline
+bool&	insertRow(int row, const QModelIndex \&parent = QModelIndex())\\
+\hline
+virtual bool&	insertRows row, int count, const QModelIndex \&parent
+              = QModelIndex())\\
+\hline
+virtual QMap<int, QVariant>	&itemData QModelIndex \&index) const\\
+\hline
+virtual QModelIndexList	& match QModelIndex \&start, int role, const QVariant \&value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags (Qt::MatchStartsWith\\
+\hline
+virtual QMimeData *	&mimeData QModelIndexList \&indexes) const\\
+\hline
+virtual QStringList	& mimeTypes const\\
+\hline
+bool	&moveColumn QModelIndex \&sourceParent, int sourceColumn,
+       const QModelIndex \&destinationParent, int destinationChild)\\
+\hline
+virtual bool & moveColumns QModelIndex \&sourceParent, int
+               sourceColumn, int count, const QModelIndex
+               \&destinationParent, int destinationChild)\\
+\hline
+bool& moveRow QModelIndex \&sourceParent, int sourceRow, const QModelIndex \&destinationParent, int d
+estinationChild)\\
+\hline
+virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, int
+\hline               count, const QModelIndex \&dest
+inationParent, int destinationChild)\\
+\hline
+virtual QModelIndex&	parent QModelIndex \&index) const = 0\\
+\hline
+bool&	removeColumn column, const QModelIndex \&parent = QModelIndex())\\
+\hline
+virtual bool&	removeColumns column, int count, const QModelIndex \&parent = QModelIndex())\\
+\hline
+bool&	removeRow row, const QModelIndex \&parent = QModelIndex())\\
+\hline
+virtual bool&	removeRows row, int count, const QModelIndex \&parent = QModelIndex())\\
+\hline
+virtual QHash<int, QByteArray>&	roleNames const\\
+\hline
+virtual int	& rowCount QModelIndex \&parent = QModelIndex()) const = 0\\
+\hline
+virtual bool &setData QModelIndex \&index, const QVariant \&value, int role = Qt::EditRole)\\
+\hline
+virtual bool	&setHeaderData section, Qt::Orientation orientation, const QVariant \&value, int role = Qt::EditRole)\\
+\hline
+virtual bool	&setItemData QModelIndex \&index, const QMap<int, QVariant> \&roles)\\
+\hline
+virtual QModelIndex&	sibling row, int column, const QModelIndex \&index) const\\
+\hline
+virtual void	&sort column, Qt::SortOrder order = Qt::AscendingOrder)\\
+\hline
+virtual QSize	&span QModelIndex \&index) const\\
+\hline
+virtual Qt::DropActions	&supportedDragActions const\\
+\hline
+virtual Qt::DropActions	&supportedDropActions const\\
+\hline
+\end{tabular}
+
+公共槽函数
 
 \begin{tabular}{|r|l|}
-	\hline
-	类型 & 函数名称 \\
-	\hline
-	QAbstractItemModel(QObject *parent = nullptr)
-virtual	~QAbstractItemModel()
-virtual QModelIndex	buddy(const QModelIndex \&index) const
-virtual bool	canDropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex \&parent) const s
-virtual bool	canFetchMore(const QModelIndex \&parent) const
-bool	checkIndex(const QModelIndex \&index, QAbstractItemModel::CheckIndexOptions options = CheckIndexOption::NoOption) const
-virtual int	columnCount(const QModelIndex \&parent = QModelIndex()) const = 0
-virtual QVariant	data(const QModelIndex \&index, int role = Qt::DisplayRole) const = 0
-virtual bool	dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
-virtual void	fetchMore(const QModelIndex &parent)
-virtual Qt::ItemFlags	flags(const QModelIndex &index) const
-virtual bool	hasChildren QModelIndex &parent = QModelIndex()) const
-bool	hasIndex row, int column, const QModelIndex &parent = QModelIndex()) const
-virtual QVariant	headerData section, Qt::Orientation orientation, int role = Qt::DisplayRole) const
-virtual QModelIndex	index row, int column, const QModelIndex &parent = QModelIndex()) const = 0
-bool	insertColumn column, const QModelIndex &parent = QModelIndex())
-virtual bool	insertColumns column, int count, const QModelIndex &parent = QModelIndex())
-bool	insertRow(int row, const QModelIndex &parent = QModelIndex())
-virtual bool	insertRows row, int count, const QModelIndex &parent = QModelIndex())
-virtual QMap<int, QVariant>	itemData QModelIndex &index) const
-virtual QModelIndexList	match QModelIndex &start, int role, const QVariant &value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags (Qt::MatchStartsWith
-virtual QMimeData *	mimeData QModelIndexList &indexes) const
-virtual QStringList	mimeTypes const
-bool	moveColumn QModelIndex &sourceParent, int sourceColumn, const QModelIndex &destinationParent, int destinationChild)
-virtual bool	moveColumns QModelIndex &sourceParent, int sourceColumn, int count, const QModelIndex &destinationParent, int destinationChild)
-bool	moveRow QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild)
-virtual bool	moveRows QModelIndex &sourceParent, int sourceRow, int count, const QModelIndex &destinationParent, int destinationChild)
-virtual QModelIndex	parent QModelIndex \&index) const = 0
-bool	removeColumn column, const QModelIndex \&parent = QModelIndex())
-virtual bool	removeColumns column, int count, const QModelIndex \&parent = QModelIndex())
-bool	removeRow row, const QModelIndex \&parent = QModelIndex())
-virtual bool	removeRows row, int count, const QModelIndex \&parent = QModelIndex())
-virtual QHash<int, QByteArray>	roleNames const
-virtual int	rowCount QModelIndex \&parent = QModelIndex()) const = 0
-virtual bool	setData QModelIndex \&index, const QVariant \&value, int role = Qt::EditRole)
-virtual bool	setHeaderData section, Qt::Orientation orientation, const QVariant \&value, int role = Qt::EditRole)
-virtual bool	setItemData QModelIndex \&index, const QMap<int, QVariant> \&roles)
-virtual QModelIndex	sibling row, int column, const QModelIndex \&index) const
-virtual void	sort column, Qt::SortOrder order = Qt::AscendingOrder)
-virtual QSize	span QModelIndex \&index) const
-virtual Qt::DropActions	supportedDragActions const
-virtual Qt::DropActions	supportedDropActions const
+\hline
+类型 & 函数名称 \\
+\hline
+virtual void	&revert()\\
+\hline
+virtual bool	&submit()\\
+\hline
+\end{tabular}
 
+信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型 & 函数名称 \\
+\hline
+void&	columnsAboutToBeInserted QModelIndex \&parent, int first, int last)\\
+\hline
+void&	columnsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationColumn)\\
+\hline
+void&	columnsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	columnsInserted(QModelIndex \&parent, int first, int last)\\
+\hline
+void&	columnsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)\\
+\hline
+void&	columnsRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector \&roles = QVector())\\
+\hline
+void&	headerDataChanged(Qt::Orientation orientation, int first, int last)\\
+\hline
+void&	layoutAboutToBeChanged(const QList \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)\\
+\hline
+void&	layoutChanged(const QList \&parents = QList(),
+      QAbstractItemModel::LayoutChangeHint hint = QA
+bstractItemModel::NoLayoutChangeHint)\\
+\hline
+void&	modelAboutToBeReset()\\
+\hline
+void&	modelReset()\\
+\hline
+void&	rowsAboutToBeInserted(const QModelIndex \&parent, int start, int end)\\
+\hline
+void&	rowsAboutToBeMoved(const QModelInd
+ex \&sourceParent, int
+      sourceStart, int sourceEnd, const QM
+odelIndex \&destinationParent, int destinationRow)\\
+\hline
+void&	rowsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	rowsInserted(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	rowsMoved(const QModelIndex \&parent, int start, int end,
+      const QModelIndex \&destination, int row)\\
+\hline
+void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
 \hline
 \end{tabular}
 
