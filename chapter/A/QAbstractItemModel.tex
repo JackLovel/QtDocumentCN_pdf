@@ -215,6 +215,92 @@ void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
 \hline
 \end{tabular}
 
+\splitLine
+
+受保护的函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型　&	　函数名称\\
+\hline
+void&	beginInsertColumns(const QModelIndex \&parent, int first, int
+      last)\\
+\hline
+void&	beginInsertRows(const QModelIndex \&parent, int first, int
+      last)\\
+\hline
+bool&	beginMoveColumns(const QModelIndex \&sourceParent, int
+  sourceFirst, int sourceLast, const QModelIndex \&destinationParent,
+  int destinationChild)\\
+\hline
+bool&	beginMoveRows(const QModelIndex \&sourceParent, int
+      sourceFirst, int sourceLast, const QModelIndex
+      \&destinationParent, int destinationChild)\\
+\hline
+void&	beginRemoveColumns(const QModelIndex \&parent, int first, int
+      last)\\
+\hline
+void&	beginRemoveRows(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	beginResetModel()\\
+\hline
+void&	changePersistentIndex(const QModelIndex \&from, const QModelIndex \&to)\\
+\hline
+void&	changePersistentIndexList(const QModelIndexList \&from, const
+   QModelIndexList \&to)\\
+\hline
+QModelIndex&	createIndex(int row, int column, void *ptr = nullptr) const\\
+\hline
+QModelIndex&	createIndex(int row, int column, quintptr id) const\\
+\hline
+void&	endInsertColumns()\\
+\hline
+void&	endInsertRows()\\
+\hline
+void&	endMoveColumns()\\
+\hline
+void&	endMoveRows()\\
+\hline
+void&	endRemoveColumns()\\
+\hline
+void&	endRemoveRows()\\
+\hline
+void&	endResetModel()\\
+\hline
+QModelIndexList&	persistentIndexList() const\\
+\hline
+\end{tabular}
+
+受保护的槽函数
+
+\splitLine
+
+\begin{tabular}{|r|l|}
+\hline
+类型　	&函数名称\\
+\hline
+void	&resetInternalData()\\
+\hline
+\end{tabular}
+
+详细描述
+
+\splitLine
+
+QAbstractItemModel 类定义了项模型与模型/视图体系结构中的其他组件进行交互操作时必须使用的标准接口。应该子类化该类创建新的模型，而不是直接实例化使用。
+
+QAbstractItemModel 类是模型/视图类中的一个，也是 Qt 模型/视图框架的一部分。它可以用作 QML 中的项视图元素或 Qt Widgets 模块中的项视图类的底层数据模型。
+
+如果需要一个模型来使用项视图，比如 QML 的 List View 元素或者 C++ widgets 的　QListView 或者　 QTableView，应该考虑子类化 QAbstractListModel 或者 QAbstractTableModel 而不是使用该类。
+
+底层数据模型作为表的层次结构暴露给视图和委托。如果不使用层次结构，那么模型就是一个简单的具有行和列的表。每个项都有一个由　QModelIndex 指定的惟一索引。
+
+\begin{figure}[hbt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{modelindex-no-parent}
+	\caption{model index}
+\end{figure}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
