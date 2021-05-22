@@ -27,8 +27,8 @@ QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github
 	\hline
 	类型 & 类型名称 \\
 	\hline
-enum class&	CheckIndexOption { NoOption, IndexIsValid, DoNotUseParent,
-            ParentIsInvalid }\\
+enum class&	CheckIndexOption{ NoOption, IndexIsValid,
+  DoNotUseParent, ParentIsInvalid}\\
 \hline
 flags&	CheckIndexOptions\\
 \hline
@@ -36,9 +36,12 @@ enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHin
 \hline
 \end{tabular}
 
+
+\splitLine
+
 公共成员函数
 
-\begin{tabular}{|r|l|}
+\begin{longtable}{|r|l|}
 \hline
 类型 & 函数名称 \\
 \hline
@@ -61,24 +64,20 @@ bool & checkIndex(const QModelIndex \&index,
 virtual int&columnCount(const QModelIndex \&parent = QModelIndex())
              const = 0\\
 \hline
-virtual QVariant&	data(const QModelIndex \&index, int role =
-                  Qt::DisplayRole) const = 0\\
+virtual QVariant&	data(const QModelIndex \&index, int role = Qt::DisplayRole) const = 0\\
 \hline
 virtual bool&	dropMimeData(const QMimeData *data, Qt::DropAction
-              action, int row, int column, const QModelIndex
-              \&parent)\\
+              action, int row, int column, const QModelIndex \&parent)\\
 \hline
 virtual void&	fetchMore(const QModelIndex \&parent)\\
 \hline
 virtual Qt::ItemFlags&	flags(const QModelIndex \&index) const\\
 \hline
-virtual bool&	hasChildren QModelIndex \&parent = QModelIndex())
-              const\\
+virtual bool&	hasChildren QModelIndex \&parent = QModelIndex()) const\\
 \hline
 bool	&hasIndex row, int column, const QModelIndex \&parent = QModelIndex()) const\\
 \hline
-virtual QVariant	&headerData section, Qt::Orientation orientation,
-                   int role = Qt::DisplayRole) const\\
+virtual QVariant	&headerData section, Qt::Orientation orientation, int role = Qt::DisplayRole) const\\
 \hline
 virtual QModelIndex& index row, int column, const QModelIndex \&parent = QModelIndex()) const = 0\\
 \hline
@@ -109,10 +108,14 @@ virtual bool & moveColumns QModelIndex \&sourceParent, int
 bool& moveRow QModelIndex \&sourceParent, int sourceRow, const QModelIndex \&destinationParent, int d
 estinationChild)\\
 \hline
-%gog
-virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, int\\
-\hline               
-count, const QModelIndex \&destinationParent, int destinationChild)\\
+virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, int destinationChild)\\
+\hline
+bool &moveRow QModelIndex \&sourceParent, int sourceRow, 
+       const QModelIndex \&destinationParent, 
+       int destinationChild)\\    
+\hline           
+virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, 
+               int count, const QModelIndex \&destinationParent, int destinationChild)\\
 \hline
 virtual QModelIndex&	parent QModelIndex \&index) const = 0\\
 \hline
@@ -144,7 +147,9 @@ virtual Qt::DropActions	&supportedDragActions const\\
 \hline
 virtual Qt::DropActions	&supportedDropActions const\\
 \hline
-\end{tabular}
+\end{longtable}
+
+\splitLine
 
 公共槽函数
 
@@ -157,6 +162,8 @@ virtual void	&revert()\\
 virtual bool	&submit()\\
 \hline
 \end{tabular}
+
+\splitLine
 
 信号
 
@@ -201,8 +208,8 @@ void&	rowsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)\\
 \hline
 void&	rowsInserted(const QModelIndex \&parent, int first, int last)\\
 \hline
-void&	rowsMoved(const QModelIndex \&parent, int start, int end,
-      const QModelIndex \&destination, int row)\\
+void&rowsMoved(const QModelIndex \&parent, int start, 
+  int end, const QModelIndex \&destination, int row) \\
 \hline
 void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
 \hline
