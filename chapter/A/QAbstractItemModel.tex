@@ -14,7 +14,8 @@ QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github
 	\hline
 	继承&QObject \\
 	\hline
-	派生 & QAbstractListModel、QAbstractProxyModel、QAbstractTableModel、QConcatenateTablesProxyModel、QDirModel、QFileSystemModel 和 QStandardItemModel \\
+	派生 & \makecell{QAbstractListModel、QAbstractProxyModel、
+           QAbstractTableModel、\\QConcatenateTablesProxyModel、QDirModel、QFileSystemModel \\和 QStandardItemModel} \\
 	\hline
 \end{tabular}
 
@@ -108,9 +109,10 @@ virtual bool & moveColumns QModelIndex \&sourceParent, int
 bool& moveRow QModelIndex \&sourceParent, int sourceRow, const QModelIndex \&destinationParent, int d
 estinationChild)\\
 \hline
-virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, int
-\hline               count, const QModelIndex \&dest
-inationParent, int destinationChild)\\
+%gog
+virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, int\\
+\hline               
+count, const QModelIndex \&destinationParent, int destinationChild)\\
 \hline
 virtual QModelIndex&	parent QModelIndex \&index) const = 0\\
 \hline
