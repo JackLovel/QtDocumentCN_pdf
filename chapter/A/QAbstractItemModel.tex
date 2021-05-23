@@ -629,6 +629,124 @@ QSortFilterProxyModel 的子类。
  };
 \end{lstlisting}
 
+注意： 由于错误，该槽函数没有出现在 Qt 5.0 中。
+
+该函数在 Qt 4.8 中被引入。
+
+参见 modelAboutToBeReset() 和 modelReset()。
+
+revert
+
+[ virtual slot ] void QAbstractItemModel::revert()
+
+让模型知道它应该丢弃缓存的信息。这个函数通常用于行编辑。
+
+该函数在 Qt 4.2 中被引入。
+
+参见 submit()。
+
+rowsAboutToBeInserted
+
+[ signal ] void QAbstractItemModel::rowsAboutToBeInserted(const QModelIndex \&parent, int start, int end)
+
+在将行插入模型之前就发出该信号。新项将位于给定 parent 项目下的包含 start 和 end 之间。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发出，而不能在子类代码中显式发出。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 insertRows() 和 beginInsertRows()。
+
+rowsAboutToBeMoved
+
+[ signal ] void QAbstractItemModel::rowsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationRow)
+
+模型中的行被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationRow 列开始移动到destinationParent。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+rowsAboutToBeRemoved
+
+[ signal ] void QAbstractItemModel::rowsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的行被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeRows() 和 beginRemoveRows()。
+
+rowsInserted
+
+[ signal ] void QAbstractItemModel::rowsInserted(const QModelIndex \&parent, int first, int last)
+
+将行插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 insertRows() 和 beginInsertRows()。
+
+rowsMoved
+
+[ signal ] void QAbstractItemModel::rowsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)
+
+模型中的行被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+rowsRemoved
+
+[ signal ] void QAbstractItemModel::rowsRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的行被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeRows() 和 beginRemoveRows()。
+
+submit
+
+[ virtual slot ] void QAbstractItemModel::submit()
+
+让模型知道它应该将缓存的信息提交到永久存储。这个函数通常用于行编辑。
+
+如果没有错误，返回 true;否则返回 false。
+
+参见 revert()。
+
+$\sim$QAbstractItemModel
+
+[ virtual ] void QAbstractItemModel::~QAbstractItemModel()
+
+销毁抽象项模型。
+
+beginInsertColumns
+
+[ protected ] void QAbstractItemModel::beginInsertColumns(const QModelIndex \&parent, int first, int last)
+
+开始一个列插入操作。
+
+在子类中重新实现 insertColumns() 时，必须在将数据插入模型的底层数据存
+储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新
+列插入后的列号。
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
