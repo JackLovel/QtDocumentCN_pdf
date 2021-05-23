@@ -423,6 +423,7 @@ QAbstractItemModel::QAbstractItemModel(QObject *parent = nullptr)
 构造指定父类对象 parent 的抽象项模型。
 
 columnsAboutToBeInserted
+
 [signal] void QAbstractItemModel::columnsAboutToBeInserted(const QModelIndex \&parent, int first, int last)
 
 在将列插入模型之前就发射此信号。新项将位于给定父项 parent 下的首 first 尾 last之间。
@@ -432,6 +433,202 @@ columnsAboutToBeInserted
 注意:　这是一个私有信号。它可以用于信号连接，但不能由用户发射。
 
 参见 insertColumns() 和 beginInsertColumns()。
+
+columnsAboutToBeMoved
+
+[ signal ] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationColumn)
+
+模型中的列被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationColumn 列开始移动到destinationParent。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+columnsAboutToBeRemoved
+
+[ signal ] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的列被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeColumns() 和 beginRemoveColumns()。
+
+columnsInserted
+
+[ signal ] void QAbstractItemModel::columnsInserted(const QModelIndex \&parent, int first, int last)
+
+将列插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 insertColumns() 和 beginInsertColumns()。
+
+columnsMoved
+
+[ signal ] void QAbstractItemModel::columnsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)
+
+模型中的列被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+columnsRemoved
+
+[ signal ] void QAbstractItemModel::columnsRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的列被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeColumns() 和 beginRemoveColumns()。
+
+dataChanged
+
+[ signal ] void QAbstractItemModel::dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector<int> \&roles = QVector())
+
+现有的项的数据发生改变时发射该信号。
+
+如果项是同一父项，则受影响的项是在 topLeft 和 bottomRight（包含）之间的项目。如果项没有相同的父项，则行为是不确定的。
+
+当重新实现 setData() 函数时，必须显示地发射该信号。
+
+可选的 roles 参数可用于指定实际修改了哪些数据角色。Roles 参数中的向量为空，表示应将所有角色视为已修改。角色参数中元素的顺序没有任何关联。
+
+参见 headerDataChanged()、setData() 和 layoutChanged()。
+
+headerDataChanged
+
+[ signal ] void QAbstractItemModel::headerDataChanged(const Qt::Orientation \&orientation, int first, int last)
+
+当标题改变时发射该信号。orientation 表示是横向标题还是竖向标题发生了改变。标题中从 first 到 last 的部分需要更新。
+
+当重新实现 setData() 函数时，必须显示地发射该信号。
+
+如果要更改列数或行数，则不需要发出此信号，而可以使用 begin/end 函数（有关详细信息，请参见 QAbstractItemModel 类描述中的子类化部分）。
+
+参见 headerData()、setHeaderData() 和 dataChanged()。
+
+layoutAboutToBeChanged
+
+[ signal ] void QAbstractItemModel::layoutAboutToBeChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
+
+这个信号会在模型的布局改变之前发出。连接到这个信号的组件使用它来适应模型布局的变化。
+
+在发出 layoutAboutToBeChanged() 之后，子类应该更新所有的持久化模型索引。
+
+可选的 parents 参数用于提供更具体的通知关于模型布局的哪些部分正在被改变。空列表表示对整个模型的布局进行了更改。parents 列表中元素的顺序不重要。可选的 hint 参数用于提示模型重新布局时都发生了什么。
+
+该函数在 Qt 5.0 中被引入。
+
+参见 layoutChanged() 和 changePersistentIndex()。
+
+layoutChanged
+
+[ signal ] void QAbstractItemModel::layoutChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
+
+每当模型公开的项的布局发生变化时，就会发出这个信号，例如，对模型进行排序时。当视图接收到该信号时，应更新项的布局来反映此更改。
+
+当对 QAbstractItemModel 或 QAbstractProxyModel 进行子类化时，请确保在更改项顺序或更改要公开给视图的数据的结构之前发出 layoutAboutToBeChanged() 信号，并在更改布局后发出 layoutChanged() 信号。
+
+可选的 parents 参数用于给出有关模型布局的哪些部分正在更改的具体的通知。空列表表示更改了整个模型的布局。parents 列表中元素的顺序并不重要。可选的 hint 参数用于提示模型重新布局时发生的情况。
+
+子类应在发​​出 layoutChanged() 信号之前更新所有持久模型索引。换句话说，
+当结构改变时：
+
+\begin{itemize}
+\item 发出 layoutAboutToBeChanged
+\item 记住将会改变的 QModelIndex
+\item 更新内部数据
+\item 调用 changePersistentIndex()
+\item 发出 layoutChanged
+\end{itemize}
+
+该函数在 Qt 5.0 中被引入。
+
+参见 layoutAboutToBeChanged()、dataChanged()、headerDataChanged()、modelReset() 和 changePersistentIndex()。
+
+modelAboutToBeReset
+[ signal ] void QAbstractItemModel::modelAboutToBeReset()
+
+当调用 beginResetModel() 时，在模型的内部状态(例如持久模型索引)失效之前发出这个信号。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt 4.2 中被引入。
+
+参见 beginResetModel() 和 modelReset()。
+
+modelReset
+
+[ signal ] void QAbstractItemModel::modelReset()
+
+当调用 endResetModel() 时，在模型的内部状态(例如持久模型索引)失效之后发出这个信号。
+
+注意，如果模型被重置，则应该认为之前从模型中检索的所有信息都是无效的。这包括但不限于 rowCount()、columnCount()、flags()、通过 data()检索的数据和 roleNames()。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt 4.1 中被引入。
+
+参见 endResetModel() 和 modelAboutToBeReset()。
+
+resetInternalData
+
+[ protected slot ] void QAbstractItemModel::resetInternalData()
+
+该槽函数在模型的内部数据被清除并被重置之后被调用。
+
+该槽函数为具体代理模型的子类提供了便利，例如维护了额外的数据的
+
+QSortFilterProxyModel 的子类。
+
+\begin{lstlisting}[language=C++]
+ class CustomDataProxy : public QSortFilterProxyModel
+ {
+     Q_OBJECT
+ public:
+     CustomDataProxy(QObject *parent)
+       : QSortFilterProxyModel(parent)
+     {
+     }
+
+     ...
+
+     QVariant data(const QModelIndex &index, int role) override
+     {
+         if (role != Qt::BackgroundRole)
+             return QSortFilterProxyModel::data(index, role);
+
+         if (m_customData.contains(index.row()))
+             return m_customData.value(index.row());
+         return QSortFilterProxyModel::data(index, role);
+     }
+ private slots:
+     void resetInternalData()
+     {
+         m_customData.clear();
+     }
+ private:
+   QHash<int, QVariant> m_customData;
+ };
+\end{lstlisting}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
