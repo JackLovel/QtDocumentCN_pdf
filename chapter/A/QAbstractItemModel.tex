@@ -747,6 +747,67 @@ beginInsertColumns
 储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新
 列插入后的列号。
 
+%modelview-begin-insert-columns.png
+\begin{tabular}{|l|l|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-columns}}
+\end{minipage}
+&指定要插入到模型项中的列的范围的第一个和最后一个列号。例如，如图所示，我们在列4之前插入三列，所以 first 是4，last 是 6:beginInsertColumns(parent, 4, 6);这将插入三个新列作为列4、5和6。\\
+\hline
+%modelview-begin-append-columns.png
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-append-columns}}
+\end{minipage}
+&
+要追加列，请将它们插入到最后一列之后。例如，如图所示我们，、将三列附加到一个包含六列的集合(以列5结尾)，因此 first 是 6 and last 是 8:
+beginInsertColumns(parent, 6, 8);
+这将追加两个新列作为列6、7和8。  \\ 
+\hline
+\end{tabular}
+
+注意： 此函数发出 columnAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+
+参见 endInsertColumns()。
+
+\splitLine
+
+beginInsertRows
+
+[ protected ] void QAbstractItemModel::beginInsertRows(const QModelIndex \&parent, int first, int last)
+
+开始一个行插入操作。
+
+在子类中重新实现 insertRows() 时，必须在将数据插入模型的底层数据存储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新行插入后的行号。
+
+\begin{tabular}{|l|l|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-rows}}
+\end{minipage}
+&
+为要插入模型中项的行范围指定第一行和最后一行。
+例如，如图所示，我们在第2行之前插入三行，因此first 是2，first 是4：
+
+beginInsertRows(parent, 2, 4);
+这将插入三行新行，即第2、3和4行。
+\\
+\hline
+%modelview-begin-append-columns.png
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-append-rows}}
+\end{minipage}
+&
+要追加行，请将它们插入到最后一行之后。例如，如图所示，我们将两行附加到一个包含4个现有行的集合(以第3行结束)，因此 first 是4，last 是5:
+beginInsertRows(parent, 4, 5);
+这将追加两个新行作为第4行和第5行。\\ 
+\hline
+\end{tabular}}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
