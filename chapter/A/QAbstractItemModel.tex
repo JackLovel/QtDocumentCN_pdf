@@ -23,6 +23,7 @@ QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github
 
 公有成员类型
 
+\resizebox{\textwidth}{!}{
 \begin{tabular}{|r|l|}
 	\hline
 	类型 & 类型名称 \\
@@ -34,7 +35,7 @@ flags&	CheckIndexOptions\\
 \hline
 enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHint }\\
 \hline
-\end{tabular}
+\end{tabular}}
 
 
 \splitLine
@@ -167,6 +168,7 @@ virtual bool	&submit()\\
 
 信号
 
+\resizebox{\textwidth}{!}{
 \begin{tabular}{|r|l|}
 \hline
 类型 & 函数名称 \\
@@ -213,12 +215,13 @@ void&rowsMoved(const QModelIndex \&parent, int start,
 \hline
 void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
 \hline
-\end{tabular}
+\end{tabular}}
 
 \splitLine
 
 受保护的函数
 
+\resizebox{\textwidth}{!}{
 \begin{tabular}{|r|l|}
 \hline
 类型　&	　函数名称\\
@@ -269,7 +272,7 @@ void&	endResetModel()\\
 \hline
 QModelIndexList&	persistentIndexList() const\\
 \hline
-\end{tabular}
+\end{tabular}}
 
 受保护的槽函数
 
@@ -300,6 +303,603 @@ QAbstractItemModel 类是模型/视图类中的一个，也是 Qt 模型/视图�
     \includegraphics[width=0.5\textwidth]{modelindex-no-parent}
 	\caption{model index}
 \end{figure}
+
+每个数据项都可以通过包含一个关联的模型索引的模型进行访问。该索引可以通过　index() 函数获得。每个索引可能有一个　sibling() 索引；子项有一个 parent()　索引。
+
+每个项目都有许多与之关联的数据元素，可以通过为模型的 data() 函数指定一个角色（请参阅 Qt::ItemDataRole）来检索它们。可以使用 itemData() 函数同时获取所有可用角色的数据。
+
+使用特定的 Qt::ItemDataRole 设置每个角色的数据。可以使用 setData() 单独设置各个角色的数据，也可以使用 setItemData 设置所有角色的数据。
+
+可以使用 flags() 查询项（请参阅 Qt::ItemFlag），以查看是否可以通过其他方式选择，拖动或操纵它们。
+
+如果项具有子对象，则 hasChildren 为相应的索引返回 true。
+
+该模型在层次结构的每个级别都有一个 rowCount() 和 columnCount。可以使用 insertRows()，insertColumns()，removeRows() 和 removeColumns() 插入和删除行和列。
+
+模型发出信号以指示变化。例如，只要模型可用的数据项发生更改，就会发出 dataChanged()。对模型提供的标题的更改将将发射　headerDataChanged() 信号。如果底层数据的结构发生了变化，则模型可以发出　layoutChanged() 来向任何附加的视图指示它们应该重新显示所显示的任何项，并需要考虑到新的结构。
+
+可以使用 match() 函数在模型中搜索可用的项以查找特定数据。
+
+要对模型进行排序，可以使用 sort()。
+
+\splitLine
+
+子类化
+
+注意：　在模型子类化参考中有一些关于模型子类化的通用指南。
+
+子类化　QAbstractItemModel 时，至少必须实现 index()，parent()，rowCount()，columnCount() 和 data()。这些函数在所有的只读模型中使用，同样也构成了可编辑模型的基础。
+
+还可以为模型重新实现 hasChildren()　来提供特殊的行为，而不是重新实现成本很高的 rowCount()。这使得模型可以限制视图请求的数据量，并且可以作为实现模型数据的惰性填充的一种方式。
+
+要在模型中启用编辑，还必须实现　setData 和重新实现 flags() 以确保返回 ItemIsEditable。还可以重新实现 headerData() 和 setHeaderData 来控制呈现模型标题的方式。
+
+当分别重新实现 setData() 和 setHeaderData() 函数时，必须显式发射　dataChanged() 和 headerDataChanged() 信号。
+
+定制模型需要创建模型索引以供其他组件使用。为此，请使用适当的行号和列号以及相应的标识符调用 createIndex()，并将其作为指针或整数值。这些值的组合对于每个项都必须是唯一的。定制模型通常在其他重新实现的函数中使用这些唯一标识符，以检索项数据并访问有关该项的父项和子项的信息。有关唯一标识符的更多信息，请参见简单树模型示例。
+
+不必支持 Qt::ItemDataRole 中定义的每个角色。根据模型中包含的数据类型，可能只有实现 data() 函数以返回一些更常见角色的有效信息才有用。大多数模型至少为 Qt::DisplayRole 提供项数据的文本表示，行为良好的模型也应为 Qt::ToolTipRole 和 Qt::WhatsThisRole 提供有效信息。支持这些角色可使模型与标准 Qt 视图一起使用。但是，对于某些处理高度专业化数据的模型，仅为用户定义的角色提供数据可能是合适的。
+
+提供可调整数据结构大小的接口的模型可以提供 insertRows()，removeRows()，
+insertColumns() 和 removeColumns() 的实现。在实现这些函数时，重要的是
+要在模型尺寸大小发生 之前 和 之后 将有关模型尺寸的更改通知所有连接的视
+图：
+
+\begin{itemize}
+\item insertRows() 的实现必须在将新行插入数据结构 之前 调用
+  beginInsertRows()，然后立即 调用 endInsertRows()。
+\item insertColumns() 的实现必须在将新列插入数据结构　之前 调用
+  beginInsertColumns()，然后立即 调用 endInsertColumns()。
+\item removeRows() 的实现必须在从数据结构中删除行　之前 调用
+  beginRemoveRows()，然后立即 调用 endRemoveRows()。
+\item removeColumns() 的实现必须在列从数据结构中删除之前调用 beginRemoveColumns()，然后立即 调用 endRemoveColumns()。
+\end{itemize}
+
+这些函数发出的私有信号使附加组件有机会在任何数据变得不可用之前采取行动。使用这些 begin 和 end 函数封装插入和删除操作还使模型能够正确地管理持久模型索引。如果希望正确处理选择，则必须确保调用了这些函数。 如果插入或移除带有子项的项，则不需要为子项调用这些函数。换句话说，父项将管理其子项。
+
+要创建增量填充的模型，可以重新实现 fetchMore() 和 canFetchMore()。如果 fetchMore() 的重新实现向模型中添加了行，则必须调用 beginInsertRows() 和 endInsertRows()。
+
+参见模型类、模型子类化参考、QModelIndex、QAbstractItemView、在项视图中
+使用拖放、简单DOM模型示例、简单树模型示例、可编辑树模型示例和 Fetch
+More示例。
+
+\splitLine
+
+成员类型文档
+
+CheckIndexOption CheckIndexOptions
+enum class QAbstractItemModel::CheckIndexOption flags QAbstractItemModel::CheckIndexOptions
+
+这个枚举可以用来控制 QAbstractItemModel::checkIndex() 执行的检查。
+
+\resizebox{\textwidth}{!}{ % 文本过宽
+\begin{tabular}{|l|l|l|}
+\hline
+常量 &值&描述\\
+\hline
+QAbstractItemModel::CheckIndexOption::NoOption & 0x0000	& 没有指定检查选项。\\
+\hline
+QAbstractItemModel::CheckIndexOption::IndexIsValid&0x0001&传递给 QAbstractItemModel::checkIndex()的模型索引被检查为有效的模型索引。\\
+\hline
+QAbstractItemModel::CheckIndexOption::DoNotUseParent&0x0002&不执行任何涉及到传递给 QAbstractItemModel::checkIndex() 的父索引的使用的检查。\\
+\hline
+\end{tabular}}
+
+该枚举是在 Qt 5.11 中引入或修改的。
+
+CheckIndexOptions 类型是一个 QFlags<CheckIndexOption> 的类型定义。它存储一个或组合的 CheckIndexOption 值。
+
+\splitLine
+
+LayoutChangeHint
+
+enum QAbstractItemModel::LayoutChangeHint
+
+这个枚举描述了模型改变布局的方式。
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量 &值&描述\\
+\hline
+QAbstractItemModel::NoLayoutChangeHint&	0&	没有任何提示。\\
+\hline
+QAbstractItemModel::VerticalSortHint&	1&	正在对行进行排序。\\
+\hline
+QAbstractItemModel::HorizontalSortHint&	2&	正在对列进行排序。\\
+\hline
+\end{tabular}
+
+注意，VerticalSortHint　和 HorizontalSortHint 表示项在同一父级中移动，
+而不是移动到模型中的不同父级，也没有过滤掉或过滤进来。
+
+\splitLine
+
+成员函数文档
+
+QAbstractItemModel
+
+QAbstractItemModel::QAbstractItemModel(QObject *parent = nullptr)
+
+构造指定父类对象 parent 的抽象项模型。
+
+columnsAboutToBeInserted
+
+[signal] void QAbstractItemModel::columnsAboutToBeInserted(const QModelIndex \&parent, int first, int last)
+
+在将列插入模型之前就发射此信号。新项将位于给定父项 parent 下的首 first 尾 last之间。
+
+注意: 连接到这个信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 的实现发射，不能在子类代码中显式发射。
+
+注意:　这是一个私有信号。它可以用于信号连接，但不能由用户发射。
+
+参见 insertColumns() 和 beginInsertColumns()。
+
+columnsAboutToBeMoved
+
+[ signal ] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationColumn)
+
+模型中的列被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationColumn 列开始移动到destinationParent。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+columnsAboutToBeRemoved
+
+[ signal ] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的列被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeColumns() 和 beginRemoveColumns()。
+
+columnsInserted
+
+[ signal ] void QAbstractItemModel::columnsInserted(const QModelIndex \&parent, int first, int last)
+
+将列插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 insertColumns() 和 beginInsertColumns()。
+
+columnsMoved
+
+[ signal ] void QAbstractItemModel::columnsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)
+
+模型中的列被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+columnsRemoved
+
+[ signal ] void QAbstractItemModel::columnsRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的列被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeColumns() 和 beginRemoveColumns()。
+
+dataChanged
+
+[ signal ] void QAbstractItemModel::dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector<int> \&roles = QVector())
+
+现有的项的数据发生改变时发射该信号。
+
+如果项是同一父项，则受影响的项是在 topLeft 和 bottomRight（包含）之间的项目。如果项没有相同的父项，则行为是不确定的。
+
+当重新实现 setData() 函数时，必须显示地发射该信号。
+
+可选的 roles 参数可用于指定实际修改了哪些数据角色。Roles 参数中的向量为空，表示应将所有角色视为已修改。角色参数中元素的顺序没有任何关联。
+
+参见 headerDataChanged()、setData() 和 layoutChanged()。
+
+headerDataChanged
+
+[ signal ] void QAbstractItemModel::headerDataChanged(const Qt::Orientation \&orientation, int first, int last)
+
+当标题改变时发射该信号。orientation 表示是横向标题还是竖向标题发生了改变。标题中从 first 到 last 的部分需要更新。
+
+当重新实现 setData() 函数时，必须显示地发射该信号。
+
+如果要更改列数或行数，则不需要发出此信号，而可以使用 begin/end 函数（有关详细信息，请参见 QAbstractItemModel 类描述中的子类化部分）。
+
+参见 headerData()、setHeaderData() 和 dataChanged()。
+
+layoutAboutToBeChanged
+
+[ signal ] void QAbstractItemModel::layoutAboutToBeChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
+
+这个信号会在模型的布局改变之前发出。连接到这个信号的组件使用它来适应模型布局的变化。
+
+在发出 layoutAboutToBeChanged() 之后，子类应该更新所有的持久化模型索引。
+
+可选的 parents 参数用于提供更具体的通知关于模型布局的哪些部分正在被改变。空列表表示对整个模型的布局进行了更改。parents 列表中元素的顺序不重要。可选的 hint 参数用于提示模型重新布局时都发生了什么。
+
+该函数在 Qt 5.0 中被引入。
+
+参见 layoutChanged() 和 changePersistentIndex()。
+
+layoutChanged
+
+[ signal ] void QAbstractItemModel::layoutChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
+
+每当模型公开的项的布局发生变化时，就会发出这个信号，例如，对模型进行排序时。当视图接收到该信号时，应更新项的布局来反映此更改。
+
+当对 QAbstractItemModel 或 QAbstractProxyModel 进行子类化时，请确保在更改项顺序或更改要公开给视图的数据的结构之前发出 layoutAboutToBeChanged() 信号，并在更改布局后发出 layoutChanged() 信号。
+
+可选的 parents 参数用于给出有关模型布局的哪些部分正在更改的具体的通知。空列表表示更改了整个模型的布局。parents 列表中元素的顺序并不重要。可选的 hint 参数用于提示模型重新布局时发生的情况。
+
+子类应在发​​出 layoutChanged() 信号之前更新所有持久模型索引。换句话说，
+当结构改变时：
+
+\begin{itemize}
+\item 发出 layoutAboutToBeChanged
+\item 记住将会改变的 QModelIndex
+\item 更新内部数据
+\item 调用 changePersistentIndex()
+\item 发出 layoutChanged
+\end{itemize}
+
+该函数在 Qt 5.0 中被引入。
+
+参见 layoutAboutToBeChanged()、dataChanged()、headerDataChanged()、modelReset() 和 changePersistentIndex()。
+
+modelAboutToBeReset
+[ signal ] void QAbstractItemModel::modelAboutToBeReset()
+
+当调用 beginResetModel() 时，在模型的内部状态(例如持久模型索引)失效之前发出这个信号。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt 4.2 中被引入。
+
+参见 beginResetModel() 和 modelReset()。
+
+modelReset
+
+[ signal ] void QAbstractItemModel::modelReset()
+
+当调用 endResetModel() 时，在模型的内部状态(例如持久模型索引)失效之后发出这个信号。
+
+注意，如果模型被重置，则应该认为之前从模型中检索的所有信息都是无效的。这包括但不限于 rowCount()、columnCount()、flags()、通过 data()检索的数据和 roleNames()。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt 4.1 中被引入。
+
+参见 endResetModel() 和 modelAboutToBeReset()。
+
+resetInternalData
+
+[ protected slot ] void QAbstractItemModel::resetInternalData()
+
+该槽函数在模型的内部数据被清除并被重置之后被调用。
+
+该槽函数为具体代理模型的子类提供了便利，例如维护了额外的数据的
+
+QSortFilterProxyModel 的子类。
+
+\begin{lstlisting}[language=C++]
+ class CustomDataProxy : public QSortFilterProxyModel
+ {
+     Q_OBJECT
+ public:
+     CustomDataProxy(QObject *parent)
+       : QSortFilterProxyModel(parent)
+     {
+     }
+
+     ...
+
+     QVariant data(const QModelIndex &index, int role) override
+     {
+         if (role != Qt::BackgroundRole)
+             return QSortFilterProxyModel::data(index, role);
+
+         if (m_customData.contains(index.row()))
+             return m_customData.value(index.row());
+         return QSortFilterProxyModel::data(index, role);
+     }
+ private slots:
+     void resetInternalData()
+     {
+         m_customData.clear();
+     }
+ private:
+   QHash<int, QVariant> m_customData;
+ };
+\end{lstlisting}
+
+注意： 由于错误，该槽函数没有出现在 Qt 5.0 中。
+
+该函数在 Qt 4.8 中被引入。
+
+参见 modelAboutToBeReset() 和 modelReset()。
+
+revert
+
+[ virtual slot ] void QAbstractItemModel::revert()
+
+让模型知道它应该丢弃缓存的信息。这个函数通常用于行编辑。
+
+该函数在 Qt 4.2 中被引入。
+
+参见 submit()。
+
+rowsAboutToBeInserted
+
+[ signal ] void QAbstractItemModel::rowsAboutToBeInserted(const QModelIndex \&parent, int start, int end)
+
+在将行插入模型之前就发出该信号。新项将位于给定 parent 项目下的包含 start 和 end 之间。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发出，而不能在子类代码中显式发出。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 insertRows() 和 beginInsertRows()。
+
+rowsAboutToBeMoved
+
+[ signal ] void QAbstractItemModel::rowsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationRow)
+
+模型中的行被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationRow 列开始移动到destinationParent。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+rowsAboutToBeRemoved
+
+[ signal ] void QAbstractItemModel::rowsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的行被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeRows() 和 beginRemoveRows()。
+
+rowsInserted
+
+[ signal ] void QAbstractItemModel::rowsInserted(const QModelIndex \&parent, int first, int last)
+
+将行插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 insertRows() 和 beginInsertRows()。
+
+rowsMoved
+
+[ signal ] void QAbstractItemModel::rowsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)
+
+模型中的行被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+该函数在 Qt4.6 中被引入。
+
+参见 beginMoveRows()。
+
+rowsRemoved
+
+[ signal ] void QAbstractItemModel::rowsRemoved(const QModelIndex \&parent, int first, int last)
+
+模型中的行被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+
+注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+
+参见 removeRows() 和 beginRemoveRows()。
+
+submit
+
+[ virtual slot ] void QAbstractItemModel::submit()
+
+让模型知道它应该将缓存的信息提交到永久存储。这个函数通常用于行编辑。
+
+如果没有错误，返回 true;否则返回 false。
+
+参见 revert()。
+
+$\sim$QAbstractItemModel
+
+[ virtual ] void QAbstractItemModel::~QAbstractItemModel()
+
+销毁抽象项模型。
+
+beginInsertColumns
+
+[ protected ] void QAbstractItemModel::beginInsertColumns(const QModelIndex \&parent, int first, int last)
+
+开始一个列插入操作。
+
+在子类中重新实现 insertColumns() 时，必须在将数据插入模型的底层数据存
+储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新
+列插入后的列号。
+
+%modelview-begin-insert-columns.png
+\begin{tabular}{|l|l|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-columns}}
+\end{minipage}
+&指定要插入到模型项中的列的范围的第一个和最后一个列号。例如，如图所示，我们在列4之前插入三列，所以 first 是4，last 是 6:beginInsertColumns(parent, 4, 6);这将插入三个新列作为列4、5和6。\\
+\hline
+%modelview-begin-append-columns.png
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-append-columns}}
+\end{minipage}
+&
+要追加列，请将它们插入到最后一列之后。例如，如图所示我们，、将三列附加到一个包含六列的集合(以列5结尾)，因此 first 是 6 and last 是 8:
+beginInsertColumns(parent, 6, 8);
+这将追加两个新列作为列6、7和8。  \\ 
+\hline
+\end{tabular}
+
+注意： 此函数发出 columnAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+
+参见 endInsertColumns()。
+
+\splitLine
+
+beginInsertRows
+
+[ protected ] void QAbstractItemModel::beginInsertRows(const QModelIndex \&parent, int first, int last)
+
+开始一个行插入操作。
+
+在子类中重新实现 insertRows() 时，必须在将数据插入模型的底层数据存储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新行插入后的行号。
+
+\begin{tabular}{|l|l|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-rows}}
+\end{minipage}
+&
+为要插入模型中项的行范围指定第一行和最后一行。
+例如，如图所示，我们在第2行之前插入三行，因此first 是2，first 是4：
+
+beginInsertRows(parent, 2, 4);
+这将插入三行新行，即第2、3和4行。
+\\
+\hline
+%modelview-begin-append-columns.png
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-append-rows}}
+\end{minipage}
+&
+要追加行，请将它们插入到最后一行之后。例如，如图所示，我们将两行附加到一个包含4个现有行的集合(以第3行结束)，因此 first 是4，last 是5:
+beginInsertRows(parent, 4, 5);
+这将追加两个新行作为第4行和第5行。\\ 
+\hline
+\end{tabular}
+
+注意： 此函数发出 rowsAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+
+参见 endInsertRows()。
+
+\splitLine
+
+beginMoveColumns
+
+[ protected ] void QAbstractItemModel::beginMoveColumns(const QModelIndex \&sourceParent, int sourceFirst, int sourceLast, const QModelIndex \&destinationParent, int destinationChild)
+
+开始一个列移动操作。
+
+当重新实现子类时，此方法简化了模型中实体的移动。此方法负责在模型中移动持久索引，否则您将需要自己执行此操作。使用 beginMoveColumns 和 endMoveColumns() 是直接发送与 changePersistentIndex() 一起的 layoutAboutToBeChanged() 和 layoutChanged() 的另一种选择。
+
+sourceParent 索引对应于从其移出列的父级；sourceFirst 和 sourceLast 是要移动的列的第一列和最后一列。destinationParent 索引对应于将这些列移入的父级。destinationChild 是要将列移动到的列。也就是说，sourceParent 中 sourceFirst 列的索引将成为 destinationParent 中的 destinationChild 列，然后是所有其他列，直到 sourceLast。
+
+但是，当在同一父目录下移动列时(sourceParent 和 destinationParent 是相等的)，这些列将被放置在 destinationChild 索引之前。也就是说，如果您希望移动列0和1，使它们变成列 1 和列 2,destinationChild 应该是 3。在本例中，源列 i (位于 sourceFirst 和 sourceLast 之间)的新索引等于(destinationChild-sourceLast-1+i)。
+
+注意，如果 sourceParent 和 destinationParent 是相同的，您必须确保 destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须确保不会尝试将列移动到它自己的子列或祖先列中。如果任一条件为真，此方法将返回 false，在这种情况下，应中止移动操作。
+
+该函数在 Qt4.6 中被引入。
+
+参见 endMoveColumns()。
+
+\splitLine
+
+beginMoveRows
+
+[ protected ] void QAbstractItemModel::beginMoveRows(const QModelIndex \&sourceParent, int sourceFirst, int sourceLast, const QModelIndex \&destinationParent, int destinationChild)
+
+开始一个行移动操作。
+
+当重新实现子类时，此方法简化了模型中实体的移动。此方法负责在模型中移动持久索引，否则您将需要自己执行此操作。使用 beginMoveRows 和 endMoveRows 是直接发送与 changePersistentIndex() 一起的 layoutAboutToBeChanged() 和 layoutChanged() 的另一种选择。
+
+sourceParent 索引对应于从其移出行的父级；sourceFirst 和 sourceLast 是要移动的行的第一行和最后一行。destinationParent 索引对应于将这些行移入的父级。destinationChild 是要将行移动到的行。也就是说，sourceParent 中的 sourceFirst 行的索引将成为 destinationParent 中的 destinationChild 行，然后是所有其他行，直到 sourceLast。
+
+但是，当在同一父目录下移动列时(sourceParent 和 destinationParent 是相等的)，这些行将被放置在 destinationChild 索引之前。也就是说，如果您希望移动列0和1，使它们变成行 1 和行 2,destinationChild 应该是 3。在本例中，源行 i (位于 sourceFirst 和 sourceLast 之间)的新索引等于(destinationChild-sourceLast-1+i)。
+
+注意，如果 sourceParent 和 destinationParent 是相同的，您必须确保
+destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须确
+保不会尝试将行移动到它自己的子列或祖先行中。如果任一条件为真，此方法将
+返回 false，在这种情况下，应中止移动操作。
+
+
+\begin{longtable}{|l|l|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-1}}
+\end{minipage}
+&
+指定源父行中您希望在模型中移动的行跨度的第一行和最后一行编号。还要在目
+                 标父级中指定要将范围内的行移动到的行。例如，如图所示，
+                 我们将源中的第 2 行到第 3 行移动了三行，因此
+                 sourceFirst 为 2，sourceLast 为 4。
+
+我们将这些项移动到目标的第2行上方，因此 destinationChild 为2。
+beginMoveRows(sourceParent, 2, 4, destinationParent, 2);
+这会将源中的三行第 2、3 和 4 行移动到目标中的 2、3 和 4 行。其他受影响的同级项也因此被移位。
+\\
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-2}}
+\end{minipage}
+&
+若要将行追加到另一个父元素，请将它们移到最后一行的后面。例如，如图所示，我们将三行移动到一个包含 6 个现有行的集合中(以第 5 行结束)，因此 destinationChild 为6：
+beginMoveRows(sourceParent, 2, 4, destinationParent, 6);
+这会将目标行移到目标父级的末尾，分别为 6、7 和 8。\\ 
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-3}}
+\end{minipage}
+&
+要在同一父级中移动行，请指定要将其移动到的行。 例如，如图所示，我们将
+                 一项从第 2 行移至第 0 行，因此 sourceFirst 和
+                 sourceLast 为2，destinationChild 为0。
+
+beginMoveRows(parent, 2, 2, parent, 0);
+注意，其他行可能会相应移位。另请注意，在同一父级中移动项时，请勿尝试无效移动或无操作移动。在上面的示例中，项 2 位于移动之前的第 2 行，因此无法将其移动到第 2 行（已经存在）或第 3 行（空操作，因为第 3 行意味着已经在第 3 行之上）\\
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-4}}
+\end{minipage}
+&
+要在同一父级中移动行，请指定要将其移动到的行。例如，如图所示，我们将一项从第 2 行移至第 4 行，因此 sourceFirst 和 sourceLast 为2，destinationChild 为4。
+beginMoveRows(parent, 2, 2, parent, 4);
+注意，其他行可能会相应移位。\\
+\hline
+\end{longtable}
 
 %%% Local Variables:
 %%% mode: latex
