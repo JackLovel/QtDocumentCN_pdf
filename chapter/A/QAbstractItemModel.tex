@@ -806,7 +806,100 @@ beginInsertRows(parent, 2, 4);
 beginInsertRows(parent, 4, 5);
 这将追加两个新行作为第4行和第5行。\\ 
 \hline
-\end{tabular}}
+\end{tabular}
+
+注意： 此函数发出 rowsAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+
+参见 endInsertRows()。
+
+\splitLine
+
+beginMoveColumns
+
+[ protected ] void QAbstractItemModel::beginMoveColumns(const QModelIndex \&sourceParent, int sourceFirst, int sourceLast, const QModelIndex \&destinationParent, int destinationChild)
+
+开始一个列移动操作。
+
+当重新实现子类时，此方法简化了模型中实体的移动。此方法负责在模型中移动持久索引，否则您将需要自己执行此操作。使用 beginMoveColumns 和 endMoveColumns() 是直接发送与 changePersistentIndex() 一起的 layoutAboutToBeChanged() 和 layoutChanged() 的另一种选择。
+
+sourceParent 索引对应于从其移出列的父级；sourceFirst 和 sourceLast 是要移动的列的第一列和最后一列。destinationParent 索引对应于将这些列移入的父级。destinationChild 是要将列移动到的列。也就是说，sourceParent 中 sourceFirst 列的索引将成为 destinationParent 中的 destinationChild 列，然后是所有其他列，直到 sourceLast。
+
+但是，当在同一父目录下移动列时(sourceParent 和 destinationParent 是相等的)，这些列将被放置在 destinationChild 索引之前。也就是说，如果您希望移动列0和1，使它们变成列 1 和列 2,destinationChild 应该是 3。在本例中，源列 i (位于 sourceFirst 和 sourceLast 之间)的新索引等于(destinationChild-sourceLast-1+i)。
+
+注意，如果 sourceParent 和 destinationParent 是相同的，您必须确保 destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须确保不会尝试将列移动到它自己的子列或祖先列中。如果任一条件为真，此方法将返回 false，在这种情况下，应中止移动操作。
+
+该函数在 Qt4.6 中被引入。
+
+参见 endMoveColumns()。
+
+\splitLine
+
+beginMoveRows
+
+[ protected ] void QAbstractItemModel::beginMoveRows(const QModelIndex \&sourceParent, int sourceFirst, int sourceLast, const QModelIndex \&destinationParent, int destinationChild)
+
+开始一个行移动操作。
+
+当重新实现子类时，此方法简化了模型中实体的移动。此方法负责在模型中移动持久索引，否则您将需要自己执行此操作。使用 beginMoveRows 和 endMoveRows 是直接发送与 changePersistentIndex() 一起的 layoutAboutToBeChanged() 和 layoutChanged() 的另一种选择。
+
+sourceParent 索引对应于从其移出行的父级；sourceFirst 和 sourceLast 是要移动的行的第一行和最后一行。destinationParent 索引对应于将这些行移入的父级。destinationChild 是要将行移动到的行。也就是说，sourceParent 中的 sourceFirst 行的索引将成为 destinationParent 中的 destinationChild 行，然后是所有其他行，直到 sourceLast。
+
+但是，当在同一父目录下移动列时(sourceParent 和 destinationParent 是相等的)，这些行将被放置在 destinationChild 索引之前。也就是说，如果您希望移动列0和1，使它们变成行 1 和行 2,destinationChild 应该是 3。在本例中，源行 i (位于 sourceFirst 和 sourceLast 之间)的新索引等于(destinationChild-sourceLast-1+i)。
+
+注意，如果 sourceParent 和 destinationParent 是相同的，您必须确保
+destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须确
+保不会尝试将行移动到它自己的子列或祖先行中。如果任一条件为真，此方法将
+返回 false，在这种情况下，应中止移动操作。
+
+
+\begin{longtable}{|l|l|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-1}}
+\end{minipage}
+&
+指定源父行中您希望在模型中移动的行跨度的第一行和最后一行编号。还要在目
+                 标父级中指定要将范围内的行移动到的行。例如，如图所示，
+                 我们将源中的第 2 行到第 3 行移动了三行，因此
+                 sourceFirst 为 2，sourceLast 为 4。
+
+我们将这些项移动到目标的第2行上方，因此 destinationChild 为2。
+beginMoveRows(sourceParent, 2, 4, destinationParent, 2);
+这会将源中的三行第 2、3 和 4 行移动到目标中的 2、3 和 4 行。其他受影响的同级项也因此被移位。
+\\
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-2}}
+\end{minipage}
+&
+若要将行追加到另一个父元素，请将它们移到最后一行的后面。例如，如图所示，我们将三行移动到一个包含 6 个现有行的集合中(以第 5 行结束)，因此 destinationChild 为6：
+beginMoveRows(sourceParent, 2, 4, destinationParent, 6);
+这会将目标行移到目标父级的末尾，分别为 6、7 和 8。\\ 
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-3}}
+\end{minipage}
+&
+要在同一父级中移动行，请指定要将其移动到的行。 例如，如图所示，我们将
+                 一项从第 2 行移至第 0 行，因此 sourceFirst 和
+                 sourceLast 为2，destinationChild 为0。
+
+beginMoveRows(parent, 2, 2, parent, 0);
+注意，其他行可能会相应移位。另请注意，在同一父级中移动项时，请勿尝试无效移动或无操作移动。在上面的示例中，项 2 位于移动之前的第 2 行，因此无法将其移动到第 2 行（已经存在）或第 3 行（空操作，因为第 3 行意味着已经在第 3 行之上）\\
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-4}}
+\end{minipage}
+&
+要在同一父级中移动行，请指定要将其移动到的行。例如，如图所示，我们将一项从第 2 行移至第 4 行，因此 sourceFirst 和 sourceLast 为2，destinationChild 为4。
+beginMoveRows(parent, 2, 2, parent, 4);
+注意，其他行可能会相应移位。\\
+\hline
+\end{longtable}
 
 %%% Local Variables:
 %%% mode: latex
