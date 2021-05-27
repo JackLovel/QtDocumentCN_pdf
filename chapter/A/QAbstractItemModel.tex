@@ -748,7 +748,8 @@ beginInsertColumns
 列插入后的列号。
 
 %modelview-begin-insert-columns.png
-\begin{tabular}{|l|l|}
+\setlength\extrarowheight{-3pt}
+\begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
 		\centering
@@ -782,7 +783,8 @@ beginInsertRows
 
 在子类中重新实现 insertRows() 时，必须在将数据插入模型的底层数据存储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新行插入后的行号。
 
-\begin{tabular}{|l|l|}
+\setlength\extrarowheight{-3pt}
+\begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
 		\centering
@@ -851,8 +853,8 @@ destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须�
 保不会尝试将行移动到它自己的子列或祖先行中。如果任一条件为真，此方法将
 返回 false，在这种情况下，应中止移动操作。
 
-
-\begin{longtable}{|l|l|}
+\setlength\extrarowheight{-3pt}
+\begin{longtable}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
 		\centering
@@ -917,7 +919,8 @@ beginRemoveColumns
 
 参见 endRemoveColumns()。
 
-\begin{tabular}{|r|l|}
+\setlength\extrarowheight{-3pt}
+\begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
 		\centering
@@ -939,7 +942,8 @@ beginRemoveRows
 
 parent 引对应于从中删除新行的父索引；first 和 last 是要删除的行的行号。
 
-\begin{tabular}{|r|l|}
+\setlength\extrarowheight{-3pt}
+\begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
 		\centering
