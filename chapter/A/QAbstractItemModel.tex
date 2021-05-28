@@ -2,7 +2,7 @@
 
 QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/A/QAbstractItemModel}{更多...} 
 
-\setlength\extrarowheight{1pt}
+\setlength\extrarowheight{2pt}
 \begin{tabular}{|m{5em}|m{25em}|}
 	\hline
 	属性 & 方法 \\
@@ -24,8 +24,7 @@ QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github
 
 公有成员类型
 
-\setlength\extrarowheight{1pt}
-\begin{longtable}{|m{10em}|m{30em}|}
+\begin{tabular}{|m{10em}|m{30em}|}
 	\hline
 	类型 & 类型名称 \\
 	\hline
@@ -36,14 +35,13 @@ flags&	CheckIndexOptions\\
 \hline
 enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHint }\\
 \hline
-\end{tabular}}
+\end{tabular}
 
 
 \splitLine
 
 公共成员函数
 
-\setlength\extrarowheight{1pt}
 \begin{longtable}{|m{10em}|m{30em}|}
 \hline
 类型 & 函数名称 \\
@@ -170,7 +168,6 @@ virtual bool	&submit()\\
 
 信号
 
-\setlength\extrarowheight{1pt}
 \begin{tabular}{|m{4em}|m{36em}|}
 \hline
 类型 & 函数名称 \\
@@ -223,7 +220,6 @@ void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
 
 受保护的函数
 
-\setlength\extrarowheight{1pt}
 \begin{tabular}{|m{10em}|m{30em}|}
 \hline
 类型　&	　函数名称\\
@@ -274,7 +270,7 @@ void&	endResetModel()\\
 \hline
 QModelIndexList&	persistentIndexList() const\\
 \hline
-\end{tabular}}
+\end{tabular}
 
 受保护的槽函数
 
@@ -374,18 +370,17 @@ enum class QAbstractItemModel::CheckIndexOption flags QAbstractItemModel::CheckI
 
 这个枚举可以用来控制 QAbstractItemModel::checkIndex() 执行的检查。
 
-\resizebox{\textwidth}{!}{ % 文本过宽
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|m{25em}|m{4em}|m{13em}|}
 \hline
 常量 &值&描述\\
 \hline
 QAbstractItemModel::CheckIndexOption::NoOption & 0x0000	& 没有指定检查选项。\\
 \hline
-QAbstractItemModel::CheckIndexOption::IndexIsValid&0x0001&传递给 QAbstractItemModel::checkIndex()的模型索引被检查为有效的模型索引。\\
+QAbstractItemModel::CheckIndexOption::IndexIsValid & 0x0001 & 传递给 QAbstractItemModel::checkIndex()的模型索引被检查为有效的模型索引。\\
 \hline
-QAbstractItemModel::CheckIndexOption::DoNotUseParent&0x0002&不执行任何涉及到传递给 QAbstractItemModel::checkIndex() 的父索引的使用的检查。\\
+QAbstractItemModel::CheckIndexOption::DoNotUseParent & 0x0002 & 不执行任何涉及到传递给 QAbstractItemModel::checkIndex() 的父索引的使用的检查。\\
 \hline
-\end{tabular}}
+\end{tabular}
 
 该枚举是在 Qt 5.11 中引入或修改的。
 
@@ -749,8 +744,6 @@ beginInsertColumns
 储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新
 列插入后的列号。
 
-%modelview-begin-insert-columns.png
-\setlength\extrarowheight{-3pt}
 \begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
@@ -758,6 +751,7 @@ beginInsertColumns
 		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-columns}}
 \end{minipage}
 &指定要插入到模型项中的列的范围的第一个和最后一个列号。例如，如图所示，我们在列4之前插入三列，所以 first 是4，last 是 6:beginInsertColumns(parent, 4, 6);这将插入三个新列作为列4、5和6。\\
+
 \hline
 %modelview-begin-append-columns.png
 \begin{minipage}[b]{0.3\columnwidth}
@@ -785,7 +779,6 @@ beginInsertRows
 
 在子类中重新实现 insertRows() 时，必须在将数据插入模型的底层数据存储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新行插入后的行号。
 
-\setlength\extrarowheight{-3pt}
 \begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
@@ -855,7 +848,6 @@ destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须�
 保不会尝试将行移动到它自己的子列或祖先行中。如果任一条件为真，此方法将
 返回 false，在这种情况下，应中止移动操作。
 
-\setlength\extrarowheight{-3pt}
 \begin{longtable}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
@@ -921,7 +913,6 @@ beginRemoveColumns
 
 参见 endRemoveColumns()。
 
-\setlength\extrarowheight{-3pt}
 \begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
@@ -944,7 +935,6 @@ beginRemoveRows
 
 parent 引对应于从中删除新行的父索引；first 和 last 是要删除的行的行号。
 
-\setlength\extrarowheight{-3pt}
 \begin{tabular}{|m{13em}|m{26em}|}
 \hline
 \begin{minipage}[b]{0.3\columnwidth}
