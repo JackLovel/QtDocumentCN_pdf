@@ -148,6 +148,187 @@ virtual bool&	waitForBytesWritten(int msecs = 30000) override\\
 virtual bool&	waitForReadyRead(int msecs = 30000) override\\
 \hline
 \end{tabular}
+
+信号
+
+\begin{tabular}{|m{5em}|m{35em}|}
+\hline
+类型&函数名 \\
+\hline
+void&	connected()\\
+\hline
+void&	disconnected()\\
+\hline
+void&	errorOccurred(QAbstractSocket::SocketError socketError)\\
+\hline
+void&	hostFound()\\
+\hline
+void&	proxyAuthenticationRequired(const QNetworkProxy \&proxy,
+                                                          QAuthenticator
+                                                          *authenticator)\\
+\hline
+void&	stateChanged(QAbstractSocket::SocketState socketState)\\
+\hline
+\end{tabular}
+
+保护成员函数
+
+\begin{tabular}{|m{5em}|m{35em}|}
+\hline
+类型&函数名 \\
+\hline
+void&	setLocalAddress(const QHostAddress \&address)\\
+\hline
+void&	setLocalPort(quint16 port)\\
+\hline
+void&	setPeerAddress(const QHostAddress \&address)\\
+\hline
+void&	setPeerName(const QString \&name)\\
+\hline
+void&	setPeerPort(quint16 port)\\
+\hline
+void&	setSocketError(QAbstractSocket::SocketError socketError)\\
+\hline
+void&	setSocketState(QAbstractSocket::SocketState state)\\
+\hline
+\end{tabular}
+
+重载保护成员函数
+
+\begin{tabular}{|m{5em}|m{35em}|}
+\hline
+类型&函数名 \\
+\hline
+virtual qint64&	readData(char *data, qint64 maxSize) override\\
+\hline
+virtual qint64&	readLineData(char *data, qint64 maxlen) override\\
+\hline
+virtual qint64&	writeData(const char *data, qint64 size) override\\
+\hline
+\end{tabular}
+
+详细介绍
+
+QAbstractSocket 类是 QTcpSocket 类和 QUdpSocket 类的基类，包含了这两个
+类所有的常规功能。您可以通过以下两种方法使用一个套接字( Socket )：
+
+\begin{itemize}
+\item 实例化一个 QTcpSocket 或者 QUdpSocket 对象
+\item 声明一个自定义套接字描述符，实例化 QAbstractSocket ，然后调用 setSocketDescriptor() 函数包装该自定义套接字描述符。
+\end{itemize}
+
+TCP（传输控制协议）是一种可靠的，面向流，面向连接的传输协议。 UDP（用户数据报协议）是一种不可靠的，面向数据报的无连接协议。 实际上，这意味着TCP更适合于连续数据传输，而当可靠性不重要时，可以使用更轻量的UDP。
+
+QAbstractSocket 的 API 统一了这两种协议之间的大部分差异。 例如，尽管 UDP 是无连接的，但 connectToHost() 为 UDP 套接字建立了虚拟连接，使您可以忽略底层协议，以几乎相同的方式使用 QAbstractSocket 类。 在 QAbstractSocket 类的内部实现中，QAbstractSocket 记录了传递给 connectToHost() 的地址和端口，并且能在调用 read() 和 write() 之类的成员函数时使用这些值。
+
+任何情况下，QAbstractSocket 类都有一个状态（ state ，该值可以由 state() 成员函数的返回值获得）。 初始状态为未连接（ QAbstractSocket :: UnconnectedState ）状态。 调用 connectToHost() 成员函数连接主机后，套接字会首先进入寻找主机（ QAbstractSocket :: HostLookupState ）状态。 如果找到了主机，则 QAbstractSocket 会进入连接中（ QAbstractSocket :: ConnectingState ）状态，并发送 hostFound() 信号。 建立连接后，它将进入已连接（ QAbstractSocket :: ConnectedState ）状态并发送 connected() 信号。 如果在以上列出任何阶段发生了错误，则会发出 errorOccurred() 信号。 每当状态发生更改时，QAbstractSocket 都会发出 stateChanged() 信号。 为方便起见，当套接字已准备好进行读取和写入数据操作时，isValid() 成员函数的返回值为 true 。但是要注意一下，在进行读写操作之前，套接字的状态必须为已连接（ QAbstractSocket :: ConnectedState ）状态。
+
+您可以通过调用 read() 或 write() 来进行数据读写操作，同时为了方便进行特殊的数据读入操作，您还可以使用 QAbstractSocket 的父类 QIODevice 提供的成员函数 readLine() 和 readAll() 。当我们需要以字节为单位进行数据读写操作时，可以使用 QAbstractSocket 的父类 QIODevice 提供的成员函数 getChar()，putChar() 和 ungetChar() 。 待数据写入套接字后，QAbstractSocket 会发出继承自父类 QIODevice 的信号 bytesWritten() 。请特别注意一下，Qt并不限制写缓冲区的大小。 您可以通过监听 bytesWritten() 信号来监视其大小。
+
+每当有新的数据块到达时，QAbstractSocket 都会发出继承自父类 QIODevice 的信号 readyRead() 。 您可以通过 bytesAvailable() 成员函数的返回值来获得当前读取缓冲区中可读取的字节数。 通常来讲，您可以将 readyRead() 信号与一个槽函数相连接，然后在该槽函数中读取所有可用的数据。 如果您不一次性读取所有数据，则其余数据以后仍可以读取，并且任何新的传入数据都将追加到 QAbstractSocket 的内部读取缓冲区中。您可以通过调用 setReadBufferSize() 成员函数来限制读取缓冲区的大小。
+
+您可以通过调用 disconnectFromHost() 成员函数关闭套接字。 调用 disconnectFromHost() 成员函数后，QAbstractSocket 会进入关闭中（ QAbstractSocket :: ClosingState ）状态。 待所有未处理数据写入套接字后，QAbstractSocket 将关闭套接字，进入未连接（ QAbstractSocket :: UnconnectedState ）状态，并发送 disconnected() 信号。 如果要立即中止连接，并丢弃所有未处理数据，请调用 abort() 成员函数。 如果远程主机关闭了该连接，QAbstractSocket 将发出 errorOccurred(QAbstractSocket :: RemoteHostClosedError) 错误信号，在此期间套接字状态仍为已连接（ QAbstractSocket :: ConnectedState ）状态，此后将发送 disconnected() 信号。
+
+您可以通过调用 peerPort() 和 peerAddress() 成员函数来获取已连接的对等方的端口和地址。 peerName() 成员函数则会返回传递给 connectToHost() 的对等方的主机名。 另外，localPort() 和 localAddress() 成员函数可返回本地套接字的端口和地址。
+
+QAbstractSocket 提供了一组函数，这些函数可以挂起调用线程，直到发出某些
+信号为止。 这些函数可用于实现阻塞套接字：
+
+\begin{itemize}
+\item waitForConnected() 阻塞套接字直到一个新的连接建立
+\item waitForReadyRead() 阻塞套接字直到有新的数据可以读取
+\item waitForBytesWritten() 阻塞套接字直到一个有效的荷载数据写入到了套接字
+\item waitForDisconnected() 阻塞套接字直到连接已经关闭
+\end{itemize}
+
+Qt官方提供了如下示例：
+
+\begin{lstlisting}[language=C++]
+int numRead = 0, numReadTotal = 0;
+char buffer[50];
+
+forever {
+	numRead  = socket.read(buffer, 50);
+
+	// do whatever with array
+
+	numReadTotal += numRead;
+	if (numRead == 0 && !socket.waitForReadyRead())
+		break;
+}
+
+\end{lstlisting}
+
+waitForReadyRead() 成员函数返回值为 false，则说明连接已关闭或发生了错误。
+
+使用阻塞套接字进行编程与使用非阻塞套接字进行编程完全不同。 阻塞套接字不需要有一个事件循环，这通常可以简化代码。 但是，在GUI应用程序中，阻塞套接字只能在非GUI线程中使用，以避免冻结用户界面。 有关这两种方法的概述，请参见 fortuneclien 和 blockingfortuneclient 示例。
+
+注意： Qt官方并不推荐将阻塞函数与信号一起使用。
+
+QAbstractSocket 可以与 QTextStream 和 QDataStream 的流运算符（operator<<() 和operator>>()）一起使用。 但是，有一个问题需要注意：在尝试使用operator>>() 读取数据之前，必须确保有足够的数据可用。
+
+您也可以在 QNetworkAccessManager 类和 QTcpServer 类的文档中找到一部分相关的信息。
+
+\splitLine
+
+成员类型文档
+
+enum QAbstractSocket::BindFlag | flags QAbstractSocket::BindMode
+该枚举描述了一些不同的标志，这些标志可以传递为 bind() 成员函数的参数，指定了不同的主机绑定模式。
+
+\begin{tabular}{|m{10em}|m{5em}|m{30em}|}
+\hline
+常量&值&描述 \\
+\hline
+QAbstractSocket::ShareAddress&	0x1	&允许其他服务绑定到相同的地址和端口。
+                               在多个进程通过侦听相同的地址和端口来分
+                               担单个服务的负载的情况下（例如，具有多
+                               个预分支侦听器的Web服务器可以大大缩短响
+                               应时间），该模式十分有效。 但是，由于该
+                               模式下允许任何服务对主机进行重新绑定，
+                               因此此选项存在着安全隐患。 请注意，您还
+                               可以允许您的服务重新绑定现有的共享地址
+                               通过将此选项与
+                               QAbstractSocket::ReuseAddressHint 结合
+                               使用。 在 Unix 上，这等效于
+                               SO\_REUSEADDR 套接字选项。 在 Windows 上，
+                               这是默认行为，因此将忽略此选项。\\
+\hline
+QAbstractSocket::DontShareAddress&	0x2&	绑定主机时独占地址和端口，不允
+                                   许其他服务重新绑定。 将此选项作为
+                                   QAbstractSocket :: bind() 参数，可
+                                   以确保在绑定主机成功后，您当前的服
+                                   务是唯一侦听指定地址和端口的服务。
+                                   即使其他服务通过指定
+                                   QAbstractSocket::ReuseAddressHint
+                                   模式来绑定服务，这个操作也是不允许
+                                   的。 该模式相比
+                                   QAbstractSocket::ShareAddress 提供
+                                   了更高的安全性，但是在某些操作系统
+                                   上，它要求您以管理员权限运行该服务。
+                                   在 Unix 和 macOS 上，独占地址和端口
+                                   是绑定主机的默认行为，因此该选项将
+                                   被忽略。 在 Windows 上，此选项使用
+                                   SO\_EXCLUSIVEADDRUSE 套接字选项。\\
+\hline
+QAbstractSocket::ReuseAddressHint&	0x4	&示意 QAbstractSocket 即使地址
+                                   和端口已被另一个套接字绑定，它也应
+                                   尝试重新绑定服务。 在 Windows 和
+                                   Unix 上，这等效于 SO\_REUSEADDR 套接
+                                   字选项。\\
+\hline
+QAbstractSocket::DefaultForPlatform&	0x0&	使用当前平台的默认模式。 在 Unix 和 macOS 上，这等效于（ QAbstractSocket::DontShareAddress + QAbstractSocket::ReuseAddressHint ），在 Windows 上，它等效于 QAbstractSocket::ShareAddress 。\\
+\hline
+\end{tabular}\\
+
+该枚举最初在Qt5.0版本引入。
+
+BindMode 类型是 typedef QFlags <BindFlag> 生成的用户自定义类型。 它存储着 BindFlag 值的 OR 组合。
+
+enum QAbstractSocket::NetworkLayerProtocol
+
+该枚举描述了Qt中可以使用的网络层协议
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
