@@ -18,7 +18,136 @@ QUdpSocket等类继承。QAbstractSocket 类为所有的socket通信类提供了
 	\hline
 \end{tabular}
 
+公共成员类型 
 
+\begin{tabular}{|m{5em}|m{35em}|}
+\hline
+类型&方法 \\ 
+\hline
+enum&	BindFlag { ShareAddress, DontShareAddress, ReuseAddressHint,
+      DefaultForPlatform }\\
+\hline
+flags&	BindMode\\
+\hline
+enum&	NetworkLayerProtocol{ IPv4Protocol, IPv6Protocol, AnyIPProtocol, UnknownNetworkLayerProtocol }\\
+\hline
+enum&	PauseMode { PauseNever, PauseOnSslErrors }\\
+\hline
+flags&	PauseModes\\
+\hline
+enum&	SocketError { ConnectionRefusedError, RemoteHostClosedError, HostNotFoundError, SocketAccessError, SocketResourceError, …, UnknownSocketError }\\
+\hline
+enum&	SocketOption{ LowDelayOption, KeepAliveOption, MulticastTtlOption, MulticastLoopbackOption, TypeOfServiceOption, …, PathMtuSocketOption }\\
+\hline
+enum&	SocketState { UnconnectedState, HostLookupState, ConnectingState, ConnectedState, BoundState, …, ListeningState }\\
+\hline
+enum&	SocketType { TcpSocket, UdpSocket, SctpSocket, UnknownSocketType }\\
+  \hline
+\end{tabular}
+
+公共成员函数
+
+\begin{longtable}{|m{15em}|m{27em}|}
+\hline
+类型&函数名 \\
+\hline
+	&QAbstractSocket(QAbstractSocket::SocketType socketType, QObject
+   *parent)\\
+\hline
+virtual&	$\sim$QAbstractSocket()\\
+\hline
+void&	abort()\\
+\hline
+bool&	bind(const QHostAddress \&address, quint16 port = 0,
+QAbstractSocket::BindMode mode = DefaultForPlatform)\\
+\hline
+bool&	bind(quint16 port = 0, QAbstractSocket::BindMode mode = DefaultForPlatform)\\
+\hline
+virtual void&	connectToHost(const QString \&hostName, quint16 port,QIODevice::OpenMode
+ openMode = ReadWrite, QAbstractSocket::NetworkLayerProtocol protocol = AnyIPProtocol)\\
+\hline
+virtual void &connectToHost(const QHostAddress \&address, quint16 port, QIODevice::Ope
+nMode openMode = ReadWrite)\\
+\hline
+virtual void	&disconnectFromHost()\\
+\hline
+QAbstractSocket::SocketError & error() const\\
+\hline
+bool&	flush()\\
+\hline
+bool&	isValid() const\\
+\hline
+QHostAddress&	localAddress() const\\
+\hline
+quint16&	localPort() const\\
+\hline
+QAbstractSocket::PauseModes	& pauseMode() const\\
+\hline
+QHostAddress&	peerAddress() const\\
+\hline
+QString&	peerName() const\\
+\hline
+quint16&	peerPort() const\\
+\hline
+QString&	protocolTag() const\\
+\hline
+QNetworkProxy&	proxy() const\\
+\hline
+qint64	&readBufferSize() const\\
+\hline
+virtual void&	resume()\\
+\hline
+void&	setPauseMode(QAbstractSocket::PauseModes pauseMode)\\
+\hline
+void&	setProtocolTag(const QString \&tag)\\
+\hline
+void&	setProxy(const QNetworkProxy \&networkProxy)\\
+\hline
+virtual void&	setReadBufferSize(qint64 size)\\
+\hline
+virtual bool&	setSocketDescriptor(qintptr socketDescriptor, QAbstractSocket::SocketStat
+e socketState = ConnectedState, QIODevice::OpenMode openMode = ReadWrite)\\
+\hline
+virtual void	&setSocketOption(QAbstractSocket::SocketOption option,
+const QVariant \&value)\\
+\hline
+virtual qintptr&	socketDescriptor() const\\
+\hline
+virtual QVariant&	socketOption(QAbstractSocket::SocketOption option)\\
+\hline
+QAbstractSocket::SocketType	&socketType() const\\
+\hline
+QAbstractSocket::SocketState&	state() const\\
+\hline
+virtual bool&	waitForConnected(int msecs = 30000)\\
+\hline
+virtual bool&	waitForDisconnected(int msecs = 30000)\\
+\hline
+\end{longtable}
+
+重载公共成员函数
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 函数名\\ 
+\hline
+virtual bool&atEnd() const override\\
+\hline
+virtual qint64&	bytesAvailable() const override\\
+\hline
+virtual qint64&		bytesToWrite() const override\\
+\hline
+virtual bool&	canReadLine() const override\\
+\hline
+virtual void&	close() override\\
+\hline
+virtual bool&	isSequential() const override\\
+\hline
+virtual bool&	waitForBytesWritten(int msecs = 30000) override\\
+\hline
+virtual bool&	waitForReadyRead(int msecs = 30000) override\\
+\hline
+\end{tabular}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
