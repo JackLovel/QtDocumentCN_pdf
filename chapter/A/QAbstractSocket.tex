@@ -319,7 +319,7 @@ QAbstractSocket::ReuseAddressHint&	0x4	&示意 QAbstractSocket 即使地址
 \hline
 QAbstractSocket::DefaultForPlatform&	0x0&	使用当前平台的默认模式。 在 Unix 和 macOS 上，这等效于（ QAbstractSocket::DontShareAddress + QAbstractSocket::ReuseAddressHint ），在 Windows 上，它等效于 QAbstractSocket::ShareAddress 。\\
 \hline
-\end{tabular}\\
+\end{tabular}
 
 该枚举最初在Qt5.0版本引入。
 
@@ -328,6 +328,120 @@ BindMode 类型是 typedef QFlags <BindFlag> 生成的用户自定义类型。 �
 enum QAbstractSocket::NetworkLayerProtocol
 
 该枚举描述了Qt中可以使用的网络层协议
+
+\begin{tabular}{|m{26em}|m{2em}|m{8em}|}
+\hline
+常量&值&描述 \\
+\hline
+QAbstractSocket::IPv4Protocol&	0	&IPv4\\
+\hline
+QAbstractSocket::IPv6Protocol&	1	&IPv6\\
+\hline
+QAbstractSocket::AnyIPProtocol&	2	&IPv4 或 IPv6\\
+\hline
+QAbstractSocket::UnknownNetworkLayerProtocol&	-1	&除IPv4和IPv6之外的协议\\
+\hline
+\end{tabular}
+
+您也可以在 QHostAddress::protocol() 中找到有关网络层协议的相关知识。
+
+enum QAbstractSocket::PauseMode | flags QAbstractSocket::PauseModes
+
+该枚举描述了套接字在什么情况下该停止传输中的数据。 
+
+当前Qt支持的唯一通知是 QSslSocket::sslErrors()。
+
+\begin{tabular}{|m{19em}|m{2em}|m{18em}|}
+\hline
+常量	&值&	描述\\
+\hline
+QAbstractSocket::PauseNever&	0x0&	“永远”不暂停套接字上的数据传输。 该模
+  式是默认设置，符合Qt 4的标准。\\
+\hline
+QAbstractSocket::PauseOnSslErrors&	0x1&	收到 SSL 错误（即 QSslSocket::sslErrors() ）的通知后，暂停套接字上的数据传输。\\
+\hline
+\end{tabular}
+
+该枚举最初在Qt5.0版本引入。
+
+PauseModes 类型是 typedef QFlags<PauseMode> 生成的用户自定义类型。它储存着 PauseMode 值的 OR 组合。
+
+enum QAbstractSocket::SocketError
+
+该枚举描述了常见的套接字错误。
+
+\begin{longtable}{|m{20em}|m{2em}|m{19em}|}
+\hline
+常量&	值&	描述 \\ 
+\hline
+QAbstractSocket::ConnectionRefusedError&	0&	连接被对方拒绝（或连接超时）。\\
+\hline
+QAbstractSocket::RemoteHostClosedError&	1&	远程主机关闭了连接。 请注意，在发送远程
+主机连接关闭的通知后，客户端套接字（即此套接字）将被关闭。\\
+\hline
+QAbstractSocket::HostNotFoundError&	2&	未能找到主机地址。\\
+\hline
+QAbstractSocket::SocketAccessError&	3&	程序没有权限来进行特定的套接字操作\\
+\hline
+QAbstractSocket::SocketResourceError&	4&	本地系统资源不足（例如本地系统使用了过多的套接字）。\\
+\hline
+QAbstractSocket::SocketTimeoutError&	5&	套接字操作超时。\\
+\hline
+QAbstractSocket::DatagramTooLargeError&	6&	数据报大于操作系统的限制（该限制可以低至
+8192字节）。\\
+\hline
+QAbstractSocket::NetworkError&	7&	网络发生错误（例如网线断开）。\\
+\hline
+QAbstractSocket::AddressInUseError&	8&	QAbstractSocket::bind() 指定的主机地址已
+被另一个套接字使用独占模式绑定。\\
+\hline
+QAbstractSocket::SocketAddressNotAvailableError&	9& QAbstractSocket::bind() 指定的主机地址不属于主机。\\
+\hline
+QAbstractSocket::UnsupportedSocketOperationError&	10&	本地操作系统不支持请求的套
+接字操作（例如，缺少IPv6支持）。\\
+\hline
+QAbstractSocket::ProxyAuthenticationRequiredError&	12&	套接字正在使用代理，并且代
+理需要身份验证。\\
+\hline
+QAbstractSocket::SslHandshakeFailedError&	13&	SSL / TLS 握手失败，因此连接已关
+闭（仅在 QSslSocket 中使用）。\\
+\hline
+QAbstractSocket::UnfinishedSocketOperationError&	11&	仅由QAbstractSocketEngine 使用，上一次尝试的操作尚未完成（仍在后台进行）。\\
+\hline
+QAbstractSocket::ProxyConnectionRefusedError&	14&	代理服务器拒绝了连接。\\
+\hline
+QAbstractSocket::ProxyConnectionClosedError&	15&	与代理服务器的连接意外关闭（在
+建立与对方的最终连接之前）。\\
+\hline
+QAbstractSocket::ProxyConnectionTimeoutError&	16&	与代理服务器的连接超时或代理服
+务器在身份验证阶段停止响应。\\
+\hline
+QAbstractSocket::ProxyNotFoundError&	17&	找不到使用 setProxy() （或应用程序代理
+）设置的代理地址。\\
+\hline
+QAbstractSocket::ProxyProtocolError&	18&	与代理服务器通信失败，因为无法理解来自代
+理服务器的响应，这通常是代理服务协议错误的锅。\\
+\hline
+QAbstractSocket::OperationError&	19&	套接字所处的状态不允许该操作\\
+\hline
+QAbstractSocket::SslInternalError&	20&	使用的 SSL 库出现内部错误。 这可能是由于 SS
+L 库安装错误或配置错误造成的。\\
+\hline
+QAbstractSocket::SslInvalidUserDataError&	21&	提供了无效的数据（证书，密钥，密码
+等），其使用导致 SSL 库出现错误。\\
+\hline
+QAbstractSocket::TemporaryError&	22&	发生临时错误（例如，操作将阻塞套接字，而套接
+字未阻塞）。\\
+\hline
+QAbstractSocket::UnknownSocketError&	-1&	神了，出现了一个未知错误。\\
+\hline
+\end{longtable}
+
+您也可以在 QAbstractSocket::error() 和 QAbstractSocket::errorOccurred() 成员函数的详细介绍中找到一部分套接字错误的介绍。
+
+enum QAbstractSocket::SocketOption
+
+该枚举表示可以在套接字上设置的选项。 如果需要设置这些选项，您可以在套接字接收到 connectd() 信号之后，或者在 QTcpServer 接收到新的套接字之后，对它们进行设置。
 
 %%% Local Variables:
 %%% mode: latex
