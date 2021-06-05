@@ -1,3 +1,5 @@
+\chapter{ContainerClasses}
+
 容器
 
 \splitLine
@@ -81,6 +83,150 @@ QMultiHash&	这个类继承于 QMap，其为多值映射提供了一个友好的
 保存在各个容器中的值类型可以是任意可复制数据类型。为了满足这一要求，该类型必须提供一个复制构造函数和一个赋值运算符。某些操作可能还要求类型支持默认构造函数。对于大多数你想要在容器中保存的类型都满足这些要求，包括基本类型，如 int， double，指针类型，以及 Qt 数据类型，如 QString，QDate 和 QTime，但并不包括 QObject 及其子类（QWidget，QDialog，QTimer 等）。如果你尝试实例化一个 QList<QWidget>，编译器将会抱怨道 QWidget 的复制构造函数和赋值运算符被禁用了。如果需要在容器中保存这些类型的元素，可以保存其指针，如 QList<QWidget *>。
 
 下面是一个满足可赋值数据类型要求的自定义数据类型的例子：
+
+\begin{lstlisting}[language=C++]
+class Employee
+{
+public:
+    Employee() {}
+    Employee(const Employee &other);
+
+    Employee &operator=(const Employee &other);
+
+private:
+    QString myName;
+    QDate myDateOfBirth;
+};
+\end{lstlisting}
+
+如果我们没有提供一个复制构造函数或一个赋值运算符，C++ 将会提供一个表现
+为逐个复制成员的默认实现。在上面的例子中，默认行为就足够了。同样的，如
+果没有提供默认构造函数，C++ 会提供一个默认构造函数，对成员进行默认构造。
+尽管没有提供任何的构造函数或赋值运算符，下面的数据类型可以被保存于容器
+中。
+
+\begin{lstlisting}[language=C++]
+struct Movie
+{
+    int id;
+    QString title;
+    QDate releaseDate;
+};
+\end{lstlisting}
+
+一些容器对它们所能保存的数据类型有额外的要求。举个例子，QMap<Key, T> 的键类型 Key 必须提供 operator<() 方法。这些特殊要求在类的详细描述中有说明。在某些情况下，特定函数会有特定的要求，这在函数的描述中有说明。如果条件不满足，编译器将总是会报错。
+
+Qt容器提供了 operator<<() 和 operator>>()，因此这些类可以很方便地通过
+QDataStream 进行读写。这意味着存储在容器中的元素类型也必须支持
+operator<<() 和 operator>>()。支持这一点是很简单的；以下是我们使上面的
+Movie 结构体支持这一点所做的改动：
+
+\begin{lstlisting}[language=C++]
+QDataStream &operator<<(QDataStream &out, const Movie &movie)
+{
+    out << (quint32)movie.id << movie.title
+        << movie.releaseDate;
+    return out;
+}
+
+QDataStream &operator>>(QDataStream &in, Movie &movie)
+{
+    quint32 id;
+    QDate date;
+
+    in >> id >> movie.title >> date;
+    movie.id = (int)id;
+    movie.releaseDate = date;
+    return in;
+}
+\end{lstlisting}
+
+某些容器类的文档中会提到默认值；举个例子，QVector 会自动使用默认值初始化其元素；QMap::value() 在指定键不存在时会返回一个默认值。对于大部分的值类型，这就是简单地代表通过默认构造函数创建的值（例如对于 QString 即空字符串）。但是对于基本类型，如 int 和 double 和指针类型，C++ 语言并没有规定任何的初始化方式，因此在这些情况下，Qt 容器将会自动将其初始化为0。
+
+\splitLine
+
+迭代器类
+
+迭代器提供了一个统一的方式去访问容器中的元素。Qt 容器类提供了两种风格迭代器：Java 风格迭代器和 STL 风格迭代器。两种迭代器均会在容器中的数据被修改或因调用非 const 成员函数导致数据从隐式共享中分离后失效。
+
+\splitLine
+
+Java 风格迭代器
+
+Java 风格迭代器在 Qt4 中引入，作为标准使用在Qt应用中。和 STL 风格迭代器相比，其易用性更高，代价是性能略低。该风格迭代器 API 以 Java 迭代器类为原型设计。
+
+对于每一个容器类，同时提供了两种数据类型的 Java 风格迭代器：一种支持只
+读访问，另一种支持读写访问。
+
+\begin{tabular}{|l|l|l|}
+\hline
+容器&	只读迭代器	&读写迭代器\\
+\hline
+QList, QQueue&	QListIterator&	QMutableListIterator\\
+\hline
+QLinkedList	&QLinkedListIterator&	QMutableLinkedListIterator\\
+\hline
+QVector, QStack	&QVectorIterator&	QMutableVectorIterator\\
+\hline
+QSet&	QSetIterator&	QMutableSetIterator\\
+\hline
+QMap<Key, T>, QMultiMap<Key, T>	&QMapIterator<Key, T>&
+                                                       QMutableMapIterator<Key,
+                                                       T>\\
+\hline
+QHash<Key, T>, QMultiHash<Key, T>&	QHashIterator<Key, T>&	QMutableHashIterator<Key, T>\\
+\hline
+\end{tabular}
+
+在接下来的讨论中，我们将重点关注 QList 和 QMap。QLinkedList，QVector 和 QSet 的迭代器类型和 QList 有完全一样的接口，类似的，QHash 和 QMap 的迭代器类型的接口也是相同的。
+
+和 STL 风格迭代器（下一节介绍）不同，Java 风格迭代器指向的是元素间隙而
+不是元素本身。因此，Java 风格迭代器可以指向容器最前（在第一个元素之前），
+也可以指向容器最后（在最后一个元素之后），还可以指向两个元素之间。下图
+用红色箭头展示了一个四个元素的列表容器合法的迭代器位置。
+
+\begin{figure}[hbt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{java_style_iterator.pdf}
+	%\caption{model index}
+\end{figure}
+
+这是一个通过循环迭代有序遍历 QList<QString> 中的所有元素并打印到终端的
+常用写法：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "D";
+
+QListIterator<QString> i(list);
+while (i.hasNext())
+    qDebug() << i.next();
+
+\end{lstlisting}
+
+它的工作原理如下：需要被迭代的 QList 对象作为参数传递给 QListIterator 的构造函数。此时迭代器位于列表中第一个元素的前面（位于元素“A“之前）。接着我们调用 hasNext() 检查迭代器之后是否有元素，如果有，我们调用 next() 跳过这个元素。next() 方法会返回其跳过的元素。对于 QList<QString> 类型，元素的类型为 QString。
+
+下列代码展示了如何反向迭代一个 QList：
+
+\begin{lstlisting}[language=C++]
+QListIterator<QString> i(list);
+i.toBack();
+while (i.hasPrevious())
+    qDebug() << i.previous();
+
+\end{lstlisting}
+
+这段代码的逻辑和前向迭代是对称的除了在开始我们调用了 toBack() 将迭代器移动到列表中最后一个元素之后。
+
+下图说明了在迭代器上调用 next() 和 previous() 产生的效果：
+
+\begin{figure}[hbt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{list_iterator.pdf}
+	%\caption{model index}
+\end{figure}
+
+下表总结了QListIterator的 API：
 
 %%% Local Variables:
 %%% mode: latex
