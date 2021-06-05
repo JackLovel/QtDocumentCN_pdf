@@ -352,6 +352,7 @@ enum QAbstractSocket::PauseMode | flags QAbstractSocket::PauseModes
 当前Qt支持的唯一通知是 QSslSocket::sslErrors()。
 
 \begin{tabular}{|m{19em}|m{2em}|m{18em}|}
+%\begin{tabular}{|C{.15\textwidth}|C{.5\textwidth}|C{.15\textwidth}|}}
 \hline
 常量	&值&	描述\\
 \hline
@@ -439,9 +440,229 @@ QAbstractSocket::UnknownSocketError&	-1&	神了，出现了一个未知错误。
 
 您也可以在 QAbstractSocket::error() 和 QAbstractSocket::errorOccurred() 成员函数的详细介绍中找到一部分套接字错误的介绍。
 
+\splitLine
+
 enum QAbstractSocket::SocketOption
 
 该枚举表示可以在套接字上设置的选项。 如果需要设置这些选项，您可以在套接字接收到 connectd() 信号之后，或者在 QTcpServer 接收到新的套接字之后，对它们进行设置。
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量&	值&	描述 \\ 
+\hline
+QAbstractSocket::LowDelayOption&	0&	尝试优化套接字以降低延迟。 对
+                                       于 QTcpSocket ，这将设置
+                                       TCP\_NODELAY 选项并禁用 Nagle 的
+                                       算法。 将此设置为1启用。\\
+\hline
+QAbstractSocket::KeepAliveOption&	1&	将此设置为1以启用 SO\_KEEPALIVE 套接字选项\\
+\hline
+QAbstractSocket::MulticastTtlOption&	2&	将此设置为整数值以设置
+                                           IP\_MULTICAST\_TTL （多播数据
+                                           报的 TTL ）套接字选项。\\
+\hline
+QAbstractSocket::MulticastLoopbackOption&	3&	将此设置为1以启用
+                                               IP\_MULTICAST\_LOOP （多
+                                               播环回）套接字选项。\\
+\hline
+QAbstractSocket::TypeOfServiceOption&	4&	Windows 不支持此选项。 这
+                                           映射到IP\_TOS套接字选项。 有
+                                           关其可能的可取值，请参见下
+                                           表。\\
+\hline
+QAbstractSocket::SendBufferSizeSocketOption&	5&	在操作系统级别设置
+                                                   套接字发送缓冲区的
+                                                   大小（以字节为单位）。
+                                                   这映射到 SO\_SNDBUF
+                                                   套接字选项。 该选项
+                                                   不会影响 QIODevice
+                                                   或 QAbstractSocket
+                                                   缓冲区。 这个枚举值
+                                                   在Qt 5.3中引入。\\
+\hline
+QAbstractSocket::ReceiveBufferSizeSocketOption&	6&	在操作系统级别设置
+                                                   套接字接收缓冲区的
+                                                   大小（以字节为单位）。
+                                                   这映射到 SO\_RCVBUF
+                                                   套接字选项。 此选项
+                                                   不会影响 QIODevice
+                                                   或 QAbstractSocket
+                                                   缓冲区（请参见
+                                                   setReadBufferSize()
+                                                   ）。 这个枚举值已在
+                                                   Qt 5.3中引入。\\
+\hline
+QAbstractSocket::PathMtuSocketOption&	7	&检索IP堆栈当前已知的路径最大传输单位（ PMTU ）值（如果该值存在）。 一些IP堆栈还允许设置 MTU 进行传输。 这个枚举值在Qt 5.11中引入。\\
+\hline
+\end{tabular}
+
+TypeOfServiceOption 可能的可取值（优先级）：
+
+\begin{tabular}{|l|l|}
+\hline
+值&	描述 \\
+\hline
+224&	Network control（网络控制）\\
+\hline
+192&	Internetwork control（互联网络控制）\\
+\hline
+160&	CRITIC/ECP（至关重要）\\
+\hline
+128&	Flash override（火速覆盖）\\
+\hline
+96&	Flash（火速）\\
+\hline
+64&	Immediate（立即）\\
+\hline
+32&	Priority（主要）\\
+\hline
+0&	Routine（常规） \\
+\hline
+\end{tabular}
+
+该枚举最初在Qt4.6版本引入。
+
+您也可以在 QAbstractSocket::setSocketOption() 和 QAbstractSocket::socketOption() 函数介绍中找到相关内容。
+
+\splitLine
+
+enum QAbstractSocket::SocketState
+该枚举描述了套接字不同的状态。
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量&	值&	描述 \\ 
+\hline
+QAbstractSocket::UnconnectedState&	0&	套接字未连接。\\
+\hline
+QAbstractSocket::HostLookupState&	1&	套接字正在查询主机。\\
+\hline
+QAbstractSocket::ConnectingState&	2&	套接字开始建立连接。\\
+\hline
+QAbstractSocket::ConnectedState&	3&	新的连接已建立。\\
+\hline
+QAbstractSocket::BoundState&	4&	套接字已绑定到一个地址和端口。\\
+\hline
+QAbstractSocket::ClosingState&	6&	套接字即将关闭（数据可能仍在等待写入）。\\
+\hline
+QAbstractSocket::ListeningState&	5&	套接字仅限内部使用。\\
+\hline
+\end{tabular}
+
+您也可以在 QAbstractSocket::state() 成员函数介绍中找到相关内容。
+
+\splitLine
+
+enum QAbstractSocket::SocketType
+
+该枚举描述了传输层的协议。
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量&	值&	描述 \\ 
+\hline
+QAbstractSocket::TcpSocket&	0&	TCP \\ 
+\hline
+QAbstractSocket::UdpSocket&	1&	UDP\\ 
+\hline
+QAbstractSocket::SctpSocket&	2&	SCTP\\
+\hline
+QAbstractSocket::UnknownSocketType&	-1&	除 TCP, UDP 和 SCTP 外的协议\\
+\hline
+\end{tabular}
+
+您也可以在 QAbstractSocket::socketType() 成员函数介绍中找到相关内容。
+
+\splitLine
+
+% gog_wang 
+成员函数文档
+
+QAbstractSocket::QAbstractSocket(QAbstractSocket::SocketType
+socketType, QObject *parent)
+
+创建一个新抽象套接字 socketType 。 函数中父对象的参数传递给 QObject 的构造函数。
+
+这就是它的构造函数嘛，没啥好说的。另外由于 QAbstractSocket 类继承自 QObject 类，应注意在 QAbstractSocket 类构造函数中调用一下父类 QObject 类的构造函数。
+
+另外您也可以在 socketType() 成员函数文档，以及 QTcpSocket 和 QUdpSocket 类文档找到相关信息。
+
+[SIGNAL] void QAbstractSocket::connected()
+
+connectToHost() 调用并成功建立一个连接后，QAbstractSocket 类将发送 connectd() 信号。
+
+注意： 在某些操作系统上，connected() 信号可能直接从 connectToHost() 调用发出，以连接到本地主机。
+
+另外您也可以在 connectToHost() 和 disconnected() 成员函数文档中找到相关信息。
+
+[SIGNAL] void QAbstractSocket::disconnected()
+
+套接字断开后会发送该信号。
+
+警告： 如果您想在与这个信号相连接的槽函数中删除信号的发送者（ sender() ），请使用 deleteLater() 函数。
+
+另外您也可以在 connectToHost() ，disconnectFromHost() 和 abort() 函数介绍中找到相关信息。
+
+[SIGNAL] void
+QAbstractSocket::errorOccurred(QAbstractSocket::SocketError
+socketError)
+
+当套接字遇到错误时会发送该信号。socketError 参数描述了该错误类型。
+
+发出此信号后，套接字可能并未准备好进行重新连接。 在这种情况下，我们应尝试从事件循环中进行重新连接。 例如我们可以调用一个QTimer::singleShot()，并将0作为时间间隔。
+
+请注意，QAbstractSocket :: SocketError 并不是Qt预注册好的元类型。因此如果您要在队列连接（ queued connections ）模式的信号与槽的连接中传递该类型的参数，您必须使用 Q\_DECLARE\_METATYPE() 和 qRegisterMetaType() 注册它为元类型。
+
+该函数在Qt5.15版本引入。
+
+另外您也可以在 error() 和 errorString() 函数介绍以及 Creating Custom Qt Types 文档中找到相关信息。
+
+[SIGNAL] void QAbstractSocket::hostFound()
+
+在 QAbstractSocket 调用 connectToHost() 函数并成功找到主机后，它将发送该消息。
+
+注意： 从Qt 4.6.3开始，由于可能已缓存DNS结果，因此 QAbstractSocket 可能直接在调用 connectToHost() 时发送 hostFound() 信号。
+
+另外您也可以在 connectd() 函数介绍中找到相关信息。
+
+[SIGNAL] void QAbstractSocket::proxyAuthenticationRequired(const
+QNetworkProxy \&proxy, QAuthenticator *authenticator)
+
+套接字连接的代理服务期需要身份验证时会发送该消息。您可以用所需的详细信息填充 authenticator 对象，以便代理服务期进行身份验证并继续连接。
+
+注意： 如果信号返回时未使用新信息填充 authenticator ，则连接将失败，因此您不能使用队列连接模式（ QueuedConnection ）连接到该信号。
+
+该函数首次在Qt4.3版本引入。
+
+另外您也可以在 QAuthenticator 和 QNetworkProxy 文档中找到相关信息。
+
+[SIGNAL] void
+QAbstractSocket::stateChanged(QAbstractSocket::SocketState
+socketState)
+
+QAbstractSocket 状态发生改变后会发送该信号。socketState 参数记录了新的状态。
+
+请注意，QAbstractSocket :: SocketState 并不是Qt预注册好的元类型。因此如果您要在队列连接（ queued connections ）模式的信号与槽的连接中传递该类型的参数，您必须使用 Q\_DECLARE\_METATYPE() 和 qRegisterMetaType() 注册它为元类型。
+
+另外您也可以在 state() 成员函数介绍和 Create Custom Qt Types 文档中找到相关信息。
+
+[virtual] QAbstractSocket::$\sim$QAbstractSocket()
+
+析构函数，销毁套接字。
+
+void QAbstractSocket::abort()
+
+中止当前连接并重置套接字。 与 disconnectFromHost() 不同，此函数会立即关闭套接字，并丢弃写缓冲区中的所有未处理数据。
+
+另外您也可以在 disconnectFromHost() 和 close() 函数介绍中找到相关信息。
+
+[override virtual] bool QAbstractSocket::atEnd() const
+
+该函数重写了父类 QIODevice 的类成员函数 QIODevice::atEnd() const 。
+
+如果当前没有更多数据可读取，则返回 true ，否则返回 false 。
+
+在循环中从套接字读取数据时，最常使用此功能。 例如：
 
 %%% Local Variables:
 %%% mode: latex
