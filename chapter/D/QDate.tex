@@ -1,0 +1,197 @@
+\chapter{QDate}
+
+QDate Class
+
+\begin{tabular}{|l|l|}
+\hline
+属性&	方法\\
+\hline
+头文件&	\#include <QDate>\\
+\hline
+qmake&	QT += core\\
+\hline
+\end{tabular}
+
+注意： 该类提供的所有函数都是可重入的。
+
+\splitLine
+
+公共成员类型
+
+\begin{tabular}{|l|l|}
+\hline
+类型&	名称\\
+\hline
+enum&	MonthNameType{ DateFormat, StandaloneFormat }\\
+\hline
+\end{tabular}
+
+\splitLine
+
+公共成员函数
+
+\begin{longtable}{|l|l|}
+\hline
+类型	&函数名\\
+\hline
+&QDate(int y, int m, int d)\\
+\hline
+&QDate()\\
+\hline
+QDate&	addDays(qint64 ndays) const\\
+\hline
+QDate&	addMonths(int nmonths, QCalendar cal) const\\
+\hline
+QDate&	addMonths(int nmonths) const\\
+\hline
+QDate&	addYears(int nyears, QCalendar cal) const\\
+\hline
+QDate&	addYears(int nyears) const\\
+\hline
+int&	day(QCalendar cal) const\\
+\hline
+int&	day() const\\
+\hline
+int&	dayOfWeek(QCalendar cal) const\\
+\hline
+int&	dayOfWeek() const\\
+\hline
+int&	dayOfYear(QCalendar cal) const\\
+\hline
+int&	dayOfYear() const\\
+\hline
+int&	daysInMonth(QCalendar cal) const\\
+\hline
+int&	daysInMonth() const\\
+\hline
+int&	daysInYear(QCalendar cal) const\\
+\hline
+int&	daysInYear() const\\
+\hline
+qint64&	daysTo(const QDate \&d) const\\
+\hline
+QDateTime&	endOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const\\
+\hline
+QDateTime&	endOfDay(const QTimeZone \&zone) const\\
+\hline
+void&	getDate(int *year, int *month, int *day) const\\
+\hline
+bool&	isNull() const\\
+\hline
+bool&	isValid() const\\
+\hline
+int&	month(QCalendar cal) const\\
+\hline
+int&	month() const\\
+\hline
+bool&	setDate(int year, int month, int day)\\
+\hline
+bool&	setDate(int year, int month, int day, QCalendar cal)\\
+\hline
+QDateTime&	startOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const\\
+\hline
+QDateTime&	startOfDay(const QTimeZone \&zone) const\\
+\hline
+qint64&	toJulianDay() const\\
+\hline
+QString&	toString(Qt::DateFormat format = Qt::TextDate) const\\
+\hline
+QString&	toString(const QString \&format) const\\
+\hline
+QString&	toString(const QString \&format, QCalendar cal) const\\
+\hline
+QString&	toString(QStringView format) const\\
+\hline
+QString&	toString(QStringView format, QCalendar cal) const\\
+\hline
+int&	weekNumber(int *yearNumber = nullptr) const\\
+\hline
+int&	year(QCalendar cal) const\\
+\hline
+int&	year() const\\
+\hline
+bool&	operator!=(const QDate \&d) const\\
+\hline
+bool&	operator<(const QDate \&d) const\\
+\hline
+bool&	operator<=(const QDate \&d) const\\
+\hline
+bool&	operator==(const QDate \&d) const\\
+\hline
+bool&	operator>(const QDate \&d) const\\
+\hline
+bool&	operator>=(const QDate \&d) const\\
+\hline
+\end{longtable}
+
+静态公共成员
+
+\begin{tabular}{|l|l|}
+\hline
+类型&	函数名\\
+\hline
+QDate&	currentDate()\\
+\hline
+QDate&	fromJulianDay(qint64 jd)\\
+\hline
+QDate&	fromString(const QString \&string, Qt::DateFormat format = Qt::TextDate)\\
+\hline
+QDate&	fromString(const QString \&string, const QString \&format)\\
+\hline
+QDate&	fromString(const QString \&string, const QString \&format, QCalendar cal)\\
+\hline
+bool&	isLeapYear(int year)\\
+\hline
+bool&	isValid(int year, int month, int day)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+相关非成员函数
+
+\begin{tabular}{|l|l|}
+\hline
+类型&	函数名\\
+\hline
+QDataStream \& &	operator<<(QDataStream \&out, const QDate \&date) \\
+\hline
+QDataStream \&	& operator>>(QDataStream \&in, QDate \&date)\\
+\hline
+\end{tabular}
+
+详细描述
+
+无论系统的日历和地域设置如何，一个\hl{QDate}对象代表特定的一天。它可以告诉您某一天的年、月、日，其对应着格里高利历或者您提供的\hl{QCalendar}。
+
+一个\hl{QDate} 对象一般由显式给定的年月日创建。注意 \hl{QDate} 将1~99的年数保持，不做任何偏移。静态函数currentDate()会创建一个从系统时间读取的\hl{QDate}对象。显式的日期设定也可以使用 setDate()。fromString() 函数返回一个由日期字符串和日期格式确定的日期。
+
+year()、month()、day() 函数可以访问年月日。另外，还有 dayOfWeek()、dayOfYear() 返回一周或一年中的天数。文字形式的信息可以通过 toString()获得。天数和月数可以由 QLocale 类映射成文字。
+
+\hl{QDate} 提供比较两个对象的全套操作，小于意味着日期靠前。
+
+您可以通过 addDays() 给日期增减几天，同样的还有 addMonths()、addYears() 增减几个月、几年。daysTo() 函数返回两个日期相距的天数。
+
+daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLeapYear() 用于判断闰年。
+
+特别注意
+
+\begin{itemize}
+\item 年数没有0 第0年的日期是非法的。公元后是正年份，公元前是负年份。QDate(1, 1, 1) 的前一天是 QDate(-1, 12, 31)。
+\item 合法的日期范围 日期内部存储为儒略日天号，使用连续的整数记录天数，公元前4714年11月24日是格里高利历第0天（儒略历的公元前4713年1月1日）。除了可以准确有效地表示绝对日期，此类也可以用来做不同日历系统的转换。儒略历天数可以通过 QDate::toJulianDay() 和 QDate::fromJulianDay()读写。 由于技术原因，储存的儒略历天号在 -784350574879~784354017364 之间，大概是公元前2亿年到公元后2亿年之间。
+\end{itemize}
+
+另请参阅：QTime、QDateTime、QCalendar、QDateTime::YearRange、QDateEdit、QDateTimeEdit 和 QCalendarWidget。
+
+\splitLine
+
+成员类型文档
+
+enum QDate::MonthNameType
+
+此枚举描述字符串中月份名称的表示类型
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
