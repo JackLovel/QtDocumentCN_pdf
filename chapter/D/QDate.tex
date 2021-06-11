@@ -12,7 +12,7 @@ qmake&	QT += core\\
 \hline
 \end{tabular}
 
-注意： 该类提供的所有函数都是可重入的。
+\textbf{注意}： 该类提供的所有函数都是可重入的。
 
 \splitLine
 
@@ -190,6 +190,564 @@ daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLe
 enum QDate::MonthNameType
 
 此枚举描述字符串中月份名称的表示类型
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量	&数值&	描述\\
+\hline
+QDate::DateFormat&	0&	用于日期到字符串格式化。\\
+\hline
+QDate::StandaloneFormat	&1&	用于枚举月份和一周七天。通常单独的名字用首
+  字母大写的单数形式书写。\\
+\hline
+\end{tabular}
+
+此枚举在Qt 4.5中引入或修改。
+
+\splitLine
+
+成员函数文档
+
+QString QDate::toString(QStringView format) const
+
+QString QDate::toString(QStringView format, QCalendar cal) const
+
+QString QDate::toString(const QString \&format) const
+
+QString QDate::toString(const QString \&format, QCalendar cal) const
+
+返回字符串形式的日期。 参数format控制输出的格式。如果传入参数cal, 它决定了使用的日历系统，默认是格里高利历。
+
+日期格式的表示如下：
+
+\begin{tabular}{|l|l|}
+\hline
+占位符 &	输出格式\\
+\hline
+d&	无占位0的日期 (1 to 31)\\
+\hline
+dd&	有占位0的日期 (01 to 31)\\
+\hline
+ddd&	简写的一周七天名称(例如 'Mon' to 'Sun')。使用系统地域设置来格
+     式化, 也就是 QLocale::system()\\
+\hline
+dddd&	长版的一周七天名称 (例如 'Monday' to 'Sunday')。使用系统地域设
+      置来格式化, 也就是 QLocale::system()\\
+\hline
+M&	无占位0的月份 (1 to 12)\\
+\hline
+MM&	有占位0的月份 (01 to 12)\\
+\hline
+MMM&	缩写的月份名称 (例如 'Jan' to 'Dec')。使用系统地域设置来格式化,
+     也就是 QLocale::system()\\
+\hline
+MMMM&	长版的月份名称 (例如 'January' to 'December')。使用系统地域设
+      置来格式化, 也就是 QLocale::system()\\
+\hline
+yy&	两位数年份 (00 to 99)\\
+\hline
+yyyy&	四位数年份。 如果是负数，加上符号是五个字符\\
+\hline
+\end{tabular}
+
+单引号包裹的内容将会一字不差地放进输出到字符串中（不带外面的单引号），尽管包含上述格式占位符。连续两个单引号('')会被转义成一个单引号输出。所有其他字符不会被转义，将原封不动输出。
+
+没有分隔符的多个占位符（例如 "ddMM"）受支持，但要慎用。因为结果的可读性不好，容易引发歧义（例如难以区分“dM”的输出"212"是清2.12还是21,2）
+
+假设今天是1969年7月20日，下面是一些格式字符串的例子
+
+\begin{tabular}{|l|l|}
+\hline
+dd.MM.yyyy	&20.07.1969\\
+\hline
+ddd MMMM d yy&	Sun July 20 69\\
+\hline
+'The day is' dddd&	The day is Sunday\\
+\hline
+\end{tabular}
+
+如果日期非法，会返回空字符串。
+
+注意： 如果需要本地化的日期表达, 请使用 QLocale::system().toString()，因为 QDate 将在 Qt 6 使用英文表达（C语言风格）。
+
+另请参阅：fromString()、QDateTime::toString()、QTime::toString() 和
+QLocale::toString()。
+
+\splitLine
+
+QDateTime QDate::endOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const
+
+QDateTime QDate::endOfDay(const QTimeZone \&zone) const
+
+返回这一天的最后一刻的时间。通常来说，是午夜前1ms：然而，如果时区转换让这一天跨过午夜（如夏令时），返回的是真实的最后一刻时间。这种情况只可能在使用时区参数QTimeZone zone或者本地时间参数 Qt::LocalTime spec时发生。
+
+参数 offsetSeconds 会被忽略，除非参数 spec 为 Qt::OffsetFromUTC，其表示出了时区信息。如果UTC和那个时区间没有过渡，一天的结束是 QTime(23, 59, 59, 999)。
+
+在罕见的日期被整体跳过（只在从东向西跨越国际日期变更线时），返回可能是非法的。将 Qt::TimeZone 作为 spec 参数传递 (而不是一个 QTimeZone) 也会造成非法结果，如果那一时刻超过了 QDateTime 的表示范围。
+
+函数在 Qt 5.14 中引入。
+
+另请参阅：startOfDay()。
+
+\splitLine
+
+QDateTime QDate::startOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const
+
+QDateTime QDate::startOfDay(const QTimeZone \&zone) const
+
+返回一天的开始时刻。通常来说应该是午夜那一时刻：然而，如果时区转换让这一天跨过午夜（如夏令时），返回的是真实的最早的一刻时间。这种情况只可能在使用时区参数QTimeZone zone或者本地时间参数 Qt::LocalTime spec时发生。
+
+参数 offsetSeconds 会被忽略，除非参数 spec 为 Qt::OffsetFromUTC，其表示出了时区信息。如果UTC和那个时区间没有过渡，一天的结束是 QTime(0, 0)。
+
+在罕见的日期被整体跳过（只在从东向西跨越国际日期变更线时），返回可能是非法的。
+
+将 Qt::TimeZone 作为 spec 参数传递 (而不是一个 QTimeZone) 也会造成非法结果，如果那一时刻超过了 QDateTime 的表示范围。
+
+函数在 Qt 5.14 中引入。
+
+另请参阅：endOfDay()。
+
+\splitLine
+
+QDate::QDate(int y, int m, int d)
+从年月日构造对象，使用格里高利历。如果日期非法，对象不会修改，且 isValid() 返回false。
+
+警告： 1~99年就对应于它本身，不会偏移。第0年是非法的。
+
+另请参阅：isValid() 和 QCalendar::dateFromParts()。
+
+\splitLine
+
+QDate::QDate()
+构造一个空的日期，也是不可用的。
+
+另请参阅：isNull() 和 isValid()。
+
+\splitLine
+
+QDate QDate::addDays(qint64 ndays) const
+
+返回一个 ndays 天之后的新日期对象(负数意味着往前减日期)。
+
+当当前日期或新日期是非法日期时，返回非法日期。
+
+另请参阅：addMonths()、addYears() 和 daysTo()。
+
+\splitLine
+
+QDate QDate::addMonths(int nmonths) const
+
+QDate QDate::addMonths(int nmonths, QCalendar cal) const
+
+返回一个 nmonths 月之后的新日期对象（负数意味着往前减日期）。
+
+如果传入 cal 参数，会使用日历系统使用，否则使用格里高利历。
+
+注意： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
+
+另请参阅：addDays() 和 addYears()。
+
+\splitLine
+
+QDate QDate::addYears(int nyears) const
+
+QDate QDate::addYears(int nyears, QCalendar cal) const
+
+返回一个 nyears 年之后的新日期对象(负数意味着往前减日期)。
+
+如果传入 cal 参数，会使用日历系统使用，否则使用格里高利历。
+
+注意： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
+
+另请参阅：addDays() 和 addMonths()。
+
+\splitLine
+
+[static] QDate QDate::currentDate()
+
+返回系统时钟所示的今天的日期对象。
+
+另请参阅：QTime::currentTime() 和 QDateTime::currentDateTime()。
+
+\splitLine
+
+int QDate::day() const
+
+int QDate::day(QCalendar cal) const
+
+返回日期是当前月份的第几天。
+
+如果传入 cal 参数，会使用此日历系统，否则使用格里高利历。非法日期则返回0。
+
+一些日历系统中，返回值可能大于7。
+
+另请参阅：year()、month() 和 dayOfWeek()。
+
+\splitLine
+
+int QDate::dayOfWeek() const
+
+int QDate::dayOfWeek(QCalendar cal) const
+
+返回日期是当前周的第几天（1=周一，7=周日）。
+
+如果传入 cal 参数，会使用此日历系统，否则使用格里高利历。非法日期则返回0。
+
+一些日历系统中，返回值可能大于7。
+
+另请参阅：day()、dayOfYear() 和 Qt::DayOfWeek。
+
+\splitLine
+
+int QDate::dayOfYear() const
+
+int QDate::dayOfYear(QCalendar cal) const
+
+返回日期是当年的第几天（第一天返回1）。
+
+如果传入 cal 参数，会使用此日历系统，否则使用格里高利历。非法日期则返回0。
+
+另请参阅：day() 和 dayOfWeek()。
+
+\splitLine
+
+int QDate::daysInMonth() const
+
+int QDate::daysInMonth(QCalendar cal) const
+
+返回日期对应的月份中总天数。
+
+如果传入 cal 参数，会使用此日历系统，否则使用格里高利历 (返回值是 28~31)。非法日期则返回0。
+
+另请参阅：day() 和 daysInYear()。
+
+\splitLine
+
+int QDate::daysInYear() const
+
+int QDate::daysInYear(QCalendar cal) const
+
+返回日期对应的一年中的总天数。
+
+如果传入 cal 参数，会使用此日历系统，否则使用格里高利历 (返回值是 365 或 366)。非法日期则返回0。
+
+另请参阅：day() 和 daysInMonth()。
+
+\splitLine
+
+qint64 QDate::daysTo(const QDate \&\emph{d}) const
+
+返回两个日期相差的天数 (\emph{d} 日期靠前则返回为负)。
+
+如果比较的二者中有非法日期，返回0。
+
+示例:
+
+\begin{lstlisting}[language=C++]
+QDate d1(1995, 5, 17);  // May 17, 1995
+QDate d2(1995, 5, 20);  // May 20, 1995
+d1.daysTo(d2);          // returns 3
+d2.daysTo(d1);          // returns -3
+\end{lstlisting}
+
+另请参阅：addDays()。
+
+\splitLine
+
+\hl{[static]}QDate QDate::fromJulianDay(qint64 jd)
+
+将jd表示的儒略日解析为日期并返回。
+
+另请参阅：toJulianDay()。
+
+\splitLine
+
+\hl{[static]}QDate QDate::fromString(const QString \&string,
+Qt::DateFormat format = Qt::TextDate)
+
+返回 string 表示的 QDate 对象，非法字符串不会被解析。
+
+注意 Qt::TextDate：建议使用英文的简写月份名称（例如 "Jan"）。尽管本地化的月份名称在 Qt 5 中也可使用，但它们会依赖于用户的区域设置。
+
+注意： 对本地化的日期的支持，包括 Qt::SystemLocaleDate、Qt::SystemLocaleShortDate、Qt::SystemLocaleLongDate、Qt::LocaleDate、Qt::DefaultLocaleShortDate 和 Qt::DefaultLocaleLongDate，将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
+
+另请参阅：toString() 和 QLocale::toDate()。
+
+\splitLine
+
+\hl{[static]}QDate QDate::fromString(const QString \&string, const QString
+\&format)
+
+\hl{[static]}QDate QDate::fromString(const QString \&string, const QString
+\&format, QCalendar cal)
+
+返回 \emph{string}  表示的 QDate 对象，非法字符串不会被解析。
+
+如果传入 \emph{cal} 参数，会使用此日历系统，否则使用格里高利历。下面的格式描述针对于格里高利历，其它日历可能不同。
+
+日期格式的表示如下：
+
+\begin{tabular}{|l|l|}
+\hline
+占位符&	输出格式\\
+\hline
+d&	无占位0的日期 (1 to 31)\\
+\hline
+dd&	有占位0的日期 (01 to 31)\\
+\hline
+ddd&	简写的一周七天名称(例如 'Mon' to 'Sun')。使用系统地域设置来格式化, 也就是 QLocale::system()\\
+\hline
+dddd&	长版的一周七天名称 (例如 'Monday' to 'Sunday')。使用系统地域设置来格式化, 也就是 QLocale::system()\\
+\hline
+M&	无占位0的月份 (1 to 12)\\
+\hline
+MM&	有占位0的月份 (01 to 12)\\
+\hline
+MMM&	缩写的月份名称 (例如 'Jan' to 'Dec')。使用系统地域设置来格式化, 也就是 QLocale::system()\\
+\hline
+MMMM&	长版的月份名称 (例如 'January' to 'December')。使用系统地域设置来格式化, 也就是 QLocale::system()\\
+\hline
+yy&	两位数年份 (00 to 99)\\
+\hline
+yyyy&	四位数年份。 如果是负数，加上符号是五个字符\\
+\hline
+\end{tabular}
+
+\textbf{注意}： 不行此函数的其他版, 日期和月份名必须使用用户本地语言。只有用户语言是英语时，英文名称才适用。
+
+所有其他字符将会被舍弃，单引号('')包裹的内容，无论是否包含格式占位符也会被舍弃。例如：
+
+\begin{lstlisting}[language=C++]
+QDate date = QDate::fromString("1MM12car2003", "d'MM'MMcaryyyy");
+// date is 1 December 2003
+\end{lstlisting}
+
+如果字符串不符合格式，一个将返回一个非法的 QDate。不需要前面补0的格式
+是贪婪的，这意味着他们会读取两位数，尽管数字大小超出日期合法范围，并且
+会占据给后续格式读取的数字位置。例如，下面的日期可以表示1月30日，但M格
+式会捕获两位数字，导致日期返回非法：
+
+\begin{lstlisting}[language=C++]
+QDate date = QDate::fromString("130", "Md"); // invalid
+\end{lstlisting}
+
+年月日中，没有出现在格式中的，将会使用如下默认值
+
+\begin{tabular}{|l|l|}
+\hline
+Year&	1900\\
+\hline
+Month&	1\\
+\hline
+Day&	1\\
+\hline
+\end{tabular}
+
+下面是默认值的示例：
+
+\begin{lstlisting}[language=C++]
+QDate::fromString("1.30", "M.d");           // January 30 1900
+QDate::fromString("20000110", "yyyyMMdd");  // January 10, 2000
+QDate::fromString("20000110", "yyyyMd");    // January 10, 2000
+\end{lstlisting}
+
+\textbf{注意}： 如果使用本地化的日期表达, 请使用 QLocale::system().toDate(), 因为 QDate 将在 Qt 6使用英文表达 (C语言风格) 。
+
+\textbf{另请参阅}：toString()、QDateTime::fromString()、QTime::fromString() 和 QLocale::toDate()。
+
+\splitLine
+
+void QDate::getDate(int  \emph{*year}, int \emph{*month}, int \emph{*day}) const
+读取日期，储存到 \emph{*year},  \emph{*month}和 \emph{*day}。指针可以是空指针。
+
+如果日期非法，返回的是0。
+
+注意： 在 Qt 5.7 之前, 这个函数不是常函数。
+
+此函数在 Qt 4.5 中引入。
+
+另请参阅：year()，month()，day()，isValid() 和
+QCalendar::partsFromDate()。
+
+\splitLine
+
+\hl{[static]}bool QDate::isLeapYear(int year)
+
+判断是否是格里高利历的闰年，是则返回 \hl{true}。
+
+另请参阅：QCalendar::isLeapYear()。
+
+\splitLine
+
+bool QDate::isNull() const
+判断日期是否为空，日期为空则返回 \hl{true}。 空日期是非法的。
+
+注意： 行为与 isValid() 等价。
+
+另请参阅：isValid()。
+
+\splitLine
+
+bool QDate::isValid() const
+
+判断日期是否合法，合法返回 \hl{true}。
+
+另请参阅：isNull() 和 QCalendar::isDateValid()。
+
+\splitLine
+
+[static]bool QDate::isValid(int year, int month, int day)
+
+是上述方法的重载。
+
+判断日期（以格里高利历解析）是否合法，合法返回 \hl{true}。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QDate::isValid(2002, 5, 17);  // true
+QDate::isValid(2002, 2, 30);  // false (2月没有20日)
+QDate::isValid(2004, 2, 29);  // true (是闰年)
+QDate::isValid(2000, 2, 29);  // true (是闰年)
+QDate::isValid(2006, 2, 29);  // false (不是闰年)
+QDate::isValid(2100, 2, 29);  // false (不是闰年)
+QDate::isValid(1202, 6, 6);   // true (即使这一年在格里高利历之前)
+\end{lstlisting}
+
+\textbf{另请参阅}： isNull()，setDate() 和 QCalendar::isDateValid()。
+
+\splitLine
+
+int QDate::month() const
+
+int QDate::month(QCalendar \emph{cal}) const
+
+返回月份编号，第一个月返回1。
+
+如果传入 \emph{cal} 参数，会使用日历系统使用，否则使用格里高利历。
+
+对于格里高利历，1月就是咱中文说的阳历一月。
+
+对于非法日期返回0。注意有一些日历中，月份可能多于12个。
+
+\textbf{另请参阅}： year() 和 day()。
+
+\splitLine
+
+bool QDate::setDate(int \emph{year}, int  \emph{month}, int \emph{day})
+
+设置对应的日期，使用的是格里高利历。 如果设置的日期合法，将返回
+\hl{true}，否则日期标记为非法并返回 \hl{false}。
+
+此函数在 Qt 4.2 中引入。
+
+\textbf{另请参阅}：isValid() 和 QCalendar::dateFromParts()。
+
+\splitLine
+
+bool QDate::setDate(int year, int month, int day, QCalendar cal)
+
+设置对应的日期，使用的是cal对应的日历。如果设置的日期合法，将返回 true，否则日期标记为非法并返回 false。
+
+函数在 Qt 5.14 中引入。
+
+\textbf{另请参阅}：isValid() 和 QCalendar::dateFromParts()。
+
+\splitLine
+
+qint64 QDate::toJulianDay() const
+
+将日期转换为儒略日。
+
+\textbf{另请参阅}：fromJulianDay()。
+
+\splitLine
+
+QString QDate::toString(Qt::DateFormat format = Qt::TextDate) const
+
+这是一个重载函数，返回日期的字符串。 format 参数决定字符串格式。
+
+如果 format 是 Qt::TextDate，日期使用默认格式。日期月份将使用系统地域设置，也就是 QLocale::system()。一个例子是 "Sat May 20 1995"。
+
+如果 format 是 Qt::ISODate，字符串按照 ISO 8601 格式展开，格式形如 yyyy-MM-dd。例如2002-01-05
+
+format 中的 Qt::SystemLocaleDate，Qt::SystemLocaleShortDate 和Qt::SystemLocaleLongDate 将在 Qt 6 中删除。这些应当由 QLocale::system().toString(date, QLocale::ShortFormat) 或 QLocale::system().toString(date, QLocale::LongFormat) 替代。
+
+format 中的 Qt::LocaleDate，Qt::DefaultLocaleShortDate 和Qt::DefaultLocaleLongDate 将在 Qt 6 中删除。这些应当由 QLocale().toString(date, QLocale::ShortFormat) 或 QLocale().toString(date, QLocale::LongFormat) 替代。
+
+如果 format 是 Qt::RFC2822Date, 字符串会转换成 RFC 2822 兼容的格式。示例其一是 "20 May 1995"。
+
+如果日期非法，返回空字符串。
+
+\textbf{警告}： Qt::ISODate 格式只在0~9999年可用。
+
+\textbf{另请参阅}：fromString() 和 QLocale::toString()。
+
+\splitLine
+
+int QDate::weekNumber(int *yearNumber = nullptr) const
+
+返回 ISO 8601 周序号 (1 到 53)。对于非法日期返回0。
+
+如果 yearNumber 不是 nullptr(默认参数), 年号返回值存于 *yearNumber。
+
+根据 ISO 8601, 格里高利历中，跨年的周属于天数更多的那年。 由于 ISO 8601 规定一周始于周一，周三在哪一年这周就属于哪一年。 大多数年有52周，但也有53周的年份。
+
+注意： *yearNumber 不总是与 year() 相等。例如, 2000.1.1是1999年第52周, 2002.12.31是2003年第1周。
+
+\textbf{另请参阅}：isValid()。
+
+\splitLine
+
+int QDate::year() const
+
+int QDate::year(QCalendar cal) const
+
+返回整数型的年份。
+
+如果传入参数 cal , 它决定了使用的日历系统，默认是格里高利历。
+
+如果日期不合法，返回0。在一些日历系统中，比第一年早的年份非法。
+
+如果使用包含第0年的日历系统，在返回0时通过 isValid() 判断是否合法。这些日历正常的使用负年份，-1年的下一年是0年，再下一年是1年。
+
+一些日历中，没有0年份但是有负数年份。例如格里高利历，公元前x年就是年份-x。
+
+\textbf{另请参阅}：month()，day()，QCalendar::hasYearZero() 和
+QCalendar::isProleptic()。
+
+\splitLine
+
+bool QDate::operator!=(const QDate \&d) const
+
+bool QDate::operator<(const QDate \&d) const
+
+bool QDate::operator<=(const QDate \&d) const
+
+bool QDate::operator==(const QDate \&d) const
+
+bool QDate::operator>(const QDate \&d) const
+
+bool QDate::operator>=(const QDate \&d) const
+
+对于日期A和B，大于意味着日期靠后，小于意味着日期靠前，相等就是同一天。
+
+\splitLine
+
+
+\textbf{相关非成员函数}
+
+QDataStream \&operator<<(QDataStream \&out, const QDate \&date)
+
+向数据流写入日期
+
+\textbf{另请参阅}：Serializing Qt Data Types。
+
+QDataStream \&operator>>(QDataStream \&in, QDate \&date)
+
+从数据流读出日期
+
+\textbf{另请参阅}：Serializing Qt Data Types。
 
 %%% Local Variables:
 %%% mode: latex
