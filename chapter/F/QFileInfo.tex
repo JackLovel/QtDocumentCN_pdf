@@ -1,4 +1,4 @@
-\chapter{QFileInfo}
+\chapter{QFileInfo-未完成}
 
 QFileInfo 类
 
@@ -154,6 +154,199 @@ bool& 	operator!=(const QFileInfo \&fileinfo) const\\
 bool& 	operator==(const QFileInfo \&fileinfo) const\\
 \hline
 \end{longtable}
+
+\splitLine
+
+静态公共成员函数
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数名\\
+\hline
+bool &	exists(const QString \&file)\\
+\hline
+\end{tabular}
+
+
+相关非成员
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型& 	函数名\\
+\hline
+typedef &	QFileInfoList\\
+\hline
+\end{tabular}
+
+\splitLine 
+
+详细描述
+
+QFileInfo 可以获取任一文件的名字、路径、访问权限、是否是文件夹及是否是符号链接等信息，也可以获取文件的大小、上次修改时间、上次读取时间，还可以获取 Qt 资源文件 的信息。
+
+QFileInfo 可以表示相对路径也可以表示绝对路径。绝对路径以 “/” （windows 上以驱动符号）开头（例如 "/tmp/quartz"），相对路径以目录名或文件名开头，相对于当前工作目录（例如 "src/fatlib"）。可以用 isRelative() 检查一个 QFileInfo 表示的是相对路径还是绝对路径。可以用 makeAbsolute() 将相对路径转为绝对路径。
+
+QFileInfo 可以在构造函数中或稍后在 setFile() 设置文件，可以用 exists() 查看文件是否存在，可以用 size() 获取文件大小。
+
+文件类型可以用 isFile()、isDir() 和 isSymLink() 获取。symLinkTarget() 函数提供了符号链接指向的文件名。
+
+在 Unix 系统（包括 macOS 和 iOS），此类的属性的 getter 函数（例如获取时间或大小）返回的都是目标文件的值，而不是符号链接的（因为Unix透明地处理符号链接）。使用 QFile 打开符号链接实际上是打开链接的目标。举例如下：
+
+
+\begin{lstlisting}[language=C++]
+#ifdef Q_OS_UNIX
+
+QFileInfo info1("/home/bob/bin/untabify");
+info1.isSymLink();          // returns true
+info1.absoluteFilePath();   // returns "/home/bob/bin/untabify"
+info1.size();               // returns 56201
+info1.symLinkTarget();      // returns "/opt/pretty++/bin/untabify"
+
+QFileInfo info2(info1.symLinkTarget());
+info2.isSymLink();          // returns false
+info2.absoluteFilePath();   // returns "/opt/pretty++/bin/untabify"
+info2.size();               // returns 56201
+
+#endif
+\end{lstlisting}
+
+在Windows上，快捷方式（“.lnk”文件）当前被视为符号链接。 和Unix系统一样，
+属性的 getter 返回目标文件的大小，而不是.lnk文件本身。 此行为已被弃用，
+并且可能会在Qt的未来版本中删除，此后，\hl{.lnk} 文件将被视为常规文件。
+
+\begin{lstlisting}[language=C++]
+#ifdef Q_OS_WIN
+
+QFileInfo info1("C:\\Documents and Settings\\Bob\\untabify.lnk");
+info1.isSymLink();          // returns true
+info1.absoluteFilePath();   // returns "C:/Documents and Settings/Bob/untabify.lnk"
+info1.size();               // returns 743
+info1.symLinkTarget();      // returns "C:/Pretty++/untabify"
+
+QFileInfo info2(info1.symLinkTarget());
+info2.isSymLink();          // returns false
+info2.absoluteFilePath();   // returns "C:/Pretty++/untabify"
+info2.size();               // returns 63942
+
+#endif
+\end{lstlisting}
+
+Elements of the file's name can be extracted with path() and fileName(). The fileName()'s parts can be extracted with baseName(), suffix() or completeSuffix(). QFileInfo objects to directories created by Qt classes will not have a trailing file separator. If you wish to use trailing separators in your own file info objects, just append one to the file name given to the constructors or setFile().
+
+涉及文件日期的函数： birthTime() lastModified() lastRead() fileTime()
+
+涉及文件访问权限的函数： isReadable() isWritable() isExecutable()
+
+涉及文件所有权的函数： owner() ownerId() group() groupId()
+
+同时查验文件权限及所有权： permission()
+
+\textbf{注意}: 在NTFS文件系统上，出于性能原因，默认情况下禁用所有权和权限检查。
+要启用它，请包含以下行：
+
+\begin{lstlisting}[language=C++]
+extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+\end{lstlisting}
+
+然后，通过将\hl{qt\_ntfs\_permission\_lookup}递增和递减 1 来打开和关闭权限检查。
+
+\begin{lstlisting}[language=C++]
+qt_ntfs_permission_lookup++; // 打开检查
+qt_ntfs_permission_lookup--; // 再次关闭
+\end{lstlisting}
+
+性能问题
+
+Some of QFileInfo's functions query the file system, but for performance reasons, some functions only operate on the file name itself. For example: To return the absolute path of a relative file name, absolutePath() has to query the file system. The path() function, however, can work on the file name directly, and so it is faster.
+
+\textbf{注意}: To speed up performance, QFileInfo caches information about the file.
+
+Because files can be changed by other users or programs, or even by other parts of the same program, there is a function that refreshes the file information: refresh(). If you want to switch off a QFileInfo's caching and force it to access the file system every time you request information from it call setCaching(false).
+
+\textbf{另请参阅}: QDir and QFile.
+
+\splitLine 
+
+成员函数文档
+
+QFileInfo::QFileInfo(const QFileInfo \&fileinfo)
+
+复制一个新的 QFileInfo。
+
+QFileInfo::QFileInfo(const QDir \&dir, const QString \&file)
+
+构造一个新的 QFileInfo，表示指定 dir 目录中的 file 文件信息。
+
+如果 dir 具有相对路径，则 QFileInfo 也将具有相对路径。
+
+如果 file 是绝对路径，则 dir 指定的目录将被忽略。
+
+\textbf{另请参阅}: isRelative()
+
+QFileInfo::QFileInfo(const QFile \&file)
+
+构造一个新的 QFileInfo，表示指定的 file 文件信息。
+
+如果文件具有相对路径，则 QFileInfo 也将具有相对路径。
+
+\textbf{另请参阅}: isRelative()
+
+QFileInfo::QFileInfo(const QString \&file)
+
+构造一个新的 QFileInfo，表示指定的 file 文件信息。file 可以包含绝对或相对路径。
+
+\textbf{另请参阅}: setFile()，isRelative()，QDir::setCurrent() 和
+
+QDir::isRelativePath()
+
+QFileInfo::QFileInfo()
+
+构造一个空的 QFileInfo 对象。
+
+\textbf{注意}: 空的 QFileInfo 对象不包含文件引用。
+
+\textbf{另请参阅}: setFile()
+
+QFileInfo \&QFileInfo::operator=(QFileInfo \&\&other)
+
+移动构造函数。
+
+该函数在 Qt 5.2 引入
+
+QFileInfo \&QFileInfo::operator=(const QFileInfo \&fileinfo)
+
+赋值构造函数。
+
+QFileInfo::$\sim$QFileInfo()
+
+析构函数。
+
+QDir QFileInfo::absoluteDir() const
+
+以 QDir 对象的形式返回文件的绝对路径。
+
+\textbf{另请参阅}: dir()，filePath()，fileName() 和 isRelative()
+
+QString QFileInfo::absoluteFilePath() const
+
+返回包含文件名的绝对路径。
+
+绝对路径名由完整路径和文件名组成。 在Unix上，它将始终以根目录“ /”开头。 在Windows上，它将始终以“ D：/”开头，其中D是驱动器号，但未映射到驱动器号的网络共享除外，在这种情况下，路径将以“ // sharename /”开头。 QFileInfo 将大写驱动器号。
+
+Returns an absolute path including the file name.
+
+The absolute path name consists of the full path and the file name. On
+Unix this will always begin with the root, '/', directory. On Windows
+this will always begin 'D:/' where D is a drive letter, except for
+network shares that are not mapped to a drive letter, in which case
+the path will begin '//sharename/'. QFileInfo will uppercase drive
+letters. Note that QDir does not do this. The code snippet below shows
+this.
+
+\begin{lstlisting}[language=C++]
+QFileInfo fi("c:/temp/foo"); => fi.absoluteFilePath() => "C:/temp/foo"
+\end{lstlisting}
+
 
 %%% Local Variables:
 %%% mode: latex
