@@ -6,7 +6,7 @@
 
 引言
 
-Qt 提供了一系列基于模板的通用容器类，可以用于存储指定类型的元素。例如，如果你需要一个可动态调整大小的 QString 数组，那么你可以使用 QVector<QString>。
+Qt: 提供了一系列基于模板的通用容器类，可以用于存储指定类型的元素。例如，如果你需要一个可动态调整大小的 QString 数组，那么你可以使用 QVector<QString>。
 
 这些类的设计目标是比 STL 容器更轻量，更安全，更易用。如果你不熟悉 STL，或想更有“ Qt 范”，使用这些类代替 STL 会是更好的选择。
 
@@ -657,7 +657,6 @@ QVector&	O(1)&	Amort. O(n)&	O(n)	&Amort. O(1)\\
 
 下表总结了 Qt 关联容器的算法复杂度。
 
-
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 &查找键	&&	插入&	\\
@@ -683,7 +682,6 @@ QSet&	Amort. O(1)&	O(n)	&Amort. O(1)	&O(n)\\
 QVector，QString 和 QByteArray 使用连续内存保存元素；QList 维护了一个保存所有元素的指针（除非 T 本身是一个指针类型或一个指针大小的基本类型，这种情况下数组中保存的的是元素本身的值）的数组，用于提供基于索引的快速访问；QHash<Key, T> 内部有一个和大小元素个数成正比的哈希表。为了避免每次在尾部添加元素时重新分配内存，这些类通常会分配比实际需要要多的内存。
 
 考虑下列代码，它用另一个 QString 构建出一个新的 QString：
-
 
 \begin{lstlisting}[language=C++]
 QString onlyLetters(const QString &in)
@@ -723,7 +721,9 @@ QHash<Key, T> 则是完全不同。QHash 内部的哈希表每次增长两倍，
 \item squeeze() 用于释放所有没有用来保存元素的内存。
 \end{itemize}
 
-如果预先知道容器要保存元素的大概数量，可以提前调用 reserve() 方法分配内存，最后在填充完容器后，再调用 squeeze() 来释放多余的预分配内存。
+如果预先知道容器要保存元素的大概数量，可以提前调用 reserve() 方法分配
+内存，最后在填充完容器后，再调用 squeeze() 来释放多余的预分配内存。
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"

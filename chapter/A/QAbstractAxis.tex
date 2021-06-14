@@ -2,30 +2,31 @@
 
 QAbstractAxis类是用于专门处理坐标轴的类
 
-\begin{tabular}{|r|l|}
-	\hline
-	属性 & 方法 \\
-	\hline
-	头文件 & \#include <QAbstractAxis>\\      
-	\hline
-	实例化 & AbstractAxis\\      
-	\hline
-	继承&QObject \\
-	\hline
-	派生 & QBarCategoryAxis, QDateTimeAxis, QLogValueAxis, and QValueAxis \\
-	\hline
+\begin{tabular}{|l|l|}
+\hline
+属性 & 方法 \\
+\hline
+头文件 & \#include <QAbstractAxis>\\      
+\hline
+实例化 & AbstractAxis\\      
+\hline
+继承&QObject \\
+\hline
+派生 & QBarCategoryAxis, QDateTimeAxis, QLogValueAxis, and QValueAxis \\
+\hline
 \end{tabular}
+
+\splitLine
 
 简述
 
 公共类型
 
-\begin{tabular}{|r|l|}
+\begin{tabular}{|l|l|}
 \hline
 类型 & 方法 \\
 \hline
-enum&	AxisType { AxisTypeNoAxis, AxisTypeValue, AxisTypeBarCategory,
-      AxisTypeCategory, AxisTypeDateTime, AxisTypeLogValue }\\
+enum&	AxisType { AxisTypeNoAxis, AxisTypeValue, AxisTypeBarCategory,AxisTypeCategory, AxisTypeDateTime, AxisTypeLogValue }\\
 \hline
 flags&	AxisTypes\\
 \hline
@@ -95,8 +96,7 @@ visible :&	bool\\
 
 公共函数
 
-
-\begin{longtable}{|r|l|}
+\begin{longtable}{|l|l|}
 \hline
 类型  & 函数名\\
 \hline
@@ -875,33 +875,51 @@ QAbstractAxis::$\sim$QAbstractAxis()
 
 void QAbstractAxis::colorChanged(QColor color) [信号] 
 
-当坐标轴的颜色变化时，该信号被发射。 注意：属性color的通知信号。
+当坐标轴的颜色变化时，该信号被发射。 
+
+\textbf{注意}：属性color的通知信号。
 
 void QAbstractAxis::gridLineColorChanged(const QColor \&color) [信号] 
 
-当绘制网格线的笔的颜色改变时，该信号被发射。 注意：属性gridLineColor的通知信号。
+当绘制网格线的笔的颜色改变时，该信号被发射。
+
+\textbf{注意}：属性gridLineColor的通知信号。
 
 QPen QAbstractAxis::gridLinePen() const
 
- 返回用于绘制网格的笔。 注意:属性gridLinePen的Getter函数。 另参见函数setGridLinePen()。
+返回用于绘制网格的笔。 
+
+\textbf{注意}：属性gridLinePen的Getter函数。 
+
+另参见函数setGridLinePen()。
 
 void QAbstractAxis :: gridLinePenChanged（const QPen \&pen） [信号] 
 
-当用于绘制网格线的笔变化时，会发出此信号。 注意:属性gridLinePen的通知信号。
+当用于绘制网格线的笔变化时，会发出此信号。 
+
+\textbf{注意}:属性gridLinePen的通知信号。
 
 void QAbstractAxis::gridVisibleChanged(bool visible) [信号] 
 
-当坐标轴的网格线的可见性变化时，发出该信号。 注意:属性gridVisible的通知信号。
+当坐标轴的网格线的可见性变化时，发出该信号。 
+
+\textbf{注意}：属性gridVisible的通知信号。
 
 void QAbstractAxis::hide() 使坐标轴，阴影，标签，网格线不可见。
 
 void QAbstractAxis::labelsAngleChanged(int angle) [信号]
 
- 当坐标轴标签的角度变化时，发出该信号。 注意：属性标签角度的通知信号
+当坐标轴标签的角度变化时，发出该信号。 
+
+\textbf{注意}：属性标签角度的通知信号
 
 QBrush QAbstractAxis::labelsBrush() const 
 
-返回用于绘制标签的画笔。 注意:属性labelsBrush的Getter函数。 另参见setLabelsBrush().
+返回用于绘制标签的画笔。 
+
+\textbf{注意}：属性labelsBrush的Getter函数。 
+
+另参见setLabelsBrush().
 
 void QAbstractAxis::labelsBrushChanged(const QBrush \&brush) [信号] 
 
@@ -913,7 +931,9 @@ void QAbstractAxis :: labelsColorChanged（QColor color） [信号signal]
 
 QFont QAbstractAxis::labelsFont() const 
 
-返回用于绘制标签的字体。 注意:属性labelsFont的Getter函数。 另参见函数setLabelsFont()。
+返回用于绘制标签的字体。 
+
+\textbf{注意}：属性labelsFont的Getter函数。 另参见函数setLabelsFont()。
 
 void QAbstractAxis :: labelsFontChanged（const QFont \&font）[信号] 
 
@@ -925,48 +945,72 @@ void QAbstractAxis::labelsVisibleChanged(bool visible) [信号]
 
 QPen QAbstractAxis::linePen() const 
 
-返回用于绘制轴线与刻度线的笔。 注意:属性linePen的Getter函数。 另参阅函数setLinePen()。
+返回用于绘制轴线与刻度线的笔。 
+
+\textbf{注意}：属性linePen的Getter函数。 另参阅函数setLinePen()。
 
 void QAbstractAxis::linePenChanged(const QPen \&pen) [信号] 
 
-当绘制坐标轴的笔变化时，会发出此信号。 注意:属性linePen的通知信号。
+当绘制坐标轴的笔变化时，会发出此信号。 
+
+\textbf{注意}：属性linePen的通知信号。
 
 void QAbstractAxis::lineVisibleChanged(bool visible) [信号] 
 
-当坐标轴线的可见性变化时，会发出此信号。 注意:属性lineVisible的通知信号。
+当坐标轴线的可见性变化时，会发出此信号。
+
+\textbf{注意}：属性lineVisible的通知信号。
 
 void QAbstractAxis::minorGridLineColorChanged(const QColor \&color)
 [信号]
 
- 当绘制副格线的笔的颜色变化时，该信号被发射。 注意:属性minorGridLineColor的通知信号。
+ 当绘制副格线的笔的颜色变化时，该信号被发射。 
+
+\textbf{注意}：属性minorGridLineColor的通知信号。
 
 void QAbstractAxis::minorGridLinePenChanged(const QPen \&pen) [信号] 
 
-当绘制副格线的笔变化时，该信号被发射。 注意：属性minorGridLinePen的通知信号。
+当绘制副格线的笔变化时，该信号被发射。 
+
+\textbf{注意}：属性minorGridLinePen的通知信号。
 
 void QAbstractAxis::minorGridVisibleChanged(bool visible) [信号] 
 
-当绘制副格线的可见性变化时，该信号被发射。 注意:属性minorGridVisible的通知信号。
+当绘制副格线的可见性变化时，该信号被发射。 
+
+\textbf{注意}：属性minorGridVisible的通知信号。
 
 Qt::Orientation QAbstractAxis::orientation() const 
 
-返回坐标轴的方向(垂直或者水平) 注意:坐标轴方向的Getter函数。
+返回坐标轴的方向(垂直或者水平) 
+
+\textbf{注意}：坐标轴方向的Getter函数。
 
 void QAbstractAxis::setGridLinePen(const QPen \&pen) 
 
-设置绘制网格线的笔。 注意:gridLinePen的Setter函数。 另参见函数gridLinePen()。
+设置绘制网格线的笔。 
+
+\textbf{注意}：gridLinePen的Setter函数。 另参见函数gridLinePen()。
 
 void QAbstractAxis::setLabelsBrush(const QBrush \&brush)
 
- 设置用于绘制标签的画笔。 注意:属性LabelsBrush的Setter函数。 另参阅labelsBrush().
+ 设置用于绘制标签的画笔。 
+
+\textbf{注意}：属性LabelsBrush的Setter函数。 另参阅labelsBrush().
 
 void QAbstractAxis::setLabelsFont(const QFont \&font) 
 
-设置用于绘制标签的字体相关 注意:属性labelsFont的Setter函数。 另参阅函数labelsFont()。
+设置用于绘制标签的字体相关 
+
+\textbf{注意}：属性labelsFont的Setter函数。 
+
+另参阅函数labelsFont()。
 
 void QAbstractAxis::setLinePen(const QPen \&pen) 
 
-设置用于绘制坐标轴线和刻度线的笔。 注意：属性linePen的Setter函数。 另参见函数linePen（）。
+设置用于绘制坐标轴线和刻度线的笔。 
+
+\textbf{注意}：属性linePen的Setter函数。 另参见函数linePen（）。
 
 void QAbstractAxis::setLineVisible(bool visible = true) 
 
