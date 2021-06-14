@@ -1,0 +1,161 @@
+\chapter{QFileInfo}
+
+QFileInfo 类
+
+QFileInfo 类用于系统无关的文件信息。
+\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/F/QFileInfo/QFileInfo.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{
+  更多内容...} 
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	方法\\
+\hline
+头文件:& 	\#include <QFileInfo>\\
+\hline
+qmake:& 	QT += core\\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item 列出所有成员函数，包括继承的成员函数
+\item 废弃的成员函数
+\end{itemize}
+
+\textbf{注意}: 此类中所有函数均 可重入
+
+\splitLine
+
+公共成员函数
+
+\begin{longtable}{|l|l|}
+\hline
+返回类型& 	函数名\\
+\hline
+&	QFileInfo(const QFileInfo \&fileinfo)\\
+\hline
+&	QFileInfo(const QDir \&dir, const QString \&file)\\
+\hline
+&	QFileInfo(const QFile \&file)\\
+\hline
+&	QFileInfo(const QString \&file)\\
+\hline
+&	QFileInfo()\\
+\hline
+QFileInfo \& &	operator=(QFileInfo \&\&other)\\
+\hline
+QFileInfo \& &	operator=(const QFileInfo \&fileinfo)\\
+\hline
+&	$\sim$QFileInfo()\\
+\hline
+QDir& 	absoluteDir() const\\
+\hline
+QString& 	absoluteFilePath() const\\
+\hline
+QString& 	absolutePath() const\\
+\hline
+QString& 	baseName() const\\
+\hline
+QDateTime& 	birthTime() const\\
+\hline
+QString& 	bundleName() const\\
+\hline
+bool& 	caching() const\\
+\hline
+QString& 	canonicalFilePath() const\\
+\hline
+QString& 	canonicalPath() const\\
+\hline
+QString& 	completeBaseName() const\\
+\hline
+QString& 	completeSuffix() const\\
+\hline
+QDir& 	dir() const\\
+\hline
+bool& 	exists() const\\
+\hline
+QString& 	fileName() const\\
+\hline
+QString& 	filePath() const\\
+\hline
+QDateTime& 	fileTime(QFile::FileTime time) const\\
+\hline
+QString& 	group() const\\
+\hline
+uint& 	groupId() const\\
+\hline
+bool& 	isAbsolute() const\\
+\hline
+bool& 	isBundle() const\\
+\hline
+bool& 	isDir() const\\
+\hline
+bool& 	isExecutable() const\\
+\hline
+bool& 	isFile() const\\
+\hline
+bool& 	isHidden() const\\
+\hline
+bool& 	isJunction() const\\
+\hline
+bool& 	isNativePath() const\\
+\hline
+bool& 	isReadable() const\\
+\hline
+bool& 	isRelative() const\\
+\hline
+bool& 	isRoot() const\\
+\hline
+bool& 	isShortcut() const\\
+\hline
+bool& 	isSymLink() const\\
+\hline
+bool& 	isSymbolicLink() const\\
+\hline
+bool& 	isWritable() const\\
+\hline
+QDateTime& 	lastModified() const\\
+\hline
+QDateTime& 	lastRead() const\\
+\hline
+bool& 	makeAbsolute()\\
+\hline
+QDateTime& 	metadataChangeTime() const\\
+\hline
+QString& 	owner() const\\
+\hline
+uint& 	ownerId() const\\
+\hline
+QString& 	path() const\\
+\hline
+bool& 	permission(QFile::Permissions permissions) const\\
+\hline
+QFile::Permissions& 	permissions() const\\
+\hline
+void& 	refresh()\\
+\hline
+void& 	setCaching(bool enable)\\
+\hline
+void& 	setFile(const QString \&file)\\
+\hline
+void& 	setFile(const QFile \&file)\\
+\hline
+void& 	setFile(const QDir \&dir, const QString \&file)\\
+\hline
+qint64& 	size() const\\
+\hline
+QString& 	suffix() const\\
+\hline
+void& 	swap(QFileInfo \&other)\\
+\hline
+QString& 	symLinkTarget() const\\
+\hline
+bool& 	operator!=(const QFileInfo \&fileinfo) const\\
+\hline
+bool& 	operator==(const QFileInfo \&fileinfo) const\\
+\hline
+\end{longtable}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
