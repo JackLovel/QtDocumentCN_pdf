@@ -1,0 +1,598 @@
+\chapter{QFile}
+
+QFile class 
+
+\splitLine 
+
+\begin{tabular}{|l|l|}
+\hline
+属性 	&方法\\
+\hline
+Header: &	\#include\\
+\hline
+qmake: &	QT += core\\
+\hline
+Inherits: &	QFileDevice\\
+\hline
+Inherited By:& 	QTemporaryFile\\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item 包含继承成员的成员列表
+\item 废弃的成员
+\end{itemize}
+
+\textbf{注意}： 类中所有函数都是 可重入的。
+
+\splitLine
+
+公共成员类型
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	方法\\
+\hline
+typedef& 	DecoderFn\\
+\hline
+\end{tabular}
+
+\splitLine
+
+公共成员函数
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	方法\\
+\hline
+	&QFile(const QString \&name, QObject *parent)\\
+\hline
+	&QFile(QObject *parent)\\
+\hline
+	&QFile(const QString \&name)\\
+\hline
+	&QFile()\\
+\hline
+virtual& 	$\sim$QFile()\\
+\hline
+bool& 	copy(const QString \&newName)\\
+\hline
+bool& 	exists() const\\
+\hline
+bool& 	link(const QString \&linkName)\\
+\hline
+bool& 	moveToTrash()\\
+\hline
+bool& 	open(FILE *fh, QIODevice::OpenMode mode,
+      QFileDevice::FileHandleFlags handleFlags = DontCloseHandle)\\
+\hline
+bool& 	open(int fd, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags handleFlags = DontCloseHandle)\\
+\hline
+bool& 	remove()\\
+\hline
+bool& 	rename(const QString \&newName)\\
+\hline
+void& 	setFileName(const QString \&name)\\
+\hline
+QString& 	symLinkTarget() const\\
+\hline
+\end{tabular}
+
+\splitLine
+
+重写公共函数
+
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	方法\\
+\hline
+virtual& QString 	fileName() const override\\
+\hline
+virtual& bool 	open(QIODevice::OpenMode mode) override\\
+\hline
+virtual& QFileDevice::Permissions 	permissions() const override\\
+\hline
+virtual& bool 	resize(qint64 sz) override\\
+\hline
+virtual& bool 	setPermissions(QFileDevice::Permissions permissions)
+         override\\
+\hline
+virtual qint64 &	size() const override\\
+\hline
+\end{tabular}
+
+\splitLine
+
+静态公共成员
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	方法\\
+\hline
+bool& 	copy(const QString \&fileName, const QString \&newName)\\
+\hline
+QString& 	decodeName(const QByteArray \&localFileName)\\
+\hline
+QString& 	decodeName(const char *localFileName)\\
+\hline
+QByteArray& 	encodeName(const QString \&fileName)\\
+\hline
+bool& 	exists(const QString \&fileName)\\
+\hline
+bool& 	link(const QString \&fileName, const QString \&linkName)\\
+\hline
+bool& 	moveToTrash(const QString \&fileName, QString *pathInTrash =
+      nullptr)\\
+\hline
+QFileDevice::Permissions &	permissions(const QString \&fileName)\\
+\hline
+bool& 	remove(const QString \&fileName)\\
+\hline
+bool& 	rename(const QString \&oldName, const QString \&newName)\\
+\hline
+bool& 	resize(const QString \&fileName, qint64 sz)\\
+\hline
+bool& 	setPermissions(const QString \&fileName, QFileDevice::Permissions permissions)\\
+\hline
+QString& 	symLinkTarget(const QString \&fileName)\\
+\hline
+\end{tabular}
+
+
+\splitLine
+
+详细描述
+
+QFile 是用于读写文本及二进制的文件及资源的I/O设备。 一个QFile可以单独使用，或者更简单的，可以与 QTextStream 或 QDataStream 一同使用。
+
+文件名通常在构造时传递，但也可以在随时使用 setFileName()设置。QFile 需要目录分隔符为 '/' 而不是依照操作系统。其他分隔符 (如 '\') 不受支持。
+
+您可以通过 exists() 判断文件是否存在。（更多操作系统相关的操作在 QFileInfo 和 QDir 中提供）
+
+文件通过 open() 打开，通过 close() 关闭，通过 flush() 刷新。数据通常使用 QDataStream or QTextStream 读写，但您也可以使用 由 QIODevice 的继承函数 read(), readLine(), readAll(), write()。单字符的操作也可以使用 getChar(), putChar(), and ungetChar()。
+
+size() 返回文件大小。您可以通过 pos() 获取当前文件位置，或通过 seek()
+移动到新的位置（译者注：此句中的“位置”指文件内操作的字节位置）。当您读
+到文件结尾， atEnd() 返回 \hl{true}。
+
+直接读文件
+
+如下例子逐行地直接读取文本文件：
+
+\begin{lstlisting}[language=C++]
+QFile file("in.txt");
+if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    return;
+
+while (!file.atEnd()) {
+     QByteArray line = file.readLine();
+     process_line(line);
+}
+\end{lstlisting}
+
+QIODevice::Text flag传递给 open() ，其告诉Qt将Windows风格的换行符
+("$\backslash$r$\backslash$n") 转换为 C++风格的换行符("$\backslash$n")。默认情况下，QFile 假设为二进制模式读取，不做字节转换。
+
+通过流来读文件
+
+如下例子逐行地通过 QTextStream 读取文本文件：
+
+\begin{lstlisting}[language=C++]
+    QFile file("in.txt");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        process_line(line);
+    }
+\end{lstlisting}
+
+QTextStream 会特意把8位文件中字节数据转换为QString中16位UTF-16字符。默认情况下，其假设用户使用系统默认编码（例如unix平台上是UTF-8；详情参看 QTextCodec::codecForLocale() ）。编码可以通过 QTextStream::setCodec() 改变。
+
+要写入文本，您可以使用左移运算符运算符 operator<<()，在 QTextStream 中，
+其重载用于讲右侧内容追加的左侧，示例如下：
+
+\begin{lstlisting}[language=C++]
+    QFile file("out.txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    out << "The magic number is: " << 49 << "\n";
+
+\end{lstlisting}
+
+QDataStream 和上文很相似，详情请见相当应类的文档。
+
+当你使用 QFile, QFileInfo 以及 QDir 来访问系统中文件，你可以使用Unicode文件名。在Unix平台，文件名会转换为8位编码。如果您想使用C++标准API (<cstdio> 或 <iostream>) 或平台相关API来访问文件而不是使用 QFile，你可以使用 encodeName() 和 decodeName() 来在Unicode文件名和8位文件名间转换。
+
+在Unix平台，有一些特殊的系统文件 (例如 /proc 下的文件) ，对于这些文件，
+size() 会返回0，但你依然可以读取更多数据；这些数据在你调用 read() 时即
+时产生。在这种情况下，您便不能使用 atEnd() 来判断是否已经没有更多数据。
+(因为 atEnd() 通过文件大小是否到达结尾)。然而您可以通过连续调用
+readAll(), read() 或 readLine() 指导没有数据来替代此功能。下面的例子使
+用 QTextStream 逐行读取 \hl{/proc/modules}：
+
+\begin{lstlisting}[language=C++]
+    QFile file("/proc/modules");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QTextStream in(&file);
+    QString line = in.readLine();
+    while (!line.isNull()) {
+        process_line(line);
+        line = in.readLine();
+    }
+\end{lstlisting}
+
+\textbf{信号}
+
+不像其他 QIODevice 的实现，例如 QTcpSocket，QFile 不会发出 aboutToClose(), bytesWritten(), 及 readyRead() 这些信号。这个实现细节意味着 QFile 不适用于读写某些特定类型的文件，比如Unix上的设备文件。
+
+\textbf{平台相关信息}
+
+文件权限和Unix和Windows上的处理并不相同。在Unix平台上，一个非 可写入 的目录，文件无法创建。但对于Windows并不一定如此，例如 'My Documents' （我的文档）目录通常不可写入，但是在其中依然可以创建文件。
+
+Qt对于文件权限的理解有局限，尤其对于 QFile::setPermissions() 有影响。在Windows上，仅当没有任何 Write* flags被设置时，Qt 会设置旧版的只读 flag。Qt不会操作访问过滤表（access control lists , ACLs）这是的此函数在NTFS卷上基本上没什么用。对于VFAT格式的U盘，倒是有可能可用。POSIX 的 ACLs 也不会被修改。
+
+另请参见 QTextStream, QDataStream, QFileInfo, QDir, 以及 The Qt
+Resource System。
+
+\splitLine
+
+成员类型文档
+
+typedef QFile::DecoderFn
+
+这个类型定义了一个如下形式的函数的指针：
+
+
+\begin{lstlisting}[language=C++]
+QString myDecoderFunc(const QByteArray &localFileName);
+\end{lstlisting}
+
+另请参见 setDecodingFunction().
+
+\splitLine
+
+成员函数文档
+
+QFile::QFile(const QString \&name, QObject *parent)
+
+构造基于给定的父对象 parent 、文件名 name 指定的QFile对象。
+
+QFile::QFile(QObject *parent)
+
+构造基于给定的父对象 parent 的QFile对象。
+
+QFile::QFile(const QString \&name)
+
+构造文件名 name 指定的QFile对象。
+
+QFile::QFile()
+
+构造一个QFile对象。
+
+[virtual]QFile::$\sim$QFile()
+
+销毁此QFile对象，如需要会自动关闭文件。
+
+bool QFile::copy(const QString \&newName)
+
+将当前 fileName() 指定的文件复制为文件名 newName 指定的文件。如果成功，返回 true ；否则返回 false。
+
+注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+
+源文件会在复制前关闭。
+
+另请参见 setFileName().
+
+[static]bool QFile::copy(const QString \&fileName, const QString \&newName)
+
+这是一个重载函数。
+
+将文件 fileName 复制为文件名 newName。如果成功，返回 true ；否则返回 false。
+
+注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+
+另请参见 rename().
+
+\hl{[static]}QString QFile::decodeName(const QByteArray \&localFileName)
+
+和 QFile::encodeName() 操作恰恰相反。返回 localFileName 的Unicode形式。
+
+另请参见 encodeName().
+
+\hl{[static]}QString QFile::decodeName(const char *localFileName)
+
+这是一个重载函数。返回 localFileName 的Unicode形式。
+
+详情参见 encodeName() 。
+
+[static]QByteArray QFile::encodeName(const QString \&fileName)
+
+基于用户区域设置，将 fileName 转换为本地的8为表示。这对于用户选择的文件名足够使用。硬编码到程序中的文件名应当只使用7位ASCII字符。
+
+另请参见 decodeName().
+
+[static]bool QFile::exists(const QString \&fileName)
+
+如果 fileName 对应的文件存在，返回 true 否则返回 false。
+
+注意： 如果 fileName 是指向不存在文件的符号链接，返回 false。
+
+bool QFile::exists() const
+
+这是一个重载函数。
+
+如果 fileName() 对应的文件存在，返回 true 否则返回 false。
+
+另请参见 fileName() and setFileName().
+
+[override virtual]QString QFile::fileName() const
+
+重写函数： QFileDevice::fileName() const.
+
+返回 setFileName() 或构造函数设置的文件名。
+
+另请参见 setFileName() and QFileInfo::fileName().
+
+bool QFile::link(const QString \&linkName)
+
+创建一个名为 linkName 的、指向 fileName() 文件的链接。链接的形式取决于底层文件系统（Windows上的快捷方式或Linux下的符号链接symlink）。如果成功，返回 true ；返回 false。
+
+此函数不会覆盖文件系统上已经存在的链接；如果已存在，link() 将返回 false 并设置 error() 为 RenameError。
+
+注意： 对于Windows平台，一个合法的链接名称必须包含 .lnk 后缀名。
+
+另请参见 setFileName().
+
+[static]bool QFile::link(const QString \&fileName, const QString \&linkName)
+
+这是一个重载函数。
+
+创建一个名为 linkName 的、指向 fileName 文件的链接。链接的形式取决于底层文件系统（Windows上的快捷方式或Linux下的符号链接symlink）。如果成功，返回 true ；否则返回 false。
+
+另请参见 link().
+
+bool QFile::moveToTrash()
+
+将 fileName() 文件移入回收站。如果成功返回 true ，并将 fileName() 设置为回收站中对应文件的路径；否则返回 false。
+
+注意： 在API不能返回回收站中文件的路径的操作系统中，一旦文件被移动 fileName() 会被设置为空字符串。在没有回收站的操作系统，此函数总返回 false。
+
+此函数引入自： Qt 5.15.
+
+[static]bool QFile::moveToTrash(const QString \&fileName, QString *pathInTrash = nullptr)
+
+这是一个重载函数。
+
+将 fileName 文件移入回收站。如果成功返回 true ，并将 *pathInTrash 设置为回收站中对应文件的路径字符串的指针；否则返回 false。
+
+注意： 在API不能返回回收站中文件的路径的操作系统中，一旦文件被移动 *pathInTrash 会被设置为空字符串。在没有回收站的操作系统，此函数总返回 false。
+
+此函数引入自： Qt 5.15.
+
+[override virtual]bool QFile::open(QIODevice::OpenMode mode)
+
+重写函数： QIODevice::open(QIODevice::OpenMod
+e mode)。
+
+使用 OpenMode mode 模式打开文件，如果成功，返回 true ；否则返回 false。
+
+模式 mode 必须是 QIODevice::ReadOnly, QIODevice::WriteOnly, 或 QIODevice::ReadWrite。也可以有附加flags，例如 QIODevice::Text 和 QIODevice::Unbuffered。
+
+注意： 在 WriteOnly 或 ReadWrite 模式，如果相关文件不存在，此函数会尝试在打开前新建。
+
+另请参见 QIODevice::OpenMode and setFileName().
+
+bool QFile::open(FILE *fh, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags handleFlags = DontCloseHandle)
+
+这是一个重载函数。
+
+使用给出的模式 \emph{mode} 打开已有的文件句柄 \emph{fh}。\emph{handleFlags} 可能会被用于指定附加选项。如果成功，返回 \hl{true}；否则返回 \hl{false}。
+
+例如：
+
+
+\begin{lstlisting}[language=C++]
+#include <stdio.h>
+
+void printError(const char* msg)
+{
+    QFile file;
+    file.open(stderr, QIODevice::WriteOnly);
+    file.write(msg, qstrlen(msg));        // 写入 stderr
+    file.close();
+}
+\end{lstlisting}
+
+当一个 QFile 通过此函数被被打开，close() 的行为由 AutoCloseHandle flag决定。如果指定了 AutoCloseHandle ，且此函数执行成功，那么 close() 会关闭传入的句柄。否则，close() 不会关闭文件，只会刷新数据(flush)。
+
+\textbf{警告}：
+
+\begin{itemize}
+\item 如果 \emph{fh} 并非指向常规文件，例如 \hl{stdin}, \hl{stdout}, 或 \hl{stderr}，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
+\item 由于使用此函数打开的文件没有指定文件名，你不能通过 QFileInfo 读取相关信息。
+\end{itemize}
+
+Windows平台的注意事项
+
+当访问文件或其他随机存取设备时，\emph{fh} 必须以二进制模式打开（也就是
+\hl{fopen()} 的模式串必须包含'b'）。Qt 会转换行末字节如果您指定
+QIODevice::Text 给 \emph{
+mode}。顺序读取设备，例如标准输入输出，不受此限制影响。
+
+您需要启用控制台应用支持，才能在控制台使用标准输入输出。要启用，可以在
+项目文件中加入：
+
+\begin{lstlisting}[language=C++]
+CONFIG += console
+\end{lstlisting}
+
+另请参见 close().
+bool QFile::open(int fd, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags handleFlags = DontCloseHandle)
+
+这是一个重载函数。
+
+使用给出的模式 mode 打开已有的文件描述符 fh。handleFlags 可能会被用于指定附加选项。如果成功，返回 true ；否则返回 false。
+
+当一个 QFile 通过此函数被被打开，close() 的行为由 AutoCloseHandle flag决定。如果指定了 AutoCloseHandle ，且此函数执行成功，那么 close() 会关闭传入的句柄。否则，close() 不会关闭文件，只会刷新数据(flush)。
+
+通过此函数打开的文件会被自动设置为 raw 模式；这意味着文件I/O函数会很慢。如果您遇到了性能问题，可以尝试其他 open() 函数。
+
+\textbf{警告}：
+
+\begin{itemize}
+\item 如果 \emph{fd} 不是一个常规文件，例如 0 (\hl{stdin}), 1 (\hl{stdout}), 或 2 (\hl{stderr})，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
+\item 由于使用此函数打开的文件没有指定文件名，你不能通过 QFileInfo 读取相关信息。
+
+\end{itemize}
+
+另请参见 close().
+
+[override virtual]QFileDevice::Permissions QFile::permissions() const
+
+重写函数： QFileDevice::permissions() const.
+
+另请参见 setPermissions().
+
+[static]QFileDevice::Permissions QFile::permissions(const QString \&fileName)
+
+这是一个重载函数。
+
+返回 fileName 文件经 OR（位或）后的权限 QFile::Permission 组合。
+
+bool QFile::remove()
+
+删除文件名 fileName() 的文件。
+
+如果成功，返回 true ；否则返回 false。
+
+文件会在删除前关闭。
+
+另请参见 setFileName().
+
+[static]bool QFile::remove(const QString \&fileName)
+
+这是一个重载函数。
+
+删除文件名 fileName 的文件。
+
+如果成功，返回 true ；否则返回 false。
+
+另请参见 remove().
+
+bool QFile::rename(const QString \&newName)
+
+把文件 fileName() 重命名为 newName。如果成功，返回 true ；否则返回 false。
+
+注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+
+文件在重命名前关闭。
+
+如果直接重命名失败，Qt会尝试拷贝数据到 newName 新文件并删除旧文件来实现重命名。如果拷贝或删除失败，Qt会撤回新文件创建，返回原先状态。
+
+另请参见 setFileName().
+
+[static]bool QFile::rename(const QString \&oldName, const QString \&newName)
+
+这是一个重载函数。
+
+把文件 oldName 重命名为 newName。如果成功，返回 true ；否则返回 false。
+
+注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+
+另请参见 rename().
+
+\hl{[override virtual]}bool QFile::resize(qint64 \emph{sz})
+
+重写函数： QFileDevice::resize(qint64 \emph{sz}).
+
+\hl{[static]}bool QFile::resize(const QString \&fileName, qint64 \emph{sz})
+
+这是一个重载函数。
+
+这是文件名 fileName 文件的大小为 \emph{sz} 字节。如果修改大小成功返回 \hl{true}，否则返回 \hl{false}。如果 \emph{sz} 比当前文件大小大，后面的数据会填充0；如果 \emph{sz} 比当前文件大小小，会裁剪文件数据。
+
+\textbf{警告}： 如果文件不存在，调用会失败。
+
+另请参见 resize().
+
+void QFile::setFileName(const QString \&name)
+
+设置文件名 name。名称可以不包含目录，包含相对目录或绝对目录。
+
+请不要在文件已经打开后调用此函数。
+
+如果文件名不包含路径，或者是相对路径，路径会基于应用程序调用 open() 时的当前路径。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QFile file;
+QDir::setCurrent("/tmp");
+file.setFileName("readme.txt");
+QDir::setCurrent("/home");
+file.open(QIODevice::ReadOnly);      // 打开Unix下文件 "/home/readme.txt"
+\end{lstlisting}
+
+注意Qt中目录分隔符统一使用"/".
+
+另请参见 fileName(), QFileInfo, and QDir.
+
+\splitLine
+
+\hl{[override virtual]}bool QFile::setPermissions(QFileDevice::Permissions permissions)
+
+重写函数： QFileDevice::setPermissions(QFileDevice::Permissions permissions).
+
+为文件设置 permissions 权限。如果成功返回 true ，如果权限不能修改返回 false 。
+
+\textbf{警告}： 此函数不会操作修改 ACLs，这会限制函数功能。
+
+另请参见 permissions() and setFileName().
+\splitLine
+
+[static]bool QFile::setPermissions(const QString \&fileName, QFileDevice::Permissions permissions)
+
+这是一个重载函数。
+
+为文件名 fileName 的文件设置 permissions 权限。
+
+\hl{[override virtual]}qint64 QFile::size() const
+
+重写函数： QFileDevice::size() const.
+
+\splitLine
+
+\hl{[static]}QString QFile::symLinkTarget(const QString \&fileName)
+
+返回符号链接（Unix上的symlink或Windows上快捷方式）fileName 指向的文件或目录的绝对路径。如果 fileName 不是一个符号链接，返回空字符串。
+
+名称可能并不是一个存在的文件，只是一个字符串路径。QFile::exists() 可以用来判断是否存在。
+
+此函数引入自： Qt 4.2.
+
+\splitLine
+
+QString QFile::symLinkTarget() const
+
+这是一个重载函数。
+
+返回QFile对象对应的符号链接（Unix上的symlink或Windows上快捷方式）指向的文件或目录的绝对路径。如果 fileName 不是一个符号链接，返回空字符串。
+
+名称可能并不是一个存在的文件，只是一个字符串路径。QFile::exists() 可以用来判断是否存在。
+
+此函数引入自： Qt 4.2.
+
+另请参见 fileName() and setFileName().
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
