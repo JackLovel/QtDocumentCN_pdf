@@ -30,7 +30,7 @@ enum&	MonthNameType{ DateFormat, StandaloneFormat }\\
 
 公共成员函数
 
-\begin{longtable}{|l|l|}
+\begin{longtable}{|l|m{30em}|}
 \hline
 类型	&函数名\\
 \hline
@@ -181,7 +181,7 @@ daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLe
 \item 合法的日期范围 日期内部存储为儒略日天号，使用连续的整数记录天数，公元前4714年11月24日是格里高利历第0天（儒略历的公元前4713年1月1日）。除了可以准确有效地表示绝对日期，此类也可以用来做不同日历系统的转换。儒略历天数可以通过 QDate::toJulianDay() 和 QDate::fromJulianDay()读写。 由于技术原因，储存的儒略历天号在 -784350574879~784354017364 之间，大概是公元前2亿年到公元后2亿年之间。
 \end{itemize}
 
-另请参阅：QTime、QDateTime、QCalendar、QDateTime::YearRange、QDateEdit、QDateTimeEdit 和 QCalendarWidget。
+\textbf{另请参阅}：QTime、QDateTime、QCalendar、QDateTime::YearRange、QDateEdit、QDateTimeEdit 和 QCalendarWidget。
 
 \splitLine
 
@@ -191,7 +191,7 @@ enum QDate::MonthNameType
 
 此枚举描述字符串中月份名称的表示类型
 
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|l|l|m{20em}|}
 \hline
 常量	&数值&	描述\\
 \hline
@@ -220,7 +220,7 @@ QString QDate::toString(const QString \&format, QCalendar cal) const
 
 日期格式的表示如下：
 
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|m{30em}|}
 \hline
 占位符 &	输出格式\\
 \hline
@@ -268,9 +268,9 @@ ddd MMMM d yy&	Sun July 20 69\\
 
 如果日期非法，会返回空字符串。
 
-注意： 如果需要本地化的日期表达, 请使用 QLocale::system().toString()，因为 QDate 将在 Qt 6 使用英文表达（C语言风格）。
+\textbf{注意}： 如果需要本地化的日期表达, 请使用 QLocale::system().toString()，因为 QDate 将在 Qt 6 使用英文表达（C语言风格）。
 
-另请参阅：fromString()、QDateTime::toString()、QTime::toString() 和
+\textbf{另请参阅}：fromString()、QDateTime::toString()、QTime::toString() 和
 QLocale::toString()。
 
 \splitLine
@@ -287,7 +287,7 @@ QDateTime QDate::endOfDay(const QTimeZone \&zone) const
 
 函数在 Qt 5.14 中引入。
 
-另请参阅：startOfDay()。
+\textbf{另请参阅}：startOfDay()。
 
 \splitLine
 
@@ -305,23 +305,23 @@ QDateTime QDate::startOfDay(const QTimeZone \&zone) const
 
 函数在 Qt 5.14 中引入。
 
-另请参阅：endOfDay()。
+\textbf{另请参阅}：endOfDay()。
 
 \splitLine
 
 QDate::QDate(int y, int m, int d)
 从年月日构造对象，使用格里高利历。如果日期非法，对象不会修改，且 isValid() 返回false。
 
-警告： 1~99年就对应于它本身，不会偏移。第0年是非法的。
+\textbf{警告}： 1~99年就对应于它本身，不会偏移。第0年是非法的。
 
-另请参阅：isValid() 和 QCalendar::dateFromParts()。
+\textbf{另请参阅}：isValid() 和 QCalendar::dateFromParts()。
 
 \splitLine
 
 QDate::QDate()
 构造一个空的日期，也是不可用的。
 
-另请参阅：isNull() 和 isValid()。
+\textbf{另请参阅}：isNull() 和 isValid()。
 
 \splitLine
 
@@ -331,7 +331,7 @@ QDate QDate::addDays(qint64 ndays) const
 
 当当前日期或新日期是非法日期时，返回非法日期。
 
-另请参阅：addMonths()、addYears() 和 daysTo()。
+\textbf{另请参阅}：addMonths()、addYears() 和 daysTo()。
 
 \splitLine
 
@@ -343,9 +343,9 @@ QDate QDate::addMonths(int nmonths, QCalendar cal) const
 
 如果传入 cal 参数，会使用日历系统使用，否则使用格里高利历。
 
-注意： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
+\textbf{注意}： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
 
-另请参阅：addDays() 和 addYears()。
+\textbf{另请参阅}：addDays() 和 addYears()。
 
 \splitLine
 
@@ -357,9 +357,9 @@ QDate QDate::addYears(int nyears, QCalendar cal) const
 
 如果传入 cal 参数，会使用日历系统使用，否则使用格里高利历。
 
-注意： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
+\textbf{注意}： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
 
-另请参阅：addDays() 和 addMonths()。
+\textbf{另请参阅}：addDays() 和 addMonths()。
 
 \splitLine
 
@@ -367,7 +367,7 @@ QDate QDate::addYears(int nyears, QCalendar cal) const
 
 返回系统时钟所示的今天的日期对象。
 
-另请参阅：QTime::currentTime() 和 QDateTime::currentDateTime()。
+\textbf{另请参阅}：QTime::currentTime() 和 QDateTime::currentDateTime()。
 
 \splitLine
 
@@ -381,7 +381,7 @@ int QDate::day(QCalendar cal) const
 
 一些日历系统中，返回值可能大于7。
 
-另请参阅：year()、month() 和 dayOfWeek()。
+\textbf{另请参阅}：year()、month() 和 dayOfWeek()。
 
 \splitLine
 
@@ -395,7 +395,7 @@ int QDate::dayOfWeek(QCalendar cal) const
 
 一些日历系统中，返回值可能大于7。
 
-另请参阅：day()、dayOfYear() 和 Qt::DayOfWeek。
+\textbf{另请参阅}：day()、dayOfYear() 和 Qt::DayOfWeek。
 
 \splitLine
 
@@ -407,7 +407,7 @@ int QDate::dayOfYear(QCalendar cal) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历。非法日期则返回0。
 
-另请参阅：day() 和 dayOfWeek()。
+\textbf{另请参阅}：day() 和 dayOfWeek()。
 
 \splitLine
 
@@ -419,7 +419,7 @@ int QDate::daysInMonth(QCalendar cal) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历 (返回值是 28~31)。非法日期则返回0。
 
-另请参阅：day() 和 daysInYear()。
+\textbf{另请参阅}：day() 和 daysInYear()。
 
 \splitLine
 
@@ -431,7 +431,7 @@ int QDate::daysInYear(QCalendar cal) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历 (返回值是 365 或 366)。非法日期则返回0。
 
-另请参阅：day() 和 daysInMonth()。
+\textbf{另请参阅}：day() 和 daysInMonth()。
 
 \splitLine
 
@@ -450,7 +450,7 @@ d1.daysTo(d2);          // returns 3
 d2.daysTo(d1);          // returns -3
 \end{lstlisting}
 
-另请参阅：addDays()。
+\textbf{另请参阅}：addDays()。
 
 \splitLine
 
@@ -458,7 +458,7 @@ d2.daysTo(d1);          // returns -3
 
 将jd表示的儒略日解析为日期并返回。
 
-另请参阅：toJulianDay()。
+\textbf{另请参阅}：toJulianDay()。
 
 \splitLine
 
@@ -469,9 +469,9 @@ Qt::DateFormat format = Qt::TextDate)
 
 注意 Qt::TextDate：建议使用英文的简写月份名称（例如 "Jan"）。尽管本地化的月份名称在 Qt 5 中也可使用，但它们会依赖于用户的区域设置。
 
-注意： 对本地化的日期的支持，包括 Qt::SystemLocaleDate、Qt::SystemLocaleShortDate、Qt::SystemLocaleLongDate、Qt::LocaleDate、Qt::DefaultLocaleShortDate 和 Qt::DefaultLocaleLongDate，将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
+\textbf{注意}： 对本地化的日期的支持，包括 Qt::SystemLocaleDate、Qt::SystemLocaleShortDate、Qt::SystemLocaleLongDate、Qt::LocaleDate、Qt::DefaultLocaleShortDate 和 Qt::DefaultLocaleLongDate，将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
 
-另请参阅：toString() 和 QLocale::toDate()。
+\textbf{另请参阅}：toString() 和 QLocale::toDate()。
 
 \splitLine
 
@@ -562,11 +562,11 @@ void QDate::getDate(int  \emph{*year}, int \emph{*month}, int \emph{*day}) const
 
 如果日期非法，返回的是0。
 
-注意： 在 Qt 5.7 之前, 这个函数不是常函数。
+\textbf{注意}： 在 Qt 5.7 之前, 这个函数不是常函数。
 
 此函数在 Qt 4.5 中引入。
 
-另请参阅：year()，month()，day()，isValid() 和
+\textbf{另请参阅}：year()，month()，day()，isValid() 和
 QCalendar::partsFromDate()。
 
 \splitLine
@@ -575,16 +575,17 @@ QCalendar::partsFromDate()。
 
 判断是否是格里高利历的闰年，是则返回 \hl{true}。
 
-另请参阅：QCalendar::isLeapYear()。
+\textbf{另请参阅}：QCalendar::isLeapYear()。
 
 \splitLine
 
 bool QDate::isNull() const
+
 判断日期是否为空，日期为空则返回 \hl{true}。 空日期是非法的。
 
-注意： 行为与 isValid() 等价。
+\textbf{注意}： 行为与 isValid() 等价。
 
-另请参阅：isValid()。
+\textbf{另请参阅}：isValid()。
 
 \splitLine
 
@@ -592,7 +593,7 @@ bool QDate::isValid() const
 
 判断日期是否合法，合法返回 \hl{true}。
 
-另请参阅：isNull() 和 QCalendar::isDateValid()。
+\textbf{另请参阅}：isNull() 和 QCalendar::isDateValid()。
 
 \splitLine
 
@@ -693,7 +694,7 @@ int QDate::weekNumber(int *yearNumber = nullptr) const
 
 根据 ISO 8601, 格里高利历中，跨年的周属于天数更多的那年。 由于 ISO 8601 规定一周始于周一，周三在哪一年这周就属于哪一年。 大多数年有52周，但也有53周的年份。
 
-注意： *yearNumber 不总是与 year() 相等。例如, 2000.1.1是1999年第52周, 2002.12.31是2003年第1周。
+\textbf{注意}： *yearNumber 不总是与 year() 相等。例如, 2000.1.1是1999年第52周, 2002.12.31是2003年第1周。
 
 \textbf{另请参阅}：isValid()。
 
