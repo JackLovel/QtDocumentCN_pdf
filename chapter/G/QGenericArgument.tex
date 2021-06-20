@@ -21,6 +21,44 @@ qmake& 	\hl{QT += core}\\
 
 公共成员函数
 
+
+\begin{tabular}{|l|m{30em}|}
+\hline
+返回类型& 	函数\\
+\hline
+	&QGenericArgument(const char *name = nullptr, const void * data =
+   nullptr)\\
+\hline
+void * 	&data() const\\
+\hline
+const char *& 	name() const\\
+\hline
+\end{tabular}
+
+\splitLine
+
+详细描述
+
+该类绝不应该被主动使用，请通过 Q\_ARG() 来使用。
+
+\textbf{另请参阅}：Q\_ARG()、QMetaObject::invokeMethod() 和 QGenericReturnArgument。
+
+\splitLine
+
+成员函数描述
+
+QGenericArgument::QGenericArgument(const char *name = nullptr, const void *data = nullptr)
+
+通过给定的 name 和 data 构造 QGenericArgument 对象。
+
+void *QGenericArgument::data() const
+
+返回构造函数中设置的数据对象指针。
+
+const char *QGenericArgument::name() const
+
+返回构造函数中设置的名称。
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"

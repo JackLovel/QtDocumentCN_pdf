@@ -1,0 +1,51 @@
+\chapter{QGenericReturnArgument}
+
+QGenericReturnArgument 类是用于序列化返回值的内部辅助类。\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/G/QGenericReturnArgument/QGenericReturnArgument.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{更多信息...}
+
+
+\begin{tabular}{|l|l|}
+\hline
+属性& 	内容\\
+\hline
+头文件& 	\hl{\#include <QGenericReturnArgument>}\\
+\hline
+qmake& 	\hl{QT += core}\\
+\hline
+被继承& 	QGenericArgument\\
+\hline
+\end{tabular}
+
+
+\splitLine
+
+公共成员函数
+
+\begin{tabular}{|l|m{30em}|}
+\hline
+返回类型& 	函数\\
+\hline
+ 	&QGenericReturnArgument(const char *name = nullptr, void *data = nullptr)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+详细描述
+
+该类绝不应该被主动使用，请通过 Q\_RETURN\_ARG() 来使用。
+
+\textbf{另请参阅}：Q\_RETURN\_ARG()，QMetaObject::invokeMethod() 和
+QGenericArgument。
+
+\splitLine
+
+成员函数描述
+
+QGenericReturnArgument::QGenericReturnArgument(const char *name = nullptr, void *data = nullptr)
+
+通过给定的 name 和 data 构造 QGenericReturnArgument 对象。
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
