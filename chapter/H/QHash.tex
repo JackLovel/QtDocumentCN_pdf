@@ -1,0 +1,191 @@
+\chapter{QHash}\label{hash}
+
+template <typename Key, typename T> class QHash
+
+QHash 类是一种模板类，提供基于哈希表的字典类结构。更多内容...\ref{detail}
+
+
+\begin{tabular}{|l|l|}
+\hline
+属性& 	内容\\
+\hline
+头文件& 	\hl{\#include <QHash>}\\
+\hline
+qmake& 	\hl{QT += core}\\
+\hline
+派生类& 	QMultiHash\\
+\hline
+\end{tabular}
+
+
+\begin{itemize}
+\item 所有成员列表，包括继承的成员
+\item 废弃的成员
+\end{itemize}
+
+\textbf{注意}： 该类中的所有函数都是可重入的。
+
+\splitLine
+
+\section{公共成员类型}
+
+\begin{tabular}{|m{5em}|m{30em}|}
+\hline
+class& 	const\_iterator\\
+\hline
+class& 	iterator\\
+\hline
+class& 	key\_iterator\\
+\hline
+typedef& 	ConstIterator\\
+\hline
+typedef& 	Iterator\\
+\hline
+typedef& 	const\_key\_value\_iterator\\
+\hline
+typedef& 	difference\_type\\
+\hline
+typedef& 	key\_type\\
+\hline
+typedef& 	key\_value\_iterator\\
+\hline
+typedef& 	mapped\_type\\
+\hline
+typedef& 	size\_type\\
+\hline
+\end{tabular}
+
+\splitLine
+
+\section{公共成员函数}
+
+\begin{longtable}{|l|l|}
+\hline
+ 	&QHash(InputIterator begin, InputIterator end)\\
+\hline
+	&QHash(QHash<K, V> \&\&other)\\
+\hline
+	&QHash(const QHash<K, V> \&other)\\
+\hline
+	&QHash(std::initializer\_list<std::pair<Key, T> > list)\\
+\hline
+	&QHash()\\
+\hline
+QHash<K, V> \& 	&operator=(QHash<K, V> \&\&other)\\
+\hline
+QHash<K, V> \& &	operator=(const QHash<K, V> \&other)\\
+\hline
+	&$\sim$QHash()\\
+\hline
+QHash::iterator 	&begin()\\
+\hline
+QHash::const\_iterator &	begin() const\\
+\hline
+int 	&capacity() const\\
+\hline
+QHash::const\_iterator 	&cbegin() const\\
+\hline
+QHash::const\_iterator &	cend() const\\
+\hline
+void &	clear()\\
+\hline
+QHash::const\_iterator& 	constBegin() const\\
+\hline
+QHash::const\_iterator &	constEnd() const\\
+\hline
+QHash::const\_iterator &	constFind(const Key \&key) const\\
+\hline
+QHash::const\_key\_value\_iterator& 	constKeyValueBegin() const\\
+\hline
+QHash::const\_key\_value\_iterator &	constKeyValueEnd() const\\
+\hline
+bool& 	contains(const Key \&key) const\\
+\hline
+int& 	count(const Key \&key) const\\
+\hline
+int& 	count() const\\
+\hline
+bool& 	empty() const\\
+\hline
+QHash::iterator &	end()\\
+\hline
+QHash::const\_iterator &	end() const\\
+\hline
+QPair<QHash::iterator, QHash::iterator> &	equal\_range(const Key
+  \&key)\\
+\hline
+QPair<QHash::const\_iterator, QHash::const\_iterator> &
+                                                        equal\_range(const
+                                                        Key \&key)
+                                                        const\\
+\hline
+QHash::iterator &	erase(QHash::const\_iterator pos)\\
+\hline
+QHash::iterator &	erase(QHash::iterator pos)\\
+\hline
+QHash::iterator &	find(const Key \&key)\\
+\hline
+QHash::const\_iterator& 	find(const Key \&key) const\\
+\hline
+QHash::iterator 	&insert(const Key \&key, const T \&value)\\
+\hline
+void& 	insert(const QHash<K, V> \&other)\\
+\hline
+bool &	isEmpty() const\\
+\hline
+const Key& 	key(const T \&value) const\\
+\hline
+const Key &	key(const T \&value, const Key \&defaultKey) const\\
+\hline
+QHash::key\_iterator &	keyBegin() const\\
+\hline
+QHash::key\_iterator &	keyEnd() const\\
+\hline
+QHash::key\_value\_iterator 	&keyValueBegin()\\
+\hline
+QHash::const\_key\_value\_iterator& 	keyValueBegin() const\\
+\hline
+QHash::key\_value\_iterator 	&keyValueEnd()\\
+\hline
+QHash::const\_key\_value\_iterator &	keyValueEnd() const\\
+\hline
+QList& 	keys() const\\
+\hline
+QList& 	keys(const T \&value) const\\
+\hline
+int &	remove(const Key \&key)\\
+\hline
+void &	reserve(int size)\\
+\hline
+int &	size() const\\
+\hline
+void &	squeeze()\\
+\hline
+void &	swap(QHash<K, V> \&other)\\
+\hline
+T 	&take(const Key \&key)\\
+\hline
+const T &	value(const Key \&key) const\\
+\hline
+const T &	value(const Key \&key, const T \&defaultValue) const\\
+\hline
+QList 	&values() const\\
+\hline
+bool 	&operator!=(const QHash<K, V> \emph{\&other}) const\\
+\hline
+bool 	&operator==(const QHash<K, V> \emph{\&other}) const\\
+\hline
+T \& 	&operator[](const Key \emph{\&key})\\
+\hline
+const T& 	operator[](const Key \emph{\&key}) const\\
+\hline
+\end{longtable}
+
+\section{相关非成员函数}
+
+\section{详细描述}\label{detail}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
