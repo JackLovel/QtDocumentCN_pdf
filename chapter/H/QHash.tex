@@ -183,7 +183,145 @@ const T& 	operator[](const Key \emph{\&key}) const\\
 
 \section{相关非成员函数}
 
+\begin{longtable}{|l|l|}
+\hline
+类型	&函数名\\
+\hline
+int& 	qGlobalQHashSeed()\\
+\hline
+uint& 	qHash(const QSslDiffieHellmanParameters \&dhparam, uint
+      seed)\\
+\hline
+uint& 	qHash(const QUrl \&url, uint seed = 0)\\
+\hline
+uint& 	qHash(const QOcspResponse \&response, uint seed)\\
+\hline
+uint& 	qHash(const QHash<Key, T> \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QBitArray \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(char key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QDateTime \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(QSslEllipticCurve curve, uint seed)\\
+\hline
+uint& 	qHash(QLatin1String key, uint seed = 0)\\
+\hline
+uint& 	qHash(uchar key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QDate \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(signed char key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QTime \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QSet \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const T *key, uint seed = 0)\\
+\hline
+uint& 	qHash(ushort key, uint seed = 0)\\
+\hline
+uint& 	qHash(short key, uint seed = 0)\\
+\hline
+uint& 	qHash(uint key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QPair<T1, T2> \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(int key, uint seed = 0)\\
+\hline
+uint& 	qHash(const std::pair<T1, T2> \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QVersionNumber \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(ulong key, uint seed = 0)\\
+\hline
+uint& 	qHash(long key, uint seed = 0)\\
+\hline
+uint& 	qHash(quint64 key, uint seed = 0)\\
+\hline
+uint& 	qHash(qint64 key, uint seed = 0)\\
+\hline
+uint& 	qHash(float key, uint seed = 0)\\
+\hline
+uint& 	qHash(double key, uint seed = 0)\\
+\hline
+uint& 	qHash(long double key, uint seed = 0)\\
+\hline
+uint& 	qHash(const Char key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QByteArray \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QString \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QStringRef \&key, uint seed = 0)\\
+\hline
+uint& 	qHashBits(const void *p, size\_t len, uint seed = 0)\\
+\hline
+uint& 	qHashRange(InputIterator first, InputIterator last, uint seed = 0)\\
+\hline
+uint& 	qHashRangeCommutative(InputIterator first, InputIterator last, uint seed = 0)\\
+\hline
+void& 	qSetGlobalQHashSeed(int newSeed)\\
+\hline
+QDataStream \& & 	operator<<(QDataStream \&out, const QHash<Key, T> \&hash)\\
+\hline
+QDataStream \& &	operator>>(QDataStream \&in, QHash<Key, T> \&hash)\\
+\hline
+\end{longtable}
+
+\splitLine
+
 \section{详细描述}\label{detail}
+
+QHash<Key, T> 是一种 Qt 泛型容器类。该类存储键值对，可以用相关联的键非常快速地查找值。
+
+QHash 的功能与 QMap 非常相似。二者的区别在于：
+
+\begin{itemize}
+\item QHash 的查找速度比 QMap 快。（详情请看算法复杂度 。）
+\item 遍历 QMap 时，元素总是按照键的顺序排好序的。而遍历 QHash时，元素的顺序是任意的。
+\item QMap 的键类型必须提供 operator<() 运算符。QHash 的键类型必须提供 operator==() 运算符和名为 qHash() 的全局哈希函数 (参考 qHash 哈希函数)。
+\end{itemize}
+
+下面是一个键类型为 QString，值类型为 \hl{int} 的 QHash 的示例：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+\end{lstlisting}
+
+
+可以使用 operator 运算符将键值对插入到哈希表中：
+
+\begin{lstlisting}[language=C++]
+hash["one"] = 1;
+hash["three"] = 3;
+hash["seven"] = 7;
+\end{lstlisting}
+
+上面的代码将3个键值对插入到 QHash 中：("one", 1)，("three", 3) 和
+("seven", 7)。另外一种向哈希表中插入元素的方法是使用 insert()：
+
+\begin{lstlisting}[language=C++]
+hash.insert("twelve", 12);
+\end{lstlisting}
+
+使用 operator 运算符或 value() 查找值：
+
+\begin{lstlisting}[language=C++]
+int num1 = hash["thirteen"];
+int num2 = hash.value("thirteen");
+\end{lstlisting}
+
+如果哈希表中不存在指定的键，这些函数返回默认构造的值。
+
+如果想检查哈希表中是否包含特定键，使用 contains()：
+
+\begin{lstlisting}[language=C++]
+int timeout = 30;
+if (hash.contains("TIMEOUT"))
+    timeout = hash.value("TIMEOUT");
+\end{lstlisting}
 
 %%% Local Variables:
 %%% mode: latex
