@@ -323,6 +323,362 @@ if (hash.contains("TIMEOUT"))
     timeout = hash.value("TIMEOUT");
 \end{lstlisting}
 
+还有一个 value() 的重载函数，如果哈希表中不存在指定键的元素，该函数使
+用第2个参数作为默认值：
+
+\begin{lstlisting}[language=C++]
+int timeout = hash.value("TIMEOUT", 30);
+\end{lstlisting}
+
+一般推荐使用 contains() 和 value() 而不是 operator 运算符查找哈希表中
+的键。原因是如果哈希表中不存在相同键的元素，operator 运算符会默默地将
+一个元素插入到哈希表中（除非哈希表是 const 的）。例如，下面的代码片段
+将在内存中创建1000个元素：
+
+
+\begin{lstlisting}[language=C++]
+// 错误
+QHash<int, QWidget *> hash;
+...
+for (int i = 0; i < 1000; ++i) {
+    if (hash[i] == okButton)
+        cout << "Found button at index " << i << Qt::endl;
+}
+\end{lstlisting}
+
+为了避免这个问题，将上面代码中的 \hl{hash[i]} 替换为 \hl{hash.value(i)}。
+
+QHash 内部使用哈希表来执行查找。哈希表自动增长和收缩以保证在不浪费太多内存的情况下快速查找。如果已经大概知道 QHash 将包含多少元素，可以通过调用 reserve() 来控制哈希表的大小，但是不能保证一定获得更好的性能。还可以调用 capacity() 来获取哈希表的大小。
+
+如果想遍历 QHash 中存储的所有键值对，可以使用迭代器。QHash 同时提供
+Java 风格迭代器（QHashIterator 和 QMutableHashIterator）和 STL 风格迭
+代器（QHash::const\_iterator 和 QHash::iterator）。下面是使用 Java 风格
+迭代器遍历 QHash<QString, int> 的方法：
+
+\begin{lstlisting}[language=C++]
+QHashIterator<QString, int> i(hash);
+while (i.hasNext()) {
+    i.next();
+    cout << i.key() << ": " << i.value() << Qt::endl;
+}
+\end{lstlisting}
+
+下面是相同的代码，不过这次使用 STL 风格迭代器：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int>::const_iterator i = hash.constBegin();
+while (i != hash.constEnd()) {
+    cout << i.key() << ": " << i.value() << Qt::endl;
+    ++i;
+}
+\end{lstlisting}
+
+QHash 是无序的，所以迭代器的顺序是不可预测的。如果需要通过键排序，使用 QMap。
+
+通常，QHash 每个键只允许有一个值。如果用已经存在的键调用 insert()，先
+前的值将被删除。例如：
+
+
+\begin{lstlisting}[language=C++]
+hash.insert("plenty", 100);
+hash.insert("plenty", 2000);
+// hash.value("plenty") == 2000
+\end{lstlisting}
+
+如果只想从哈希表中获取值（而不是键），也可以使用 foreach：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+...
+foreach (int value, hash)
+    cout << value << Qt::endl;
+\end{lstlisting}
+
+移除元素有几种方法。一种是调用 remove()；该函数移除指定键的所有元素。另一种方法是使用 QMutableHashIterator::remove()。另外，还可以使用 clear() 清除整个哈希表。
+
+QHash 键和值的数据类型必须是可赋值数据类型。不能存储 QWidget 作为值；而应该存储 QWidget *。
+qHash() 哈希函数
+
+QHash 的键类型除了必须是可赋值数据类型外，还有一个额外要求：它必须提供 operator==() 运算符，并且在键类型的命名空间内还必须有一个为键类型参数返回哈希值的 qHash() 函数。
+
+该 qHash() 函数基于键计算数值。可以使用任何可以想到的算法计算，只要保证相同参数返回相同值就可以。也就是说，如果 \hl{e1 == e2}，那么 \hl{qHash(e1) == qHash(e2)} 也保持成立。然而，为了获得更好的性能，qHash() 函数应该尽最大可能对不同的键返回不同的哈希值。
+
+对于键类型 \hl{K}，qHash 函数必须是下面两种签名之一：
+
+
+例子：
+
+\begin{lstlisting}[language=C++]
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+
+class Employee
+{
+public:
+    Employee() {}
+    Employee(const QString &name, QDate dateOfBirth);
+    ...
+
+private:
+    QString myName;
+    QDate myDateOfBirth;
+};
+
+inline bool operator==(const Employee &e1, const Employee &e2)
+{
+    return e1.name() == e2.name()
+           && e1.dateOfBirth() == e2.dateOfBirth();
+}
+
+inline uint qHash(const Employee &key, uint seed)
+{
+    return qHash(key.name(), seed) ^ key.dateOfBirth().day();
+}
+
+#endif // EMPLOYEE_H
+\end{lstlisting}
+
+上例中，我们依赖 Qt 的全局 qHash(const QString \&, uint) 函数取得雇员名字的哈希值，然后将这个值与雇员的出生日期求异或，来为同名雇员生成各自唯一的哈希值。
+
+注意，Qt 提供的 qHash() 重载函数的实现可能在任何时候改变。一定不能依赖于这个假定，认为不同 Qt 版本的 qHash() 函数（对于相同的输入）会计算出相同的结果。
+算法复杂度攻击
+
+所有哈希表都容易受到一种特殊类型的拒绝服务攻击，攻击者预先仔细计算好一组不同的键，用这些键在哈希表的同一个 bucket 中（甚至具有相同哈希值）进行散列。攻击的目的是在数据输入表中时达到最坏情形的算法行为（O(n) 而不是平均的 O(1)，详情参考算法复杂度）。
+
+为了避免这种最坏情形的行为，可以在 qHash() 计算哈希值时通过随机种子进行掺杂，抵消攻击的程度。 该种子由 QHash 自动生成，每个进程单独一个，由 QHash 传给两个参数的 qHash() 重载函数的第2个参数。
+
+QHash 的这种随机化处理默认是激活的。尽管如此，使用者不应该依赖于特定的 QHash 顺序，这可能是在调试或回归测试等临时需要这种确定性行为的时候。要想关闭随机化处理，可以将环境变量 \hl{QT\_HASH\_SEED} 设置为 0，或者使用参数 0 调用 qSetGlobalQHashSeed() 函数。
+
+另请参阅 QHashIterator, QMutableHashIterator, QMap 和 QSet.
+
+\section{成员类型文档}
+
+typedef QHash::ConstIterator
+
+QHash::const\_iterator 的 Qt 风格的别名。
+
+typedef QHash::Iterator
+
+QHash::iterator 的 Qt 风格的别名。
+
+typedef QHash::const\_key\_value\_iterator
+
+QMap::const\_key\_value\_iterator 类型定义为 QHash 和 QMultiHash 提供 STL 风格迭代器。
+
+除了 operator*() 运算符返回的是键值对而不是值之外，QHash::const\_key\_value\_iterator 基本和 QHash::const\_iterator 相同。
+
+Qt 5.10 中引入该类型定义。
+
+另请参阅 QKeyValueIterator。
+
+typedef QHash::difference\_type
+
+ptrdiff\_t 的类型别名。为兼容 STL 提供。
+
+typedef QHash::key\_type
+
+Key 的类型别名。为兼容 STL 提供。
+
+typedef QHash::key\_value\_iterator
+
+QHash::key\_value\_iterator 类型定义为 QHash 和 QMultiHash 提供 STL 风格迭代器。
+
+除了 operator*() 运算符返回的是键值对而不是值之外，QHash::key\_value\_iterator 基本和 QHash::iterator 相同。
+
+Qt 5.10 中引入该类型定义。
+
+\textbf{另请参阅}: QKeyValueIterator。
+
+typedef QHash::mapped\_type
+
+T 的类型别名。为兼容 STL 提供。
+
+typedef QHash::size\_type
+
+int 的类型别名。为兼容 STL 提供。
+
+\section{成员函数文档}
+
+template QHash::QHash(InputIterator begin, InputIterator end)
+
+用迭代器范围 [begin, end) 内每个元素的副本构造一个哈希表。需要满足下列两个条件之一：迭代范围内的元素是包含 first 和 second 数据成员的对象（像 QPair，std::pair 等），分别可以转换为 Key 类型和 T 类型；或者迭代器必须含有 key() 和 value() 成员函数，分别返回可以转换为 Key 类型的键和 T 类型的值。
+
+Qt 5.14 中引入该函数。
+
+QHash::QHash(QHash<K, V> \&\&other)
+
+移动构造一个 QHash 实例，使该实例指向 other 所指向的同一对象。
+
+Qt 5.2 中引入该函数。
+
+QHash::QHash(const QHash<K, V> \&other)
+
+构造一个 other 的副本。
+
+该操作需要常数时间，因为 QHash 是隐式共享的。这使得从一个函数返回 QHash 非常快。如果共享实例被修改了，它将以线性时间被复制一份（写时拷贝）。
+
+\textbf{另请参阅}: operator=()。
+
+QHash::QHash(std::initializer\_list<std::pair<Key, T>> list)
+
+用初始化列表 list 中每个元素的副本构造一个哈希表。
+
+只有当程序在 C++11 模式下编译时，该函数才可用。
+
+Qt 5.1 中引入该函数。
+
+QHash::QHash()
+
+构造一个空哈希表。
+
+\textbf{另请参阅}: clear()。
+
+QHash<K, V> \&QHash::operator=(QHash<K, V> \&\&other)
+
+移动赋值 other 到该 QHash实例。
+
+Qt 5.2 中引入该函数。
+
+QHash<K, V> \&QHash::operator=(const QHash<K, V> \&other)
+
+将 other 赋值给该哈希表并返回该哈希表的引用。
+
+QHash::$\sim$QHash()
+
+析构哈希表。该哈希表中值的引用及所有该哈希表的迭代器都将失效。
+
+QHash::iterator QHash::begin()
+
+返回 STL 风格迭代器 pointing to the first item in the hash.
+
+\textbf{另请参阅}: constBegin() 和 end()。
+
+QHash::const\_iterator QHash::begin() const
+
+这是一个重载函数。
+
+int QHash::capacity() const
+
+返回 QHash 内部哈希表中的 bucket 数。
+
+该函数的唯一目的是提供一种调节 QHash 内存使用的方法。一般很少需要调用该函数。如果想知道哈希表中的元素数，请调用 size()。
+
+\textbf{另请参阅}: reserve() 和 squeeze()。
+
+QHash::const\_iterator QHash::cbegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一个元素。
+
+Qt 5.0 中引入该函数。
+
+\textbf{另请参阅}: begin() 和 cend()。
+
+QHash::const\_iterator QHash::cend() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
+
+Qt 5.0 中引入该函数。
+
+\textbf{另请参阅}: cbegin() 和 end()。
+
+void QHash::clear()
+
+从哈希表中移除所有元素。
+
+\textbf{另请参阅}: remove()。
+
+QHash::const\_iterator QHash::constBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一个元素。
+
+\textbf{另请参阅}: begin() 和 constEnd()。
+
+QHash::const_iterator QHash::constEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
+
+\textbf{另请参阅}: constBegin() 和 end()。
+
+QHash::const\_iterator QHash::constFind(const Key \&key) const
+
+返回常量类型（译者注：原文没有const）的迭代器，指向哈希表中键为 key 的元素。
+
+如果哈希表不包含键为 key 的元素，该函数返回 constEnd()。
+
+Qt 4.1 中引入该函数。
+
+\textbf{另请参阅}: find() 和 QMultiHash::constFind()。
+
+QHash::const\_key\_value_iterator QHash::constKeyValueBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一项.
+
+Qt 5.10 中引入该函数。
+
+\textbf{另请参阅}: keyValueBegin()。
+
+QHash::const\_key\_value\_iterator QHash::constKeyValueEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一项之后的假想项。
+
+Qt 5.10 中引入该函数。
+
+\textbf{另请参阅}: constKeyValueBegin()。
+
+bool QHash::contains(const Key \&key) const
+
+如果该哈希表包含键为 key 的元素，返回 true；否则返回 false。
+
+\textbf{另请参阅}: count() 和 QMultiHash::contains()。
+
+int QHash::count(const Key \&key) const
+
+返回与键 key 相关联的元素个数。
+
+\textbf{另请参阅}: contains() 和 insertMulti()。
+
+int QHash::count() const
+
+这是一个重载函数。
+
+同 size()。
+
+bool QHash::empty() const
+
+该函数为兼容 STL 提供。与 isEmpty() 等价，如果哈希表为空，返回 true；否则返回 false。
+
+QHash::iterator QHash::end()
+
+返回 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
+
+\textbf{另请参阅}: begin() 和 constEnd()。
+
+QHash::const\_iterator QHash::end() const
+
+这是一个重载函数。
+
+QPair<QHash::iterator, QHash::iterator> QHash::equal_range(const Key \&key)
+
+返回一对迭代器界定与 key 相关联的值的范围 [first, second)。如果范围为空，则两个迭代器都为 end()。
+
+Qt 5.7 中引入该函数。
+
+QPair<QHash::const\_iterator, QHash::const\_iterator> QHash::equal\_range(const Key \&key) const
+
+这是一个重载函数。
+
+Qt 5.7 中引入该函数。
+
+QHash::iterator QHash::erase(QHash::const\_iterator pos)
+
+从哈希表中移除迭代器 pos 指向的键值对，返回指向哈希表中下一个元素的迭代器。
+
+与 remove() 和 take() 不同，该函数绝不会使 QHash 重新散列其内部数据结
+构。这意味着可以在迭代时安全调用该函数而不会影响哈希表中元素的顺序。
+
+例如：
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
