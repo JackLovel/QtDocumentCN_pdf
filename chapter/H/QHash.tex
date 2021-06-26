@@ -1131,33 +1131,33 @@ uint qHash(long double key, uint seed = 0)
 
 Qt 5.3 中引入该函数。
 
-uint qHash(const QChar key, uint seed = 0)
+uint qHash(const QChar \emph{key}, uint \emph{seed} = 0)
 
-返回 key 的哈希值，使用 seed 来随机化计算结果。
-
-Qt 5.0 中引入该函数。
-
-uint qHash(const QByteArray \&key, uint seed = 0)
-
-返回 key 的哈希值，使用 seed 来随机化计算结果。
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
 
 Qt 5.0 中引入该函数。
 
-uint qHash(const QString \&key, uint seed = 0)
+uint qHash(const QByteArray \emph{\&key},  uint \emph{seed} = 0)
 
-返回 key 的哈希值，使用 seed 来随机化计算结果。
-
-Qt 5.0 中引入该函数。
-
-uint qHash(const QStringRef \&key, uint seed = 0)
-
-返回 key 的哈希值，使用 seed 来随机化计算结果。
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
 
 Qt 5.0 中引入该函数。
 
-uint qHashBits(const void *p, size\_t len, uint seed = 0)
+uint qHash(const QString \emph{\&key}, uint \emph{seed} = 0)
 
-返回 p 指向的大小为 len 的内存块的哈希值，使用 seed 来随机化计算结果。
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QStringRef \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHashBits(const void \emph{*p}, size\_t \emph{len}, uint \emph{seed} = 0)
+
+返回 \emph{p} 指向的大小为 \emph{len} 的内存块的哈希值，使用 \emph{seed} 来随机化计算结果。
 
 仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为 std::vector 实现 qHash() 函数的例子：
 
@@ -1180,9 +1180,9 @@ Qt 5.4 中引入该函数。
 
 \textbf{另请参阅}: qHashRange() 和 qHashRangeCommutative()。
 
-template uint qHashRange(InputIterator first, InputIterator last, uint seed = 0)
+template uint qHashRange(InputIterator \emph{first}, InputIterator \emph{last}, uint \emph{seed} = 0)
 
-返回范围 [first,last) 的哈希值，使用 seed 来随机化计算结果，该函数依次对每个元素执行 qHash()，然后将所有哈希值组合成一个值。
+返回范围 [\emph{first},\emph{last}) 的哈希值，使用 \emph{seed} 来随机化计算结果，该函数依次对每个元素执行 qHash()，然后将所有哈希值组合成一个值。
 
 该函数的返回值依赖于范围中元素的顺序。这意味着
 
@@ -1212,10 +1212,11 @@ inline uint qHash(const std::vector<int> &key, uint seed = 0)
 
 Qt 5.5 中引入该函数。
 
-另请参阅 qHashBits() 和 qHashRangeCommutative()。
-template uint qHashRangeCommutative(InputIterator first, InputIterator last, uint seed = 0)
+\textbf{另请参阅}: qHashBits() 和 qHashRangeCommutative()。
 
-返回范围 [first,last) 的哈希值，使用 seed 来随机化计算结果，该函数依次对每个元素执行 qHash()，然后将所有哈希值组合成一个值。
+template uint qHashRangeCommutative(InputIterator \emph{first}, InputIterator \emph{last}, uint \emph{seed} = 0)
+
+返回范围 [\emph{first},\emph{last}) 的哈希值，使用 \emph{seed} 来随机化计算结果，该函数依次对每个元素执行 qHash()，然后将所有哈希值组合成一个值。
 
 该函数的返回值不依赖于范围中元素的顺序。这意味着
 
@@ -1245,32 +1246,33 @@ inline uint qHash(const std::unordered_set<int> &key, uint seed = 0)
 
 Qt 5.5 中引入该函数。
 
-另请参阅 qHashBits() 和 qHashRange()。
-void qSetGlobalQHashSeed(int newSeed)
+\textbf{另请参阅}: qHashBits() 和 qHashRange()。
 
-将全局 QHash 种子设置为 newSeed。
+void qSetGlobalQHashSeed(int \emph{newSeed})
+
+将全局 QHash 种子设置为 \emph{newSeed}。
 
 只有在测试和调试时才需要手动设置全局 QHash 种子值，此时需要 QHash 具有确定的和可复制的行为。我们不鼓励在产品代码中这么做因为这会使软件容易受到 算法复杂度攻击。
 
-从 Qt 5.10 开始，只能在 0 和 -1 之间设置值。传递 -1 将重新初始化全局 QHash 种子为一个随机值，传递 0 用来为 C++ 基本类型（例如 int）和字符串类型（QString，QByteArray）请求稳定算法。
+从 Qt 5.10 开始，只能在 0 和 -1 之间设置值。传递 -1 将重新初始化全局 QHash 种子为一个随机值，传递 0 用来为 C++ 基本类型（例如 \hl{int}）和字符串类型（QString，QByteArray）请求稳定算法。
 
 任何新创建的 QHash 都会设置种子值。参考 qHash 了解 QHash 如何使用种子。
 
-如果设置了环境变量 QT\_HASH\_SEED，调用该函数什么也不做。
+如果设置了环境变量 \hl{QT\_HASH\_SEED}，调用该函数什么也不做。
 
 Qt 5.6 中引入该函数。
 
 \textbf{另请参阅}: qGlobalQHashSeed。
 
-template <typename Key, typename T> QDataStream \&operator<<(QDataStream \&out, const QHash<Key, T> \&hash)
+template <typename Key, typename T> QDataStream \&operator<<(QDataStream \emph{\&out}, const QHash<Key, T> \emph{\&hash})
 
-将哈希表 hash 写出到流 out。
+将哈希表 \emph{hash} 写出到流 \emph{out}。
 
-该函数需要键和值类型实现 operator<<()。
+该函数需要键和值类型实现 \hl{operator<<()}。
 
 \textbf{另请参阅}: Serializing Qt Data Types。
 
-template <typename Key, typename T> QDataStream \&operator>>(QDataStream \&in, QHash<Key, T> \&hash)
+template <typename Key, typename T> QDataStream \&operator>>(QDataStream \emph{\&in}, QHash<Key, T> \emph{\&hash})
 
 从流 in 读入数据到哈希表 hash。
 
