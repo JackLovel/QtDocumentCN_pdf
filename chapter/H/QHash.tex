@@ -593,7 +593,7 @@ QHash::const\_iterator QHash::constBegin() const
 
 \textbf{另请参阅}: begin() 和 constEnd()。
 
-QHash::const_iterator QHash::constEnd() const
+QHash::const\_iterator QHash::constEnd() const
 
 返回常量类型的 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
 
@@ -609,7 +609,7 @@ Qt 4.1 中引入该函数。
 
 \textbf{另请参阅}: find() 和 QMultiHash::constFind()。
 
-QHash::const\_key\_value_iterator QHash::constKeyValueBegin() const
+QHash::const\_key\_value\_iterator QHash::constKeyValueBegin() const
 
 返回常量类型的 STL 风格迭代器，指向哈希表中的第一项.
 
@@ -657,7 +657,7 @@ QHash::const\_iterator QHash::end() const
 
 这是一个重载函数。
 
-QPair<QHash::iterator, QHash::iterator> QHash::equal_range(const Key \&key)
+QPair<QHash::iterator, QHash::iterator> QHash::equal\_range(const Key \&key)
 
 返回一对迭代器界定与 key 相关联的值的范围 [first, second)。如果范围为空，则两个迭代器都为 end()。
 
@@ -677,6 +677,273 @@ QHash::iterator QHash::erase(QHash::const\_iterator pos)
 构。这意味着可以在迭代时安全调用该函数而不会影响哈希表中元素的顺序。
 
 例如：
+
+\begin{lstlisting}[language=C++]
+QHash<QObject *, int> objectHash;
+...
+QHash<QObject *, int>::iterator i = objectHash.find(obj);
+while (i != objectHash.end() && i.key() == obj) {
+    if (i.value() == 0) {
+        i = objectHash.erase(i);
+    } else {
+        ++i;
+    }
+}
+\end{lstlisting}
+
+Qt 5.7 中引入该函数。
+
+\textbf{另请参阅}: remove()，take() 和 find()。
+
+QHash::iterator QHash::erase(QHash::iterator \emph{pos})
+
+这是一个重载函数。
+
+QHash::iterator QHash::find(const Key \emph{\&key})
+
+返回迭代器，指向哈希表中键为 key 的元素。
+
+如果哈希表不包含键为 \emph{key} 的元素，函数返回 end().
+
+如果哈希表包含多个键为 \emph{key} 的元素，函数返回指向最新插入的那个值的迭代器。其它值可以通过递增迭代器取得。例如，下面的代码遍历同一键的所有元素：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+...
+QHash<QString, int>::const_iterator i = hash.find("HDR");
+while (i != hash.end() && i.key() == "HDR") {
+    cout << i.value() << Qt::endl;
+    ++i;
+}
+\end{lstlisting}
+
+\textbf{另请参阅}: value()，values() 和 QMultiHash::find()。
+
+QHash::const\_iterator QHash::find(const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+QHash::iterator QHash::insert(const Key \emph{\&key}, const T \emph{\&value})
+
+用键 \emph{key} 和值 \emph{value} 插入一个新元素。
+
+如果已经存在键为 \emph{key} 的元素，该元素的值将被 \emph{value} 替换。
+
+如果有多个键为 \emph{key} 的元素，最新插入的元素的值将被 \emph{value }替换。
+
+void QHash::insert(const QHash<K, V> \emph{\&other})
+
+将 \emph{other} 哈希表中的所有元素插入到本哈希表中。
+
+如果一个键同时在两个哈希表中出现，其值将被 other 中存储的值替换。
+
+\textbf{注意}: 如果 other 中同一键关联多个元素，则该键的最终值未定义。
+
+Qt 5.15 中引入该函数。
+
+bool QHash::isEmpty() const
+
+如果哈希表中不包含元素，返回 \hl{true}；否则返回 \hl{false}。
+
+\textbf{另请参阅}: size()。
+
+const Key QHash::key(const T \emph{\&value}) const
+
+返回与值 \emph{value} 对应的第一个键。
+
+如果哈希表不包含值为 \emph{value} 的元素，函数返回默认构造的键.
+
+该函数可能会比较慢（线性时间），因为 QHash 的内部数据结构是以快速查找键而不是值为目标来优化的。
+
+\textbf{另请参阅}: value() 和 keys()。
+
+const Key QHash::key(const T \emph{\&value}, const Key \emph{\&defaultKey}) const
+
+这是一个重载函数。
+
+返回与值 \emph{value} 对应的第一个键，如果哈希表不包含值为 \emph{value} 的元素，返回 \emph{defaultKey}。
+
+该函数可能会比较慢（线性时间），因为 QHash 的内部数据结构是以快速查找键而不是值为目标来优化的。
+
+Qt 4.3 中引入该函数。
+
+QHash::key\_iterator QHash::keyBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一个键。
+
+Qt 5.6 中引入该函数。
+
+\textbf{另请参阅}: keyEnd()。
+
+QHash::key\_iterator QHash::keyEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的最后一个元素之后的假想元素的键。
+
+Qt 5.6 中引入该函数。
+
+\textbf{另请参阅}: keyBegin()。
+
+QHash::key\_value\_iterator QHash::keyValueBegin()
+
+返回 STL 风格迭代器，指向哈希表中的第一项。
+
+Qt 5.10 中引入该函数。
+
+\textbf{另请参阅}: keyValueEnd()。
+
+QHash::const\_key\_value\_iterator QHash::keyValueBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一项。
+
+Qt 5.10 中引入该函数。
+
+\textbf{另请参阅}: keyValueEnd()。
+
+QHash::key\_value\_iterator QHash::keyValueEnd()
+
+返回 STL 风格迭代器，指向哈希表中最后一项之后的假想项。
+
+Qt 5.10 中引入该函数。
+
+\textbf{另请参阅}: keyValueBegin()。
+
+QHash::const\_key\_value\_iterator QHash::keyValueEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一项之后的假想项。
+
+Qt 5.10 中引入该函数。
+
+\textbf{另请参阅}: keyValueBegin()。
+
+QList QHash::keys() const
+
+以任意顺序返回哈希表中所有键的列表。在哈希表中多次出现的键（当该方法应用在 QMultiHash 时）也会在列表中多次出现。
+
+键的顺序将确保与通过 values() 返回的值的顺序相同。
+
+\textbf{另请参阅}: QMultiMap::uniqueKeys()，values() 和 key()。
+
+QList QHash::keys(const T \emph{\&value}) const
+
+这是一个重载函数。
+
+以任意顺序返回所有与值 \emph{value} 相关联的键的列表。
+
+该函数可能会比较慢（线性时间），因为 QHash 的内部数据结构是以快速查找键而不是值为目标来优化的。
+
+int QHash::remove(const Key \emph{\&key})
+
+从哈希表中移除所有键为 \emph{key} 的元素。返回被移除的元素个数，如果键存在，则为1，否则为0。
+
+\textbf{另请参阅}: clear()，take() 和 QMultiHash::remove()。
+
+void QHash::reserve(int \emph{size})
+
+确保 QHash 的内部哈希表包含至少 \emph{size} 数量的 bucket。
+
+该函数对于需要构建大型哈希表，并且不想重复分配内存的使用者来说很有用。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+hash.reserve(20000);
+for (int i = 0; i < 20000; ++i)
+    hash.insert(keys[i], values[i]);
+\end{lstlisting}
+
+理想情况下，\emph{size} 应该比哈希表中期望的最大元素数略大。\emph{size} 不一定必须是质数，因为 QHash 内部总会使用一个质数。如果 \emph{size} 预估小了，可能发生的最坏情形就是 QHash 会变慢一点。
+
+一般很少需要调用该函数。QHash 的内部哈希表会自动收缩或增长来保证不浪费太多内存的情况下达到最优性能。
+
+\textbf{另请参阅}: squeeze() 和 capacity()。
+
+int QHash::size() const
+
+返回哈希表中的元素个数。
+
+\textbf{另请参阅}: isEmpty() 和 count()。
+
+void QHash::squeeze()
+
+减少 QHash 内部哈希表的大小以节约内存。
+
+该函数的唯一目的是提供一种调节 QHash 内存使用的方法。一般很少需要调用该函数。
+
+\textbf{另请参阅}: reserve() 和 capacity()。
+
+void QHash::swap(QHash<K, V> \emph{\&other})
+
+将哈希表 \emph{other} 与本哈希表。该操作非常快，永远不失败。
+
+Qt 4.8 中引入该函数。
+
+T QHash::take(const Key \emph{\&key})
+
+从哈希表中移除键为 \emph{key} 的元素，返回键 \emph{key} 所关联的值。
+
+如果哈希表中不存在该元素，该函数简单返回一个默认构造的值。如果哈希表中有多个键为 \emph{key} 的元素，只移除最新插入的元素并返回值。
+
+如果不使用返回值，使用 remove() 更高效一些。
+
+\textbf{另请参阅}: remove()。
+
+const T QHash::value(const Key \emph{\&key}) const
+
+返回键 \emph{key} 关联的值。
+
+如果哈希表不包含键为 \emph{key} 的元素，该函数返回默认构造的值。如果哈希表中有多个键为 \emph{key} 的元素，返回最新插入的元素的值。
+
+\textbf{另请参阅}: key()，values()，contains() 和 [operator]()。
+
+const T QHash::value(const Key \emph{\&key}, const T \emph{\&defaultValue}) const
+
+这是一个重载函数。
+
+如果哈希表不包含键为 \emph{key} 的元素，该函数返回 \emph{defaultValue}。
+
+QList QHash::values() const
+
+以任意顺序返回哈希表中所有值的列表。如果一个键关联到多个值，该键的所有值都将被放入列表中，而不只是最新插入的值。
+
+顺序将确保与通过 keys() 返回的键的顺序相同。
+
+\textbf{另请参阅}: keys() 和 value()。
+
+bool QHash::operator!=(const QHash<K, V> \emph{\&other}) const
+
+如果 other 与本哈希表不相等，返回 \hl{true}，否则返回 \hl{false}。
+
+如果两个哈希表包含相同的键值对，则认为二者相等。
+
+该函数需要值类型实现 \hl{operator==()}。
+
+\textbf{另请参阅}: operator==()。
+
+bool QHash::operator==(const QHash<K, V> \emph{\&other}) const
+
+如果 \hl{other} 与本哈希表相等，返回 \emph{true}，否则返回 \emph{false}。
+
+如果两个哈希表包含相同的键值对，则认为二者相等。
+
+该函数需要值类型实现 \hl{operator==()}。
+
+\textbf{另请参阅}: operator!=()。
+
+T \&QHash::operator[](const Key \emph{\&key})
+
+返回键 \emph{key} 所关联的值的可修改引用。
+
+如果哈希表不包含键为 \emph{key} 的元素，该函数用键 \emph{key} 插入一个默认构
+造的值，并返回该值的引用。如果哈希表包含多个键为 \emph{key} 的元素，该函数返回最新插入的那个值的引用。
+
+\textbf{另请参阅}: insert() 和 value()。
+
+const T QHash::operator[](const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+同 value()。
 
 
 %%% Local Variables:
