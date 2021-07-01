@@ -23,6 +23,7 @@
 \usepackage{pbox}
 \usepackage{graphicx} % 导入图片包
 \graphicspath{{img/}}
+\usepackage[bodytextleadingratio=1.45]{zhlineskip}
 
 \newfontfamily\consolas{Consolas}
 %fc-list :lang=zh >> c:\font.txt
@@ -75,6 +76,8 @@
 
 % 首行缩进两个字符
 %\setlength{\parindent}{2em}
+%\CTEXindent 
+\CTEXnoindent % 取消首行缩进
 
 \setlength{\headheight}{20pt}
 
@@ -120,6 +123,7 @@
 \include{./chapter/G/QGenericReturnArgument}
 \include{./chapter/H/const_iterator}
 \include{./chapter/H/QHash}
+\include{./chapter/H/qhash-key-iterator}
 \include{./chapter/S/QSql}
 \include{./chapter/S/QSqlDatabase}
 \include{./chapter/W/QWaitCondition}
