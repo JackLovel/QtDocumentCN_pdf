@@ -81,13 +81,8 @@
 
 \setlength{\headheight}{20pt}
 
-%\makeatletter
-%\providecommand*\input@path{}
-%\newcommand\addinputpath[1]{
-%  \expandafter\def\expandafter\input@path
-%  \expandafter{\input@path{#1}}}
-%\addinputpath{body/}
-%\makeatother
+% 定义需要强调的环境
+\newenvironment{notice}[1][注意]{{\textbf{#1}：}}
 
 \begin{document}
 % 正文区（文稿区）
