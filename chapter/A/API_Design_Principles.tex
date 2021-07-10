@@ -287,7 +287,12 @@ bool QWidget::isEnabledTo(const QWidget *ancestor) const;
 QPoint QWidget::mapFrom(const QWidget *ancestor, const QPoint &pos) const;
 \end{lstlisting}
 
-注意，我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
+%注意，我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
+
+\begin{notice}
+我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
+\end{notice}
+
 
 \begin{lstlisting}[language=C++]
 bool isVisibleTo(const QGraphicsItem *parent) const;
@@ -391,8 +396,7 @@ QWidget &widget = 0)
 
 const 关键字不会为你做任何事，考虑将其移除，而非为一个成员函数提供 const/非 const 的重载版本。
 
-
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: master
+%%% TeX-master: "../../master"
 %%% End:
