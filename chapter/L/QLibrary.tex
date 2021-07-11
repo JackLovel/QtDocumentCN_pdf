@@ -1,5 +1,130 @@
 \chapter{QLibrary}
 
+Qlibrary用于运行时加载库。
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	内容\\
+\hline
+头文件:& 	\#include <QLibrary>\\
+\hline
+qmake:& 	QT += core\\
+\hline
+继承于:& 	QObject\\
+\hline
+\end{tabular}
+
+\begin{notice}
+此类中全部函数可重入。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|l|}
+\hline
+类型 &	名称\\
+\hline
+enum &	LoadHint { ResolveAllSymbolsHint, ExportExternalSymbolsHint,
+       LoadArchiveMemberHint, PreventUnloadHint, DeepBindHint }\\
+\hline
+flags &	LoadHints \\ 
+\hline
+\end{tabular}
+
+\section{属性}
+
+\begin{itemize}
+\item fileName : QString
+\item loadHints : LoadHints
+\end{itemize}
+
+\section{公共成员函数}
+
+\begin{longtable}{|l|l|}
+\hline
+ 类型& 	函数名\\
+\hline
+	&QLibrary(const QString \&fileName, const QString \&version,
+   QObject *parent = nullptr)\\
+\hline
+	&QLibrary(const QString \&fileName, int verNum, QObject *parent =
+   nullptr)\\
+\hline
+	&QLibrary(const QString \&fileName, QObject *parent = nullptr)\\
+\hline
+	&QLibrary(QObject *parent = nullptr)\\
+\hline
+virtual& 	$\sim$QLibrary()\\
+\hline
+QString& 	errorString() const\\
+\hline
+QString& 	fileName() const\\
+\hline
+bool& 	isLoaded() const\\
+\hline
+bool& 	load()\\
+\hline
+QLibrary::LoadHints& 	loadHints() const\\
+\hline
+QFunctionPointer& 	resolve(const char *symbol)\\
+\hline
+void& 	setFileName(const QString \&fileName)\\
+\hline
+void& 	setFileNameAndVersion(const QString \&fileName, int versionNumber)\\
+\hline
+void& 	setFileNameAndVersion(const QString \&fileName, const QString
+      \&version)\\
+\hline
+void& 	setLoadHints(QLibrary::LoadHints hints)\\
+\hline
+bool& 	unload()\\
+\hline
+\end{longtable}
+
+\section{静态公共成员}
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	函数名\\
+\hline
+bool& 	isLibrary(const QString \&fileName)\\
+\hline
+QFunctionPointer& 	resolve(const QString \&fileName, const char
+                  *symbol)\\
+\hline
+QFunctionPointer& 	resolve(const QString \&fileName, int verNum, const char *symbol)\\
+\hline
+QFunctionPointer& 	resolve(const QString \&fileName, const QString \&version, const char *symbol)\\
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+QLibrary的实例用于操作一个动态链接库文件（文中称为库，也就是DLL）。QLibrary提供访问库中函数的一种平台无关方式。您可以在构造时传递库文件名，也可以通过 setFileName() 给对象显式设置。加载库时，QLibrary在所有系统指定的位置搜索 (例如： Unix上的 LD\_LIBRARY\_PATH), 除非文件名是绝对路径。
+
+如果文件路径是绝对路径，则会首先尝试在这个位置加载。如果找不到，QLibrary尝试不同系统相关的前后缀的文件名，比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀".dylib"，Windows的后缀".dll"。
+
+如果文件路径不是绝对路径，Qlibrary改变搜索顺序，首先尝试系统特定的前后缀，之后是特定文件路径。
+
+这让使用除去前后缀的库基本名称来指定库文件变得可能。因此代码可以在不同操作系统里执行，但不用太多代码尝试各种文件名称。
+
+最重要的函数是 load() 用于动态加载库，isLoaded() 用于检查是否加载成功，以及 resolve() 来解析库中的符号。如果库还没加载，resolve() 函数隐式地加载这个库。多个QLibrary实例访问同一个物理库文件是可行的。一旦被加载，库在内存中一直保留到程序结束。您可以通过 unload() 尝试卸载一个库，但如果有其他QLibrary实例在使用同一个库文件，调用会失败。只有在每一个实例都调用过 unload() 后，库才会真正卸载。
+
+Qlibrary 的一种典型用法是解析库中的导出符号，并调用其对应的C语言函数。这叫做显式链接，对应于隐式链接。隐式链接是构建中的链接可执行文件和静态库的步骤。
+
+下面的代码片段加载了个库，解析"mysymbol"符号，并在一切就绪的情况下调用
+这个函数。如果出现了问题， 例如库文件不存在或者符号未定义，函数指针将
+会是nullptr，且不会调用。
+
+\begin{lstlisting}[language=C++]
+
+QLibrary myLib("mylib");
+typedef void (*MyPrototype)();
+MyPrototype myFunction = (MyPrototype) myLib.resolve("mysymbol");
+if (myFunction)
+    myFunction();
+
+\end{lstlisting}
 
 %%% Local Variables:
 %%% mode: latex
