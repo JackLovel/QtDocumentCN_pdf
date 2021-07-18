@@ -764,6 +764,112 @@ const T \&QList::first() const
 
 示例:
 
+
+\begin{lstlisting}[language=C++]
+QSet<int> set;
+set << 20 << 30 << 40 << ... << 70;
+
+QList<int> list = QList<int>::fromSet(set);
+std::sort(list.begin(), list.end());
+\end{lstlisting}
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+fromVector(), toSet() 和 QSet::toList()。
+\end{notice}
+
+
+\hl{[static]} QList QList::fromStdList(const std::list \emph{\&list})
+
+返回一个包含且仅包含 \emph{list} 中所有的数据的 QList 对象。QList 中元素的顺序和 \emph{list} 一致。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+std::list<double> stdlist;
+list.push_back(1.2);
+list.push_back(0.5);
+list.push_back(3.14);
+
+QList<double> list = QList<double>::fromStdList(stdlist);
+\end{lstlisting}
+
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+toStdList() 和 QVector::fromStdVector()。
+\end{notice}
+
+
+\hl{[static]} QList QList::fromVector(const QVector \emph{\&vector})
+
+返回包含且仅包含 \emph{vector} 中所有的元素的 QList 对象。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QVector<double> vect;
+vect << 20.0 << 30.0 << 40.0 << 50.0;
+
+QList<double> list = QVector<T>::fromVector(vect);
+// list: [20.0, 30.0, 40.0, 50.0]
+\end{lstlisting}
+
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+fromSet(), toVector() 和 QVector::toList()。
+\end{notice}
+
+T \&QList::front()
+
+该方法用于提供对 STL 的兼容，等同于 first()。要求列表不能为空， 如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+const T \&QList::front() const
+
+这是个重载函数。
+
+int QList::indexOf(const T \emph{\&value}, int \emph{from} = 0) const
+
+返回从索引位置 \emph{from} 开始向列表尾部方向搜索，在列表中 \emph{value} 第一次出现的索引位置。如果没有找到则返回 -1。
+
+示例：
+
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "B" << "A";
+list.indexOf("B");          // 返回 1
+list.indexOf("B", 1);       // 返回 1
+list.indexOf("B", 2);       // 返回 3
+list.indexOf("X");          // 返回 -1
+\end{lstlisting}
+
+
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
+
+\begin{notice}[另请参阅]
+lastIndexOf() 和 contains()。
+\end{notice}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
