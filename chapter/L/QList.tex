@@ -764,6 +764,306 @@ const T \&QList::first() const
 
 示例:
 
+
+\begin{lstlisting}[language=C++]
+QSet<int> set;
+set << 20 << 30 << 40 << ... << 70;
+
+QList<int> list = QList<int>::fromSet(set);
+std::sort(list.begin(), list.end());
+\end{lstlisting}
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+fromVector(), toSet() 和 QSet::toList()。
+\end{notice}
+
+
+\hl{[static]} QList QList::fromStdList(const std::list \emph{\&list})
+
+返回一个包含且仅包含 \emph{list} 中所有的数据的 QList 对象。QList 中元素的顺序和 \emph{list} 一致。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+std::list<double> stdlist;
+list.push_back(1.2);
+list.push_back(0.5);
+list.push_back(3.14);
+
+QList<double> list = QList<double>::fromStdList(stdlist);
+\end{lstlisting}
+
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+toStdList() 和 QVector::fromStdVector()。
+\end{notice}
+
+
+\hl{[static]} QList QList::fromVector(const QVector \emph{\&vector})
+
+返回包含且仅包含 \emph{vector} 中所有的元素的 QList 对象。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QVector<double> vect;
+vect << 20.0 << 30.0 << 40.0 << 50.0;
+
+QList<double> list = QVector<T>::fromVector(vect);
+// list: [20.0, 30.0, 40.0, 50.0]
+\end{lstlisting}
+
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+fromSet(), toVector() 和 QVector::toList()。
+\end{notice}
+
+T \&QList::front()
+
+该方法用于提供对 STL 的兼容，等同于 first()。要求列表不能为空， 如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+const T \&QList::front() const
+
+这是个重载函数。
+
+int QList::indexOf(const T \emph{\&value}, int \emph{from} = 0) const
+
+返回从索引位置 \emph{from} 开始向列表尾部方向搜索，在列表中 \emph{value} 第一次出现的索引位置。如果没有找到则返回 -1。
+
+示例：
+
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "B" << "A";
+list.indexOf("B");          // 返回 1
+list.indexOf("B", 1);       // 返回 1
+list.indexOf("B", 2);       // 返回 3
+list.indexOf("X");          // 返回 -1
+\end{lstlisting}
+
+
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
+
+\begin{notice}[另请参阅]
+lastIndexOf() 和 contains()。
+\end{notice}
+
+
+void QList::insert(int i, const T \emph{\&value})
+
+将 \emph{value} 插入到列表的索引位置 \emph{i}。
+
+如果 \emph{i} == 0，该值将会被追加到列表头部。如果 \emph{i} == size()，该值将会被追加到列表尾部。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "alpha" << "beta" << "delta";
+list.insert(2, "gamma");
+// list: ["alpha", "beta", "gamma", "delta"]
+\end{lstlisting}
+
+
+
+\begin{notice}[另请参阅]
+append(), prepend(), replace() 和 removeAt()。
+\end{notice}
+
+QList::iterator QList::insert(QList::iterator \emph{before}, const T \emph{\&value})
+
+这是个重载函数。
+
+将 \emph{value} 插入到迭代器 \emph{before} 指向元素的前面，并返回一个指向插入元素的迭代器。需要注意的是传递给该函数的迭代器在调用完成后将会失效，返回的迭代器可以用来代替它。
+
+bool QList::isEmpty() const
+
+如果列表中没有任何元素则返回 true ，否则返回 false。
+
+\begin{notice}[另请参阅]
+size()。
+\end{notice}
+
+
+T \&QList::last()
+
+返回列表最后一个元素的引用，列表必须非空。如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+
+\begin{notice}[另请参阅]
+constLast(), first() 和 isEmpty()。
+\end{notice}
+
+
+const T \&QList::last() const
+
+这是个重载函数。
+
+int QList::lastIndexOf(const T \emph{\&value}, int \emph{from} = -1) const
+
+返回从索引位置 \emph{from} 开始向列表头部方向搜索，在列表中 \emph{value} 最后一次出现的索引位置。如果 \emph{from} 是 -1，将会从最后一个元素开始搜索。如果没有找到则返回 -1。
+
+示例：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "B" << "A";
+list.lastIndexOf("B");      // 返回 3
+list.lastIndexOf("B", 3);   // 返回 3
+list.lastIndexOf("B", 2);   // 返回 1
+list.lastIndexOf("X");      // 返回 -1
+\end{lstlisting}
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
+
+
+\begin{notice}[另请参阅]
+indexOf()。
+\end{notice}
+
+
+int QList::length() const
+
+该方法等同于 count()。
+
+该方法在 Qt 4.5 中引入。
+
+
+\begin{notice}[另请参阅]
+count()。
+\end{notice}
+
+
+QList QList::mid(int \emph{pos}, int \emph{length} = -1) const
+
+返回一个包含从列表的 \emph{pos} 位置开始的元素的子列表，如果
+\emph{length} 为 -1（默认值），那么从 \emph{pos} 开始的所有元素都会被
+子列表包含，否则子列表将会包含 \emph{length} 个（如果剩余元素个数不足 \emph{length} 则为剩下的全部）元素。
+
+void QList::move(int \emph{from}, int \emph{to})
+
+将位于索引位置 \emph{from} 的元素移动到索引位置 \emph{to}。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "D" << "E" << "F";
+list.move(1, 4);
+// list: ["A", "C", "D", "E", "B", "F"]
+\end{lstlisting}
+
+等同于 insert(\emph{to}, takeAt(\emph{from}))。该方法会假定 \emph{from} 和 \emph{to} 都不小于 0 且小于 size()。为了避免调用出错，应提前检查 from 和 to 是否不小于 0 且小于 size()。
+
+\begin{notice}[另请参阅]
+swap(), insert() 和 takeAt()。
+\end{notice}
+
+void QList::pop\_back()
+
+该方法用于提供对 STL 的兼容，等同于 removeLast()。该方法要求列表不能为空，如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+void QList::pop\_front()
+
+该方法用于提供对 STL 的兼容，等同于 removeFirst()。该方法要求列表不能为空，如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+void QList::prepend(const T \emph{\&value})
+
+在列表头部插入 \emph{value} 。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list.prepend("one");
+list.prepend("two");
+list.prepend("three");
+// list: ["three", "two", "one"]
+\end{lstlisting}
+
+
+该方法等同于 list.insert(0, value)。
+
+如果该列表是非共享的,那么此操作通常会非常快（均摊下来为 常量时间复杂度），因为 QList 在内部缓存的两端都预分配了额外的内存空间用于支持列表两端的快速增长。
+
+
+\begin{notice}[另请参阅]
+append() 和 insert()。
+\end{notice}
+
+void QList::push\_back(const T \&value)
+
+该方法用于提供对 STL 的兼容，等同于 append(value)。
+
+void QList::push\_front(const T \&value)
+
+该方法用于提供对 STL 的兼容，等同于 prepend(value)。
+
+QList::reverse\_iterator QList::rbegin()
+
+返回一个指向列表在逆序遍历时第一个元素 STL 风格的反向迭代器。
+
+该方法在 Qt 5.6 中引入。
+
+\begin{notice}[另请参阅]
+begin(), crbegin() 和 rend()。
+\end{notice}
+
+
+
+QList::const\_reverse\_iterator QList::rbegin() const
+
+这是个重载函数。
+
+该方法在 Qt 5.6 中引入。
+
+int QList::removeAll(const T \emph{\&value})
+
+移除列表中所有值为 \emph{value} 的元素，然后返回移除的数量。
+
+示例：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "sun" << "cloud" << "sun" << "rain";
+list.removeAll("sun");
+// list: ["cloud", "rain"]
+\end{lstlisting}
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+\begin{notice}[另请参阅]
+removeOne(), removeAt(), takeAt() 和 replace()。
+\end{notice}
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../master"
