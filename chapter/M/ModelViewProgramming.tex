@@ -122,4 +122,51 @@ QListView 和 QTreeView 类是最适合与 QFileSystemModel一起使用的视图
 
 我们使用了现成的模型 QFileSystemModel，并创建了一些视图来显示目录的内容。展示了使用模型的最简单方法。 该模型的构建和使用是在单个 main() 函数中执行的：
 
+\begin{lstlisting}[language=C++]
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QSplitter *splitter = new QSplitter;
+
+    QFileSystemModel *model = new QFileSystemModel;
+    model->setRootPath(QDir::currentPath());
+\end{lstlisting}
+
+该模型被设置为使用来自特定文件系统的数据。调用 setRootPath() 将告诉模型文件系统上的哪个驱动器会暴露给视图。
+
+我们使用同一个模型创建两个不同的视图，来查看模型中的项目呈现出来的效果：
+
+\begin{lstlisting}[language=C++]
+QTreeView *tree = new QTreeView(splitter);
+tree->setModel(model);
+tree->setRootIndex(model->index(QDir::currentPath()));
+
+QListView *list = new QListView(splitter);
+list->setModel(model);
+list->setRootIndex(model->index(QDir::currentPath()));
+\end{lstlisting}
+
+视图的构造方法与其他部件一样。设置视图来显示模型中的项目仅需使用目录模型作为参数来调用视图的 setModel() 函数即可。我们通过在每个视图上调用 setRootIndex() 函数来过滤模型提供的数据，并从文件系统模型中为当前目录传递合适的模型索引。
+
+这种情况下对于 QFileSystemModel 来说只能通过传递一个目录参数来使用 index() 函数获取索引，模型索引在 模型类 部分中讨论。
+
+该函数的其余部分是在分裂器部件中显示视图，并运行应用程序的事件循环：
+
+\begin{lstlisting}{language=C++}
+    splitter->setWindowTitle("Two views onto the same file system model");
+    splitter->show();
+    return app.exec();
+}
+\end{lstlisting}
+
+在上面的示例中，我们忽略了如何处理项目选择。 在 处理项目视图中的选择项 部分中将更详细地介绍。
+
+\section{模型类}
+
+在学习如何处理选择项之前，理解模型/视图框架中使用的概念是很有用的。
+
+\subsection{基本概念}
+
+在模型/视图体系结构中，模型提供了视图和委托用来访问数据的标准接口。在 Qt 中，标准接口由 QAbstractItemModel 类定义。无论数据项如何存储在任何基础数据结构中，QAbstractItemModel 的所有子类都将数据表示为一个有层次的包含项表的结构。视图使用此约定来访问模型中的数据项，但是它们向用户呈现此信息的方式不受限制。
+
 
