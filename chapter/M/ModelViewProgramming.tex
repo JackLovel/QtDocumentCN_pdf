@@ -4,9 +4,11 @@
 
 Qt 中包含了一系列的项目视图类，他们使用了模型/视图架构来管理数据和显示之间的关系。此架构的功能分离特征给开发人员在自定义项目的呈现形式时带来了很大的灵活性，并提供标准的模型接口，以允许将各种数据源与现有项目视图一起使用。在本文档中，我们对模型/视图进行了简要介绍，概述了所涉及的概念，并描述了项目视图系统的结构特征。介绍了体系结构中的每个组件，并给出了示例，这些示例告诉我们如何使用所提供的类。
 
+
 \section{模型/视图体系架构}
 
 模型-视图-控制器（MVC）是源自 Smalltalk 的设计模式，在构建用户界面时经常使用。在《设计模式》一书中，Gamma 等人写到：
+
 
 \begin{quote}
 MVC 由三种对象组成。模型是应用程序对象，视图是其在屏幕上的呈现，控制器定义了用户界面对用户输入的反应方式。 在MVC之前，用户界面设计往往会将这些对象整合在一起。 MVC 使它们解耦以增加灵活性和重用性。	
@@ -19,7 +21,9 @@ MVC 由三种对象组成。模型是应用程序对象，视图是其在屏幕�
     \includegraphics[width=0.5\textwidth]{Model_View_architecture.pdf}
   & 模型/视图架构 模型与数据源通信，为架构中的其他组件提供接口。通信的性质取决于数据源的类型以及模型的实现方式。
 
+
 视图从模型中获取模型索引； 这些索引是对数据项的引用。 通过向模型提供模型索引，视图可以从数据源检索出数据项。
+
 
 在标准视图中，委托负责渲染显示数据项。 当编辑项目后，委托将直接通过模型索引与模型进行通信。\\
 
@@ -40,13 +44,18 @@ MVC 由三种对象组成。模型是应用程序对象，视图是其在屏幕�
 
 所有项目模型均基于 QAbstractItemModel 类。此类定义一个接口，视图和委托使用该接口访问数据。数据本身不必存储在模型中。它可以保存在由单独的类，文件，数据库或某些其他应用程序组件提供的数据结构或存储库中。
 
+
 有关模型的基本概念在 “模型类”部分中介绍。
+
 
 QAbstractItemModel 提供了一个数据接口，该接口足够灵活，可以处理以表，列表和树的形式表示数据的视图。但是，当为列表和类似表的数据结构实现新模型时，QAbstractListModel 和 QAbstractTableModel 类是更好的选择，因为它们提供了常用功能的默认实现。这些类中的每一个都可以被子类化以提供支持特殊类型的列表和表的模型。
 
+
 在 创建新模型 部分中讨论了模型子类化的过程。
 
+
 Qt提供了一些现成的模型，可用于处理数据项：
+
 
 \begin{itemize}
 \item QStringListModel 用于存储一列简单的 QString 类型的项目。
@@ -55,10 +64,62 @@ Qt提供了一些现成的模型，可用于处理数据项：
 \item QSqlQueryModel，QSqlTableModel 和 QSqlRelationalTableModel 用于在使用模型/视图架构时访问数据库。
 \end{itemize}
 
+
 如果这些标准模型不满足您的要求，则可以将 QAbstractItemModel，QAbstractListModel 或 QAbstractTableModel 子类化以创建您自己的自定义模型。
 
 \section{视图}
 
 Qt 提供了针对各种视图的完整实现：QListView 用于显示项目列表，QTableView 用于显示表结构模型的数据，QTreeView 在一个分层次的结构列表中显示数据项。这些类均基于 QAbstractItemView 抽象基类。尽管这些类都是已经实现好的，但也可以将它们子类化以提供满足我们需求的自定义视图。
 
+
 所有可用的视图可在 视图类 部分中进行查阅。
+
+\section{委托}
+
+QAbstractItemDelegate 是模型/视图框架中委托的抽象基类。默认委托实现由 QStyledItemDelegate 提供， Qt 中的标准视图都将其作为默认委托。但是，QStyledItemDelegate 和 QItemDelegate 是绘制和为视图中的项目提供编辑器的独立替代方法。它们之间的区别在于 QStyledItemDelegate 使用当前样式来绘制其项目。因此，在实现自定义委托或使用 Qt 样式表时，建议将 QStyledItemDelegate 用作基类。
+
+
+委托在 “委托类” 部分中进行了描述。
+
+\section{排序}
+
+在模型/视图架构中，有两种方法可以进行排序；选择哪种方法取决于底层使用的模型。
+
+
+如果您的模型是可排序的，即重新实现 QAbstractItemModel::sort() 函数，则 QTableView 和 QTreeView 都提供了API，可让您以编程方式对模型数据进行排序。 另外，通过将 QHeaderView::sortIndicatorChanged() 信号连接到 QTableView::sortByColumn() 槽函数或 QTreeView::sortByColumn() 槽函数，可以启用交互式排序（即允许用户通过单击视图的标题对数据进行排序））。
+
+
+如果您的模型没有所需的接口，或者如果您想使用列表视图来呈现数据，则另一种方法是在视图呈现数据之前，使用委托模型来转换模型的结构。 有关 代理模型 的部分将对此进行详细介绍。
+
+\section{便捷类}
+
+从标准视图类派生出了许多便捷类，用于 Qt 中基于项目的项目视图类和表类，它们不打算被子类化。
+
+比如 QListWidget，QTreeWidget 和 QTableWidget。
+
+这些类的灵活性不如视图类，并且不能与任意模型一起使用。我们建议您使用模型/视图方法来处理项目视图中的数据，除非您强烈需要一组基于项目的类。
+
+如果希望在使用基于项目的接口的同时利用模型/视图方法提供的功能，请考虑将视图类（例如 QListView，QTableView 和 QTreeView ）与 QStandardItemModel 一起使用。
+
+\section{使用模型和视图}
+
+以下各节说明如何在 Qt 中使用模型/视图模型。每个部分都包含一个示例，紧接着是展示如何创建新组件。
+
+\subsection{Qt 中包含的两个模型}
+
+Qt 提供的两个标准模型是 QStandardItemModel 和 QFileSystemModel。QStandardItemModel 是一个多功能模型，可用于表示列表，表和树视图所需的各种不同的数据结构。该模型还保存数据项。QFileSystemModel 是用于维护有关目录内容的信息的模型，它本身不保存任何数据项，而仅表示本地文件系统上的文件和目录。
+
+QFileSystemModel 提供了一个现成的模型用来测试使用，并且可以通过简单的配置就可以使用现有的数据。使用该模型，我们可以展示如何创建一个可用于现成视图的模型，并探索如何使用模型索引来操控数据。
+
+\subsection{通过现有模型使用视图}
+
+QListView 和 QTreeView 类是最适合与 QFileSystemModel一起使用的视图。下面提供的示例是分别在树形视图和列表视图中显示相同的目录内容。这些视图共享用户的选择，以便在两个视图中突出显示所选的项目。
+
+\begin{figure}[hpt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{shareddirmodel.png}
+\end{figure}
+
+我们使用了现成的模型 QFileSystemModel，并创建了一些视图来显示目录的内容。展示了使用模型的最简单方法。 该模型的构建和使用是在单个 main() 函数中执行的：
+
+
