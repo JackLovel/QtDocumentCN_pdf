@@ -1,0 +1,462 @@
+\chapter{QPaintEngine}
+
+
+QPaintEngine类为QPainter提供了如何在指定绘图设备上(译者注:一般为QPaintDevice的派生)绘制的一些抽象的方法。
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	方法\\
+\hline
+头文件:& 	\#include <QPaintEngine>>\\
+\hline
+qmake:& 	QT += core\\
+\hline
+\end{tabular}
+
+\begin{notice}
+此类中全部函数可重入。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|m{23em}|}
+\hline
+类型 &	名称\\
+\hline
+enum &	LoadHint { ResolveAllSymbolsHint, ExportExternalSymbolsHint,
+       LoadArchiveMemberHint, PreventUnloadHint, DeepBindHint }\\
+\hline
+flags &	LoadHints \\ 
+\hline
+\end{tabular}
+
+\section{属性}
+
+\begin{itemize}
+\item fileName : QString
+\item loadHints : LoadHints
+\end{itemize}
+
+\section{公共成员函数}
+
+\begin{longtable}{|l|m{25em}|}
+\hline
+ 类型& 	函数名\\
+\hline
+	&QLibrary(const QString \&fileName, const QString \&version,
+   QObject *parent = nullptr)\\
+\hline
+	&QLibrary(const QString \&fileName, int verNum, QObject *parent =
+   nullptr)\\
+\hline
+	&QLibrary(const QString \&fileName, QObject *parent = nullptr)\\
+\hline
+	&QLibrary(QObject *parent = nullptr)\\
+\hline
+virtual& 	$\sim$QLibrary()\\
+\hline
+QString& 	errorString() const\\
+\hline
+QString& 	fileName() const\\
+\hline
+bool& 	isLoaded() const\\
+\hline
+bool& 	load()\\
+\hline
+QLibrary::LoadHints& 	loadHints() const\\
+\hline
+QFunctionPointer& 	resolve(const char *symbol)\\
+\hline
+void& 	setFileName(const QString \&fileName)\\
+\hline
+void& 	setFileNameAndVersion(const QString \&fileName, int versionNumber)\\
+\hline
+void& 	setFileNameAndVersion(const QString \&fileName, const QString
+      \&version)\\
+\hline
+void& 	setLoadHints(QLibrary::LoadHints hints)\\
+\hline
+bool& 	unload()\\
+\hline
+\end{longtable}
+
+\section{静态公共成员}
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	函数名\\
+\hline
+bool& 	isLibrary(const QString \&fileName)\\
+\hline
+QFunctionPointer& 	resolve(const QString \&fileName, const char
+                  *symbol)\\
+\hline
+QFunctionPointer& 	resolve(const QString \&fileName, int verNum, const char *symbol)\\
+\hline
+QFunctionPointer& 	resolve(const QString \&fileName, const QString \&version, const char *symbol)\\
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+QLibrary的实例用于操作一个动态链接库文件（文中称为库，也就是DLL）。QLibrary提供访问库中函数的一种平台无关方式。您可以在构造时传递库文件名，也可以通过 setFileName() 给对象显式设置。加载库时，QLibrary在所有系统指定的位置搜索 (例如： Unix上的 LD\_LIBRARY\_PATH), 除非文件名是绝对路径。
+
+如果文件路径是绝对路径，则会首先尝试在这个位置加载。如果找不到，QLibrary尝试不同系统相关的前后缀的文件名，比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀".dylib"，Windows的后缀".dll"。
+
+如果文件路径不是绝对路径，Qlibrary改变搜索顺序，首先尝试系统特定的前后缀，之后是特定文件路径。
+
+这让使用除去前后缀的库基本名称来指定库文件变得可能。因此代码可以在不同操作系统里执行，但不用太多代码尝试各种文件名称。
+
+最重要的函数是 load() 用于动态加载库，isLoaded() 用于检查是否加载成功，以及 resolve() 来解析库中的符号。如果库还没加载，resolve() 函数隐式地加载这个库。多个QLibrary实例访问同一个物理库文件是可行的。一旦被加载，库在内存中一直保留到程序结束。您可以通过 unload() 尝试卸载一个库，但如果有其他QLibrary实例在使用同一个库文件，调用会失败。只有在每一个实例都调用过 unload() 后，库才会真正卸载。
+
+Qlibrary 的一种典型用法是解析库中的导出符号，并调用其对应的C语言函数。这叫做显式链接，对应于隐式链接。隐式链接是构建中的链接可执行文件和静态库的步骤。
+
+下面的代码片段加载了个库，解析"mysymbol"符号，并在一切就绪的情况下调用
+这个函数。如果出现了问题， 例如库文件不存在或者符号未定义，函数指针将
+会是nullptr，且不会调用。
+
+\begin{lstlisting}[language=C++]
+QLibrary myLib("mylib");
+typedef void (*MyPrototype)();
+MyPrototype myFunction = (MyPrototype) myLib.resolve("mysymbol");
+if (myFunction)
+    myFunction();
+\end{lstlisting}
+
+符号必须作为C函数导出，resolve()才能工作。这意味着用C++编译器编译的函
+数必须由 \hl{extern "C"}块包裹。在Windows上，还要求导出函数要使用dllexport宏；
+实现详情见 resolve()。方便起见，resolve() 函数有静态形式，您可以在不现
+实加载库的情况下使用：
+
+
+\begin{lstlisting}[language=C++]
+typedef void (*MyPrototype)();
+MyPrototype myFunction =
+        (MyPrototype) QLibrary::resolve("mylib", "mysymbol");
+if (myFunction)
+    myFunction();
+\end{lstlisting}
+
+\begin{notice}[另请参阅]
+QPluginLoader.
+\end{notice}
+
+\section{成员类型介绍}
+
+enum QLibrary::LoadHint flags QLibrary::LoadHints
+
+这个枚举描述了可能的可以用来改变库的加载行为的指示。这些取值指示在库加
+载后如何解析符号，通过 setLoadHints() 指定。
+
+\begin{tabular}{|l|l|m{20em}|}
+\hline
+常量 	&值& 	描述\\
+\hline
+QLibrary::ResolveAllSymbolsHint& 	0x01 &	在加载库的时候解析符号，而
+                                           不是简单等到 resolve() 调用。
+  \\
+\hline
+QLibrary::ExportExternalSymbolsHint& 	0x02& 	导出库中未解析的符号和
+                                              外部符号，这些符号可以在
+                                              后续动态加载的库中解析。
+  \\
+\hline
+QLibrary::LoadArchiveMemberHint& 	0x04 &	运行库的文件名指定压缩包中
+                                           的特定对象。如果设置了这个
+                                           指示，文件名包含一个路径，
+                                           其指向归档文件，接着是其中
+                                           的成员名称。\\
+\hline
+QLibrary::PreventUnloadHint& 	0x08 	&阻止库从地址空间通过close()卸
+                                        载。如果之后再有open()调用，库
+                                        中的静态变量不会重新初始化。\\
+\hline
+QLibrary::DeepBindHint& 	0x10 	&Instructs the linker to prefer definitions in the loaded library over exported definitions in the loading application when resolving external symbols in the loaded library. This option is only supported on Linux.
+命令链接器在解析加载过的库中的外部符号时，优先使用加载了的库中的定义，
+  而不是在应用程序加载中的定义。【译者注：翻译存疑，故保留原文参考，详
+  情参考globc--dlopen()--RTLD\_DEEPBIND】\\
+\hline
+\end{tabular}
+
+LoadHints是一个 QFlags \hl{<LoadHint>} 类型的typedef。 它储存了LoadHint取值的OR（位或）方式的组合。
+
+\begin{notice}[另请参阅]
+loadHints.
+\end{notice}
+
+\section{属性文档}
+
+fileName : QString
+
+这个属性容纳库的文件名。
+
+我们建议忽略库的后缀名，因为Qlibrary会自动寻找带有合适后缀名的文件。 (参见 isLibrary())
+
+当加载库时，在所有系统指定的位置搜索 (例如： Unix上的 \hl{LD\_LIBRARY\_PATH})，除非文件名是绝对路径。加载成功后，fileName() 返回返回库文件的全名。如果在构造对象或setFileName() 中包含路径，讲返回文件的全路径。
+
+例如在Unix平台成功加载"GL"库后，fileName() 会返回 "libGL.so"。如果传递参数的文件路径是 "/usr/lib/libGL", fileName() 会返回 "/usr/lib/libGL.so"。
+
+访问函数:
+
+\begin{tabular}{|l|l|}
+\hline
+类型& 	函数名\\
+\hline
+QString& 	fileName() const\\
+\hline
+void& 	setFileName(const QString \&fileName)\\
+\hline
+\end{tabular}
+
+loadHints : LoadHints
+
+给 load() 函数一些关于如何执行的指示。
+
+您可以对于符号如何解析做指示。通常来说，符号不是在加载库时解析的，而是惰性解析的（也就是调用 resolve() 时）。如果您设置loadHints 为ResolveAllSymbolsHint，那么如果平台支持，所有符号会在库加载时一齐解析。
+
+设置 ExportExternalSymbolsHint 会使库中的外部符号在后续库解析中可用。
+
+如果设置了 LoadArchiveMemberHint ，文件名会被分解为两部分：归档文件的路径和归档成员的名称. 例如, fileName libGL.a(\hl{shr\_64.o}) 指向归档文件 \hl{libGL.a}中的库文件 \hl{shr\_64.o} . 这个特性只在AIX平台生效。
+
+loadHints 的解释是平台相关的，如果您用这些特效，您大概已经对编译的系统平台做了一些假设。因此请仅在您明白您这些操作的结果的情况下设置这些指示。
+
+默认情况下，此属性没有设置任何flag，所有库文件会惰性加载，并且不会导出共其他动态链接库使用的外部符号。
+
+\begin{notice}
+在库已经加载后设置这个属性没有效果。 并且 loadHints() 不会体现出这些修
+改。
+\end{notice}
+
+\begin{notice}
+这个属性是所有指向同一个库的 QLibrary 实例共享的。
+\end{notice}
+
+访问函数：
+
+\begin{tabular}{|l|l|}
+\hline
+类型 	&函数名\\
+\hline
+QLibrary::LoadHints &	loadHints() const\\
+\hline
+void &	setLoadHints(QLibrary::LoadHints \emph{hints})\\
+\hline
+\end{tabular}
+
+\section{成员函数文档}
+
+% gog 
+
+QLibrary::QLibrary(const QString \emph{\&fileName}, const QString \emph{\&version}, QObject \emph{*parent} = nullptr)
+
+基于给定的父对象 \emph{parent} 构造一个库对象。它会加载文件名 \emph{fileName}、完整版本号 \emph{version} 指定的库文件。如今，版本号在Windows上被忽略。
+
+我们建议在 \emph{fileName} 中忽略文件名的前后缀，因为QLibrary会基于不同平台自
+动寻找合适的前后缀。比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀
+".dylib"，Windows的后缀".dll"。（参见fileName ）
+
+QLibrary::QLibrary(const QString \emph{\&fileName}, int \emph{verNum}, QObject \emph{*parent} = nullptr)
+
+基于给定的父对象 \emph{parent} 构造一个库对象。它会加载文件名 \emph{fileName}、主版本号 \emph{verNum} 指定的库文件。如今，版本号在Windows上被忽略。
+
+我们建议在 fileName 中忽略文件名的前后缀，因为QLibrary会基于不同平台自
+动寻找合适的前后缀。比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀
+".dylib"，Windows的后缀".dll"。（参见fileName ）
+
+QLibrary::QLibrary(const QString \emph{\&fileName}, QObject
+\emph{*parent} = nullptr)
+
+基于给定的父对象 \emph{parent} 构造一个库对象。它会加载文件名 \emph{fileName} 指定的库文件。
+
+我们建议在 
+\emph{fileName} 中忽略文件名的前后缀，因为QLibrary会基于不同平台自
+动寻找合适的前后缀。比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀
+".dylib"，Windows的后缀".dll"。（参见fileName ）
+
+QLibrary::QLibrary(QObject \emph{*parent} = nullptr)
+
+基于给定的父对象 \emph{parent} 构造一个库对象。
+
+\hl{[virtual]}QLibrary::$\sim$QLibrary()
+
+删除此QLibrary对象。
+
+除非显式调用 unload()，库会在一直驻留在内存中，知道应用结束。
+
+\begin{notice}[另请参阅]
+isLoaded() 和 unload().
+\end{notice}
+
+
+QString QLibrary::errorString() const
+
+返回一个描述上一个发生的错误的文本字符串。截至现在，errorString 只会在 load(), unload() 或 resolve() 调用由于一些原因失败时才会设置。
+
+此函数引入自：Qt 4.2.
+
+
+\hl{[static]}bool QLibrary::isLibrary(const QString \emph{\&fileName})
+
+如果 \emph{fileName} 包含一个合法的可加载的后缀，返回true；否则返回false。
+
+\begin{tabular}{|c|c|}
+\hline
+平台& 	合法后缀\\
+\hline
+Windows& 	.dll, .DLL\\
+\hline
+Unix/Linux& 	.so\\
+\hline
+AIX 	&.a\\
+\hline
+HP-UX 	&.sl, .so (HP-UXi)\\
+\hline
+macOS and iOS& 	.dylib, .bundle, .so\\
+\hline
+\end{tabular}
+
+Unix平台上的名字后的版本号会被忽略。
+
+bool QLibrary::isLoaded() const
+
+如果库已经被加载，返回true，否则返回false。
+
+\begin{notice}[另请参阅]
+load().
+\end{notice}
+
+bool QLibrary::load()
+
+加载一个库，如果成功加载则返回true；否则返回false。因为 resolve() 内部会自动调用此方法，您没必要显示调用这个函数。如果在某些情况下您想提前加载库，您可以主动调用它。
+
+\begin{notice}[另请参阅]
+unload().
+\end{notice}
+
+QFunctionPointer QLibrary::res
+olve(const char \emph{*symbol})
+
+返回导出符号 \emph{symbol} 对应的地址。如果需要，库会自动加载。如果库无法加载或符号无法解析，返回 \hl{nullptr} 。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+typedef int (*AvgFunction)(int, int);
+
+AvgFunction avg = (AvgFunction) library->resolve("avg");
+if (avg)
+    return avg(5, 8);
+else
+    return -1;
+\end{lstlisting}
+
+符号必须作为C语言函数导出。这意味着如果使用C++编译器，函数必须由
+\hl{extern "C"} 包裹。在Windows平台，您还必须显式通过 \hl{\_\_declspec(dllexport)}
+指导编译器导出符号，例如：
+
+\begin{lstlisting}[language=C++]
+extern "C" MY_EXPORT int avg(int a, int b)
+{
+    return (a + b) / 2;
+}
+\end{lstlisting}
+
+宏 \hl{MY\_EXPORT} 定义如下
+
+\begin{lstlisting}[language=C++]
+#ifdef Q_OS_WIN
+#define MY_EXPORT __declspec(dllexport)
+#else
+#define MY_EXPORT
+#endif
+\end{lstlisting}
+
+
+% gog 
+
+
+\hl{[static]}QFunctionPointer QLibrary::resolve(const QString \emph{\&fileName}, const char \emph{*symbol})
+
+这是一个重载函数。
+
+加载文件名 \emph{fileName} 对应的库，并返回 \emph{symbol} 对应导出符号的地址。注意 \emph{fileName} 不应该包含平台相关前后缀（详情见 fileName）. 库会一直保留到应用程序退出。
+
+如果库无法加载或符号无法解析，返回 \hl{nullptr} 。
+
+\begin{notice}[另请参阅]
+resolve().
+\end{notice}
+
+\hl{[static]}QFunctionPointer QLibrary::resolve(const QString
+\emph{\&fileName}, int \emph{verNum}, const char \emph{*symbol})
+
+这是一个重载函数。
+
+加载文件名 \emph{fileName} 、主版本号 \emph{verNum} 对应的库，并返回 \emph{symbol} 对应导出符号的地址。注意 \emph{fileName} 不应该包含平台相关前后缀（详情见 fileName）. 库会一直保留到应用程序退出。\emph{version} 参数在 Windows 上无效。
+
+如果库无法加载或符号无法解析，返回 \hl{nullptr} 。
+
+\begin{notice}[另请参阅]
+resolve().
+\end{notice}
+
+[static]QFunctionPointer QLibrary::resolve(const QString \emph{\&fileName}, const QString \emph{\&version}, const char \emph{*symbol})
+
+这是一个重载函数。
+
+加载文件名 \emph{fileName}、完整版本号 \emph{version} 对应的库，并返回 \emph{symbol} 对应导出符号的地址。注意 \emph{fileName} 不应该包含平台相关前后缀（详情见 fileName）. 库会一直保留到应用程序退出。\emph{version} 参数在 Windows 上无效。
+
+如果库无法加载或符号无法解析，返回 \hl{nullptr} 。
+
+此函数引入自：Qt 4.4.
+
+\begin{notice}[另请参阅]
+resolve().
+\end{notice}
+
+void QLibrary::setFileNameAndVersion(const QString \emph{\&fileName}, int \emph{versionNumber})
+
+设置 \emph{fileName} 属性，以及相对应的文件名和版本号信息。\emph{versionNumber} 参数在 Windows 上无效。
+
+
+
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice}
+
+
+void QLibrary::setFileNameAndVersion(const QString \emph{\&fileName}, const
+QString \emph{\&version})
+
+设置 \emph{fileName} 属性，以及相对应的文件名和完整版本号信息。\emph{version} 参数在 Windows 上无效。
+
+此函数引入自：Qt 4.4.
+
+
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice}
+
+
+bool QLibrary::unload()
+
+卸载一个库；如果成功返回 \hl{true}，否则 \hl{false}。
+
+在应用程序结束是，此函数自动调用，因此您不应该手动调用。
+
+如果有其他 QLibrary 示例在使用同一个库，调用会失败。卸载只会在所有实例都调用过此函数之后发生。
+
+\begin{notice}
+在 Mac OS X 10.3 (Panther)，无法卸载动态链接库。
+\end{notice}
+
+\begin{notice}[另请参阅]
+resolve() 和 load().
+\end{notice}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../master"
+%%% End:
