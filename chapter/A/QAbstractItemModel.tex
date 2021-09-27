@@ -22,7 +22,7 @@ QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github
 
 \splitLine
 
-公有成员类型
+\section{公有成员类型}
 
 \begin{tabular}{|m{10em}|m{30em}|}
 	\hline
@@ -40,7 +40,7 @@ enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHin
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 \begin{longtable}{|m{10em}|m{30em}|}
 \hline
@@ -152,7 +152,7 @@ virtual Qt::DropActions	&supportedDropActions const\\
 
 \splitLine
 
-公共槽函数
+\section{公共槽函数}
 
 \begin{tabular}{|r|l|}
 \hline
@@ -166,7 +166,7 @@ virtual bool	&submit()\\
 
 \splitLine
 
-信号
+\section{信号}
 
 \begin{tabular}{|m{4em}|m{36em}|}
 \hline
@@ -218,7 +218,7 @@ void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
 
 \splitLine
 
-受保护的函数
+\section{受保护的函数}
 
 \begin{tabular}{|m{10em}|m{30em}|}
 \hline
@@ -272,7 +272,7 @@ QModelIndexList&	persistentIndexList() const\\
 \hline
 \end{tabular}
 
-受保护的槽函数
+\section{受保护的槽函数}
 
 \splitLine
 
@@ -284,7 +284,7 @@ void	&resetInternalData()\\
 \hline
 \end{tabular}
 
-详细描述
+\section{详细描述}
 
 \splitLine
 
@@ -363,7 +363,7 @@ More示例。
 
 \splitLine
 
-成员类型文档
+\section{成员类型文档}
 
 CheckIndexOption CheckIndexOptions
 enum class QAbstractItemModel::CheckIndexOption flags QAbstractItemModel::CheckIndexOptions
@@ -411,7 +411,7 @@ QAbstractItemModel::HorizontalSortHint&	2&	正在对列进行排序。\\
 
 \splitLine
 
-成员函数文档
+\section{成员函数文档}
 
 QAbstractItemModel
 
@@ -425,7 +425,9 @@ columnsAboutToBeInserted
 
 在将列插入模型之前就发射此信号。新项将位于给定父项 parent 下的首 first 尾 last之间。
 
-注意: 连接到这个信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 的实现发射，不能在子类代码中显式发射。
+\begin{notice}
+	连接到这个信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 的实现发射，不能在子类代码中显式发射。
+\end{notice}
 
 注意:　这是一个私有信号。它可以用于信号连接，但不能由用户发射。
 
