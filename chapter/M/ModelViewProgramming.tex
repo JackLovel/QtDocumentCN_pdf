@@ -34,11 +34,12 @@ MVC 由三种对象组成。模型是应用程序对象，视图是其在屏幕�
 
 模型、视图和委托之间通过信号槽通信。
 
-\begin{itemize}
-\item 数据源的数据发生改变时模型将发射信号通知视图。
+\begin{compactitem}
+	\item 数据源的数据发生改变时模型将发射信号通知视图。
 \item 用户交互发生改变时，视图将发射相应的信号。
 \item 在编辑期间，委托将发射信号来告知模型和视图有关编辑器的状态。
-\end{itemize}
+\end{compactitem}
+
 
 \section{模型}
 
@@ -56,13 +57,12 @@ QAbstractItemModel 提供了一个数据接口，该接口足够灵活，可以�
 
 Qt提供了一些现成的模型，可用于处理数据项：
 
-
-\begin{itemize}
+\begin{compactitem}
 \item QStringListModel 用于存储一列简单的 QString 类型的项目。
 \item QStandardItemModel 用于管理更复杂的树形结构项目，每个项目可以包含任意数据。
 \item QFileSystemModel 提供有关本地归档系统中文件和目录的信息。
 \item QSqlQueryModel，QSqlTableModel 和 QSqlRelationalTableModel 用于在使用模型/视图架构时访问数据库。
-\end{itemize}
+\end{compactitem}
 
 
 如果这些标准模型不满足您的要求，则可以将 QAbstractItemModel，QAbstractListModel 或 QAbstractTableModel 子类化以创建您自己的自定义模型。
@@ -286,14 +286,14 @@ QVariant value = model->data(index, role);
 
 \section{摘要}
 
-\begin{itemize}
+\begin{compactitem}
 \item 模型索引以独立于任何底层数据结构的方式提供给视图和委托有关模型所提供项的位置的信息。
 \item 项通过其行号和列号以及其父项的模型索引检索出来。
 \item 模型索引是由模型根据其他组件（例如视图和委托）的请求构造出来的。
 \item 如果使用 index() 请求索引时为父项指定了有效的模型索引，则返回的索引将引用模型中该父项之下的项。获得的索引指向该项目的子项。
 \item 如果使用 index() 请求索引时为父项指定了无效的模型索引，则返回的索引引用模型中的顶级项。
 \item 项角色 用来区分与项关联的不同类型的数据。
-\end{itemize}
+\end{compactitem}
 
 \section{使用模型索引}
 
@@ -331,12 +331,14 @@ QString text = model->data(index, Qt::DisplayRole).toString();
 \end{lstlisting}
 
 以上示例演示了从模型中检索数据的基本用法：
-\begin{itemize}
+
+\begin{compactitem}
 \item 模型的大小范围可以使用 rowCount() 和 columnCount 获取到。这些函数通常需要指定一个父项模型索引。
 \item 模型索引用于访问模型中的数据项。指定一个项需要行、列和父项的模型索引。
 \item 通过 \hl{QModelIndex()} 指定一个空的父项的索引来访问模型中的顶层项。
 \item 项包含不同角色的数据。要获得特定角色的数据，必须同时向模型提供模型索引和角色。
-\end{itemize}
+\end{compactitem}
+
 
 \subsection{拓展阅读}
 
