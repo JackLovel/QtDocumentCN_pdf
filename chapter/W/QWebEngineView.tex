@@ -17,7 +17,7 @@ QWebEngineView类提供了一个widget, 被使用去查看和编辑web元素。
 	\hline
 \end{tabular}
 
-特性
+\section{特性}
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -35,7 +35,7 @@ QWebEngineView类提供了一个widget, 被使用去查看和编辑web元素。
 	\hline
 \end{tabular}
 
-公共成员函数
+\section{公共成员函数}
 
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|r|l|}
@@ -97,7 +97,7 @@ virtual QSize sizeHint() const override
 \item 14 个公共成员函数继承自 QPaintDevice
 \end{itemize}
 
-公有槽函数
+\section{公有槽函数}
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -113,12 +113,14 @@ virtual QSize sizeHint() const override
 	\hline
 \end{tabular}
 
-\begin{itemize}
+
+\begin{compactitem}
 \item 19 个公共槽函数继承自 QWidget
 \item 1 个公共槽函数继承自 QObject
-\end{itemize}
+\end{compactitem}
 
-信号
+
+\section{信号}
 
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|r|l|}
@@ -151,14 +153,14 @@ void&	urlChanged(const QUrl \&url)\\
 \end{itemize}
 
 
-静态公有成员函数
+\section{静态公有成员函数}
 
 \begin{itemize}
 	\item 5 个静态公有成员函数继承自 QWidget
 	\item 9 个静态公有成员函数 QObject
 \end{itemize}
 
-保护成员函数
+\section{保护成员函数}
 
 
 virtual QWebEngineView * createWindow(QWebEnginePage::WebWindowType type)
@@ -199,7 +201,7 @@ virtual void&	showEvent(QShowEvent *event) override \\
 	\item 一个保护槽继承自QWidget
 \end{itemize}
 
-详细描述
+\section{详细描述}
 
 QWebEngineView类提供了一个小部件, 被用去查看和编辑web文档。
 
@@ -227,7 +229,7 @@ page()函数返回一个指向web页对象的指针。一个QWebEngineView 包�
 
 您也可以在 WebEngine Widgets Simple Browser Example, WebEngine Content Manipulation Example, 和 WebEngine Markdown Editor Example的文档中找到相关的信息。
 
-特性文档编制
+\section{特性文档编制}
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -239,7 +241,7 @@ page()函数返回一个指向web页对象的指针。一个QWebEngineView 包�
 
 此属性保存此页面是否包含所选内容。 默认情况下，此属性为false。
 
-访问函数：
+\section{访问函数}
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -247,7 +249,9 @@ page()函数返回一个指向web页对象的指针。一个QWebEngineView 包�
 	\hline
 \end{tabular}
 
-另见 \href{https://doc.qt.io/qt-5/qwebengineview.html#selectionChanged}{selectionChanged()}
+\begin{notice}[另请参阅]
+	\href{https://doc.qt.io/qt-5/qwebengineview.html#selectionChanged}{selectionChanged()}
+\end{notice}
 
 icon : const QIcon
 

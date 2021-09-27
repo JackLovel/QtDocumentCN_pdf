@@ -18,7 +18,7 @@ QX11Info
 \end{tabular}
 
 
-简述
+\section{简述}
 
 \begin{tabular}{|r|l|}
 \hline
@@ -56,12 +56,13 @@ void&	setNextStartupId(const QByteArray \&id)\\
 \hline
 \end{tabular}
 
-详细说明
+\section{详细说明}
+
 该类提供了关于 x window相关的显式配置信息
 
 该类提供了两类API：一种是提供特定的widget或者特定的pixmap相关的非静态函数，一种是为应用程序提供默认信息的静态函数。(这个分类简直了！！！)
 
-成员函数
+\section{成员函数}
 
 int QX11Info::appDpiX(int screen = -1) static函数
 
@@ -69,7 +70,9 @@ int QX11Info::appDpiX(int screen = -1) static函数
 
 参数screen是指哪个x屏幕（比如两个的话，第一个就是0，第二个就是1）。请注意，如果用户使用的系统是指Xinerama（而不是传统的x11多屏幕），则只有一个x屏幕。请使用QDesktopWidget来查询有关于Xinerama屏幕的信息。
 
-另参阅apDipY();
+\begin{notice}[另请参阅]
+apDipY();
+\end{notice}
 
 int QX11Info::appDpiY(int screen = -1) static函数
 
@@ -77,7 +80,9 @@ int QX11Info::appDpiY(int screen = -1) static函数
 
 参数screen是指哪个x屏幕（比如两个的话，第一个就是0，第二个就是1）。请注意，如果用户使用的系统是指Xinerama（而不是传统的x11多屏幕），则只有一个x屏幕。请使用QDesktopWidget来查询有关于Xinerama屏幕的信息。
 
-另参阅apDipX();
+\begin{notice}[另请参阅]
+apDipX();
+\end{notice}
 
 unsigned long QX11Info::appRootWindow(int screen = -1) static函数
 
