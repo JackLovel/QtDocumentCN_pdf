@@ -1,7 +1,5 @@
 \chapter{QDate}
 
-QDate Class
-
 \begin{tabular}{|l|l|}
 \hline
 属性&	方法\\
@@ -12,11 +10,15 @@ qmake&	QT += core\\
 \hline
 \end{tabular}
 
-\textbf{注意}： 该类提供的所有函数都是可重入的。
+
+\begin{notice}
+该类提供的所有函数都是可重入的。
+\end{notice}
+
 
 \splitLine
 
-公共成员类型
+\section{公共成员类型}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -28,7 +30,7 @@ enum&	MonthNameType{ DateFormat, StandaloneFormat }\\
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 \begin{longtable}{|l|m{30em}|}
 \hline
@@ -124,7 +126,7 @@ bool&	operator>=(const QDate \&d) const\\
 \hline
 \end{longtable}
 
-静态公共成员
+\section{静态公共成员}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -148,7 +150,7 @@ bool&	isValid(int year, int month, int day)\\
 
 \splitLine
 
-相关非成员函数
+\section{相关非成员函数}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -160,7 +162,7 @@ QDataStream \&	& operator>>(QDataStream \&in, QDate \&date)\\
 \hline
 \end{tabular}
 
-详细描述
+\section{详细描述}
 
 无论系统的日历和地域设置如何，一个\hl{QDate}对象代表特定的一天。它可以告诉您某一天的年、月、日，其对应着格里高利历或者您提供的\hl{QCalendar}。
 
@@ -174,18 +176,22 @@ year()、month()、day() 函数可以访问年月日。另外，还有 dayOfWeek
 
 daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLeapYear() 用于判断闰年。
 
-特别注意
+\section{特别注意}
 
-\begin{itemize}
+\begin{compactitem}
 \item 年数没有0 第0年的日期是非法的。公元后是正年份，公元前是负年份。QDate(1, 1, 1) 的前一天是 QDate(-1, 12, 31)。
 \item 合法的日期范围 日期内部存储为儒略日天号，使用连续的整数记录天数，公元前4714年11月24日是格里高利历第0天（儒略历的公元前4713年1月1日）。除了可以准确有效地表示绝对日期，此类也可以用来做不同日历系统的转换。儒略历天数可以通过 QDate::toJulianDay() 和 QDate::fromJulianDay()读写。 由于技术原因，储存的儒略历天号在 -784350574879~784354017364 之间，大概是公元前2亿年到公元后2亿年之间。
-\end{itemize}
+\end{compactitem}
 
-\textbf{另请参阅}：QTime、QDateTime、QCalendar、QDateTime::YearRange、QDateEdit、QDateTimeEdit 和 QCalendarWidget。
+
+\begin{notice}[另请参阅]
+QTime、QDateTime、QCalendar、QDateTime::YearRange、QDateEdit、QDateTimeEdit 和 QCalendarWidget。
+\end{notice}
+
 
 \splitLine
 
-成员类型文档
+\section{成员类型文档}
 
 enum QDate::MonthNameType
 
@@ -268,10 +274,17 @@ ddd MMMM d yy&	Sun July 20 69\\
 
 如果日期非法，会返回空字符串。
 
-\textbf{注意}： 如果需要本地化的日期表达, 请使用 QLocale::system().toString()，因为 QDate 将在 Qt 6 使用英文表达（C语言风格）。
 
-\textbf{另请参阅}：fromString()、QDateTime::toString()、QTime::toString() 和
+\begin{notice}
+如果需要本地化的日期表达, 请使用 QLocale::system().toString()，因为 QDate 将在 Qt 6 使用英文表达（C语言风格）。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+fromString()、QDateTime::toString()、QTime::toString() 和
 QLocale::toString()。
+\end{notice}
+
 
 \splitLine
 
@@ -287,7 +300,10 @@ QDateTime QDate::endOfDay(const QTimeZone \&zone) const
 
 函数在 Qt 5.14 中引入。
 
-\textbf{另请参阅}：startOfDay()。
+
+\begin{notice}[另请参阅]
+startOfDay()。
+\end{notice}
 
 \splitLine
 
@@ -305,7 +321,9 @@ QDateTime QDate::startOfDay(const QTimeZone \&zone) const
 
 函数在 Qt 5.14 中引入。
 
-\textbf{另请参阅}：endOfDay()。
+\begin{notice}[另请参阅]
+endOfDay()。
+\end{notice}
 
 \splitLine
 
@@ -513,6 +531,7 @@ yyyy&	四位数年份。 如果是负数，加上符号是五个字符\\
 \hline
 \end{tabular}
 
+
 \textbf{注意}： 不行此函数的其他版, 日期和月份名必须使用用户本地语言。只有用户语言是英语时，英文名称才适用。
 
 所有其他字符将会被舍弃，单引号('')包裹的内容，无论是否包含格式占位符也会被舍弃。例如：
@@ -551,9 +570,18 @@ QDate::fromString("20000110", "yyyyMMdd");  // January 10, 2000
 QDate::fromString("20000110", "yyyyMd");    // January 10, 2000
 \end{lstlisting}
 
-\textbf{注意}： 如果使用本地化的日期表达, 请使用 QLocale::system().toDate(), 因为 QDate 将在 Qt 6使用英文表达 (C语言风格) 。
 
-\textbf{另请参阅}：toString()、QDateTime::fromString()、QTime::fromString() 和 QLocale::toDate()。
+
+\begin{notice}
+如果使用本地化的日期表达, 请使用 QLocale::system().toDate(), 因为 QDate 将在 Qt 6使用英文表达 (C语言风格) 。
+	
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+toString()、QDateTime::fromString()、QTime::fromString() 和 QLocale::toDate()。
+\end{notice}
+
 
 \splitLine
 
@@ -562,12 +590,20 @@ void QDate::getDate(int  \emph{*year}, int \emph{*month}, int \emph{*day}) const
 
 如果日期非法，返回的是0。
 
-\textbf{注意}： 在 Qt 5.7 之前, 这个函数不是常函数。
+
+
+\begin{notice}
+ 在 Qt 5.7 之前, 这个函数不是常函数。
+\end{notice}
 
 此函数在 Qt 4.5 中引入。
 
-\textbf{另请参阅}：year()，month()，day()，isValid() 和
+
+
+\begin{notice}[另请参阅]
+year()，month()，day()，isValid() 和
 QCalendar::partsFromDate()。
+\end{notice}
 
 \splitLine
 
@@ -575,7 +611,11 @@ QCalendar::partsFromDate()。
 
 判断是否是格里高利历的闰年，是则返回 \hl{true}。
 
-\textbf{另请参阅}：QCalendar::isLeapYear()。
+
+\begin{notice}[另请参阅]
+QCalendar::isLeapYear()。
+\end{notice}
+
 
 \splitLine
 
@@ -583,9 +623,13 @@ bool QDate::isNull() const
 
 判断日期是否为空，日期为空则返回 \hl{true}。 空日期是非法的。
 
-\textbf{注意}： 行为与 isValid() 等价。
+\begin{notice}
+行为与 isValid() 等价。
+\end{notice}
 
-\textbf{另请参阅}：isValid()。
+\begin{notice}[另请参阅]
+isValid()。
+\end{notice}
 
 \splitLine
 
@@ -593,7 +637,11 @@ bool QDate::isValid() const
 
 判断日期是否合法，合法返回 \hl{true}。
 
-\textbf{另请参阅}：isNull() 和 QCalendar::isDateValid()。
+
+
+\begin{notice}[另请参阅]
+isNull() 和 QCalendar::isDateValid()。
+\end{notice}
 
 \splitLine
 
@@ -615,7 +663,10 @@ QDate::isValid(2100, 2, 29);  // false (不是闰年)
 QDate::isValid(1202, 6, 6);   // true (即使这一年在格里高利历之前)
 \end{lstlisting}
 
-\textbf{另请参阅}： isNull()，setDate() 和 QCalendar::isDateValid()。
+
+\begin{notice}[另请参阅]
+isNull()，setDate() 和 QCalendar::isDateValid()。
+\end{notice}
 
 \splitLine
 
@@ -631,7 +682,11 @@ int QDate::month(QCalendar \emph{cal}) const
 
 对于非法日期返回0。注意有一些日历中，月份可能多于12个。
 
-\textbf{另请参阅}： year() 和 day()。
+
+
+\begin{notice}[另请参阅]
+ year() 和 day()。
+\end{notice}
 
 \splitLine
 
@@ -642,7 +697,10 @@ bool QDate::setDate(int \emph{year}, int  \emph{month}, int \emph{day})
 
 此函数在 Qt 4.2 中引入。
 
-\textbf{另请参阅}：isValid() 和 QCalendar::dateFromParts()。
+
+\begin{notice}[另请参阅]
+isValid() 和 QCalendar::dateFromParts()。
+\end{notice}
 
 \splitLine
 
@@ -652,7 +710,11 @@ bool QDate::setDate(int year, int month, int day, QCalendar cal)
 
 函数在 Qt 5.14 中引入。
 
-\textbf{另请参阅}：isValid() 和 QCalendar::dateFromParts()。
+
+
+\begin{notice}[另请参阅]
+isValid() 和 QCalendar::dateFromParts()。
+\end{notice}
 
 \splitLine
 
@@ -660,7 +722,10 @@ qint64 QDate::toJulianDay() const
 
 将日期转换为儒略日。
 
-\textbf{另请参阅}：fromJulianDay()。
+
+\begin{notice}[另请参阅]
+fromJulianDay()。
+\end{notice}
 
 \splitLine
 
@@ -680,9 +745,15 @@ format 中的 Qt::LocaleDate，Qt::DefaultLocaleShortDate 和Qt::DefaultLocaleLo
 
 如果日期非法，返回空字符串。
 
-\textbf{警告}： Qt::ISODate 格式只在0~9999年可用。
 
-\textbf{另请参阅}：fromString() 和 QLocale::toString()。
+\begin{notice}[警告]
+Qt::ISODate 格式只在0~9999年可用。
+\end{notice}
+
+\begin{notice}[另请参阅]
+fromString() 和 QLocale::toString()。
+\end{notice}
+
 
 \splitLine
 
@@ -694,9 +765,13 @@ int QDate::weekNumber(int *yearNumber = nullptr) const
 
 根据 ISO 8601, 格里高利历中，跨年的周属于天数更多的那年。 由于 ISO 8601 规定一周始于周一，周三在哪一年这周就属于哪一年。 大多数年有52周，但也有53周的年份。
 
-\textbf{注意}： *yearNumber 不总是与 year() 相等。例如, 2000.1.1是1999年第52周, 2002.12.31是2003年第1周。
+\begin{notice}
+ *yearNumber 不总是与 year() 相等。例如, 2000.1.1是1999年第52周, 2002.12.31是2003年第1周。
+\end{notice}
 
-\textbf{另请参阅}：isValid()。
+\begin{notice}[另请参阅]
+isValid()。
+\end{notice}
 
 \splitLine
 
@@ -714,8 +789,11 @@ int QDate::year(QCalendar cal) const
 
 一些日历中，没有0年份但是有负数年份。例如格里高利历，公元前x年就是年份-x。
 
-\textbf{另请参阅}：month()，day()，QCalendar::hasYearZero() 和
-QCalendar::isProleptic()。
+\begin{notice}[另请参阅]
+month()，day()，QCalendar::hasYearZero() 和QCalendar::isProleptic()。
+\end{notice}
+
+
 
 \splitLine
 
@@ -742,15 +820,15 @@ QDataStream \&operator<<(QDataStream \&out, const QDate \&date)
 
 向数据流写入日期
 
-\textbf{另请参阅}：Serializing Qt Data Types。
+
+\begin{notice}[另请参阅]
+Serializing Qt Data Types。
+\end{notice}
 
 QDataStream \&operator>>(QDataStream \&in, QDate \&date)
 
 从数据流读出日期
 
-\textbf{另请参阅}：Serializing Qt Data Types。
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
+\begin{notice}[另请参阅]
+Serializing Qt Data Types。
+\end{notice}
