@@ -330,16 +330,27 @@ endOfDay()。
 QDate::QDate(int y, int m, int d)
 从年月日构造对象，使用格里高利历。如果日期非法，对象不会修改，且 isValid() 返回false。
 
-\textbf{警告}： 1~99年就对应于它本身，不会偏移。第0年是非法的。
 
-\textbf{另请参阅}：isValid() 和 QCalendar::dateFromParts()。
+\begin{notice}
+1~99年就对应于它本身，不会偏移。第0年是非法的。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+isValid() 和 QCalendar::dateFromParts()。
+\end{notice}
+
+
 
 \splitLine
 
 QDate::QDate()
 构造一个空的日期，也是不可用的。
 
-\textbf{另请参阅}：isNull() 和 isValid()。
+
+\begin{notice}[另请参阅]
+isNull() 和 isValid()。
+\end{notice}
 
 \splitLine
 
@@ -347,9 +358,13 @@ QDate QDate::addDays(qint64 ndays) const
 
 返回一个 ndays 天之后的新日期对象(负数意味着往前减日期)。
 
-当当前日期或新日期是非法日期时，返回非法日期。
+当前日期或新日期是非法日期时，返回非法日期。
 
-\textbf{另请参阅}：addMonths()、addYears() 和 daysTo()。
+
+
+\begin{notice}[另请参阅]
+addMonths()、addYears() 和 daysTo()。
+\end{notice}
 
 \splitLine
 
@@ -361,9 +376,14 @@ QDate QDate::addMonths(int nmonths, QCalendar cal) const
 
 如果传入 cal 参数，会使用日历系统使用，否则使用格里高利历。
 
-\textbf{注意}： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
 
-\textbf{另请参阅}：addDays() 和 addYears()。
+\begin{notice}
+如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
+\end{notice}
+
+\begin{notice}[另请参阅]
+addDays() 和 addYears()。
+\end{notice}
 
 \splitLine
 
@@ -375,9 +395,16 @@ QDate QDate::addYears(int nyears, QCalendar cal) const
 
 如果传入 cal 参数，会使用日历系统使用，否则使用格里高利历。
 
-\textbf{注意}： 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
 
-\textbf{另请参阅}：addDays() 和 addMonths()。
+
+\begin{notice}
+如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
+\end{notice}
+
+\begin{notice}[另请参阅]
+addDays() 和 addMonths()。
+\end{notice}
+
 
 \splitLine
 
@@ -385,7 +412,11 @@ QDate QDate::addYears(int nyears, QCalendar cal) const
 
 返回系统时钟所示的今天的日期对象。
 
-\textbf{另请参阅}：QTime::currentTime() 和 QDateTime::currentDateTime()。
+
+
+\begin{notice}[另请参阅]
+QTime::currentTime() 和 QDateTime::currentDateTime()。
+\end{notice}
 
 \splitLine
 
@@ -413,7 +444,9 @@ int QDate::dayOfWeek(QCalendar cal) const
 
 一些日历系统中，返回值可能大于7。
 
-\textbf{另请参阅}：day()、dayOfYear() 和 Qt::DayOfWeek。
+\begin{notice}[另请参阅]
+day()、dayOfYear() 和 Qt::DayOfWeek。
+\end{notice}
 
 \splitLine
 
@@ -425,7 +458,9 @@ int QDate::dayOfYear(QCalendar cal) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历。非法日期则返回0。
 
-\textbf{另请参阅}：day() 和 dayOfWeek()。
+\begin{notice}[另请参阅]
+day() 和 dayOfWeek()。
+\end{notice}
 
 \splitLine
 
@@ -437,7 +472,11 @@ int QDate::daysInMonth(QCalendar cal) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历 (返回值是 28~31)。非法日期则返回0。
 
-\textbf{另请参阅}：day() 和 daysInYear()。
+
+
+\begin{notice}[另请参阅]
+day() 和 daysInYear()。
+\end{notice}
 
 \splitLine
 
@@ -531,8 +570,9 @@ yyyy&	四位数年份。 如果是负数，加上符号是五个字符\\
 \hline
 \end{tabular}
 
-
-\textbf{注意}： 不行此函数的其他版, 日期和月份名必须使用用户本地语言。只有用户语言是英语时，英文名称才适用。
+\begin{notice}
+ 不行此函数的其他版, 日期和月份名必须使用用户本地语言。只有用户语言是英语时，英文名称才适用。
+\end{notice}
 
 所有其他字符将会被舍弃，单引号('')包裹的内容，无论是否包含格式占位符也会被舍弃。例如：
 
