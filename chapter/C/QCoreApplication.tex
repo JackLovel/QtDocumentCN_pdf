@@ -20,7 +20,7 @@ qmake&	QT+=core\\
 \hline
 \end{tabular}
 
-属性
+\section{属性}
 
 \begin{tabular}{|l|l|l|l|}
 \hline
@@ -36,7 +36,7 @@ organizationDomain&	QString&		&\\
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 详细说明
 
@@ -635,7 +635,11 @@ void init_ptr()
 }
 \end{lstlisting}
 
-注意，对于应用程序或模块范围的清理，qAddPostRoutine() 通常不太合适。例如，若程序被分割成动态加载的模块，那么相关的模块可能在 QCoreApplication 的析构函数调用之前就卸载了。在这种情况下，如果仍想使用 qAddPostRoutine() ，可以使用 qRemovePostRoutine() 来防止 QCoreApplication 的析构函数调用一个例程。举个例子，在模块卸载前调用 qRemovePostRoutine() 。
+
+
+\begin{notice}
+对于应用程序或模块范围的清理，qAddPostRoutine() 通常不太合适。例如，若程序被分割成动态加载的模块，那么相关的模块可能在 QCoreApplication 的析构函数调用之前就卸载了。在这种情况下，如果仍想使用 qAddPostRoutine() ，可以使用 qRemovePostRoutine() 来防止 QCoreApplication 的析构函数调用一个例程。举个例子，在模块卸载前调用 qRemovePostRoutine() 。
+\end{notice}
 
 对于模块或库，使用引用计数初始化管理器，或者 Qt 对象树删除机制可能会更
 好。下面是一个私有类使用对象树机制正确调用清除函数的一个例子：
@@ -669,21 +673,39 @@ private:
 
 通过选择正确的父对象，正常情况下可以在正确的时机清理模块的数据。
 
-注意： 函数自 Qt 5.10 已线程安全
+\begin{notice}
+ 函数自 Qt 5.10 已线程安全
+\end{notice}
 
-注意： 该函数线程安全
+\begin{notice}
+该函数线程安全
+\end{notice}
 
-另请参阅：qRemovePostRoutine()。
+\begin{notice}[另请参阅]
+qRemovePostRoutine()。
+\end{notice}
+
 
 void qRemovePostRoutine(QtCleanUpFunction ptr)
 
-注意： 函数自 Qt 5.10 已线程安全
+\begin{notice}
+函数自 Qt 5.10 已线程安全
+\end{notice}
 
-注意： 该函数线程安全
+ 
+
+\begin{notice}
+该函数线程安全
+\end{notice}
+
 
 此函数自 Qt 5.3 引入。
 
-另请参阅：qAddPostRoutine()。
+
+
+\begin{notice}[另请参阅]
+qAddPostRoutine()。
+\end{notice}
 
 \splitLine
 
@@ -707,13 +729,22 @@ static void preRoutineMyDebugTool()
 Q_COREAPP_STARTUP_FUNCTION(preRoutineMyDebugTool)
 \end{lstlisting}
 
-注意，启动函数将在 QCoreApplication 构造后，在任何 GUI 初始化前调用。如果函数中需要GUI代码，请使用计时器(或队列动态调用)，在后面的事件循环中执行初始化。
+
+
+ 
 
 如果删除了 QCoreApplication 并创建了另一个 QCoreApplication ，将再次调用启动函数。
 
-注意：此宏不适用于静态链接到应用程序中的库代码中使用，因为链接器可能会删除该函数，使其根本不会被调用。
+ 
+\begin{notice}
+此宏不适用于静态链接到应用程序中的库代码中使用，因为链接器可能会删除该函数，使其根本不会被调用。
+\end{notice}
 
-注意：此函数是可重入的。
+
+\begin{notice}
+ 此函数是可重入的。
+\end{notice}
+
 
 此函数自 Qt 5.1 引入。
 
@@ -748,7 +779,9 @@ public:
 
 通常 \emph{context} 参数为类名，不过也可以是任何文本。
 
-另请参阅：Q\_OBJECT，QObject::tr()，与 QObject::trUtf8()。
+\begin{notice}[另请参阅]
+	Q\_OBJECT，QObject::tr()，与 QObject::trUtf8()。
+\end{notice}
 
 %%% Local Variables:
 %%% mode: latex
