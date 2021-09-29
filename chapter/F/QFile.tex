@@ -18,12 +18,16 @@ Inherited By:& 	QTemporaryFile\\
 \hline
 \end{tabular}
 
-\begin{itemize}
+\begin{compactitem}
 \item 包含继承成员的成员列表
 \item 废弃的成员
-\end{itemize}
+\end{compactitem}
 
-\textbf{注意}： 类中所有函数都是 可重入的。
+
+\begin{notice}
+	类中所有函数都是 可重入的。
+\end{notice}
+ 
 
 \splitLine
 
@@ -259,7 +263,7 @@ QString myDecoderFunc(const QByteArray &localFileName);
 
 \splitLine
 
-成员函数文档
+\section{成员函数文档}
 
 QFile::QFile(const QString \&name, QObject *parent)
 
@@ -415,10 +419,10 @@ void printError(const char* msg)
 
 \textbf{警告}：
 
-\begin{itemize}
+\begin{compactitem}
 \item 如果 \emph{fh} 并非指向常规文件，例如 \hl{stdin}, \hl{stdout}, 或 \hl{stderr}，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
 \item 由于使用此函数打开的文件没有指定文件名，你不能通过 QFileInfo 读取相关信息。
-\end{itemize}
+\end{compactitem}
 
 Windows平台的注意事项
 
@@ -447,19 +451,24 @@ bool QFile::open(int fd, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags 
 
 \textbf{警告}：
 
-\begin{itemize}
+\begin{compactitem}
 \item 如果 \emph{fd} 不是一个常规文件，例如 0 (\hl{stdin}), 1 (\hl{stdout}), 或 2 (\hl{stderr})，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
 \item 由于使用此函数打开的文件没有指定文件名，你不能通过 QFileInfo 读取相关信息。
 
-\end{itemize}
+\end{compactitem}
 
-另请参见 close().
+
+\begin{notice}[另请参阅]
+ close().
+\end{notice}
 
 [override virtual]QFileDevice::Permissions QFile::permissions() const
 
 重写函数： QFileDevice::permissions() const.
 
-另请参见 setPermissions().
+\begin{notice}[另请参阅]
+setPermissions().
+\end{notice}
 
 [static]QFileDevice::Permissions QFile::permissions(const QString \&fileName)
 
@@ -475,7 +484,9 @@ bool QFile::remove()
 
 文件会在删除前关闭。
 
-另请参见 setFileName().
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice}
 
 [static]bool QFile::remove(const QString \&fileName)
 
@@ -485,7 +496,9 @@ bool QFile::remove()
 
 如果成功，返回 true ；否则返回 false。
 
-另请参见 remove().
+\begin{notice}[另请参阅]
+remove().
+\end{notice}
 
 bool QFile::rename(const QString \&newName)
 
@@ -497,7 +510,11 @@ bool QFile::rename(const QString \&newName)
 
 如果直接重命名失败，Qt会尝试拷贝数据到 newName 新文件并删除旧文件来实现重命名。如果拷贝或删除失败，Qt会撤回新文件创建，返回原先状态。
 
-另请参见 setFileName().
+
+
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice}
 
 [static]bool QFile::rename(const QString \&oldName, const QString \&newName)
 
@@ -507,7 +524,10 @@ bool QFile::rename(const QString \&newName)
 
 注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
 
-另请参见 rename().
+
+\begin{notice}[另请参阅]
+rename().
+\end{notice}
 
 \hl{[override virtual]}bool QFile::resize(qint64 \emph{sz})
 
@@ -519,9 +539,15 @@ bool QFile::rename(const QString \&newName)
 
 这是文件名 fileName 文件的大小为 \emph{sz} 字节。如果修改大小成功返回 \hl{true}，否则返回 \hl{false}。如果 \emph{sz} 比当前文件大小大，后面的数据会填充0；如果 \emph{sz} 比当前文件大小小，会裁剪文件数据。
 
-\textbf{警告}： 如果文件不存在，调用会失败。
 
-另请参见 resize().
+
+\begin{notice}[警告]
+如果文件不存在，调用会失败。
+\end{notice}
+
+\begin{notice}[另请参阅]
+resize().
+\end{notice}
 
 void QFile::setFileName(const QString \&name)
 
@@ -541,9 +567,15 @@ QDir::setCurrent("/home");
 file.open(QIODevice::ReadOnly);      // 打开Unix下文件 "/home/readme.txt"
 \end{lstlisting}
 
-注意Qt中目录分隔符统一使用"/".
 
-另请参见 fileName(), QFileInfo, and QDir.
+
+\begin{notice}
+Qt中目录分隔符统一使用"/".
+\end{notice}
+
+\begin{notice}[另请参阅]
+fileName(), QFileInfo, and QDir.
+\end{notice}
 
 \splitLine
 
@@ -553,9 +585,16 @@ file.open(QIODevice::ReadOnly);      // 打开Unix下文件 "/home/readme.txt"
 
 为文件设置 permissions 权限。如果成功返回 true ，如果权限不能修改返回 false 。
 
-\textbf{警告}： 此函数不会操作修改 ACLs，这会限制函数功能。
 
-另请参见 permissions() and setFileName().
+
+\begin{notice}[警告]
+此函数不会操作修改 ACLs，这会限制函数功能。
+\end{notice}
+
+\begin{notice}[另请参阅]
+permissions() and setFileName().
+\end{notice}
+
 \splitLine
 
 [static]bool QFile::setPermissions(const QString \&fileName, QFileDevice::Permissions permissions)
@@ -590,9 +629,6 @@ QString QFile::symLinkTarget() const
 
 此函数引入自： Qt 4.2.
 
-另请参见 fileName() and setFileName().
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
+\begin{notice}[另请参阅]
+fileName() and setFileName().
+\end{notice}
