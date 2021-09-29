@@ -13,7 +13,7 @@ QSql 命名空间 里的 各种名样的标识符，已经被运用在 Qt SQL �
 	\hline
 \end{tabular}
 
-类型
+\section{类型}
 
 \resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
 	\begin{tabular}{|c|l|}
@@ -33,12 +33,11 @@ QSql 命名空间 里的 各种名样的标识符，已经被运用在 Qt SQL �
 	\end{tabular}
 }
 
-
 细节的介绍 
 
 查看 \href{https://doc.qt.io/qt-5/qtsql-index.html}{Qt SQL}
 
-类型 文档
+\section{类型 文档}
 
 enum QSql::Location
 
@@ -56,7 +55,9 @@ enum QSql::Location
 	\hline
 \end{tabular}
 
-另请参阅 \href{https://doc.qt.io/qt-5/qsqlquery.html#at}{QSqlQuery::at()}
+\begin{notice}[另请参阅]
+\href{https://doc.qt.io/qt-5/qsqlquery.html#at}{QSqlQuery::at()}
+\end{notice}
 
 enum QSql::NumericalPrecisionPolicy
 
@@ -80,8 +81,9 @@ enum QSql::NumericalPrecisionPolicy
 	\end{tabular}
 }
 
-注意： 如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。
-
+\begin{notice}
+如果特定的驱动发生溢出，这是一个真实行为。像 Oracle数据库在这种情形下，就会返回一个错误。
+\end{notice}
 
 enum QSql::ParamTypeFlag
 

@@ -1,4 +1,4 @@
-\chapter{QFileInfo-未完成}
+\chapter{QFileInfo}
 
 QFileInfo 类
 
@@ -16,16 +16,19 @@ qmake:& 	QT += core\\
 \hline
 \end{tabular}
 
-\begin{itemize}
+\begin{compactitem}
 \item 列出所有成员函数，包括继承的成员函数
 \item 废弃的成员函数
-\end{itemize}
+\end{compactitem}
 
-\textbf{注意}: 此类中所有函数均 可重入
+\begin{notice}
+	此类中所有函数均 可重入
+\end{notice}
+
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 \begin{longtable}{|l|l|}
 \hline
@@ -180,7 +183,7 @@ typedef &	QFileInfoList\\
 
 \splitLine 
 
-详细描述
+\section{详细描述}
 
 QFileInfo 可以获取任一文件的名字、路径、访问权限、是否是文件夹及是否是符号链接等信息，也可以获取文件的大小、上次修改时间、上次读取时间，还可以获取 Qt 资源文件 的信息。
 
@@ -241,7 +244,11 @@ Elements of the file's name can be extracted with path() and fileName(). The fil
 
 同时查验文件权限及所有权： permission()
 
-\textbf{注意}: 在NTFS文件系统上，出于性能原因，默认情况下禁用所有权和权限检查。
+\begin{notice}
+在NTFS文件系统上，出于性能原因，默认情况下禁用所有权和权限检查。
+\end{notice}
+
+
 要启用它，请包含以下行：
 
 \begin{lstlisting}[language=C++]
@@ -267,7 +274,7 @@ Because files can be changed by other users or programs, or even by other parts 
 
 \splitLine 
 
-成员函数文档
+\section{成员函数文档}
 
 QFileInfo::QFileInfo(const QFileInfo \&fileinfo)
 
@@ -281,7 +288,10 @@ QFileInfo::QFileInfo(const QDir \&dir, const QString \&file)
 
 如果 file 是绝对路径，则 dir 指定的目录将被忽略。
 
-\textbf{另请参阅}: isRelative()
+\begin{notice}[另请参阅]
+ isRelative()
+\end{notice}
+
 
 QFileInfo::QFileInfo(const QFile \&file)
 
@@ -289,23 +299,35 @@ QFileInfo::QFileInfo(const QFile \&file)
 
 如果文件具有相对路径，则 QFileInfo 也将具有相对路径。
 
-\textbf{另请参阅}: isRelative()
+\begin{notice}[另请参阅]
+ isRelative()
+\end{notice}
 
 QFileInfo::QFileInfo(const QString \&file)
 
 构造一个新的 QFileInfo，表示指定的 file 文件信息。file 可以包含绝对或相对路径。
 
-\textbf{另请参阅}: setFile()，isRelative()，QDir::setCurrent() 和
 
+\begin{notice}[另请参阅]
+setFile()，isRelative()，QDir::setCurrent() 和
 QDir::isRelativePath()
+\end{notice}
 
 QFileInfo::QFileInfo()
 
 构造一个空的 QFileInfo 对象。
 
-\textbf{注意}: 空的 QFileInfo 对象不包含文件引用。
 
-\textbf{另请参阅}: setFile()
+
+\begin{notice}
+空的 QFileInfo 对象不包含文件引用。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+ setFile()
+\end{notice}
+
 
 QFileInfo \&QFileInfo::operator=(QFileInfo \&\&other)
 
@@ -325,7 +347,10 @@ QDir QFileInfo::absoluteDir() const
 
 以 QDir 对象的形式返回文件的绝对路径。
 
-\textbf{另请参阅}: dir()，filePath()，fileName() 和 isRelative()
+
+\begin{notice}[另请参阅]
+dir()，filePath()，fileName() 和 isRelative()
+\end{notice}
 
 QString QFileInfo::absoluteFilePath() const
 

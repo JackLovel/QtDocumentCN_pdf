@@ -6,14 +6,14 @@ class QHash::const\_iterator
 
 QHash::const\_iterator 类为 QHash\ref{hash} 和 QMultiHash 提供 STL 风格的常量迭代器。\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/H/QHash/QHash-const-iterator.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{更多内容...}
 
-\begin{itemize}
+\begin{compactitem}
 \item 所有成员列表，包括继承的成员
 \item 废弃的成员
-\end{itemize}
+\end{compactitem}
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -44,7 +44,7 @@ bool 	&operator==(const const\_iterator \&other) const\\
 
 \splitLine
 
-详细描述
+\section{详细描述}
 
 QHash 同时提供 STL 风格迭代器 和 Java 风格迭代器。STL 风格迭代器更底层，使用更笨拙；同时也稍快一些。对于已经了解 STL 的开发者来说更加熟悉。
 
@@ -71,14 +71,19 @@ for (i = hash.constBegin(); i != hash.constEnd(); ++i)
 
 同一哈希表可以使用多个迭代器。然而，需要注意任何对 QHash 的直接修改都可能完全改变哈希表中存储的元素顺序，因为该操作可能引起 QHash 重新散列其内部数据结构。如果需要长时间持有迭代器，建议使用 QMap 而非 QHash。
 
-\textbf{警告}： 隐式共享容器迭代器的工作方式和 STL 迭代器不完全相同。当容器的迭代器还处于活动状态时，应该避免拷贝容器。更多信息请参阅隐式共享迭代器问题。
+\begin{notice}
+	隐式共享容器迭代器的工作方式和 STL 迭代器不完全相同。当容器的迭代器还处于活动状态时，应该避免拷贝容器。更多信息请参阅隐式共享迭代器问题。
+\end{notice}
 
-\textbf{另请参阅}: QHash::iterator 和 QHashIterator。
 
+
+\begin{notice}[另请参阅]
+ QHash::iterator 和 QHashIterator。
+\end{notice}
 
 \splitLine
 
-成员函数文档
+\section{成员函数文档}
 
 const\_iterator::const\_iterator(const iterator \&other)
 
@@ -90,25 +95,41 @@ const\_iterator::const\_iterator()
 
 一定不要对未初始化的迭代器调用 key()，value() 和 operator++() 等函数。使用前要用 operator=() 赋值。
 
-\textbf{另请参阅}: QHash::constBegin() 和 QHash::constEnd()。
+
+
+\begin{notice}[另请参阅]
+QHash::constBegin() 和 QHash::constEnd()。
+\end{notice}
+
 
 const Key \&const\_iterator::key() const
 
 返回当前元素的键。
 
-\textbf{另请参阅}: value()。
+
+
+\begin{notice}[另请参阅]
+ value()。
+\end{notice}
 
 const T \&const\_iterator::value() const
 
 返回当前元素的值。
 
-\textbf{另请参阅}: key() 和 operator*()。
+
+
+\begin{notice}[另请参阅]
+ key() 和 operator*()。
+\end{notice}
 
 bool const\_iterator::operator!=(const const\_iterator \&other) const
 
 如果 other 与本迭代器指向的元素不同，返回 \hl{true}；否则返回 \hl{false}。
 
-\textbf{另请参阅}: operator==()。
+
+\begin{notice}[另请参阅]
+operator==()。
+\end{notice}
 
 const T \&const\_iterator::operator*() const
 
@@ -116,7 +137,10 @@ const T \&const\_iterator::operator*() const
 
 同 value()。
 
-\textbf{另请参阅}: key()。
+\begin{notice}[另请参阅]
+key()。
+\end{notice}
+
 
 const\_iterator \&const\_iterator::operator++()
 
@@ -124,7 +148,9 @@ const\_iterator \&const\_iterator::operator++()
 
 对 QHash::end() 调用该函数将导致未定义结果。
 
-\textbf{另请参阅}: operator--()。
+\begin{notice}[另请参阅]
+operator--()。
+\end{notice}
 
 const\_iterator const\_iterator::operator++(int)
 
@@ -137,14 +163,19 @@ const T *const\_iterator::operator->() const
 
 返回指向当前元素值的指针。
 
-\textbf{另请参阅}: value()。
+\begin{notice}[另请参阅]
+value()。
+\end{notice}
 
 bool const\_iterator::operator==(const const\_iterator \&other) const
 
 如果 other 与本迭代器指向相同的元素，返回 \hl{true}；否则返回 \hl{false}。
 
 
-\textbf{另请参阅}: operator!=()。
+
+\begin{notice}[另请参阅]
+operator!=()。
+\end{notice}
 
 
 %%% Local Variables:
