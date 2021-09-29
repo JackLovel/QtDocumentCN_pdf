@@ -16,8 +16,12 @@ Qt: 提供了一系列基于模板的通用容器类，可以用于存储指定�
 
 Qt 还提供了 foreach 关键字，可以方便地遍历容器。
 
-注：从 Qt 5.14 开始，绝大部分容器类已经支持范围构造函数，但需要注意的
-是 QMultiMap 是一个例外。我们推荐使用该特性代替各种 from/to 方法。例如：
+\begin{notice}
+从 Qt 5.14 开始，绝大部分容器类已经支持范围构造函数，但需要注意的
+是 QMultiMap 是一个例外。我们推荐使用该特性代替各种 from/to 方法。
+\end{notice}
+
+例如：
 
 \begin{quote}
 译者注：这里的 from/to 方法指的是 Qt 容器类提供的以 from/to 开头的转换方法，如QVector::toList
@@ -615,11 +619,11 @@ CONFIG += no_keywords
 Qt 包含了在某些方面和容器相似的其他模板类。这些类没有提供迭代器，也无
 法在 \hl{foreach} 关键字中使用。
 
-\begin{itemize}
+\begin{compactitem}
 \item QCache<Key, T> 提供了一个缓存，用于保存与键类型Key相关联的类型T的对象。
 \item QContiguousCache 提供了一个高效的方式用于缓存那些通常以连续的方式访问的数据。
 \item QPair<T1, T2> 保存了一对元素。
-\end{itemize}
+\end{compactitem}
 
 其他基于 Qt 的模板容器实现的非模板类型有 QBitArray, QByteArray, QString 和 QStringList。
 
@@ -631,13 +635,13 @@ Qt 包含了在某些方面和容器相似的其他模板类。这些类没有�
 
 为了描述算法复杂度，我们使用以下基于“大O”符号的术语：
 
-\begin{itemize}
+\begin{compactitem}
 \item 常量时间：O(1)。函数有常量时间复杂度表示无论容器中有多少元素，执行该函数的时间都是相等的。一个例子是 QLinkedList::insert())；
 \item 对数时间：O(log n)。函数有对数时间复杂度表示该函数的运行时间和容器中元素个数的对数成正比。一个例子是二分查找算法。
 \item 线性时间：O(n)。函数有线性时间复杂度表示该函数的运行时间和容器中元素的个数成正比。一个例子是 QVector::insert()。
 \item 线性对数时间：O(n log n)。线性对数时间复杂度的函数要比线性复杂度的函数慢，且随着数量的增加差距会越来越大，但依然比平方时间的函数快。
 \item 平方时间：O(n²)。函数有平方时间复杂度表示该函数的运行时间和容器中元素的个数的平方成正比。
-\end{itemize}
+\end{compactitem}
 
 下表总结了 Qt 线性容器类的算法复杂度。
 
@@ -699,11 +703,11 @@ QString onlyLetters(const QString &in)
 
 上面的数字可能有些奇怪，这里是分配的指导原则。
 
-\begin{itemize}
+\begin{compactitem}
 \item QString 每次分配 4 个字符指导达到 20 个字符。
 \item 从 20 到 4084 个字符，每次将当前的大小翻倍。更准确的说，是翻倍后再减去 12。（一些内存分配器在分配刚好两倍的内存时性能较差，因为它们需要使用每块内存块中的一些字节用于登记。
 \item 从 4084 开始，每次分配将会在原来的基础上增加 2048 个字符大小（4096 字节）。这么做的意义是现代操作系统在重新分配内存时并不会复制全部的数据，而仅仅是简单地将物理内存页重新排序,只有第一页和最后一页的数据需要复制。
-\end{itemize}
+\end{compactitem}
 
 QByteArray 和 QList 使用和 QString 差不多的增长算法。
 
@@ -715,11 +719,11 @@ QHash<Key, T> 则是完全不同。QHash 内部的哈希表每次增长两倍，
 定义调整，QVector, QHash<Key, T>, QSet, QString 和 QByteArray 提供了一
 个提供了三个方法用于检查和指定保存元素使用的内存量。
 
-\begin{itemize}
+\begin{compactitem}
 \item capacity() 用于返回已分配内存的元素个数（对于QHash 和 QSet，返回的是哈希表的簇的个数）。
 \item reserve(size) 用于显式的预分配 size 个元素大小的内存。
 \item squeeze() 用于释放所有没有用来保存元素的内存。
-\end{itemize}
+\end{compactitem}
 
 如果预先知道容器要保存元素的大概数量，可以提前调用 reserve() 方法分配
 内存，最后在填充完容器后，再调用 squeeze() 来释放多余的预分配内存。

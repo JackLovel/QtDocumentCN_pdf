@@ -18,16 +18,20 @@ Inherited By:& 	QTemporaryFile\\
 \hline
 \end{tabular}
 
-\begin{itemize}
+\begin{compactitem}
 \item 包含继承成员的成员列表
 \item 废弃的成员
-\end{itemize}
+\end{compactitem}
 
-\textbf{注意}： 类中所有函数都是 可重入的。
+
+\begin{notice}
+	类中所有函数都是 可重入的。
+\end{notice}
+ 
 
 \splitLine
 
-公共成员类型
+\section{公共成员类型}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -39,7 +43,7 @@ typedef& 	DecoderFn\\
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -80,7 +84,7 @@ QString& 	symLinkTarget() const\\
 
 \splitLine
 
-重写公共函数
+\section{重写公共函数}
 
 
 \begin{tabular}{|l|l|}
@@ -104,7 +108,7 @@ virtual qint64 &	size() const override\\
 
 \splitLine
 
-静态公共成员
+\section{静态公共成员}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -142,7 +146,7 @@ QString& 	symLinkTarget(const QString \&fileName)\\
 
 \splitLine
 
-详细描述
+\section{详细描述}
 
 QFile 是用于读写文本及二进制的文件及资源的I/O设备。 一个QFile可以单独使用，或者更简单的，可以与 QTextStream 或 QDataStream 一同使用。
 
@@ -239,12 +243,15 @@ readAll(), read() 或 readLine() 指导没有数据来替代此功能。下面�
 
 Qt对于文件权限的理解有局限，尤其对于 QFile::setPermissions() 有影响。在Windows上，仅当没有任何 Write* flags被设置时，Qt 会设置旧版的只读 flag。Qt不会操作访问过滤表（access control lists , ACLs）这是的此函数在NTFS卷上基本上没什么用。对于VFAT格式的U盘，倒是有可能可用。POSIX 的 ACLs 也不会被修改。
 
-另请参见 QTextStream, QDataStream, QFileInfo, QDir, 以及 The Qt
+
+\begin{notice}[另请参阅]
+QTextStream, QDataStream, QFileInfo, QDir, 以及 The Qt
 Resource System。
+\end{notice} 
 
 \splitLine
 
-成员类型文档
+\section{成员类型文档}
 
 typedef QFile::DecoderFn
 
@@ -255,11 +262,14 @@ typedef QFile::DecoderFn
 QString myDecoderFunc(const QByteArray &localFileName);
 \end{lstlisting}
 
-另请参见 setDecodingFunction().
+
+\begin{notice}[另请参阅]
+setDecodingFunction().
+\end{notice} 
 
 \splitLine
 
-成员函数文档
+\section{成员函数文档}
 
 QFile::QFile(const QString \&name, QObject *parent)
 
@@ -289,7 +299,11 @@ bool QFile::copy(const QString \&newName)
 
 源文件会在复制前关闭。
 
-另请参见 setFileName().
+
+
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice} 
 
 [static]bool QFile::copy(const QString \&fileName, const QString \&newName)
 
@@ -299,31 +313,49 @@ bool QFile::copy(const QString \&newName)
 
 注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
 
-另请参见 rename().
+
+
+\begin{notice}[另请参阅]
+rename().
+\end{notice} 
 
 \hl{[static]}QString QFile::decodeName(const QByteArray \&localFileName)
 
 和 QFile::encodeName() 操作恰恰相反。返回 localFileName 的Unicode形式。
 
-另请参见 encodeName().
+
+\begin{notice}[另请参阅]
+encodeName().
+\end{notice} 
 
 \hl{[static]}QString QFile::decodeName(const char *localFileName)
 
 这是一个重载函数。返回 localFileName 的Unicode形式。
 
-详情参见 encodeName() 。
+
+\begin{notice}[另请参阅]
+ encodeName() 。
+\end{notice} 
+
 
 [static]QByteArray QFile::encodeName(const QString \&fileName)
 
 基于用户区域设置，将 fileName 转换为本地的8为表示。这对于用户选择的文件名足够使用。硬编码到程序中的文件名应当只使用7位ASCII字符。
 
-另请参见 decodeName().
+
+\begin{notice}[另请参阅]
+decodeName().
+\end{notice} 
 
 [static]bool QFile::exists(const QString \&fileName)
 
 如果 fileName 对应的文件存在，返回 true 否则返回 false。
 
-注意： 如果 fileName 是指向不存在文件的符号链接，返回 false。
+
+
+\begin{notice}
+如果 fileName 是指向不存在文件的符号链接，返回 false。
+\end{notice} 
 
 bool QFile::exists() const
 
@@ -331,7 +363,11 @@ bool QFile::exists() const
 
 如果 fileName() 对应的文件存在，返回 true 否则返回 false。
 
-另请参见 fileName() and setFileName().
+
+
+\begin{notice}[另请参阅]
+fileName() and setFileName().
+\end{notice} 
 
 [override virtual]QString QFile::fileName() const
 
@@ -339,7 +375,10 @@ bool QFile::exists() const
 
 返回 setFileName() 或构造函数设置的文件名。
 
-另请参见 setFileName() and QFileInfo::fileName().
+
+\begin{notice}[另请参阅]
+setFileName() and QFileInfo::fileName().
+\end{notice} 
 
 bool QFile::link(const QString \&linkName)
 
@@ -347,9 +386,15 @@ bool QFile::link(const QString \&linkName)
 
 此函数不会覆盖文件系统上已经存在的链接；如果已存在，link() 将返回 false 并设置 error() 为 RenameError。
 
-注意： 对于Windows平台，一个合法的链接名称必须包含 .lnk 后缀名。
 
-另请参见 setFileName().
+\begin{notice}
+对于Windows平台，一个合法的链接名称必须包含 .lnk 后缀名。
+\end{notice} 
+
+
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice} 
 
 [static]bool QFile::link(const QString \&fileName, const QString \&linkName)
 
@@ -357,13 +402,20 @@ bool QFile::link(const QString \&linkName)
 
 创建一个名为 linkName 的、指向 fileName 文件的链接。链接的形式取决于底层文件系统（Windows上的快捷方式或Linux下的符号链接symlink）。如果成功，返回 true ；否则返回 false。
 
-另请参见 link().
+
+
+\begin{notice}[另请参阅]
+link().
+\end{notice} 
 
 bool QFile::moveToTrash()
 
 将 fileName() 文件移入回收站。如果成功返回 true ，并将 fileName() 设置为回收站中对应文件的路径；否则返回 false。
+ 
 
-注意： 在API不能返回回收站中文件的路径的操作系统中，一旦文件被移动 fileName() 会被设置为空字符串。在没有回收站的操作系统，此函数总返回 false。
+\begin{notice}
+在API不能返回回收站中文件的路径的操作系统中，一旦文件被移动 fileName() 会被设置为空字符串。在没有回收站的操作系统，此函数总返回 false。
+\end{notice} 
 
 此函数引入自： Qt 5.15.
 
@@ -373,7 +425,9 @@ bool QFile::moveToTrash()
 
 将 fileName 文件移入回收站。如果成功返回 true ，并将 *pathInTrash 设置为回收站中对应文件的路径字符串的指针；否则返回 false。
 
-注意： 在API不能返回回收站中文件的路径的操作系统中，一旦文件被移动 *pathInTrash 会被设置为空字符串。在没有回收站的操作系统，此函数总返回 false。
+\begin{notice}
+在API不能返回回收站中文件的路径的操作系统中，一旦文件被移动 *pathInTrash 会被设置为空字符串。在没有回收站的操作系统，此函数总返回 false。
+\end{notice} 
 
 此函数引入自： Qt 5.15.
 
@@ -415,10 +469,10 @@ void printError(const char* msg)
 
 \textbf{警告}：
 
-\begin{itemize}
+\begin{compactitem}
 \item 如果 \emph{fh} 并非指向常规文件，例如 \hl{stdin}, \hl{stdout}, 或 \hl{stderr}，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
 \item 由于使用此函数打开的文件没有指定文件名，你不能通过 QFileInfo 读取相关信息。
-\end{itemize}
+\end{compactitem}
 
 Windows平台的注意事项
 
@@ -434,7 +488,10 @@ mode}。顺序读取设备，例如标准输入输出，不受此限制影响。
 CONFIG += console
 \end{lstlisting}
 
-另请参见 close().
+\begin{notice}[另请参阅]
+close().
+\end{notice}
+
 bool QFile::open(int fd, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags handleFlags = DontCloseHandle)
 
 这是一个重载函数。
@@ -447,19 +504,24 @@ bool QFile::open(int fd, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags 
 
 \textbf{警告}：
 
-\begin{itemize}
+\begin{compactitem}
 \item 如果 \emph{fd} 不是一个常规文件，例如 0 (\hl{stdin}), 1 (\hl{stdout}), 或 2 (\hl{stderr})，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
 \item 由于使用此函数打开的文件没有指定文件名，你不能通过 QFileInfo 读取相关信息。
 
-\end{itemize}
+\end{compactitem}
 
-另请参见 close().
+
+\begin{notice}[另请参阅]
+ close().
+\end{notice}
 
 [override virtual]QFileDevice::Permissions QFile::permissions() const
 
 重写函数： QFileDevice::permissions() const.
 
-另请参见 setPermissions().
+\begin{notice}[另请参阅]
+setPermissions().
+\end{notice}
 
 [static]QFileDevice::Permissions QFile::permissions(const QString \&fileName)
 
@@ -475,7 +537,9 @@ bool QFile::remove()
 
 文件会在删除前关闭。
 
-另请参见 setFileName().
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice}
 
 [static]bool QFile::remove(const QString \&fileName)
 
@@ -485,7 +549,9 @@ bool QFile::remove()
 
 如果成功，返回 true ；否则返回 false。
 
-另请参见 remove().
+\begin{notice}[另请参阅]
+remove().
+\end{notice}
 
 bool QFile::rename(const QString \&newName)
 
@@ -497,7 +563,11 @@ bool QFile::rename(const QString \&newName)
 
 如果直接重命名失败，Qt会尝试拷贝数据到 newName 新文件并删除旧文件来实现重命名。如果拷贝或删除失败，Qt会撤回新文件创建，返回原先状态。
 
-另请参见 setFileName().
+
+
+\begin{notice}[另请参阅]
+setFileName().
+\end{notice}
 
 [static]bool QFile::rename(const QString \&oldName, const QString \&newName)
 
@@ -507,7 +577,10 @@ bool QFile::rename(const QString \&newName)
 
 注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
 
-另请参见 rename().
+
+\begin{notice}[另请参阅]
+rename().
+\end{notice}
 
 \hl{[override virtual]}bool QFile::resize(qint64 \emph{sz})
 
@@ -519,9 +592,15 @@ bool QFile::rename(const QString \&newName)
 
 这是文件名 fileName 文件的大小为 \emph{sz} 字节。如果修改大小成功返回 \hl{true}，否则返回 \hl{false}。如果 \emph{sz} 比当前文件大小大，后面的数据会填充0；如果 \emph{sz} 比当前文件大小小，会裁剪文件数据。
 
-\textbf{警告}： 如果文件不存在，调用会失败。
 
-另请参见 resize().
+
+\begin{notice}[警告]
+如果文件不存在，调用会失败。
+\end{notice}
+
+\begin{notice}[另请参阅]
+resize().
+\end{notice}
 
 void QFile::setFileName(const QString \&name)
 
@@ -541,9 +620,15 @@ QDir::setCurrent("/home");
 file.open(QIODevice::ReadOnly);      // 打开Unix下文件 "/home/readme.txt"
 \end{lstlisting}
 
-注意Qt中目录分隔符统一使用"/".
 
-另请参见 fileName(), QFileInfo, and QDir.
+
+\begin{notice}
+Qt中目录分隔符统一使用"/".
+\end{notice}
+
+\begin{notice}[另请参阅]
+fileName(), QFileInfo, and QDir.
+\end{notice}
 
 \splitLine
 
@@ -553,9 +638,16 @@ file.open(QIODevice::ReadOnly);      // 打开Unix下文件 "/home/readme.txt"
 
 为文件设置 permissions 权限。如果成功返回 true ，如果权限不能修改返回 false 。
 
-\textbf{警告}： 此函数不会操作修改 ACLs，这会限制函数功能。
 
-另请参见 permissions() and setFileName().
+
+\begin{notice}[警告]
+此函数不会操作修改 ACLs，这会限制函数功能。
+\end{notice}
+
+\begin{notice}[另请参阅]
+permissions() and setFileName().
+\end{notice}
+
 \splitLine
 
 [static]bool QFile::setPermissions(const QString \&fileName, QFileDevice::Permissions permissions)
@@ -590,9 +682,6 @@ QString QFile::symLinkTarget() const
 
 此函数引入自： Qt 4.2.
 
-另请参见 fileName() and setFileName().
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
+\begin{notice}[另请参阅]
+fileName() and setFileName().
+\end{notice}
