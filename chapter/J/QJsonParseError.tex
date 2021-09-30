@@ -18,8 +18,11 @@ QJsonParseError类用于在JSON解析期间报告错误。
 
 该结构在 5.0 被引入。
 
-\textbf{注意}： 该结构的所有函数都是可重入。
+ 
 
+\begin{notice}
+该结构的所有函数都是可重入。
+\end{notice}
 
 \section{公共类型}
 
@@ -59,8 +62,10 @@ int 	&offset\\
 
 \section{详细说明}
 
-\textbf{另外参阅}: JSON Support in Qt 和 JSON Save Game Example。
 
+\begin{notice}[另外参阅]
+JSON Support in Qt 和 JSON Save Game Example。
+\end{notice}
 
 \section{成员类型文档}
 
@@ -113,8 +118,10 @@ QString QJsonParseError::errorString() const
 
 返回适合于所报告的JSON解析错误的人类可读消息。
 
-\textbf{另请参见}: error。
 
+\begin{notice}[另外参阅]
+error。
+\end{notice}
 
 \section{成员变量文档}
 
@@ -122,15 +129,17 @@ QJsonParseError::ParseError QJsonParseError::error
 
 包含解析错误的类型。如果文档被正确解析，则等于QJsonParseError::NoError。
 
-\textbf{另外参阅}: ParseError 和 errorString()。
+
+\begin{notice}[另外参阅]
+ParseError 和 errorString()。
+\end{notice}
 
 int QJsonParseError::offset
 
 包含发生解析错误的输入字符串中的偏移量。
 
-\textbf{另外参阅}: error 和 errorString()。
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
+
+\begin{notice}[另外参阅]
+	error 和 errorString()。
+\end{notice}

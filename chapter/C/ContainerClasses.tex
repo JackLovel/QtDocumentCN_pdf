@@ -4,7 +4,7 @@
 
 \splitLine
 
-引言
+\section{引言} 
 
 Qt: 提供了一系列基于模板的通用容器类，可以用于存储指定类型的元素。例如，如果你需要一个可动态调整大小的 QString 数组，那么你可以使用 QVector<QString>。
 
@@ -35,7 +35,7 @@ QSet<int> set(vector.begin(), vector.end());
 */
 \end{lstlisting}
 
-容器类
+\section{容器类}
 
 \splitLine
 
@@ -149,13 +149,13 @@ QDataStream &operator>>(QDataStream &in, Movie &movie)
 
 \splitLine
 
-迭代器类
+\section{迭代器类}
 
 迭代器提供了一个统一的方式去访问容器中的元素。Qt 容器类提供了两种风格迭代器：Java 风格迭代器和 STL 风格迭代器。两种迭代器均会在容器中的数据被修改或因调用非 const 成员函数导致数据从隐式共享中分离后失效。
 
 \splitLine
 
-Java 风格迭代器
+\subsection{Java 风格迭代器}
 
 Java 风格迭代器在 Qt4 中引入，作为标准使用在Qt应用中。和 STL 风格迭代器相比，其易用性更高，代价是性能略低。该风格迭代器 API 以 Java 迭代器类为原型设计。
 
@@ -349,7 +349,7 @@ while (i.findNext(widget))
 
 \splitLine
 
-STL 风格迭代器
+\section{STL 风格迭代器}
 
 STL 风格迭代器在 Qt 2.0 中被引入，可用于 Qt 和 STL 的泛型算法，且为速度做了优化。
 
@@ -401,7 +401,6 @@ for (i = list.begin(); i != list.end(); ++i)
     \includegraphics[width=0.5\textwidth]{stl_style_iterator.pdf}
 \end{figure}
 
-% bug： 显示
 使用 STL 风格迭代器反向遍历可以通过反向迭代器实现
 
 \begin{lstlisting}[language=C++]
@@ -533,7 +532,6 @@ foreach 关键字
 
 使用的语法是：foreach(变量，容器) 语句。下面是一个使用 foreach 迭代 QLinkedList<QString> 的例子：
 
-% gog
 \begin{lstlisting}[language=C++]
 
 QLinkedList<QString> list;
@@ -629,7 +627,7 @@ Qt 包含了在某些方面和容器相似的其他模板类。这些类没有�
 
 \splitLine
 
-算法复杂度
+\section{算法复杂度}
 
 算法复杂度关注的是当容器中元素数量增加时，每个函数有多快（或者说多慢）。例如，无论 QLinkedList 中的元素数量有多少，在其中间插入一个元素是一个极快的操作，然而在一个具有非常多的元素的 QVector 中间插入一个元素可能会非常慢，因为半数的元素需要在内存中移动一个位置。
 
@@ -681,7 +679,7 @@ QSet&	Amort. O(1)&	O(n)	&Amort. O(1)	&O(n)\\
 
 \splitLine
 
-增长策略
+\section{增长策略}
 
 QVector，QString 和 QByteArray 使用连续内存保存元素；QList 维护了一个保存所有元素的指针（除非 T 本身是一个指针类型或一个指针大小的基本类型，这种情况下数组中保存的的是元素本身的值）的数组，用于提供基于索引的快速访问；QHash<Key, T> 内部有一个和大小元素个数成正比的哈希表。为了避免每次在尾部添加元素时重新分配内存，这些类通常会分配比实际需要要多的内存。
 

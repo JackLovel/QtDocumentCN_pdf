@@ -38,13 +38,13 @@ organizationDomain&	QString&		&\\
 
 \section{公共成员函数}
 
-详细说明
+\subsection{详细说明}
 
 此类为那些没有GUI的应用程序提供消息循环。对于使用Qt但无GUI的程序，它们必须有且仅有一个QCoreApplication对象。对于GUI应用程序，请参见QGuiApplication。对于使用了Qt Widgets的模块，请参见QApplication。
 
 QCoreApplication包含主事件循环，这些来自于操作系统（如定时器、网络事件等）及其它来源的事件将由它来处理和派发。它同时也处理应用程序的初始化和析构，以及全系统和全程序的设置。
 
-事件循环及事件处理
+\subsection{事件循环及事件处理}
 
 消息循环从调用exec()开始。长时间运行的一些操作也可以通过调用processEvents()让程序保持响应。
 
@@ -54,32 +54,39 @@ QCoreApplication包含主事件循环，这些来自于操作系统（如定时�
 
 此类提供了一个槽函数quit()及一个信号aboutToQuit()。
 
-程序和库路径
+\subsection{程序和库路径}
 
 一个应用程序有一个applicationDirPath()和一个applicationFilePath()。库路径(参见QLibrary)能通过libraryPaths()被获取，且能通过setLibraryPaths()、addLibraryPath()和removeLibraryPath()来对它进行操作。
 
-国际化和翻译
+\subsection{国际化和翻译}
 
 翻译文件能分别通过installTranslator()和removeTranslator()被加载和移除。您可以通过translate()来翻译应用中的字符串。QObject::tr()和QObject::trUtf8()这两个函数根据translate()来进行了实现。
 
-访问命令行参数
+\subsection{访问命令行参数}
 
 您应该通过arguments()来获取传递给QCoreApplication构造函数的命令行参数。
 
-注意：QCoreApplication将移除 \hl{-qmljsdebugger="..."} 选项。它会解析
+\begin{notice}
+	QCoreApplication将移除 \hl{-qmljsdebugger="..."} 选项。它会解析
 \hl{qmljsdebugger} 参数，然后删除此选项及其参数。
+\end{notice}
+
 
 对于一些更加高级的命令行参数的处理，请创建一个QCommandLineParser。
 
-区域设置
+\subsection{区域设置}
 
 运行在Unix/Linux的Qt程序，将会默认使用系统的区域设置。这可能会导致在使用POSIX函数时发生冲突，例如，数据类型转换时由转换浮点数转换为字符串，由于不同区域符号的差异可能会导致一些冲突。为了解决这个问题，在初始化QGuiApplication、QApplication或QCoreApplication之后，需要马上调用POSIX函数setlocale(LC\_NUMERIC, "C")，以重新将数字的格式设置为"C"-locale。
 
-另请参阅QGuiApplication, QAbstractEventDispatcher, QEventLoop, Semaphores Example, 以及Wait Conditions Example。
+\begin{notice}[另请参阅]
+QGuiApplication, QAbstractEventDispatcher, QEventLoop, Semaphores Example, 以及Wait Conditions Example。
+\end{notice}
+
+
 
 \splitLine
 
-属性文档
+\section{属性文档}
 
 applicationName : QString
 
@@ -152,7 +159,9 @@ void	&applicationVersionChanged()\\
 \hline
 \end{tabular}
 
-另请参阅applicationName, organizationName, 以及organizationDomain。
+\begin{notice}[另请参阅]
+applicationName, organizationName, 以及organizationDomain。
+\end{notice}
 
 organizationDomain: QString
 
@@ -180,7 +189,11 @@ void	&organizationNameChanged()\\
 \hline
 \end{tabular}
 
-另请参阅 applicationDomain和applicationName。
+
+
+\begin{notice}[另请参阅]
+ applicationDomain和applicationName。
+\end{notice}
 
 quitLockEnabled: bool
 
@@ -198,7 +211,10 @@ void&	setQuitLockEnabled(bool enabled)\\
 \hline
 \end{tabular}
 
-另请参阅 QEventLoopLocker。
+
+\begin{notice}[另请参阅]
+QEventLoopLocker。
+\end{notice}
 
 \splitLine
 
@@ -210,15 +226,24 @@ QCoreApplication::QCoreApplication(int \&argc, char **argv)
 
 argc和argv参数将会被应用程序处理，将其转换为一种更加便捷的形式，并可以通过arguments()来获取。
 
-警告：argc和argv这两个值所指向的内存，必须在整个QCoreApplication生命周期内有效。另外，agrc必须要大于0，且argv必须至少包含一个合法的字符串。
+
+\begin{notice}[ 警告]
+argc和argv这两个值所指向的内存，必须在整个QCoreApplication生命周期内有效。另外，agrc必须要大于0，且argv必须至少包含一个合法的字符串。
+\end{notice}
 
 void QCoreApplication::aboutToQuit() [signal]
 
 当程序即将退出主消息循环时，如当消息循环嵌套层数降为0时，此事件被发射。它可能发生在应用程序中调用quit()之后，亦发生在关闭整个桌面会话时。
 
-注意：这是一个私有信号。它能够被连接，但是用户无法发射它。
 
-另请参阅 quit()。
+
+\begin{notice}
+这是一个私有信号。它能够被连接，但是用户无法发射它。
+\end{notice}
+
+\begin{notice}[另请参阅]
+quit()。
+\end{notice}
 
 void QCoreApplication::quit() [static slot]
 
@@ -230,14 +255,15 @@ void QCoreApplication::quit() [static slot]
 
 例如：
 
-
 \begin{lstlisting}[language=C++]
 QPushButton *quitButton = new QPushButton("Quit");
 connect(quitButton, &QPushButton::clicked, &app, &QCoreApplication::quit, Qt::QueuedConnection);
 \end{lstlisting}
 
-% gog
-另请参阅 exit(), aboutToQuit(), and QGuiApplication::lastWindowClosed()。
+\begin{notice}[另请参阅]
+exit(), aboutToQuit(), and QGuiApplication::lastWindowClosed()。
+\end{notice}
+
 
 QCoreApplication::$\sim$QCoreApplication() [virtual]
 
@@ -251,7 +277,9 @@ void QCoreApplication::addLibraryPath(const QString \&path) [static]
 
 当QCoreApplication被销毁后，这些库路径将会被重设为默认值。
 
-另请参阅 removeLibraryPath(), libraryPaths(), and setLibraryPaths().
+\begin{notice}[另请参阅]
+removeLibraryPath(), libraryPaths(), and setLibraryPaths().
+\end{notice}
 
 QString QCoreApplication::applicationDirPath() [static]
 返回包含此可执行文件的文件夹路径。
@@ -260,9 +288,15 @@ QString QCoreApplication::applicationDirPath() [static]
 
 在macOS和iOS上，它会指向实际包含可执行文件的目录，该目录可能在一个应用程序包内（如果是以应用程序包形式存在）。
 
-警告：在Linux上，这个函数会尝试从/proc获取文件路径。如果失败了，那么它假设argv[0]包含了可执行文件的绝对路径。此函数同样也假设了应用程序不会改变当前路径。
+\begin{notice}[警告]
+在Linux上，这个函数会尝试从/proc获取文件路径。如果失败了，那么它假设argv[0]包含了可执行文件的绝对路径。此函数同样也假设了应用程序不会改变当前路径。
+\end{notice}
 
-另请参阅 applicationFilePath()。
+
+\begin{notice}[另请参阅]
+applicationFilePath()。
+\end{notice}
+
 
 QString QCoreApplication::applicationFilePath() [static]
 
@@ -270,9 +304,17 @@ QString QCoreApplication::applicationFilePath() [static]
 
 例如，您已经在/usr/local/qt目录安装了Qt，然后运行regexp示例，那么这个函数会返回"/usr/local/qt/examples/tools/regexp/regexp"。
 
-警告：在Linux上，这个函数会尝试从/proc获取文件路径。如果失败了，那么它假设argv[0]包含了可执行文件的绝对路径。此函数同样也假设了应用程序不会改变当前路径。
 
-另请参阅 applicationDirPath()。
+\begin{notice}[警告]
+在Linux上，这个函数会尝试从/proc获取文件路径。如果失败了，那么它假设argv[0]包含了可执行文件的绝对路径。此函数同样也假设了应用程序不会改变当前路径。
+\end{notice}
+
+
+
+
+\begin{notice}[另请参阅]
+applicationDirPath()。
+\end{notice}
 
 qint64 QCoreApplication::applicationPid() [static]
 
@@ -288,7 +330,11 @@ QStringList QCoreApplication::arguments() [static]
 
 调用这个函数需要花费很多时间——您应该在解析命令行时，将结果缓存起来。
 
-警告： 在Unix下，这个参数列表由main()函数中的argc和argv参数生成。argv中的字符串数据将会通过QString::fromLocal8Bit()来解析，因此，在Latin1的区域环境下，是不可能来传递日语的命令行的，其他情况以此类推。大部分现代Unix系统没有此限制，因为它们是基于Unicode的。
+
+
+\begin{notice}[警告]
+在Unix下，这个参数列表由main()函数中的argc和argv参数生成。argv中的字符串数据将会通过QString::fromLocal8Bit()来解析，因此，在Latin1的区域环境下，是不可能来传递日语的命令行的，其他情况以此类推。大部分现代Unix系统没有此限制，因为它们是基于Unicode的。
+\end{notice}
 
 在Windows下，这个参数列表，只有在构造函数中传入了修改的argc和argv时，才会从这个argc和argv中解析。这种情况下，就会出现编码问题。
 
@@ -296,13 +342,20 @@ QStringList QCoreApplication::arguments() [static]
 
 此函数自Qt 4.1引入。
 
-另请参阅 applicationFilePath()和QCommandLineParser。
+
+
+\begin{notice}[另请参阅]
+applicationFilePath()和QCommandLineParser。
+\end{notice}
 
 bool QCoreApplication::closingDown() [static]
 
 如果application对象正在被销毁中，则返回true，否则返回false。
 
-另请参阅 startingUp()。
+
+\begin{notice}[另请参阅]
+startingUp()。
+\end{notice}
 
 bool QCoreApplication::event(QEvent *e) [override virtual protected]
 
@@ -312,7 +365,11 @@ QAbstractEventDispatcher *QCoreApplication::eventDispatcher() [static]
 
 返回指向主线程事件派发器的指针。如果线程中没有事件派发器，则返回nullptr。
 
-另请参阅 setEventDispatcher()。
+
+
+\begin{notice}[另请参阅]
+ setEventDispatcher()。
+\end{notice}
 
 int QCoreApplication::exec() [static]
 
@@ -324,7 +381,11 @@ int QCoreApplication::exec() [static]
 
 我们建议您连接aboutToQuit()信号来做一些清理工作，而不是将它们放在main函数中。因为在某些平台下，exec()可能不会返回。例如，在Windows下，当用户注销时，系统将在Qt关闭所有顶层窗口后才终止进程。因此，不能保证程序有时间退出其消息循环来执行main函数中exec()之后的代码。
 
-另请参阅 quit()，exit(), processEvent()和QApplication::exec()。
+
+\begin{notice}[另请参阅]
+quit()，exit(), processEvent()和QApplication::exec()。
+
+\end{notice}
 
 void QCoreApplication::exit(int returnCode = 0) [static]
 
@@ -336,7 +397,10 @@ void QCoreApplication::exit(int returnCode = 0) [static]
 
 将信号以QueuedConnection参数连接此槽是一个不错的实践。如果连接了此槽的一个信号（未在队列中的）在控制流程进入主消息循环前（如在int main中调用exec()之前）被发射，那么这个槽不会有任何效果，应用程序也不会退出。使用队列连接方式能保证控制路程进入主消息循环后，此槽才会被触发。
 
-另请参阅 quit()和exec()。
+
+\begin{notice}[另请参阅]
+quit()和exec()。
+\end{notice}
 
 void QCoreApplication::installNativeEventFilter(QAbstractNativeEventFilter *filterObj)
 
@@ -348,13 +412,24 @@ void QCoreApplication::installNativeEventFilter(QAbstractNativeEventFilter *filt
 
 如果有多个事件过滤器被安装了，那么最后安装的过滤器将会被最先调用。
 
-注意： 此处设置的过滤器功能接收原生事件，即MSG或XCB事件结构。
 
-注意： 如果设置了Qt::AA\_PluginApplication属性，那么原生事件过滤器将会被屏蔽。
+\begin{notice}
+ 此处设置的过滤器功能接收原生事件，即MSG或XCB事件结构。
+\end{notice}
+
+
+\begin{notice}
+如果设置了Qt::AA\_PluginApplication属性，那么原生事件过滤器将会被屏蔽。
+\end{notice}
+
 
 为了最大可能保持可移植性，您应该总是尽可能使用QEvent和QObject::installEventFilter()。
 
-另请参阅 QObject::installEventFilter()。
+
+
+\begin{notice}[另请参阅]
+QObject::installEventFilter()。
+\end{notice}
 
 bool QCoreApplication::installTranslator(QTranslator *translationFile) [static]
 
@@ -366,7 +441,11 @@ bool QCoreApplication::installTranslator(QTranslator *translationFile) [static]
 
 函数若执行成功则返回true，失败则返回false。
 
-另请参阅 removeTranslator()，translate()，QTranslator::load()和动态翻译。
+
+
+\begin{notice}[另请参阅]
+removeTranslator()，translate()，QTranslator::load()和动态翻译。
+\end{notice}
 
 QCoreApplication* QCoreApplication::instance() [static]
 
@@ -378,7 +457,10 @@ bool QCoreApplication::isSetuidAllowed() [static]
 
 此函数自Qt 5.3引入。
 
-另请参阅 QCoreApplication::setSetuidAllowed()。
+
+\begin{notice}[另请参阅]
+QCoreApplication::setSetuidAllowed()。
+\end{notice}
 
 QStringList QCoreApplication::libraryPaths() [static]
 
@@ -398,7 +480,11 @@ foreach (const QString &path, app.libraryPaths())
     do_something(path);
 \end{lstlisting}
 
-另请参阅 setLibraryPaths(), addLibraryPath(), removeLibraryPath(), QLibrary , 以及 如何创建Qt插件。
+
+
+\begin{notice}[另请参阅]
+ setLibraryPaths(), addLibraryPath(), removeLibraryPath(), QLibrary , 以及 如何创建Qt插件。
+\end{notice}
 
 bool QCoreApplication::notify(QObject receiver, QEvent event) [virtual]
 
@@ -409,20 +495,26 @@ bool QCoreApplication::notify(QObject receiver, QEvent event) [virtual]
 处理事件有5种不同的方式：重写虚函数只是其中一种。所有的五种途径如下所
 示：
 
-\begin{enumerate}
+\begin{compactenum}
 \item 重写paintEvent()，mousePressEvent()等。这个是最通用、最简单但最不强大的一种方法。
 \item 重写此函数。这非常强大，提供了完全控制，但是一次只能激活一个子类。
 \item 将一个事件过滤器安装到QCoreApplication。这样的一个事件过滤器可以处理所有窗体的所有事件，就像是重写了notify()函数这样强大。此外，您还可以提供多个应用级别全局的事件过滤器。全局事件过滤器甚至可以接收到那些不可用窗体的鼠标事件。注意程序的事件过滤器仅能响应主线程中的对象。
 \item 重写QObject::event()（就像QWidget那样）。如果您是这样做的，您可以接收到Tab按键，及您可以在任何特定窗体的事件过滤器被调用之前接收到事件。
 \item 在对象上安装事件过滤器。这样的事件过滤器将可以收到所有事件，包括Tab和Shift+Tab事件——只要它们不更改窗体的焦点。
-\end{enumerate}
+\end{compactenum}
 
-% gog 
+
 未来规划：在Qt 6中，这个函数不会响应主线程之外的对象。需要该功能的应用程序应同时为其事件检查需求找到其他解决方案。该更改可能会扩展到主线程，因此不建议使用此功能。
 
-注意：如果您重写此函数，在您的应用程序开始析构之前，您必须保证所有正在处理事件的线程停止处理事件。这包括了您可能在用的其他库所创建的线程，但是不适用于Qt自己的线程。
+\begin{notice}
+如果您重写此函数，在您的应用程序开始析构之前，您必须保证所有正在处理事件的线程停止处理事件。这包括了您可能在用的其他库所创建的线程，但是不适用于Qt自己的线程。
+\end{notice}
 
-另请参阅：QObject::event()和installNativeEventFilter()。
+
+\begin{notice}[另请参阅]
+QObject::event()和installNativeEventFilter()。
+\end{notice}
+
 
 void QCoreApplication::postEvent(QObject* receiver, QEvent* event, int priority = Qt::NormalEventPriority) [static]
 
@@ -436,11 +528,19 @@ void QCoreApplication::postEvent(QObject* receiver, QEvent* event, int priority 
 级之前。优先级priority可以是任何整数，只要它们在\hl{INT\_MAX} 和
 \hl{INT\_MIN} 之闭区间内。相同优先级的事件会按照投送顺序被处理。
 
-注意：此函数是线程安全的。
+
+\begin{notice}
+此函数是线程安全的。
+\end{notice}
+
 
 此函数自Qt 4.3引入。
 
-另请参阅：sendEvent()，notify()，sendPostedEvents()，和Qt::EventPriority。
+\begin{notice}[另请参阅]
+sendEvent()，notify()，sendPostedEvents()，和Qt::EventPriority。
+
+\end{notice}
+
 
 void QCoreApplication::processEvents(QEventLoop::ProcessEventsFlags flags = QEventLoop::AllEvents) [static]
 
@@ -452,9 +552,16 @@ void QCoreApplication::processEvents(QEventLoop::ProcessEventsFlags flags = QEve
 
 此函数只处理调用线程的事件，当所有可处理事件处理完毕之后返回。可用事件是在函数调用之前排队的事件。这意味着在函数运行时投送的事件将会排队到下一轮事件处理为止。
 
-注意：此函数是线程安全的。
 
-另请参阅：exec()，QTimer，QEventLoop::processEvents()，flush()和sendPostedEvents()。
+\begin{notice}
+此函数是线程安全的。
+\end{notice}
+
+\begin{notice}[另请参阅]
+exec()，QTimer，QEventLoop::processEvents()，flush()和sendPostedEvents()。
+\end{notice}
+
+
 
 void QCoreApplication::processEvents(QEventLoop::ProcessEventsFlags
 flags = QEventLoop::AllEvents, int ms) [static]
@@ -467,9 +574,17 @@ flags = QEventLoop::AllEvents, int ms) [static]
 
 此函数只处理调用线程的事件。
 
-注意：不像processEvents()的重写，这个函数同样也处理当函数正在运行中时被投送的事件。)，QTimer，QEventLoop::processEvents()。
 
-另请参阅：exec()，QTimer，QEventLoop::processEvents()。
+\begin{notice}
+不像processEvents()的重写，这个函数同样也处理当函数正在运行中时被投送的事件。)，QTimer，QEventLoop::processEvents()。
+\end{notice}
+
+
+
+
+\begin{notice}[另请参阅]
+exec()，QTimer，QEventLoop::processEvents()。
+\end{notice}
 
 void QCoreApplication::removeLibraryPath(const QString \&path) [static]
 
@@ -477,7 +592,11 @@ void QCoreApplication::removeLibraryPath(const QString \&path) [static]
 
 当QCoreApplication被析构时，此列表会被还原。
 
-另请参阅：exec()，QTimer和QEventLoop::processEvents()。
+
+\begin{notice}[另请参阅]
+exec()，QTimer和QEventLoop::processEvents()。
+\end{notice}
+
 
 void QCoreApplication::removeNativeEventFilter(QAbstractNativeEventFilter *filterObject)
 
@@ -489,7 +608,12 @@ void QCoreApplication::removeNativeEventFilter(QAbstractNativeEventFilter *filte
 
 此函数自Qt 5.0引入。
 
-另请参阅：installNativeEventFilter()。
+
+
+\begin{notice}[另请参阅]
+installNativeEventFilter()。
+\end{notice}
+
 
 void QCoreApplication::removePostedEvents(QObject *receiver, int eventType = 0) [static]
 
@@ -499,7 +623,10 @@ void QCoreApplication::removePostedEvents(QObject *receiver, int eventType = 0) 
 
 如果接收者为 \hl{nullptr}，那么所有对象将会移除 eventType 所指定的所有事件。如果 eventType 为0，那么receiver的所有事件将会被移除。自始自终，您都不应将 0 传递给 eventType 。
 
-注意：此函数是线程安全的。
+
+\begin{notice}
+此函数是线程安全的。
+\end{notice}
 
 此函数自Qt 4.3引入。
 
@@ -509,7 +636,10 @@ bool QCoreApplication::removeTranslator(QTranslator *translationFile) [static]
 
 该函数成功时返回 true ，失败时返回 false 。
 
-另请参阅：installTranslator()，translate()，与 QObject::tr()。
+
+\begin{notice}[另请参阅]
+installTranslator()，translate()，与 QObject::tr()。
+\end{notice}
 
 bool QCoreApplication::sendEvent(QObject *receiver, QEvent *event) [static]
 
@@ -522,7 +652,11 @@ QMouseEvent event(QEvent::MouseButtonPress, pos, 0, 0, 0);
 QApplication::sendEvent(mainWindow, &event);
 \end{lstlisting}
 
-另请参阅：postEvent() 与 notify()。
+
+
+\begin{notice}[另请参阅]
+postEvent() 与 notify()。
+\end{notice}
 
 void QCoreApplication::sendPostedEvents(QObject *receiver = nullptr, int event\_type = 0) [static]
 
@@ -532,23 +666,41 @@ void QCoreApplication::sendPostedEvents(QObject *receiver = nullptr, int event\_
 
 如果接收对象指针为 nullptr ，event\_type 的所有事件将分派到所有对象。如果 event\_type 为 0 ，所有事件将发送到接收对象 receiver 。
 
-注意： 该方法必须由其 QObject 参数 receiver 所在的线程调用。
 
-另请参阅：flush() 与 postEvent()。
+\begin{notice}
+该方法必须由其 QObject 参数 receiver 所在的线程调用。
+
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+flush() 与 postEvent()。
+\end{notice}
+
 
 void QCoreApplication::setAttribute(Qt::ApplicationAttribute attribute, bool on = true) [static]
 
 如果 on 为 true ，则设置属性 attribute；否则清除该属性。
 
-注意：在创建 QCoreApplication 实例之前，一些应用程序的属性必须要设置。 有关更多信息，请参考 Qt::ApplicationAttribute 文档。
 
-另请参阅：testAttribute()。
+
+\begin{notice}
+在创建 QCoreApplication 实例之前，一些应用程序的属性必须要设置。 有关更多信息，请参考 Qt::ApplicationAttribute 文档。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+testAttribute()。
+\end{notice}
+
 
 void QCoreApplication::setEventDispatcher(QAbstractEventDispatcher *eventDispatcher) [static]
 
 将主线程的事件分派器设置为 eventDispatcher 。只有在还没有安装事件分派器的情况下，也就是在实例化 QCoreApplication 之前，才可以进行设置。此方法获取对象的所有权。
 
-另请参阅：eventDispatcher()。
+\begin{notice}[另请参阅]
+eventDispatcher()。
+\end{notice}
 
 void QCoreApplication::setLibraryPaths(const QStringList \&paths) [static]
 
@@ -556,7 +708,9 @@ void QCoreApplication::setLibraryPaths(const QStringList \&paths) [static]
 
 当实例 QCoreApplication 被析构时，库路径将设置为默认值。
 
-另请参阅：libraryPaths()、addLibraryPath()、removeLibraryPath() 与 QLibrary。
+\begin{notice}[另请参阅]
+libraryPaths()、addLibraryPath()、removeLibraryPath() 与 QLibrary。
+\end{notice}
 
 void QCoreApplication::setSetuidAllowed(bool allow) [static]
 
@@ -566,23 +720,36 @@ void QCoreApplication::setSetuidAllowed(bool allow) [static]
 
 Qt 受攻击面较大，因此它并不是一个恰当 setuid 程序解决方案。 不过，出于历史原因，可能某些程序仍需要这种方式运行。 当检测到此标志时，可防止 Qt 中止应用程序。须在创建 QCoreApplication 实例之前将其进行设置。
 
-注意：强烈建议不要打开此选项，它会带来安全风险。
+
+
+\begin{notice}
+强烈建议不要打开此选项，它会带来安全风险。
+\end{notice}
 
 此函数自Qt 5.3引入。
 
-另请参阅：isSetuidAllowed()。
+\begin{notice}[另请参阅]
+isSetuidAllowed()。
+\end{notice}
 
 bool QCoreApplication::startingUp()
 
 如果应用程序对象尚未创建，则返回 true ；否则返回 false 。
 
-另请参阅：closingDown()。
+
+
+\begin{notice}[另请参阅]
+closingDown()。
+\end{notice}
 
 bool QCoreApplication::testAttribute(Qt::ApplicationAttribute attribute) [static]
 
 如果设置了属性 attribute ，返回 true ；否则返回 false 。
 
-另请参阅：setAttribute()。
+
+\begin{notice}[另请参阅]
+setAttribute()。
+\end{notice}
 
 QString QCoreApplication::translate(const char *context, const char *sourceText, const char *disambiguation = nullptr, int n = -1) [static]
 
@@ -602,9 +769,15 @@ n 与 \%n 一并使用以便支持复数形式。详见 QObject::tr() 。
 
 此函数非虚函数。您可以子类化 QTranslator 来使用其他翻译技术。
 
-注意：此函数线程安全。
 
-另请参阅：QObject::tr()，installTranslator()，removeTranslator()，与 translate()。
+\begin{notice}
+此函数线程安全。
+\end{notice}
+
+
+\begin{notice}[另请参阅]
+QObject::tr()，installTranslator()，removeTranslator()，与 translate()。
+\end{notice}
 
 \splitLine
 
@@ -709,7 +882,7 @@ qAddPostRoutine()。
 
 \splitLine
 
-宏文档
+\section{宏文档}
 
 Q\_COREAPP\_STARTUP\_FUNCTION(QtStartUpFunction ptr)
 
@@ -782,8 +955,3 @@ public:
 \begin{notice}[另请参阅]
 	Q\_OBJECT，QObject::tr()，与 QObject::trUtf8()。
 \end{notice}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
