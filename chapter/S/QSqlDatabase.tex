@@ -15,7 +15,7 @@ QSqlDatabase 类 用于处理数据库的连接
 \href{https://doc.qt.io/qt-5/qsqldatabase-members.html}{列出所有的成员，包括继承成员}
 
 
-公共类型
+\section{公共类型}
 
 \resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
 \begin{tabular}{|r|l|}
@@ -95,7 +95,7 @@ QString	&userName() const\\
 \end{tabular}
 }
 
-静态公共成员
+\section{静态公共成员}
 
 \resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
 \begin{tabular}{|r|l|}
@@ -127,7 +127,7 @@ QString	&userName() const\\
 \end{tabular}
 }
 
-受保护的成员函数
+\section{受保护的成员函数}
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -140,7 +140,7 @@ QString	&userName() const\\
 \end{tabular}
 
 
-详细的介绍
+\section{详细的介绍}
 
 QSqlDatabase 类提供接口用于数据库的连接 。一个 QSqlDatabase 实例对象表示连接。 这个连接提供 数据库 所需要的 驱动，这个驱动来自于 QSqlDriver。 换而言之，您可以实现自己的数据库驱动，通过继承 QSqlDriver。查看\href{https://doc.qt.io/qt-5/sql-driver.html#how-to-write-your-own-database-driver}{如何实现自己的数据库驱动}来获取更多的信息。
 
@@ -152,7 +152,9 @@ QSqlDatabase db = QSqlDatabase::database();
 
 QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接所做的操作将影响表示相同连接的其他 QSqlDatabase 实例。 使用 cloneDatabase() 在基于已存在数据库的连接 来 创建 独立的数据库的连接。
 
-警告：强烈建议不要将QSqlDatabase的拷贝作为类成员，因为这将阻止关闭时正确清理实例。 如果需要访问已经存在QSqlDatabase，应该使用database()访问。如果您选择使用作为成员变量的QSqlDatabase，则需要在删除QCoreApplication实例之前删除它，否则可能会导致未定义的行为。
+\begin{notice}[警告]
+强烈建议不要将QSqlDatabase的拷贝作为类成员，因为这将阻止关闭时正确清理实例。 如果需要访问已经存在QSqlDatabase，应该使用database()访问。如果您选择使用作为成员变量的QSqlDatabase，则需要在删除QCoreApplication实例之前删除它，否则可能会导致未定义的行为。
+\end{notice}
 
 如果您想创建多个数据库连接，可以调用 addDatabase(), 并且给一个独一无二的参数(即：连接名称)。使用 带有连接名的database() 函数，来获取该连接。使用 带有连接名的removeDatabase() 函数，来删除 一个连接。如果尝试删除由其他QSqlDatabase对象引用的连接，QSqlDatabase将输出警告。可以使用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-bool-qsqldatabasecontainsconst-qstring-connectionname--qlatin1stringdefaultconnection}{contains()}查看给定的连接名是否在连接列表中。
 
@@ -185,12 +187,15 @@ QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接
 		\hline
 \end{tabular}
 
-注意： QSqlDatabase::exec() 方法已经被弃用。请使用 QSqlQuery::exec()
+\begin{notice}
+QSqlDatabase::exec() 方法已经被弃用。请使用 QSqlQuery::exec()
+\end{notice}
 
-注意： 使用事务时，必须在创建查询之前启动事务。
+\begin{notice}
+使用事务时，必须在创建查询之前启动事务。
+\end{notice}
 
-
-成员函数文档
+\section{成员函数文档}
 
 [protected] QSqlDatabase::QSqlDatabase(QSqlDriver *driver)
 
@@ -232,7 +237,10 @@ QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接
 
 其他第三方驱动程序，包括自己自定义的驱动程序，都可以动态加载。
 
-请参阅 \href{https://doc.qt.io/qt-5/sql-driver.html}{SQL Database Drivers}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseregistersqldriverconst-qstring-name-qsqldrivercreatorbase-creator}{registerSqlDriver()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qstringlist-qsqldatabasedrivers}{drivers()}。
+\begin{notice}[另请参阅]
+\href{https://doc.qt.io/qt-5/sql-driver.html}{SQL Database Drivers}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseregistersqldriverconst-qstring-name-qsqldrivercreatorbase-creator}{registerSqlDriver()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qstringlist-qsqldatabasedrivers}{drivers()}。
+\end{notice}
+
 
 QSqlDatabase::QSqlDatabase(const QSqlDatabase \&other)
 

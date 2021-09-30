@@ -14,9 +14,12 @@ QWaitCondition 提供一个用于同步线程的条件变量。\href{https://git
 	\hline
 \end{tabular}
 
-注意： 此类中所有函数都是\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/R/Reentrancy_and_Thread-Safety/Reentrancy_and_Thread-Safety.md}{线程安全}的。
+\begin{notice}
+	此类中所有函数都是\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/R/Reentrancy_and_Thread-Safety/Reentrancy_and_Thread-Safety.md}{线程安全}的。
+\end{notice}
+
  	
-公共成员函数
+\section{公共成员函数}
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -45,7 +48,7 @@ QWaitCondition 提供一个用于同步线程的条件变量。\href{https://git
 	\hline
 \end{tabular}
 
-详细描述
+\section{详细描述}
 
 QWaitCondition允许线程告诉其他线程某种条件已经满足。一个或多个线程可以被阻塞并等待 QWaitCondition 用 wakeOne() 或 wakeAll() 设置条件。使用 wakeOne() 唤醒一个随机选择的线程，或使用 wakeAll() 唤醒所有线程。
 
@@ -108,9 +111,12 @@ forever {
 互斥量是必需的，因为当两个线程同时更改同一变量的值时，结果是不可预测的。
 等待条件是一个强大的线程同步原语。Wait Conditions示例演示了如何使用 QWaitCondition 作为 QSemaphore() 的替代品，来控制生产者消费者的共享循环缓冲区的访问。
 
-另请参阅： QMutex、QSemaphore、QThread() 和 Wait Conditions示例。
+\begin{notice}[另请参阅]
+QMutex、QSemaphore、QThread() 和 Wait Conditions示例。
+\end{notice}
 
-成员函数文档
+
+\section{成员函数文档}
 
 QWaitCondition::QWaitCondition()
 
@@ -123,6 +129,7 @@ QWaitCondition::~QWaitCondition()
 void QWaitCondition::notify\_all()
 
 用于STL兼容。它相当于 wakeAll()。
+
 在 Qt 5.8 引入该函数。
 
 void QWaitCondition::notify\_one()
@@ -138,7 +145,11 @@ bool QWaitCondition::wait(QMutex *lockedMutex, QDeadlineTimer deadline = QDeadli
 截止日期已到。如果 deadline 是默认值 QDeadlineTimer::Forever，则永远不会超时（必须用信号通知事件）。如果等待超时，此函数将返回false。
 lockedMutex 将返回到相同的锁定状态。提供此函数是为了允许原子从锁定状态转换到等待状态。   在 Qt 5.12 引入该函数。
 
-另请参阅： wakeOne()、wakeAll()。
+\begin{notice}[另请参阅]
+ wakeOne()、wakeAll()。
+\end{notice}
+
+
 
 bool QWaitCondition::wait(QMutex *lockedMutex, unsigned long time)
 重载。
@@ -152,7 +163,11 @@ bool QWaitCondition::wait(QReadWriteLock **lockedReadWriteLock, QDeadlineTimer d
 lockedReadWriteLock 将返回到相同的锁定状态。提供此函数是为了允许原子从锁定状态转换到等待状态。
 在 Qt 5.12 引入该函数。
 
-另请参阅： wakeOne()、wakeAll()。
+
+\begin{notice}[另请参阅]
+wakeOne()、wakeAll()。
+\end{notice}
+
 
 bool QWaitCondition::wait(QReadWriteLock *lockedReadWriteLock, unsigned long time)
 重载。
@@ -161,11 +176,18 @@ void QWaitCondition::wakeAll()
 
 唤醒等待条件的所有线程。线程的唤醒顺序取决于操作系统的调度策略，无法控制或预测。
 
-另请参阅： wakeOne()。
+
+
+
+\begin{notice}[另请参阅]
+wakeOne()。
+\end{notice}
 
 void QWaitCondition::wakeOne()
 
 唤醒一个等待条件的线程。线程的唤醒顺序取决于操作系统的调度策略，无法控制或预测。
 如果要唤醒特定线程，解决方案通常是使用不同的等待条件，并让线程在不同的条件下等待。
 
-另请参阅： wakeAll()。
+\begin{notice}[另请参阅]
+wakeAll()。
+\end{notice}

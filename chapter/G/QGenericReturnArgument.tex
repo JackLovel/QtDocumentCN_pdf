@@ -18,7 +18,7 @@ qmake& 	\hl{QT += core}\\
 
 \splitLine
 
-公共成员函数
+\section{公共成员函数}
 
 \begin{tabular}{|l|m{30em}|}
 \hline
@@ -30,16 +30,20 @@ qmake& 	\hl{QT += core}\\
 
 \splitLine
 
-详细描述
+\section{详细描述}
 
 该类绝不应该被主动使用，请通过 Q\_RETURN\_ARG() 来使用。
 
-\textbf{另请参阅}：Q\_RETURN\_ARG()，QMetaObject::invokeMethod() 和
+
+
+\begin{notice}[另请参阅]
+	Q\_RETURN\_ARG()，QMetaObject::invokeMethod() 和
 QGenericArgument。
+\end{notice}
 
 \splitLine
 
-成员函数描述
+\section{成员函数描述}
 
 QGenericReturnArgument::QGenericReturnArgument(const char *name = nullptr, void *data = nullptr)
 

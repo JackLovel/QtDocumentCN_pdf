@@ -17,38 +17,38 @@ Qt 最出名的特点之一是一致性强、易于学习、功能强大的 API�
 您可能也会有兴趣查阅 Jasmin Blanchette 的 
 \href{https://people.mpi-inf.mpg.de/~jblanche/api-design.pdf}{Little Manual of API Design (PDF)}，或它的前身，由 Matthias Ettrich 编写的 \href{https://doc.qt.io/archives/qq/qq13-apis.html}{Designing Qt-Style C++ APIs} 。
 
-优秀接口的六大特点
+\section{优秀接口的六大特点}
 
 API 是面向开发者的，而 GUI 则是面向终端用户。API 中的 P 代表开发者(Programmer)，而非程序(Program)，目的是指出 API 由开发者，即人类（而非计算机）所使用这一特点。
 
 Matthias 在 Qt 季刊弟13期，关于 API 设计的文章中，声称他坚信 API 应该是最小化但完备的，具备清晰而简洁的语义，符合直觉，被开发者，易于记忆，能够引导开发者编写高可读性的代码。
 
-最小化
+\subsection{最小化}
 
 最小化的 API 指包含尽可能少的公共成员和最少的类。这可让 API 更易于理解、记忆、调试和修改。
 
-完备性
+\subsection{完备性}
 完备的 API 意味着具备所有应有的功能。这可能会与最小化产生冲突。此外，若一个成员函数位于错误的类中，则大多数潜在的用户回无法找到它。
 
-清晰简洁的语义
+\subsection{清晰简洁的语义}
 
 与其它设计协作时，应该让您的设计做到最小例外。通用化会让事情更简单。特例可能存在，但不应成为关注的焦点。在处理特定问题时，不应让解决方案过度泛化。（例如，Qt 3 中的 QMineSourceFactory 本该被称作 QImageLoader，并且具备另一套 API。）
 
-复合直觉
+\subsection{复合直觉}
 
 如同计算机上其它内容，API 应复合直觉。不同的开发经验和技术背景会导致对复合直觉与否有不同的感知。复合直觉的 API 应能让中等经验的开发者无需阅读文档并直接使用，并让不知道这个 API 的开发者可以理解使用它编写的代码。
 
-易于记忆
+\subsection{易于记忆}
 
 为了让 API 易于记忆，请选择一组保持一致并足够精确的命名约定。使用可理解的模式和概念，并且避免缩写。
 
-可读性导向
+\subsection{可读性导向}
 
 编写代码只需要一次，但阅读（以及调试和修改）则会非常频繁。高可读性的代码通常需要花更多时间编写，但可以在产品的生命周期中节约更多的时间。
 
 最后需要谨记，不同类型的用户会使用 API 的不同部分。在单纯地创建一个 Qt 类实例能非常直观的同时，希望用户在尝试继承它之前先阅读文档则是很合理的。
 
-静态多态
+\subsection{静态多态}
 
 相似的代码类应具有相似的 API。可以使用继承来实现——当运行时多态支持时，这是很合理的。但多态同时也可以体现在设计截断。例如，若将代码中的 QProgressBar 换为 QSlider，或将 QString 换为 QByteArray，他们间相似的 API 会另替换操作变得非常容易。这便是为何我们称之为“静态多态”。
 
@@ -68,7 +68,8 @@ Matthias 在 Qt 季刊弟13期，关于 API 设计的文章中，声称他坚信
 
 ​ QBoxLayout 是 QHBoxLayout 和 QVBoxLayout 的基类。优点：可以在工具栏中使用 QBoxLayout，调用 setOrientation() 来令其水平/垂直排布。缺点：引入额外的类，用户可能会写出形如 ((QBoxLayout *)hbox)->setOrientation(Qt::Vertical) 的代码，而这是不合理的。
 
-基于属性的 API
+\section{基于属性的 API}
+
 比较新的 Qt 类倾向于使用基于属性的 API，例如：
 
 \begin{lstlisting}[language=C++]
@@ -116,13 +117,15 @@ toolButton->setStyle(yetAnotherStyle);
 toolButton->iconSize(); // 返回 (52, 52) 
 \end{lstlisting}
 
+\begin{notice}
+	一旦 iconSize 被设置，它会被一直留存，此时修改当前样式不会影响它。这是 好的。有时，提供重置属性的渠道会很方便，这有两种实现方式：
 
-注意，一旦 iconSize 被设置，它会被一直留存，此时修改当前样式不会影响它。这是 好的。有时，提供重置属性的渠道会很方便，这有两种实现方式：
+\end{notice}
 
-\begin{itemize}
+\begin{compactitem}
 	\item 传递一个特定值（如 QSIze()、-1 或 Qt::Alignment(0)）来指代“重置”；
 	\item 提供显示的 resetFoo() 或 unsetFoo() 函数。
-\end{itemize}
+\end{compactitem}
 
 对于 iconSize，将 QSize()（即 QSize(-1, -1)）设为“重置”便足够了。
 
@@ -136,15 +139,15 @@ QProperty
 本文原文中的内容与现有的 Qt 6.0 预览版存在出入，因此暂不翻译本节，待官方进一步维护更新原文。
 \end{quote}
 
-C++ 特性
+\section{C++ 特性}
 
-值 与 对象
+\subsection{值 与 对象}
 
 \begin{quote}
 译者注：此条原文无内容，待官方更新
 \end{quote}
 
-指针 与 引用
+\subsection{指针 与 引用}
 
 作为输出参数，指针与引用哪个更好？
 
@@ -171,7 +174,7 @@ struct Hsv { int hue, saturation, value }; Hsv getHsv() const;
 	译者注：对于可能失败的带返回值的函数，Qt 倾向于返回数值，使用 bool* ok = 0 参数来存储调用结果，以便在不关心时忽略之。同样在 Qt 6 以后，该方式不再被建议使用，而是改用 std::optional<T> 返回类型。
 \end{quote}
 
-传递常引用 与 传递值
+\subsection{传递常引用 与 传递值}
 若类型大于16字节，传递常引用。
 
 若类型具有非平凡的拷贝构造函数或非平凡的析构函数，传递常引用来避免执行这些方法。
@@ -188,7 +191,7 @@ void setAlarm(const QSharedPointer<Alarm> &alarm); // 常引用远快于拷贝�
 // QDate, QTime, QPoint, QPointF, QSize, QSizeF, QRect 都是其它应该值传递的好例子
 \end{lstlisting}
 
-虚函数
+\section{虚函数}
 
 当 C++ 中的一个成员函数被声明为虚函数，这主要用于通过在子类中重写来自定义该函数的行为。将函数设为虚函数的目的是让对该函数的现有调用会被替代为访问自定义的代码分支。若在该类之外没人调用此函数，则在将其声明为虚函数之前需要小心斟酌：
 
@@ -213,28 +216,28 @@ virtual void setOverwriteMode( bool b ) { overWrite = b; }
 
 在 Qt 中，我们因为多种原因而尝试最小化虚函数的数量。每个虚函数调用都会让缺陷修复变得更难，因为会在调用图中插入一个不受控制的节点（使得调用结果无法预测）。人们会在虚函数中做非常疯狂的举措，例如：
 
-\begin{itemize}
+\begin{compactitem}
 \item 发送事件
 \item 发送信号
 \item 重入事件循环（例如，打开一个模态文件对话框）
 \item 删除对象（例如，某些导致 delete this 的操作）
-\end{itemize}
+\end{compactitem}
 
 此外还有一些避免过度使用虚函数的原因：
 
-\begin{itemize}
+\begin{compactitem}
 \item 无法在不破坏二进制兼容性的前提下增加、移动或删除虚函数
 \item 无法简便地重写虚函数
 \item 编译器通常几乎不会内敛虚函数调用
 \item 调用虚函数需要查询虚表，导致其比常规函数调用慢2-3倍
 \item 虚函数另类对象更难进行值拷贝（可能做到，但会表现得很混乱且不被推荐）
-\end{itemize}
+\end{compactitem}
 
 过去的经验告诉我们，没有虚函数地类会产生更少的错误，通常也导致更少的维护。
 
 一个通用的经验法则是，除非从工具集或该类的主要使用者角度需要调用它，否则一个函数不应该是虚函数。
 
-虚对象 与 可复制性
+\section{虚对象 与 可复制性}
 
 多态对象和值类型的类并不是好朋友。
 
@@ -265,7 +268,7 @@ class OtherClass {
 \end{lstlisting}
 （此小节正在施工中）
 
-不变性
+\section{不变性}
 
 C++ 提供了 const 关键字来标识不会改变或不会产生副作用的事物。它可被用于数值、指针和倍只想的内容，也可被作为成员函数的特殊属性来标识它不会修改对象的状态。
 
@@ -396,7 +399,3 @@ QWidget &widget = 0)
 
 const 关键字不会为你做任何事，考虑将其移除，而非为一个成员函数提供 const/非 const 的重载版本。
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
