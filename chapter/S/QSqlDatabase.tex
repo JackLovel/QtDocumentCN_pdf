@@ -393,81 +393,128 @@ void QSqlDatabase::close()
 
 这个函数也会影响它的QSqlDatabase对象副本。
 
-另请参阅 removeDatabase()
+
+
+
+\begin{notice}[另请参阅]
+removeDatabase()
+\end{notice}
+
 
 bool QSqlDatabase::commit()
 如果驱动支持事务和一个transaction()已经被启动，那就可以提交一个事务到这个数据库中。如果这个操作成功，就会返回 true。否则返回 false。
 
-注意： 对于一些数据库，如果对数据库使用SELECT进行查询操作，将会提交失败并且返回false。在执行提交之前，使查询处于非活动状态。
+
+\begin{notice}
+对于一些数据库，如果对数据库使用SELECT进行查询操作，将会提交失败并且返回false。在执行提交之前，使查询处于非活动状态。
+\end{notice} 
 
 调用 lastError() 函数获取错误信息。
 
-另请参阅 QSqlQuery::isActive()， QSqlDriver::hasFeature()，和 rollback()。
+\begin{notice}[另请参阅]
+ QSqlQuery::isActive()， QSqlDriver::hasFeature()，和 rollback()。
+\end{notice}
+
 
 QString QSqlDatabase::connectOptions() const
+
 返回用于此连接的连接选项字符串。这个字符串可能是空。
 
-另请参阅 setConnectOptions()
+
+\begin{notice}[另请参阅]
+setConnectOptions()
+\end{notice}
 
 QString QSqlDatabase::connectionName() const
+
 返回连接名，它有可能为空。
 
-注意： 这个连接名不是 数据库名
+
+\begin{notice}
+这个连接名不是 数据库名
+\end{notice}
 
 qt4.4 中引入了这个函数。
 
-另请参阅 addDatabase()
+\begin{notice}[另请参阅]
+addDatabase()
+\end{notice}
+
 
 [static] QStringList QSqlDatabase::connectionNames()
+
 返回包含所有连接名称的列表。
 
-注意： 这个函数是线程安全的。
+\begin{notice}
+这个函数是线程安全的。
+\end{notice} 
 
-另请参阅 contains()，database()， 和 线程和SQL模块
+\begin{notice}[另请参阅]
+contains()，database()， 和 线程和SQL模块
+\end{notice}
 
 [static] bool QSqlDatabase::contains(const QString \&connectionName = QLatin1String(defaultConnection))
 
 
 如果所给的连接名，包含在所给的数据库连接列表里，那么就返回 true；否则返回 false。
 
-注意： 这个函数是 线程安全的
+\begin{notice}
+这个函数是 线程安全的
+\end{notice} 
 
-另请参阅 connectionNames(), database() 和 线程和SQL模块。
+
+\begin{notice}[另请参阅]
+connectionNames(), database() 和 线程和SQL模块。
+\end{notice}
+
 
 [static] QSqlDatabase QSqlDatabase::database(const QString \&connectionName = QLatin1String(defaultConnection), bool open = true)
 
 
 返回一个调用 connectionName 参数的数据库连接。这个数据库连接使用之前，必须已经通过 addDatabase() 函数进行添加。如果open为true（默认值），并且数据库连接尚未打开，则现在打开它。如果未指定连接名参数，则使用默认连接。如果连接名不存在数据库列表中，那么将会返回一个非法的连接。
 
-注意： 这个函数是 线程安全的
+\begin{notice}
+这个函数是 线程安全的
+\end{notice}
 
-另请参阅 isOpen() 和 线程和SQL模块。
+\begin{notice}[另请参阅]
+ isOpen() 和 线程和SQL模块。
+\end{notice}
+
+
 
 QString QSqlDatabase::databaseName() const
 
 
 返回连接的连接数据库名称，当然它也可能是空的。
 
-注意： 这个数据库名不是连接名
+\begin{notice}
+这个数据库名不是连接名。
+\end{notice}
 
-另请参阅 setDatabaseName()。
+\begin{notice}[另请参阅]
+setDatabaseName()。
+\end{notice}
+
 
 QSqlDriver *QSqlDatabase::driver() const
 
 
 返回被使用的数据库连接的所使用的数据库驱动。
 
-另请参阅 addDatabase() 和 drivers()
+\begin{notice}[另请参阅]
+addDatabase() 和 drivers()
+\end{notice}
 
 QString QSqlDatabase::driverName() const
 
-
 返回连接的驱动名称
 
-另请参阅 addDatabase() 和 driver()
+\begin{notice}[另请参阅]
+addDatabase() 和 driver()
+\end{notice}
 
 [static] QStringList QSqlDatabase::drivers()
-
 
 返回一个可使用的数据库驱动列表 另请参阅 registerSqlDriver()
 
@@ -478,21 +525,30 @@ QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
 
 如果查询为空，则返回一个空的、无效的查询。并且 lastError()。
 
-另请参阅 QSqlQuery 和 lastError()。
+\begin{notice}[另请参阅]
+QSqlQuery 和 lastError()。
+\end{notice}
+
 
 QString QSqlDatabase::hostName() const
 
 
 返回连接的主机名；它有可能为空。
 
-另请参阅 setHostName()
+\begin{notice}[另请参阅]
+ setHostName()。
+\end{notice}
+
 
 [static] bool QSqlDatabase::isDriverAvailable(const QString \&name)
 
 
 如果调用一个叫 name 的驱动，是可以使用的，那么就返回 true；反之返回 false。
 
-另请参阅 drivers()。
+\begin{notice}[另请参阅]
+drivers()。
+\end{notice}
+
 
 bool QSqlDatabase::isOpen() const
 
@@ -528,25 +584,34 @@ qDebug() << db.isValid();    // 返回 false
 
 使用 QSqlQuery::lastError() 函数来获取一个单个查询上的错误。
 
-另请参阅 QSqlError and QSqlQuery::lastError()。
+\begin{notice}[另请参阅]
+QSqlError and QSqlQuery::lastError()。
+\end{notice}
+
 
 QSql::NumericalPrecisionPolicyQSqlDatabase::numericalPrecisionPolicy() const
+
 返回数据库连接的当前默认精度策略。
 
 qt4.6中引入了这个函数。
 
-另请参阅 QSql::NumericalPrecisionPolicy, setNumericalPrecisionPolicy()、
-
+\begin{notice}[另请参阅]
+QSql::NumericalPrecisionPolicy, setNumericalPrecisionPolicy()、
 QSqlQuery::numericalPrecisionPolicy() 和 QSqlQuery::setNumericalPrecisionPolicy()。
+\end{notice}
+
+
 
 bool QSqlDatabase::open()
 
 
 使用当前连接值打开数据库连接。如果操作成功就返回 true; 反之返回 false。可以调用 lastError()来获取错误的信息。
 
-另请参阅 lastError()、 setDatabaseName()、setUserName()、
-
+\begin{notice}[另请参阅]
+lastError()、 setDatabaseName()、setUserName()、
 setPassword()、setHostName()、setPort()和 setConnectOptions()。
+\end{notice}
+
 
 bool QSqlDatabase::open(const QString \&user, const QString \&password)
 
@@ -557,40 +622,57 @@ bool QSqlDatabase::open(const QString \&user, const QString \&password)
 
 这个函数不存放所给的 password 参数，相反的它会把 password 参数直接传给驱动用于打连接，然后销毁这个参数。
 
-另请参阅 lastError()。
+
+
+\begin{notice}[另请参阅]
+lastError()。
+\end{notice}
 
 QString QSqlDatabase::password() const
 
 
 返回连接的密码。如果没有使用setPassword() 函数进行密码的设置 并且 没有调用 open() 以及 没有使用密码，那么就返回空的字符串。
 
-另请参阅 setPassword()
+
+\begin{notice}[另请参阅]
+setPassword()。
+\end{notice}
 
 int QSqlDatabase::port() const
 
 
 返回连接的端口号。如果端口号没有设置，那么这个值就是未定义的。
 
-另请参阅 setPort()
-
+\begin{notice}[另请参阅]
+setPort()。
+\end{notice}
 
 QSqlIndex QSqlDatabase::primaryIndex(const QString \&tablename) const
 
 
 返回所给表格名的索引。如果索引不存在，那么就返回一个空的 QSqlIndex
 
-注意： 如果表在创建时没有被引用，一些驱动程序（如 QPSQL 驱动程序）可能要求您以小写的形式传递表格名。
+\begin{notice}
+如果表在创建时没有被引用，一些驱动程序（如 QPSQL 驱动程序）可能要求您以小写的形式传递表格名。
+\end{notice}
+
 
 查看关于 Qt SQL driver 文档的更多信息。
 
-另请参阅 tables() 和 record()。
+\begin{notice}[另请参阅]
+tables() 和 record()。
+\end{notice}
+
 
 QSqlRecord QSqlDatabase::record(const QString \&tablename) const
 
 
 返回一个QSqlRecord，其中填充了名为tablename的表（或视图）中所有字段的名称。字段在记录中出现的顺序未定义。如果没有这样的表格（或者视图）存在，将会返回一个空的记录。
 
-注意： 如果表在创建时没有被引用，一些驱动程序（如 QPSQL 驱动程序）可能要求您以小写的形式传递表格名。
+\begin{notice}
+如果表在创建时没有被引用，一些驱动程序（如 QPSQL 驱动程序）可能要求您以小写的形式传递表格名。
+\end{notice}
+
 
 查看 Qt SQL driver 文档的更多信息。
 
@@ -611,14 +693,20 @@ QVERIFY(db.isValid());
 
 QSqlDatabase拥有 creator 指针的所有权，因此您不能自己删除它。
 
-另请参阅 drivers()。
+\begin{notice}[另请参阅]
+drivers()。
+\end{notice}
 
 [static] void QSqlDatabase::removeDatabase(const QString \&connectionName)
 
 
 从数据库列表中，删除一个叫 connectionName 数据库连接。
 
-警告： 不应在数据库连接上打开查询的情况下调用此函数，否则将发生资源泄漏。
+\begin{notice}[警告]
+不应在数据库连接上打开查询的情况下调用此函数，否则将发生资源泄漏。
+\end{notice}
+
+
 
 \clearpage
 
@@ -647,20 +735,30 @@ QSqlDatabase::removeDatabase("sales"); // 正确的
 
 如果要删除默认连接，这个连接可能是通过调用 addDatabase() 函数而创建的，但未指定连接名称，可以通过对database()返回的数据库调用connectionName() 来检索默认连接名称。注意，如果没有创建默认数据库，将返回一个无效的数据库。
 
-注意： 这个函数是线程安全的
+\begin{notice}
+这个函数是线程安全的
+\end{notice}
 
-另请查阅 database()，connectionName()，和 线程和SQL模块。
+\begin{notice}[另请查阅]
+database()，connectionName()，和 线程和SQL模块。
+\end{notice}
 
 bool QSqlDatabase::rollback()
 
 
 在数据库里回滚一个事务，如果驱动支持一个事务以及一个 transaction() 已经被启动。如果操作成功返回 true。否则返回 false。
 
-注意： 对于某些数据库，如果存在使用数据库进行选择的活动查询，则回滚将失败并返回false。确保在执行回滚操作之前，查询是 非活动 的状态。
+\begin{notice}
+对于某些数据库，如果存在使用数据库进行选择的活动查询，则回滚将失败并返回false。确保在执行回滚操作之前，查询是 非活动 的状态。
+\end{notice}
 
 调用 lastError() 操作获得错误的相关信息。
 
-另请查阅 QSqlQuery::isActive()，QSqlDriver::hasFeature() 和 commit()。
+\begin{notice}[另请查阅]
+QSqlQuery::isActive()，QSqlDriver::hasFeature() 和 commit()。
+\end{notice}
+
+
 
 void QSqlDatabase::setConnectOptions(const QString \&options = QString())
 
@@ -762,13 +860,20 @@ if (!db.open()) {
 
 查阅这个客户端库文档，获得更多关于不同可选项的更多信息。
 
-另请查阅 connectOptions()。
+\begin{notice}[另请查阅]
+connectOptions()。
+\end{notice}
+
+
 
 void QSqlDatabase::setDatabaseName(const QString \&name)
 
 通过所给的 name 参数来设置所连接的数据库名称。必须在打开连接之前设置数据库名称。 或者，可以调用close()函数关闭连接，设置数据库名称，然后再次调用open() 。
 
-注意： 这个数据库名不是连接名。必须在创建连接对象时将连接名称传递给 addDatabase()。
+\begin{notice}
+这个数据库名不是连接名。必须在创建连接对象时将连接名称传递给 addDatabase()。
+\end{notice}
+
 
 对于 QSQLITE 驱动，如果数据库名指定的名字不存在，然后它将会创建这个文件，除非您设置了 QSQLITE\_OPEN\_READONLY
 
@@ -813,25 +918,37 @@ void QSqlDatabase::setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy pr
 
 设置在此数据库连接上创建的查询使用的默认数值精度策略。
 
-注意： 驱动程序不支持以低精度获取数值，将忽略精度策略。您可以使用 QSqlDriver::hasFeature()来查找一个驱动是否支持这个功能。
+\begin{notice}
+驱动程序不支持以低精度获取数值，将忽略精度策略。您可以使用 QSqlDriver::hasFeature()来查找一个驱动是否支持这个功能。
+\end{notice}
 
-注意： 通过 precisionPolicy 来设置这个默认的精度策略，将不会响影任何当前的活动查询。
+\begin{notice}
+通过 precisionPolicy 来设置这个默认的精度策略，将不会响影任何当前的活动查询。
+\end{notice}
 
 qt4.6中引入了这个函数。
 
-另请查阅 QSql::NumericalPrecisionPolicy，
-numericalPrecisionPolicy()，QSqlQuery::setNumericalPrecisionPolicy 和 QSqlQuery::numericalPrecisionPolicy.
+
+\begin{notice}[另请查阅]
+QSql::NumericalPrecisionPolicy，
+numericalPrecisionPolicy()，QSqlQuery::setNumericalPrecisionPolicy 和 QSqlQuery::numericalPrecisionPolicy。
+\end{notice}
+
+
 
 void QSqlDatabase::setPassword(const QString \&password)
 通过 password 参数来设置连接的密码。为了生效，必须在打开连接之前来设置密码。或者，您可以调用close()关闭连接，然后设置密码，再次调用open()函数。
 
 这个没有默认值。
 
-警告： 这个函数以明文的形式把密码存放到qt里。 将密码作为参数来避免这个行为，然后使用 open()进行调用。
+\begin{notice}[警告]
+这个函数以明文的形式把密码存放到qt里。 将密码作为参数来避免这个行为，然后使用 open()进行调用。
+\end{notice}
 
-另请查阅 password()，setUserName()，setDatabaseName()，setHostName(),
-
+\begin{notice}[另请查阅]
+password()，setUserName()，setDatabaseName()，setHostName(),
 setPort(), setConnectOptions()和 open()。
+\end{notice}
 
 void QSqlDatabase::setPort(int port)
 
@@ -839,9 +956,11 @@ void QSqlDatabase::setPort(int port)
 
 这个没有默认的值。
 
-另请查阅 port(), setUserName()， setPassword(),
-
+\begin{notice}[另请查阅]
+port(), setUserName()， setPassword(),
 setHostName()，setDatabaseName(), setConnectOptions() 和 open()。
+\end{notice}
+
 
 void QSqlDatabase::setUserName(const QString \&name)
 
@@ -849,22 +968,36 @@ void QSqlDatabase::setUserName(const QString \&name)
 
 这个没有默认值。
 
-另请查阅 userName()，setDatabaseName()，setPassword()，
 
+\begin{notice}[另请查阅]
+userName()，setDatabaseName()，setPassword()，
 setHostName()，setPort()，setConnectOptions() 和 open()。
+\end{notice}
+
 
 QStringList QSqlDatabase::tables(QSql::TableType type = QSql::Tables) const
+
 返回由 parameter type 参数 指定的数据库的表格、系统表和视图的列表。
 
-另请查阅 primaryIndex() 和 record()。
+\begin{notice}[另请查阅]
+primaryIndex() 和 record()。
+\end{notice}
 
 bool QSqlDatabase::transaction()
+
 如果驱动程序支持事务，则在数据库上开始事务。如果操作成功的话，返回 true, 否则返回 false。
 
-另请查阅 QSqlDriver::hasFeature()， commit() 和 rollback()。
+
+
+\begin{notice}[另请查阅]
+QSqlDriver::hasFeature()， commit() 和 rollback()。
+\end{notice}
 
 QString QSqlDatabase::userName() const
+
 返回连接的用户名; 它也许为空。
 
-另请查阅 setUserName()。
+\begin{notice}[另请查阅]
+setUserName()。
+\end{notice}
 
