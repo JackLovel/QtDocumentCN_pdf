@@ -12,8 +12,8 @@ QSqlDatabase 类 用于处理数据库的连接
 	\hline
 \end{tabular}
 
-\href{https://doc.qt.io/qt-5/qsqldatabase-members.html}{列出所有的成员，包括继承成员}
 
+\href{https://doc.qt.io/qt-5/qsqldatabase-members.html}{列出所有的成员，包括继承成员}
 
 \section{公共类型}
 
@@ -258,7 +258,12 @@ QSqlDatabase::~QSqlDatabase()
 
 销毁这个对象，并且释放所有配置的资源 注意： 当最后的连接被销毁，这个折构函数就会暗中的调用 close()函数，去删除这个数据库的其他连接。
 
-另请参阅 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabaseclose}{close()}。
+
+\begin{notice}[另请参阅 ]
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabaseclose}{close()}。
+\end{notice}
+
+
 
 [static] QSqlDatabase QSqlDatabase::addDatabase(const QString \&type,const QString \&connectionName = QLatin1String(defaultConnection))
 
@@ -270,13 +275,24 @@ QSqlDatabase::~QSqlDatabase()
 
 如果我们没有指定连接名参数，那么应用程序就会返回默认连接。 如果我们提供了连接名参数，那么可以使用database(connectionName) 函数来获取该连接。
 
-警告： 如果您指定了 相同的连接名参数，那么就会替换之前的那个相同的连接。如果您多次调用这个函数而不指定 连接名参数，则默认连接将被替换。
+\begin{notice}[警告]
+如果您指定了 相同的连接名参数，那么就会替换之前的那个相同的连接。如果您多次调用这个函数而不指定 连接名参数，则默认连接将被替换。
+\end{notice}
+
 
 在使用连接之前，它必须经过初始化。比如： 调用下面一些或者全部 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetdatabasenameconst-qstring-name}{setDatabaseName()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetusernameconst-qstring-name}{setUserName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetpasswordconst-qstring-password}{setPassword()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesethostnameconst-qstring-host}{setHostName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetportint-port}{setPort()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetconnectoptionsconst-qstring-options--qstring}{setConnectOptions()}，并最终调用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#bool-qsqldatabaseopen}{open()}
 
-注意： 这个函数是线程安全的
 
-请查看 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabasedatabaseconst-qstring-connectionname--qlatin1stringdefaultconnection-bool-open--true}{database()}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseremovedatabaseconst-qstring-connectionname}{removeDatabase()} 以及 \href{https://doc.qt.io/qt-5/threads-modules.html#threads-and-the-sql-module}{ 线程和SQL 单元}。
+
+\begin{notice}
+这个函数是线程安全的
+\end{notice}
+
+
+\begin{notice}[另请查阅]
+\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabasedatabaseconst-qstring-connectionname--qlatin1stringdefaultconnection-bool-open--true}{database()}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseremovedatabaseconst-qstring-connectionname}{removeDatabase()} 以及 \href{https://doc.qt.io/qt-5/threads-modules.html#threads-and-the-sql-module}{ 线程和SQL 单元}。
+\end{notice}
+
 
 [static] QSqlDatabase QSqlDatabase::addDatabase(QSqlDriver *driver, const QString \&connectionName = QLatin1String(defaultConnection))
 
@@ -292,7 +308,11 @@ query.exec("SELECT NAME, ID FROM STAFF");
 
 上面的代码用于设置一个 PostgreSQL 连接和实例化一个 QPSQLDriver 对象。接下来，addDatabase() 被调用产生一个已知的连接，以便于它可以使用 Qt SQL 相关的类。Qt假定您已经打开了数据库连接，当使用连接句柄（或一组句柄）实例化驱动程序时。
 
-注意： 我们假设qtdir是安装Qt的目录。假定您的PostgreSQL头文件己经包含在搜索路径中，然后这里才能引用所需要的PostgreSQL客户端库和去实例化QPSQLDriver对象。
+\begin{notice}
+我们假设qtdir是安装Qt的目录。假定您的PostgreSQL头文件己经包含在搜索路径中，然后这里才能引用所需要的PostgreSQL客户端库和去实例化QPSQLDriver对象。
+\end{notice}
+
+
 
 请记住，必须将数据库客户端库到您的程序里。确保客户端库在您的链接器的搜索路径中，并且像下面这样添加到您的 .pro 文件里：
 
@@ -329,26 +349,46 @@ QIBASE	&QIBaseDriver	&isc\_db\_handle connection	&qsql\_ibase.cpp\\
 
 当构造用于为内部查询创建新连接的QTDSDriver时，需要主机名（或服务名）。这是为了防止在同时使用多个QSqlQuery对象时发生阻塞。
 
-警告： 添加一个存在连接名的连接时，这个新添加的连接将会替换另一个。 警告： SQL框架拥有驱动程序的所有权。它不能被删除。可以使用removeDatabase()，去删除这个连接。 另请参阅drivers()
+
+\begin{notice}[警告]
+我们假设添加一个存在连接名的连接时，这个新添加的连接将会替换另一个。 
+\end{notice}
+
+
+\begin{notice}[警告]
+	 SQL框架拥有驱动程序的所有权。它不能被删除。可以使用removeDatabase()，去删除这个连接。 另请参阅drivers()
+\end{notice}
+
+
 
 [protected] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
 
 克隆其他数据库连接并将其存储为connectionName。原始数据库中的所有设置，例如databaseName()、hostName()等，都会被复制。如果其他数据库无效，则不执行任何操作。返回最新被创建的数据库连接。
 
-注意： 这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
+
+
+\begin{notice}[警告]
+这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
+\end{notice}
+
 
 [static] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
 这是个重载函数。
 
 克隆其他数据库连接并将其存储为connectionName。原始数据库中的所有设置，例如databaseName()、hostName()等，都会被复制。如果其他数据库无效，则不执行任何操作。返回最新被创建的数据库连接。
 
-注意： 这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
+
+
+\begin{notice}
+这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
+\end{notice}
 
 当我们在另一个线程克隆这个数据库，这个重载是非常有用的。
 
 qt5.13中引入了这个函数。
 
 void QSqlDatabase::close()
+
 关闭数据库连接，释放获取的所有资源，并使与数据库一起使用的任何现有QSqlQuery对象无效
 
 这个函数也会影响它的QSqlDatabase对象副本。
