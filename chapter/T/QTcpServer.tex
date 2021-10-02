@@ -338,6 +338,60 @@ void QTcpServer::setMaxPendingConnections(int \emph{numConnections})
 maxPendingConnections() 和 hasPendingConnections() 。
 \end{notice}
 
+void QTcpServer::setProxy(const QNetworkProxy \emph{\&networkProxy} )
+
+显式设置该套接字的网络代理为 \emph{networkProxy} 。
+
+您通过设置使用 QNetworkProxy::NoProxy 代理类型来禁止套接字使用代理：
+
+\begin{lstlisting}[language=C++]
+	 server->setProxy(QNetworkProxy::NoProxy);
+\end{lstlisting}
+
+该函数最初在Qt4.1版本时引入。
+
+\begin{notice}[另请查阅]
+proxy() 和 QNetworkProxy。
+\end{notice}
+
+bool QTcpServer::setSocketDescriptor(qintptr \emph{socketDescriptor})
+
+设置该服务端监听连接时使用的套接字描述符为 \emph{socketDescriptor} 。当操作成功时返回 true ，否则返回 false 。
+
+调用该函数时，服务端应该处于正在监听的状态。
+
+另外您也可以在 socketDescriptor() 和 isListening() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+socketDescriptor() 和 isListening()。
+\end{notice}
+
+
+
+qintptr QTcpServer::socketDescriptor() const
+
+返回服务端监听连接时使用的套接字描述符，如果该服务器未处于监听状态返回-1。
+
+如果服务器正在使用 QNetworkProxy ，返回的套接字描述符可能并不能在本地套接字函数中使用。
+
+\begin{notice}[另请查阅]
+setSocketDescriptor() 和 isListening()。
+\end{notice}
+
+
+bool QTcpServer::waitForNewConnection(int \emph{msec} = 0, bool \emph{*timedOut} = nullptr)
+
+等待 msec 毫秒或者直到有新的连接接入。如果有新的连接，该函数返回 true ， 否则返回 false 。如果 \emph{*timeOut} 参数不为 nullptr 并且操作超时， \emph{timeOut} 将被设置为 true 。
+
+这是一个可以引起阻塞的函数。不推荐在一个单线程的 GUI 程序中使用该函数，因为使用该函数后直到该函数返回之前整个应用程序会停止响应。 waitForNewConnection() 函数通常在没有事件循环的情况下使用。
+
+不阻塞应用程序的可选方案是使用 newConnection() 信号。
+
+如果 msec 参数设置为-1，该函数将不会超时。
+
+\begin{notice}[另请查阅]
+hasPendingConnections() 和 nextPendingConnection()。
+\end{notice}
 
 
 
