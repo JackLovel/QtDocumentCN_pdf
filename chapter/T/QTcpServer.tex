@@ -1,0 +1,199 @@
+\chapter{QTcpServer}
+
+QTcpServer 类提供了一个基于 TCP 协议的服务器。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QTcpServer>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	父类	  & QObject \\ 
+	\hline
+    子类	 & QSctpServer \\ 
+	\hline
+\end{tabular}
+
+
+\begin{notice}
+该类的所有成员函数都是可重入的。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|l|}
+	\hline
+		& QTcpServer(QObject *parent = nullptr) \\
+	\hline
+	 virtual	& $\sim$QTcpServer() \\ 
+	\hline
+void	 & close() \\ 
+\hline
+QString	& errorString() const \\
+\hline
+virtual bool	& hasPendingConnections() const \\ 
+\hline
+bool	& isListening() const \\ 
+\hline
+bool	& listen(const QHostAddress \&address = QHostAddress::Any, quint16 port = 0) \\ 
+\hline
+int	& maxPendingConnections() const \\
+\hline
+virtual QTcpSocket *	& nextPendingConnection()\\
+\hline
+void	 & pauseAccepting() \\ 
+\hline
+QNetworkProxy	& proxy() const\\
+\hline
+void	 & resumeAccepting()\\
+\hline
+QHostAddress & 	serverAddress() const\\
+\hline
+QAbstractSocket::SocketError	 & serverError() const \\
+\hline
+quint16	 & serverPort() const\\
+\hline
+void	 & setMaxPendingConnections(int numConnections)\\
+\hline
+void	 & setProxy(const QNetworkProxy \&networkProxy)\\
+\hline
+bool	& setSocketDescriptor(qintptr socketDescriptor)\\
+\hline
+qintptr	& socketDescriptor() const\\
+\hline
+bool	& waitForNewConnection(int msec = 0, bool *timedOut = nullptr)\\
+	\hline
+\end{longtable}
+
+\section{信号}
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型	 & 函数名 \\
+	\hline
+void	v & acceptError(QAbstractSocket::SocketError \emph{socketError}) \\
+\hline
+void	 & newConnection() \\
+	\hline 
+\end{tabular}
+
+\section{保护成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型	 & 函数名 \\
+	\hline
+void	 &  addPendingConnection(QTcpSocket \emph{*socket}) \\ 
+\hline
+virtual void	 & incomingConnection(qintptr \emph{socketDescriptor}) \\ 
+	\hline 
+\end{tabular}
+
+\section{详细介绍}
+
+这个类使“用Qt编写一个接受 TCP 链接的服务器”的构想成为可能。您可以为 QTcpServer 指定一个端口或者让它自动选一个。您也可以令 QTcpServer 仅监听一个指定的地址或者让它监听这台机器上的所有地址。
+
+调用 listen() 函数来为到达的连接建立服务器监听。每次当有新的客户端连接到这个服务端时，QTcpServer 都会发出 newConnection() 信号。
+
+调用 nextPendingConnection() 函数接受一个连接到 QTcpServer 的待处理连接。 该函数会返回一个处于已连接（ QAbstractSocket::ConnectedState ）状态的 QTcpSocket ，您可以使用这个 QTcpSocket 与客户端进行通信。
+
+如果发生错误，serverError() 函数会返回该错误的类型。 您可以调用 errorString() 函数来获取一个能让人看懂的错误描述。
+
+当服务器正在监听连接时，服务器所监听的地址和端口可以通过 serverAddress() 和 serverPort() 函数来获取。
+
+调用 close() 函数后 QTcpServer 会停止监听到达的连接。
+
+另外您也可以在 QTcpSocket 类文档和Qt官方给出的 Fortune Server Example ，Threaded Fortune Server Example ，Loopback Example 和 Torrent Example 示例文档中找到相关信息。
+
+\section{成员函数文档}
+
+QTcpServer::QTcpServer(QObject  \emph{*parent}= nullptr)
+
+构造函数。构造一个 QTcpServer 对象。
+
+\emph{parent} 参数将传递到 QObject 的构造函数中。
+
+\begin{notice}[另请参阅]
+listen() 和 setSocketDescriptor()。
+\end{notice}
+
+
+% gog 
+
+[SIGNAL] void QTcpServer::acceptError(QAbstractSocket::SocketError \emph{socketError})
+
+当接受一个新的连接时出错，QTcpServer 会发送此信号。 socketError 参数描述了该错误的类型。
+
+该函数最早在Qt5.0版本引入。
+
+\begin{notice}[另请参阅]
+pauseAccepting() 和 resumeAccepting()。
+\end{notice}
+
+[SIGNAL] void QTcpServer::newConnection()
+
+每当有新的连接可用时，QTcpServer 都会发送该消息。
+
+\begin{notice}[另请参阅]
+hasPendingConnections() 和 nextPendingConnection()。
+\end{notice}
+
+[virtual] QTcpServer::$\sim$QTcpServer()
+
+析构函数。销毁 QTcpServer 对象。如果服务器正在监听连接，套接字会自动关闭。
+
+在服务端删除之前，所有仍处于连接状态的客户端 QTcpSocket 都必须断开连接或者重新指定父类。
+
+\begin{notice}[另请参阅]
+ close() 。
+\end{notice}
+
+
+[protected] void QTcpServer::addPendingConnection(QTcpSocket  \emph{*socket})
+
+该函数由 QTcpServer::incomingConnection() 函数调用，作用是添加 socket 到待处理连接列表中。
+
+\begin{notice}
+如果您不想破坏连接处理机制，请不要忘记从重新实现的 incomingConnection() 中调用此成员。
+\end{notice}
+
+该函数最初在Qt4.7版本引入。
+
+\begin{notice}[另请参阅]
+incomingConnection() 
+\end{notice}
+
+void QTcpServer::close()
+
+关闭服务器。服务器将不再监听到达的连接。
+
+\begin{notice}[另请参阅]
+ listen() 
+\end{notice}
+
+QString QTcpServer::errorString() const
+
+将最后一个出现的错误的相关信息按照适合人阅读的形式返回。
+
+
+\begin{notice}[另请参阅]
+serverError() 
+\end{notice}
+
+
+[virtual] bool QTcpServer::hasPendingConnections() const
+
+当服务端有待处理的连接时该函数返回 true ，否则返回 false 。
+
+\begin{notice}[另请参阅]
+nextPendingConnection() 和 setMaxPendingConnections()。
+\end{notice}
+
+
+
+
+
+
+
