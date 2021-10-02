@@ -106,7 +106,7 @@ qDeleteAll(list.constBegin(), list.constEnd());
 支持隐式共享的容器的迭代器的行为和 STL 迭代器并不完全一样。当这类容器的迭代器在使用时你应当避免容器的拷贝。更多信息请阅读 隐式共享迭代器问题 一文。
 \end{notice}
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 QList::iterator and QListIterator.
 \end{notice}
 
@@ -133,7 +133,7 @@ const\_iterator::const\_iterator()
 
 类似于 operator*() and operator++() 的方法不允许对未初始化的迭代器调用，在使用前先通过 operator=() 进行赋值。
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 QList::constBegin() 和 QList::constEnd().
 \end{notice}
 
@@ -143,7 +143,7 @@ bool const\_iterator::operator!=(const const\_iterator  \emph{\&other}) const
 如果该迭代器指向的元素的值不等于 \emph{other} 迭代器指向的元素的值则返回 true。
 
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator==().
 \end{notice}
 
@@ -152,7 +152,7 @@ const T \&const\_iterator::operator*() const
 
 返回当前的元素。
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator->().
 \end{notice}
 
@@ -162,7 +162,7 @@ const\_iterator const\_iterator::operator+(const\_iterator::difference\_type \em
 返回一个指向当前迭代器向列表尾部移动 \emph{j} 步的位置的元素的迭代器。(如果 \emph{j} 为负值，则迭代器向列表头部移动。)
 
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator-() 和 operator+=().
 \end{notice}
 
@@ -173,7 +173,7 @@ const\_iterator \&const\_iterator::operator++()
 
 对 QList::end() 调用该方法是未定义行为。
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator--().
 \end{notice}
 
@@ -189,7 +189,7 @@ const\_iterator \&const\_iterator::operator+=(const\_iterator::difference\_type 
 
 将该迭代器列表尾部移动 \emph{j} 个元素。(如果 \emph{j} 为负值，则向列表头部移动)
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator-=() 和 operator+().
 \end{notice}
 
@@ -197,7 +197,7 @@ const\_iterator const\_iterator::operator-(const\_iterator::difference\_type \em
 
 返回一个指向当前迭代器向列表头部移动 \emph{j} 步的位置的元素的迭代器。(如果 \emph{j} 为负值，则迭代器向列表尾部移动。)
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator+() 和 operator-=().
 \end{notice}
 
@@ -212,7 +212,7 @@ const\_iterator \&const\_iterator::operator--()
 对 QList::begin() 调用该方法是未定义行为。
 
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator++().
 \end{notice}
 
@@ -227,7 +227,7 @@ const\_iterator \&const\_iterator::operator-=(const\_iterator::difference\_type 
 
 将迭代器向列表头部回退 \emph{j} 元素。(如果 \emph{j} 为负值，则迭代器向列表尾部移动。)
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator+=() 和 operator-().
 \end{notice}
 
@@ -236,7 +236,7 @@ const T *const\_iterator::operator->() const
 
 返回一个指向当前元素的指针。
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator*().
 \end{notice}
 
@@ -254,7 +254,7 @@ bool const\_iterator::operator==(const const\_iterator \emph{\&other}) const
 
 如果该迭代器指向的元素的值等于 \emph{other} 迭代器指向的元素的值则返回 \hl{true}。
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator!=().
 \end{notice}
 
@@ -273,6 +273,6 @@ const T \&const\_iterator::operator[](const\_iterator::difference\_type \emph{j}
 
 提供该方法是为了使 QList 迭代器行为类似 C++ 指针。
 
-\begin{notice}[另请参见]
+\begin{notice}[另请参阅]
 operator+().
 \end{notice}
