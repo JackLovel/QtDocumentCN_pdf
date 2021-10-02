@@ -295,7 +295,12 @@ bool QFile::copy(const QString \&newName)
 
 将当前 fileName() 指定的文件复制为文件名 newName 指定的文件。如果成功，返回 true ；否则返回 false。
 
-注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+
+\begin{notice}
+如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+\end{notice} 
+
+
 
 源文件会在复制前关闭。
 
@@ -311,9 +316,10 @@ setFileName().
 
 将文件 fileName 复制为文件名 newName。如果成功，返回 true ；否则返回 false。
 
-注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
 
-
+\begin{notice}
+如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+\end{notice} 
 
 \begin{notice}[另请参阅]
 rename().
@@ -440,9 +446,17 @@ e mode)。
 
 模式 mode 必须是 QIODevice::ReadOnly, QIODevice::WriteOnly, 或 QIODevice::ReadWrite。也可以有附加flags，例如 QIODevice::Text 和 QIODevice::Unbuffered。
 
-注意： 在 WriteOnly 或 ReadWrite 模式，如果相关文件不存在，此函数会尝试在打开前新建。
+\begin{notice}
+在 WriteOnly 或 ReadWrite 模式，如果相关文件不存在，此函数会尝试在打开前新建。
+\end{notice} 
 
-另请参见 QIODevice::OpenMode and setFileName().
+
+
+\begin{notice}[另请参阅]
+QIODevice::OpenMode and setFileName()。
+\end{notice} 
+
+
 
 bool QFile::open(FILE *fh, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags handleFlags = DontCloseHandle)
 
@@ -467,7 +481,9 @@ void printError(const char* msg)
 
 当一个 QFile 通过此函数被被打开，close() 的行为由 AutoCloseHandle flag决定。如果指定了 AutoCloseHandle ，且此函数执行成功，那么 close() 会关闭传入的句柄。否则，close() 不会关闭文件，只会刷新数据(flush)。
 
-\textbf{警告}：
+\begin{notice}[警告]
+
+\end{notice} 
 
 \begin{compactitem}
 \item 如果 \emph{fh} 并非指向常规文件，例如 \hl{stdin}, \hl{stdout}, 或 \hl{stderr}，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
@@ -502,7 +518,10 @@ bool QFile::open(int fd, QIODevice::OpenMode mode, QFileDevice::FileHandleFlags 
 
 通过此函数打开的文件会被自动设置为 raw 模式；这意味着文件I/O函数会很慢。如果您遇到了性能问题，可以尝试其他 open() 函数。
 
-\textbf{警告}：
+
+\begin{notice}[警告]
+
+\end{notice} 
 
 \begin{compactitem}
 \item 如果 \emph{fd} 不是一个常规文件，例如 0 (\hl{stdin}), 1 (\hl{stdout}), 或 2 (\hl{stderr})，你可能不能够使用 seek()，且size() 返回0。详见 QIODevice::isSequential()。
@@ -575,7 +594,11 @@ setFileName().
 
 把文件 oldName 重命名为 newName。如果成功，返回 true ；否则返回 false。
 
-注意如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+
+\begin{notice}
+如果 newName 文件名的文件已存在，函数不会覆盖，直接返回 false 。
+\end{notice}
+
 
 
 \begin{notice}[另请参阅]
