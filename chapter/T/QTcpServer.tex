@@ -191,6 +191,154 @@ serverError()
 nextPendingConnection() 和 setMaxPendingConnections()。
 \end{notice}
 
+[virtual protected] void QTcpServer::incomingConnection(qintptr \emph{socketDescriptor})
+
+当有新的连接到达时， QTcpServer 会调用该虚函数。 socketDescriptor 参数是为该连接指定的本机套接字描述符。
+
+对该虚函数重写，您需要进行以下操作：
+
+\begin{compactitem}
+\item 构建一个 QTcpSocket 。
+\item 设置套接字描述符。
+\item 将 QTcpSocket 储存在内部的待处理连接列表中。
+\item 发送 newConnection() 信号。
+\end{compactitem}
+
+重写此函数，以在连接可用时更改服务器的行为。
+
+如果该服务器使用了 QNetworkProxy ，\emph{socketDescriptor}可能并不能被本地套接字功能使用，应该仅被 QTcpSocket::setSocketDescriptor() 函数使用。
+
+\begin{notice}
+	如果在这个方法中创建了另外一个套接字，该套接字需要通过调用 addPendingConnection() 函数添加到连接处理机制中。
+
+\end{notice}
+
+\begin{notice}
+	如果您想在另外一个线程中将到达的连接当作一个新的 QTcpSocket 进行处理，您需要将套接字描述符传递到那个线程中并在那个线程中创建一个 QTcpSocket 对象并使用该该对象的 setSocketDescriptor() 方法。
+\end{notice}
+
+\begin{notice}
+	如果您想在另外一个线程中将到达的连接当作一个新的 QTcpSocket 进行处理，您需要将套接字描述符传递到那个线程中并在那个线程中创建一个 QTcpSocket 对象并使用该该对象的 setSocketDescriptor() 方法。
+\end{notice}
+
+\begin{notice}[另请查阅]
+newConnection(), nextPendingConnection() 和 addPendingConnection()。
+\end{notice}
+
+% gog
+bool QTcpServer::isListening() const
+
+当服务端正在监听连接时返回 true ，否则返回 false 。
+
+
+
+\begin{notice}[另请查阅]
+listen()。
+\end{notice}
+
+bool QTcpServer::listen(const QHostAddress  \emph{\&address} = QHostAddress::Any, quint16 \emph{port} = 0)
+
+令服务端监听在 address 指定的地址和 port 指定的端口上到达的连接。如果 port 参数为0 ，QTcpServer 会自动选择一个端口。 如果 address 参数为 QHostAddress::Any ，服务端会监听所有的网络接口。
+
+操作成功该函数返回 true ，否则返回 false 。
+
+\begin{notice}[另请查阅]
+ isListening() 
+\end{notice}
+
+int QTcpServer::maxPendingConnections() const
+
+返回最大的待处理的已接受连接数。默认为30。
+
+\begin{notice}[另请查阅]
+setMaxPendingConnections() 和 hasPendingConnections() 。
+\end{notice}
+
+
+[virtual] QTcpSocket *QTcpServer::nextPendingConnection()
+
+将下一个待处理的连接作为已连接的 QTcpSocket 对象返回。
+
+该套接字将作为该服务端的子对象创建，这就意味着当 QTcpServer 对象销毁后，该套接字对象也会被销毁。最好在完成处理后显式删除该对象，以避免浪费内存。
+
+如果没有待处理的连接，该函数会返回 nullptr 。
+
+\begin{notice}
+返回的 QTcpSocket 对象不能在其他线程中使用。如果您想在其他的线程中使用到达的连接，您需要重写 incomingConnection() 函数。
+\end{notice}
+ 
+\begin{notice}[另请查阅]
+hasPendingConnections() 。
+\end{notice}
+
+void QTcpServer::pauseAccepting()
+
+暂停接收新连接。队列连接会保留在队列中。
+
+该函数最初在Qt5.0版本引入。
+
+\begin{notice}[另请查阅]
+ resumeAccepting()
+\end{notice}
+
+
+QNetworkProxy QTcpServer::proxy() const
+
+返回该套接字的网络代理。默认将使用QNetworkProxy::DefaultProxy 。
+
+该函数最初在Qt4.1版本引入。
+
+
+\begin{notice}[另请查阅]
+setProxy() 和 QNetworkProxy()。
+\end{notice}
+
+void QTcpServer::resumeAccepting()
+
+恢复接收新连接。
+
+该函数最初在Qt5.0版本引入。
+
+\begin{notice}[另请查阅]
+pauseAccepting()。
+\end{notice}
+
+QHostAddress QTcpServer::serverAddress() const
+
+如果服务端正在监听，则返回服务端的地址，否则返回 QHostAddress::Null 。
+
+\begin{notice}[另请查阅]
+serverPort() 和 listen() 。
+\end{notice}
+
+
+QAbstractSocket::SocketError QTcpServer::serverError() const
+
+返回最后出现的错误的代码。
+
+\begin{notice}[另请查阅]
+errorString()。
+\end{notice}
+
+quint16 QTcpServer::serverPort() const
+
+如果服务端正在监听，则返回服务端的端口，否则返回 0 。
+
+\begin{notice}[另请查阅]
+serverAddress() 和 listen() 。
+\end{notice}
+
+void QTcpServer::setMaxPendingConnections(int \emph{numConnections})
+
+设置待处理的已接受连接的数目最大值为 \emph{numConnections}。超过该数目后，在调用 nextPendingConnection() 函数之前， QTcpServer 将不会再接收到达的连接。默认情况下，QTcpServer接收连接的最大值为30。
+
+服务器达到其最大待处理连接数后，客户端仍然可以连接（即 QTcpSocket 仍可以发出 connected() 信号）。 QTcpServer 将停止接受新连接，但是操作系统仍可以将它们保持在队列中。
+
+\begin{notice}[另请查阅]
+maxPendingConnections() 和 hasPendingConnections() 。
+\end{notice}
+
+
 
 
 
