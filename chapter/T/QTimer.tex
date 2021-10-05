@@ -242,8 +242,6 @@ bool	& isActive() const \\
 	\hline 
 \end{tabular}
 
-
-
 \begin{tabular}{|r|l|}
 	\hline
 属性名	 & 类型 \\
@@ -257,6 +255,122 @@ interval & 	int \\
 一旦处理完窗口系统事件队列中的所有事件，超时间隔为0的QTimer 就会超时。
 
 此属性的默认值为0。 设置活动定时器的间隔会改变 timerId()。
+
+访问函数：
+
+\begin{tabular}{|r|l|}
+	\hline
+类型	 & 函数名 \\
+\hline
+int & 	interval() const \\
+\hline
+void	 & setInterval(int \emph{msec}) \\
+\hline
+void &	setInterval(std::chrono::milliseconds \emph{value}) \\
+	\hline 
+\end{tabular}
+
+
+\begin{notice}[另请参阅]
+singleShot。
+\end{notice}
+
+\begin{tabular}{|l|r|}
+\hline
+属性名	 & 类型 \\ 
+\hline
+remainingTime	& const int \\ 
+\hline
+\end{tabular}
+
+此属性保留剩余时间（以毫秒为单位）
+
+返回定时器的剩余值（以毫秒为单位），直到超时为止。 如果定时器处于非活动状态，则返回值为-1。 如果定时器过期，则返回值为0。
+
+此属性在Qt 5.0中引入。
+
+访问函数
+
+\begin{tabular}{|l|r|}
+\hline
+类型 & 函数名 \\ 
+\hline
+int	& remainingTime() const \\
+\hline
+\end{tabular}
+
+
+\begin{notice}[另请参阅]
+\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/T/QTimer/qtimer.html#interval-prop}{interval}。
+\end{notice}
+
+
+\begin{tabular}{|l|r|}
+\hline
+属性名 & 类型 \\ 
+\hline
+singleShot &	bool \\
+\hline
+\end{tabular}
+
+
+此属性保持定时器是否为单次定时器。
+
+单触发定时器仅触发一次，非单触发定时器每interval毫秒触发一次。
+
+此属性的默认值是false。
+
+访问函数：
+
+\begin{tabular}{|r|l|}
+\hline
+类型 & 	函数名 \\ 
+\hline
+bool &	isSingleShot() const \\ 
+\hline
+void	 & setSingleShot(bool singleShot) \\
+\hline
+\end{tabular}
+
+
+\begin{notice}[另请参阅]
+interval 和 singleShot()。
+\end{notice}
+
+\begin{tabular}{|r|l|}
+\hline
+类型	 & 属性名 \\ 
+\hline
+timerType	 & Qt::TimerType \\ 
+\hline
+\end{tabular}
+
+控制定时器的精度。
+
+默认的属性是 Qt::CoarseTimer。
+
+访问函数：
+
+\begin{tabular}{|r|l|}
+\hline
+类型	 & 函数名 \\ 
+Qt::TimerType & 	timerType() const \\ 
+void	 & setTimerType(Qt::TimerType \emph{atype}) \\ 
+\hline
+\end{tabular}
+
+\begin{notice}[另请参阅]
+ Qt::TimerType。
+\end{notice}
+
+\section{成员函数文档}
+
+
+
+
+
+
+
 
 
 
