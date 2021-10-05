@@ -1,0 +1,84 @@
+\chapter{QTcpSocket}
+
+QTcpSocket 提供了一个 TCP 类型的套接字。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QTcpSocket>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	父类	  & QAbstractSocket \\ 
+	\hline
+    子类	 & QSctpSocket 和 QSslSocket \\ 
+	\hline
+\end{tabular}
+
+
+\begin{notice}
+QTcpSocket类中所有的函数都是可重入函数。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+		& QTcpSocket(QObject  \emph{*parent} = nullptr) \\
+	\hline
+	 virtual	& $\sim$QTcpSocket() \\ 
+	\hline
+\end{tabular}
+
+\section{详细描述}
+
+
+
+
+TCP（传输控制协议）是一种可靠的，面向流，面向连接的传输协议。 它特别适合连续数据传输。
+
+QTcpSocket 是继承自 QAbstractSocket 的一个便利子类，它允许您建立 TCP 连接并传输数据流。您可以阅读 QAbstractSocket 文档获取详细信息。
+
+\begin{notice}
+	无法在 QIODevice::Unbuffered 模式下打开 TCP 套接字。
+\end{notice}
+
+
+
+\begin{notice}[另请查阅]
+QTcpServer, QUdpSocket, QNetworkAccessManager, Fortune Server Example, Fortune Client Example, Threaded Fortune Server Example, Blocking Fortune Client Example, Loopback Example 和  and Torrent Example。
+\end{notice}
+
+
+
+\section{成员函数文档}
+
+QTcpSocket::QTcpSocket(QObject  \emph{*parent} = nullptr)
+
+
+构造函数。创建一个 QTcpSocket 类型的对象。该对象创建后初始状态为未连接（ UnconnectedState ）状态。
+
+
+函数中父对象参数 \emph{parent} 传递给 QObject 的构造函数。
+
+\begin{notice}[另请查阅]
+\href{https://doc.qt.io/qt-5/qabstractsocket.html#socketType}{socketType()}。
+\end{notice}
+
+
+
+\emph{[virtual]}QTcpSocket::$\sim$QTcpSocket()
+
+析构函数。销毁套接字，必要时关闭连接。
+
+\begin{notice}[另请查阅]
+\href{https://doc.qt.io/qt-5/qabstractsocket.html#close}{close()}。
+\end{notice}
+
+
+
+
+
+
+
