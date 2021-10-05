@@ -1,0 +1,172 @@
+\chapter{QTimer}
+
+QTimer提供了重复和信号槽的定时器。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QTimer>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+	继承	  & QObject \\ 
+	\hline
+\end{tabular}
+
+\section{属性}
+
+\begin{tabular}{|r|l|}
+	\hline
+属性名	 & 类型 \\ 
+\hline
+active	& const bool\\
+\hline
+singleShot	& bool\\
+\hline
+interval &	int\\
+\hline
+timeType	& Qt::TimerType\\
+\hline
+remainingTime &	const int\\
+	\hline
+\end{tabular}
+
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|l|}
+\hline
+类型 & 	函数名 \\
+\hline
+ & QTimer(QObject *parent = nullptr) \\
+ \hline
+virtual	& $\sim$QTimer() \\
+\hline
+QMetaObject::Connection	& callOnTimeout(Functor slot, Qt::ConnectionType connectionType = ...) \\
+\hline
+QMetaObject::Connection	& callOnTimeout(const QObject *context, Functor slot, Qt::ConnectionType connectionType = ...) \\ 
+\hline
+QMetaObject::Connection	& callOnTimeout(const QObject *receiver, PointerToMemberFunction slot, Qt::ConnectionType connectionType = ...) \\ 
+\hline
+int	& interval() const \\ 
+\hline
+std::chrono::milliseconds	 & intervalAsDuration() const \\ 
+\hline
+bool	& isActive() const \\
+\hline
+bool &	isSingleShot() const \\
+\hline
+int	& remainingTime() const \\
+\hline
+std::chrono::milliseconds	 & remainingTimeAsDuration() const \\
+\hline
+void	 & setInterval(int msec) \\ 
+\hline
+void & 	setInterval(std::chrono::milliseconds value) \\ 
+\hline
+void	 & setSingleShot(bool singleShot) \\ 
+\hline
+void	  & setTimerType(Qt::TimerType atype) \\
+\hline
+void	 & start(std::chrono::milliseconds msec) \\
+\hline
+int	& timerId() const \\
+\hline
+Qt::TimerType	 & timerType() const \\
+\hline
+\end{longtable}
+
+\begin{compactitem}
+\item 32个共有成员函数继承自QObject
+\end{compactitem}
+
+\section{公有槽函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型	 & 函数名 \\
+	\hline
+void &	start(int msec) \\
+\hline
+void &	start() \\
+\hline
+void &	stop()  \\
+	\hline 
+\end{tabular}
+
+\begin{compactitem}
+\item 一个公有槽函数继承自QObject
+\end{compactitem}
+
+\section{信号}
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型	 & 函数名 \\
+	\hline
+void	 & timeout() \\
+	\hline 
+\end{tabular}
+
+\begin{compactitem}
+\item 2个信号继承自QObject
+\end{compactitem}
+
+\section{静态公有成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型	 & 函数名 \\
+	\hline
+void	 & singleShot(int msec, const QObject *receiver, const char *member) \\
+\hline
+void &	singleShot(int msec, Qt::TimerType timerType, const QObject *receiver, const char *member) \\
+\hline
+void	 & singleShot(int msec, const QObject *receiver, PointerToMemberFunction method) \\
+\hline
+void	 & singleShot(int msec, Qt::TimerType timerType, const QObject *receiver, PointerToMemberFunction method) \\ 
+\hline
+void	 & singleShot(int msec, Functor functor) \\
+\hline
+void	 & singleShot(int msec, Qt::TimerType timerType, Functor functor) \\
+\hline
+void	 & singleShot(int msec, const QObject *context, Functor functor) \\
+\hline
+void	 & singleShot(int msec, Qt::TimerType timerType, const QObject *context, Functor functor) \\
+\hline
+void &	singleShot(std::chrono::milliseconds msec, const QObject *receiver, const char *member) \\
+\hline
+void	 & singleShot(std::chrono::milliseconds msec, Qt::TimerType timerType, const QObject *receiver, const char *member) \\
+\hline
+const QMetaObject	 & staticMetaObject \\
+	\hline 
+\end{tabular}
+
+
+\begin{compactitem}
+\item 10个静态公有成员函数继承自QObject
+\end{compactitem}
+
+\section{重新实现保护成员函数}
+
+
+\begin{tabular}{|r|l|}
+	\hline
+	类型	 & 函数名 \\
+	\hline
+virtual void	& timerEvent(QTimerEvent *e) override \\ 
+\hline
+\end{tabular}
+
+
+\begin{compactitem}
+\item 9个保护成员函数继承自QObject
+\end{compactitem}
+
+
+
+
+
+
+
