@@ -272,7 +272,9 @@ Qt官方并不推荐将阻塞函数与信号一起使用。
 
 QAbstractSocket 可以与 QTextStream 和 QDataStream 的流运算符（operator<<() 和operator>>()）一起使用。 但是，有一个问题需要注意：在尝试使用operator>>() 读取数据之前，必须确保有足够的数据可用。
 
-您也可以在 QNetworkAccessManager 类和 QTcpServer 类的文档中找到一部分相关的信息。
+\begin{notice}[另请查阅]
+QNetworkAccessManager 类和 QTcpServer。
+\end{notice}
 
 \splitLine
 
@@ -443,7 +445,10 @@ QAbstractSocket::UnknownSocketError&	-1&	神了，出现了一个未知错误。
 \hline
 \end{longtable}
 
-您也可以在 QAbstractSocket::error() 和 QAbstractSocket::errorOccurred() 成员函数的详细介绍中找到一部分套接字错误的介绍。
+\begin{notice}[另请查阅]
+QAbstractSocket::error() 和 QAbstractSocket::errorOccurred()。
+\end{notice}
+
 
 \splitLine
 
@@ -649,7 +654,6 @@ socketError)
 
 该函数在Qt5.15版本引入。
 
-另外您也可以在 error() 和 errorString() 函数介绍以及 Creating Custom Qt Types 文档中找到相关信息。
 
 \begin{notice}[另请查阅]
 error()、 errorString() 和 Creating Custom Qt Types。
@@ -779,7 +783,6 @@ mode = DefaultForPlatform)
 
 返回等待读取的传入字节数。
 
-另外您也可以在 bytesToWrite() 和 read() 函数介绍中找到相关信息。
 
 \begin{notice}[另请查阅]
 bytesToWrite() 和 read() 。
@@ -1288,7 +1291,11 @@ if (socket->waitForConnected(1000))
 在 Windows 上，此功能可能会随机性地失败。 如果您的软件将在 Windows 上运行，请考虑使用事件循环和 connected() 信号。
 \end{notice}
 
-另外您也可以在 connectToHost() 和 connected() 函数中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+connectToHost() 和 connected()。
+\end{notice}
 
 \splitLine
 
