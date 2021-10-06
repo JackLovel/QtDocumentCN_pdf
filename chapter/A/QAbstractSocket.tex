@@ -527,7 +527,10 @@ TypeOfServiceOption 可能的可取值（优先级）：
 
 该枚举最初在Qt4.6版本引入。
 
-您也可以在 QAbstractSocket::setSocketOption() 和 QAbstractSocket::socketOption() 函数介绍中找到相关内容。
+\begin{notice}[另请查阅]
+QAbstractSocket::setSocketOption() 和 QAbstractSocket::socketOption()。
+\end{notice}
+
 
 \splitLine
 
@@ -554,7 +557,10 @@ QAbstractSocket::ListeningState&	5&	套接字仅限内部使用。\\
 \hline
 \end{tabular}
 
-您也可以在 QAbstractSocket::state() 成员函数介绍中找到相关内容。
+
+\begin{notice}[另请查阅]
+QAbstractSocket::state()。
+\end{notice}
 
 \splitLine
 
@@ -576,12 +582,16 @@ QAbstractSocket::UnknownSocketType&	-1&	除 TCP, UDP 和 SCTP 外的协议\\
 \hline
 \end{tabular}
 
-您也可以在 QAbstractSocket::socketType() 成员函数介绍中找到相关内容。
+
+
+\begin{notice}[另请查阅]
+QAbstractSocket::socketType() 。
+\end{notice}
 
 \splitLine
 
-% gog_wang 
-成员函数文档
+
+\section{成员函数文档}
 
 QAbstractSocket::QAbstractSocket(QAbstractSocket::SocketType
 socketType, QObject *parent)
@@ -590,7 +600,11 @@ socketType, QObject *parent)
 
 这就是它的构造函数嘛，没啥好说的。另外由于 QAbstractSocket 类继承自 QObject 类，应注意在 QAbstractSocket 类构造函数中调用一下父类 QObject 类的构造函数。
 
-另外您也可以在 socketType() 成员函数文档，以及 QTcpSocket 和 QUdpSocket 类文档找到相关信息。
+
+\begin{notice}[另请查阅]
+socketType() 、 QTcpSocket 和 QUdpSocket 。
+\end{notice}
+
 
 [SIGNAL] void QAbstractSocket::connected()
 
@@ -601,7 +615,12 @@ connectToHost() 调用并成功建立一个连接后，QAbstractSocket 类将发
 在某些操作系统上，connected() 信号可能直接从 connectToHost() 调用发出，以连接到本地主机。
 \end{notice}
 
-另外您也可以在 connectToHost() 和 disconnected() 成员函数文档中找到相关信息。
+
+\begin{notice}[另请查阅]
+connectToHost() 和 disconnected()。
+\end{notice}
+
+
 
 [SIGNAL] void QAbstractSocket::disconnected()
 
@@ -611,7 +630,12 @@ connectToHost() 调用并成功建立一个连接后，QAbstractSocket 类将发
 如果您想在与这个信号相连接的槽函数中删除信号的发送者（ sender() ），请使用 deleteLater() 函数。
 \end{notice}
 
-另外您也可以在 connectToHost() ，disconnectFromHost() 和 abort() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+connectToHost() 、disconnectFromHost() 和 abort()。
+\end{notice}
+
+
 
 [SIGNAL] void
 QAbstractSocket::errorOccurred(QAbstractSocket::SocketError
@@ -627,6 +651,11 @@ socketError)
 
 另外您也可以在 error() 和 errorString() 函数介绍以及 Creating Custom Qt Types 文档中找到相关信息。
 
+\begin{notice}[另请查阅]
+error()、 errorString() 和 Creating Custom Qt Types。
+\end{notice}
+
+
 [SIGNAL] void QAbstractSocket::hostFound()
 
 在 QAbstractSocket 调用 connectToHost() 函数并成功找到主机后，它将发送该消息。
@@ -635,18 +664,28 @@ socketError)
 从Qt 4.6.3开始，由于可能已缓存DNS结果，因此 QAbstractSocket 可能直接在调用 connectToHost() 时发送 hostFound() 信号。
 \end{notice}
 
-另外您也可以在 connectd() 函数介绍中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+connectd()。
+\end{notice}
 
 [SIGNAL] void QAbstractSocket::proxyAuthenticationRequired(const
 QNetworkProxy \&proxy, QAuthenticator *authenticator)
 
 套接字连接的代理服务期需要身份验证时会发送该消息。您可以用所需的详细信息填充 authenticator 对象，以便代理服务期进行身份验证并继续连接。
 
-注意： 如果信号返回时未使用新信息填充 authenticator ，则连接将失败，因此您不能使用队列连接模式（ QueuedConnection ）连接到该信号。
+
+\begin{notice}
+如果信号返回时未使用新信息填充 authenticator ，则连接将失败，因此您不能使用队列连接模式（ QueuedConnection ）连接到该信号。
+\end{notice}
+
 
 该函数首次在Qt4.3版本引入。
 
-另外您也可以在 QAuthenticator 和 QNetworkProxy 文档中找到相关信息。
+\begin{notice}[另请查阅]
+QAuthenticator 和 QNetworkProxy。
+\end{notice}
 
 [SIGNAL] void
 QAbstractSocket::stateChanged(QAbstractSocket::SocketState
@@ -654,9 +693,15 @@ socketState)
 
 QAbstractSocket 状态发生改变后会发送该信号。socketState 参数记录了新的状态。
 
-请注意，QAbstractSocket :: SocketState 并不是Qt预注册好的元类型。因此如果您要在队列连接（ queued connections ）模式的信号与槽的连接中传递该类型的参数，您必须使用 Q\_DECLARE\_METATYPE() 和 qRegisterMetaType() 注册它为元类型。
+\begin{notice}
+QAbstractSocket::SocketState 并不是Qt预注册好的元类型。因此如果您要在队列连接（ queued connections ）模式的信号与槽的连接中传递该类型的参数，您必须使用 Q\_DECLARE\_METATYPE() 和 qRegisterMetaType() 注册它为元类型。
+\end{notice}
 
-另外您也可以在 state() 成员函数介绍和 Create Custom Qt Types 文档中找到相关信息。
+
+\begin{notice}[另请查阅]
+state() 和 Create Custom Qt Types 。
+\end{notice}
+
 
 [virtual] QAbstractSocket::$\sim$QAbstractSocket()
 
@@ -666,7 +711,13 @@ void QAbstractSocket::abort()
 
 中止当前连接并重置套接字。 与 disconnectFromHost() 不同，此函数会立即关闭套接字，并丢弃写缓冲区中的所有未处理数据。
 
-另外您也可以在 disconnectFromHost() 和 close() 函数介绍中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+ disconnectFromHost() 和 close() 。
+\end{notice}
+
+
 
 [override virtual] bool QAbstractSocket::atEnd() const
 
@@ -687,7 +738,12 @@ void SocketClass::readyReadSlot()
 }
 \end{lstlisting}
 
-另外您也可以在 bytesAvailable() 和 readyRead() 函数介绍中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+bytesAvailable() 和 readyRead() 。
+\end{notice}
+
 
 \splitLine
 
@@ -725,13 +781,21 @@ mode = DefaultForPlatform)
 
 另外您也可以在 bytesToWrite() 和 read() 函数介绍中找到相关信息。
 
+\begin{notice}[另请查阅]
+bytesToWrite() 和 read() 。
+\end{notice}
+
 [override virtual] qint64 QAbstractSocket::bytesToWrite() const
 
 该函数重写了父类 QIODevice 的类成员函数 QIODevice::bytesToWrite() const 。
 
 返回等待写入的字节数。 当控制权返回事件循环或调用 flush() 时，这些字节将会被写入。
 
-另外您也可以在 bytesAvailable() 和 flush() 函数介绍中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+ bytesAvailable() 和 flush() 。
+\end{notice}
 
 [override virtual] bool QAbstractSocket::canReadLine() const
 
@@ -739,7 +803,11 @@ mode = DefaultForPlatform)
 
 如果能从该套接字中读取一行数据时返回 true，否则返回 false 。
 
-另外您也可以在 readLine() 函数介绍中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+readLine() 。
+\end{notice}
 
 [override virtual] void QAbstractSocket::close()
 
@@ -749,7 +817,11 @@ mode = DefaultForPlatform)
 
 您可以阅读 QIODevice::close() 的介绍来查阅关闭 I/O 设备时发生的操作。
 
-另外您也可以在 abort() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+abort() 。
+\end{notice}
+
 
 [virtual] void QAbstractSocket::connectToHost(const QString \&hostName,
 quint16 port, QIODevice::OpenMode openMode = ReadWrite,
@@ -763,7 +835,11 @@ QAbstractSocket::NetworkLayerProtocol protocol = AnyIPProtocol)
 
 hostName 参数可以是一个字符串形式的IP地址（例如"49.195.83.32"），也可以是一个主机名（例如"example.com"）。QAbstractSocket 仅在需要时才会进行查找。 port 端口参数按本机字节顺序。
 
-另外您也可以在 state()，peerName()，peerAddress()，peerPort() 和 waitForConnected() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+state()、peerName()、peerAddress()、peerPort() 和 waitForConnected()。
+\end{notice}
+
 
 [virtual] void QAbstractSocket::connectToHost(const QHostAddress
 \&address, quint16 port, QIODevice::OpenMode openMode = ReadWrite)
@@ -776,13 +852,21 @@ hostName 参数可以是一个字符串形式的IP地址（例如"49.195.83.32"�
 
 尝试关闭套接字。如果还有未处理的数据等待写入，QAbstractSocket 会进入正在关闭（ ClosingState ）状态并等待所有数据被写入后再关闭套接字。最终 QAbstractSocket 会进入未连接（ UnconnectedState ）状态并发送 disconnected() 信号。
 
-另外您也可以在 connectToHost() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+connectToHost()。
+\end{notice}
+
 
 QAbstractSocket::SocketError QAbstractSocket::error() const
 
 返回最后一个错误的类型。
 
-另外您也可以在 state() 和 errorString() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+ state() 和 errorString()。
+\end{notice}
+
 
 bool QAbstractSocket::flush()
 
@@ -790,7 +874,11 @@ bool QAbstractSocket::flush()
 
 可成功写入的字节数取决于操作系统。请仅在需要 QAbstractSocket 立即开始发送缓冲的数据的情况下调用此函数。 在大多数情况下，您不需要调用此函数，因为一旦控制权返回事件循环，QAbstractSocket 将自动开始发送数据。 在没有事件循环的情况下，请改为调用 waitForBytesWritten() 。
 
-另外您也可以在 write() 和 waitForBytesWritten() 函数介绍中找到相关信息。
+
+
+\begin{notice}[另请查阅]
+ write() 和 waitForBytesWritten()。
+\end{notice}
 
 [override virtual] bool QAbstractSocket::isSequential() const
 
@@ -805,7 +893,11 @@ bool QAbstractSocket::isValid() const
 在进行读写操作之前，套接字必须处于已连接（ ConnectedState ）状态。
 \end{notice}
 
-另外您也可以在 state() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+ state()。
+\end{notice}
+
 
 QHostAddress QAbstractSocket::localAddress() const
 
@@ -813,13 +905,19 @@ QHostAddress QAbstractSocket::localAddress() const
 
 返回的主机地址通常是主机的IP地址。但是当套接字连接到本地主机时，返回的主机地址为 QHostAddress::LocalAddress。
 
-另外您也可以在 localPort()，peerAddress() 和 setLocalAddress() 函数介绍中找到相关信息。
+\begin{notice}[另请查阅]
+ localPort()、peerAddress() 和 setLocalAddress()。
+\end{notice}
 
 quint16 QAbstractSocket::localPort() const
 
 如果本地套接字可用则按照本地字节顺序返回主机端口，否则返回0。
 
-另外您也可以在 localAddress()，peerPort() 和 setLocalPort() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+ localAddress()，peerPort() 和 setLocalPort()。
+\end{notice}
+
 
 QAbstractSocket::PauseModes QAbstractSocket::pauseMode() const
 
@@ -827,7 +925,10 @@ QAbstractSocket::PauseModes QAbstractSocket::pauseMode() const
 
 该函数最初在Qt5.0版本引入。
 
-另外您也可以在 setPauseMode() 和 resume() 函数介绍中找到相关信息。
+
+\begin{notice}[另请查阅]
+ setPauseMode() 和 resume()。
+\end{notice}
 
 QHostAddress QAbstractSocket::peerAddress() const
 
@@ -850,6 +951,8 @@ peerAddress()，peerPort() 和 setPeerName() 。
 
 
 quint16 QAbstractSocket::peerPort() const
+
+
 如果套接字处于已连接（ ConnectedState ）状态则返回对等端的端口，否则返回0。
 
 \begin{notice}[另请查阅]
@@ -951,7 +1054,6 @@ pauseMode)
 
 该函数最初在Qt5.0版本引入。
 
-另外您也可以在 pauseMode() 和 resume() 函数介绍中找到相关信息。
 
 \begin{notice}[另请查阅]
 pauseMode() 和 resume() 。
@@ -1008,11 +1110,11 @@ protocolTag() 。
 \end{notice}
 
 void QAbstractSocket::setProxy(const QNetworkProxy \&networkProxy )
+
 将此套接字的显式网络代理设置为 networkProxy 。
 
 您可以通过指定 networkProxy 为 QNetworkProxy::NoProxy 以禁止套接字使用代理网络：
 
-% gog_wang
 
 \begin{lstlisting}[language=C++]
 socket->setProxy(QNetworkProxy::NoProxy);
@@ -1154,7 +1256,9 @@ bytesWritten() 信号发出后该函数返回值为 true，偶则返回 false �
 在 Windows 上，此功能可能会随机性地失败。 如果您的软件将在 Windows 上运行，请考虑使用事件循环和 bytesWritten() 信号。
 \end{notice}
 
-另外您也可以在 waitForReadyRead() 函数介绍中找到相关信息。
+\begin{notice}[另请查阅]
+waitForReadyRead()。
+\end{notice}
 
 [virtual] bool QAbstractSocket::waitForConnected(int msecs = 30000)
 
@@ -1231,7 +1335,10 @@ readyRead() 信号发出后该函数返回值为 true，偶则返回 false （�
 \end{notice}
 
 
-另外您也可以在 waitForBytesWritten()() 函数介绍中找到相关信息。
+\begin{notice}[另请查阅]
+waitForBytesWritten()。
+\end{notice}
+
 
 \splitLine
 
@@ -1239,8 +1346,3 @@ readyRead() 信号发出后该函数返回值为 true，偶则返回 false （�
 
 该函数重写了父类 QIODevice 的类成员函数 QIODevice::writeData(const
 char data, qint64 size)。
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
