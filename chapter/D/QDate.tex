@@ -430,7 +430,9 @@ int QDate::day(QCalendar cal) const
 
 一些日历系统中，返回值可能大于7。
 
-\textbf{另请参阅}：year()、month() 和 dayOfWeek()。
+\begin{notice}[另请参阅]
+year()、month() 和 dayOfWeek()。
+\end{notice}
 
 \splitLine
 
@@ -488,7 +490,11 @@ int QDate::daysInYear(QCalendar cal) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历 (返回值是 365 或 366)。非法日期则返回0。
 
-\textbf{另请参阅}：day() 和 daysInMonth()。
+
+
+\begin{notice}[另请参阅]
+day() 和 daysInMonth()。
+\end{notice}
 
 \splitLine
 
@@ -507,7 +513,10 @@ d1.daysTo(d2);          // returns 3
 d2.daysTo(d1);          // returns -3
 \end{lstlisting}
 
-\textbf{另请参阅}：addDays()。
+
+\begin{notice}[另请参阅]
+addDays()。
+\end{notice}
 
 \splitLine
 
@@ -515,7 +524,11 @@ d2.daysTo(d1);          // returns -3
 
 将jd表示的儒略日解析为日期并返回。
 
-\textbf{另请参阅}：toJulianDay()。
+
+\begin{notice}[另请参阅]
+toJulianDay()。
+\end{notice}
+
 
 \splitLine
 
@@ -528,7 +541,10 @@ Qt::DateFormat format = Qt::TextDate)
 
 \textbf{注意}： 对本地化的日期的支持，包括 Qt::SystemLocaleDate、Qt::SystemLocaleShortDate、Qt::SystemLocaleLongDate、Qt::LocaleDate、Qt::DefaultLocaleShortDate 和 Qt::DefaultLocaleLongDate，将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
 
-\textbf{另请参阅}：toString() 和 QLocale::toDate()。
+
+\begin{notice}[另请参阅]
+toString() 和 QLocale::toDate()。
+\end{notice}
 
 \splitLine
 
