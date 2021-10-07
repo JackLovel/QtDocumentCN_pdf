@@ -94,7 +94,10 @@ while (i.findNext(widget)) {
 
 同一哈希表可以使用多个迭代器。如果在 QHashIterator处于活动状态时修改哈希表，QHashIterator 将继续在原哈希表上遍历，而忽略修改后的副本。
 
-另请参阅 QMutableHashIterator 和 QHash::const\_iterator.
+
+\begin{notice}[另请参阅]
+QMutableHashIterator 和 QHash::const\_iterator。
+\end{notice}
 
 \splitLine
 
@@ -111,37 +114,65 @@ const Key \&QHashIterator::key() const
 
 调用遍历函数（(next()，findNext()）后，该函数返回跳过的最后一个元素的键。
 
-\textbf{另请参阅}: value()。
+
+
+\begin{notice}[另请参阅]
+value()。
+\end{notice}
 
 bool QHashIterator::hasNext() const
 
 如果该迭代器后面至少有一个元素，返回 \hl{true}，即该迭代器不在容器的末端；否则返回 \hl{false}。
 
-\textbf{另请参阅}: next()。
+
+\begin{notice}[另请参阅]
+next()。
+\end{notice}
+
 
 void QHashIterator::toBack()
 
 将迭代器移动到容器的末端（最后一个元素之后）。
 
-\textbf{另请参阅}: toFront()。
+
+
+\begin{notice}[另请参阅]
+toFront()。
+\end{notice}
+
 
 void QHashIterator::toFront()
 
 将迭代器移动到容器的前端（第一个元素之前）。
 
-\textbf{另请参阅}: toBack() 和 next()。
+
+
+
+\begin{notice}[另请参阅]
+toBack() 和 next()。
+\end{notice}
+
 
 QHashIterator<Key, T> \&QHashIterator::operator=(const QHash<Key, T> \emph{\&container})
 
 将迭代器关联到 \emph{container} 来遍历哈希表。迭代器将被移动到哈希表的前端（第一个元素之前）。
 
-\textbf{另请参阅}: toFront() 和 toBack()。
+
+
+\begin{notice}[另请参阅]
+toFront() 和 toBack()。
+\end{notice}
+
 
 QHashIterator::QHashIterator(const QHash<Key, T> \emph{\&hash})
 
 构造一个迭代器来遍历 \emph{hash}。迭代器将被移动到哈希表的前端（第一个元素之前）。
 
-\textbf{另请参阅}: operator=()。
+
+\begin{notice}[另请参阅]
+operator=()。
+\end{notice}
+
 
 QHashIterator::Item QHashIterator::next()
 
@@ -151,7 +182,11 @@ QHashIterator::Item QHashIterator::next()
 
 对位于容器末端的迭代器调用该函数将导致未定义结果。
 
-\textbf{另请参阅}: hasNext() 和 peekNext()。
+
+
+\begin{notice}[另请参阅]
+hasNext() 和 peekNext()。
+\end{notice}
 
 QHashIterator::Item QHashIterator::peekNext() const
 
@@ -161,13 +196,18 @@ QHashIterator::Item QHashIterator::peekNext() const
 
 对位于容器末端的迭代器调用该函数将导致未定义结果。
 
-\textbf{另请参阅}: hasNext() 和 next()。
+
+\begin{notice}[另请参阅]
+hasNext() 和 next()。
+\end{notice}
 
 const T \&QHashIterator::value() const
 
 调用遍历函数（next()，findNext()）后，该函数返回跳过的最后一个元素的值。
 
-\textbf{另请参阅}: key()。
+\begin{notice}[另请参阅]
+key()。
+\end{notice}
 
 %%% Local Variables:
 %%% mode: latex

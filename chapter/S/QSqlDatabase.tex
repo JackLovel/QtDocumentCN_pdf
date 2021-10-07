@@ -289,7 +289,7 @@ QSqlDatabase::~QSqlDatabase()
 \end{notice}
 
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabasedatabaseconst-qstring-connectionname--qlatin1stringdefaultconnection-bool-open--true}{database()}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseremovedatabaseconst-qstring-connectionname}{removeDatabase()} 以及 \href{https://doc.qt.io/qt-5/threads-modules.html#threads-and-the-sql-module}{ 线程和SQL 单元}。
 \end{notice}
 
@@ -739,7 +739,7 @@ QSqlDatabase::removeDatabase("sales"); // 正确的
 这个函数是线程安全的
 \end{notice}
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 database()，connectionName()，和 线程和SQL模块。
 \end{notice}
 
@@ -754,7 +754,7 @@ bool QSqlDatabase::rollback()
 
 调用 lastError() 操作获得错误的相关信息。
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 QSqlQuery::isActive()，QSqlDriver::hasFeature() 和 commit()。
 \end{notice}
 
@@ -860,7 +860,7 @@ if (!db.open()) {
 
 查阅这个客户端库文档，获得更多关于不同可选项的更多信息。
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 connectOptions()。
 \end{notice}
 
@@ -900,9 +900,9 @@ if (db.open()) {
 
 这个没有默认的值
 
-另请查阅 databaseName()、setUserName()、 setPassword()、 setHostName()、 
-
-setPort()、setConnectOptions() 和 open()。
+\begin{notice}[另请参阅]
+databaseName()、setUserName()、 setPassword()、 setHostName()、setPort()、setConnectOptions() 和 open()。
+\end{notice}
 
 
 void QSqlDatabase::setHostName(const QString \&host)
@@ -911,7 +911,13 @@ void QSqlDatabase::setHostName(const QString \&host)
 
 这个没有默认值。
 
-另请查阅 hostName()， setUserName(), setPassword()，setDatabaseName()，setPort()， setConnectOptions() 和 open()。
+
+
+
+\begin{notice}[另请参阅]
+hostName()， setUserName(), setPassword()，setDatabaseName()，setPort()， setConnectOptions() 和 open()。
+\end{notice}
+
 
 void QSqlDatabase::setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy precisionPolicy)
 
@@ -929,7 +935,7 @@ void QSqlDatabase::setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy pr
 qt4.6中引入了这个函数。
 
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 QSql::NumericalPrecisionPolicy，
 numericalPrecisionPolicy()，QSqlQuery::setNumericalPrecisionPolicy 和 QSqlQuery::numericalPrecisionPolicy。
 \end{notice}
@@ -945,7 +951,7 @@ void QSqlDatabase::setPassword(const QString \&password)
 这个函数以明文的形式把密码存放到qt里。 将密码作为参数来避免这个行为，然后使用 open()进行调用。
 \end{notice}
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 password()，setUserName()，setDatabaseName()，setHostName(),
 setPort(), setConnectOptions()和 open()。
 \end{notice}
@@ -956,7 +962,7 @@ void QSqlDatabase::setPort(int port)
 
 这个没有默认的值。
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 port(), setUserName()， setPassword(),
 setHostName()，setDatabaseName(), setConnectOptions() 和 open()。
 \end{notice}
@@ -969,7 +975,7 @@ void QSqlDatabase::setUserName(const QString \&name)
 这个没有默认值。
 
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 userName()，setDatabaseName()，setPassword()，
 setHostName()，setPort()，setConnectOptions() 和 open()。
 \end{notice}
@@ -979,7 +985,7 @@ QStringList QSqlDatabase::tables(QSql::TableType type = QSql::Tables) const
 
 返回由 parameter type 参数 指定的数据库的表格、系统表和视图的列表。
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 primaryIndex() 和 record()。
 \end{notice}
 
@@ -989,7 +995,7 @@ bool QSqlDatabase::transaction()
 
 
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 QSqlDriver::hasFeature()， commit() 和 rollback()。
 \end{notice}
 
@@ -997,7 +1003,7 @@ QString QSqlDatabase::userName() const
 
 返回连接的用户名; 它也许为空。
 
-\begin{notice}[另请查阅]
+\begin{notice}[另请参阅]
 setUserName()。
 \end{notice}
 
