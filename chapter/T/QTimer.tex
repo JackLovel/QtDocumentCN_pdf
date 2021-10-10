@@ -369,15 +369,365 @@ QTimer::QTimer(QObject \emph{*parent} = nullptr)
 
 使用给定的 \emph{parent} 构造一个定时器。
 
+[virtual] QTimer::$\sim$QTimer()
+
+销毁定时器。
+
+QMetaObject::Connection QTimer::callOnTimeout(Functor \emph{slot}, Qt::ConnectionType connectionType = ...)
+
+这是一个重载函数。
+
+创建一个从timeout() 信号到slot的连接，并返回一个连接句柄。
+
+为了方便提供了这个方法。它等价于调用：
+
+\begin{lstlisting}
+It's equivalent to calling QObject::connect(timer, &QTimer::timeout, timer, slot, connectionType).
+\end{lstlisting}
+
+在Qt5.12引入该函数。
+
+\begin{notice}[另请参阅]
+QObject::connect() 和 timeout().
+\end{notice}
+
+QMetaObject::Connection QTimer::callOnTimeout(const QObject \emph{*context}, Functor \emph{slot}, Qt::ConnectionType \emph{connectionType} = ...)
+
+此函数重载 callOnTimeout().
+
+创建一个从 timeout() 信号到slot的连接，将其放置在context的特定事件循环中，并返回该连接的句柄。
+
+为了方便提供了这个方法。它等价于调用：
 
 
+\begin{lstlisting}
+QObject::connect(timer, &QTimer::timeout, context, slot, connectionType).
+\end{lstlisting}
+	
+在Qt5.12引入该函数。
+	
+\begin{notice}[另请参阅]
+QObject::connect() 和 timeout().
+\end{notice}
+
+QMetaObject::Connection QTimer::callOnTimeout(const QObject \emph{*receiver}, PointerToMemberFunction \emph{slot}, Qt::ConnectionType \emph{connectionType} = ...)
+
+此函数重载 callOnTimeout().
+
+创建一个从 timeout() 信号到slot的连接，将其放置在context的特定事件循环中，并返回该连接的句柄。
+
+为了方便提供了这个方法。它等价于调用：
 
 
+\begin{lstlisting}
+QObject::connect(timer, &QTimer::timeout, receiver, slot, connectionType).
+\end{lstlisting}
+	
+在Qt5.12引入该函数。
+	
+\begin{notice}[另请参阅]
+QObject::connect() 和 timeout().
+\end{notice}
+
+% 
+std::chrono::milliseconds QTimer::intervalAsDuration() const
+
+以std::chrono::milliseconds 对象的形式返回此定时器的间隔。
+
+在Qt5.8引入该函数。
+
+\begin{notice}[另请参阅]
+interval。
+\end{notice}
+
+bool QTimer::isActive() const
+
+如果定时器正在运行（正在等待），则返回true；否则，返回false。 否则返回false。
+
+\begin{notice}
+获取函数来自属性active。
+\end{notice}
+
+std::chrono::milliseconds QTimer::remainingTimeAsDuration() const
+
+以 std::chrono::milliseconds 对象的形式返回此定时器对象中剩余的时间。 
+如果此定时器到期或过期，则返回的值为std::chrono::milliseconds::zero()。 
+如果找不到剩余时间或定时器未激活，则此函数返回负值持续时间。
+
+在Qt5.8引入该函数。
+
+[static] void QTimer::singleShot(int msec, const QObject \emph{*receiver}, const char \emph{*member})
+
+在给定的时间间隔后，此静态函数调用slot。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+\begin{lstlisting}[language=C++]
+Example:
+
+#include <QApplication>
+#include <QTimer>
+
+int main(int argc, char *argv[])
+{
+	QApplication app(argc, argv);
+	QTimer::singleShot(600000, &app, SLOT(quit()));
+	...
+	return app.exec();
+}
+\end{lstlisting}
+
+%%%%%%%%% gog 
+
+这个示例程序自动在10分钟(600,000毫秒)触发。
+
+receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+[static] void QTimer::singleShot(int msec, Qt::TimerType timerType, const QObject *receiver, const char *member)
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数调用slot。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒。 timerType 影响了定时器的精度。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
 
 
+[static] void QTimer::singleShot(int msec, const QObject *receiver, PointerToMemberFunction method)
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数调用slot。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒。
+
+如果在间隔发生之前销毁了receiver，则不会调用该方法。 该函数将在receiver的线程中运行。 接收者的线程必须具有正在运行的Qt事件循环。
 
 
+\begin{notice}
+该函数是可重入。
+\end{notice}
 
+在Qt5.4引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(int msec, Qt::TimerType timerType, const QObject *receiver, PointerToMemberFunction method)
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数调用slot。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒。 timerType 影响了定时器的精度。
+
+如果在间隔发生之前销毁了receiver，则不会调用该方法。 该函数将在receiver的线程中运行。 接收者的线程必须具有正在运行的Qt事件循环。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+在Qt5.4引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(int \emph{msec}, Functor \emph{functor})
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数将调用functor。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+时间间隔是msec 毫秒。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+在Qt5.4引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, Functor \emph{functor})
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数将调用 functor。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的 QTimer 对象。
+
+时间间隔是msec 毫秒。 timerType 影响了定时器的精度。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+	
+
+在Qt5.4引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(int \emph{msec}, const QObject \emph{*context}, Functor \emph{functor})
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数将调用functor。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+时间间隔是 msec 毫秒。
+
+如果 context 在间隔发生之前被破坏，则不会调用该方法。 该函数将在 context 线程中运行。 上下文的线程必须具有正在运行的Qt事件循环。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+在Qt5.4引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(int msec, Qt::TimerType timerType, const QObject *context, Functor functor)
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数将调用functor。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+时间间隔是msec 毫秒。 timerType 影响了定时器的精度。
+
+如果context在间隔发生之前被破坏，则不会调用该方法。 该函数将在context线程中运行。 上下文的线程必须具有正在运行的Qt事件循环。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+在Qt5.4引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(std::chrono::milliseconds msec, const QObject *receiver, const char *member)
+
+这是一个重载函数。
+
+时间间隔是 msec 毫秒。 timerType 影响了定时器的精度。非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+The receiver是接收对象，而member 是插槽。时间间隔是 msec。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+在Qt5.8引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[static] void QTimer::singleShot(std::chrono::milliseconds \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*receiver}, const char \emph{*member})
+
+这是一个重载函数。
+
+在给定的时间间隔后，此静态函数将调用 \emph{slot}。
+
+非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
+
+\emph{receiver}是接收对象，\emph{member}是插槽。 \emph{msec}在持续时间对象毫秒中给出。 \emph{timerType}影响定时器的准确性。
+
+\begin{notice}
+该函数是可重入。
+\end{notice}
+
+在Qt5.8引入该函数。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[slot] void QTimer::start(int \emph{msec})
+
+以 \hl{msec} 毫秒的超时间隔启动或重新启动定时器。
+
+如果定时器已经在运行，它将被stopped并重新启动。如果singleShot 是 true, 则定时器将仅激活一次。
+
+[slot] void QTimer::start()
+
+重载start()函数。
+
+以interval.中指定的超时时间启动或重新启动定时器。
+
+如果定时器已经运行，它将stopped 和重新启动。
+
+如果 singleShot 是 true, 则定时器将仅激活一次。
+
+void QTimer::start(std::chrono::milliseconds \emph{msec})
+
+这是重载函数。
+
+以msec毫秒的持续时间启动或重启定时器。
+
+如果定时器已经运行，它将stopped 和重新启动。
+
+如果 singleShot 是 true, 则定时器将仅激活一次。
+
+在Qt5.8引入该函数。
+
+[slot] void QTimer::stop()
+
+停止定时器。
+
+\begin{notice}[另请参阅]
+start()。
+\end{notice}
+
+[signal] void QTimer::timeout()
+
+定时器超时时发出此信号。
+
+\begin{notice}
+这是一个私人信号。 它可以用于信号连接，但不能由用户发射。
+\end{notice}
+
+\begin{notice}[另请参阅]
+interval, start(), 和 stop().
+\end{notice}
+
+[override virtual protected] void QTimer::timerEvent(QTimerEvent \emph{*e})
+
+重新实现自 QObject::timerEvent()。
+
+int QTimer::timerId() const
+
+如果定时器正在运行，则返回定时器的ID。 否则返回-1。
 
 
 
