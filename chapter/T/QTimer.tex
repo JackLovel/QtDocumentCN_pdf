@@ -175,8 +175,8 @@ The QTimer 类为定时器提供了高级编程接口。 要使用它，请创�
 
 \begin{lstlisting}[language=C++]
 QTimer *timer = new QTimer(this);
- connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-  timer->start(1000);
+connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+timer->start(1000);
 \end{lstlisting}
 
 
@@ -487,7 +487,7 @@ receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒�
 该函数是可重入。
 \end{notice}
 
-[static] void QTimer::singleShot(int msec, Qt::TimerType timerType, const QObject *receiver, const char *member)
+[static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*receiver}, const char \emph{*member})
 
 这是一个重载函数。
 
@@ -506,7 +506,8 @@ start()。
 \end{notice}
 
 
-[static] void QTimer::singleShot(int msec, const QObject *receiver, PointerToMemberFunction method)
+[static] void QTimer::singleShot(int \emph{msec}, const QObject \emph{*receiver}, PointerToMemberFunction \emph{method})
+
 这是一个重载函数。
 
 在给定的时间间隔后，此静态函数调用slot。
@@ -528,7 +529,7 @@ receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒�
 start()。
 \end{notice}
 
-[static] void QTimer::singleShot(int msec, Qt::TimerType timerType, const QObject *receiver, PointerToMemberFunction method)
+[static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*receiver}, PointerToMemberFunction \emph{method})
 
 这是一个重载函数。
 
@@ -635,7 +636,7 @@ start()。
 start()。
 \end{notice}
 
-[static] void QTimer::singleShot(std::chrono::milliseconds msec, const QObject *receiver, const char *member)
+[static] void QTimer::singleShot(std::chrono::milliseconds \emph{msec}, const QObject \emph{*receiver}, const char \emph{*member})
 
 这是一个重载函数。
 
