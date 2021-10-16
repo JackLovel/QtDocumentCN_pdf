@@ -1,0 +1,217 @@
+\chapter{QReadWriteLock}
+
+QReadWriteLock 类提供读写锁定。更多...
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	方法\\
+\hline
+头文件:& 	\#include <QReadWriteLock>\\
+\hline
+qmake:& 	QT += core\\
+\hline
+\end{tabular}
+
+\begin{notice}
+此类中所有函数都是线程安全的。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|l|}
+\hline
+类型 &	名称\\
+\hline
+enmu 	& RecursionMode \{ Recursive, NonRecursive\}\\
+\hline
+\end{tabular}
+
+
+\section{公共成员函数}
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+& QReadWriteLock(QReadWriteLock::RecursionMode \emph{recursionMode} = NonRecursive) \\
+\hline
+& $\sim$QReadWriteLock() \\ 
+void &	lockForRead() \\ 
+\hline
+void &	lockForeWrite() \\ 
+\hline
+bool &	tryLockForRead()\\ 
+\hline
+bool &	tryLockForRead(int \emph{timeout}) \\ 
+\hline
+bool &	trylockForWrite() \\ 
+\hline
+bool &	trylockForWrite(int \emph{timeout}) \\ 
+\hline
+void &	unlock() \\ 
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+读写锁是一种用于保护读写资源的同步工具。
+如果希望允许多个线程同时进行只读访问，那么这种类型的锁很有用，但是只要一个线程想写入资源，那么它就必须阻止所有其他线程，直到写入完成。
+  
+在许多情况下，QReadWriteLock 是 QMutex 强有力的竞争对手。
+QReadWriteLock 在多并发读，少量写的情况下，有较好的执行效果。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QReadWriteLock lock;
+
+void ReaderThread::run()
+{
+    ...
+    lock.lockForRead();
+    read_file();
+    lock.unlock();
+    ...
+}
+    
+void WriterThread::run()
+{
+    ...
+    lock.lockForWrite();
+    write_file();
+    lock.unlock();
+    ...
+}
+\end{lstlisting}
+
+为了确保写者永远不会被读者阻塞，如果有写者被阻塞，则读者将无法获取锁，
+即使该锁当前正被其他读者访问。另外，如果一个写者正在写，而另一个写者想进入，则该写者将优先于其他可能正在等待的读者。
+
+与 QMutex 类似，当使用 QReadWriteLock::Recursive 作为 QReadWriteLock::RecursiveMode 参数构造时，QReadWriteLock 可以被同一线程递归锁定。在这种情况下，
+unlock() 的调用次数必须与 lockForWrite() 或 lockForRead() 的调用次数相同。
+请注意，当尝试递归锁定时，不能更改锁类型，也就是说，在已经为写入而锁定的线程中，不可能为读取而锁定（反之亦然）。
+
+\begin{notice}[另请参阅]
+QReadLock、QWriteLock、QMutex、QSemaphore。
+\end{notice}
+
+%%  
+
+\section{成员类型文档}
+
+enum QReadWriteLock::RecursionMode
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量 &	值  &	描述 \\ 
+\hline
+QReadWriteLock::Recursive  &	1  &	  在这种模式下，线程可以多次锁定同一个 QReadWriteLock。QReadWriteLock 在执行相应数量的 unlock() 调用之前不会解锁。 \\ 
+\hline
+QReadWriteLock::NonRecursive &	0 	&  在这种模式下，线程只能锁定 QReadWriteLock 一次。 \\ 
+\hline
+\end{tabular}
+
+
+\begin{notice}[另请参阅]
+QReadWriteLock()。
+\end{notice}
+
+\section{成员函数文档}
+
+QReadWriteLock::QReadWriteLock(QReadWriteLock::RecursionMode recursionMode = NonRecursive)
+
+构造一个 \hl{recursionMode} 模式的 \hl{QReadWriteLock}。
+默认 NonRecursive。
+
+在 Qt 4.4 引入该函数。
+
+
+\begin{notice}[另请参阅]
+lockForRead()、lockForWrite()、RecursiveMode。
+\end{notice} 
+
+QReadWriteLock::$\sim$QReadWriteLock()
+
+解锁，并析构。
+
+\begin{notice}[警告]
+销毁正在使用的读写锁可能会导致未定义的行为。
+\end{notice} 
+
+void QReadWriteLock::lockForRead()
+
+读锁定。如果另一个线程正写锁定，则此函数将阻塞当前线程。
+如果线程已写锁定，则不可读锁定。
+
+\begin{notice}[另请参阅]
+unlock()、lockForWrite()、tryLockForWrite()。
+\end{notice} 
+
+void QReadWriteLock::lockForWrite()
+
+写锁定。如果另一个线程（包括当前线程）为读或写而锁定（除非锁是使用 QReadWriteLock::Recursive 模式创建的），则此函数将阻塞当前线程。   如果线程已读锁定，则不可写锁定。
+
+\begin{notice}[另请参阅]
+unlock()、lockForWrite()、tryLockForWrite()。
+\end{notice} 
+
+bool QReadWriteLock::tryLockForRead()
+
+尝试读锁定。如果获得了锁，此函数将返回 true，否则将返回 false，而不是等待锁变为可用，即不阻塞。
+如果另一个线程已写锁定，则读锁定尝试将失败。
+如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其写锁定。
+如果线程已写锁定，则不可读锁定。
+
+\begin{notice}[另请参阅]
+unlock()、lockForRead()。
+\end{notice} 
+
+bool QReadWriteLock::tryLockForRead(int \emph{timeout})
+
+重载函数。尝试读锁定。如果获得了锁，此函数返回 true，否则返回 false。如果另一个线程已写锁定，则此函数最多将等待 timeout 毫秒。
+
+\begin{notice}
+传递一个负数作为超时值相当于调用 lockForRead()，即当 timeout 值为负数时，此函数将永远等待，直到读锁定为止。
+\end{notice} 
+
+如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其写锁定。
+如果线程已读锁定，则不可写锁定。
+
+\begin{notice}[另请参阅]
+unlock()、lockForRead()。
+\end{notice} 
+
+bool QReadWriteLock::tryLockForWrite()
+
+尝试锁定以进行写入。如果获取的锁为 true，则立即返回 false。
+如果另一个线程已锁定，则写锁定尝试将失败。
+
+如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其锁定。
+如果线程已读锁定，则不可写锁定。
+
+\begin{notice}[另请参阅]
+unlock()、lockForWrite()。
+\end{notice}
+
+bool QReadWriteLock::tryLockForWrite(int \emph{timeout})
+
+重载函数。尝试写锁定。如果获得了锁，此函数返回 true，否则返回 false。如果另一个线程已写锁定，则此函数最多将等待 timeout 毫秒。
+
+\begin{notice}
+传递一个负数作为超时值相当于调用 lockForWrite()，即当 timeout 值为负数时，此函数将永远等待，直到读锁定为止。
+\end{notice}
+
+如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其写锁定。
+如果线程已读锁定，则不可写锁定。
+
+\begin{notice}[另请参阅]
+unlock()、lockForWrite()。
+\end{notice}
+
+void QReadWriteLock::unlock()
+
+解锁。 试图解锁未锁定的锁是错误的，将导致程序终止。
+ 
+\begin{notice}[另请参阅]
+lockForRead()、lockForWrite()、tryLockForRead()、trylockForWrite()。
+\end{notice}
