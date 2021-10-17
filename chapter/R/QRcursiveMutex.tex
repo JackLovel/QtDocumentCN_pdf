@@ -1,0 +1,69 @@
+\chapter{QRcursiveMutex}
+
+QRcursiveMutex类提供线程间的访问序列化。更多...
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	方法\\
+\hline
+头文件:& 	\#include <QRcursiveMutex>\\
+\hline
+qmake:& 	QT += core\\
+\hline
+加入版本 & 	Qt 5.14 \\ 
+\hline
+继承自 	& QMutex(private) \\ 
+\hline
+\end{tabular}
+
+\begin{notice}
+此类中所有函数都是线程安全的。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+& QRecursiveMutex() \\ 
+\hline
+& $\sim$QRecursiveMutex() \\ 
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+QRecursiveMutex 类是一个互斥体，与 QMutex 类似，与之API兼容。
+它与 QMutex 的不同之处在于，它可多次接受来自同一线程的 lock() 调用。
+QMutex 在这种情况下会死锁。
+QRecursiveMutex 的构造和操作成本要高很多，因此尽可能使用纯 QMutex。
+然而，有时一个公共函数调用另一个公共函数，它们都需要锁定同一个互斥体。在这种情况下，您有两个选项：
+
+\begin{compactitem}
+\item 将需要互斥锁保护的代码分解到私有函数中，私有函数假设在调用互斥体时 保留互斥体，并在调用私有实现函数之前在公共函数中锁定一个纯QMutex。
+\item 或者使用递归互斥锁，所以第二个公共函数希望锁定互斥锁，与第一个公共函数是否锁定没有多大关系了。
+\end{compactitem}
+
+\begin{notice}[另请参阅]
+QMutex，QMutexLocker，QReadWriteLock，QSemaphore 和 QWaitCondition。
+\end{notice}
+
+
+\section{成员函数文档}
+
+QRecursiveMutex::QRecursiveMutex()
+
+构造一个新的递归互斥锁。互斥锁是在解锁状态下创建的。
+
+\begin{notice}[另请参阅]
+lock()、unlock()
+\end{notice}
+
+QRecursiveMutex::$\sim$QRecursiveMutex()
+
+析构。
+
+\begin{notice}[警告]
+销毁锁定的互斥锁可能会导致未定义的行为。
+\end{notice}
