@@ -272,7 +272,9 @@ class OtherClass {
 
 C++ 提供了 const 关键字来标识不会改变或不会产生副作用的事物。它可被用于数值、指针和倍只想的内容，也可被作为成员函数的特殊属性来标识它不会修改对象的状态。
 
-注意，const 自身并不提供太大的价值——许多语言甚至并未提供 const 关键字，但这并不会自动导致它们存在缺陷。事实上，若移除所有函数重载，并通过搜索替换移除 C++ 代码中的所有 const 标识，代码很可能依然能够编译并正确执行。使用实用主义导向来使用 const 是很重要的。
+\begin{notice}
+const 自身并不提供太大的价值——许多语言甚至并未提供 const 关键字，但这并不会自动导致它们存在缺陷。事实上，若移除所有函数重载，并通过搜索替换移除 C++ 代码中的所有 const 标识，代码很可能依然能够编译并正确执行。使用实用主义导向来使用 const 是很重要的。
+\end{notice}
 
 让我们看看 Qt 中使用 const 的 API 设计：
 
@@ -289,8 +291,6 @@ bool QWidget::isVisibleTo(const QWidget *ancestor) const;
 bool QWidget::isEnabledTo(const QWidget *ancestor) const;
 QPoint QWidget::mapFrom(const QWidget *ancestor, const QPoint &pos) const;
 \end{lstlisting}
-
-%注意，我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
 
 \begin{notice}
 我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：

@@ -870,17 +870,21 @@ QAbstractAxis::$\sim$QAbstractAxis()
 
 析构函数，销毁轴对象，当一个坐标轴添加到图表时，该图表获得该坐标轴的所有权。
 
-void QAbstractAxis::colorChanged(QColor color) [信号] 
+void QAbstractAxis::colorChanged(QColor \emph{color}) [信号] 
 
 当坐标轴的颜色变化时，该信号被发射。 
 
-\textbf{注意}：属性color的通知信号。
+\begin{notice}
+属性color的通知信号。
+\end{notice}
 
-void QAbstractAxis::gridLineColorChanged(const QColor \&color) [信号] 
+void QAbstractAxis::gridLineColorChanged(const QColor \emph{\&color}) [信号] 
 
 当绘制网格线的笔的颜色改变时，该信号被发射。
 
-\textbf{注意}：属性gridLineColor的通知信号。
+\begin{notice}
+属性gridLineColor的通知信号。
+\end{notice}
 
 QPen QAbstractAxis::gridLinePen() const
 
