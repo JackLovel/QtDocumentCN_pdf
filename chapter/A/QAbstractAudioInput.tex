@@ -114,7 +114,11 @@ void QAbstractAudioInput::errorChanged(QAudio::Error error) [信号signal]
 
 QAudioFormat QAbstractAudioInput::format() const [纯虚函数]
 
-返回正在使用的QAudioFormat(这个类是储存音频流相关的参数信息的) 另参见setFormat()函数
+返回正在使用的QAudioFormat(这个类是储存音频流相关的参数信息的)。
+
+\begin{notice}[另请参阅]
+setFormat()。
+\end{notice}
 
 void QAbstractAudioInput::notify() [信号signal]
 
@@ -142,7 +146,11 @@ void QAbstractAudioInput::resume() [纯虚函数]
 
 void QAbstractAudioInput::setBufferSize(int value) [纯虚函数]
 
-将音频缓冲区大小设置为value大小(以毫秒为单位) 另参阅bufferSize()函数
+将音频缓冲区大小设置为value大小(以毫秒为单位) 
+
+\begin{notice}[另请参阅]
+bufferSize()。
+\end{notice}
 
 void QAbstractAudioInput::setFormat(const QAudioFormat \&fmt) [纯虚函数]
 

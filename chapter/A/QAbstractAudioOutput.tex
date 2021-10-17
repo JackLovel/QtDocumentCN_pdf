@@ -97,18 +97,24 @@ int QAbstractAudioOutput::bufferSize() const [纯虚函数]
 
 以字节为单位，返回音频缓冲区的大小。
 
-另见setBufferSize()函数
 
-int QAbstractAudioOutput :: bytesFree ()const [纯虚函数] 
+\begin{notice}[另请参阅]
+setBufferSize()。
+\end{notice}
+
+int QAbstractAudioOutput :: bytesFree () const [纯虚函数] 
 
 返回音频缓冲区的可用空间(以字节为单位)
 
 QString QAbstractAudioOutput::category() const [虚函数 virtual] 
 
-音频缓冲区的类别（官方文档没有，这是我个人经验，当然可能有误，望指正） 另见setCategory()
+音频缓冲区的类别（官方文档没有，这是我个人经验，当然可能有误，望指正） 
 
-qint64 QAbstractAudioOutput::elapsedUSecs() const [纯虚函数 pure
-virtual] 
+\begin{notice}[另请参阅]
+setCategory()。
+\end{notice}
+
+qint64 QAbstractAudioOutput::elapsedUSecs() const [纯虚函数 pure virtual] 
 
 返回调用start()函数之后的毫秒数，包括处于空闲状态的时间和挂起状态的时间。
 
@@ -125,16 +131,23 @@ signal]
 QAudioFormat QAbstractAudioOutput :: format （）const [纯虚函数 pure
 virtual]
 
-返回正在使用的QAudioFormat()类 另见setFormat()
+返回正在使用的QAudioFormat()类 
+
+\begin{notice}[另请参阅]
+setFormat()。
+\end{notice}
 
 void QAbstractAudioOutput::notify() [信号 signal] 
 
 当函数setNotifyInterval(x)函数已经调用，即音频数据的时间间隔已经被设置时。该信号被发射。（就是调用setNotifyInterval(x)后，这个信号会被发射。官方文档讲的好详细啊=。=）
 
-int QAbstractAudioOutput::notifyInterval() const [纯虚函数 pure
-virtual]
+int QAbstractAudioOutput::notifyInterval() const [纯虚函数 pure virtual]
 
-以毫秒为单位，返回时间间隔 另见函数setNotifyInterval()
+以毫秒为单位，返回时间间隔 
+
+\begin{notice}[另请参阅]
+setNotifyInterval()。
+\end{notice}
 
 int QAbstractAudioOutput::periodSize() const [纯虚函数 pure virtual] 
 
@@ -153,30 +166,45 @@ void QAbstractAudioOutput::resume() [纯虚函数 pure virtual]
 
 继续处理暂停后的音频数据 (也就是暂停后继续的意思呗)
 
-void QAbstractAudioOutput::setBufferSize(int value) [纯虚函数 pure
-virtual]
+void QAbstractAudioOutput::setBufferSize(int value) [纯虚函数 pure virtual]
 
- 重新设置音频缓冲区的大小（以字节为单位 即输入参数value） 另见bufferSize()函数
+重新设置音频缓冲区的大小（以字节为单位 即输入参数value） 
 
-void QAbstractAudioOutput::setCategory(const QString \&) 
 
-[虚函数 virtual] 参见函数category()
+\begin{notice}[另请参阅]
+bufferSize()()。
+\end{notice}
 
-void QAbstractAudioOutput::setFormat(const QAudioFormat \&fmt) [纯虚函
-数 pure virtual] 
+void QAbstractAudioOutput::setCategory(const QString \&) [虚函数 virtual] 
 
-QAbstractAudioOutput设置QAudioFormat类，只有当QAudio状态为QAudio::StoppedState时，音频格式才会被设置成功。 另见函数format()
+\begin{notice}[另请参阅]
+category()。
+\end{notice}
 
-void QAbstractAudioOutput::setNotifyInterval(int ms) [纯虚函数 pure
-virtual] 
+void QAbstractAudioOutput::setFormat(const QAudioFormat \&fmt) [纯虚函数 pure virtual] 
+
+QAbstractAudioOutput设置QAudioFormat类，只有当QAudio状态为QAudio::StoppedState时，音频格式才会被设置成功。
+
+\begin{notice}[另请参阅]
+format()。
+\end{notice}
+
+void QAbstractAudioOutput::setNotifyInterval(int ms) [纯虚函数 pure virtual] 
 
 设置发送notify()信号的时间间隔。这个ms并不是实时处理的音频数据中的ms数。
 这个时间间隔是平台相关的。
- 另见notifyInterval()
+
+\begin{notice}[另请参阅]
+notifyInterval()。
+\end{notice}
 
 void QAbstractAudioOutput::setVolume(qreal volume) [虚函数 virtual] 
 
-设置音量。音量的范围为[0.0 - 1.0]。 另见函数volume()
+设置音量。音量的范围为[0.0 - 1.0]。 
+
+\begin{notice}[另请参阅]
+volume()。
+\end{notice}
 
 void QAbstractAudioOutput::start(QIODevice *device) [纯虚函数 pure virtual] 
 
@@ -208,9 +236,8 @@ qreal QAbstractAudioOutput::volume() const [虚函数 virtual]
 
 返回音量。
 
-音量范围为[0.0 - 1.0] 另参阅函数setVolume()
+音量范围为[0.0 - 1.0] 
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
+\begin{notice}[另请参阅]
+setVolume()。
+\end{notice}

@@ -1307,6 +1307,7 @@ bool DragDropListModel::dropMimeData(const QMimeData *data,
 }
 ```
 
+
 注意，该模型通常需要重新实现 [QAbstractItemModel::insertRows()]() 和 [QAbstractItemModel::setData()]() 函数。
 
 ## 代理模型
