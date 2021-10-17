@@ -123,13 +123,11 @@ virtual]
 
 返回错误状态。
 
-void QAbstractAudioOutput::errorChanged(QAudio::Error error) [信号
-signal] 
+void QAbstractAudioOutput::errorChanged(QAudio::Error error) [信号 signal] 
 
 当错误状态改变时，该信号被发射。
 
-QAudioFormat QAbstractAudioOutput :: format （）const [纯虚函数 pure
-virtual]
+QAudioFormat QAbstractAudioOutput::format() const [纯虚函数 pure virtual]
 
 返回正在使用的QAudioFormat()类 
 
@@ -170,7 +168,6 @@ void QAbstractAudioOutput::setBufferSize(int value) [纯虚函数 pure virtual]
 
 重新设置音频缓冲区的大小（以字节为单位 即输入参数value） 
 
-
 \begin{notice}[另请参阅]
 bufferSize()()。
 \end{notice}
@@ -189,7 +186,7 @@ QAbstractAudioOutput设置QAudioFormat类，只有当QAudio状态为QAudio::Stop
 format()。
 \end{notice}
 
-void QAbstractAudioOutput::setNotifyInterval(int ms) [纯虚函数 pure virtual] 
+void QAbstractAudioOutput::setNotifyInterval(int \emph{ms}) [纯虚函数 pure virtual] 
 
 设置发送notify()信号的时间间隔。这个ms并不是实时处理的音频数据中的ms数。
 这个时间间隔是平台相关的。
