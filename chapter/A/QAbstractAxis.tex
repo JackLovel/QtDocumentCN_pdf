@@ -886,37 +886,56 @@ QPen QAbstractAxis::gridLinePen() const
 
 返回用于绘制网格的笔。 
 
-\textbf{注意}：属性gridLinePen的Getter函数。 
+\begin{notice}
+属性gridLinePen的Getter函数。 
+\end{notice}
 
-另参见函数setGridLinePen()。
+\begin{notice}[另请参阅]
+setGridLinePen()。
+\end{notice}
 
 void QAbstractAxis :: gridLinePenChanged（const QPen \&pen） [信号] 
 
 当用于绘制网格线的笔变化时，会发出此信号。 
 
-\textbf{注意}:属性gridLinePen的通知信号。
+
+
+\begin{notice}
+属性gridLinePen的通知信号。
+\end{notice}
 
 void QAbstractAxis::gridVisibleChanged(bool visible) [信号] 
 
 当坐标轴的网格线的可见性变化时，发出该信号。 
 
-\textbf{注意}：属性gridVisible的通知信号。
+\begin{notice}
+属性gridVisible的通知信号。
+\end{notice}
 
-void QAbstractAxis::hide() 使坐标轴，阴影，标签，网格线不可见。
+void QAbstractAxis::hide() 
+
+使坐标轴，阴影，标签，网格线不可见。
 
 void QAbstractAxis::labelsAngleChanged(int angle) [信号]
 
 当坐标轴标签的角度变化时，发出该信号。 
 
-\textbf{注意}：属性标签角度的通知信号
+\begin{notice}
+属性标签角度的通知信号
+\end{notice}
 
 QBrush QAbstractAxis::labelsBrush() const 
 
 返回用于绘制标签的画笔。 
 
-\textbf{注意}：属性labelsBrush的Getter函数。 
+\begin{notice}
+属性labelsBrush的Getter函数。
+\end{notice}
 
-另参见setLabelsBrush().
+\begin{notice}[另请参阅]
+setLabelsBrush()。
+\end{notice}
+
 
 void QAbstractAxis::labelsBrushChanged(const QBrush \&brush) [信号] 
 
@@ -930,7 +949,13 @@ QFont QAbstractAxis::labelsFont() const
 
 返回用于绘制标签的字体。 
 
-\textbf{注意}：属性labelsFont的Getter函数。 另参见函数setLabelsFont()。
+\begin{notice}
+属性labelsFont的Getter函数。
+\end{notice}
+
+\begin{notice}[另请参阅]
+setLabelsFont()。
+\end{notice}
 
 void QAbstractAxis :: labelsFontChanged（const QFont \&font）[信号] 
 
@@ -944,74 +969,123 @@ QPen QAbstractAxis::linePen() const
 
 返回用于绘制轴线与刻度线的笔。 
 
-\textbf{注意}：属性linePen的Getter函数。 另参阅函数setLinePen()。
+\begin{notice}
+属性linePen的Getter函数。
+\end{notice}
+
+\begin{notice}[另请参阅]
+setLinePen()。
+\end{notice}
 
 void QAbstractAxis::linePenChanged(const QPen \&pen) [信号] 
 
 当绘制坐标轴的笔变化时，会发出此信号。 
 
-\textbf{注意}：属性linePen的通知信号。
+\begin{notice}
+属性linePen的通知信号。
+\end{notice}
 
 void QAbstractAxis::lineVisibleChanged(bool visible) [信号] 
 
 当坐标轴线的可见性变化时，会发出此信号。
 
-\textbf{注意}：属性lineVisible的通知信号。
+\begin{notice}
+属性lineVisible的通知信号。
+\end{notice}
 
 void QAbstractAxis::minorGridLineColorChanged(const QColor \&color)
 [信号]
 
  当绘制副格线的笔的颜色变化时，该信号被发射。 
 
-\textbf{注意}：属性minorGridLineColor的通知信号。
+\begin{notice}
+属性minorGridLineColor的通知信号。
+\end{notice}
 
 void QAbstractAxis::minorGridLinePenChanged(const QPen \&pen) [信号] 
 
 当绘制副格线的笔变化时，该信号被发射。 
 
-\textbf{注意}：属性minorGridLinePen的通知信号。
+\begin{notice}
+属性minorGridLinePen的通知信号。
+\end{notice}
 
 void QAbstractAxis::minorGridVisibleChanged(bool visible) [信号] 
 
 当绘制副格线的可见性变化时，该信号被发射。 
 
-\textbf{注意}：属性minorGridVisible的通知信号。
+\begin{notice}
+属性minorGridVisible的通知信号。
+\end{notice}
 
 Qt::Orientation QAbstractAxis::orientation() const 
 
 返回坐标轴的方向(垂直或者水平) 
 
-\textbf{注意}：坐标轴方向的Getter函数。
+\begin{notice}
+坐标轴方向的Getter函数。
+\end{notice}
 
 void QAbstractAxis::setGridLinePen(const QPen \&pen) 
 
 设置绘制网格线的笔。 
 
-\textbf{注意}：gridLinePen的Setter函数。 另参见函数gridLinePen()。
+\begin{notice}
+gridLinePen的Setter函数。
+\end{notice}
+
+\begin{notice}[另请参阅]
+gridLinePen()。
+\end{notice}
 
 void QAbstractAxis::setLabelsBrush(const QBrush \&brush)
 
- 设置用于绘制标签的画笔。 
+设置用于绘制标签的画笔。 
 
-\textbf{注意}：属性LabelsBrush的Setter函数。 另参阅labelsBrush().
+\begin{notice}
+属性LabelsBrush的Setter函数。
+\end{notice}
+
+\begin{notice}[另请参阅]
+labelsBrush()。
+\end{notice}
 
 void QAbstractAxis::setLabelsFont(const QFont \&font) 
 
 设置用于绘制标签的字体相关 
 
-\textbf{注意}：属性labelsFont的Setter函数。 
-
-另参阅函数labelsFont()。
-
+\begin{notice}
+属性labelsFont的Setter函数。
+\end{notice}
+    
+\begin{notice}[另请参阅]
+labelsFont()。
+\end{notice}
+    
 void QAbstractAxis::setLinePen(const QPen \&pen) 
 
 设置用于绘制坐标轴线和刻度线的笔。 
 
-\textbf{注意}：属性linePen的Setter函数。 另参见函数linePen（）。
+
+\begin{notice}
+属性linePen的Setter函数。
+\end{notice}
+ 
+\begin{notice}[另请参阅]
+linePen()。
+\end{notice}
 
 void QAbstractAxis::setLineVisible(bool visible = true) 
 
-设置坐标轴线与刻度线是否可见。 注意:属性lineVisible的Setter函数 另参见函数isLineVisible()。
+设置坐标轴线与刻度线是否可见。 
+
+\begin{notice}
+属性lineVisible的Setter函数
+\end{notice}
+     
+\begin{notice}[另请参阅]
+isLineVisible()。
+\end{notice}
 
 void QAbstractAxis::setMax(const QVariant \&max) 
 
@@ -1028,52 +1102,129 @@ void QAbstractAxis::setRange(const QVariant \&min, const QVariant
 
 void QAbstractAxis::setShadesBrush(const QBrush \&brush)
 
- 设置用于绘制阴影的画笔。 注意：属性shadesBrush的Setter函数。 另参见函数shadesBrush().
+设置用于绘制阴影的画笔。 
+
+\begin{notice}
+属性shadesBrush的Setter函数。
+\end{notice}
+         
+\begin{notice}[另请参阅]
+shadesBrush()。
+\end{notice}
+    
 
 void QAbstractAxis::setShadesPen(const QPen \&pen)
 
- 设置用于绘制阴影的笔。 注意：属性shadesPen的Setter函数。 另参见函数shadesPen().
+设置用于绘制阴影的笔。 
+
+\begin{notice}
+属性shadesPen的Setter函数。
+\end{notice}
+             
+\begin{notice}[另请参阅]
+shadesPen()。
+\end{notice}
 
 void QAbstractAxis::setTitleBrush(const QBrush \&brush) 
 
-设置用于绘制标题的画笔。 注意：属性titleBrush的Setter函数。 另参见函数titleBrush().
+设置用于绘制标题的画笔。
+
+\begin{notice}
+属性titleBrush的Setter函数。
+\end{notice}
+    
+\begin{notice}[另请参阅]
+titleBrush()。
+\end{notice}
 
 void QAbstractAxis::setTitleFont(const QFont \&font) 
 
-设置用于绘制标题的笔。 注意：属性titleFont的Setter函数。 另参见函数titleFont().
+设置用于绘制标题的笔。
+
+\begin{notice}
+属性titleFont的Setter函数。
+\end{notice}
+        
+\begin{notice}[另请参阅]
+titleFont()。
+\end{notice}
 
 void QAbstractAxis::setVisible(bool visible = true) 
 
-设置坐标轴，阴影，标签，网格线是否可见。 注意：属性visible的Setter函数。 另参见函数isVisible().
+设置坐标轴，阴影，标签，网格线是否可见。 
 
-void QAbstractAxis::shadesBorderColorChanged(QColor color) [信号
-signal] 
+\begin{notice}
+属性visible的Setter函数。
+\end{notice}
+            
+\begin{notice}[另请参阅]
+isVisible()。
+\end{notice}
 
-当绘制坐标轴边框的颜色变化时，会发出此信号。 注意:属性shadesBorderColor的通知信号。
+void QAbstractAxis::shadesBorderColorChanged(QColor color) [信号] 
+
+当绘制坐标轴边框的颜色变化时，会发出此信号。  
+
+\begin{notice}
+属性shadesBorderColor的通知信号。
+\end{notice}
 
 QBrush QAbstractAxis::shadesBrush() const 
 
-返回用于绘制阴影的画笔。 注意：属性shadesBrush()的Getter函数。 另参阅函数setShadesBrush().
+返回用于绘制阴影的画笔。
 
-void QAbstractAxis::shadesBrushChanged(const QBrush \&brush) [信号signal] 
+\begin{notice}
+属性shadesBrush()的Getter函数。
+\end{notice}
+        
+\begin{notice}[另请参阅]
+setShadesBrush()
+\end{notice}
 
-当绘制坐标轴阴影的画刷变化时，会发出此信号。 注意:属性shadesBrush()的通知信号。
+void QAbstractAxis::shadesBrushChanged(const QBrush \&brush) [信号] 
 
-void QAbstractAxis::shadesColorChanged(QColor color) [信号signal] 
+当绘制坐标轴阴影的画刷变化时，会发出此信号。 
 
-当绘制坐标轴阴影颜色发生变化时，会发出此信号。 注意:属性shadesColor()的通知信号。
+\begin{notice}
+属性shadesBrush()的通知信号。
+\end{notice}
+
+void QAbstractAxis::shadesColorChanged(QColor color) [信号] 
+
+当绘制坐标轴阴影颜色发生变化时，会发出此信号。 
+
+\begin{notice}
+属性shadesColor()的通知信号。
+\end{notice}
 
 QPen QAbstractAxis::shadesPen() const 
 
-返回用于绘制阴影的笔。 注意:属性shadesPen()的Getter函数 另参阅函数setShadesPen().
+返回用于绘制阴影的笔。
 
-void QAbstractAxis::shadesPenChanged(const QPen \&pen) [信号signal] 
+\begin{notice}
+属性shadesPen()的Getter函数。
+\end{notice}
+    
+\begin{notice}[另请参阅]
+setShadesPen()。
+\end{notice}
 
-当绘制坐标轴阴影的笔发生变化时，会发出此信号。 注意:属性shadesPen()的通知信号。
+void QAbstractAxis::shadesPenChanged(const QPen \&pen) [信号] 
 
-void QAbstractAxis::shadesVisibleChanged(bool visible) [信号signal] 
+当绘制坐标轴阴影的笔发生变化时，会发出此信号。
 
-当坐标轴的阴影可见性变化时，会发出此信号。 注意:属性shadesVisible()的通知信号。
+\begin{notice}
+属性shadesPen()的通知信号。
+\end{notice}
+
+void QAbstractAxis::shadesVisibleChanged(bool visible) [信号] 
+
+当坐标轴的阴影可见性变化时，会发出此信号。
+
+\begin{notice}
+属性shadesVisible()的通知信号。
+\end{notice}
+
 
 void QAbstractAxis::show() 
 
@@ -1081,28 +1232,59 @@ void QAbstractAxis::show()
 
 QBrush QAbstractAxis::titleBrush() const 
 
-返回用于绘制标题的画刷 注意:属性titleBrush的Getter函数 另参阅函数setTitleBrush()
+返回用于绘制标题的画刷
 
-void QAbstractAxis::titleBrushChanged(const QBrush \&brush) [信号
-signal] 
+\begin{notice}
+属性titleBrush的Getter函数。
+\end{notice}
 
-当绘制坐标轴标题的画刷变化时，该信号被发射 注意:titleBrush的通知信号。
+\begin{notice}[另请参阅]
+setTitleBrush()。
+\end{notice}
+
+void QAbstractAxis::titleBrushChanged(const QBrush \&brush) [信号] 
+
+当绘制坐标轴标题的画刷变化时，该信号被发射 
+
+\begin{notice}
+titleBrush的通知信号。
+\end{notice}
 
 QFont QAbstractAxis::titleFont() const 
 
-返回绘制标题的笔相关属性。 注意：titleFont的Getter函数 另参阅函数setTitleFont()
+返回绘制标题的笔相关属性。 
 
-void QAbstractAxis::titleFontChanged(const QFont \&font) [信号 signal]
+\begin{notice}
+titleFont的Getter函数。
+\end{notice}
 
-当坐标轴标题的字体属性更改时，会发出此信号。 注意:titleFont的通知信号。
+\begin{notice}[另请参阅]
+setTitleFont()。
+\end{notice}
 
-void QAbstractAxis::titleTextChanged(const QString \&text) [信号signal] 
+void QAbstractAxis::titleFontChanged(const QFont \&font) [信号]
 
-当坐标轴标题的文本内容改变时，会发出此信号。 注意:titleText的通知信号。
+当坐标轴标题的字体属性更改时，会发出此信号。 
 
-void QAbstractAxis::titleVisibleChanged(bool visible) [信号 signal] 
+\begin{notice}
+titleFont的通知信号。
+\end{notice}
 
-当坐标轴的标题文本的可见性变化时，会发出此信号。 注意:titleVisible的通知信号
+void QAbstractAxis::titleTextChanged(const QString \&text) [信号] 
+
+当坐标轴标题的文本内容改变时，会发出此信号。 
+
+\begin{notice}
+titleText的通知信号。
+\end{notice}
+
+void QAbstractAxis::titleVisibleChanged(bool visible) [信号] 
+
+当坐标轴的标题文本的可见性变化时，会发出此信号。 
+
+\begin{notice}
+titleVisible的通知信号。
+\end{notice}
 
 AxisType QAbstractAxis::type() const 
 
@@ -1110,9 +1292,8 @@ AxisType QAbstractAxis::type() const
 
 void QAbstractAxis::visibleChanged(bool visible) 
 
-当坐标轴的可见性变化时，会发出此信号。 注意：坐标轴的visible的通知信号
+当坐标轴的可见性变化时，会发出此信号。 
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
+\begin{notice}
+坐标轴的visible的通知信号。
+\end{notice}
