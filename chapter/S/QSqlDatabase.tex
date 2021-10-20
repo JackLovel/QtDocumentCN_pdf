@@ -913,7 +913,7 @@ databaseName()、setUserName()、 setPassword()、 setHostName()、setPort()、s
 \end{notice}
 
 
-void QSqlDatabase::setHostName(const QString \&host)
+void QSqlDatabase::setHostName(const QString \emph{\&host})
 
 通过 host 参数来设置连接的主机名。为了生效，必须在打开连接之前，设置主机名。或者，可以调用close()关闭连接，然后设置主机名，再次调用open()函数。
 
