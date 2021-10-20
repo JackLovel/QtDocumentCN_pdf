@@ -246,8 +246,6 @@ void &	setLoadHints(QLibrary::LoadHints \emph{hints})\\
 
 \section{成员函数文档}
 
-% gog 
-
 QLibrary::QLibrary(const QString \emph{\&fileName}, const QString \emph{\&version}, QObject \emph{*parent} = nullptr)
 
 基于给定的父对象 \emph{parent} 构造一个库对象。它会加载文件名 \emph{fileName}、完整版本号 \emph{version} 指定的库文件。如今，版本号在Windows上被忽略。
@@ -371,10 +369,6 @@ extern "C" MY_EXPORT int avg(int a, int b)
 #define MY_EXPORT
 #endif
 \end{lstlisting}
-
-
-% gog 
-
 
 \hl{[static]}QFunctionPointer QLibrary::resolve(const QString \emph{\&fileName}, const char \emph{*symbol})
 
