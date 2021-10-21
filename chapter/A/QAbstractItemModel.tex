@@ -422,13 +422,9 @@ VerticalSortHint　和 HorizontalSortHint 表示项在同一父级中移动，
 
 \section{成员函数文档}
 
-QAbstractItemModel
-
 QAbstractItemModel::QAbstractItemModel(QObject *parent = nullptr)
 
 构造指定父类对象 parent 的抽象项模型。
-
-columnsAboutToBeInserted
 
 [signal] void QAbstractItemModel::columnsAboutToBeInserted(const QModelIndex \&parent, int first, int last)
 
@@ -445,8 +441,6 @@ columnsAboutToBeInserted
 \begin{notice}[另请参阅]
 insertColumns() 和 beginInsertColumns()。
 \end{notice}
-
-columnsAboutToBeMoved
 
 [signal] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationColumn)
 
@@ -466,8 +460,6 @@ columnsAboutToBeMoved
 beginMoveRows()。
 \end{notice}
 
-columnsAboutToBeRemoved
-
 [signal] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
 
 模型中的列被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
@@ -480,9 +472,9 @@ columnsAboutToBeRemoved
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice} 
 
-参见 removeColumns() 和 beginRemoveColumns()。
-
-columnsInserted
+\begin{notice}[另请参阅]
+removeColumns() 和 beginRemoveColumns()。
+\end{notice}
 
 [signal] void QAbstractItemModel::columnsInserted(const QModelIndex \&parent, int first, int last)
 
@@ -500,9 +492,7 @@ columnsInserted
 insertColumns() 和 beginInsertColumns()。
 \end{notice}
 
-columnsMoved
-
-[signal] void QAbstractItemModel::columnsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)
+[signal] void QAbstractItemModel::columnsMoved(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end}, const QModelIndex \emph{\&destination}, int \emph{column})
 
 模型中的列被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
 
@@ -519,8 +509,6 @@ columnsMoved
 \begin{notice}[另请参阅]
 beginMoveRows()。
 \end{notice}
-
-columnsRemoved
 
 [signal] void QAbstractItemModel::columnsRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -539,8 +527,6 @@ columnsRemoved
 removeColumns() 和 beginRemoveColumns()。
 \end{notice}
 
-dataChanged
-
 [signal] void QAbstractItemModel::dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector<int> \&roles = QVector())
 
 现有的项的数据发生改变时发射该信号。
@@ -555,8 +541,6 @@ dataChanged
 headerDataChanged()、setData() 和 layoutChanged()。
 \end{notice}
 
-headerDataChanged
-
 [signal] void QAbstractItemModel::headerDataChanged(const Qt::Orientation \&orientation, int first, int last)
 
 当标题改变时发射该信号。orientation 表示是横向标题还是竖向标题发生了改变。标题中从 first 到 last 的部分需要更新。
@@ -568,8 +552,6 @@ headerDataChanged
 \begin{notice}[另请参阅]
 headerData()、setHeaderData() 和 dataChanged()。
 \end{notice}
-
-layoutAboutToBeChanged
 
 [signal] void QAbstractItemModel::layoutAboutToBeChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
 
@@ -584,8 +566,6 @@ layoutAboutToBeChanged
 \begin{notice}[另请参阅]
 layoutChanged() 和 changePersistentIndex()。
 \end{notice}
-
-layoutChanged
 
 [signal] void QAbstractItemModel::layoutChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
 
@@ -612,8 +592,6 @@ layoutChanged
 layoutAboutToBeChanged()、dataChanged()、headerDataChanged()、modelReset() 和 changePersistentIndex()。
 \end{notice}
 
-modelAboutToBeReset
-
 [signal] void QAbstractItemModel::modelAboutToBeReset()
 
 当调用 beginResetModel() 时，在模型的内部状态(例如持久模型索引)失效之前发出这个信号。
@@ -628,23 +606,25 @@ modelAboutToBeReset
 beginResetModel() 和 modelReset()。
 \end{notice}
 
-modelReset
-
 [signal] void QAbstractItemModel::modelReset()
 
 当调用 endResetModel() 时，在模型的内部状态(例如持久模型索引)失效之后发出这个信号。
 
-注意，如果模型被重置，则应该认为之前从模型中检索的所有信息都是无效的。这包括但不限于 rowCount()、columnCount()、flags()、通过 data()检索的数据和 roleNames()。
+\begin{notice}
+如果模型被重置，则应该认为之前从模型中检索的所有信息都是无效的。这包括但不限于 rowCount()、columnCount()、flags()、通过 data()检索的数据和 roleNames()。
+\end{notice}
 
-注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
 
 该函数在 Qt 4.1 中被引入。
 
-参见 endResetModel() 和 modelAboutToBeReset()。
+\begin{notice}[另请参阅]
+endResetModel() 和 modelAboutToBeReset()。
+\end{notice}
 
-resetInternalData
-
-[ protected slot ] void QAbstractItemModel::resetInternalData()
+[protected slot] void QAbstractItemModel::resetInternalData()
 
 该槽函数在模型的内部数据被清除并被重置之后被调用。
 
@@ -683,13 +663,15 @@ QSortFilterProxyModel 的子类。
  };
 \end{lstlisting}
 
-注意： 由于错误，该槽函数没有出现在 Qt 5.0 中。
+\begin{notice}
+由于错误，该槽函数没有出现在 Qt 5.0 中。
+\end{notice}
 
 该函数在 Qt 4.8 中被引入。
 
-参见 modelAboutToBeReset() 和 modelReset()。
-
-revert
+\begin{notice}[另请参阅]
+modelAboutToBeReset() 和 modelReset()。
+\end{notice}
 
 [virtual slot] void QAbstractItemModel::revert()
 
@@ -697,11 +679,11 @@ revert
 
 该函数在 Qt 4.2 中被引入。
 
-参见 submit()。
+\begin{notice}[另请参阅]
+submit()。
+\end{notice}
 
-rowsAboutToBeInserted
-
-[ signal ] void QAbstractItemModel::rowsAboutToBeInserted(const QModelIndex \&parent, int start, int end)
+[signal] void QAbstractItemModel::rowsAboutToBeInserted(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end})
 
 在将行插入模型之前就发出该信号。新项将位于给定 parent 项目下的包含 start 和 end 之间。
 
@@ -709,71 +691,93 @@ rowsAboutToBeInserted
 
 注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 
-参见 insertRows() 和 beginInsertRows()。
+\begin{notice}[另请参阅]
+insertRows() 和 beginInsertRows()。
+\end{notice}
 
-rowsAboutToBeMoved
-
-[ signal ] void QAbstractItemModel::rowsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationRow)
+[signal] void QAbstractItemModel::rowsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationRow)
 
 模型中的行被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationRow 列开始移动到destinationParent。
 
-注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
 
-注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
 
 该函数在 Qt4.6 中被引入。
 
-参见 beginMoveRows()。
+\begin{notice}[另请参阅]
+beginMoveRows()。
+\end{notice}
 
-rowsAboutToBeRemoved
-
-[signal] void QAbstractItemModel::rowsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
+[signal] void QAbstractItemModel::rowsAboutToBeRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
 模型中的行被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
 
-注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice} 
 
-注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
 
-参见 removeRows() 和 beginRemoveRows()。
+\begin{notice}[另请参阅]
+removeRows() 和 beginRemoveRows()。
+\end{notice}
 
-rowsInserted
-
-[signal] void QAbstractItemModel::rowsInserted(const QModelIndex \&parent, int first, int last)
+[signal] void QAbstractItemModel::rowsInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
 将行插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
 
-注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
 
-注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
 
-参见 insertRows() 和 beginInsertRows()。
+\begin{notice}[另请参阅]
+insertRows() 和 beginInsertRows()。
+\end{notice}
 
-[signal] void QAbstractItemModel::rowsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)
+[signal] void QAbstractItemModel::rowsMoved(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end}, const QModelIndex \emph{\&destination}, int \emph{column})
 
 模型中的行被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
 
-注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
 
-注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
 
 该函数在 Qt4.6 中被引入。
 
-参见 beginMoveRows()。
+\begin{notice}[另请参阅]
+beginMoveRows()。
+\end{notice}
 
-rowsRemoved
-
-[signal] void QAbstractItemModel::rowsRemoved(const QModelIndex \&parent, int first, int last)
+[signal] void QAbstractItemModel::rowsRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
 模型中的行被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
 
-注意： 连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
 
-注意： 这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
 
-参见 removeRows() 和 beginRemoveRows()。
-
-submit
+\begin{notice}[另请参阅]
+removeRows() 和 beginRemoveRows()。
+\end{notice}
 
 [virtual slot] void QAbstractItemModel::submit()
 
@@ -825,8 +829,6 @@ beginInsertColumns(parent, 6, 8);
 参见 endInsertColumns()。
 
 \splitLine
-
-beginInsertRows
 
 [protected] void QAbstractItemModel::beginInsertRows(const QModelIndex \&parent, int first, int last)
 
@@ -1041,9 +1043,17 @@ beginRemoveRows(parent, 2, 3);\\
 
 如果 canFetchMore() 返回 true，则应该调用 fetchMore() 函数。比如 QAbstractItemView 就是这样做的。
 
-注意： 该函数可以通过元对象系统和 QML 调用。请参阅 \href{}{Q\_INVOKABLE} 。
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
 
-参见 fetchMore()。
+\begin{notice}[另请参阅]
+\href{}{Q\_INVOKABLE}
+\end{notice}
+
+\begin{notice}[另请参阅]
+fetchMore()。
+\end{notice}
 
 [protected] void QAbstractItemModel::changePersistentIndex(const QModelIndex \&from, const QModelIndex \&to)
 
@@ -1053,9 +1063,12 @@ beginRemoveRows(parent, 2, 3);\\
 
 如果 canFetchMore() 返回 true，则应该调用 fetchMore() 函数。比如 QAbstractItemView 就是这样做的。
 
-参见 persistentIndexList() 和 changePersistentIndexList()。
 
-[protected] void QAbstractItemModel::changePersistentIndexList(const QModelIndexList \&from, const QModelIndexList \&to)
+\begin{notice}[另请参阅]
+persistentIndexList() 和 changePersistentIndexList()。
+\end{notice}
+
+[protected] void QAbstractItemModel::changePersistentIndexList(const QModelIndexList \emph{\&from}, const QModelIndexList \emph{\&to})
 
 将等于给定的 from 的 QPersistentModelIndex()es 模型索引列表更改为 to 模型索引列表。
 
@@ -1063,9 +1076,10 @@ beginRemoveRows(parent, 2, 3);\\
 
 该函数在 Qt4.1 中被引入。
 
-参见 persistentIndexList() 和 changePersistentIndex()。
-
-checkIndex
+\begin{notice}[另请参阅]
+persistentIndexList() 和 changePersistentIndex()。
+\end{notice}
+  
 
 bool QAbstractItemModel::checkIndex(const QModelIndex \&index, QAbstractItemModel::CheckIndexOptions options = CheckIndexOption::NoOption) const
 
@@ -1087,13 +1101,20 @@ options 参数可能会改变其中一些检查。如果 options 包含 IndexIsV
 
 该函数如果检查成功返回 true，否则返回 false。允许在 Q\_ASSERT 和类似的其他调试机制中使用该函数。如果某些检查失败，则将在 qt.core.qabstractitemmodel.checkindex 日志记录类别中显示一条警告消息，其中包含一些可能对调试失败有用的信息。
 
-注意： 这个函数是一个调试助手，用于实现您自己的项模型。在开发复杂模型时，以及在构建复杂的模型层次结构时(例如使用代理模型)，调用这个函数来捕获传递给某个 QAbstractItemModel() API 的非法模型索引(如上定义)相关的bug是很有用的。
+\begin{notice}
+这个函数是一个调试助手，用于实现您自己的项模型。在开发复杂模型时，以及在构建复杂的模型层次结构时(例如使用代理模型)，调用这个函数来捕获传递给某个 QAbstractItemModel() API 的非法模型索引(如上定义)相关的bug是很有用的。
+\end{notice}
 
-警告： 请注意，将非法索引传递给项模型是未定义的行为，因此应用程序必须避免这样做，并且不能依赖于项模型可以用来优雅地处理非法索引的任何“防御性”编程。
+\begin{notice}[警告]
+请注意，将非法索引传递给项模型是未定义的行为，因此应用程序必须避免这样做，并且不能依赖于项模型可以用来优雅地处理非法索引的任何“防御性”编程。
+\end{notice}
 
-该函数在 `Qt5.11 中被引入。
 
-参见 QModelIndex。
+该函数在 Qt5.11 中被引入。
+
+\begin{notice}[另请参阅]
+QModelIndex。
+\end{notice}
 
 [pure virtual] int QAbstractItemModel::columnCount(const QModelIndex \&parent = QModelIndex()) const
 
@@ -1441,8 +1462,6 @@ insertColumns()、removeRows()、beginInsertRows() 和 endInsertRows()。
 setItemData()、Qt::ItemDataRole 和 data()。
 \end{notice}
   
-match
-
 [virtual] QModelIndexList QAbstractItemModel::match(const QModelIndex \&start, int role, const QVariant \&value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const
 
 返回一列项的索引，这些索引在 start 索引的列中并且该索引下的数据在给定角色下存储的数据与指定值匹配。执行搜索的方式由给定的 flags 定义。返回的列表可能是空的。还要注意，如果使用了代理模型，列表中结果的顺序可能与模型中的顺序不一致。不能依赖结果的顺序。
@@ -1508,8 +1527,6 @@ moveColumns() 和 moveRow()。
 \begin{notice}[另请参阅]
 beginMoveColumns() 和 endMoveColumns()。
 \end{notice}
-
-moveRow
 
 bool QAbstractItemModel::moveRow(const QModelIndex \&sourceParent, int sourceRow const QModelIndex \&destinationParent, int destinationChild)
 
