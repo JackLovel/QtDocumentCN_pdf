@@ -57,7 +57,7 @@ QString QAbstractAudioDeviceInfo::deviceName() const [纯虚函数]
 
 返回音频设备名称
 
-bool QAbstractAudioDeviceInfo::isFormatSupported(const QAudioFormat \&format) const [纯虚函数] 
+bool QAbstractAudioDeviceInfo::isFormatSupported(const QAudioFormat \emph{\&format}) const [纯虚函数] 
 
 传入参数QAudioFormat（音频流）类，如果QAbstractAudioDeviceInfo支持的话，返回true（真是不好翻译）
 
@@ -66,7 +66,7 @@ QAudioFormat QAbstractAudioDeviceInfo::preferredFormat() const [纯虚函数]
 
 QListQAudioFormat::Endian QAbstractAudioDeviceInfo::supportedByteOrders() 
 
-[纯虚函数] 返回当前支持可用的字节顺序(QAudioFormat :: Endian)列表
+[纯虚函数] 返回当前支持可用的字节顺序(QAudioFormat::Endian)列表
 
 QList QAbstractAudioDeviceInfo::supportedChannelCounts() [纯虚函数] 
 
@@ -87,8 +87,3 @@ QList QAbstractAudioDeviceInfo::supportedSampleSizes() [纯虚函数]
 QListQAudioFormat::SampleType QAbstractAudioDeviceInfo::supportedSampleTypes() [纯虚函数] 
 
 返回当前可用样本类型的列表。
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
