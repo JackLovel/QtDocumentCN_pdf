@@ -442,7 +442,7 @@ QAbstractItemModel::QAbstractItemModel(QObject *parent = nullptr)
 insertColumns() 和 beginInsertColumns()。
 \end{notice}
 
-[signal] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationColumn)
+[signal] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \emph{\&sourceParent}, int \emph{sourceStart}, int \emph{sourceEnd}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationColumn})
 
 模型中的列被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationColumn 列开始移动到destinationParent。
  
@@ -460,7 +460,7 @@ insertColumns() 和 beginInsertColumns()。
 beginMoveRows()。
 \end{notice}
 
-[signal] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)
+[signal] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
 模型中的列被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
 
@@ -476,7 +476,7 @@ beginMoveRows()。
 removeColumns() 和 beginRemoveColumns()。
 \end{notice}
 
-[signal] void QAbstractItemModel::columnsInserted(const QModelIndex \&parent, int first, int last)
+[signal] void QAbstractItemModel::columnsInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
 将列插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
 
@@ -862,13 +862,18 @@ beginInsertRows(parent, 4, 5);
 \hline
 \end{tabular}
 
-注意： 此函数发出 rowsAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+\begin{notice}
+此函数发出 rowsAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+\end{notice}
 
-参见 endInsertRows()。
+\begin{notice}[另请参阅]
+endInsertRows()。
+\end{notice}
+  
 
 \splitLine
 
-[protected] void QAbstractItemModel::beginMoveColumns(const QModelIndex \&sourceParent, int sourceFirst, int sourceLast, const QModelIndex \&destinationParent, int destinationChild)
+[protected] void QAbstractItemModel::beginMoveColumns(const QModelIndex \emph{\&sourceParent}, int \emph{sourceFirst}, int \emph{sourceLast}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})
 
 开始一个列移动操作。
 
