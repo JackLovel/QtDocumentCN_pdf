@@ -228,12 +228,9 @@ nextPendingConnection() 和 setMaxPendingConnections()。
 newConnection(), nextPendingConnection() 和 addPendingConnection()。
 \end{notice}
 
-% gog
 bool QTcpServer::isListening() const
 
 当服务端正在监听连接时返回 true ，否则返回 false 。
-
-
 
 \begin{notice}[另请参阅]
 listen()。
@@ -246,7 +243,7 @@ bool QTcpServer::listen(const QHostAddress  \emph{\&address} = QHostAddress::Any
 操作成功该函数返回 true ，否则返回 false 。
 
 \begin{notice}[另请参阅]
- isListening() 
+isListening() 
 \end{notice}
 
 int QTcpServer::maxPendingConnections() const

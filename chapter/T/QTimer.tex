@@ -354,7 +354,9 @@ timerType	 & Qt::TimerType \\
 \begin{tabular}{|r|l|}
 \hline
 类型	 & 函数名 \\ 
+\hline
 Qt::TimerType & 	timerType() const \\ 
+\hline
 void	 & setTimerType(Qt::TimerType \emph{atype}) \\ 
 \hline
 \end{tabular}
@@ -476,8 +478,6 @@ int main(int argc, char *argv[])
 	return app.exec();
 }
 \end{lstlisting}
-
-%%%%%%%%% gog 
 
 这个示例程序自动在10分钟(600,000毫秒)触发。
 
@@ -614,7 +614,7 @@ start()。
 start()。
 \end{notice}
 
-[static] void QTimer::singleShot(int msec, Qt::TimerType timerType, const QObject *context, Functor functor)
+[static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*context}, Functor \emph{functor})
 
 这是一个重载函数。
 

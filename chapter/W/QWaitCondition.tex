@@ -1,7 +1,5 @@
 \chapter{QWaitCondition}
 
-QWaitCondition
-
 QWaitCondition 提供一个用于同步线程的条件变量。\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWaitCondition/QWaitCondition.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{更多...} 
 	
 \begin{tabular}{|r|l|}
@@ -55,12 +53,12 @@ QWaitCondition允许线程告诉其他线程某种条件已经满足。一个或
 例，假设我们有三个任务，当用户按下一个键时，应该执行某些任务。每个任务可以分成一个线程，每个线程都有一个 run() 主体, 如下所示：
 
 \begin{lstlisting}[language=C++]
-	forever {
-		mutex.lock();
-		keyPressed.wait(&mutex);
-		do_something();
-		mutex.unlock();
-	}
+forever {
+	mutex.lock();
+	keyPressed.wait(&mutex);
+	do_something();
+	mutex.unlock();
+}
 \end{lstlisting}
 
 这里，keyPressed 变量是 QWaitCondition 类型的全局变量。
@@ -149,9 +147,7 @@ lockedMutex 将返回到相同的锁定状态。提供此函数是为了允许�
  wakeOne()、wakeAll()。
 \end{notice}
 
-
-
-bool QWaitCondition::wait(QMutex *lockedMutex, unsigned long time)
+bool QWaitCondition::wait(QMutex \emph{*lockedMutex}, unsigned long \emph{time})
 重载。
 
 bool QWaitCondition::wait(QReadWriteLock **lockedReadWriteLock, QDeadlineTimer deadline = QDeadlineTimer(QDeadlineTimer::Forever))

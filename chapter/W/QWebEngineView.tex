@@ -1,9 +1,6 @@
 \chapter{QWebEngineView}
 
-QWebEngineView 
-
 QWebEngineView类提供了一个widget, 被使用去查看和编辑web元素。
-
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -37,22 +34,23 @@ QWebEngineView类提供了一个widget, 被使用去查看和编辑web元素。
 
 \section{公共成员函数}
 
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|r|l|}
-	\hline
-	 类型&  函数名\\
-	\hline
-	&	QWebEngineView(QWidget *parent = Q\_NULLPTR)] \\
-	\hline
-virtual	&$\sim$QWebEngineView() \\
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{|r|l|}
+\begin{longtable}{|l|m{25em}|}
 \hline
-void	&findText(const QString \&subString, QWebEnginePage::FindFlags options = ..., const QWebEngineCallback \&resultCallback = ...)] \\
+类型&  函数名\\
 \hline
-bool&	hasSelection() const\\
+&	QWebEngineView(QWidget *parent = Q\_NULLPTR)] \\
 \hline
-QWebEngineHostory *&	history() const\\
+virtual	& $\sim$QWebEngineView() \\
 \hline
-QIcon&	icon() const\\
+void	& findText(const QString \&subString, QWebEnginePage::FindFlags options = ..., const QWebEngineCallback \&resultCallback = ...)] \\
+\hline
+bool &	hasSelection() const\\
+\hline
+QWebEngineHostory * &	history() const\\
+\hline
+QIcon &	icon() const\\
 \hline
 QUrl&	iconUrl() const\\
 \hline
@@ -85,7 +83,7 @@ QUrl &	url() const\\
 \hline
 qreal&	zoomFactor() const\\
 \hline
-\end{tabular}}
+\end{longtable}
 
 重实现公共成员函数
 
@@ -124,46 +122,47 @@ virtual QSize sizeHint() const override
 
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|r|l|}
-	\hline
-	类型&  函数名\\
-	\hline
+% \begin{longtable}{|l|m{30em}|}
+\hline
+类型&  函数名\\
+\hline
 void&	iconChanged(const QIcon \&icon)\\
-	\hline
+\hline
 void&	iconUrlChanged(const QUrl \&url)\\
-	\hline
+\hline
 void&	iconUrlChanged(const QUrl \&url)\\
-	\hline
+\hline
 void&	loadProgress(int progress)\\
-	\hline
+\hline
 void&	loadStarted() \\
-	\hline
+\hline
 void &	renderProcessTerminated(QWebEnginePage::RenderProcessTerminationStatus terminationStatus, int exitCode)\\
 \hline
 void &	selectionChanged()\\
-	\hline
+\hline
 void&	titleChanged(const QString \&title)\\
-	\hline
+\hline
 void&	urlChanged(const QUrl \&url)\\
-	\hline
+\hline
+% \end{longtable}
 \end{tabular}}
 
 \begin{compactitem}
-	\item 3 信号继承自 QWidget
-	\item 2 信号继承自 QObject
+\item 3 信号继承自 QWidget
+\item 2 信号继承自 QObject
 \end{compactitem}
-
 
 \section{静态公有成员函数}
 
 \begin{compactitem}
-	\item 5 个静态公有成员函数继承自 QWidget
-	\item 9 个静态公有成员函数 QObject
+\item 5 个静态公有成员函数继承自 QWidget
+\item 9 个静态公有成员函数 QObject
 \end{compactitem}
 
 \section{保护成员函数}
 
 
-virtual QWebEngineView * createWindow(QWebEnginePage::WebWindowType type)
+virtual QWebEngineView * createWindow(QWebEnginePage::WebWindowType \emph{type})
 
 重实现保护成员函数
 
