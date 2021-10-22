@@ -1,0 +1,88 @@
+\chapter{Qt资源系统}
+
+Qt 资源系统是一套平台独立的机制，用于将二进制文件存储至应用程序的可执行文件中。
+这在您的应用始终依赖一组特定文件（如图标、翻译文件等），并且不想承担丢失这些文件的风险时，会非常有用。
+
+资源系统基于 qmake、rcc (Qt 的资源编译器) 和 QFile 的密切协作。
+
+\section{资源汇总文件}
+
+通过 \hl{.qrc} 文件来指定应用程序所关联的资源，该文件基于 XML 格式，包含了磁盘中的文件列表，并为它们标注可选的别名，以供应用程序来获取资源内容。
+
+下文为一个 \hl{.qrc} 文件范例：
+
+\begin{lstlisting}[language=XML]
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+<file>images/copy.png</file>
+<file>images/cut.png</file>
+<file>images/new.png</file>
+<file>images/open.png</file>
+<file>images/paste.png</file>
+<file>images/save.png</file>
+</qresource>
+</RCC>
+\end{lstlisting}
+
+.qrc 文件中列举的资源文件是应用程序资源树的一部分，其中指定的路径为 .qrc 文件所在目录的相对路径。注意，列举的资源文件必须位于 .qrc 文件所在目录或其子目录。
+
+资源数据可以被编译进二进制程序，从而在运行时可被立即获取；也可以生成为二进制文件，随后在应用程序代码中注册至资源系统。
+
+默认情况下，资源文件在应用程序中，可使用它们在资源树中的路径，附加上 :/ 前缀来访问，也可以通过名为 qrc 的 URL Scheme 来访问。
+
+例如，文件路径 :/images/cut.png，或 链接地址 qrc:///images/cut.png，可以用于访问 cut.png 文件，该文件在应用程序资源树中的路径为 images/cut.png。该路径也可以通过 file 标签的 alias 属性进行修改：
+
+\begin{lstlisting}
+<file alias="cut-img.png">images/cut.png</file>
+\end{lstlisting}
+
+此时，该文件可通过 :/cut-img.png 路径访问。也可以通过 qresource 标签的 prefix 属性为 .qrc 文件中的所有资源文件设置路径前缀：
+
+\begin{lstlisting}
+<qresource prefix="/myresources">
+    <file alias="cut-img.png">images/cut.png</file>
+</qresource>
+\end{lstlisting}
+
+在此场景下，该文件可通过 :/myresources/cut-img.png 路径访问。
+
+某些资源需要随用户的区域设置发生改变，如翻译文件或图标。这可以通过在 qresource 标签中添加 lang 属性，为其指定对应的区域名称字符串来实现，例如：
+
+\begin{lstlisting}
+<qresource>
+    <file>cut.jpg</file>
+</qresource>
+<qresource lang="fr">
+    <file alias="cut.jpg">cut_fr.jpg</file>
+</qresource>
+\end{lstlisting}
+
+若用户区域为法国（即 QLocale::system().name() 函数返回 "fr\_FR"），则 :/cut.jpg 会引用至 cut\_fr.jpg，其它情况下使用 cut.jpg。
+
+\begin{notice}[另请参阅]
+QLocale 文档以获取区域字符串格式的说明。
+\end{notice}
+
+\begin{notice}[另请参阅]
+QFileSelector 文档以了解另一个基于区域选取资源的机制，该机制可基于操作系统等更多附加信息来进行选取。
+\end{notice}
+
+\section{外部二进制资源}
+
+若要生成外部二进制资源，您需要传递 -binary 选项至 rcc 来创建资源数据文件（通常使用 .rcc 扩展名）。二进制资源文件创建完毕后，可以通过 QResource 接口进行注册。
+
+例如，.qrc 文件中指定的一组资源数据，可以通过如下方式进行编译：
+
+\begin{lstlisting}
+rcc -binary myresource.qrc -o myresource.rcc
+\end{lstlisting}
+
+在应用程序中，通过如下代码注册资源：
+
+\begin{lstlisting}
+QResource::registerResource("/path/to/myresource.rcc");
+\end{lstlisting}
+
+\section{内建资源}
+
+若要将资源编译至二进制程序内，您需要在应用程序的 .pro 文件中指定 .qrc 文件，从而让 qmake 可以感知到它。例如：
