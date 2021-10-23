@@ -1,7 +1,5 @@
 \chapter{QFileInfo}
 
-QFileInfo 类
-
 QFileInfo 类用于系统无关的文件信息。
 \href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/F/QFileInfo/QFileInfo.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{
   更多内容...} 
@@ -34,19 +32,19 @@ qmake:& 	QT += core\\
 \hline
 返回类型& 	函数名\\
 \hline
-&	QFileInfo(const QFileInfo \&fileinfo)\\
+&	QFileInfo(const QFileInfo \emph{\&fileinfo})\\
 \hline
-&	QFileInfo(const QDir \&dir, const QString \&file)\\
+&	QFileInfo(const QDir \emph{\&dir}, const QString \emph{\&file})\\
 \hline
-&	QFileInfo(const QFile \&file)\\
+&	QFileInfo(const QFile \emph{\&file})\\
 \hline
-&	QFileInfo(const QString \&file)\\
+&	QFileInfo(const QString \emph{\&file})\\
 \hline
 &	QFileInfo()\\
 \hline
-QFileInfo \& &	operator=(QFileInfo \&\&other)\\
+QFileInfo \& &	operator=(QFileInfo \emph{\&\&other})\\
 \hline
-QFileInfo \& &	operator=(const QFileInfo \&fileinfo)\\
+QFileInfo \& &	operator=(const QFileInfo \emph{\&fileinfo})\\
 \hline
 &	$\sim$QFileInfo()\\
 \hline
@@ -80,7 +78,7 @@ QString& 	fileName() const\\
 \hline
 QString& 	filePath() const\\
 \hline
-QDateTime& 	fileTime(QFile::FileTime time) const\\
+QDateTime& 	fileTime(QFile::FileTime \emph{time}) const\\
 \hline
 QString& 	group() const\\
 \hline
@@ -130,7 +128,7 @@ uint& 	ownerId() const\\
 \hline
 QString& 	path() const\\
 \hline
-bool& 	permission(QFile::Permissions permissions) const\\
+bool& 	permission(QFile::Permissions \emph{permissions}) const\\
 \hline
 QFile::Permissions& 	permissions() const\\
 \hline
@@ -138,40 +136,40 @@ void& 	refresh()\\
 \hline
 void& 	setCaching(bool enable)\\
 \hline
-void& 	setFile(const QString \&file)\\
+void& 	setFile(const QString \emph{\&file})\\
 \hline
-void& 	setFile(const QFile \&file)\\
+void& 	setFile(const QFile \emph{\&file})\\
 \hline
-void& 	setFile(const QDir \&dir, const QString \&file)\\
+void& 	setFile(const QDir \emph{\&dir}, const QString \emph{\&file})\\
 \hline
 qint64& 	size() const\\
 \hline
 QString& 	suffix() const\\
 \hline
-void& 	swap(QFileInfo \&other)\\
+void& 	swap(QFileInfo \emph{\&other})\\
 \hline
 QString& 	symLinkTarget() const\\
 \hline
-bool& 	operator!=(const QFileInfo \&fileinfo) const\\
+bool& 	operator!=(const QFileInfo \emph{\&fileinfo}) const\\
 \hline
-bool& 	operator==(const QFileInfo \&fileinfo) const\\
+bool& 	operator==(const QFileInfo \emph{\&fileinfo}) const\\
 \hline
 \end{longtable}
 
 \splitLine
 
-静态公共成员函数
+\section{静态公共成员函数}
 
 \begin{tabular}{|l|l|}
 \hline
 返回类型 &	函数名\\
 \hline
-bool &	exists(const QString \&file)\\
+bool &	exists(const QString \emph{\&file})\\
 \hline
 \end{tabular}
 
 
-相关非成员
+\section{相关非成员}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -279,11 +277,11 @@ QDir 和 QFile。
 
 \section{成员函数文档}
 
-QFileInfo::QFileInfo(const QFileInfo \&fileinfo)
+QFileInfo::QFileInfo(const QFileInfo \emph{\&fileinfo})
 
 复制一个新的 QFileInfo。
 
-QFileInfo::QFileInfo(const QDir \&dir, const QString \&file)
+QFileInfo::QFileInfo(const QDir \emph{\&dir}, const QString \emph{\&file})
 
 构造一个新的 QFileInfo，表示指定 dir 目录中的 file 文件信息。
 
@@ -296,7 +294,7 @@ QFileInfo::QFileInfo(const QDir \&dir, const QString \&file)
 \end{notice}
 
 
-QFileInfo::QFileInfo(const QFile \&file)
+QFileInfo::QFileInfo(const QFile \emph{\&file})
 
 构造一个新的 QFileInfo，表示指定的 file 文件信息。
 
@@ -320,8 +318,6 @@ QFileInfo::QFileInfo()
 
 构造一个空的 QFileInfo 对象。
 
-
-
 \begin{notice}
 空的 QFileInfo 对象不包含文件引用。
 \end{notice}
@@ -332,13 +328,13 @@ QFileInfo::QFileInfo()
 \end{notice}
 
 
-QFileInfo \&QFileInfo::operator=(QFileInfo \&\&other)
+QFileInfo \&QFileInfo::operator=(QFileInfo \emph{\&\&other})
 
 移动构造函数。
 
 该函数在 Qt 5.2 引入
 
-QFileInfo \&QFileInfo::operator=(const QFileInfo \&fileinfo)
+QFileInfo \&QFileInfo::operator=(const QFileInfo \emph{\&fileinfo})
 
 赋值构造函数。
 
@@ -359,7 +355,8 @@ QString QFileInfo::absoluteFilePath() const
 
 返回包含文件名的绝对路径。
 
-绝对路径名由完整路径和文件名组成。 在Unix上，它将始终以根目录“ /”开头。 在Windows上，它将始终以“ D：/”开头，其中D是驱动器号，但未映射到驱动器号的网络共享除外，在这种情况下，路径将以“ // sharename /”开头。 QFileInfo 将大写驱动器号。
+绝对路径名由完整路径和文件名组成。 在Unix上，它将始终以根目录“ /”开头。 
+在Windows上，它将始终以“ D：/”开头，其中D是驱动器号，但未映射到驱动器号的网络共享除外，在这种情况下，路径将以“ // sharename /”开头。 QFileInfo 将大写驱动器号。
 
 Returns an absolute path including the file name.
 
@@ -374,9 +371,3 @@ this.
 \begin{lstlisting}[language=C++]
 QFileInfo fi("c:/temp/foo"); => fi.absoluteFilePath() => "C:/temp/foo"
 \end{lstlisting}
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
