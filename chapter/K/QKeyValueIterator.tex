@@ -1,0 +1,164 @@
+\chapter{QKeyValueIterator}
+
+
+template <typename Key, typename T, typename Iterator> class QKeyValueIterator
+
+关联容器的键值对类型的迭代器。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include<QKeyValueIterator>\\      
+	\hline
+	qmake & QT+=core\\      
+	\hline
+	Since:&	Qt 5.10 \\ 
+	\hline
+\end{tabular}
+
+Qt 5.10 中引入该类。
+
+\begin{compactitem}
+\item 所有成员列表，包括继承的成员
+\end{compactitem}
+
+\section{公共成员函数}
+
+\begin{tabular}{|l|l|}
+\hline
+类型 &	函数名\\
+\hline
+& QKeyValueIterator(Iterator \emph{o}) \\ 
+\hline
+& QKeyValueIterator() \\ 
+\hline
+Iterator	& base() const \\ 
+\hline
+std::pair<Key, T>	& operator*() const \\ 
+\hline
+QKeyValueIterator<Key, T, Iterator> \&	& operator++() \\ 
+\hline
+QKeyValueIterator<Key, T, Iterator>	& operator++(\emph{int}) \\ 
+\hline
+QKeyValueIterator<Key, T, Iterator> \& &	operator--() \\ 
+\hline
+QKeyValueIterator<Key, T, Iterator>	 &operator--(\emph{int}) \\ 
+\hline
+QKeyValueIterator::pointer &	operator->() const \\ 
+\hline
+\end{tabular}
+
+\section{相关非成员函数}
+
+\begin{tabular}{|l|m{30em}|}
+\hline
+类型 	&函数名\\
+\hline
+bool & operator!=(QKeyValueIterator<Key, T, Iterator> \emph{lhs
+}, QKeyValueIterator<Key, T, Iterator> \emph{rhs}) \\ 
+\hline
+bool &	operator==(QKeyValueIterator<Key, T, Iterator> \emph{lhs}, QKeyValueIterator<Key, T, Iterator> \emph{rhs}) \\ 
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+QKeyValueIterator 类为关联容器如 QHash 和 QMap 返回的键值对提供 STL 风格的迭代器。
+该类支持与 STL 关联容器相同的接口，即遍历容器时取得键值对。
+
+这将改善 QMap，QHash 及其相关类与 STL 风格算法之间的互操作性。
+
+\begin{notice}[警告]
+隐式共享容器的迭代器的工作方式和 STL 迭代器不完全相同。当容器的迭代器还处于活动状态时，应该避免拷贝容器。更多信息请参阅隐式共享迭代器问题
+\end{notice}
+
+\section{成员函数文档}
+
+QKeyValueIterator::QKeyValueIterator(Iterator \emph{o})
+
+在迭代器 \emph{o} 之上构造 QKeyValueIterator。
+
+QKeyValueIterator::QKeyValueIterator()
+
+构造一个默认 QKeyValueIterator。
+
+Iterator QKeyValueIterator::base() const
+
+返回该 QKeyValueIterator 基于的底层迭代器。
+
+std::pair<Key, T> QKeyValueIterator::operator*() const
+
+以键值对返回当前元素。
+
+QKeyValueIterator<Key, T, Iterator> \&QKeyValueIterator::operator++()
+
+前置 ++ 运算符（\hl{++i}）将迭代器向前移动到容器中的下一个元素并返回迭代器。
+
+\begin{notice}
+将迭代器向前移动到容器的 end() 之后将导致未定义行为。
+\end{notice}
+
+\begin{notice}[另请参阅]
+operator--().
+\end{notice}
+
+QKeyValueIterator<Key, T, Iterator> QKeyValueIterator::operator++(int)
+
+这是一个重载函数。
+
+后置 ++ 运算符（\hl{i++})将迭代器向前移动到容器中的下一个元素并返回指向旧位置元素的迭代器。
+
+\begin{notice}
+将迭代器向前移动到容器的 end() 之后将导致未定义行为。
+\end{notice}
+
+QKeyValueIterator<Key, T, Iterator> \&QKeyValueIterator::operator--()
+
+前置 -- 运算符（\hl{--i}）将迭代器向后前移动到容器中的前一个元素并返回迭代器。
+
+\begin{notice}
+将迭代器向后移动到容器的 begin() 之前将导致未定义行为。
+\end{notice}
+
+\begin{notice}[另请参阅]
+operator++()。
+\end{notice}
+
+QKeyValueIterator<Key, T, Iterator> QKeyValueIterator::operator--(\emph{int})
+
+这是一个重载函数。
+
+后置 -- 运算符（\hl{i--}）将迭代器向后前移动到容器中的前一个元素并返回指向旧位置元素的迭代器。
+
+\begin{notice}
+将迭代器向后移动到容器的 begin() 之前将导致未定义行为。
+\end{notice}
+
+QKeyValueIterator::pointer QKeyValueIterator::operator->() const
+
+返回指向当前元素的键值对类型的指针。
+
+Qt 5.15 中引入该函数。
+
+\begin{notice}[另请参阅]
+operator*()。
+\end{notice}
+
+\section{相关非成员函数}
+
+bool operator!=(QKeyValueIterator<Key, T, Iterator> \emph{lhs}, QKeyValueIterator<Key, T, Iterator> \emph{rhs})
+
+如果 \emph{rhs} 与 \emph{lhs} 指向的元素不同，返回 \hl{true}，否则返回 \hl{false}。
+
+\begin{notice}[另请参阅]
+operator==()。
+\end{notice}
+
+bool operator==(QKeyValueIterator<Key, T, Iterator> \emph{lhs}, QKeyValueIterator<Key, T, Iterator> \emph{rhs})
+
+如果 \emph{rhs} 与 \emph{lhs} 指向的元素相同，返回 \hl{true}，否则返回 \hl{false}。
+
+\begin{notice}[另请参阅]
+operator!=()。
+\end{notice}
