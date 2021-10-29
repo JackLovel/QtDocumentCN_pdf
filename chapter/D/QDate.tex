@@ -36,93 +36,93 @@ enum&	MonthNameType{ DateFormat, StandaloneFormat }\\
 \hline
 类型	&函数名\\
 \hline
-&QDate(int y, int m, int d)\\
+&QDate(int \emph{y}, int \emph{m}, int \emph{d})\\
 \hline
 &QDate()\\
 \hline
-QDate&	addDays(qint64 ndays) const\\
+QDate&	addDays(qint64 \emph{ndays}) const\\
 \hline
-QDate&	addMonths(int nmonths, QCalendar cal) const\\
+QDate&	addMonths(int \emph{nmonths}, QCalendar \emph{cal}) const\\
 \hline
-QDate&	addMonths(int nmonths) const\\
+QDate&	addMonths(int \emph{nmonths}) const\\
 \hline
-QDate&	addYears(int nyears, QCalendar cal) const\\
+QDate&	addYears(int \emph{nyears}, QCalendar \emph{cal}) const\\
 \hline
-QDate&	addYears(int nyears) const\\
+QDate&	addYears(int \emph{nyears}) const\\
 \hline
-int&	day(QCalendar cal) const\\
+int&	day(QCalendar \emph{cal}) const\\
 \hline
 int&	day() const\\
 \hline
-int&	dayOfWeek(QCalendar cal) const\\
+int&	dayOfWeek(QCalendar \emph{cal}) const\\
 \hline
 int&	dayOfWeek() const\\
 \hline
-int&	dayOfYear(QCalendar cal) const\\
+int&	dayOfYear(QCalendar \emph{cal}) const\\
 \hline
 int&	dayOfYear() const\\
 \hline
-int&	daysInMonth(QCalendar cal) const\\
+int&	daysInMonth(QCalendar \emph{cal}) const\\
 \hline
 int&	daysInMonth() const\\
 \hline
-int&	daysInYear(QCalendar cal) const\\
+int&	daysInYear(QCalendar \emph{cal}) const\\
 \hline
 int&	daysInYear() const\\
 \hline
-qint64&	daysTo(const QDate \&d) const\\
+qint64&	daysTo(const QDate \emph{\&d}) const\\
 \hline
-QDateTime&	endOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const\\
+QDateTime&	endOfDay(Qt::TimeSpec \emph{spec} = Qt::LocalTime, int \emph{offsetSeconds} = 0) const\\
 \hline
-QDateTime&	endOfDay(const QTimeZone \&zone) const\\
+QDateTime&	endOfDay(const QTimeZone \emph{\&zone}) const\\
 \hline
-void&	getDate(int *year, int *month, int *day) const\\
+void&	getDate(int \emph{*year}, int \emph{*month}, int \emph{*day}) const\\
 \hline
 bool&	isNull() const\\
 \hline
 bool&	isValid() const\\
 \hline
-int&	month(QCalendar cal) const\\
+int&	month(QCalendar \emph{cal}) const\\
 \hline
 int&	month() const\\
 \hline
-bool&	setDate(int year, int month, int day)\\
+bool&	setDate(int \emph{year}, int \emph{month}, int \emph{day})\\
 \hline
-bool&	setDate(int year, int month, int day, QCalendar cal)\\
+bool&	setDate(int \emph{year}, int \emph{month}, int \emph{day}, QCalendar \emph{cal})\\
 \hline
-QDateTime&	startOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const\\
+QDateTime&	startOfDay(Qt::TimeSpec \emph{spec} = Qt::LocalTime, int \emph{offsetSeconds} = 0) const\\
 \hline
-QDateTime&	startOfDay(const QTimeZone \&zone) const\\
+QDateTime&	startOfDay(const QTimeZone \emph{\&zone}) const\\
 \hline
 qint64&	toJulianDay() const\\
 \hline
-QString&	toString(Qt::DateFormat format = Qt::TextDate) const\\
+QString&	toString(Qt::DateFormat \emph{format} = Qt::TextDate) const\\
 \hline
-QString&	toString(const QString \&format) const\\
+QString&	toString(const QString \emph{\&format}) const\\
 \hline
-QString&	toString(const QString \&format, QCalendar cal) const\\
+QString&	toString(const QString \emph{\&format}, QCalendar \emph{cal}) const\\
 \hline
-QString&	toString(QStringView format) const\\
+QString&	toString(QStringView \emph{format}) const\\
 \hline
-QString&	toString(QStringView format, QCalendar cal) const\\
+QString&	toString(QStringView \emph{format}, QCalendar \emph{cal}) const\\
 \hline
-int&	weekNumber(int *yearNumber = nullptr) const\\
+int&	weekNumber(int \emph{*yearNumber} = nullptr) const\\
 \hline
-int&	year(QCalendar cal) const\\
+int&	year(QCalendar \emph{cal}) const\\
 \hline
 int&	year() const\\
 \hline
-bool&	operator!=(const QDate \&d) const\\
+bool&	operator!=(const QDate \emph{\&d}) const\\
 \hline
-bool&	operator<(const QDate \&d) const\\
+bool&	operator<(const QDate \emph{\&d}) const\\
 \hline
-bool&	operator<=(const QDate \&d) const\\
+bool&	operator<=(const QDate \emph{\&d}) const\\
 \hline
-bool&	operator==(const QDate \&d) const\\
+bool&	operator==(const QDate \emph{\&d}) const\\
 \hline
-bool&	operator>(const QDate \&d) const\\
+bool&	operator>(const QDate \emph{\&d}) const\\
 \hline
-bool&	operator>=(const QDate \&d) const\\
+bool&	operator>=(const QDate \emph{\&d}) const\\
 \hline
 \end{longtable}
 
@@ -134,17 +134,17 @@ bool&	operator>=(const QDate \&d) const\\
 \hline
 QDate&	currentDate()\\
 \hline
-QDate&	fromJulianDay(qint64 jd)\\
+QDate&	fromJulianDay(qint64 \emph{jd})\\
 \hline
-QDate&	fromString(const QString \&string, Qt::DateFormat format = Qt::TextDate)\\
+QDate&	fromString(const QString \emph{\&string}, Qt::DateFormat \emph{format} = Qt::TextDate)\\
 \hline
-QDate&	fromString(const QString \&string, const QString \&format)\\
+QDate&	fromString(const QString \emph{\&string}, const QString \emph{\&format})\\
 \hline
-QDate&	fromString(const QString \&string, const QString \&format, QCalendar cal)\\
+QDate&	fromString(const QString \emph{\&string}, const QString \emph{\&format}, QCalendar \emph{cal})\\
 \hline
-bool&	isLeapYear(int year)\\
+bool&	isLeapYear(int \emph{year})\\
 \hline
-bool&	isValid(int year, int month, int day)\\
+bool&	isValid(int \emph{year}, int \emph{month}, int \emph{day})\\
 \hline
 \end{tabular}
 
@@ -156,9 +156,9 @@ bool&	isValid(int year, int month, int day)\\
 \hline
 类型&	函数名\\
 \hline
-QDataStream \& &	operator<<(QDataStream \&out, const QDate \&date) \\
+QDataStream \& &	operator<<(QDataStream \emph{\&out}, const QDate \emph{\&date}) \\
 \hline
-QDataStream \&	& operator>>(QDataStream \&in, QDate \&date)\\
+QDataStream \&	& operator>>(QDataStream \emph{\&in}, QDate \emph{\&date})\\
 \hline
 \end{tabular}
 
@@ -179,7 +179,7 @@ daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLe
 \section{特别注意}
 
 \begin{compactitem}
-\item 年数没有0 第0年的日期是非法的。公元后是正年份，公元前是负年份。QDate(1, 1, 1) 的前一天是 QDate(-1, 12, 31)。
+\item 年数没有0 第0年的日期是非法的。公元后是正年份，公元前是负年份。\hl{QDate(1, 1, 1)} 的前一天是 \hl{QDate(-1, 12, 31)}。
 \item 合法的日期范围 日期内部存储为儒略日天号，使用连续的整数记录天数，公元前4714年11月24日是格里高利历第0天（儒略历的公元前4713年1月1日）。除了可以准确有效地表示绝对日期，此类也可以用来做不同日历系统的转换。儒略历天数可以通过 QDate::toJulianDay() 和 QDate::fromJulianDay()读写。 由于技术原因，储存的儒略历天号在 -784350574879~784354017364 之间，大概是公元前2亿年到公元后2亿年之间。
 \end{compactitem}
 
@@ -201,9 +201,9 @@ enum QDate::MonthNameType
 \hline
 常量	&数值&	描述\\
 \hline
-QDate::DateFormat&	0&	用于日期到字符串格式化。\\
+\hl{QDate::DateFormat}&	\hl{0}&	用于日期到字符串格式化。\\
 \hline
-QDate::StandaloneFormat	&1&	用于枚举月份和一周七天。通常单独的名字用首
+\hl{QDate::StandaloneFormat}	&\hl{1}&	用于枚举月份和一周七天。通常单独的名字用首
   字母大写的单数形式书写。\\
 \hline
 \end{tabular}
@@ -214,13 +214,13 @@ QDate::StandaloneFormat	&1&	用于枚举月份和一周七天。通常单独的�
 
 成员函数文档
 
-QString QDate::toString(QStringView format) const
+QString QDate::toString(QStringView \emph{format}) const
 
-QString QDate::toString(QStringView format, QCalendar cal) const
+QString QDate::toString(QStringView \emph{format}, QCalendar \emph{cal}) const
 
-QString QDate::toString(const QString \&format) const
+QString QDate::toString(const QString \emph{\&format}) const
 
-QString QDate::toString(const QString \&format, QCalendar cal) const
+QString QDate::toString(const QString \emph{\&format}, QCalendar \emph{cal}) const
 
 返回字符串形式的日期。 参数format控制输出的格式。如果传入参数cal, 它决定了使用的日历系统，默认是格里高利历。
 
@@ -288,9 +288,9 @@ QLocale::toString()。
 
 \splitLine
 
-QDateTime QDate::endOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const
+QDateTime QDate::endOfDay(Qt::TimeSpec \emph{spec} = Qt::LocalTime, int \emph{offsetSeconds} = 0) const
 
-QDateTime QDate::endOfDay(const QTimeZone \&zone) const
+QDateTime QDate::endOfDay(const QTimeZone \emph{\&zone}) const
 
 返回这一天的最后一刻的时间。通常来说，是午夜前1ms：然而，如果时区转换让这一天跨过午夜（如夏令时），返回的是真实的最后一刻时间。这种情况只可能在使用时区参数QTimeZone zone或者本地时间参数 Qt::LocalTime spec时发生。
 
@@ -307,9 +307,9 @@ startOfDay()。
 
 \splitLine
 
-QDateTime QDate::startOfDay(Qt::TimeSpec spec = Qt::LocalTime, int offsetSeconds = 0) const
+QDateTime QDate::startOfDay(Qt::TimeSpec \emph{spec} = Qt::LocalTime, int \emph{offsetSeconds} = 0) const
 
-QDateTime QDate::startOfDay(const QTimeZone \&zone) const
+QDateTime QDate::startOfDay(const QTimeZone \emph{\&zone}) const
 
 返回一天的开始时刻。通常来说应该是午夜那一时刻：然而，如果时区转换让这一天跨过午夜（如夏令时），返回的是真实的最早的一刻时间。这种情况只可能在使用时区参数QTimeZone zone或者本地时间参数 Qt::LocalTime spec时发生。
 
@@ -327,8 +327,9 @@ endOfDay()。
 
 \splitLine
 
-QDate::QDate(int y, int m, int d)
-从年月日构造对象，使用格里高利历。如果日期非法，对象不会修改，且 isValid() 返回false。
+QDate::QDate(int \emph{y}, int \emph{m}, int \emph{d})
+
+从年月日构造对象，使用格里高利历。如果日期非法，对象不会修改，且 isValid() 返回 \hl{false}。
 
 
 \begin{notice}
@@ -354,7 +355,7 @@ isNull() 和 isValid()。
 
 \splitLine
 
-QDate QDate::addDays(qint64 ndays) const
+QDate QDate::addDays(qint64 \emph{ndays}) const
 
 返回一个 ndays 天之后的新日期对象(负数意味着往前减日期)。
 
@@ -368,9 +369,9 @@ addMonths()、addYears() 和 daysTo()。
 
 \splitLine
 
-QDate QDate::addMonths(int nmonths) const
+QDate QDate::addMonths(int \emph{nmonths}) const
 
-QDate QDate::addMonths(int nmonths, QCalendar cal) const
+QDate QDate::addMonths(int \emph{nmonths}, QCalendar \emph{cal}) const
 
 返回一个 nmonths 月之后的新日期对象（负数意味着往前减日期）。
 
@@ -387,9 +388,9 @@ addDays() 和 addYears()。
 
 \splitLine
 
-QDate QDate::addYears(int nyears) const
+QDate QDate::addYears(int \emph{nyears}) const
 
-QDate QDate::addYears(int nyears, QCalendar cal) const
+QDate QDate::addYears(int \emph{nyears}, QCalendar \emph{cal}) const
 
 返回一个 nyears 年之后的新日期对象(负数意味着往前减日期)。
 
@@ -422,7 +423,7 @@ QTime::currentTime() 和 QDateTime::currentDateTime()。
 
 int QDate::day() const
 
-int QDate::day(QCalendar cal) const
+int QDate::day(QCalendar \emph{cal}) const
 
 返回日期是当前月份的第几天。
 
@@ -438,7 +439,7 @@ year()、month() 和 dayOfWeek()。
 
 int QDate::dayOfWeek() const
 
-int QDate::dayOfWeek(QCalendar cal) const
+int QDate::dayOfWeek(QCalendar \emph{cal}) const
 
 返回日期是当前周的第几天（1=周一，7=周日）。
 
@@ -454,7 +455,7 @@ day()、dayOfYear() 和 Qt::DayOfWeek。
 
 int QDate::dayOfYear() const
 
-int QDate::dayOfYear(QCalendar cal) const
+int QDate::dayOfYear(QCalendar \emph{cal}) const
 
 返回日期是当年的第几天（第一天返回1）。
 
@@ -468,7 +469,7 @@ day() 和 dayOfWeek()。
 
 int QDate::daysInMonth() const
 
-int QDate::daysInMonth(QCalendar cal) const
+int QDate::daysInMonth(QCalendar \emph{cal}) const
 
 返回日期对应的月份中总天数。
 
@@ -484,7 +485,7 @@ day() 和 daysInYear()。
 
 int QDate::daysInYear() const
 
-int QDate::daysInYear(QCalendar cal) const
+int QDate::daysInYear(QCalendar \emph{cal}) const
 
 返回日期对应的一年中的总天数。
 
@@ -520,7 +521,7 @@ addDays()。
 
 \splitLine
 
-\hl{[static]}QDate QDate::fromJulianDay(qint64 jd)
+\hl{[static]}QDate QDate::fromJulianDay(qint64 \emph{jd})
 
 将jd表示的儒略日解析为日期并返回。
 
@@ -532,15 +533,20 @@ toJulianDay()。
 
 \splitLine
 
-\hl{[static]}QDate QDate::fromString(const QString \&string,
-Qt::DateFormat format = Qt::TextDate)
+\hl{[static]}QDate QDate::fromString(const QString \emph{\&string},
+Qt::DateFormat \emph{format} = Qt::TextDate)
 
 返回 string 表示的 QDate 对象，非法字符串不会被解析。
 
-注意 Qt::TextDate：建议使用英文的简写月份名称（例如 "Jan"）。尽管本地化的月份名称在 Qt 5 中也可使用，但它们会依赖于用户的区域设置。
+\begin{notice}
+Qt::TextDate：建议使用英文的简写月份名称（例如 "Jan"）。
+尽管本地化的月份名称在 Qt 5 中也可使用，但它们会依赖于用户的区域设置。
+\end{notice}
 
-\textbf{注意}： 对本地化的日期的支持，包括 Qt::SystemLocaleDate、Qt::SystemLocaleShortDate、Qt::SystemLocaleLongDate、Qt::LocaleDate、Qt::DefaultLocaleShortDate 和 Qt::DefaultLocaleLongDate，将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
-
+\begin{notice}
+对本地化的日期的支持，包括 Qt::SystemLocaleDate、Qt::SystemLocaleShortDate、Qt::SystemLocaleLongDate、Qt::LocaleDate、Qt::DefaultLocaleShortDate 和 Qt::DefaultLocaleLongDate，
+将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
+\end{notice} 
 
 \begin{notice}[另请参阅]
 toString() 和 QLocale::toDate()。
@@ -548,11 +554,9 @@ toString() 和 QLocale::toDate()。
 
 \splitLine
 
-\hl{[static]}QDate QDate::fromString(const QString \&string, const QString
-\&format)
+\hl{[static]}QDate QDate::fromString(const QString \emph{\&string}, const QString \emph{\&format})
 
-\hl{[static]}QDate QDate::fromString(const QString \&string, const QString
-\&format, QCalendar cal)
+\hl{[static]}QDate QDate::fromString(const QString \emph{\&string}, const QString \emph{\&format}, QCalendar \emph{cal})
 
 返回 \emph{string}  表示的 QDate 对象，非法字符串不会被解析。
 
@@ -630,7 +634,6 @@ QDate::fromString("20000110", "yyyyMd");    // January 10, 2000
 
 \begin{notice}
 如果使用本地化的日期表达, 请使用 QLocale::system().toDate(), 因为 QDate 将在 Qt 6使用英文表达 (C语言风格) 。
-	
 \end{notice}
 
 
@@ -646,15 +649,11 @@ void QDate::getDate(int  \emph{*year}, int \emph{*month}, int \emph{*day}) const
 
 如果日期非法，返回的是0。
 
-
-
 \begin{notice}
  在 Qt 5.7 之前, 这个函数不是常函数。
 \end{notice}
 
 此函数在 Qt 4.5 中引入。
-
-
 
 \begin{notice}[另请参阅]
 year()，month()，day()，isValid() 和
@@ -663,15 +662,13 @@ QCalendar::partsFromDate()。
 
 \splitLine
 
-\hl{[static]}bool QDate::isLeapYear(int year)
+\hl{[static]}bool QDate::isLeapYear(int \emph{year})
 
 判断是否是格里高利历的闰年，是则返回 \hl{true}。
-
 
 \begin{notice}[另请参阅]
 QCalendar::isLeapYear()。
 \end{notice}
-
 
 \splitLine
 
@@ -701,7 +698,7 @@ isNull() 和 QCalendar::isDateValid()。
 
 \splitLine
 
-[static]bool QDate::isValid(int year, int month, int day)
+[static]bool QDate::isValid(int \emph{year}, int \emph{month}, int \emph{day})
 
 是上述方法的重载。
 
@@ -760,13 +757,11 @@ isValid() 和 QCalendar::dateFromParts()。
 
 \splitLine
 
-bool QDate::setDate(int year, int month, int day, QCalendar cal)
+bool QDate::setDate(int \emph{year}, int \emph{month}, int \emph{day}, QCalendar \emph{cal})
 
 设置对应的日期，使用的是cal对应的日历。如果设置的日期合法，将返回 true，否则日期标记为非法并返回 false。
 
 函数在 Qt 5.14 中引入。
-
-
 
 \begin{notice}[另请参阅]
 isValid() 和 QCalendar::dateFromParts()。
@@ -778,18 +773,19 @@ qint64 QDate::toJulianDay() const
 
 将日期转换为儒略日。
 
-
 \begin{notice}[另请参阅]
 fromJulianDay()。
 \end{notice}
 
 \splitLine
 
-QString QDate::toString(Qt::DateFormat format = Qt::TextDate) const
+QString QDate::toString(Qt::DateFormat \emph{format} = Qt::TextDate) const
 
 这是一个重载函数，返回日期的字符串。 format 参数决定字符串格式。
 
-如果 format 是 Qt::TextDate，日期使用默认格式。日期月份将使用系统地域设置，也就是 QLocale::system()。一个例子是 "Sat May 20 1995"。
+如果 format 是 Qt::TextDate，日期使用默认格式。
+日期月份将使用系统地域设置，也就是 QLocale::system()。
+一个例子是 "Sat May 20 1995"。
 
 如果 format 是 Qt::ISODate，字符串按照 ISO 8601 格式展开，格式形如 yyyy-MM-dd。例如2002-01-05
 
@@ -813,7 +809,7 @@ fromString() 和 QLocale::toString()。
 
 \splitLine
 
-int QDate::weekNumber(int *yearNumber = nullptr) const
+int QDate::weekNumber(int \emph{*yearNumber} = nullptr) const
 
 返回 ISO 8601 周序号 (1 到 53)。对于非法日期返回0。
 
@@ -833,7 +829,7 @@ isValid()。
 
 int QDate::year() const
 
-int QDate::year(QCalendar cal) const
+int QDate::year(QCalendar \emph{cal}) const
 
 返回整数型的年份。
 
@@ -853,35 +849,33 @@ month()，day()，QCalendar::hasYearZero() 和QCalendar::isProleptic()。
 
 \splitLine
 
-bool QDate::operator!=(const QDate \&d) const
+bool QDate::operator!=(const QDate \emph{\&d}) const
 
-bool QDate::operator<(const QDate \&d) const
+bool QDate::operator<(const QDate \emph{\&d}) const
 
-bool QDate::operator<=(const QDate \&d) const
+bool QDate::operator<=(const QDate \emph{\&d}) const
 
-bool QDate::operator==(const QDate \&d) const
+bool QDate::operator==(const QDate \emph{\&d}) const
 
-bool QDate::operator>(const QDate \&d) const
+bool QDate::operator>(const QDate \emph{\&d}) const
 
-bool QDate::operator>=(const QDate \&d) const
+bool QDate::operator>=(const QDate \emph{\&d}) const
 
 对于日期A和B，大于意味着日期靠后，小于意味着日期靠前，相等就是同一天。
 
 \splitLine
 
-
 \textbf{相关非成员函数}
 
-QDataStream \&operator<<(QDataStream \&out, const QDate \&date)
+QDataStream \&operator<<(QDataStream \emph{\&out}, const QDate \emph{\&date})
 
 向数据流写入日期
-
 
 \begin{notice}[另请参阅]
 Serializing Qt Data Types。
 \end{notice}
 
-QDataStream \&operator>>(QDataStream \&in, QDate \&date)
+QDataStream \&operator>>(QDataStream \emph{\&in}, QDate \emph{\&date})
 
 从数据流读出日期
 
