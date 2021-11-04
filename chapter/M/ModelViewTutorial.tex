@@ -42,7 +42,7 @@
 模型/视图是一种将数据从视图中分离出来，来处理数据集的一种技术。标准部件并不是为将数据从视图中分离出来而设计的，这就是为什么 Qt 会有两种不同类型的部件。
 这两种部件看起来都一样，但是它们与数据之间的交互方式是不同的。
 
-\begin{tabular}{|l|m{25em}|}
+\begin{longtable}{|l|m{25em}|}
 \hline
 标准部件使用的数据最为部件的一部分。\\
 &
@@ -52,7 +52,7 @@
 &
 \includegraphics[width=0.4\textwidth]{modelview} \\ 
 \hline	
-\end{tabular}
+\end{longtable}
 
 \subsection{标准部件}
 
@@ -76,22 +76,43 @@
 
 下面是模型/视图部件及其对应的标准部件。
 
-\begin{tabular}{|l|l|l|}
+\begin{longtable}{|l|m{15em}|m{10em}|}
 \hline
-部件\\ 
-&
-标准部件 (基于项的便捷类)\\ 
-&
-模型/视图 视图类 (使用外部数据)\\ 
+部件 & 标准部件 (基于项的便捷类) & 模型/视图 视图类 (使用外部数据) \\ 
 \hline
-\end{tabular}
+\includegraphics[width=0.4\textwidth]{modelview}  
+&
+QListWidget
+&
+QListView  \\
+\hline
+\includegraphics[width=0.4\textwidth]{tableview}  
+&
+QTableWidget	
+&
+QTableView \\
+\hline
+\includegraphics[width=0.4\textwidth]{treeview}  
+&
+QTreeWidget	
+&
+QTreeView  \\
+\hline
+\includegraphics[width=0.4\textwidth]{columnview}  
+&
 
-% \includegraphics[width=0.4\textwidth]{modelview} \\ 
-% &
-% QListWidget\\
-% &
-% QListView \\ 
-% \hline
+&
+QColumnView s显示列表层次结构的树视图  \\
+\hline
+\includegraphics[width=0.4\textwidth]{modelview-combobox}  
+&
+QComboBox 既可以用作视图类，也可以用作传统部件
+&
+  \\
+\hline
+\end{longtable}
+
+
 
 \subsection{在表单和模型之间使用适配器}
 
@@ -231,7 +252,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 当我们稍微改变模型时，我们得到以下结果：
 
 \begin{figure}[hbt!]  
-\includegraphics[width=0.3\textwidth]{readonlytable_role}
+\includegraphics[width=0.5\textwidth]{readonlytable_role}
 \end{figure}
 
 实际上，除了 data() 方法外，无需更改其他任何内容即可设置字体，背景色，对齐方式和复选框。
@@ -284,3 +305,83 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 每个格式化属性将通过对 data() 方法的单独调用从模型中请求。
 角色参数用于让模型知道请求哪个属性：
 
+\begin{tabular}{|l|m{15em}|l|}
+	\hline
+	枚举 enum Qt::ItemDataRole & 意义 &类型 \\
+	\hline
+	Qt::DisplayRole	 & 文本	 &QString \\
+	\hline
+	Qt::FontRole	& 字体	&QFont\\ 
+	\hline
+	BackgroundRole &	单元格背景的画笔	& QBrush\\ 
+	\hline
+	Qt::TextAlignmentRole	& 文本对齐方式 &enum Qt::AlignmentFlag \\
+	\hline 
+	Qt::CheckStateRole &	使用 QVariant() 取消复选框，使用 Qt::Checked 或 Qt::UnChecked 设置复选框 &	enum Qt::ItemDataRole \\
+	\hline
+\end{tabular}
+
+请参阅 Qt 明明控件文档了解有关　Qt::ItemDataRole 枚举功能的更多信息。
+
+现在我们需要确定使用分离的模型如何影响应用程序的性能，因此让我们跟踪视图调用 data() 方法的频率。
+为了跟踪视图调用模型的频率，我们在 data() 方法中放置了一条调试语句，该语句记录到错误输出流中。
+在我们的小示例中，data() 将被调用 42 次。
+每次将光标悬停在该字段上时，都会再次调用 data()，每个单元格7次。
+这就是为什么在调用　data()　和缓存昂贵的查找操作时确保数据可用的重要原因。
+
+\subsection{表内的时钟}
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{clock}
+\end{figure}
+
+我们仍然使用一个只读表，但是这次内容每秒更改一次，因为我们正在显示当前时间。
+
+（文件：examples/widgets/tutorials/modelview/3\_changingmodel/mymodel.cpp）
+
+\begin{lstlisting}{language=C++}
+QVariant MyModel::data(const QModelIndex &index, int role) const
+{
+    int row = index.row();
+    int col = index.column();
+
+    if (role == Qt::DisplayRole && row == 0 && col == 0)
+        return QTime::currentTime().toString();
+
+    return QVariant();
+}
+\end{lstlisting}
+
+缺少一些东西来使时钟滴答作响。我们需要每秒告诉视图时间已更改，并且需要再次读取。
+我们用一个计时器来做到这一点。
+在构造函数中，我们将其间隔设置为1秒，然后连接其超时信号。
+
+(文件：examples/widgets/tutorials/modelview/3\_changingmodel/mymodel.cpp)
+
+\begin{lstlisting}{language=C++}
+MyModel::MyModel(QObject *parent)
+    : QAbstractTableModel(parent)
+    , timer(new QTimer(this))
+{
+    timer->setInterval(1000);
+    connect(timer, &QTimer::timeout , this, &MyModel::timerHit);
+    timer->start();
+}
+\end{lstlisting}
+
+（文件：examples/widgets/tutorials/modelview/3\_changingmodel/mymodel.cpp）
+
+槽函数：
+
+\begin{lstlisting}{language=C++}
+void MyModel::timerHit()
+{
+    //we identify the top left cell
+    QModelIndex topLeft = createIndex(0,0);
+    //emit a signal to make the view reread identified data
+    emit dataChanged(topLeft, topLeft, {Qt::DisplayRole});
+}
+\end{lstlisting}
+
+我们通过发射 dataChanged() 信号要求视图再次读取左上角单元格中的数据。
+请注意，我们没有将 dataChanged 信号显式连接到视图。这在我们调用 setModel 时自动发生。
