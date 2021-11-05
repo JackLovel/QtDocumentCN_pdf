@@ -518,3 +518,225 @@ QListView，QTableView 和 QTreeView 均使用了合并了列表、表和树的�
 \begin{figure}[hbt!]  
 \includegraphics[width=0.5\textwidth]{list_table_tree}
 \end{figure}
+
+到目前为止，我们在示例中使用的模型都是这样子的：
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{example_model}
+\end{figure}
+
+我们想呈现一棵真正的树。在上面的示例中包装了数据，以建立模型。这次我们使用 QStandardItemModel ，这是用于具有层次结构的数据的容器，也实现了 QAbstractItemModel。
+要显示树，必须用 QStandardItem 填充 QStandardItemModelQStandardItem 可以保存项目的所有标准属性，例如文本，字体，复选框或笔刷。
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{tree_2_with_algorithm}
+\end{figure}
+
+(文件：\hl{examples/widgets/tutorials/modelview/6\_treeview/mainwindow.cpp})
+
+\begin{lstlisting}{language=C++}
+// modelview.cpp
+#include "mainwindow.h"
+
+#include <QTreeView>
+#include <QStandardItemModel>
+#include <QStandardItem>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , treeView(new QTreeView(this))
+    , standardModel(new QStandardItemModel(this))
+{
+    setCentralWidget(treeView);
+
+    QList<QStandardItem *> preparedRow = prepareRow("first", "second", "third");
+    QStandardItem *item = standardModel->invisibleRootItem();
+    // adding a row to the invisible root item produces a root element
+    item->appendRow(preparedRow);
+
+    QList<QStandardItem *> secondRow = prepareRow("111", "222", "333");
+    // adding a row to an item starts a subtree
+    preparedRow.first()->appendRow(secondRow);
+
+    treeView->setModel(standardModel);
+    treeView->expandAll();
+}
+
+QList<QStandardItem *> MainWindow::prepareRow(const QString &first,
+                                              const QString &second,
+                                              const QString &third) const
+{
+    return {new QStandardItem(first),
+            new QStandardItem(second),
+            new QStandardItem(third)};
+}
+\end{lstlisting}
+
+我们只需实例化一个 QStandardItemModel 并向构造函数添加几个 QStandardItem。
+然后，我们可以建立分层数据结构，因为 QStandardItem 可以容纳其他 QStandardItem。节点在视图内折叠并展开。
+
+\subsection{处理选择}
+
+我们希望访问所选项目的内容，以便将其与层次结构级别一起输出到窗口标题中。
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{selection2}
+\end{figure}
+
+因此，让我们来创建几个项:
+
+（文件： \hl{examples/widgets/tutorials/modelview/7\_selections/mainwindow.cpp}）
+
+\begin{lstlisting}{language=C++}
+#include "mainwindow.h"
+
+#include <QTreeView>
+#include <QStandardItemModel>
+#include <QItemSelectionModel>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , treeView(new QTreeView(this))
+    , standardModel(new QStandardItemModel(this))
+{
+    setCentralWidget(treeView);
+    QStandardItem *rootNode = standardModel->invisibleRootItem();
+
+    //defining a couple of items
+    QStandardItem *americaItem = new QStandardItem("America");
+    QStandardItem *mexicoItem =  new QStandardItem("Canada");
+    QStandardItem *usaItem =     new QStandardItem("USA");
+    QStandardItem *bostonItem =  new QStandardItem("Boston");
+    QStandardItem *europeItem =  new QStandardItem("Europe");
+    QStandardItem *italyItem =   new QStandardItem("Italy");
+    QStandardItem *romeItem =    new QStandardItem("Rome");
+    QStandardItem *veronaItem =  new QStandardItem("Verona");
+
+    //building up the hierarchy
+    rootNode->    appendRow(americaItem);
+    rootNode->    appendRow(europeItem);
+    americaItem-> appendRow(mexicoItem);
+    americaItem-> appendRow(usaItem);
+    usaItem->     appendRow(bostonItem);
+    europeItem->  appendRow(italyItem);
+    italyItem->   appendRow(romeItem);
+    italyItem->   appendRow(veronaItem);
+
+    //register the model
+    treeView->setModel(standardModel);
+    treeView->expandAll();
+
+    //selection changes shall trigger a slot
+    QItemSelectionModel *selectionModel = treeView->selectionModel();
+    connect(selectionModel, &QItemSelectionModel::selectionChanged,
+            this, &MainWindow::selectionChangedSlot);
+}
+\end{lstlisting}
+
+视图在单独的选择模型中管理选择，可以使用 selectionModel() 方法进行检索。我们检索选择模型，以便将槽函数连接到其 selectionChanged() 信号。
+
+(文件： \hl{examples/widgets/tutorials/modelview/7\_selections/mainwindow.cpp})
+
+\begin{lstlisting}{language=C++}
+void MainWindow::selectionChangedSlot(const QItemSelection & /*newSelection*/, const QItemSelection & /*oldSelection*/)
+{
+    //get the text of the selected item
+    const QModelIndex index = treeView->selectionModel()->currentIndex();
+    QString selectedText = index.data(Qt::DisplayRole).toString();
+    //find out the hierarchy level of the selected item
+    int hierarchyLevel = 1;
+    QModelIndex seekRoot = index;
+    while (seekRoot.parent() != QModelIndex()) {
+        seekRoot = seekRoot.parent();
+        hierarchyLevel++;
+    }
+    QString showString = QString("%1, Level %2").arg(selectedText)
+                         .arg(hierarchyLevel);
+    setWindowTitle(showString);
+}
+\end{lstlisting}
+
+我们通过调用 treeView->selectionModel()->currentIndex() 来获得与选择相对应的模型索引，并通过使用模型索引来获取字段的字符串。
+然后我们只计算项目的hierarchyLevel。顶级项没有父级，并且 parent() 方法将返回默认构造的 QModelIndex()。这就是为什么我们在迭代计算期间使用 parent() 方法迭代到最高级别的原因。
+
+可以检索选择模型（如上所示），但也可以使用 QAbstractItemView::setSelectionModel 进行设置。
+这样就可以拥有3个具有同步选择的视图类，因为仅使用了一个选择模型实例。要在3个视图之间共享选择模型，请使用 selectionModel() 并通过 setSelectionModel 将结果分配给第二个和第三个视图类。
+
+\subsection{预定义模型}
+
+使用模型/视图的典型方法是包装特定数据以使其可用于视图类。
+但是，Qt 还为常见的底层数据结构提供了预定义的模型。
+如果可用的数据结构之一适合您的应用程序，那么预定义的模型可能是一个不错的选择。
+
+\begin{longtable}{|l|l|}
+\hline
+QStringListModel &	存储字符串列表 \\ 
+\hline
+QStandardItemModel &	存储任意分层结构的项目\\
+\hline
+QFileSystemModel
+QDirModel	 & 封装本地文件系统\\ 
+\hline
+QSqlQueryModel &	封装 SQL 结果集\\
+\hline
+QSqlTableModel	& 封装 SQL 表\\
+\hline
+QSqlRelationalTableModel &	封装带外键的 SQL 表 \\
+\hline
+QSortFilterProxyModel	& 排序或者过滤其他模型 \\
+\hline
+\end{longtable}
+
+\subsection{委托}
+
+到目前为止，在所有示例中，数据均以文本或复选框形式显示在单元格中，并以文本或复选框的形式进行编辑。
+提供这些表示和编辑服务的组件称为委托。我们只是刚刚开始使用委托，因为视图使用了默认委托。
+但是，假设我们想要一个不同的编辑器（例如，一个滑块或一个下拉列表），或者想象我们想要将数据显示为图形。
+让我们看一个名为 Star Delegate 的示例，其中的星星用于显示等级：
+
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{stardelegate}
+\end{figure}
+
+该视图具有 setItemDelegate() 方法，该方法将替换默认委托并安装自定义委托。
+可以通过创建从 QStyledItemDelegate 继承的类来编写新的委托。为了编写一个显示星星但没有输入功能的委托，我们只需要重写2个方法即可。
+
+
+\begin{lstlisting}{language=C++}
+class StarDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
+public:
+    StarDelegate(QWidget *parent = 0);
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const;
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index) const;
+};
+\end{lstlisting}
+
+paint() 根据底层数据的内容绘制星形。可以通过调用 index.data() 查找数据。委托的 sizeHint() 方法用于获取每个星星的尺寸，因此该单元格将提供足够的高度和宽度来容纳星星。
+
+如果要在视图类的网格内以自定义图形显示数据，则编写自定义委托是正确的选择。如果要离开网格，则可以不使用自定义委托，而使用自定义视图类。
+
+Qt 文档中关于委托的其他参考：
+
+\begin{compactitem}
+\item Spin Box Delegate Example
+\item QAbstractItemDelegate Class Reference
+\item QSqlRelationalDelegate Class Reference
+\item QStyledItemDelegate Class Reference
+\item QItemDelegate Class Reference
+\end{compactitem}
+
+\subsection{使用 ModelTest 调试}
+
+模型的被动性质为程序员带来了新的挑战。模型中的不一致会导致应用程序崩溃。
+由于该模型会被视图中调用无数次，因此很难找出哪个调用使应用程序崩溃了，以及哪个操作导致了该问题。
+
+Qt Labs 提供了一个名为 ModelTest 的软件，该软件可在您的程序运行时检查模型。
+每次更改模型时，ModelTest 都会扫描模型并使用断言报告错误。这对于树模型尤其重要，因为它们的层次结构性质即使是细微的不一致也会留下许多可能性。
+
+与视图类不同，ModelTest 使用超出范围的索引来测试模型。
+这意味着您的应用程序可能会因 ModelTest 而崩溃，即使没有它也可以完美运行。因此，在使用 ModelTest 时，您还需要处理所有超出范围的索引。
