@@ -385,3 +385,136 @@ void MyModel::timerHit()
 
 我们通过发射 dataChanged() 信号要求视图再次读取左上角单元格中的数据。
 请注意，我们没有将 dataChanged 信号显式连接到视图。这在我们调用 setModel 时自动发生。
+
+\subsection{设置行和列的标题} 
+
+标题可以通过调用视图的一个方法被隐藏： tableView->verticalHeader()->hide();
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{modelview-header}
+\end{figure}
+
+但是，标题内容是通过模型设置的，因此我们重新实现 headerData() 方法：
+
+（文件：examples/widgets/tutorials/modelview/4\_headers/mymodel.cpp）
+
+\begin{lstlisting}{language=C++}
+QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
+        switch (section) {
+        case 0:
+            return QString("first");
+        case 1:
+            return QString("second");
+        case 2:
+            return QString("third");
+        }
+    }
+    return QVariant();
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+方法 headerData() 也具有角色参数，该角色与 MyModel::data() 中的含义相同。
+\end{lstlisting}
+
+\subsection{最小编辑示例}
+
+在此示例中，我们将构建一个应用程序，该应用程序通过重复输入表单元格中的值来自动用内容填充窗口标题。为了能够轻松访问窗口标题，我们将　QTableView 放在 QMainWindow 中。
+
+该模型决定编辑功能是否可用。我们仅需修改模型即可启用可用的编辑功能。这可以通过重新实现以下虚函数来完成：setData() 和 flags()。
+
+（文件：examples/widgets/tutorials/modelview/5\_edit/mymodel.h）
+
+
+\begin{lstlisting}{language=C++}
+// mymodel.h
+#include <QAbstractTableModel>
+#include <QString>
+
+const int COLS= 3;
+const int ROWS= 2;
+
+class MyModel : public QAbstractTableModel
+{
+    Q_OBJECT
+public:
+    MyModel(QObject *parent = nullptr);
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+private:
+    QString m_gridData[ROWS][COLS];  //holds text entered into QTableView
+signals:
+    void editCompleted(const QString &);
+};
+\end{lstlisting}
+
+我们使用二维数组 QString m\_gridData 来存储我们的数据。这使 m\_gridData 成为 MyModel 的核心。
+MyModel 的其余部分就像包装器一样，将 m\_gridData 调整为 QAbstractItemModel 接口。
+我们还引入了 editCompleted() 信号，这使得将修改后的文本传输到窗口标题成为可能。
+
+(文件：examples/widgets/tutorials/modelview/5\_edit/mymodel.cpp)
+
+\begin{lstlisting}{language=C++}
+bool MyModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (role == Qt::EditRole) {
+        if (!checkIndex(index))
+            return false;
+        //save value from editor to member m_gridData
+        m_gridData[index.row()][index.column()] = value.toString();
+        //for presentation purposes only: build and emit a joined string
+        QString result;
+        for (int row = 0; row < ROWS; row++) {
+            for (int col= 0; col < COLS; col++)
+                result += m_gridData[row][col] + ' ';
+        }
+        emit editCompleted(result);
+        return true;
+    }
+    return false;
+}
+\end{lstlisting}
+    
+每次用户编辑单元格时都会调用　setData() 。index 参数告诉我们哪个字段已被编辑，value 提供了编辑过程的结果。
+该角色将始终设置为 Qt::EditRole，因为我们的单元格仅包含文本。
+如果存在一个复选框，并且将用户权限设置为允许选中该复选框，则还将以角色设置为 Qt::CheckStateRole 进行调用。
+
+(文件：\hl{examples/widgets/tutorials/modelview/5\_edit/mymodel.cpp})
+
+\begin{lstlisting}{language=C++}
+Qt::ItemFlags MyModel::flags(const QModelIndex &index) const
+{
+    return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+}
+\end{lstlisting}
+
+单元格的各种属性可以使用 flags() 进行调整。
+
+返回　Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsEnabled 足以显示一个可被单元格选中的编辑器。
+
+如果编辑一个单元格所修改的数据多于该特定单元格中的数据，则该模型必须发射　dataChanged() 信号，以便读取已更改的数据。
+
+\section{中间主题}
+
+\subsection{树视图}
+
+您可以将上面的示例转换为具有树视图的应用程序。
+只需将 QTableView 替换为 QTreeView，这将生成一个读/写树。不必对模型进行任何更改。
+树不会有任何层次结构，因为模型本身没有任何层次结构。
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{dummy_tree}
+\end{figure}
+
+
+QListView，QTableView 和 QTreeView 均使用了合并了列表、表和树的模型抽象。
+这样就可以让不同类型的视图类使用同一模型。
+
+\begin{figure}[hbt!]  
+\includegraphics[width=0.5\textwidth]{list_table_tree}
+\end{figure}
