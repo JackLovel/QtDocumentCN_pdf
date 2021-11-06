@@ -740,3 +740,122 @@ Qt Labs 提供了一个名为 ModelTest 的软件，该软件可在您的程序�
 
 与视图类不同，ModelTest 使用超出范围的索引来测试模型。
 这意味着您的应用程序可能会因 ModelTest 而崩溃，即使没有它也可以完美运行。因此，在使用 ModelTest 时，您还需要处理所有超出范围的索引。
+
+\section{附录}
+\subsection{书籍}
+
+模型/视图编程在 Qt 文档中有相当广泛的介绍，但也有好几本好书。
+
+\begin{compactitem}
+\item C++ GUI Programming with Qt 4 / Jasmin Blanchette, Mark Summerfield, Prentice Hall, 2nd edition, ISBN 0-13-235416-0. 
+      Also available in German: C++ GUI Programmierung mit Qt 4: Die offizielle Einführung, Addison-Wesley, ISBN 3-827327-29-6
+\item The Book of Qt4, The Art of Building Qt Applications / Daniel Molkentin, Open Source Press, ISBN 1-59327-147-6. 
+      Translated from Qt 4, Einführung in die Applikationsentwicklung, Open Source Press, ISBN 3-937514-12-0.
+\item Foundations of Qt Development / Johan Thelin, Apress, ISBN 1-59059-831-8.
+\item Advanced Qt Programming / Mark Summerfield, Prentice Hall, ISBN 0-321-63590-6. 
+      This book covers Model/View programming on more than 150 pages.
+\end{compactitem}
+
+以下列表概述了上面列出的前三本书中包含的示例程序。
+其中一些为开发类似应用程序提供了非常好的模板。
+
+\begin{longtable}{|m{15em}|l|l|l|m{15em}|}
+\hline
+示例名称 &	使用的视图类	&使用的模型&	涵盖的方面　 \\ 
+\hline	
+Team Leaders &	QListview	&QStringListModel	&	&Book 1, Chapter 10, Figure 10.6 \\
+\hline	
+Directory Viewer	&QTreeView	&QDirModel	&	&Book 1, Chapter 10, Figure 10.7\\
+\hline	
+Color Names	 & QListView &	应用于 QStringListModel 的 QSortFilterProxyModel &&		Book 1, Chapter 10, Figure 10.8 \\
+\hline	
+Currencies &	QTableView &	基于 QAbstractTableModel 的自定义模型　&	只读　	&Book 1, Chapter 10, Figure 10.10　 \\ 
+\hline
+Cities　 &	QTableView &	基于 QAbstractTableModel 的自定义模型　&	读/写	&Book 1, Chapter 10, Figure 10.12 \\ 
+\hline
+Boolean Parser &	QTreeView	& 基于 QAbstractTableModel 的自定义模型	 & 只读　	&Book 1, Chapter 10, Figure 10.14 \\ 
+\hline
+Track Editor &	QTableWidget &	& 	自定义的委托并提供了自定义的编辑器　 &	Book 1, Chapter 10, Figure 10.15 \\ 
+\hline
+Four directory views &	QListView QTableView QTreeView &	QDirModel	& 演示使用多个视图	&Book2, Chapter 8.2 \\ 
+\hline
+Address Book &	QListView QTableView QTreeView	& 基于 QAbstractTableModel 的自定义模型& 	读/写　&	Book2, Chapter 8.4 \\
+\hline
+Address Book with sorting　 &		& QSortfilterProxyModel &	引入排序和过滤功能 &	Book2, Chapter 8.5 \\ 
+\hline
+Address Book with checkboxes &	& &		在模型/视图中引入复选框	 &Book2, Chapter 8.6 \\ 
+\hline
+Address Book with transposed grid	&	基于　QAbstractProxyModel 的自定义代理模型	& 引入自定义模型 &	Book2, Chapter 8.7 \\ 
+\hline
+Address Book with drag and drop		& &	引入托拖放支持	& Book2, Chapter 8.8 \\ 
+\hline
+Address Book with custom editor	&	&	引入自定义委托	& Book2, Chapter 8.9 \\
+\hline
+Views	& QListView QTableView QTreeView &	QStandardItemModel	& 只读	& Book 3, Chapter 5, figure 5-3 \\ 
+\hline
+Bardelegate	& QTableView	& &	演示基于 QAbstractItemDelegate 的自定义委托	& Book 3, Chapter 5, figure 5-5 \\ 
+\hline
+Editdelegate &	QTableView	& &		基于 QAbstractItemDelegate 的用于编辑的自定义委托	&Book 3, Chapter 5, figure 5-6 \\ 
+\hline
+Singleitemview	& 基于　QAbstractItemView 的自定义视图	&&	自定义视图	&Book 3, Chapter 5, figure 5-7 \\ 
+\hline
+listmodel &	QTableView	&基于 QAbstractTableModel 的自定义模型	&只读&	Book 3, Chapter 5, Figure 5-8 \\ 
+\hline
+treemodel	& QTreeView	& 基于 QAbstractTableModel 的自定义模型	&只读	&Book 3, Chapter 5, Figure 5-10 \\ 
+\hline
+edit integers &	[QListView]	& 基于 QAbstractTableModel 的自定义模型	 & 读/写	& Book 3, Chapter 5, Listing 5-37, Figure 5-11 \\ 
+\hline
+sorting	 & QTableView	& 应用于 QStringListModel 的 QSortFilterProxyModel	& 演示排序	& Book 3, Chapter 5, Figure 5-12 \\ 
+\hline
+\end{longtable}
+
+\subsection{Qt　文档}
+
+Qt5.0提供了19个模型/视图示例。这些示例可以在　项目视图示例 页面上找到。
+
+
+\begin{longtable}{|l|m{10em}|m{10em}|l|}
+\hline
+示例名称	& 使用的视图类	& 使用的模型 & 	涵盖的方面　 \\ 
+\hline
+Address Book &	QTableView &QAbstractTableModel QSortFilterProxyModel &	使用QSortFilterProxyModel从一个数据池生成不同的子集 \\ 
+\hline
+Basic Sort/Filter Model	& QTreeView &	QStandardItemModel QSortFilterProxyModel & 	 \\ 
+\hline
+Chart	& 自定义视图	& QStandardItemModel	& 设计与选择模型协作的自定义视图 \\ 
+\hline
+Color Editor Factory &	QTableWidget	&&	扩展一个带有新的自定义的编辑器的委托来选择颜色 \\ 
+\hline
+Combo Widget Mapper &使用 [QDataWidgetMapper] () 映射　QLineEdit、QTextEdit 和 QComboBox	 & QStandardItemModel	& 演示了QComboBox如何作为视图类 \\ 
+\hline
+Custom Sort/Filter Model &	QTreeView &	QStandardItemModel QSortFilterProxyModel &	子类化　QSortFilterProxyModel 用于高级排序和过滤 \\ 
+\hline
+Dir View &	QTreeView &	QFileSystemModel &	演示如何将模型指定给视图的非常小的示例 \\ 
+\hline
+Editable Tree Model	 &QTreeView	 &自定义树模型	& 使用树的综合示例，演示了如何使用底层自定义模型编辑单元格和树结构 \\ 
+\hline
+Fetch More&	QListView	&自定义列表模型 &	动态变化的模型 \\ 
+\hline
+Frozen Column &	QTableView	& QStandardItemModel	& \\ 
+\hline
+Interview &	Multiple	　& 自定义项目模型 &	多个视图 \\ 
+\hline
+Pixelator	& QTableView	& 自定义表模型	& 实现一个自定义委托 \\ 
+\hline
+Puzzle	& QListView	& 自定义列表模型 &	支持拖放的模型/视图 \\ 
+\hline
+Simple DOM Model&	QTreeView	　& 自定义树模型 &	自定义的只读的树模型的示例 \\ 
+\hline
+Simple Tree Model	 & QTreeView	& 自定义树模型	& 自定义的只读的树模型的示例 \\ 
+\hline
+Simple Widget Mapper&	使用 QDataWidgetMapper 映射 QLineEdit、QTextEdit 和 QSpinBox&	QStandardItemModel &	QDataWidgetMapper 的基本用法 \\ 
+\hline
+Spin Box Delegate & 	QTableView &	QStandardItemModel &	使用旋转框作为单元格编辑器的自定义委托 \\ 
+\hline 
+Spreadsheet	& QTableView	 &&	自定义委托　 \\ 
+\hline 
+Star Delegate &	QTableWidget	&&	功能齐全的自定义委托示例 \\ 
+\hline
+\end{longtable}
+
+还提供了模型/视图技术的参考文档。
