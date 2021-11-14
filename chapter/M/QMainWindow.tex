@@ -1,0 +1,268 @@
+\chapter{QMainWindow}
+
+QMainWindow 类用于创建主程序窗口。 更多内容...
+
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMainWindow>\\      
+	\hline
+	qmake & QT += widgets\\      
+	\hline
+	继承: &	QWidget\\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 列出所有成员函数, 包括继承的成员函数
+\end{compactitem}
+
+\section{公共成员类型}
+
+\begin{tabular}{|r|m{25em}|}
+	\hline
+	类型 & 方法 \\
+	\hline
+    enum &	DockOption \{ AnimatedDocks, AllowNestedDocks, AllowTabbedDocks, ForceTabbedDocks, VerticalTabs, GroupedDragging \} \\ 
+    \hline
+    flags &	DockOptions \\ 
+	\hline
+\end{tabular}
+
+\section{属性}
+
+\begin{tabular}{|r|l|}
+	\hline
+    属性名 &	类型 \\ 
+    \hline
+    animated 	& bool \\ 
+    \hline
+    dockNestingEnabled &	bool\\
+    \hline
+    dockOptions &	DockOptions\\
+    \hline
+    documentMode 	&bool\\
+    \hline
+    iconSize  &	QSize\\
+    \hline
+    tabShape 	&QTabWidget::TabShape\\
+    \hline
+    toolButtonStyle &	Qt::ToolButtonStyle\\
+    \hline
+    unifiedTitleAndToolBarOnMac &	bool\\
+	\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{20em}|}
+\hline
+返回类型  & 	函数名 \\
+\hline
+ &QMainWindow (QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags()) \\ 
+ \hline
+virtual  &	$\sim$QMainWindow () \\
+\hline
+void 	&addDockWidget (Qt::DockWidgetArea area, QDockWidget *dockwidget) \\ 
+\hline
+void 	&addDockWidget (Qt::DockWidgetArea area, QDockWidget *dockwidget, Qt::Orientation orientation) \\
+\hline
+void 	&addToolBar (Qt::ToolBarArea area, QToolBar *toolbar) \\ 
+\hline
+void 	&addToolBar (QToolBar *toolbar) \\ 
+\hline
+QToolBar *& 	addToolBar (const QString \&title) \\
+\hline
+void 	&addToolBarBreak (Qt::ToolBarArea area = Qt::TopToolBarArea) \\
+\hline
+QWidget *& 	centralWidget () const \\ 
+\hline
+Qt::DockWidgetArea &	corner (Qt::Corner corner) const \\
+\hline
+virtual QMenu * &	createPopupMenu () \\
+\hline
+QMainWindow::DockOptions& 	dockOptions () const\\
+\hline
+Qt::DockWidgetArea 	&dockWidgetArea (QDockWidget *dockwidget) const\\
+\hline
+bool &	documentMode () const \\
+\hline
+QSize &	iconSize () const\\
+\hline
+void 	&insertToolBar (QToolBar *before, QToolBar *toolbar)\\
+\hline
+void 	&insertToolBarBreak (QToolBar *before)\\
+\hline
+bool 	&isAnimated () const\\
+\hline
+bool 	&isDockNestingEnabled () const\\
+\hline
+QMenuBar *& 	menuBar () const \\ 
+\hline
+QWidget * &	menuWidget () const \\ 
+\hline
+void 	&removeDockWidget (QDockWidget *dockwidget)\\ 
+\hline
+void 	&removeToolBar (QToolBar *toolbar) \\ 
+\hline
+void 	&removeToolBarBreak (QToolBar *before) \\ 
+\hline
+void 	&resizeDocks (const QList<QDockWidget *> \&docks, const QList<int> \&sizes, Qt::Orientation orientation) \\ 
+\hline
+bool 	&restoreDockWidget (QDockWidget *dockwidget) \\ 
+\hline
+bool 	&restoreState (const QByteArray \&state, int version = 0) \\ 
+\hline
+QByteArray &	saveState (int version = 0) const \\ 
+\hline
+void &	setCentralWidget (QWidget *widget) \\ 
+\hline
+void &	setCorner (Qt::Corner corner, Qt::DockWidgetArea area) \\ 
+\hline
+void 	&setDockOptions (QMainWindow::DockOptions options) \\ 
+\hline
+void &	setDocumentMode (bool enabled) \\ 
+\hline
+void &	setIconSize (const QSize \&iconSize) \\ 
+\hline
+void &	setMenuBar (QMenuBar *menuBar) \\ 
+\hline
+void& 	setMenuWidget (QWidget *menuBar) \\ 
+\hline
+void &	setStatusBar (QStatusBar *statusbar) \\ 
+\hline
+void &	setTabPosition (Qt::DockWidgetAreas areas, QTabWidget::TabPosition tabPosition) \\ 
+\hline
+void &	setTabShape (QTabWidget::TabShape tabShape) \\ 
+\hline
+void 	&setToolButtonStyle (Qt::ToolButtonStyle toolButtonStyle) \\ 
+\hline
+void 	&splitDockWidget (QDockWidget *first, QDockWidget *second, Qt::Orientation orientation) \\ 
+\hline
+QStatusBar * & 	statusBar () const \\ 
+\hline
+QTabWidget::TabPosition &	tabPosition (Qt::DockWidgetArea area) const \\ 
+\hline
+QTabWidget::TabShape & 	tabShape () const \\
+\hline
+QList<QDockWidget *> 	&tabifiedDockWidgets (QDockWidget *dockwidget) const \\
+\hline
+void &	tabifyDockWidget (QDockWidget *first, QDockWidget *second) \\ 
+\hline
+QWidget *& 	takeCentralWidget () \\ 
+\hline
+Qt::ToolBarArea &	toolBarArea (QToolBar *toolbar) const \\ 
+\hline
+bool &	toolBarBreak (QToolBar *toolbar) const \\ 
+\hline
+Qt::ToolButtonStyle & 	toolButtonStyle () const \\ 
+\hline
+bool &	unifiedTitleAndToolBarOnMac () const \\
+\hline
+\end{longtable}
+
+\section{公共槽}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\
+\hline
+void 	&setAnimated (bool enabled) \\ 
+\hline
+void 	&setDockNestingEnabled (bool enabled) \\
+\hline
+void 	&setUnifiedTitleAndToolBarOnMac (bool set) \\
+\hline
+\end{tabular}
+
+\section{信号}
+
+\begin{tabular}{|r|l|}
+    \hline
+    返回类型 &	函数名 \\
+    \hline
+    void &	iconSizeChanged (const QSize \&iconSize) \\ 
+    \hline
+    void &	tabifiedDockWidgetActivated (QDockWidget *dockWidget) \\ 
+    \hline
+    void &	toolButtonStyleChanged (Qt::ToolButtonStyle toolButtonStyle) \\
+    \hline
+\end{tabular}
+
+\section{保护成员函数}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\
+\hline
+virtual void &	contextMenuEvent (QContextMenuEvent *event) override \\
+\hline
+virtual bool &	event (QEvent *event) override \\
+\hline
+\end{tabular}
+
+\section{详细描述}
+\subsection{Qt 主窗口框架}
+
+主窗口提供了一套创建应用程序用户界面的框架。 Qt 用QMainWindow和 相关类 来管理主窗口。QMainWindow已经定义了一个布局，可以往里添加一些 QToolBar 和 QDockWidget，也可以添加一个 QMenuBar 和一个 QStatusBar。这个布局有一个中央区域，可以放任意部件。如下图所示：
+
+main window layout
+
+\begin{notice}
+主窗口必须设置中央部件。
+\end{notice}
+
+\subsection{创建主窗口组件}
+
+中央部件通常是标准 Qt 部件，如 QTextEdit 或 QGraphicsView，也可自定义部件。
+用setCentralWidget()来设置中央部件。
+
+主窗口可以是单文档界面或多文档界面。 
+Qt 中设置 QMdiArea 为中央部件即创建了多文档界面。
+
+下面举例说明主窗口可以添加的部件。
+
+\subsubsection{创建菜单}
+
+Qt 用 QMenu 类实现菜单，主窗口将其放在 QMenuBar。
+可以添加 QAction 到QMenu，一个QAction代表菜单中的一个条目。
+
+用menuBar()可以得到主窗口的菜单栏，用 QMenuBar::addMenu 添加菜单。
+
+QMainWindow 默认有一个菜单栏，可以用setMenuBar()自定义一个新的菜单栏。
+如果不想用 QMenuBar ，也可以用setMenuWidget()来定制菜单栏。
+
+创建菜单代码示例：
+
+\begin{lstlisting}{language=C++}
+void MainWindow::createMenus()
+{
+    fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(newAct);
+    fileMenu->addAction(openAct);
+    fileMenu->addAction(saveAct);
+}
+\end{lstlisting}
+
+createPopupMenu()可以创建弹出式菜单，它会在主窗口收到 context menu 事件时弹出。
+停靠部件和菜单栏默认实现了右键菜单，可以重写createPopupMenu()创建自定义菜单。
+
+\subsubsection{创建工具栏}
+
+Qt 用 QToolBar 类实现工具栏，可以用addToolBar()添加工具栏到主窗口。
+
+可以设置 Qt::ToolBarArea 来控制工具栏的初始位置。可以用addToolBarBreak()或insertToolBarBreak()分割工具栏所在的区域，前者可使接下来添加的工具栏换至新的一行，后者添加了一个工具栏分隔符。用 QToolBar::setAllowedAreas 加 QToolBar::setMovable 可以限制用户放工具栏的位置。
+
+工具栏图标的尺寸可以用iconSize()获取，它是平台相关的。可以用setIconSize()设置固定尺寸。用setToolButtonStyle()可以修改工具栏图标外观。
+
+创建工具栏代码示例：
+
+\begin{lstlisting}{language=C++}
+void MainWindow::createToolBars()
+{
+    fileToolBar = addToolBar(tr("File"));
+    fileToolBar->addAction(newAct);
+}
+\end{lstlisting}
