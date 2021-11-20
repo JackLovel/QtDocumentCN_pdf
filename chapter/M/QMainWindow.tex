@@ -266,3 +266,213 @@ void MainWindow::createToolBars()
     fileToolBar->addAction(newAct);
 }
 \end{lstlisting}
+
+\subsection{创建停靠部件}
+
+Qt 用 QDockWidget 类实现停靠部件。停靠部件即可以停靠在主窗口的窗口，可以用 \hl{addDockWidget()} 添加停靠部件到主窗口。
+
+可以设置 \hl{Qt::DockWidgetArea} 来控制停靠部件的位置，有上、下、左、右四种。\hl{setCorner()} 可以让一个角落属于某个相邻的区域。
+默认情况下，一个区域只有一个停靠部件，用 \hl{setDockNestingEnabled()} 可以使其能上下或者左右排列多个停靠部件。
+
+两个停靠部件也可以堆叠在一起，然后使用 QTabBar 来选择应显示哪个部件。
+
+创建并添加停靠部件到主窗口的代码示例：
+
+
+\begin{lstlisting}[language=C++]
+QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
+dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+dockWidget->setWidget(dockWidgetContents);
+addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
+\end{lstlisting}
+
+\subsection{状态栏}
+
+用 \hl{setStatusBar()} 可以设置状态栏，调用 \hl{statusBar()} 会返回主窗口的状态栏。查看 QStatusBar 获取更多内容。
+
+\subsection{存储状态}
+
+QMainWindow 用 \hl{saveState()} 保存布局，用 \hl{restoreState()} 恢复布局。包括工具栏和停靠部件的位置和相对主窗口的尺寸。
+
+\begin{notice}[另请参阅]
+QMenuBar，QToolBar，QStatusBar, QDockWidget，Application Example，
+Dock Widgets Example，MDI Example，SDI Example 和 Menus Example。
+\end{notice}
+
+\section{成员变量文档}
+
+enum QMainWindow::DockOption flags QMainWindow::DockOptions
+
+该枚举包含指定 QMainWindow 停靠行为的标志。
+
+\begin{tabular}{|l|l|m{25em}|}
+\hline
+函数	& 值	&描述 \\ 
+\hline
+QMainWindow::AnimatedDocks&	0x01	&同 animated 属性 \\
+\hline
+QMainWindow::AllowNestedDocks	&0x02&	同 dockNestingEnabled 属性 \\ 
+\hline
+QMainWindow::AllowTabbedDocks	&0x04	&允许形成下方有 tabBar 的重合部件 \\ 
+\hline
+QMainWindow::ForceTabbedDocks	&0x08&	每个停靠区域都只包含一个选项卡式停靠部件。
+换句话说，停靠区域里不能上下或左右排列停靠部件。如果设置了此选项，则 AllowNestedDocks 不起作用。 \\
+\hline
+QMainWindow::VerticalTabs	&0x10	&设置 tabBar 在竖直左方位置（默认在下方），包含了 AllowTabbedDocks。另请参阅 setTabPosition () \\ 
+\hline
+QMainWindow::GroupedDragging	&0x20	&拖动停靠部件的标题栏时，将拖动所有和它在一起的停靠部件。
+包含了 AllowTabbedDocks 。在某些停靠部件有区域限制时会有问题。（该枚举值在 Qt 5.6 添加） \\ 
+\hline
+\end{tabular}
+
+这些选项只是控制停靠部件将如何放入 QMainWindow，不会重新排列停靠部件。
+所以要先给停靠部件设置这些选项，再添加到主窗口。AnimatedDocks 和 VerticalTabs 选项例外，它们可以随后设置。
+
+此枚举值在 Qt 4.3 引入和修改
+
+DockOptions 是 QFlags<DockOption> 的 typedef。
+它存储 DockOption 值的 OR 组合。
+
+\section{属性文档}
+
+animated : bool
+
+此属性表示是否对操作停靠部件和工具栏进行动画处理
+
+当停靠部件或工具栏在主窗口拖动时，主窗口会显示它们将停靠在什么位置。设置此属性使 QMainWindow 在平滑动画中移动其内容。清除此属性会使它们啪地进入新位置。
+
+默认情况，此属性是生效的。如果主窗口调整尺寸或重绘太慢，可能会无效。
+
+设置此属性与使用 setDockOptions () 设置 AnimatedDocks 选项相同。
+
+该属性在 Qt 4.2 引入
+
+存取函数：
+
+\begin{tabular}{|c|c|}
+\hline
+    返回类型 &	函数名 \\ 
+\hline
+bool	& isAnimated() const \\ 
+\hline
+void	& setAnimated(bool enabled) \\ 
+\hline
+\end{tabular}
+
+\splitLine
+
+dockNestingEnabled : bool
+
+此属性表示停靠部件是否可以嵌套。
+
+如果此属性为false，停靠区域只能是水平的或垂直的一行。
+如果此属性为true，停靠区域所占的区域可以沿任意方向拆分以包含更多的停靠部件。
+
+\begin{quote}
+译者注：如果设为 true，两个 dock 可以上面一块，
+下面一块，显示在一个区域里，如果设为 false，
+则两个 dock 只能变成选项卡式占用一个区域。
+\end{quote}
+
+只有在包含大量停靠部件的应用程序中，才需要停靠嵌套。
+它给用户更大的自由来组织主窗口。但是，当停靠部件拖过主窗口时，停靠嵌套会导致更加复杂和不太直观的行为。
+
+设置此属性与使用 setDockOptions () 设置 AllowNestedDocks 选项相同。
+
+该属性在 Qt 4.2 引入
+
+存取函数：
+
+\begin{tabular}{|c|c|}
+    \hline
+    返回类型 &	函数名 \\ 
+    \hline
+    bool	& isDockNestingEnabled() const \\ 
+    \hline
+    void	& setDockNestingEnabled(bool enabled) \\ 
+    \hline
+    \end{tabular}
+
+\splitLine
+
+dockOptions : DockOptions
+
+此属性表示 QMainWindow 的停靠行为
+
+默认值是 AnimatedDocks | AllowTabbedDocks
+
+该属性在 Qt 4.3 引入
+
+存取函数：
+
+\begin{tabular}{|c|c|}
+    \hline
+    返回类型 &	函数名 \\ 
+    \hline
+    QMainWindow::DockOptions &	dockOptions() const \\ 
+    \hline
+    void	&setDockOptions(QMainWindow::DockOptions options) \\ 
+    \hline
+    \end{tabular}
+
+\splitLine
+
+documentMode : bool
+
+此属性决定选项卡式停靠部件的选项卡栏是否为文档模式。
+
+默认为 false
+
+该属性在 Qt 4.5 引入
+
+存取函数：
+
+\begin{tabular}{|c|c|}
+    \hline
+    返回类型 &	函数名 \\ 
+    \hline
+    bool&	documentMode() const \\ 
+    \hline
+    void&	setDocumentMode(bool enabled) \\ 
+    \hline
+    \end{tabular}
+
+\begin{notice}[另请参阅]
+QTabBar::documentMode
+\end{notice}
+
+\splitLine
+
+iconSize : QSize
+
+主窗口工具栏图标的尺寸。
+
+默认是 GUI 样式的默认工具栏图标大小。
+
+\begin{notice}
+使用的图标必须至少具有此大小，因为图标只会缩小。
+\end{notice}
+
+存取函数：
+
+\begin{tabular}{|c|c|}
+    \hline
+    返回类型 &	函数名 \\ 
+    \hline 
+    QSize	&iconSize() const \\ 
+    \hline
+    void&	setIconSize(const QSize \&iconSize) \\
+    \hline
+    \end{tabular}
+
+\splitLine
+
+tabShape : QTabWidget::TabShape
+
+此属性表示选项卡式停靠部件的选项卡形状。
+
+默认是 QTabWidget::Rounded
+
+该属性在 Qt 4.5 引入
+
+存取函数：
