@@ -1,55 +1,360 @@
-\chapter{模型视图教程}
+\chapter{QMainWindow}
 
-每个 \hl{UI} 开发人员都应该了解模型视图编程，本教程的目的是让您轻松理解有关模型视图的相关知识。
+QMainWindow 类用于创建主程序窗口。 更多内容...
 
-表格，列表和树部件是 GUI 中经常使用的组件。这些部件可以通过两种不同的方式访问其数据。
-传统方式是，这些部件包含用于存储数据的内部容器。这种方法非常直观，但是，在许多应用程序中，它会导致数据同步问题。
-第二种方法是模型/视图编程，其中部件不维护内部数据容器。他们通过标准化接口访问外部数据，因此避免了数据重复。
-乍一看，这似乎很复杂，但是如果您仔细看一看，不仅容易掌握，而且模型/视图编程的许多好处也变得更加明显。
 
-\begin{figure}[hbt!]  
-	% \centering
-\includegraphics[width=0.3\textwidth]{treeview}
-\end{figure}
-
-在此过程中，我们将了解 \hl{Qt} 提供的一些基本技术，例如：
-
-\begin{compactitem}
-\item 标准部件和模型视图部件的区别
-\item 窗体和模型之间的适配器
-\item 开发一个简单的模型视图的应用程序
-\item 预定义模型
-
-\end{compactitem}
-
-中间主题，比如
-
-\begin{compactitem}
-\item 树形视图
-\item 选项
-\item 委托
-\item 模型调试测试
-\end{compactitem}
-
-您还将了解到新的应用程序是否可以通过模型/视图编程更容易地编写，或者经典的标准部件是否也可以工作。
-
-本教程中的代码您可以编辑修改或者集成到您的项目中去。 源码在 \hl{Qt} 的 \hl{examples/widgets/tutorials/modelview} 目录。
-
-详见 参考文档
-
-\section{介绍}
-
-模型/视图是一种将数据从视图中分离出来，来处理数据集的一种技术。标准部件并不是为将数据从视图中分离出来而设计的，这就是为什么 Qt 会有两种不同类型的部件。
-这两种部件看起来都一样，但是它们与数据之间的交互方式是不同的。
-
-\begin{tabular}{|l|m{25em}|}
+\begin{tabular}{|r|l|}
 	\hline
-		\includegraphics[width=0.5\textwidth]{modelview-roles}
-	  & 
-	项角色
-	
-	项角色向模型指示要引用的数据类型。视图可以以不同的方式显示角色，因此为每个角色提供适当的信息很重要。
-	
-	创建新模型 部分将更详细地介绍角色的某些特定用法。\\
-	\hline	
-	\end{tabular}
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMainWindow>\\      
+	\hline
+	qmake & QT += widgets\\      
+	\hline
+	继承: &	QWidget\\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 列出所有成员函数, 包括继承的成员函数
+\end{compactitem}
+
+\section{公共成员类型}
+
+\begin{tabular}{|r|m{25em}|}
+	\hline
+	类型 & 方法 \\
+	\hline
+    enum &	DockOption \{ AnimatedDocks, AllowNestedDocks, AllowTabbedDocks, ForceTabbedDocks, VerticalTabs, GroupedDragging \} \\ 
+    \hline
+    flags &	DockOptions \\ 
+	\hline
+\end{tabular}
+
+\section{属性}
+
+\begin{tabular}{|r|l|}
+	\hline
+    属性名 &	类型 \\ 
+    \hline
+    animated 	& bool \\ 
+    \hline
+    dockNestingEnabled &	bool\\
+    \hline
+    dockOptions &	DockOptions\\
+    \hline
+    documentMode 	&bool\\
+    \hline
+    iconSize  &	QSize\\
+    \hline
+    tabShape 	&QTabWidget::TabShape\\
+    \hline
+    toolButtonStyle &	Qt::ToolButtonStyle\\
+    \hline
+    unifiedTitleAndToolBarOnMac &	bool\\
+	\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{20em}|}
+\hline
+返回类型  & 	函数名 \\
+\hline
+ &QMainWindow (QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::WindowFlags()) \\ 
+ \hline
+virtual  &	$\sim$QMainWindow () \\
+\hline
+void 	&addDockWidget (Qt::DockWidgetArea area, QDockWidget *dockwidget) \\ 
+\hline
+void 	&addDockWidget (Qt::DockWidgetArea area, QDockWidget *dockwidget, Qt::Orientation orientation) \\
+\hline
+void 	&addToolBar (Qt::ToolBarArea area, QToolBar *toolbar) \\ 
+\hline
+void 	&addToolBar (QToolBar *toolbar) \\ 
+\hline
+QToolBar *& 	addToolBar (const QString \&title) \\
+\hline
+void 	&addToolBarBreak (Qt::ToolBarArea area = Qt::TopToolBarArea) \\
+\hline
+QWidget *& 	centralWidget () const \\ 
+\hline
+Qt::DockWidgetArea &	corner (Qt::Corner corner) const \\
+\hline
+virtual QMenu * &	createPopupMenu () \\
+\hline
+QMainWindow::DockOptions& 	dockOptions () const\\
+\hline
+Qt::DockWidgetArea 	&dockWidgetArea (QDockWidget *dockwidget) const\\
+\hline
+bool &	documentMode () const \\
+\hline
+QSize &	iconSize () const\\
+\hline
+void 	&insertToolBar (QToolBar *before, QToolBar *toolbar)\\
+\hline
+void 	&insertToolBarBreak (QToolBar *before)\\
+\hline
+bool 	&isAnimated () const\\
+\hline
+bool 	&isDockNestingEnabled () const\\
+\hline
+QMenuBar *& 	menuBar () const \\ 
+\hline
+QWidget * &	menuWidget () const \\ 
+\hline
+void 	&removeDockWidget (QDockWidget *dockwidget)\\ 
+\hline
+void 	&removeToolBar (QToolBar *toolbar) \\ 
+\hline
+void 	&removeToolBarBreak (QToolBar *before) \\ 
+\hline
+void 	&resizeDocks (const QList<QDockWidget *> \&docks, const QList<int> \&sizes, Qt::Orientation orientation) \\ 
+\hline
+bool 	&restoreDockWidget (QDockWidget *dockwidget) \\ 
+\hline
+bool 	&restoreState (const QByteArray \&state, int version = 0) \\ 
+\hline
+QByteArray &	saveState (int version = 0) const \\ 
+\hline
+void &	setCentralWidget (QWidget *widget) \\ 
+\hline
+void &	setCorner (Qt::Corner corner, Qt::DockWidgetArea area) \\ 
+\hline
+void 	&setDockOptions (QMainWindow::DockOptions options) \\ 
+\hline
+void &	setDocumentMode (bool enabled) \\ 
+\hline
+void &	setIconSize (const QSize \&iconSize) \\ 
+\hline
+void &	setMenuBar (QMenuBar *menuBar) \\ 
+\hline
+void& 	setMenuWidget (QWidget *menuBar) \\ 
+\hline
+void &	setStatusBar (QStatusBar *statusbar) \\ 
+\hline
+void &	setTabPosition (Qt::DockWidgetAreas areas, QTabWidget::TabPosition tabPosition) \\ 
+\hline
+void &	setTabShape (QTabWidget::TabShape tabShape) \\ 
+\hline
+void 	&setToolButtonStyle (Qt::ToolButtonStyle toolButtonStyle) \\ 
+\hline
+void 	&splitDockWidget (QDockWidget *first, QDockWidget *second, Qt::Orientation orientation) \\ 
+\hline
+QStatusBar * & 	statusBar () const \\ 
+\hline
+QTabWidget::TabPosition &	tabPosition (Qt::DockWidgetArea area) const \\ 
+\hline
+QTabWidget::TabShape & 	tabShape () const \\
+\hline
+QList<QDockWidget *> 	&tabifiedDockWidgets (QDockWidget *dockwidget) const \\
+\hline
+void &	tabifyDockWidget (QDockWidget *first, QDockWidget *second) \\ 
+\hline
+QWidget *& 	takeCentralWidget () \\ 
+\hline
+Qt::ToolBarArea &	toolBarArea (QToolBar *toolbar) const \\ 
+\hline
+bool &	toolBarBreak (QToolBar *toolbar) const \\ 
+\hline
+Qt::ToolButtonStyle & 	toolButtonStyle () const \\ 
+\hline
+bool &	unifiedTitleAndToolBarOnMac () const \\
+\hline
+\end{longtable}
+
+\section{公共槽}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\
+\hline
+void 	&setAnimated (bool enabled) \\ 
+\hline
+void 	&setDockNestingEnabled (bool enabled) \\
+\hline
+void 	&setUnifiedTitleAndToolBarOnMac (bool set) \\
+\hline
+\end{tabular}
+
+\section{信号}
+
+\begin{tabular}{|r|l|}
+    \hline
+    返回类型 &	函数名 \\
+    \hline
+    void &	iconSizeChanged (const QSize \&iconSize) \\ 
+    \hline
+    void &	tabifiedDockWidgetActivated (QDockWidget *dockWidget) \\ 
+    \hline
+    void &	toolButtonStyleChanged (Qt::ToolButtonStyle toolButtonStyle) \\
+    \hline
+\end{tabular}
+
+\section{保护成员函数}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\
+\hline
+virtual void &	contextMenuEvent (QContextMenuEvent *event) override \\
+\hline
+virtual bool &	event (QEvent *event) override \\
+\hline
+\end{tabular}
+
+\section{详细描述}
+\subsection{Qt 主窗口框架}
+
+主窗口提供了一套创建应用程序用户界面的框架。 Qt 用QMainWindow和 相关类 来管理主窗口。QMainWindow已经定义了一个布局，可以往里添加一些 QToolBar 和 QDockWidget，也可以添加一个 QMenuBar 和一个 QStatusBar。这个布局有一个中央区域，可以放任意部件。如下图所示：
+
+main window layout
+
+\begin{notice}
+主窗口必须设置中央部件。
+\end{notice}
+
+\subsection{创建主窗口组件}
+
+中央部件通常是标准 Qt 部件，如 QTextEdit 或 QGraphicsView，也可自定义部件。
+用setCentralWidget()来设置中央部件。
+
+主窗口可以是单文档界面或多文档界面。 
+Qt 中设置 QMdiArea 为中央部件即创建了多文档界面。
+
+下面举例说明主窗口可以添加的部件。
+
+\subsubsection{创建菜单}
+
+Qt 用 QMenu 类实现菜单，主窗口将其放在 QMenuBar。
+可以添加 QAction 到QMenu，一个QAction代表菜单中的一个条目。
+
+用menuBar()可以得到主窗口的菜单栏，用 QMenuBar::addMenu 添加菜单。
+
+QMainWindow 默认有一个菜单栏，可以用setMenuBar()自定义一个新的菜单栏。
+如果不想用 QMenuBar ，也可以用setMenuWidget()来定制菜单栏。
+
+创建菜单代码示例：
+
+\begin{lstlisting}{language=C++}
+void MainWindow::createMenus()
+{
+    fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(newAct);
+    fileMenu->addAction(openAct);
+    fileMenu->addAction(saveAct);
+}
+\end{lstlisting}
+
+createPopupMenu()可以创建弹出式菜单，它会在主窗口收到 context menu 事件时弹出。
+停靠部件和菜单栏默认实现了右键菜单，可以重写createPopupMenu()创建自定义菜单。
+
+\subsubsection{创建工具栏}
+
+Qt 用 QToolBar 类实现工具栏，可以用addToolBar()添加工具栏到主窗口。
+
+可以设置 Qt::ToolBarArea 来控制工具栏的初始位置。可以用addToolBarBreak()或insertToolBarBreak()分割工具栏所在的区域，前者可使接下来添加的工具栏换至新的一行，后者添加了一个工具栏分隔符。用 QToolBar::setAllowedAreas 加 QToolBar::setMovable 可以限制用户放工具栏的位置。
+
+工具栏图标的尺寸可以用iconSize()获取，它是平台相关的。可以用setIconSize()设置固定尺寸。用setToolButtonStyle()可以修改工具栏图标外观。
+
+创建工具栏代码示例：
+
+\begin{lstlisting}{language=C++}
+void MainWindow::createToolBars()
+{
+    fileToolBar = addToolBar(tr("File"));
+    fileToolBar->addAction(newAct);
+}
+\end{lstlisting}
+
+\subsection{创建停靠部件}
+
+Qt 用 QDockWidget 类实现停靠部件。停靠部件即可以停靠在主窗口的窗口，可以用 \hl{addDockWidget()} 添加停靠部件到主窗口。
+
+可以设置 \hl{Qt::DockWidgetArea} 来控制停靠部件的位置，有上、下、左、右四种。\hl{setCorner()} 可以让一个角落属于某个相邻的区域。
+默认情况下，一个区域只有一个停靠部件，用 \hl{setDockNestingEnabled()} 可以使其能上下或者左右排列多个停靠部件。
+
+两个停靠部件也可以堆叠在一起，然后使用 QTabBar 来选择应显示哪个部件。
+
+创建并添加停靠部件到主窗口的代码示例：
+
+
+\begin{lstlisting}[language=C++]
+QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
+dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+dockWidget->setWidget(dockWidgetContents);
+addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
+\end{lstlisting}
+
+\subsection{状态栏}
+
+用 \hl{setStatusBar()} 可以设置状态栏，调用 \hl{statusBar()} 会返回主窗口的状态栏。查看 QStatusBar 获取更多内容。
+
+\subsection{存储状态}
+
+QMainWindow 用 \hl{saveState()} 保存布局，用 \hl{restoreState()} 恢复布局。包括工具栏和停靠部件的位置和相对主窗口的尺寸。
+
+\begin{notice}[另请参阅]
+QMenuBar，QToolBar，QStatusBar, QDockWidget，Application Example，
+Dock Widgets Example，MDI Example，SDI Example 和 Menus Example。
+\end{notice}
+
+\section{成员变量文档}
+
+enum QMainWindow::DockOption flags QMainWindow::DockOptions
+
+该枚举包含指定 QMainWindow 停靠行为的标志。
+
+\begin{tabular}{|l|l|m{25em}|}
+\hline
+函数	& 值	&描述 \\ 
+\hline
+QMainWindow::AnimatedDocks&	0x01	&同 animated 属性 \\
+\hline
+QMainWindow::AllowNestedDocks	&0x02&	同 dockNestingEnabled 属性 \\ 
+\hline
+QMainWindow::AllowTabbedDocks	&0x04	&允许形成下方有 tabBar 的重合部件 \\ 
+\hline
+QMainWindow::ForceTabbedDocks	&0x08&	每个停靠区域都只包含一个选项卡式停靠部件。
+换句话说，停靠区域里不能上下或左右排列停靠部件。如果设置了此选项，则 AllowNestedDocks 不起作用。 \\
+\hline
+QMainWindow::VerticalTabs	&0x10	&设置 tabBar 在竖直左方位置（默认在下方），包含了 AllowTabbedDocks。另请参阅 setTabPosition () \\ 
+\hline
+QMainWindow::GroupedDragging	&0x20	&拖动停靠部件的标题栏时，将拖动所有和它在一起的停靠部件。
+包含了 AllowTabbedDocks 。在某些停靠部件有区域限制时会有问题。（该枚举值在 Qt 5.6 添加） \\ 
+\hline
+\end{tabular}
+
+这些选项只是控制停靠部件将如何放入 QMainWindow，不会重新排列停靠部件。
+所以要先给停靠部件设置这些选项，再添加到主窗口。AnimatedDocks 和 VerticalTabs 选项例外，它们可以随后设置。
+
+此枚举值在 Qt 4.3 引入和修改
+
+DockOptions 是 QFlags<DockOption> 的 typedef。
+它存储 DockOption 值的 OR 组合。
+
+\section{属性文档}
+
+animated : bool
+
+此属性表示是否对操作停靠部件和工具栏进行动画处理
+
+当停靠部件或工具栏在主窗口拖动时，主窗口会显示它们将停靠在什么位置。设置此属性使 QMainWindow 在平滑动画中移动其内容。清除此属性会使它们啪地进入新位置。
+
+默认情况，此属性是生效的。如果主窗口调整尺寸或重绘太慢，可能会无效。
+
+设置此属性与使用 setDockOptions () 设置 AnimatedDocks 选项相同。
+
+该属性在 Qt 4.2 引入
+
+存取函数：
+
+\begin{tabular}{|c|c|}
+\hline
+    返回类型 &	函数名 \\ 
+\hline
+bool	& isAnimated() const \\ 
+\hline
+void	& setAnimated(bool enabled) \\ 
+\hline
+\end{tabular}
