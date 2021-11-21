@@ -208,7 +208,10 @@ virtual bool &	event (QEvent *event) override \\
 
 主窗口提供了一套创建应用程序用户界面的框架。 Qt 用QMainWindow和 相关类 来管理主窗口。QMainWindow已经定义了一个布局，可以往里添加一些 QToolBar 和 QDockWidget，也可以添加一个 QMenuBar 和一个 QStatusBar。这个布局有一个中央区域，可以放任意部件。如下图所示：
 
-main window layout
+\begin{figure}[hbt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{mainwindowlayout}
+\end{figure}
 
 \begin{notice}
 主窗口必须设置中央部件。
