@@ -1,0 +1,187 @@
+\chapter{QMap}
+
+template <typename Key, typename T> class QMap
+
+QMap 类是一种模板类，提供基于红黑树的字典类结构。更多内容...
+
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMap>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+	派生类:	& QMultiMap \\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 所有成员列表，包括继承的成员
+\item 废弃的成员
+\end{compactitem}
+
+\begin{notice}
+该类中的所有函数都是可重入的。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{longtable}{|r|l|}
+\hline
+class	& const\_iterator \\
+\hline
+class &	iterator \\ 
+\hline
+class &	key\_iterator \\ 
+\hline
+typedef	&ConstIterator \\ 
+\hline
+typedef	&Iterator \\ 
+\hline
+typedef	&const\_key\_value\_iterator \\
+\hline
+typedef	&difference\_type \\        
+\hline
+typedef	&key\_type \\
+\hline
+typedef & key\_value\_iterator \\
+\hline
+typedef	&mapped\_type \\ 
+\hline
+typedef	&size\_type \\ 
+\hline
+\end{longtable}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{22em}|}
+\hline
+& QMap(const typename std::map<Key, T> \&other) \\
+\hline
+&QMap(QMap<Key, T> \&\&other)\\
+\hline
+& QMap(const QMap<Key, T> \&other)\\
+\hline
+& QMap(std::initializer\_list<std::pair<Key, T>> list)\\
+\hline
+& Map()\\
+\hline
+QMap<Key, T> &	operator=(QMap<Key, T> \&\&other) \\
+\hline 
+QMap<Key, T> &	operator=(const QMap<Key, T> \&other)\\ 
+\hline
+& $\sim$QMap() \\
+\hline
+QMap::iterator &	begin() \\ 
+\hline
+QMap::const\_iterator	&begin() const \\
+\hline
+QMap::const\_iterator&	cbegin() const \\
+\hline
+QMap::const\_iterator &	cend() const \\ 
+\hline
+void	& clear() \\ 
+\hline
+QMap::const\_iterator &	constBegin() const \\ 
+\hline
+QMap::const\_iterator &	constEnd() const \\
+\hline
+QMap::const\_iterator&	constFind(const Key \&key) const \\
+\hline
+QMap::const\_key\_value\_iterator&	constKeyValueBegin() const \\
+\hline
+QMap::const\_key\_value\_iterator&	constKeyValueEnd() const \\
+\hline
+bool &	contains(const Key \&key) const \\
+\hline
+int	&count(const Key \&key) const \\
+\hline
+int	&count() const \\ 
+\hline
+bool&	empty() const \\
+\hline
+QMap::iterator	& end() \\
+\hline
+QMap::const\_iterator	& end() const \\ 
+\hline
+QPair<QMap::iterator, QMap::iterator> &	equal\_range(const Key \&key) \\    
+\hline
+QPair<QMap::const\_iterator, QMap::const\_iterator> &	equal\_range(const Key \&key) const \\
+\hline 
+QMap::iterator	&erase(QMap::iterator pos) \\ 
+\hline
+QMap::iterator	&find(const Key \&key) \\
+\hline
+QMap::const\_iterator	&find(const Key \&key) const \\ 
+\hline
+T &	first() \\ 
+\hline
+const T &	first() const \\
+\hline
+const Key &	firstKey() const \\
+\hline
+QMap::iterator	&insert(const Key \&key, const T \&value) \\
+\hline
+QMap::iterator	&insert(QMap::const\_iterator pos, const Key \&key, const T \&value) \\
+\hline
+void	&insert(const QMap<Key, T> \&map)\\
+\hline
+bool	&isEmpty() const \\
+\hline
+const Key & key(const T \&value, const Key \&defaultKey = Key()) const \\
+\hline
+QMap::key\_iterator&	keyBegin() const\\
+\hline
+QMap::key\_iterator &	keyEnd() const \\
+\hline
+QMap::key\_value\_iterator	&keyValueBegin() \\
+\hline
+QMap::const\_key\_value\_iterator&	keyValueBegin() const \\
+\hline
+QMap::key\_value\_iterator&	keyValueEnd() \\ 
+\hline
+QMap::const\_key\_value\_iterator&	keyValueEnd() const \\
+\hline
+QList&	keys() const \\
+\hline
+QList	&keys(const T \&value) const \\
+\hline
+T &	last() \\ 
+\hline
+const T &	last() const \\ 
+\hline
+const Key &	lastKey() const \\ 
+\hline
+QMap::iterator	&lowerBound(const Key \&key) \\ 
+\hline
+QMap::const\_iterator	&lowerBound(const Key \&key) const \\
+\hline
+int	&remove(const Key \&key) \\
+\hline
+int &	size() const \\ 
+\hline
+void & swap(QMap<Key, T> \&other) \\ 
+\hline
+T	& take(const Key \&key) \\ 
+\hline
+std::map<Key, T> &	toStdMap() const \\
+\hline
+QMap::iterator&	upperBound(const Key \&key) \\ 
+\hline
+QMap::const\_iterator &	upperBound(const Key \&key) const \\
+\hline
+const T	& value(const Key \&key, const T \&defaultValue = T()) const \\
+\hline
+QList	& values() const\\ 
+\hline
+bool	& operator!=(const QMap<Key, T> \&other) const \\ 
+\hline
+bool	& operator==(const QMap<Key, T> \&other) const \\ 
+\hline
+T &	operator[](const Key \&key) \\ 
+\hline
+const T	 &operator[](const Key \&key) const \\ 
+\hline
+\end{longtable}
