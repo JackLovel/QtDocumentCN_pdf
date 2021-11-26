@@ -730,7 +730,10 @@ T \&QMap::first()
 
 Qt 5.2 中引入该函数。
 
-另请参阅 last()，firstKey() 和 isEmpty()。
+
+\begin{notice}[另请参阅]
+last()，firstKey() 和 isEmpty()。
+\end{notice}
 
 \splitLine
 
@@ -750,29 +753,37 @@ const Key \&QMap::firstKey() const
 
 Qt 5.2 中引入该函数。
 
-另请参阅 lastKey()，first()，keyBegin() 和 isEmpty()。
+
+\begin{notice}[另请参阅]
+lastKey()，first()，keyBegin() 和 isEmpty()。
+\end{notice}
 
 \splitLine
 
-QMap::iterator QMap::insert(const Key \&key, const T \&value)
+QMap::iterator QMap::insert(const Key \emph{\&key}, const T \emph{\&value})
 
-用键 key 和值 value 插入一个新元素。
+用键 \emph{key} 和值 \emph{value} 插入一个新元素。
 
-如果已经存在键为 key 的元素，该元素的值将被 value 替换。
+如果已经存在键为 \emph{key} 的元素，该元素的值将被 \emph{value} 替换。
 
-如果有多个键为 key 的元素，最新插入的元素的值将被 value 替换。
+如果有多个键为 \emph{key} 的元素，最新插入的元素的值将被 \emph{value} 替换。
 
-另请参阅 QMultiMap::insert()。
+\begin{notice}[另请参阅]
+QMultiMap::insert()。
+\end{notice}
 
 \splitLine
 
-QMap::iterator QMap::insert(QMap::const\_iterator pos, const Key \&key, const T \&value)
+QMap::iterator QMap::insert(QMap::const\_iterator \emph{pos}, const Key \emph{\&key}, const T \emph{\&value})
 
 这是一个重载函数。
 
 用键 key 和值 value 插入一个新元素，pos 用来提示插入位置。
 
-如果以 constBegin() 作为插入位置提示，表明 key 比 map 中的任何键都小，而 constEnd() 则建议 key（严格）大于 map 中的任何键。否则提示应该满足条件 (pos - 1).key() < key <= pos.key()。如果提示 pos 是错误的，其将被忽略，并以常规方式插入。
+如果以 constBegin() 作为插入位置提示，表明 key 比 map 中的任何键都小，
+而 constEnd() 则建议 key（严格）大于 map 中的任何键。
+否则提示应该满足条件 (pos - 1).key() < key <= pos.key()。
+如果提示 pos 是错误的，其将被忽略，并以常规方式插入。
 
 如果已经存在键为 key 的元素，该元素的值将被 value 替换。
 
@@ -780,27 +791,36 @@ QMap::iterator QMap::insert(QMap::const\_iterator pos, const Key \&key, const T 
 
 如果提示是正确的，并且 map 未被共享，插入操作平均在常数时间内完成。
 
-从有序数据创建 map 时，从最大键的元素开始以 constBegin() 作为提示插入，比按从小到大的顺序以 constEnd() 作为提示插入更快，因为 constEnd() - 1 （用来检查提示是否合法）需要对数时间。
+从有序数据创建 map 时，从最大键的元素开始以 constBegin() 作为提示插入，
+比按从小到大的顺序以 constEnd() 作为提示插入更快，因为 constEnd() - 1 （用来检查提示是否合法）需要对数时间。
 
-注意： 需小心对待提示。提供从旧的共享实例取得的迭代器可能引起崩溃，还会有默默污染 map 和 pos 的 map 的风险。
+\begin{notice}
+需小心对待提示。提供从旧的共享实例取得的迭代器可能引起崩溃，还会有默默污染 map 和 pos 的 map 的风险。
+\end{notice}
 
 Qt 5.1 中引入该函数。
 
-另请参阅 QMultiMap::insert()。
+\begin{notice}[另请参阅]
+QMultiMap::insert()。
+\end{notice}
 
 \splitLine
 
-void QMap::insert(const QMap<Key, T> \&map)
+void QMap::insert(const QMap<Key, T> \emph{\&map})
 
-将 map 中的所有元素插入到本 map 中。
+将 map 中的所有元素插入到本 \emph{map} 中。
 
-如果一个键同时在两个 map 中出现，其值将被传入的 map 中存储的值替换。
+如果一个键同时在两个 \emph{map} 中出现，其值将被传入的 \emph{map} 中存储的值替换。
 
-注意: 如果传入的 map 中同一键关联多个元素，则该键的最终值未定义。
+\begin{notice}[另请参阅]
+如果传入的 map 中同一键关联多个元素，则该键的最终值未定义。
+\end{notice}
 
 Qt 5.15 中引入该函数。
 
-另请参阅 QMultiMap::insert()。
+\begin{notice}[另请参阅]
+QMultiMap::insert()。
+\end{notice}
 
 \splitLine
 
@@ -808,21 +828,25 @@ bool QMap::isEmpty() const
 
 如果 map 中不包含元素，返回 true；否则返回 false。
 
-另请参阅 size()。
+\begin{notice}
+size()。
+\end{notice}
 
 \splitLine
 
-const Key QMap::key(const T \&value, const Key \&defaultKey = Key()) const
+const Key QMap::key(const T \emph{\&value}, const Key \&defaultKey = Key()) const
 
 这是一个重载函数。
 
-返回与值 value 对应的第一个键，如果 map 不包含值为 value 的元素，返回 defaultKey。如果没有提供 defaultKey，函数返回默认构造的键。
+返回与值 \emph{value} 对应的第一个键，如果 map 不包含值为 value 的元素，返回 defaultKey。如果没有提供 defaultKey，函数返回默认构造的键。
 
 该函数可能会比较慢（线性时间），因为 QMap 的内部数据结构是以快速查找键而不是值为目标来优化的。
 
 Qt 4.3 中引入该函数。
 
+\begin{notice}[另请参阅]
 另请参阅 value() 和 keys()。
+\end{notice}
 
 \splitLine
 
@@ -832,7 +856,9 @@ QMap::key\_iterator QMap::keyBegin() const
 
 Qt 5.6 中引入该函数。
 
-另请参阅 keyEnd() 和 firstKey()。
+\begin{notice}[另请参阅]
+keyEnd() 和 firstKey()。
+\end{notice}
 
 \splitLine
 
@@ -842,7 +868,9 @@ QMap::key\_iterator QMap::keyEnd() const
 
 Qt 5.6 中引入该函数。
 
-另请参阅 keyBegin() 和 lastKey()。
+\begin{notice}[另请参阅]
+keyBegin() 和 lastKey()。
+\end{notice}
 
 \splitLine
 
@@ -852,7 +880,9 @@ QMap::key\_value\_iterator QMap::keyValueBegin()
 
 Qt 5.10 中引入该函数。
 
-另请参阅 keyValueEnd().
+\begin{notice}[另请参阅]
+keyValueEnd().
+\end{notice}
 
 \splitLine
 
@@ -862,7 +892,9 @@ QMap::const\_key\_value\_iterator QMap::keyValueBegin() const
 
 Qt 5.10 中引入该函数。
 
-另请参阅 keyValueEnd()。
+\begin{notice}[另请参阅]
+keyValueEnd()。
+\end{notice}
 
 \splitLine
 
@@ -872,7 +904,9 @@ QMap::key\_value\_iterator QMap::keyValueEnd()
 
 Qt 5.10 中引入该函数。
 
-另请参阅 keyValueBegin()。
+\begin{notice}[另请参阅]
+keyValueBegin()。
+\end{notice}
 
 \splitLine
 
@@ -882,7 +916,9 @@ QMap::const\_key\_value\_iterator QMap::keyValueEnd() const
 
 Qt 5.10 中引入该函数。
 
-另请参阅 keyValueBegin()。
+\begin{notice}[另请参阅]
+keyValueBegin()。
+\end{notice}
 
 \splitLine
 
@@ -892,15 +928,17 @@ QList<Key> QMap::keys() const
 
 键的顺序将确保与通过 values() 返回的值的顺序相同。
 
-另请参阅 QMultiMap::uniqueKeys()，values() 和 key()。
+\begin{notice}[另请参阅]
+QMultiMap::uniqueKeys()，values() 和 key()。
+\end{notice}
 
 \splitLine
 
-QList<Key> QMap::keys(const T \&value) const
+QList<Key> QMap::keys(const T \emph{\&value}) const
 
 这是一个重载函数。
 
-以升序返回所有与值 value 相关联的键的列表。
+以升序返回所有与值 \emph{value} 相关联的键的列表。
 
 该函数可能会比较慢（线性时间），因为 QMap 的内部数据结构是以快速查找键而不是值为目标来优化的。
 
@@ -914,7 +952,9 @@ T \&QMap::last()
 
 Qt 5.2 中引入该函数。
 
-另请参阅 first()，lastKey() 和 isEmpty()。
+\begin{notice}[另请参阅]
+first()，lastKey() 和 isEmpty()。
+\end{notice}
 
 \splitLine
 
@@ -934,12 +974,14 @@ const Key \&QMap::lastKey() const
 
 Qt 5.2 中引入该函数。
 
-另请参阅 firstKey()，last()，keyEnd() 和 isEmpty()。
+\begin{notice}[另请参阅]
+firstKey()，last()，keyEnd() 和 isEmpty()。
+\end{notice}
 
 \splitLine
 
-QMap::iterator QMap::lowerBound(const Key \&key)
+QMap::iterator QMap::lowerBound(const Key \emph{\&key})
 
-返回指向 map 中键 key 所关联的第一个元素的迭代器。如果 map 不包含键为 key 的元素，函数返回指向距离下一个键最近的元素的迭代器。
+返回指向 map 中键 \emph{key} 所关联的第一个元素的迭代器。如果 map 不包含键为 key 的元素，函数返回指向距离下一个键最近的元素的迭代器。
 
 例子：
