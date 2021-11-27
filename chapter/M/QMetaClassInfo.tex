@@ -1,0 +1,65 @@
+\chapter{QMetaClassInfo}
+
+QMetaClassInfo 类提供了某个类的附加信息。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMetaClassInfo>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{tabular}{|r|l|}
+\hline
+const char * 	&name() const \\
+\hline
+const char * 	& value() const \\ 
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+类型信息对象指的在源代码中通过 Q\_CLASSINFO() 指定的名称-值对。
+这些信息可以通过 name() 和 value() 获取，例如：
+
+\begin{lstlisting}[language=C++]
+class MyClass
+{
+    Q_OBJECT
+    Q_CLASSINFO("author", "Sabrina Schweinsteiger")
+    Q_CLASSINFO("url", "http://doc.moosesoft.co.uk/1.0/")
+
+public:
+    ...
+};
+\end{lstlisting}
+
+此机制可以在您的应用中自由使用，Qt 不会在自身的任何类中使用它。
+
+\begin{notice}[另请参阅]
+QMetaObject。
+\end{notice}
+
+\section{成员函数文档}
+
+const char *QMetaClassInfo::name() const
+
+返回本信息对象的名称。
+
+\begin{notice}[另请参阅]
+value()。
+\end{notice}
+
+const char *QMetaClassInfo::value() const
+
+返回本信息对象的值。
+
+\begin{notice}[另请参阅]
+name()。
+\end{notice}
+
