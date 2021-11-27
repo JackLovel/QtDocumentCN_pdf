@@ -985,3 +985,214 @@ QMap::iterator QMap::lowerBound(const Key \emph{\&key})
 返回指向 map 中键 \emph{key} 所关联的第一个元素的迭代器。如果 map 不包含键为 key 的元素，函数返回指向距离下一个键最近的元素的迭代器。
 
 例子：
+
+\begin{lstlisting}[language=C++]
+QMap<int, QString> map;
+map.insert(1, "one");
+map.insert(5, "five");
+map.insert(10, "ten");
+
+map.lowerBound(0);      // 返回指向 (1, "one") 的迭代器
+map.lowerBound(1);      // 返回指向 (1, "one") 的迭代器
+map.lowerBound(2);      // 返回指向 (5, "five") 的迭代器
+map.lowerBound(10);     // 返回指向 (10, "ten") 的迭代器
+map.lowerBound(999);    // 返回 end()
+\end{lstlisting}
+
+如果 map 包含多个键为 key 的元素，该函数返回指向最新插入的值的迭代器。其它值可以通过递增迭代器访问。例如，下面的例子遍历同一键所关联的所有元素：
+
+\begin{lstlisting}[language=C++]
+QMap<QString, int> map;
+...
+QMap<QString, int>::const_iterator i = map.lowerBound("HDR");
+QMap<QString, int>::const_iterator upperBound = map.upperBound("HDR");
+while (i != upperBound) {
+    cout << i.value() << Qt::endl;
+    ++i;
+}
+\end{lstlisting}
+
+%%%%%%%%%
+\begin{notice}[另请参阅]
+upperBound() 和 find()。
+\end{notice}
+    
+
+QMap::const\_iterator QMap::lowerBound(const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+\splitLine
+
+int QMap::remove(const Key \emph{\&key})
+
+从 map 中移除所有键为 \emph{key} 的元素。返回被移除的元素个数，如果键存在，则为1，否则为0。
+
+\begin{notice}[另请参阅]
+clear()，take() 和 QMultiMap::remove()。
+\end{notice}
+
+\splitLine
+
+int QMap::size() const
+
+返回 map 中键值对的个数。
+
+\begin{notice}[另请参阅]
+isEmpty() 和 count()。
+\end{notice}
+    
+
+\splitLine
+
+void QMap::swap(QMap<Key, T> \emph{\&other})
+
+将 map other 与本 map 交换。该操作非常快，永远不失败。
+
+Qt 4.8 中引入该函数。
+
+\splitLine
+
+T QMap::take(const Key \emph{\&key})
+
+从 map 中移除键为 \emph{key} 的元素，返回键 \emph{key} 所关联的值。
+
+如果 map 中不存在该元素，该函数简单返回一个默认构造的值。如果 map 中有多个键为 key 的元素，只移除最新插入的元素并返回值。
+
+如果不使用返回值，使用 remove() 更高效一些。
+
+\begin{notice}[另请参阅]
+remove()。
+\end{notice}
+
+\splitLine
+
+std::map<Key, T> QMap::toStdMap() const
+
+返回与这个 QMap 相对应的 STL map。
+
+\splitLine
+
+QMap::iterator QMap::upperBound(const Key \emph{\&key})
+
+返回迭代器，指向 map 中首个大于键 \emph{key} 的元素。如果 map 不包含键为 \emph{key} 的元素，该函数返回指向距离下一个键最近的元素的迭代器。
+
+例子：
+
+\begin{lstlisting}[language=C++]
+QMap<int, QString> map;
+map.insert(1, "one");
+map.insert(5, "five");
+map.insert(10, "ten");
+
+map.upperBound(0);      // 返回指向 (1, "one") 的迭代器
+map.upperBound(1);      // 返回指向 (5, "five") 的迭代器
+map.upperBound(2);      // 返回指向 (5, "five") 的迭代器
+map.upperBound(10);     // 返回 end()
+map.upperBound(999);    // 返回 end()
+\end{lstlisting}
+
+%%%%%%
+\begin{notice}[另请参阅]
+lowerBound() 和 find()。
+\end{notice}
+
+QMap::const\_iterator QMap::upperBound(const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+\splitLine
+
+const T QMap::value(const Key \emph{\&key}, const T \&defaultValue = T()) const
+
+返回键 key 关联的值。
+
+如果 map 不包含键为 \emph{key} 的元素，该函数返回 defaultValue。 如果没有指定 defaultValue，该函数返回默认构造的值。如果 map 中有多个键为 key 的元素，返回最新插入的元素的值。
+
+\begin{notice}[另请参阅]
+key()，values()，contains() 和 operator[]()。
+\end{notice}
+
+\splitLine
+
+QList<T> QMap::values() const
+
+按照键升序返回 map 中所有值的列表。如果一个键关联到多个值，该键的所有值都将被放入列表中，而不只是最新插入的值。
+
+\begin{notice}[另请参阅]
+keys() 和 value()。
+\end{notice}
+
+\splitLine
+
+bool QMap::operator!=(const QMap<Key, T> \emph{\&other}) const
+
+如果 other 与本 map 不相等，返回 true，否则返回 false。
+
+如果两个 map 包含相同的键值对，则认为二者相等。
+
+该函数需要值类型实现 operator==()。
+
+\begin{notice}[另请参阅]
+operator==()。
+\end{notice}
+
+\splitLine
+
+bool QMap::operator==(const QMap<Key, T> \emph{\&other}) const
+
+如果 \emph{other} 与本 map 相等，返回 true，否则返回 false。
+
+如果两个 map 包含相同的键值对，则认为二者相等。
+
+该函数需要值类型实现 operator==()。
+
+\begin{notice}[另请参阅]
+operator!=()。
+\end{notice}
+
+\splitLine
+
+T \&QMap::operator[](const Key \emph{\&key})
+
+返回键 \emph{key} 所关联的值的可修改引用。
+
+如果 map 不包含键为 \emph{key} 的元素，该函数用键 \emph{key} 插入一个默认构造的值，并返回该值的引用。
+如果 map 包含多个键为  \emph{key} 的元素，该函数返回最新插入的那个值的引用。
+
+\begin{notice}[另请参阅]
+insert() 和 value()。
+\end{notice}
+
+
+\splitLine
+
+const T QMap::operator[](const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+同 value()。
+
+\section{相关非成员函数}
+
+template <typename Key, typename T> QDataStream \&operator<<(QDataStream \emph{\&out}, const QMap<Key, T> \emph{\&map})
+
+将 \emph{map} 写出到流 \emph{out}。
+
+该函数需要键和值类型实现 operator<<()。
+
+\begin{notice}[另请参阅]
+QDataStream 运算符的格式。
+\end{notice}
+
+\splitLine
+
+template <typename Key, typename T> QDataStream \&operator>>(QDataStream \emph{\&in}, QMap<Key, T> \emph{\&map})
+
+从流 in 读入数据到 map。
+
+该函数需要键和值类型实现 operator>>()。
+
+\begin{notice}[另请参阅]
+QDataStream 运算符的格式。
+\end{notice}
