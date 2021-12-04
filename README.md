@@ -5,8 +5,3 @@
 ### license
 [font-license](https://github.com/JackLovel/QtDocumentCN_pdf/blob/master/license.txt)
 
-### PR
-
-```
-目前还有一些文档样式问题，如果您有解决办法，请 PR 给我。
-```
