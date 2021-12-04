@@ -1,0 +1,79 @@
+\chapter{QMetaMethod}
+
+QMetaMethod 类提供了对应一个成员函数的元数据。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMetaMethod>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+\end{tabular}
+
+\section{公共类型}
+
+\begin{tabular}{|r|l|}   
+\hline
+类型	& 名称 \\ 
+\hline
+enum	&Access \{ Private, Protected, Public \} \\ 
+\hline
+enum	& MethodType \{ Method, Signal, Slot, Constructor \} \\
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|l|m{27em}|} 
+\hline
+返回类型 & 函数 \\   
+\hline
+QMetaMethod::Access	& access() const \\ 
+\hline
+bool &	invoke(QObject *object, Qt::ConnectionType connectionType, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invoke(QObject *object, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invoke(QObject *object, Qt::ConnectionType connectionType, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invoke(QObject *object, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invokeOnGadget(void *gadget, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invokeOnGadget(void *gadget, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+const char * 	&name() const \\
+\hline
+const char * 	& value() const \\ 
+\hline
+bool & 	isValid() const \\ 
+\hline
+int	& methodIndex() const \\ 
+\hline
+QByteArray &	methodSignature() const \\ 
+\hline
+QMetaMethod::MethodType	 & methodType() const \\
+\hline
+QByteArray & 	name() const \\ 
+\hline
+int	& parameterCount() const \\
+\hline
+QList<QByteArray>	& parameterNames() const \\
+\hline
+int	& parameterType(int index) const \\
+\hline
+QList<QByteArray> &	parameterTypes() const \\
+\hline
+int	& returnType() const \\
+\hline
+int	& revision() const \\ 
+\hline
+const char *	& tag() const \\ 
+\hline
+const char *	& typeName() const \\ 
+\hline
+\end{longtable}
+
+

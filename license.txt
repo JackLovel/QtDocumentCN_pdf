@@ -1,5 +1,5 @@
 
-* 中文部分使用了 思源黑体
+* 字体使用了 思源黑体
 - source-han-sans
 Copyright -2020 Adobe (http://www.adobe.com/), with Reserved Font
 Name 'Source'. Source is a trademark of Adobe in the United States
@@ -97,9 +97,5 @@ INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
 DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
-
-* 英文部分使用了 JetBrains Mono
-- JetBrains Mono 
-字体可在 SIL Open Font License 1.1 许可下获得，并且可以免费用于商业和非商业目的。
 
 * 本项目是基于 https://github.com/QtDocumentCN/QtDocumentCN/ 的 pdf 版本
