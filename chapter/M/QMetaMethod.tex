@@ -77,3 +77,128 @@ const char *	& typeName() const \\
 \end{longtable}
 
 
+\section{静态公共成员}
+
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+QMetaMethod 	&fromSignal(PointerToMemberFunction \emph{signal}) \\ 
+\hline
+\end{tabular}
+
+\section{相关非成员函数}
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+bool  &	operator!=(const QMetaMethod \emph{\&m1}, const QMetaMethod \emph{\&m2}) \\
+\hline 
+bool  &	operator==(const QMetaMethod \emph{\&m1}, const QMetaMethod \emph{\&m2})  \\
+\hline
+\end{tabular}
+
+\section{宏定义}
+
+\begin{tabular}{|c|c|}
+	\hline
+	宏定义 \\ 
+	\hline
+Q\_METAMETHOD\_INVOKE\_MAX\_ARGS \\ 
+	\hline
+	\end{tabular}
+
+\section{详细描述}
+
+QMetaMethod 类具有一个 methodType()、一个 methodSignature()、一组 parameterTypes() 和 parameterNames()、返回值的 typeName()、一个 tag()、一个 access() 描述符。
+可以通过 invoke() 来执行任意 QObject 的方法。
+
+\begin{notice}[另请参阅]
+QMetaObject、QMetaEnum、QMetaProperty 和 Qt 属性系统。
+\end{notice}
+
+\section{成员类型文档}
+
+enum QMetaMethod::Access
+
+此枚举描述某方法的访问权限，遵循 C++ 相关公约。
+
+
+\begin{tabular}{|c|c|}
+	\hline
+	常量 	& 数值  \\
+	\hline
+	QMetaMethod::Private  &	0 \\ 
+	\hline
+	QMetaMethod::Protected &	1 \\ 
+	\hline
+	QMetaMethod::Public &	2 \\ 
+	\hline
+	\end{tabular}
+
+enum QMetaMethod::MethodType	
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	常量  &	数值 	& 描述  \\ 
+	\hline
+	QMetaMethod::Method &	0 &	该函数是普通的成员函数。 \\
+	\hline
+	QMetaMethod::Signal &	1 	&该函数是信号函数。 \\
+	\hline
+	QMetaMethod::Slot &	2 &	该函数是槽函数。 \\ 
+	\hline
+	QMetaMethod::Constructor &	3 &	该函数是构造函数。 \\ 
+	\hline
+	\end{tabular}
+
+\section{成员函数文档}
+
+QMetaMethod::Access QMetaMethod::access() const
+
+返回该方法的访问权限(private、protected 或 `public)。
+
+\begin{notice}
+信号永远是公共的，但应将此认为是实现细节。在类外发射该类的信号通常是个坏主意。
+\end{notice}
+
+\begin{notice}[另请参阅]
+methodType()。
+\end{notice}
+
+[static] template <typename PointerToMemberFunction> QMetaMethod QMetaMethod::fromSignal(PointerToMemberFunction signal)
+
+返回对应给定 signal 的元方法，若 signal 并非信号，则返回无效的 QMetaMethod 对象。
+
+范例：
+
+\begin{lstlisting}[language=C++]
+QMetaMethod destroyedSignal = QMetaMethod::fromSignal(&QObject::destroyed);
+\end{lstlisting}
+
+
+本函数在 Qt 5.0 中被引入。
+
+bool QMetaMethod::invoke(QObject *object, Qt::ConnectionType connectionType, QGenericReturnArgument returnValue, 
+   QGenericArgument val0 = QGenericArgument(nullptr), 
+   QGenericArgument val1 = QGenericArgument(), 
+QGenericArgument val2 = QGenericArgument(), 
+QGenericArgument val3 = QGenericArgument(), 
+QGenericArgument val4 = QGenericArgument(), 
+QGenericArgument val5 = QGenericArgument(), 
+QGenericArgument val6 = QGenericArgument(), 
+QGenericArgument val7 = QGenericArgument(),
+ QGenericArgument val8 = QGenericArgument(), 
+ QGenericArgument val9 = QGenericArgument()) const
+
+通过 object 对象动态调用本方法。若可被动态调用则返回 tue，若该对象无此方法或参数不匹配则返回 false。
+
+该动态调用可以是同步或异步的，由 connectionType 决定：
+
+\begin{compactitem}
+\item 若 type 是 Qt::DirectConnection，则该方法会被立即执行。
+\item 若 type 是 Qt::QueuedConnection，则会发送一个 QEvent ，该方法会在应用进入该对象所属线程的主事件循环后执行。
+\item 若 type 是 Qt::AutoConnection，当 object 与调用者处于相同线程中时，该方法会被同步执行，否则会被异步执行。
+\end{compactitem}

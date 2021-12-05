@@ -27,6 +27,8 @@
 \usepackage{paralist}
 
 \usepackage{adjustbox}
+\usepackage{lstfiracode}
+
 
 \newfontfamily\consolas{Consolas}
 %fc-list :lang=zh >> c:\font.txt
@@ -42,6 +44,8 @@
 
 \lstset{
 	basicstyle=\small\consolas,
+	% style=FiraCodeStyle,   % Use predefined FiraCodeStyle
+	% basicstyle=\ttfamily   % Use \ttfamily for source code listings
 	numberstyle= \tiny, 
 	keywordstyle= \color{ blue!70},
 	commentstyle=\color{mygreen},
@@ -75,6 +79,10 @@
 %\setmainfont{Consolas}
 \setmainfont{SourceCodePro-Regular}
 
+% \usepackage{fontspec}
+% \setmonofont{Fira Code}[
+%   Contextuals=Alternate  % Activate the calt feature
+% ]
 
 % 标题页
 \title{Qt中文文档翻译}
