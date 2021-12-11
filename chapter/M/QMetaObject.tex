@@ -1,0 +1,372 @@
+\chapter{QMetaObject 结构体}
+
+QMetaObject 类包含了 Qt 对象的元信息。更多内容...。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMetaObject>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+\end{tabular}
+
+\section{公共成员类型}
+
+
+\begin{tabular}{|r|l|}   
+\hline
+类型	& 名称 \\ 
+\hline
+class	& Connection \\ 
+\hline
+\end{tabular}
+
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{28em}|}   
+\hline
+QMetaClassInfo	& classInfo(int \emph{index}) const \\ 
+\hline
+int &	classInfoCount() const \\
+\hline
+int	&classInfoOffset() const\\
+\hline
+const char *	&className() const\\
+\hline
+QMetaMethod	&constructor(int index) const\\
+\hline
+int	&constructorCount() const\\
+\hline
+QMetaEnum	&enumerator(int index) const\\
+\hline
+int	&enumeratorCount() const\\
+\hline
+int	&enumeratorOffset() const\\
+\hline
+int&	indexOfClassInfo(const char *name) const\\
+\hline
+int	&indexOfConstructor(const char *constructor) const\\
+\hline
+int	&indexOfEnumerator(const char *name) const\\
+\hline
+int	&indexOfMethod(const char *method) const\\
+\hline
+int	&indexOfProperty(const char *name) const\\
+\hline
+int	&indexOfSignal(const char *signal) const\\
+\hline
+int&	indexOfSlot(const char *slot) const\\
+\hline
+bool	&inherits(const QMetaObject *metaObject) const\\
+\hline
+QMetaMethod	&method(int index) const\\
+\hline
+int	&methodCount() const\\
+\hline
+int	&methodOffset() const\\
+\hline
+QObject *	&newInstance(QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const\\
+\hline
+QMetaProperty	&property(int index) const\\
+\hline
+int&	propertyCount() const\\
+\hline
+int	&propertyOffset() const\\
+\hline
+const QMetaObject *	&superClass() const\\
+\hline
+QMetaProperty	&userProperty() const\\
+\hline
+\end{longtable}
+
+
+
+\section{静态公共成员}
+
+\begin{longtable}{|l|m{28em}|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+bool	&checkConnectArgs(const char *signal, const char *method) \\
+\hline
+bool	&checkConnectArgs(const QMetaMethod \&signal, const QMetaMethod \&method) \\
+\hline
+void	&connectSlotsByName(QObject *object) \\
+\hline
+bool	&invokeMethod(QObject *obj, const char *member, Qt::ConnectionType type, QGenericReturnArgument ret, QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument())\\
+\hline
+bool	&invokeMethod(QObject *obj, const char *member, QGenericReturnArgument ret, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument())\\
+\hline
+bool	&invokeMethod(QObject *obj, const char *member, Qt::ConnectionType type, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument())\\
+\hline
+bool	&invokeMethod(QObject *obj, const char *member, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument())\\
+\hline
+bool	&invokeMethod(QObject *context, Functor function, Qt::ConnectionType type = Qt::AutoConnection, FunctorReturnType *ret = nullptr) \\
+\hline
+bool	&invokeMethod(QObject *context, Functor function, FunctorReturnType *ret) \\
+\hline
+QByteArray&	normalizedSignature(const char *method) \\
+\hline
+QByteArray&	normalizedType(const char *type)\\
+\hline
+\end{longtable}
+
+\section{宏定义}
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型	& 宏定义 \\
+\hline
+QGenericArgument	& Q\_ARG(Type, const Type \&value) \\
+\hline
+QGenericReturnArgument&	Q\_RETURN\_ARG(Type, Type \&value) \\
+\hline
+\end{tabular}
+
+
+
+\section{详细描述}
+
+Qt 的元对象系统负责信号槽跨对象通信机制、运行时类型信息和 Qt 的属性系统。
+应用中的每个 QObject 子类都有一个唯一的 QMetaObject 实例（译者注：与类一一对应，即同一个 QObject 子类的任意对象，都使用同一个 QMetaObject），其中保存了这个 QObject 子类的所有元信息，可以通过 QObject::metaObject() 获取。
+
+QMetaObject 在应用编写中通常不需要，但在进行元编程时会非常有用，例如脚本引擎或者用户界面生成器。
+
+最常用的成员函数有：
+
+\begin{compactitem}
+\item className() 返回类的名称。
+\item superClass() 返回父类对应的元对象。
+\item method() 和 methodCount() 提供关于一个类的元方法（信号、槽和其它可动态调用的成员方法）。
+\item enumerator() 和 enumeratorCount() 提供一个类的枚举类型的信息。
+\item propertyCount() 和 property() 提供一个类的属性的信息。
+\item constructor() 和 constructorCount() 提供一个类的元构造函数的信息。
+\end{compactitem}
+
+
+索引函数 indexOfConstructor()、indexOfMethod()、indexOfEnumerator() 和 indexOfProperty() 将构造函数、成员函数、枚举类型和属性的名称映射为索引。例如，当连接信号槽时，Qt 内部使用 indexOfMethod() 进行检索。
+
+类可以拥有一系列 名称—数值 格式的附加信息，保存在 QMetaClassInfo 对象中。信息条目数量可通过 classInfoCount()查询， classInfo()返回单条信息，也可通过 indexOfClassInfo() 检索信息条目。
+
+\begin{notice}
+元对象系统的操作通常是线程安全的，比如元对象是在编译期生成的静态只读实例。
+然而，如果元对象在被程序动态修改了（如通过 QQmlPropertyMap），应用需要显示地同步对相关对象的访问。
+\end{notice}
+
+\begin{notice}[另请参阅]
+QMetaClassInfo、QMetaEnum、QMetaMethod、QMetaProperty、QMetaType 和 Meta-Object System。
+\end{notice}
+
+\section{成员函数文档}
+
+[static] bool QMetaObject::checkConnectArgs(const char \emph{*signal}, const char \emph{*method})
+
+如果 signal 和 method 的参数能够匹配则返回 true，否则返回 false。
+
+signal 和 method 都被假设是已经规范化的。
+
+\begin{notice}[另请参阅]
+normalizedSignature()。
+\end{notice}
+
+[static] bool QMetaObject::checkConnectArgs(const QMetaMethod \emph{\&signal}, const QMetaMethod \emph{\&method})
+
+这是一个重载函数。
+
+如果 signal 和 method 的参数能够匹配则返回 true，否则返回 false。
+
+本函数在 Qt 5.0 中被引入。
+
+QMetaClassInfo QMetaObject::classInfo(int \emph{index}) const
+
+返回对应 index 的类型信息的元数据对象。
+
+范例：
+
+\begin{lstlisting}[language=C++]
+class MyClass : public QObject
+ {
+     Q_OBJECT
+     Q_CLASSINFO("author", "Sabrina Schweinsteiger")
+     Q_CLASSINFO("url", "http://doc.moosesoft.co.uk/1.0/")
+
+ public:
+     ...
+ };
+\end{lstlisting}
+
+
+%%%%%%%%%%%%%%%%
+
+\begin{notice}[另请参阅]
+classInfoCount()、classInfoOffset() 和 indexOfClassInfo()。
+\end{notice}
+
+int QMetaObject::classInfoCount() const
+
+返回该类信息条目数量。
+
+\begin{notice}[另请参阅]
+classInfo()、classInfoOffset() 和 indexOfClassInfo()。
+\end{notice}
+
+int QMetaObject::classInfoOffset() const
+
+返回类信息在该类中的偏移量，即第一条类信息的编号。
+
+若该类没有包含类信息的父类，则偏移量为 0，否则偏移量是所有父类的类信息数量的总和。
+
+\begin{notice}[另请参阅]
+classInfo()、classInfoCount() 和 indexOfClassInfo()。
+\end{notice}
+
+const char *QMetaObject::className() const
+
+返回该类的名称。
+
+\begin{notice}[另请参阅]
+superClass()。
+\end{notice}
+
+[static] void QMetaObject::connectSlotsByName(QObject \emph{*object})
+
+递归检索 object 和所有子对象，将它们的信号连接至 object 中匹配的槽，匹配格式如下：
+
+\begin{lstlisting}
+void on_<对象名>_<信号名>(<信号参数>);
+\end{lstlisting}
+
+假设有一个对象名 为 button1 的 QPushButton 类型的子对象，则捕获它的 clicked() 信号的槽应为：
+
+\begin{lstlisting}
+void on_button1_clicked();
+\end{lstlisting}
+
+若 object 对象自身的名字已设置，则它自己的信号也会被连接至对应的槽。
+
+\begin{notice}[另请参阅]
+QObject::setObjectName().
+\end{notice}
+
+%%%%%%%%%%%
+QMetaMethod QMetaObject::constructor(int \emph{index}) const
+
+返回指定 index 的构造函数的元数据。
+
+该函数在 Qt 4.5 中被引入。
+
+\begin{notice}[另请参阅]
+constructorCount() 和 newInstance()。
+\end{notice}
+
+int QMetaObject::constructorCount() const
+
+返回此类的构造函数个数。
+
+该函数在 Qt 4.5 中被引入。
+
+\begin{notice}[另请参阅]
+constructor() 和 indexOfConstructor()。
+\end{notice}
+
+QMetaEnum QMetaObject::enumerator(int \emph{index}) const
+
+返回指定 index 的枚举类型的元数据。
+
+\begin{notice}[另请参阅]
+enumeratorCount()、enumeratorOffset() 和 indexOfEnumerator()。
+\end{notice}
+
+int QMetaObject::enumeratorCount() const
+
+返回该类的枚举类型的个数。
+
+\begin{notice}[另请参阅]
+enumerator()、enumeratorOffset() 和 indexOfEnumerator()。
+\end{notice}
+	
+int QMetaObject::enumeratorOffset() const
+
+返回该类的枚举类型偏移量，即首个枚举变量的编号。
+
+若该类没有包含枚举类型的父类，则偏移量为 0，否则偏移量是所有父类的枚举类型数量的总和。
+
+\begin{notice}[另请参阅]
+enumerator()、enumeratorCount() 和 indexOfEnumerator()。
+\end{notice}
+
+int QMetaObject::indexOfClassInfo(const char \emph{*name}) const
+
+查找名为 name 的类型信息条目并返回其编号，未找到则返回-1。
+
+\begin{notice}[另请参阅]
+classInfo()、classInfoCount() 和 classInfoOffset()。
+\end{notice}
+
+int QMetaObject::indexOfConstructor(const char \emph{*constructor}) const
+
+查找名为 constructor 的构造函数并返回其编号，未找到则返回-1。
+
+注意：constructor 需要为规范化的格式，如 normalizedSignature() 的返回值。
+
+该函数在 Qt 4.5 中被引入。
+
+另请参阅：constructor()、constructorCount() 和 normalizedSignature()。
+
+int QMetaObject::indexOfEnumerator(const char *name) const
+
+查找名为 name 的枚举类型并返回其编号，未找到则返回-1。
+
+另请参阅：enumerator(), enumeratorCount() 和 enumeratorOffset().
+
+int QMetaObject::indexOfMethod(const char *method) const
+
+查找名为 method 的方法并返回其编号，未找到则返回-1。
+
+注意：method 需要为规范化的格式，如 normalizedSignature() 的返回值。
+
+另请参阅：method()、methodCount()、methodOffset() 和 normalizedSignature()。
+
+int QMetaObject::indexOfProperty(const char *name) const
+
+查找名为 name 的属性并返回其编号，未找到则返回-1。
+
+\begin{notice}[另请参阅]
+property()、propertyCount() 和 propertyOffset()。	
+\end{notice}
+
+int QMetaObject::indexOfSignal(const char \emph{*signal}) const
+
+查找名为 name 的信号并返回其编号，未找到则返回-1。
+
+此方法与 indexOfMethod() 相似，区别是若该方法存在但并非信号函数，则会返回 -1。
+
+\begin{notice}
+signal 需要为规范化的格式，如 normalizedSignature() 的返回值。	
+\end{notice}
+
+\begin{notice}[另请参阅]
+indexOfMethod()、normalizedSignature(), method()、methodCount() 和 methodOffset()。
+\end{notice}
+
+int QMetaObject::indexOfSlot(const char \emph{*slot}) const
+
+查找名为 name 的槽并返回其编号，未找到则返回-1。
+
+此方法与 indexOfMethod() 相似，区别是若该方法存在但并非槽函数，则会返回 -1。
+
+\begin{notice}[另请参阅]
+indexOfMethod()、method()、methodCount() 和 methodOffset()。
+\end{notice}
+
+
+bool QMetaObject::inherits(const QMetaObject \emph{*metaObject}) const
+
+若该 QMetaObject 继承自 metaObject 描述的类型，则返回 true，否则返回 false。
+
+一个类型被认为是继承自它自己的。
+
+该函数在 Qt 5.7 中被引入。
