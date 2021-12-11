@@ -308,29 +308,39 @@ classInfo()、classInfoCount() 和 classInfoOffset()。
 
 int QMetaObject::indexOfConstructor(const char \emph{*constructor}) const
 
-查找名为 constructor 的构造函数并返回其编号，未找到则返回-1。
+查找名为 \emph{constructor} 的构造函数并返回其编号，未找到则返回-1。
 
-注意：constructor 需要为规范化的格式，如 normalizedSignature() 的返回值。
+\begin{notice}
+constructor 需要为规范化的格式，如 normalizedSignature() 的返回值。
+\end{notice}
 
 该函数在 Qt 4.5 中被引入。
 
-另请参阅：constructor()、constructorCount() 和 normalizedSignature()。
+\begin{notice}[另请参阅]
+constructor()、constructorCount() 和 normalizedSignature()。
+\end{notice}
 
-int QMetaObject::indexOfEnumerator(const char *name) const
+int QMetaObject::indexOfEnumerator(const char \emph{*name}) const
 
-查找名为 name 的枚举类型并返回其编号，未找到则返回-1。
+查找名为 \emph{name} 的枚举类型并返回其编号，未找到则返回-1。
 
-另请参阅：enumerator(), enumeratorCount() 和 enumeratorOffset().
+\begin{notice}
+enumerator(), enumeratorCount() 和 enumeratorOffset().
+\end{notice}
 
-int QMetaObject::indexOfMethod(const char *method) const
+int QMetaObject::indexOfMethod(const char \emph{*method}) const
 
-查找名为 method 的方法并返回其编号，未找到则返回-1。
+查找名为 \emph{method} 的方法并返回其编号，未找到则返回-1。
 
-注意：method 需要为规范化的格式，如 normalizedSignature() 的返回值。
+\begin{notice}
+method 需要为规范化的格式，如 normalizedSignature() 的返回值。
+\end{notice}
 
-另请参阅：method()、methodCount()、methodOffset() 和 normalizedSignature()。
+\begin{notice}[另请参阅]
+method()、methodCount()、methodOffset() 和 normalizedSignature()。
+\end{notice}
 
-int QMetaObject::indexOfProperty(const char *name) const
+int QMetaObject::indexOfProperty(const char \emph{*name}) const
 
 查找名为 name 的属性并返回其编号，未找到则返回-1。
 
@@ -365,8 +375,29 @@ indexOfMethod()、method()、methodCount() 和 methodOffset()。
 
 bool QMetaObject::inherits(const QMetaObject \emph{*metaObject}) const
 
-若该 QMetaObject 继承自 metaObject 描述的类型，则返回 true，否则返回 false。
+若该 QMetaObject 继承自 \emph{metaObject} 描述的类型，则返回 true，否则返回 false。
 
 一个类型被认为是继承自它自己的。
 
 该函数在 Qt 5.7 中被引入。
+
+%%%%%%
+[static] bool QMetaObject::invokeMethod(QObject *obj, const char *member, 
+ Qt::ConnectionType type, QGenericReturnArgument ret, 
+ QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), 
+ QGenericArgument val2 = QGenericArgument(),QGenericArgument val3 = QGenericArgument(), 
+ QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), 
+ QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), 
+ QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument())
+
+通过 obj 对象动态调用它的 member 方法（或者信号和槽），若调用成功则返回 true，若该对象没有此方法或参数不匹配则返回 false。
+
+该调用可以是同步或异步的，由 type 决定：
+
+\begin{compactitem}
+\item 若 type 是 Qt::DirectConnection，则该方法会被立即执行。
+\item 若 type 是 Qt::QueuedConnection，则会发送一个 QEvent ，该方法会在应用进入该对象所属线程的主事件循环后执行。
+\item 若 type 是 Qt::BlockingQueuedConnection，则该方法会通过与 Qt::QueuedConnection 相同的方式执行，
+	此外当前线程会被阻塞，直到该事件被响应。使用此方法在相同线程的对象间通信会导致死锁。
+\item 若 type 是 Qt::AutoConnection，当 obj 与调用者处于相同线程中时，该方法会被同步执行，否则会被异步执行。
+\end{compactitem}
