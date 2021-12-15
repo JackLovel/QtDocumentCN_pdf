@@ -1,0 +1,67 @@
+\chapter{Connection}
+
+QMetaObject::Connection 类。
+
+\section{公共成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+返回类型  &	函数 \\ 
+\hline
+	&Connection(Connection \emph{\&\&o}) \\ 
+    \hline
+	&Connection(const Connection \emph{\&other}) \\ 
+    \hline
+	&Connection() \\ 
+    \hline
+Connection & 	operator=(Connection \emph{\&\&other}) \\ 
+\hline
+Connection & 	operator=(const Connection \emph{\&other}) \\
+	& $\sim$Connection() \\ 
+    \hline
+bool &	operator bool() const    \\ 
+	\hline
+\end{tabular}
+
+
+\section{详细描述}
+
+代表一组信号槽（或信号-仿函数）连接的句柄。
+
+此类可被用于检查连接是否有效，或通过 QObject::disconnect() 断开连接。
+对于不具备上下文对象的 信号-仿函数 连接，这是唯一的断开连接的方式。
+
+由于 Connection 仅仅是一个句柄，当被销毁或重新赋值时，底层的信号槽连接不会被影响。
+
+\section{成员函数文档}
+
+Connection::Connection(Connection \emph{\&\&o})
+
+移动构造函数，将其指向 \hl{o} 原先指向的对象。
+
+Connection::Connection(const Connection \emph{\&other})
+
+生成 \hl{other} 连接的句柄的一份拷贝。
+
+Connection::Connection()
+
+创建一个空的连接实例。
+
+Connection \&Connection::operator=(Connection \emph{\&\&other})
+
+将 \hl{other} 转移赋值至本对象，并返回本对象的引用。
+
+Connection \&Connection::operator=(const Connection \emph{\&other})
+
+将 \hl{other} 赋值给本对象，并返回本对象的引用。
+
+Connection::$\sim$Connection()
+
+QMetaObject::Connection 的析构函数。
+
+bool Connection::operator bool() const
+
+若该对象有效，则返回 \hl{true}。
+
+若 QObject::connect 成功，则该连接是有效的；
+若 QObject::connect 无法找到对应的信号槽或参数不匹配，则该连接无效。
