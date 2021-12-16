@@ -269,9 +269,9 @@ Some of QFileInfo's functions query the file system, but for performance reasons
 Because files can be changed by other users or programs, or even by other parts of the same program, there is a function that refreshes the file information: refresh(). If you want to switch off a QFileInfo's caching and force it to access the file system every time you request information from it call setCaching(false).
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QDir 和 QFile。
-\end{notice}
+\end{seeAlso}
 
 \splitLine 
 
@@ -289,9 +289,9 @@ QFileInfo::QFileInfo(const QDir \emph{\&dir}, const QString \emph{\&file})
 
 如果 file 是绝对路径，则 dir 指定的目录将被忽略。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  isRelative()
-\end{notice}
+\end{seeAlso}
 
 
 QFileInfo::QFileInfo(const QFile \emph{\&file})
@@ -300,19 +300,19 @@ QFileInfo::QFileInfo(const QFile \emph{\&file})
 
 如果文件具有相对路径，则 QFileInfo 也将具有相对路径。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  isRelative()
-\end{notice}
+\end{seeAlso}
 
 QFileInfo::QFileInfo(const QString \&file)
 
 构造一个新的 QFileInfo，表示指定的 file 文件信息。file 可以包含绝对或相对路径。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setFile()，isRelative()，QDir::setCurrent() 和
 QDir::isRelativePath()
-\end{notice}
+\end{seeAlso}
 
 QFileInfo::QFileInfo()
 
@@ -323,9 +323,9 @@ QFileInfo::QFileInfo()
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  setFile()
-\end{notice}
+\end{seeAlso}
 
 
 QFileInfo \&QFileInfo::operator=(QFileInfo \emph{\&\&other})
@@ -347,9 +347,9 @@ QDir QFileInfo::absoluteDir() const
 以 QDir 对象的形式返回文件的绝对路径。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 dir()，filePath()，fileName() 和 isRelative()
-\end{notice}
+\end{seeAlso}
 
 QString QFileInfo::absoluteFilePath() const
 

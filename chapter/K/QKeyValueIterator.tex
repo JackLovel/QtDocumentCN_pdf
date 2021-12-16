@@ -99,9 +99,9 @@ QKeyValueIterator<Key, T, Iterator> \&QKeyValueIterator::operator++()
 将迭代器向前移动到容器的 end() 之后将导致未定义行为。
 \end{notice}
 
-\begin{notice}[另请参阅]
-operator--().
-\end{notice}
+\begin{seeAlso}
+operator--()。
+\end{seeAlso}
 
 QKeyValueIterator<Key, T, Iterator> QKeyValueIterator::operator++(int)
 
@@ -121,9 +121,9 @@ QKeyValueIterator<Key, T, Iterator> \&QKeyValueIterator::operator--()
 将迭代器向后移动到容器的 begin() 之前将导致未定义行为。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator++()。
-\end{notice}
+\end{seeAlso}
 
 QKeyValueIterator<Key, T, Iterator> QKeyValueIterator::operator--(\emph{int})
 
@@ -141,9 +141,9 @@ QKeyValueIterator::pointer QKeyValueIterator::operator->() const
 
 Qt 5.15 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator*()。
-\end{notice}
+\end{seeAlso}
 
 \section{相关非成员函数}
 
@@ -151,14 +151,14 @@ bool operator!=(QKeyValueIterator<Key, T, Iterator> \emph{lhs}, QKeyValueIterato
 
 如果 \emph{rhs} 与 \emph{lhs} 指向的元素不同，返回 \hl{true}，否则返回 \hl{false}。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator==()。
-\end{notice}
+\end{seeAlso}
 
 bool operator==(QKeyValueIterator<Key, T, Iterator> \emph{lhs}, QKeyValueIterator<Key, T, Iterator> \emph{rhs})
 
 如果 \emph{rhs} 与 \emph{lhs} 指向的元素相同，返回 \hl{true}，否则返回 \hl{false}。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator!=()。
-\end{notice}
+\end{seeAlso}

@@ -91,9 +91,9 @@ QAbstractAudioInput类为QAudioInput类提供了访问音频设备的方法。�
 这意味着QAbstractAudioInput是实现音频功能的。有关功能的描述，可以参考
 QAudioInput类。 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QAudioInput函数
-\end{notice}
+\end{seeAlso}
 
 \section{成员函数文档}
 
@@ -120,9 +120,9 @@ QAudioFormat QAbstractAudioInput::format() const [纯虚函数]
 
 返回正在使用的QAudioFormat(这个类是储存音频流相关的参数信息的)。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setFormat()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioInput::notify() [信号signal]
 
@@ -152,9 +152,9 @@ void QAbstractAudioInput::setBufferSize(int value) [纯虚函数]
 
 将音频缓冲区大小设置为value大小(以毫秒为单位) 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 bufferSize()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioInput::setFormat(const QAudioFormat \&fmt) [纯虚函数]
 
@@ -166,9 +166,9 @@ void QAbstractAudioInput::setNotifyInterval(int ms) [纯虚函数]
 
 void QAbstractAudioInput::setVolume(qreal) [纯虚函数]
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 volume()函数 （设置这里应该是设置音量的值，Volume在英文中有音量的意思，官方文档这里根本就没有任何说明，说去参考valume()函数，可是valume()说又去参考SetValume()函数，这是互相甩锅的节奏么？？？坑爹啊！！！)
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioInput::start(QIODevice *device) [纯虚函数]
 
@@ -197,9 +197,9 @@ void QAbstractAudioInput::suspend() [纯虚函数]
 qreal QAbstractAudioInput::volume() const [纯虚函数]
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setVolume()（内心os：参考我解释setVolume()函数的说明，这里应该是返回其音量）
-\end{notice}
+\end{seeAlso}
 
 %%% Local Variables:
 %%% mode: latex

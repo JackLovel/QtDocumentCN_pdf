@@ -436,9 +436,9 @@ QAbstractItemModel::QAbstractItemModel(QObject *parent = nullptr)
 这是一个私有信号。它可以用于信号连接，但不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertColumns() 和 beginInsertColumns()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \emph{\&sourceParent}, int \emph{sourceStart}, int \emph{sourceEnd}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationColumn})
 
@@ -454,9 +454,9 @@ insertColumns() 和 beginInsertColumns()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -470,9 +470,9 @@ beginMoveRows()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice} 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeColumns() 和 beginRemoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::columnsInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -486,9 +486,9 @@ removeColumns() 和 beginRemoveColumns()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice}
   
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertColumns() 和 beginInsertColumns()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::columnsMoved(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end}, const QModelIndex \emph{\&destination}, int \emph{column})
 
@@ -504,9 +504,9 @@ insertColumns() 和 beginInsertColumns()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::columnsRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -521,9 +521,9 @@ beginMoveRows()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeColumns() 和 beginRemoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector<int> \&roles = QVector())
 
@@ -535,9 +535,9 @@ removeColumns() 和 beginRemoveColumns()。
 
 可选的 roles 参数可用于指定实际修改了哪些数据角色。Roles 参数中的向量为空，表示应将所有角色视为已修改。角色参数中元素的顺序没有任何关联。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 headerDataChanged()、setData() 和 layoutChanged()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::headerDataChanged(const Qt::Orientation \emph{\&orientation}, int \emph{first}, int \emph{last})
 
@@ -547,9 +547,9 @@ headerDataChanged()、setData() 和 layoutChanged()。
 
 如果要更改列数或行数，则不需要发出此信号，而可以使用 begin/end 函数（有关详细信息，请参见 QAbstractItemModel 类描述中的子类化部分）。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 headerData()、setHeaderData() 和 dataChanged()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::layoutAboutToBeChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
 
@@ -561,9 +561,9 @@ headerData()、setHeaderData() 和 dataChanged()。
 
 该函数在 Qt 5.0 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 layoutChanged() 和 changePersistentIndex()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::layoutChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
 
@@ -586,9 +586,9 @@ layoutChanged() 和 changePersistentIndex()。
 
 该函数在 Qt 5.0 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 layoutAboutToBeChanged()、dataChanged()、headerDataChanged()、modelReset() 和 changePersistentIndex()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::modelAboutToBeReset()
 
@@ -600,9 +600,9 @@ layoutAboutToBeChanged()、dataChanged()、headerDataChanged()、modelReset() �
 
 该函数在 Qt 4.2 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginResetModel() 和 modelReset()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::modelReset()
 
@@ -618,9 +618,9 @@ beginResetModel() 和 modelReset()。
 
 该函数在 Qt 4.1 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endResetModel() 和 modelAboutToBeReset()。
-\end{notice}
+\end{seeAlso}
 
 [protected slot] void QAbstractItemModel::resetInternalData()
 
@@ -667,9 +667,9 @@ QSortFilterProxyModel 的子类。
 
 该函数在 Qt 4.8 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 modelAboutToBeReset() 和 modelReset()。
-\end{notice}
+\end{seeAlso}
 
 [virtual slot] void QAbstractItemModel::revert()
 
@@ -677,9 +677,9 @@ modelAboutToBeReset() 和 modelReset()。
 
 该函数在 Qt 4.2 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 submit()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::rowsAboutToBeInserted(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end})
 
@@ -693,9 +693,9 @@ submit()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertRows() 和 beginInsertRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::rowsAboutToBeMoved(const QModelIndex \emph{\&sourceParent}, int \emph{sourceStart}, int \emph{sourceEnd}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationRow})
 
@@ -711,9 +711,9 @@ insertRows() 和 beginInsertRows()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::rowsAboutToBeRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -727,9 +727,9 @@ beginMoveRows()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeRows() 和 beginRemoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::rowsInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -743,9 +743,9 @@ removeRows() 和 beginRemoveRows()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertRows() 和 beginInsertRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::rowsMoved(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end}, const QModelIndex \emph{\&destination}, int \emph{column})
 
@@ -761,9 +761,9 @@ insertRows() 和 beginInsertRows()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QAbstractItemModel::rowsRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -777,9 +777,9 @@ beginMoveRows()。
 这是一个私有信号。仅用于信号连接，而不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeRows() 和 beginRemoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [virtual slot] void QAbstractItemModel::submit()
 
@@ -787,9 +787,9 @@ removeRows() 和 beginRemoveRows()。
 
 如果没有错误，返回 true;否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 revert()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] void QAbstractItemModel::$\sim$QAbstractItemModel()
 
@@ -828,9 +828,9 @@ beginInsertColumns(parent, 6, 8);
 此函数发出 columnAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endInsertColumns()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -870,9 +870,9 @@ beginInsertRows(parent, 4, 5);
 此函数发出 rowsAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endInsertRows()。
-\end{notice}
+\end{seeAlso}
   
 
 \splitLine
@@ -891,9 +891,9 @@ sourceParent 索引对应于从其移出列的父级；sourceFirst 和 sourceLas
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endMoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -966,9 +966,9 @@ beginMoveRows(parent, 2, 2, parent, 4);
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::beginRemoveColumns(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
 
@@ -980,9 +980,9 @@ endMoveRows()。
 此函数发出 columnAboutToBeRemoved() 信号，在删除数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endRemoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 \begin{tabular}{|m{13em}|m{26em}|}
 \hline
@@ -1020,9 +1020,9 @@ beginRemoveRows(parent, 2, 3);\\
 此函数发出 rowsAboutToBeRemoved() 信号，连接的视图（或代理）必须在删除数据之前处理该信号。否则，视图可能会以无效状态结束。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endRemoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::beginResetModel()
 
@@ -1042,9 +1042,9 @@ endRemoveRows()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 modelAboutToBeReset()、modelReset() 和 endResetModel()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] void QAbstractItemModel::buddy(const QModelIndex \emph{\&index}) const
 
@@ -1058,9 +1058,9 @@ modelAboutToBeReset()、modelReset() 和 endResetModel()。
 
 如果您想要测试是否可以在 row、column、parent节点上放置 data，请在自定义模型中重新实现此函数。如果您不需要该测试，那么就没有必要重新实现此函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 dropMimeData() 和 在项视图中使用拖放。
-\end{notice}
+\end{seeAlso}
 
 
 [virtual] bool QAbstractItemModel::canFetchMore(const QModelIndex \&parent) const
@@ -1075,13 +1075,13 @@ dropMimeData() 和 在项视图中使用拖放。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{}{Q\_INVOKABLE}
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 fetchMore()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::changePersistentIndex(const QModelIndex \&from, const QModelIndex \&to)
 
@@ -1092,9 +1092,9 @@ fetchMore()。
 如果 canFetchMore() 返回 true，则应该调用 fetchMore() 函数。比如 QAbstractItemView 就是这样做的。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 persistentIndexList() 和 changePersistentIndexList()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::changePersistentIndexList(const QModelIndexList \emph{\&from}, const QModelIndexList \emph{\&to})
 
@@ -1104,11 +1104,10 @@ persistentIndexList() 和 changePersistentIndexList()。
 
 该函数在 Qt4.1 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 persistentIndexList() 和 changePersistentIndex()。
-\end{notice}
+\end{seeAlso}
   
-
 bool QAbstractItemModel::checkIndex(const QModelIndex \&index, QAbstractItemModel::CheckIndexOptions options = CheckIndexOption::NoOption) const
 
 此函数检查索引是否为此模型的合法模型索引。 合法模型索引要么是无效的模型索引，要么是具有以下所有条件的有效模型索引：
@@ -1140,9 +1139,9 @@ options 参数可能会改变其中一些检查。如果 options 包含 IndexIsV
 
 该函数在 Qt5.11 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QModelIndex。
-\end{notice}
+\end{seeAlso}
 
 [pure virtual] int QAbstractItemModel::columnCount(const QModelIndex \&parent = QModelIndex()) const
 
@@ -1168,15 +1167,15 @@ int DomModel::columnCount(const QModelIndex &parent) const
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
 该函数在 Qt4.1 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 rowCount()。
-\end{notice}
+\end{seeAlso}
 
 [protected] QModelIndex QAbstractItemModel::createIndex(int row, int column, void *ptr = nullptr) const
 
@@ -1224,9 +1223,9 @@ dropMimeData
 
 在子类中重新实现 insertColumns()时，必须在将数据插入模型的底层数据存储之后调用此函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginInsertColumns()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::endInsertRows()
 
@@ -1234,9 +1233,9 @@ beginInsertColumns()。
 
 在子类中重新实现 insertRows()时，必须在将数据插入模型的底层数据存储之后调用此函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginInsertRows()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::endMoveColumns()
 
@@ -1246,9 +1245,9 @@ beginInsertRows()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::endMoveRows()
 
@@ -1258,9 +1257,9 @@ beginMoveColumns()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::endRemoveColumns()
 
@@ -1268,9 +1267,9 @@ beginMoveRows()。
 
 在子类中重新实现 removeColumns() 时，必须在从模型的底层数据存储中删除数据之后调用此函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginRemoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::endRemoveRows()
 
@@ -1278,9 +1277,9 @@ beginRemoveColumns()。
 
 在子类中重新实现 removeRows() 时，必须在从模型的底层数据存储中删除数据之后调用此函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginRemoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [protected] void QAbstractItemModel::endResetModel()
 
@@ -1292,9 +1291,9 @@ beginRemoveRows()。
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginResetModel()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] void QAbstractItemModel::fetchMore(const QModelIndex \emph{\&parent})
 
@@ -1308,13 +1307,13 @@ beginResetModel()。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 canFetchMore()。
-\end{notice}
+\end{seeAlso}
   
 [virtual] Qt::ItemFlags QAbstractItemModel::flags(const QModelIndex \emph{\&index}) const
 
@@ -1326,14 +1325,13 @@ canFetchMore()。
 该函数可以通过元对象系统和 QML 调用。。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Qt::ItemFlags。
-\end{notice}
+\end{seeAlso}
 
 [virtual] Qt::ItemFlags QAbstractItemModel::hasChildren(const QModelIndex \&parent = QModelIndex()) const
 
@@ -1349,13 +1347,13 @@ Qt::ItemFlags。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 parent() 和 index()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::hasIndex(int \emph{row}, int \emph{column}, const QModelIndex \&parent = QModelIndex()) const
 
@@ -1366,9 +1364,9 @@ parent() 和 index()。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
 [virtual] QVariant QAbstractItemModel::headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const
 
@@ -1380,13 +1378,13 @@ Q\_INVOKABLE。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Qt::ItemDataRole、setHeaderData() 和 QHeaderView。
-\end{notice}
+\end{seeAlso}
 
 [pure virtual] QModelIndex QAbstractItemModel::index(int row, int column, const QModelIndex \&parent = QModelIndex()) const
 
@@ -1398,13 +1396,13 @@ Qt::ItemDataRole、setHeaderData() 和 QHeaderView。
 该函数可以通过元对象系统和 QML 调用
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 createIndex()。
-\end{notice}
+\end{seeAlso}
 
 bool QAbstractItemModel::insertColumn(int column, const QModelIndex \&parent = QModelIndex()) const
 
@@ -1416,13 +1414,13 @@ bool QAbstractItemModel::insertColumn(int column, const QModelIndex \&parent = Q
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertColumns()、insertRow() 和 removeColumn()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::insertColumns(int column, int
 count, const QModelIndex \&parent = QModelIndex()) const
@@ -1445,13 +1443,13 @@ count, const QModelIndex \&parent = QModelIndex()) const
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertRows()、removeColumns()、beginInsertColumns() 和 endInsertColumns()。
-\end{notice}
+\end{seeAlso}
 
 bool QAbstractItemModel::insertRow(int row, const QModelIndex \&parent = QModelIndex()) const
 
@@ -1463,9 +1461,9 @@ bool QAbstractItemModel::insertRow(int row, const QModelIndex \&parent = QModelI
   
 如果插入了该行，则返回 true；否则，返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertRows()、insertColumn() 和 removeRow()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::insertRows(int row, int count, const QModelIndex \&parent = QModelIndex()) const
 
@@ -1485,9 +1483,9 @@ insertRows()、insertColumn() 和 removeRow()。
 
 如果您实现了自己的模型，希望支持插入，则可以重新实现此函数。或者，您可以提供自己的 API 来更改数据。在任何一种情况下，您都需要调用 beginInsertRows() 和 endInsertRows() 来通知其他组件模型已经更改
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertColumns()、removeRows()、beginInsertRows() 和 endInsertRows()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] QMap<int, QVariant> QAbstractItemModel::itemData(const QModelIndex \&index) const
 
@@ -1495,9 +1493,9 @@ insertColumns()、removeRows()、beginInsertRows() 和 endInsertRows()。
 
 如果希望扩展此函数的默认行为以在 map 中包含自定义角色，请重新实现此函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setItemData()、Qt::ItemDataRole 和 data()。
-\end{notice}
+\end{seeAlso}
   
 [virtual] QModelIndexList QAbstractItemModel::match(const QModelIndex \&start, int role, const QVariant \&value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const
 
@@ -1515,9 +1513,9 @@ setItemData()、Qt::ItemDataRole 和 data()。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
 [virtual] QMimeData QAbstractItemModel::mimeData(const QModelIndexList \emph{\&indexes}) const
 
@@ -1525,9 +1523,9 @@ Q\_INVOKABLE。
 
 如果 indexes 为空，或者没有受支持的 MIME 类型，则返回 0，而不是序列化的空列表。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 mimeTypes() 和 dropMimeData()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] QStringList QAbstractItemModel::mimeTypes() const
 
@@ -1537,9 +1535,9 @@ mimeTypes() 和 dropMimeData()。
 
 如果在自定义模型中重新实现这个函数，还必须重新实现调用它的成员函数: mimeData() 和 dropMimeData()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 mimeData() 和 dropMimeData()。
-\end{notice}
+\end{seeAlso}
 
 bool QAbstractItemModel::moveColumn(const QModelIndex \&sourceParent, int sourceColumn, const QModelIndex \&destinationParent, int destinationChild)
 
@@ -1547,9 +1545,9 @@ bool QAbstractItemModel::moveColumn(const QModelIndex \&sourceParent, int source
 
 如果列被成功移动，则返回 true;否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 moveColumns() 和 moveRow()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::moveColumns(const QModelIndex \emph{\&sourceParent}, int \emph{sourceColumn}, int \emph{count}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})
 
@@ -1561,9 +1559,9 @@ moveColumns() 和 moveRow()。
 
 如果实现自己的模型，则如果要支持移动，则可以重新实现此功能。另外，您可以提供自己的 API 来更改数据。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveColumns() 和 endMoveColumns()。
-\end{notice}
+\end{seeAlso}
 
 bool QAbstractItemModel::moveRow(const QModelIndex \&sourceParent, int sourceRow const QModelIndex \&destinationParent, int destinationChild)
 
@@ -1571,9 +1569,9 @@ bool QAbstractItemModel::moveRow(const QModelIndex \&sourceParent, int sourceRow
 
 如果行被成功移动，则返回 true;否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 moveRows() 和 moveColumn()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::moveRows(const QModelIndex \&sourceParent, int sourceRow, int count, const QModelIndex \&destinationParent, int destinationChild)
 
@@ -1585,9 +1583,9 @@ moveRows() 和 moveColumn()。
 
 如果实现自己的模型，则如果要支持移动，则可以重新实现此功能。另外，您可以提供自己的 API 来更改数据。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 beginMoveRows() 和 endMoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [pure virtual] bool QAbstractItemModel::parent(const QModelIndex \emph{\&index}) const
 
@@ -1601,13 +1599,13 @@ beginMoveRows() 和 endMoveRows()。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 createIndex()。
-\end{notice}
+\end{seeAlso}
 
 [protected] QModelIndexList QAbstractItemModel::persistentIndexList() const
 
@@ -1690,15 +1688,15 @@ Qt::WhatsThisRole&	whatsThis\\
 \hline
 \end{tabular}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeRow()、removeColumns()、insertColumns()、beginRemoveRows() 和 endRemoveRows()。
-\end{notice}
+\end{seeAlso}
 
 该函数在 Qt4.6 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setRoleNames()。
-\end{notice}
+\end{seeAlso}
 
 [pure virtual] int QAbstractItemModel::rowCount(const QModelIndex \&parent = QModelIndex()) const
 
@@ -1708,21 +1706,21 @@ setRoleNames()。
 在实现基于表的模型时，当父节点有效时，rowCount() 应该返回 0。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setSupportedDragActions()、Qt::DropActions 和 在项视图中使用拖放。
-\end{notice}
+\end{seeAlso}
 
 \begin{notice}
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 columnCount()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::setData(const QModelIndex \&index, const QVariant \&value, int role = Qt::EditRole)
 
@@ -1738,13 +1736,13 @@ columnCount()。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Qt::ItemDataRole、data() 和 itemData()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant \&value, int role = Qt::EditRole)
 
@@ -1758,14 +1756,14 @@ Qt::ItemDataRole、data() 和 itemData()。
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
   
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Qt::ItemDataRole 和 headerData()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::setItemData(const QModelIndex \&index, const QMap<int, QVariant> \&roles)
 
@@ -1775,9 +1773,9 @@ Qt::ItemDataRole 和 headerData()。
 
 不在角色中的角色将不会被修改。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setData()、data() 和 itemData()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] QModelIndex QAbstractItemModel::sibling(int \emph{row}, int \emph{column}, const QModelIndex \&) const
 
@@ -1791,13 +1789,13 @@ sibling() 只是一个便捷函数，它找到项的父项，并使用它来检�
 该函数可以通过元对象系统和 QML 调用。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Q\_INVOKABLE。
-\end{notice}
+\end{seeAlso}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 index()、QModelIndex::row() 和 QModelIndex::column()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] void QAbstractItemModel::sort(int column, Qt::SortOrder order = Qt::AscendingOrder)
 
@@ -1825,9 +1823,9 @@ index()、QModelIndex::row() 和 QModelIndex::column()。
 目前没有使用span。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setSupportedDragActions()、Qt::DropActions 和 在项视图中使用拖放。
-\end{notice}
+\end{seeAlso}
 
 [virtual] Qt::DropActions QAbstractItemModel::supportedDropActions() const
 
@@ -1837,6 +1835,6 @@ setSupportedDragActions()、Qt::DropActions 和 在项视图中使用拖放。
 
 该函数在 Qt4.2 中被引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 dropMimeData()、Qt::DropActions 和 在项视图中使用拖放。
-\end{notice}
+\end{seeAlso}

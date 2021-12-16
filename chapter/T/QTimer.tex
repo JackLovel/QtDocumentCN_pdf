@@ -216,9 +216,9 @@ QTimer::singleShot(200, this, SLOT(updateCaption()));
 
 有些操作系统可能会限制定时器的使用数量，Qt尽量工作在这些范围之内。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 BasicTimer, QTimerEvent, QObject::timerEvent(), Timers, Analog Clock Example, 和 Wiggly Example。
-\end{notice}
+\end{seeAlso}
 
 \section{属性文档}
 
@@ -271,9 +271,9 @@ void &	setInterval(std::chrono::milliseconds \emph{value}) \\
 \end{tabular}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 singleShot。
-\end{notice}
+\end{seeAlso}
 
 \begin{tabular}{|l|r|}
 \hline
@@ -300,9 +300,9 @@ int	& remainingTime() const \\
 \end{tabular}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/T/QTimer/qtimer.html#interval-prop}{interval}。
-\end{notice}
+\end{seeAlso}
 
 
 \begin{tabular}{|l|r|}
@@ -333,9 +333,9 @@ void	 & setSingleShot(bool singleShot) \\
 \end{tabular}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 interval 和 singleShot()。
-\end{notice}
+\end{seeAlso}
 
 \begin{tabular}{|r|l|}
 \hline
@@ -361,9 +361,9 @@ void	 & setTimerType(Qt::TimerType \emph{atype}) \\
 \hline
 \end{tabular}
 
-\begin{notice}[另请参阅]
- Qt::TimerType。
-\end{notice}
+\begin{seeAlso}
+Qt::TimerType。
+\end{seeAlso}
 
 \section{成员函数文档}
 
@@ -389,9 +389,9 @@ It's equivalent to calling QObject::connect(timer, &QTimer::timeout, timer, slot
 
 在Qt5.12引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QObject::connect() 和 timeout().
-\end{notice}
+\end{seeAlso}
 
 QMetaObject::Connection QTimer::callOnTimeout(const QObject \emph{*context}, Functor \emph{slot}, Qt::ConnectionType \emph{connectionType} = ...)
 
@@ -408,9 +408,9 @@ QObject::connect(timer, &QTimer::timeout, context, slot, connectionType).
 	
 在Qt5.12引入该函数。
 	
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QObject::connect() 和 timeout().
-\end{notice}
+\end{seeAlso}
 
 QMetaObject::Connection QTimer::callOnTimeout(const QObject \emph{*receiver}, PointerToMemberFunction \emph{slot}, Qt::ConnectionType \emph{connectionType} = ...)
 
@@ -427,9 +427,9 @@ QObject::connect(timer, &QTimer::timeout, receiver, slot, connectionType).
 	
 在Qt5.12引入该函数。
 	
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QObject::connect() 和 timeout().
-\end{notice}
+\end{seeAlso}
 
 % 
 std::chrono::milliseconds QTimer::intervalAsDuration() const
@@ -438,9 +438,9 @@ std::chrono::milliseconds QTimer::intervalAsDuration() const
 
 在Qt5.8引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 interval。
-\end{notice}
+\end{seeAlso}
 
 bool QTimer::isActive() const
 
@@ -501,9 +501,9 @@ receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒�
 该函数是可重入。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 
 [static] void QTimer::singleShot(int \emph{msec}, const QObject \emph{*receiver}, PointerToMemberFunction \emph{method})
@@ -525,9 +525,9 @@ receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒�
 
 在Qt5.4引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*receiver}, PointerToMemberFunction \emph{method})
 
@@ -547,9 +547,9 @@ receiver 是接收对象，而 member 是插槽。 时间间隔是 msec 毫秒�
 
 在Qt5.4引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(int \emph{msec}, Functor \emph{functor})
 
@@ -567,9 +567,9 @@ start()。
 
 在Qt5.4引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, Functor \emph{functor})
 
@@ -588,9 +588,9 @@ start()。
 
 在Qt5.4引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(int \emph{msec}, const QObject \emph{*context}, Functor \emph{functor})
 
@@ -610,9 +610,9 @@ start()。
 
 在Qt5.4引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(int \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*context}, Functor \emph{functor})
 
@@ -632,9 +632,9 @@ start()。
 
 在Qt5.4引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(std::chrono::milliseconds \emph{msec}, const QObject \emph{*receiver}, const char \emph{*member})
 
@@ -650,9 +650,9 @@ The receiver是接收对象，而member 是插槽。时间间隔是 msec。
 
 在Qt5.8引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QTimer::singleShot(std::chrono::milliseconds \emph{msec}, Qt::TimerType \emph{timerType}, const QObject \emph{*receiver}, const char \emph{*member})
 
@@ -670,9 +670,9 @@ start()。
 
 在Qt5.8引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [slot] void QTimer::start(int \emph{msec})
 
@@ -706,9 +706,9 @@ void QTimer::start(std::chrono::milliseconds \emph{msec})
 
 停止定时器。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 start()。
-\end{notice}
+\end{seeAlso}
 
 [signal] void QTimer::timeout()
 
@@ -718,9 +718,9 @@ start()。
 这是一个私人信号。 它可以用于信号连接，但不能由用户发射。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 interval, start(), 和 stop().
-\end{notice}
+\end{seeAlso}
 
 [override virtual protected] void QTimer::timerEvent(QTimerEvent \emph{*e})
 
