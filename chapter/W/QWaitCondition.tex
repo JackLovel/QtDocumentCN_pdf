@@ -109,9 +109,9 @@ forever {
 互斥量是必需的，因为当两个线程同时更改同一变量的值时，结果是不可预测的。
 等待条件是一个强大的线程同步原语。Wait Conditions示例演示了如何使用 QWaitCondition 作为 QSemaphore() 的替代品，来控制生产者消费者的共享循环缓冲区的访问。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMutex、QSemaphore、QThread() 和 Wait Conditions示例。
-\end{notice}
+\end{seeAlso}
 
 
 \section{成员函数文档}
@@ -143,9 +143,9 @@ bool QWaitCondition::wait(QMutex *lockedMutex, QDeadlineTimer deadline = QDeadli
 截止日期已到。如果 deadline 是默认值 QDeadlineTimer::Forever，则永远不会超时（必须用信号通知事件）。如果等待超时，此函数将返回false。
 lockedMutex 将返回到相同的锁定状态。提供此函数是为了允许原子从锁定状态转换到等待状态。   在 Qt 5.12 引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  wakeOne()、wakeAll()。
-\end{notice}
+\end{seeAlso}
 
 bool QWaitCondition::wait(QMutex \emph{*lockedMutex}, unsigned long \emph{time})
 重载。
@@ -160,9 +160,9 @@ lockedReadWriteLock 将返回到相同的锁定状态。提供此函数是为了
 在 Qt 5.12 引入该函数。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 wakeOne()、wakeAll()。
-\end{notice}
+\end{seeAlso}
 
 
 bool QWaitCondition::wait(QReadWriteLock \emph{*lockedReadWriteLock}, unsigned long \emph{time})
@@ -173,18 +173,15 @@ void QWaitCondition::wakeAll()
 
 唤醒等待条件的所有线程。线程的唤醒顺序取决于操作系统的调度策略，无法控制或预测。
 
-
-
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 wakeOne()。
-\end{notice}
+\end{seeAlso}
 
 void QWaitCondition::wakeOne()
 
 唤醒一个等待条件的线程。线程的唤醒顺序取决于操作系统的调度策略，无法控制或预测。
 如果要唤醒特定线程，解决方案通常是使用不同的等待条件，并让线程在不同的条件下等待。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 wakeAll()。
-\end{notice}
+\end{seeAlso}

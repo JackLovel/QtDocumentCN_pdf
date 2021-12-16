@@ -67,9 +67,9 @@ QByteArray readData()
 
 QMutexLocker 文档展示了使用locker对象来大大简化编程的示例。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QWriteLocker、QReadWriteLock。
-\end{notice}
+\end{seeAlso}
 
 \section{成员函数文档}
 
@@ -78,17 +78,17 @@ ReadLocker::QReadLocker(QReadWriteLock \emph{*lock})
 构造一个 QReadLocker 并锁定用于读取的锁。当 QReadLocker 被销毁时，锁将被解锁。如果 lock == nullptr，则 QReadLocker 不执行任何操作。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock::lockForRead()。
-\end{notice}
+\end{seeAlso}
 
 QReadLocker::$\sim$QReadLocker()
 
 销毁 QReadLocker 并解锁传递给构造函数的锁。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock::unlock()。
-\end{notice}
+\end{seeAlso}
 
 QReadWriteLock *QReadLocker::readWriteLock() const
 
@@ -98,15 +98,14 @@ void QReadLocker::relock()
 
 重新锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()。
-\end{notice}
-
+\end{seeAlso}
 
 void QReadLocker::unlock()
 
 解锁。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock::unlock()。
-\end{notice}
+\end{seeAlso}

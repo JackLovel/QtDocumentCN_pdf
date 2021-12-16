@@ -378,10 +378,9 @@ size() 的返回值且 不 小于0。
 
 如果想要详细了解 Qt 和 STL 对应容器之间的对比，可阅读 理解 Qt 容器一文。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QListIterator, QMutableListIterator, QLinkedList 和 QVector。
-\end{notice}
-
+\end{seeAlso}
 
 \section{成员类型文档}
 
@@ -411,10 +410,10 @@ QList::const\_reverse\_iterator 仅仅是 std::reverse\_iterator<const\_iterator
 
 该类型在 Qt 5.6 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QList::rbegin(), QList::rend(), QList::reverse\_iterator 和QList::const\_iterator。
 typedef QList::difference\_type
-\end{notice}
+\end{seeAlso}
 
 ptrdiff\_t 的别名，提供了对 STL 的兼容。
 
@@ -436,9 +435,9 @@ QList::reverse\_iterator 仅仅是 \hl{std::reverse\_iterator<iterator>} 的类�
 
 该类型在 Qt 5.6 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QList::rbegin(), QList::rend(), QList::const\_reverse\_iterator 和 QList::iterator。
-\end{notice}
+\end{seeAlso}
 
 typedef QList::size\_type
 
@@ -478,9 +477,9 @@ QList::QList(const QList \emph{\&other})
 
 该操作为 常量时间复杂度，因为 QList 是隐式共享的，所以一个函数返回 QList 是非常快的。如果一个共享实例被修改了，其将会被复制一份（写时拷贝），复杂度为线性时间复杂度。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator=()。
-\end{notice}
+\end{seeAlso}
 
 QList::QList()
 
@@ -522,9 +521,9 @@ list.append("three");
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator<<(), prepend() 和 insert()。
-\end{notice}
+\end{seeAlso}
 
 
 
@@ -536,9 +535,9 @@ void QList::append(const QList \&value)
 
 该方法在 Qt 4.5 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  operator<<() 和 operator+=()。
-\end{notice}
+\end{seeAlso}
 
 
 const T \&QList::at(int i) const
@@ -547,13 +546,9 @@ const T \&QList::at(int i) const
 
 该方法非常快，为(常量时间复杂度)。
 
-
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 value() 和 operator[]()。
-\end{notice}
-
-
+\end{seeAlso}
 
 T \&QList::back()
 
@@ -568,9 +563,9 @@ QList::iterator QList::begin()
 返回一个指向列表第一个元素的 STL 风格迭代器
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constBegin() 和 end()。
-\end{notice}
+\end{seeAlso}
 
 
 QList::const\_iterator QList::begin() const
@@ -584,9 +579,9 @@ QList::const\_iterator QList::cbegin() const
 该方法在 Qt 5.0 中引入。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin() and cend()。
-\end{notice}
+\end{seeAlso}
 
 
 QList::const\_iterator QList::cend() const
@@ -596,9 +591,9 @@ QList::const\_iterator QList::cend() const
 该方法在 Qt 5.0 中引入。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 cbegin() and end()。
-\end{notice}
+\end{seeAlso}
 
 void QList::clear()
 
@@ -606,9 +601,9 @@ void QList::clear()
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeAll()。
-\end{notice}
+\end{seeAlso}
 
 
 QList::const\_iterator QList::constBegin() const
@@ -616,9 +611,9 @@ QList::const\_iterator QList::constBegin() const
 返回指向列表中第一个元素的常量 STL 风格迭代器。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin() 和 constEnd()。
-\end{notice}
+\end{seeAlso}
 
 
 QList::const\_iterator QList::constEnd() const
@@ -628,9 +623,9 @@ QList::const\_iterator QList::constEnd() const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constBegin() 和 end()。
-\end{notice}
+\end{seeAlso}
 
 
 const T \&QList::constFirst() const
@@ -639,9 +634,9 @@ const T \&QList::constFirst() const
 
 该方法在 Qt 5.6 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constLast(), isEmpty() 和 first()。
-\end{notice}
+\end{seeAlso}
 
 
 const T \&QList::constLast() const
@@ -653,9 +648,9 @@ const T \&QList::constLast() const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constFirst(), isEmpty() 和 last()。
-\end{notice}
+\end{seeAlso}
 
 
 bool QList::contains(const T \&value) const
@@ -664,9 +659,9 @@ bool QList::contains(const T \&value) const
 
 该方法要求值类型实现了 operator==()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 indexOf() 和 count()。
-\end{notice}
+\end{seeAlso}
 
 int QList::count(const T \&value) const
 
@@ -676,9 +671,9 @@ int QList::count(const T \&value) const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 contains() 和 indexOf()。
-\end{notice}
+\end{seeAlso}
 
 
 int QList::count() const
@@ -691,9 +686,9 @@ QList::const\_reverse\_iterator QList::crbegin() const
 
 该方法在 Qt 5.6 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin(), rbegin() 和 rend()。
-\end{notice}
+\end{seeAlso}
 
 QList::const\_reverse\_iterator QList::crend() const
 
@@ -701,9 +696,9 @@ QList::const\_reverse\_iterator QList::crend() const
 
 该方法在 Qt 5.6 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 end(), rend() 和 rbegin()。
-\end{notice}
+\end{seeAlso}
 
 bool QList::empty() const
 
@@ -713,9 +708,9 @@ QList::iterator QList::end()
 
 返回一个指向位于最后一个元素之后的虚拟元素的常量 STL 风格迭代器。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin() 和 constEnd()。
-\end{notice}
+\end{seeAlso}
 
 QList::const\_iterator QList::end() const
 
@@ -727,17 +722,17 @@ bool QList::endsWith(const T \&value) const
 
 该方法在 Qt 4.5 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isEmpty() 和 contains()。
-\end{notice}
+\end{seeAlso}
 
 QList::iterator QList::erase(QList::iterator pos)
 
 从列表中移除和迭代器 pos 关联的元素，然会返回列表中下一个元素的迭代器 (可能是 end())。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insert() 和 removeAt()。
-\end{notice}
+\end{seeAlso}
 
 QList::iterator QList::erase(QList::iterator begin, QList::iterator end)
 
@@ -750,9 +745,9 @@ T \&QList::first()
 
 返回列表中第一个元素的引用，列表必须非空。如果列表可能为空，应先调用 isEmpty() 进行检查。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constFirst(), last() 和 isEmpty()。
-\end{notice}
+\end{seeAlso}
 
 const T \&QList::first() const
 
@@ -778,9 +773,9 @@ std::sort(list.begin(), list.end());
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 fromVector(), toSet() 和 QSet::toList()。
-\end{notice}
+\end{seeAlso}
 
 
 \hl{[static]} QList QList::fromStdList(const std::list \emph{\&list})
@@ -805,9 +800,9 @@ QList<double> list = QList<double>::fromStdList(stdlist);
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toStdList() 和 QVector::fromStdVector()。
-\end{notice}
+\end{seeAlso}
 
 
 \hl{[static]} QList QList::fromVector(const QVector \emph{\&vector})
@@ -830,10 +825,9 @@ QList<double> list = QVector<T>::fromVector(vect);
 从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
 \end{notice}
 
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 fromSet(), toVector() 和 QVector::toList()。
-\end{notice}
+\end{seeAlso}
 
 T \&QList::front()
 
@@ -866,9 +860,9 @@ list.indexOf("X");          // 返回 -1
 
 需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lastIndexOf() 和 contains()。
-\end{notice}
+\end{seeAlso}
 
 
 void QList::insert(int i, const T \emph{\&value})
@@ -889,9 +883,9 @@ list.insert(2, "gamma");
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 append(), prepend(), replace() 和 removeAt()。
-\end{notice}
+\end{seeAlso}
 
 QList::iterator QList::insert(QList::iterator \emph{before}, const T \emph{\&value})
 
@@ -903,9 +897,9 @@ bool QList::isEmpty() const
 
 如果列表中没有任何元素则返回 true ，否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 size()。
-\end{notice}
+\end{seeAlso}
 
 
 T \&QList::last()
@@ -913,9 +907,9 @@ T \&QList::last()
 返回列表最后一个元素的引用，列表必须非空。如果列表可能为空，应先调用 isEmpty() 进行检查。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constLast(), first() 和 isEmpty()。
-\end{notice}
+\end{seeAlso}
 
 
 const T \&QList::last() const
@@ -942,9 +936,9 @@ list.lastIndexOf("X");      // 返回 -1
 需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 indexOf()。
-\end{notice}
+\end{seeAlso}
 
 
 int QList::length() const
@@ -954,9 +948,9 @@ int QList::length() const
 该方法在 Qt 4.5 中引入。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 count()。
-\end{notice}
+\end{seeAlso}
 
 
 QList QList::mid(int \emph{pos}, int \emph{length} = -1) const
@@ -981,9 +975,9 @@ list.move(1, 4);
 
 等同于 insert(\emph{to}, takeAt(\emph{from}))。该方法会假定 \emph{from} 和 \emph{to} 都不小于 0 且小于 size()。为了避免调用出错，应提前检查 from 和 to 是否不小于 0 且小于 size()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 swap(), insert() 和 takeAt()。
-\end{notice}
+\end{seeAlso}
 
 void QList::pop\_back()
 
@@ -1014,9 +1008,9 @@ list.prepend("three");
 如果该列表是非共享的,那么此操作通常会非常快（均摊下来为 常量时间复杂度），因为 QList 在内部缓存的两端都预分配了额外的内存空间用于支持列表两端的快速增长。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 append() 和 insert()。
-\end{notice}
+\end{seeAlso}
 
 void QList::push\_back(const T \&value)
 
@@ -1032,11 +1026,9 @@ QList::reverse\_iterator QList::rbegin()
 
 该方法在 Qt 5.6 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin(), crbegin() 和 rend()。
-\end{notice}
-
-
+\end{seeAlso}
 
 QList::const\_reverse\_iterator QList::rbegin() const
 
@@ -1059,7 +1051,7 @@ list.removeAll("sun");
 
 该方法要求值类型实现了 \hl{operator==()}。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeOne(), removeAt(), takeAt() 和 replace()。
-\end{notice}
+\end{seeAlso}
 

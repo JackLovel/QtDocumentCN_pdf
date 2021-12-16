@@ -152,9 +152,9 @@ QSqlDatabase db = QSqlDatabase::database();
 
 QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接所做的操作将影响表示相同连接的其他 QSqlDatabase 实例。 使用 cloneDatabase() 在基于已存在数据库的连接 来 创建 独立的数据库的连接。
 
-\begin{notice}[警告]
+\begin{warning}
 强烈建议不要将QSqlDatabase的拷贝作为类成员，因为这将阻止关闭时正确清理实例。 如果需要访问已经存在QSqlDatabase，应该使用database()访问。如果您选择使用作为成员变量的QSqlDatabase，则需要在删除QCoreApplication实例之前删除它，否则可能会导致未定义的行为。
-\end{notice}
+\end{warning}
 
 如果您想创建多个数据库连接，可以调用 addDatabase(), 并且给一个独一无二的参数(即：连接名称)。使用 带有连接名的database() 函数，来获取该连接。使用 带有连接名的removeDatabase() 函数，来删除 一个连接。如果尝试删除由其他QSqlDatabase对象引用的连接，QSqlDatabase将输出警告。可以使用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-bool-qsqldatabasecontainsconst-qstring-connectionname--qlatin1stringdefaultconnection}{contains()}查看给定的连接名是否在连接列表中。
 
@@ -237,9 +237,9 @@ QSqlDatabase::exec() 方法已经被弃用。请使用 QSqlQuery::exec()
 
 其他第三方驱动程序，包括自己自定义的驱动程序，都可以动态加载。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://doc.qt.io/qt-5/sql-driver.html}{SQL Database Drivers}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseregistersqldriverconst-qstring-name-qsqldrivercreatorbase-creator}{registerSqlDriver()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qstringlist-qsqldatabasedrivers}{drivers()}。
-\end{notice}
+\end{seeAlso}
 
 
 QSqlDatabase::QSqlDatabase(const QSqlDatabase \&other)
@@ -263,9 +263,9 @@ QSqlDatabase::$\sim$QSqlDatabase()
 当最后的连接被销毁，这个折构函数就会暗中的调用 close()函数，去删除这个数据库的其他连接。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabaseclose}{close()}。
-\end{notice}
+\end{seeAlso}
 
 
 
@@ -279,12 +279,13 @@ QSqlDatabase::$\sim$QSqlDatabase()
 
 如果我们没有指定连接名参数，那么应用程序就会返回默认连接。 如果我们提供了连接名参数，那么可以使用database(connectionName) 函数来获取该连接。
 
-\begin{notice}[警告]
+\begin{warning}
 如果您指定了 相同的连接名参数，那么就会替换之前的那个相同的连接。如果您多次调用这个函数而不指定 连接名参数，则默认连接将被替换。
-\end{notice}
+\end{warning}
 
 
-在使用连接之前，它必须经过初始化。比如： 调用下面一些或者全部 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetdatabasenameconst-qstring-name}{setDatabaseName()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetusernameconst-qstring-name}{setUserName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetpasswordconst-qstring-password}{setPassword()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesethostnameconst-qstring-host}{setHostName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetportint-port}{setPort()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetconnectoptionsconst-qstring-options--qstring}{setConnectOptions()}，并最终调用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#bool-qsqldatabaseopen}{open()}
+在使用连接之前，它必须经过初始化。
+比如： 调用下面一些或者全部 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetdatabasenameconst-qstring-name}{setDatabaseName()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetusernameconst-qstring-name}{setUserName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetpasswordconst-qstring-password}{setPassword()} 、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesethostnameconst-qstring-host}{setHostName()}、 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetportint-port}{setPort()} 和 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#void-qsqldatabasesetconnectoptionsconst-qstring-options--qstring}{setConnectOptions()}，并最终调用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#bool-qsqldatabaseopen}{open()}
 
 
 
@@ -293,9 +294,9 @@ QSqlDatabase::$\sim$QSqlDatabase()
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-qsqldatabase-qsqldatabasedatabaseconst-qstring-connectionname--qlatin1stringdefaultconnection-bool-open--true}{database()}, \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-void-qsqldatabaseremovedatabaseconst-qstring-connectionname}{removeDatabase()} 以及 \href{https://doc.qt.io/qt-5/threads-modules.html#threads-and-the-sql-module}{ 线程和SQL 单元}。
-\end{notice}
+\end{seeAlso}
 
 
 [static] QSqlDatabase QSqlDatabase::addDatabase(QSqlDriver *driver, const QString \&connectionName = QLatin1String(defaultConnection))
@@ -353,17 +354,13 @@ QIBASE	&QIBaseDriver	&isc\_db\_handle connection	&qsql\_ibase.cpp\\
 
 当构造用于为内部查询创建新连接的QTDSDriver时，需要主机名（或服务名）。这是为了防止在同时使用多个QSqlQuery对象时发生阻塞。
 
-
-\begin{notice}[警告]
+\begin{warning}
 我们假设添加一个存在连接名的连接时，这个新添加的连接将会替换另一个。 
-\end{notice}
+\end{warning}
 
-
-\begin{notice}[警告]
+\begin{warning}
 	 SQL框架拥有驱动程序的所有权。它不能被删除。可以使用removeDatabase()，去删除这个连接。 另请参阅drivers()
-\end{notice}
-
-
+\end{warning}
 
 [protected] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
 
@@ -371,12 +368,11 @@ QIBASE	&QIBaseDriver	&isc\_db\_handle connection	&qsql\_ibase.cpp\\
 
 
 
-\begin{notice}[警告]
+\begin{warning}
 这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
-\end{notice}
+\end{warning}
 
-
-[static] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
+[static] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \emph{\&other}, const QString \emph{\&connectionName})
 这是个重载函数。
 
 克隆其他数据库连接并将其存储为connectionName。原始数据库中的所有设置，例如databaseName()、hostName()等，都会被复制。如果其他数据库无效，则不执行任何操作。返回最新被创建的数据库连接。
@@ -400,9 +396,9 @@ void QSqlDatabase::close()
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 removeDatabase()
-\end{notice}
+\end{seeAlso}
 
 
 bool QSqlDatabase::commit()
@@ -415,9 +411,9 @@ bool QSqlDatabase::commit()
 
 调用 lastError() 函数获取错误信息。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  QSqlQuery::isActive()， QSqlDriver::hasFeature()，和 rollback()。
-\end{notice}
+\end{seeAlso}
 
 
 QString QSqlDatabase::connectOptions() const
@@ -425,9 +421,9 @@ QString QSqlDatabase::connectOptions() const
 返回用于此连接的连接选项字符串。这个字符串可能是空。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setConnectOptions()
-\end{notice}
+\end{seeAlso}
 
 QString QSqlDatabase::connectionName() const
 
@@ -440,9 +436,9 @@ QString QSqlDatabase::connectionName() const
 
 qt4.4 中引入了这个函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDatabase()
-\end{notice}
+\end{seeAlso}
 
 
 [static] QStringList QSqlDatabase::connectionNames()
@@ -453,9 +449,9 @@ addDatabase()
 这个函数是线程安全的。
 \end{notice} 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 contains()，database()， 和 线程和SQL模块
-\end{notice}
+\end{seeAlso}
 
 [static] bool QSqlDatabase::contains(const QString \&connectionName = QLatin1String(defaultConnection))
 
@@ -467,9 +463,9 @@ contains()，database()， 和 线程和SQL模块
 \end{notice} 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 connectionNames(), database() 和 线程和SQL模块。
-\end{notice}
+\end{seeAlso}
 
 
 [static] QSqlDatabase QSqlDatabase::database(const QString \&connectionName = QLatin1String(defaultConnection), bool open = true)
@@ -481,11 +477,9 @@ connectionNames(), database() 和 线程和SQL模块。
 这个函数是 线程安全的
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  isOpen() 和 线程和SQL模块。
-\end{notice}
-
-
+\end{seeAlso}
 
 QString QSqlDatabase::databaseName() const
 
@@ -496,27 +490,25 @@ QString QSqlDatabase::databaseName() const
 这个数据库名不是连接名。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setDatabaseName()。
-\end{notice}
-
+\end{seeAlso}
 
 QSqlDriver *QSqlDatabase::driver() const
 
-
 返回被使用的数据库连接的所使用的数据库驱动。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDatabase() 和 drivers()
-\end{notice}
+\end{seeAlso}
 
 QString QSqlDatabase::driverName() const
 
 返回连接的驱动名称
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDatabase() 和 driver()
-\end{notice}
+\end{seeAlso}
 
 [static] QStringList QSqlDatabase::drivers()
 
@@ -529,19 +521,18 @@ QSqlQuery QSqlDatabase::exec(const QString \&query = QString()) const
 
 如果查询为空，则返回一个空的、无效的查询。并且 lastError()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QSqlQuery 和 lastError()。
-\end{notice}
-
+\end{seeAlso}
 
 QString QSqlDatabase::hostName() const
 
 
 返回连接的主机名；它有可能为空。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  setHostName()。
-\end{notice}
+\end{seeAlso}
 
 
 [static] bool QSqlDatabase::isDriverAvailable(const QString \&name)
@@ -549,9 +540,9 @@ QString QSqlDatabase::hostName() const
 
 如果调用一个叫 name 的驱动，是可以使用的，那么就返回 true；反之返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 drivers()。
-\end{notice}
+\end{seeAlso}
 
 
 bool QSqlDatabase::isOpen() const
@@ -588,9 +579,9 @@ qDebug() << db.isValid();    // 返回 false
 
 使用 QSqlQuery::lastError() 函数来获取一个单个查询上的错误。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QSqlError and QSqlQuery::lastError()。
-\end{notice}
+\end{seeAlso}
 
 
 QSql::NumericalPrecisionPolicyQSqlDatabase::numericalPrecisionPolicy() const
@@ -599,26 +590,21 @@ QSql::NumericalPrecisionPolicyQSqlDatabase::numericalPrecisionPolicy() const
 
 qt4.6中引入了这个函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QSql::NumericalPrecisionPolicy, setNumericalPrecisionPolicy()、
 QSqlQuery::numericalPrecisionPolicy() 和 QSqlQuery::setNumericalPrecisionPolicy()。
-\end{notice}
-
-
+\end{seeAlso}
 
 bool QSqlDatabase::open()
 
-
 使用当前连接值打开数据库连接。如果操作成功就返回 true; 反之返回 false。可以调用 lastError()来获取错误的信息。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lastError()、 setDatabaseName()、setUserName()、
 setPassword()、setHostName()、setPort()和 setConnectOptions()。
-\end{notice}
-
+\end{seeAlso}
 
 bool QSqlDatabase::open(const QString \&user, const QString \&password)
-
 
 这是一个重载函数。
 
@@ -626,11 +612,9 @@ bool QSqlDatabase::open(const QString \&user, const QString \&password)
 
 这个函数不存放所给的 password 参数，相反的它会把 password 参数直接传给驱动用于打连接，然后销毁这个参数。
 
-
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lastError()。
-\end{notice}
+\end{seeAlso}
 
 QString QSqlDatabase::password() const
 
@@ -638,18 +622,18 @@ QString QSqlDatabase::password() const
 返回连接的密码。如果没有使用setPassword() 函数进行密码的设置 并且 没有调用 open() 以及 没有使用密码，那么就返回空的字符串。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setPassword()。
-\end{notice}
+\end{seeAlso}
 
 int QSqlDatabase::port() const
 
 
 返回连接的端口号。如果端口号没有设置，那么这个值就是未定义的。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setPort()。
-\end{notice}
+\end{seeAlso}
 
 QSqlIndex QSqlDatabase::primaryIndex(const QString \&tablename) const
 
@@ -663,9 +647,9 @@ QSqlIndex QSqlDatabase::primaryIndex(const QString \&tablename) const
 
 查看关于 Qt SQL driver 文档的更多信息。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 tables() 和 record()。
-\end{notice}
+\end{seeAlso}
 
 
 QSqlRecord QSqlDatabase::record(const QString \&tablename) const
@@ -697,20 +681,18 @@ QVERIFY(db.isValid());
 
 QSqlDatabase拥有 creator 指针的所有权，因此您不能自己删除它。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 drivers()。
-\end{notice}
+\end{seeAlso}
 
 [static] void QSqlDatabase::removeDatabase(const QString \&connectionName)
 
 
 从数据库列表中，删除一个叫 connectionName 数据库连接。
 
-\begin{notice}[警告]
+\begin{warning}
 不应在数据库连接上打开查询的情况下调用此函数，否则将发生资源泄漏。
-\end{notice}
-
-
+\end{warning}
 
 \clearpage
 
@@ -747,9 +729,9 @@ QSqlDatabase::removeDatabase("sales"); // 正确的
 这个函数是线程安全的
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 database()，connectionName()，和 线程和SQL模块。
-\end{notice}
+\end{seeAlso}
 
 bool QSqlDatabase::rollback()
 
@@ -762,14 +744,11 @@ bool QSqlDatabase::rollback()
 
 调用 lastError() 操作获得错误的相关信息。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QSqlQuery::isActive()，QSqlDriver::hasFeature() 和 commit()。
-\end{notice}
-
-
+\end{seeAlso}
 
 void QSqlDatabase::setConnectOptions(const QString \&options = QString())
-
 
 设置一组数据库的具体的可选项。它必须在打之这个连接之前执行这个操作，否则是无效的。另一个可能的原因是调用 QSqlDatabase::setConnectOptions() 去关闭这个连接，并且调用 open() 再次关闭这个连接。
 
@@ -868,9 +847,9 @@ if (!db.open()) {
 
 查阅这个客户端库文档，获得更多关于不同可选项的更多信息。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 connectOptions()。
-\end{notice}
+\end{seeAlso}
 
 
 
@@ -908,9 +887,9 @@ if (db.open()) {
 
 这个没有默认的值
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 databaseName()、setUserName()、 setPassword()、 setHostName()、setPort()、setConnectOptions() 和 open()。
-\end{notice}
+\end{seeAlso}
 
 
 void QSqlDatabase::setHostName(const QString \emph{\&host})
@@ -922,9 +901,9 @@ void QSqlDatabase::setHostName(const QString \emph{\&host})
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hostName()， setUserName(), setPassword()，setDatabaseName()，setPort()， setConnectOptions() 和 open()。
-\end{notice}
+\end{seeAlso}
 
 
 void QSqlDatabase::setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy precisionPolicy)
@@ -943,10 +922,10 @@ void QSqlDatabase::setNumericalPrecisionPolicy(QSql::NumericalPrecisionPolicy pr
 qt4.6中引入了这个函数。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QSql::NumericalPrecisionPolicy，
 numericalPrecisionPolicy()，QSqlQuery::setNumericalPrecisionPolicy 和 QSqlQuery::numericalPrecisionPolicy。
-\end{notice}
+\end{seeAlso}
 
 
 
@@ -955,14 +934,14 @@ void QSqlDatabase::setPassword(const QString \&password)
 
 这个没有默认值。
 
-\begin{notice}[警告]
+\begin{warning}
 这个函数以明文的形式把密码存放到qt里。 将密码作为参数来避免这个行为，然后使用 open()进行调用。
-\end{notice}
+\end{warning}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 password()，setUserName()，setDatabaseName()，setHostName(),
 setPort(), setConnectOptions()和 open()。
-\end{notice}
+\end{seeAlso}
 
 void QSqlDatabase::setPort(int port)
 
@@ -970,10 +949,10 @@ void QSqlDatabase::setPort(int port)
 
 这个没有默认的值。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 port(), setUserName()， setPassword(),
 setHostName()，setDatabaseName(), setConnectOptions() 和 open()。
-\end{notice}
+\end{seeAlso}
 
 
 void QSqlDatabase::setUserName(const QString \&name)
@@ -982,36 +961,32 @@ void QSqlDatabase::setUserName(const QString \&name)
 
 这个没有默认值。
 
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 userName()，setDatabaseName()，setPassword()，
 setHostName()，setPort()，setConnectOptions() 和 open()。
-\end{notice}
-
+\end{seeAlso}
 
 QStringList QSqlDatabase::tables(QSql::TableType type = QSql::Tables) const
 
 返回由 parameter type 参数 指定的数据库的表格、系统表和视图的列表。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 primaryIndex() 和 record()。
-\end{notice}
+\end{seeAlso}
 
 bool QSqlDatabase::transaction()
 
 如果驱动程序支持事务，则在数据库上开始事务。如果操作成功的话，返回 true, 否则返回 false。
 
-
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QSqlDriver::hasFeature()， commit() 和 rollback()。
-\end{notice}
+\end{seeAlso}
 
 QString QSqlDatabase::userName() const
 
 返回连接的用户名; 它也许为空。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setUserName()。
-\end{notice}
+\end{seeAlso}
 

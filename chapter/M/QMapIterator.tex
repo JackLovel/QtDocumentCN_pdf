@@ -114,11 +114,9 @@ while (i.findNext(widget)) {
 如果在 QMapIterator 处于活动状态时修改 map，QMapIterator 将继续在原 map 上遍历，
 而忽略修改后的副本。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMutableMapIterator 和 QMap::const\_iterator。
-\end{notice}
-
-%%%%%%%%%%%%%
+\end{seeAlso}
 
 \section{成员函数文档}
 
@@ -131,9 +129,9 @@ bool QMapIterator::findPrevious(const T \emph{\&value})
 调用该函数后，如果找到值，迭代器将被移动到匹配元素的前面；
 否则，迭代器将被移动到容器的前端。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 findNext()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -146,9 +144,9 @@ bool QMapIterator::findNext(const T \emph{\&value})
 调用该函数后，如果找到值 \emph{value}，迭代器将被移动到匹配元素的后面；
 否则，迭代器将被移动到容器的末端。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 findPrevious()。
-\end{notice}
+\end{seeAlso}
     
 \splitLine
 
@@ -158,9 +156,9 @@ const Key \&QMapIterator::key() const
 
 调用 next() 或 findNext() 后，key() 与 peekPrevious().key() 相同。调用 previous() 或 findPrevious() 后，key() 与 peekNext().key() 相同。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 value()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -172,9 +170,9 @@ QMapIterator::Item QMapIterator::peekPrevious() const
 
 对位于容器前端的迭代器调用该函数将导致未定义结果。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hasPrevious()，previous() 和 peekNext()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -187,9 +185,9 @@ QMapIterator::Item QMapIterator::previous()
 对位于容器前端的迭代器调用该函数将导致未定义结果。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hasPrevious()，peekPrevious() 和 next()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -197,9 +195,9 @@ bool QMapIterator::hasPrevious() const
 
 如果该迭代器前面至少有一个元素，返回 true，即该迭代器不在容器的前端；否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hasNext() 和 previous()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -207,9 +205,9 @@ bool QMapIterator::hasNext() const
 
 如果该迭代器后面至少有一个元素，返回 true，即该迭代器不在容器的末端；否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hasPrevious() 和 next()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -217,9 +215,9 @@ void QMapIterator::toBack()
 
 将迭代器移动到容器的末端（最后一个元素之后）。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toFront() 和 previous()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -227,9 +225,9 @@ void QMapIterator::toFront()
 
 将迭代器移动到容器的前端（第一个元素之前）。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toBack() 和 next()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -238,9 +236,9 @@ QMapIterator<Key, T> \&QMapIterator::operator=(const QMap<Key, T> \emph{\&contai
 将迭代器关联到 \emph{container} 来遍历 map。迭代器将被移动到 map 的前端（第一个元素之前）。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toFront() 和 toBack()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -249,9 +247,9 @@ QMapIterator::QMapIterator(const QMap<Key, T> \emph{\&map})
 构造一个迭代器来遍历 \emph{map}。迭代器将被移动到 \emph{map} 的前端（第一个元素之前）。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator=()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -263,9 +261,9 @@ QMapIterator::Item QMapIterator::next()
 
 对位于容器末端的迭代器调用该函数将导致未定义结果。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hasNext()，peekNext() 和 previous()。
-\end{notice}
+\end{seeAlso}
     
 \splitLine
 
@@ -277,9 +275,9 @@ QMapIterator::Item QMapIterator::peekNext() const
 
 对位于容器末端的迭代器调用该函数将导致未定义结果。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 hasNext()，next() 和 peekPrevious()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -291,6 +289,6 @@ const T \&QMapIterator::value() const
 
 调用 previous() 或 findPrevious() 后，value() 与 peekNext().value() 相同。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 key()。
-\end{notice}
+\end{seeAlso}

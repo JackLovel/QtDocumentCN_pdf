@@ -117,15 +117,14 @@ while (i != hash.end()) {
 
 同一哈希表可以使用多个迭代器。然而，需要注意任何对 QHash 的直接修改都可能完全改变哈希表中存储的元素顺序，因为该操作可能引起 QHash 重新散列其内部数据结构。有一个例外是 QHash::erase()。该函数可以在迭代时安全调用，不会影响哈希表中元素的顺序。如果需要长时间持有迭代器，建议使用 QMap 而非 QHash。
 
-\begin{notice}[警告]
+\begin{warning}
 隐式共享容器迭代器的工作方式和 STL 迭代器不完全相同。当容器的迭代器还处于活动状态时，应该避免拷贝容器。更多信息请参阅隐式共享迭代器问题。
-\end{notice}
+\end{warning}
  
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QHash::const\_iterator，QHash::key\_iterator 和
 QMutableHashIterator。
-\end{notice}
+\end{seeAlso}
 
 \section{成员函数文档}
 
@@ -135,9 +134,9 @@ bool iterator::operator!=(const iterator \emph{\&other}) const
 
 如果 \emph{other} 与本迭代器指向的元素不同，返回 \hl{true}；否则返回 \hl{false}。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator==()。
-\end{notice}
+\end{seeAlso}
  
 
 bool iterator::operator==(const const\_iterator \emph{\&other}) const
@@ -148,9 +147,9 @@ bool iterator::operator==(const iterator \emph{\&other}) const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator!=()。
-\end{notice}
+\end{seeAlso}
 
 iterator::iterator()
 
@@ -159,9 +158,9 @@ iterator::iterator()
 一定不要对未初始化的迭代器调用 key()，value() 和 operator++() 等函数。使用前要用 operator=() 赋值。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  QHash::begin() 和 QHash::end()。
-\end{notice}
+\end{seeAlso}
 
 const Key \&iterator::key() const
 
@@ -170,9 +169,9 @@ const Key \&iterator::key() const
 不能直接通过迭代器改变元素的键，尽管可以通过调用 QHash::erase() 后再调用 QHash::insert() 的方式来改变键。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  value()。
-\end{notice}
+\end{seeAlso}
 
 T \&iterator::value() const
 
@@ -186,9 +185,9 @@ if (i.key() == "Hello")
 \end{lstlisting}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 key() 和 operator*()。
-\end{notice}
+\end{seeAlso}
 
 T \&iterator::operator*() const
 
@@ -197,9 +196,9 @@ T \&iterator::operator*() const
 同 value()。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 key()。
-\end{notice}
+\end{seeAlso}
 
 
 iterator \&iterator::operator++()
@@ -209,9 +208,9 @@ iterator \&iterator::operator++()
 对 QHash::end() 调用该函数将导致未定义结果。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator--()。
-\end{notice}
+\end{seeAlso}
 
 iterator iterator::operator++(int)
 
@@ -223,6 +222,6 @@ T *iterator::operator->() const
 
 返回指向当前元素值的指针。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  value()。
-\end{notice}
+\end{seeAlso}

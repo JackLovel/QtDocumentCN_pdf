@@ -367,9 +367,9 @@ inline bool operator<(const Employee &e1, const Employee &e2)
 
 该例中，先比较雇员名。如果雇员名相等，再比较二者的生日来分出大小。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMapIterator，QMutableMapIterator，QHash 和 QSet。
-\end{notice}
+\end{seeAlso}
 
 \section{成员类型文档}
 
@@ -393,9 +393,9 @@ QMap::const\_key\_value\_iterator 类型定义为 QMap 和 QMultiMap 提供 STL 
 
 Qt 5.10 中引入该类型定义。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QKeyValueIterator。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -416,9 +416,9 @@ QMap::key\_value\_iterator 类型定义为 QMap 和 QMultiMap 提供 STL 风格�
 
 Qt 5.10 中引入该类型定义。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QKeyValueIterator。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -438,9 +438,9 @@ QMap::QMap(const typename std::map<Key, T> \emph{\&other})
 
 构造一个 \emph{other} 的副本。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toStdMap()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -458,9 +458,9 @@ QMap::QMap(const QMap<Key, T> \&other)
 
 该操作需要常数时间，因为 QMap 是隐式共享的。这使得从一个函数返回 QMap 非常快。如果共享实例被修改了，它将以线性时间被复制一份（写时拷贝）。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator=()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -478,9 +478,9 @@ QMap::QMap()
 
 构造一个空 map。
  
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 clear()。
-\end{notice}
+\end{seeAlso}
 	
 \splitLine
 
@@ -506,9 +506,9 @@ QMap::iterator QMap::begin()
 
 返回 STL 风格迭代器，指向 map 中的第一个元素。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constBegin() 和 end()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -524,9 +524,9 @@ QMap::const\_iterator QMap::cbegin() const
 
 Qt 5.0 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin() 和 cend()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -536,9 +536,9 @@ QMap::const\_iterator QMap::cend() const
 
 Qt 5.0 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 cbegin() 和 end()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -546,9 +546,9 @@ void QMap::clear()
 
 从 map 中移除所有元素。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 remove()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -556,9 +556,9 @@ QMap::const\_iterator QMap::constBegin() const
 
 返回常量类型的 STL 风格迭代器，指向 map 中的第一个元素。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin() 和 constEnd()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -566,9 +566,9 @@ QMap::const\_iterator QMap::constEnd() const
 
 返回常量类型的 STL 风格迭代器，指向 map 中最后一个元素之后的假想元素。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constBegin() 和 end()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -580,9 +580,9 @@ QMap::const\_iterator QMap::constFind(const Key \emph{\&key}) const
 
 Qt 4.1 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 find() 和 QMultiMap::constFind()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -592,9 +592,9 @@ QMap::const\_key\_value\_iterator QMap::constKeyValueBegin() const
 
 Qt 5.10 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyValueBegin()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -604,9 +604,9 @@ QMap::const\_key\_value\_iterator QMap::constKeyValueEnd() const
 
 Qt 5.10 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constKeyValueBegin()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -614,9 +614,9 @@ bool QMap::contains(const Key \emph{\&key}) const
 
 如果该 map 包含键为 \emph{key} 的元素，返回 true；否则返回 false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 count() 和 QMultiMap::contains()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -624,9 +624,9 @@ int QMap::count(const Key \emph{\&key}) const
 
 返回与键 \emph{key} 相关联的元素个数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 contains() 和 QMultiMap::count()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -649,11 +649,10 @@ QMap::iterator QMap::end()
 
 返回 STL 风格迭代器，指向 map 中最后一个元素之后的假想元素。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 begin() 和 constEnd()。
-\end{notice}
+\end{seeAlso}
 
-%% 
 \splitLine
 
 QMap::const\_iterator QMap::end() const
@@ -681,9 +680,9 @@ QMap::iterator QMap::erase(QMap::iterator \emph{pos})
 从 map 中移除迭代器 \emph{pos} 指向的键值对，返回指向 map 中下一个元素的迭代器。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 remove()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -708,11 +707,9 @@ while (i != map.end() && i.key() == "HDR") {
 }
 \end{lstlisting}
 
-%%%%
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 constFind()，value()，values()，lowerBound()，upperBound() 和 QMultiMap::find()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -731,9 +728,9 @@ T \&QMap::first()
 Qt 5.2 中引入该函数。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 last()，firstKey() 和 isEmpty()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -754,9 +751,9 @@ const Key \&QMap::firstKey() const
 Qt 5.2 中引入该函数。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lastKey()，first()，keyBegin() 和 isEmpty()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -768,9 +765,9 @@ QMap::iterator QMap::insert(const Key \emph{\&key}, const T \emph{\&value})
 
 如果有多个键为 \emph{key} 的元素，最新插入的元素的值将被 \emph{value} 替换。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMultiMap::insert()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -800,9 +797,9 @@ QMap::iterator QMap::insert(QMap::const\_iterator \emph{pos}, const Key \emph{\&
 
 Qt 5.1 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMultiMap::insert()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -812,15 +809,15 @@ void QMap::insert(const QMap<Key, T> \emph{\&map})
 
 如果一个键同时在两个 \emph{map} 中出现，其值将被传入的 \emph{map} 中存储的值替换。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 如果传入的 map 中同一键关联多个元素，则该键的最终值未定义。
-\end{notice}
+\end{seeAlso}
 
 Qt 5.15 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMultiMap::insert()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -844,9 +841,9 @@ const Key QMap::key(const T \emph{\&value}, const Key \&defaultKey = Key()) cons
 
 Qt 4.3 中引入该函数。
 
-\begin{notice}[另请参阅]
-另请参阅 value() 和 keys()。
-\end{notice}
+\begin{seeAlso}
+value() 和 keys()。
+\end{seeAlso}
 
 \splitLine
 
@@ -856,9 +853,9 @@ QMap::key\_iterator QMap::keyBegin() const
 
 Qt 5.6 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyEnd() 和 firstKey()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -868,9 +865,9 @@ QMap::key\_iterator QMap::keyEnd() const
 
 Qt 5.6 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyBegin() 和 lastKey()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -880,9 +877,9 @@ QMap::key\_value\_iterator QMap::keyValueBegin()
 
 Qt 5.10 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyValueEnd().
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -892,9 +889,9 @@ QMap::const\_key\_value\_iterator QMap::keyValueBegin() const
 
 Qt 5.10 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyValueEnd()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -904,9 +901,9 @@ QMap::key\_value\_iterator QMap::keyValueEnd()
 
 Qt 5.10 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyValueBegin()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -916,9 +913,9 @@ QMap::const\_key\_value\_iterator QMap::keyValueEnd() const
 
 Qt 5.10 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keyValueBegin()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -928,9 +925,9 @@ QList<Key> QMap::keys() const
 
 键的顺序将确保与通过 values() 返回的值的顺序相同。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMultiMap::uniqueKeys()，values() 和 key()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -952,9 +949,9 @@ T \&QMap::last()
 
 Qt 5.2 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 first()，lastKey() 和 isEmpty()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -974,9 +971,9 @@ const Key \&QMap::lastKey() const
 
 Qt 5.2 中引入该函数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 firstKey()，last()，keyEnd() 和 isEmpty()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1013,9 +1010,9 @@ while (i != upperBound) {
 \end{lstlisting}
 
 %%%%%%%%%
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 upperBound() 和 find()。
-\end{notice}
+\end{seeAlso}
     
 
 QMap::const\_iterator QMap::lowerBound(const Key \emph{\&key}) const
@@ -1028,9 +1025,9 @@ int QMap::remove(const Key \emph{\&key})
 
 从 map 中移除所有键为 \emph{key} 的元素。返回被移除的元素个数，如果键存在，则为1，否则为0。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 clear()，take() 和 QMultiMap::remove()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1038,9 +1035,9 @@ int QMap::size() const
 
 返回 map 中键值对的个数。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isEmpty() 和 count()。
-\end{notice}
+\end{seeAlso}
     
 
 \splitLine
@@ -1061,9 +1058,9 @@ T QMap::take(const Key \emph{\&key})
 
 如果不使用返回值，使用 remove() 更高效一些。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 remove()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1093,9 +1090,9 @@ map.upperBound(999);    // 返回 end()
 \end{lstlisting}
 
 %%%%%%
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lowerBound() 和 find()。
-\end{notice}
+\end{seeAlso}
 
 QMap::const\_iterator QMap::upperBound(const Key \emph{\&key}) const
 
@@ -1109,9 +1106,9 @@ const T QMap::value(const Key \emph{\&key}, const T \&defaultValue = T()) const
 
 如果 map 不包含键为 \emph{key} 的元素，该函数返回 defaultValue。 如果没有指定 defaultValue，该函数返回默认构造的值。如果 map 中有多个键为 key 的元素，返回最新插入的元素的值。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 key()，values()，contains() 和 operator[]()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1119,9 +1116,9 @@ QList<T> QMap::values() const
 
 按照键升序返回 map 中所有值的列表。如果一个键关联到多个值，该键的所有值都将被放入列表中，而不只是最新插入的值。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 keys() 和 value()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1133,9 +1130,9 @@ bool QMap::operator!=(const QMap<Key, T> \emph{\&other}) const
 
 该函数需要值类型实现 operator==()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator==()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1147,9 +1144,9 @@ bool QMap::operator==(const QMap<Key, T> \emph{\&other}) const
 
 该函数需要值类型实现 operator==()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator!=()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1160,10 +1157,9 @@ T \&QMap::operator[](const Key \emph{\&key})
 如果 map 不包含键为 \emph{key} 的元素，该函数用键 \emph{key} 插入一个默认构造的值，并返回该值的引用。
 如果 map 包含多个键为  \emph{key} 的元素，该函数返回最新插入的那个值的引用。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insert() 和 value()。
-\end{notice}
-
+\end{seeAlso}
 
 \splitLine
 
@@ -1181,9 +1177,9 @@ template <typename Key, typename T> QDataStream \&operator<<(QDataStream \emph{\
 
 该函数需要键和值类型实现 operator<<()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QDataStream 运算符的格式。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1193,6 +1189,6 @@ template <typename Key, typename T> QDataStream \&operator>>(QDataStream \emph{\
 
 该函数需要键和值类型实现 operator>>()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QDataStream 运算符的格式。
-\end{notice}
+\end{seeAlso}

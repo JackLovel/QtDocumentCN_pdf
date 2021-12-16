@@ -297,10 +297,10 @@ addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
 
 QMainWindow 用 \hl{saveState()} 保存布局，用 \hl{restoreState()} 恢复布局。包括工具栏和停靠部件的位置和相对主窗口的尺寸。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMenuBar，QToolBar，QStatusBar, QDockWidget，Application Example，
 Dock Widgets Example，MDI Example，SDI Example 和 Menus Example。
-\end{notice}
+\end{seeAlso}
 
 \section{成员变量文档}
 
@@ -440,9 +440,9 @@ documentMode : bool
     \hline
     \end{tabular}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QTabBar::documentMode
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -491,9 +491,9 @@ tabShape : QTabWidget::TabShape
     \end{tabular}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setTabPosition ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -562,9 +562,9 @@ QMainWindow::QMainWindow(QWidget *parent = nullptr, Qt::WindowFlags flags = Qt::
 
 您可以将此信号连接到其他组件，以帮助保持应用程序的一致外观。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setIconSize ().
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -574,9 +574,9 @@ setIconSize ().
 
 该函数在 Qt 5.8 引入
 
-\begin{notice}[另请参阅]
-tabifyDockWidget() and tabifiedDockWidgets()
-\end{notice}
+\begin{seeAlso}
+tabifyDockWidget() and tabifiedDockWidgets()。
+\end{seeAlso}
 
 \splitLine
 
@@ -586,9 +586,9 @@ tabifyDockWidget() and tabifiedDockWidgets()
 
 您可以将此信号连接到其他组件，以帮助保持应用程序的一致外观。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setToolButtonStyle ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -616,9 +616,9 @@ void QMainWindow::addToolBar(Qt::ToolBarArea area, QToolBar *toolbar)
 在主窗口中将 toolbar 添加到指定的 area。toolbar 放置在当前工具栏块（比如分隔符）的后面。如果主窗口已管理 toolbar，则只会将工具栏移动到 area。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertToolBar ()，addToolBarBreak () 和 insertToolBarBreak ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -636,9 +636,9 @@ QToolBar *QMainWindow::addToolBar(const QString \&title)
 
 创建 QToolBar 的一个对象，设置它的窗口标题为 title 并将它添加到上方的工具栏区域。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setWindowTitle ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -652,9 +652,9 @@ QWidget *QMainWindow::centralWidget() const
 
 返回主窗口的中央部件。如果尚未设置中央部件，则此函数返回零。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setCentralWidget ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -666,9 +666,9 @@ Qt::DockWidgetArea QMainWindow::corner(Qt::Corner corner) const
 
 返回占用指定 corner 的停靠部件区域。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setCorner ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -681,9 +681,9 @@ setCorner ()
 如果要创建自定义弹出式菜单，请重新实现此功能并返回新创建的弹出式菜单。
 弹出式菜单的所有权将传输到调用方。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDockWidget ()，addToolBar () 和 menuBar ()
-    \end{notice}
+    \end{seeAlso}
     
 \splitLine
 
@@ -691,9 +691,9 @@ Qt::DockWidgetArea QMainWindow::dockWidgetArea(QDockWidget \emph{*dockwidget}) c
 
 返回 dockwidget 的 Qt::DockWidgetArea。如果 dockwidget 没有被加入主窗口，此函数返回Qt::NoDockWidgetArea
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDockWidget ()，splitDockWidget () 和 Qt::DockWidgetArea
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -708,9 +708,9 @@ void QMainWindow::insertToolBar(QToolBar \emph{*before}, QToolBar \emph{*toolbar
 将 toolbar 插入到 before 工具栏占用的区域之前。
 例如，在正常的从左到右布局操作中，toolbar 将显示在水平工具栏区域中 before 工具栏的左侧。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 insertToolBarBreak ()，addToolBar () 和 addToolBarBreak ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -734,9 +734,9 @@ QMenuBar *QMainWindow::menuBar() const
 QMenuBar *menuBar = new QMenuBar(nullptr);
 \end{lstlisting}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setMenuBar()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -746,9 +746,9 @@ QWidget *QMainWindow::menuWidget() const
 
 该函数在 Qt 4.2 引入
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setMenuWidget ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -795,9 +795,9 @@ bool QMainWindow::restoreDockWidget(QDockWidget \emph{*dockwidget})
 如果在调用 restoreState () 后创建 \emph{dockwidget} 的状态，则恢复状态。
 如果状态已恢复，则返回true；否则返回false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 restoreState() 和 saveState()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -818,9 +818,9 @@ void MainWindow::readSettings()
 }
 \end{lstlisting}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 saveState()，QWidget::saveGeometry()，QWidget::restoreGeometry() 和 restoreDockWidget()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -847,9 +847,9 @@ void MyMainWindow::closeEvent(QCloseEvent *event)
 }
 \end{lstlisting}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 restoreState()， QWidget::saveGeometry() 和 QWidget::restoreGeometry()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -861,9 +861,9 @@ void QMainWindow::setCentralWidget(QWidget \emph{*widget})
 QMainWindow 拥有 widget 指针的所有权，会在适当的时间将其删除。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 centralWidget()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -871,9 +871,9 @@ void QMainWindow::setCorner(Qt::Corner \emph{corner}, Qt::DockWidgetArea \emph{a
 
 用停靠部件 area 占据指定的 corner。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 corner()
- \end{notice}
+ \end{seeAlso}
 
 \splitLine
 
@@ -884,9 +884,9 @@ void QMainWindow::setMenuBar(QMenuBar \emph{*menuBar})
 \begin{notice}
 QMainWindow 拥有 menuBar 指针的所有权，会在适当的时间将其删除。\end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 menuBar()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -898,9 +898,9 @@ QMainWindow 拥有 \emph{menuBar} 指针的所有权，会在适当的时间将�
 
 该函数在 Qt 4.2 引入
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 menuWidget()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -910,9 +910,9 @@ void QMainWindow::setStatusBar(QStatusBar \emph{*statusbar})
 
 将状态栏设置为nullptr会将其从主窗口中删除。请注意，QMainWindow 拥有 statusbar 指针的所有权，会在适当的时间将其删除。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 statusBar()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -926,9 +926,9 @@ VerticalTabs 会覆盖此方法设置的选项卡位置
 
 该函数在 Qt 4.5 引入
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 tabPosition() 和 setTabShape()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -949,9 +949,9 @@ Qt::LayoutDirection 会影响两个分割区域的停靠部件顺序。启用从
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 tabifyDockWidget(), addDockWidget() 和 removeDockWidget()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -959,9 +959,9 @@ QStatusBar *QMainWindow::statusBar() const
 
 返回主窗口的状态栏。如果状态栏不存在，则此函数将创建并返回一个空状态栏。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setStatusBar()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -975,9 +975,9 @@ QTabWidget::TabPosition QMainWindow::tabPosition(Qt::DockWidgetArea \emph{area})
 
 该函数在 Qt 4.5 引入
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setTabPosition() 和 tabShape()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -987,9 +987,9 @@ QList<QDockWidget *> QMainWindow::tabifiedDockWidgets(QDockWidget \emph{*dockwid
 
 该函数在 Qt 4.5 引入
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 tabifyDockWidget ()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -997,9 +997,9 @@ void QMainWindow::tabifyDockWidget(QDockWidget \emph{*first}, QDockWidget \emph{
 
 将 \emph{second} 停靠部件移动到 \emph{first} 停靠部件旁形成一个选项卡式停靠区域。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 tabifiedDockWidgets()
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1018,9 +1018,9 @@ Qt::ToolBarArea QMainWindow::toolBarArea(QToolBar \emph{*toolbar}) const
 返回 toolbar 的 Qt::ToolBarArea。
  如果主窗口没有添加 toolbar ，返回 Qt::NoToolBarArea。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addToolBar()， addToolBarBreak() 和 Qt::ToolBarArea
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -1028,6 +1028,6 @@ bool QMainWindow::toolBarBreak(QToolBar \emph{*toolbar}) const
 
 返回 \emph{toolbar} 之前是否有工具栏 break。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addToolBarBreak() 和 insertToolBarBreak()
-    \end{notice}
+    \end{seeAlso}

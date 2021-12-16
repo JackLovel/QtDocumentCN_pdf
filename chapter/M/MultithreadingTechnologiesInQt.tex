@@ -10,9 +10,9 @@ Qt 提供一系列的类与函数来处理多线程。Qt 开发者们可以使�
 允许 QObject 槽函数在子线程执行。若子类化一个 QThread，程序可以在事件循环启动前初始化这个新线程；
 或者在无事件循环下运行并行代码。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QThread 类文档 以及示例代码 多线程范例 来了解如何使用 QThread。
-\end{notice}
+\end{seeAlso}
 
 \section{QThreadPool 与 QRunnable: 线程重用}
 
@@ -22,12 +22,10 @@ QThread 类文档 以及示例代码 多线程范例 来了解如何使用 QThre
 
 每一个 Qt 程序都会自带一个公共线程池，可以通过调用 QThreadPool::globalInstance() 来获取。公共线程池会自动维持着一定数量的线程，线程数为基于 CPU 核心数计算的最佳值。不过，您也可以显式创建并管理一个独立的 QThreadPool 。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Qt Concurrent 模块文档以获取各个函数的详细信息。
-\end{notice}
+\end{seeAlso}
     
-
-
 \section{Qt Concurrent: 使用高级 API}
 
 Qt Concurrent 模块提供了数个高级函数，用于处理一些常见的并行计算模式：map、filter 和 reduce。
@@ -57,9 +55,9 @@ QML 类型 WorkerScript 可将 JavaScript 代码与 GUI 线程并行运行。
 
 使用 WorkerScript，很像使用一个移入子线程工作的 QObject，数据通过信号槽在线程间进行传输。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 WorkerScript 文档以获得实现脚本的详细信息，以及能够在线程间传输的数据类型列表。
-\end{notice}
+\end{seeAlso}
 
 \section{选择合适的方法}
 
