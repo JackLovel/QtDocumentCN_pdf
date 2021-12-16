@@ -248,9 +248,9 @@ method.invoke(obj,
 
 若 compute 槽通过特定顺序没有完整获取到一个 QString、一个 int 和一个 double，则此调用会失败。
 
-\begin{notice}[警告]
+\begin{warning}
 此方法不会验证参数的有效性，object 必须是创建 QMetaMethod 的 QMetaObject 的类型实例，参数列表必须与该方法的保持一直，否则会导致未定义行为。
-\end{notice}
+\end{warning}
 
 \begin{seeAlso}
 Q\_ARG()、Q\_RETURN\_ARG()、qRegisterMetaType() 和 QMetaObject::invokeMethod()。

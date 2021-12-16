@@ -102,9 +102,9 @@ qDeleteAll(list.constBegin(), list.constEnd());
 
 多个迭代器可以作用在同一个列表上。然而，需要注意的是对该 QList 进行任意非常量的方法调用都会使所有已存在的迭代器状态变成未定义。如果需要在一个比较长周期内保证迭代器有效，我们建议你使用 QLinkedList 而不是 QList。
 
-\begin{notice}[警告]
+\begin{warning}
 支持隐式共享的容器的迭代器的行为和 STL 迭代器并不完全一样。当这类容器的迭代器在使用时你应当避免容器的拷贝。更多信息请阅读 隐式共享迭代器问题 一文。
-\end{notice}
+\end{warning}
 
 \begin{seeAlso}
 QList::iterator and QListIterator.

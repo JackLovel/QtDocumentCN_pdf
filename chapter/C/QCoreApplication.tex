@@ -284,10 +284,9 @@ QString QCoreApplication::applicationDirPath() [static]
 
 在macOS和iOS上，它会指向实际包含可执行文件的目录，该目录可能在一个应用程序包内（如果是以应用程序包形式存在）。
 
-\begin{notice}[警告]
+\begin{warning}
 在Linux上，这个函数会尝试从/proc获取文件路径。如果失败了，那么它假设argv[0]包含了可执行文件的绝对路径。此函数同样也假设了应用程序不会改变当前路径。
-\end{notice}
-
+\end{warning}
 
 \begin{seeAlso}
 applicationFilePath()。
@@ -301,12 +300,9 @@ QString QCoreApplication::applicationFilePath() [static]
 例如，您已经在/usr/local/qt目录安装了Qt，然后运行regexp示例，那么这个函数会返回"/usr/local/qt/examples/tools/regexp/regexp"。
 
 
-\begin{notice}[警告]
+\begin{warning}
 在Linux上，这个函数会尝试从/proc获取文件路径。如果失败了，那么它假设argv[0]包含了可执行文件的绝对路径。此函数同样也假设了应用程序不会改变当前路径。
-\end{notice}
-
-
-
+\end{warning}
 
 \begin{seeAlso}
 applicationDirPath()。
@@ -326,11 +322,9 @@ QStringList QCoreApplication::arguments() [static]
 
 调用这个函数需要花费很多时间——您应该在解析命令行时，将结果缓存起来。
 
-
-
-\begin{notice}[警告]
+\begin{warning}
 在Unix下，这个参数列表由main()函数中的argc和argv参数生成。argv中的字符串数据将会通过QString::fromLocal8Bit()来解析，因此，在Latin1的区域环境下，是不可能来传递日语的命令行的，其他情况以此类推。大部分现代Unix系统没有此限制，因为它们是基于Unicode的。
-\end{notice}
+\end{warning}
 
 在Windows下，这个参数列表，只有在构造函数中传入了修改的argc和argv时，才会从这个argc和argv中解析。这种情况下，就会出现编码问题。
 

@@ -152,9 +152,9 @@ QSqlDatabase db = QSqlDatabase::database();
 
 QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接所做的操作将影响表示相同连接的其他 QSqlDatabase 实例。 使用 cloneDatabase() 在基于已存在数据库的连接 来 创建 独立的数据库的连接。
 
-\begin{notice}[警告]
+\begin{warning}
 强烈建议不要将QSqlDatabase的拷贝作为类成员，因为这将阻止关闭时正确清理实例。 如果需要访问已经存在QSqlDatabase，应该使用database()访问。如果您选择使用作为成员变量的QSqlDatabase，则需要在删除QCoreApplication实例之前删除它，否则可能会导致未定义的行为。
-\end{notice}
+\end{warning}
 
 如果您想创建多个数据库连接，可以调用 addDatabase(), 并且给一个独一无二的参数(即：连接名称)。使用 带有连接名的database() 函数，来获取该连接。使用 带有连接名的removeDatabase() 函数，来删除 一个连接。如果尝试删除由其他QSqlDatabase对象引用的连接，QSqlDatabase将输出警告。可以使用 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/S/QSqlDatabase/QSqlDatabase.md#static-bool-qsqldatabasecontainsconst-qstring-connectionname--qlatin1stringdefaultconnection}{contains()}查看给定的连接名是否在连接列表中。
 
@@ -279,9 +279,9 @@ QSqlDatabase::$\sim$QSqlDatabase()
 
 如果我们没有指定连接名参数，那么应用程序就会返回默认连接。 如果我们提供了连接名参数，那么可以使用database(connectionName) 函数来获取该连接。
 
-\begin{notice}[警告]
+\begin{warning}
 如果您指定了 相同的连接名参数，那么就会替换之前的那个相同的连接。如果您多次调用这个函数而不指定 连接名参数，则默认连接将被替换。
-\end{notice}
+\end{warning}
 
 
 在使用连接之前，它必须经过初始化。
@@ -354,17 +354,13 @@ QIBASE	&QIBaseDriver	&isc\_db\_handle connection	&qsql\_ibase.cpp\\
 
 当构造用于为内部查询创建新连接的QTDSDriver时，需要主机名（或服务名）。这是为了防止在同时使用多个QSqlQuery对象时发生阻塞。
 
-
-\begin{notice}[警告]
+\begin{warning}
 我们假设添加一个存在连接名的连接时，这个新添加的连接将会替换另一个。 
-\end{notice}
+\end{warning}
 
-
-\begin{notice}[警告]
+\begin{warning}
 	 SQL框架拥有驱动程序的所有权。它不能被删除。可以使用removeDatabase()，去删除这个连接。 另请参阅drivers()
-\end{notice}
-
-
+\end{warning}
 
 [protected] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
 
@@ -372,12 +368,11 @@ QIBASE	&QIBaseDriver	&isc\_db\_handle connection	&qsql\_ibase.cpp\\
 
 
 
-\begin{notice}[警告]
+\begin{warning}
 这个新的连接不能被打开。您必须调用 open(),才能使用这个新的连接。
-\end{notice}
+\end{warning}
 
-
-[static] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \&other, const QString \&connectionName)
+[static] QSqlDatabase QSqlDatabase::cloneDatabase(const QString \emph{\&other}, const QString \emph{\&connectionName})
 这是个重载函数。
 
 克隆其他数据库连接并将其存储为connectionName。原始数据库中的所有设置，例如databaseName()、hostName()等，都会被复制。如果其他数据库无效，则不执行任何操作。返回最新被创建的数据库连接。
@@ -695,11 +690,9 @@ drivers()。
 
 从数据库列表中，删除一个叫 connectionName 数据库连接。
 
-\begin{notice}[警告]
+\begin{warning}
 不应在数据库连接上打开查询的情况下调用此函数，否则将发生资源泄漏。
-\end{notice}
-
-
+\end{warning}
 
 \clearpage
 
@@ -941,9 +934,9 @@ void QSqlDatabase::setPassword(const QString \&password)
 
 这个没有默认值。
 
-\begin{notice}[警告]
+\begin{warning}
 这个函数以明文的形式把密码存放到qt里。 将密码作为参数来避免这个行为，然后使用 open()进行调用。
-\end{notice}
+\end{warning}
 
 \begin{seeAlso}
 password()，setUserName()，setDatabaseName()，setHostName(),
