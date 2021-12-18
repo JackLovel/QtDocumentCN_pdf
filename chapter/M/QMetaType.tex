@@ -1,0 +1,206 @@
+\chapter{QMetaType}
+
+QMetaType 类管理元对象系统中的注名类型。更多内容...。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+    头文件  &	\hl{\#include <QMetaType>} \\
+    \hline
+    qmake: & \hl{QT += core}    \\
+	\hline
+\end{tabular}
+
+\begin{notice}
+此类中所有函数都是线程安全的。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{tabular}{|r|m{25em}|}   
+\hline
+类型 	& 名称 \\
+\hline
+enum &	Type \{ Void, Bool, Int, UInt, Double, ..., UnknownType \} \\
+\hline
+enum &	TypeFlag \{ NeedsConstruction, NeedsDestruction, MovableType, IsEnumeration, PointerToQObject \}\\
+\hline
+flags &	TypeFlags\\
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{28em}|}   
+\hline
+返回类型 	& 函数 \\
+\hline
+& QMetaType(const int \emph{typeId} = QMetaType::UnknownType) \\ 
+\hline
+& $\sim$QMetaType() \\
+\hline
+void *	&construct(void \emph{*where}, const void \emph{*copy} = 0) const \\
+\hline
+void *	&create(const void \emph{*copy} = 0) const \\
+\hline
+void	&destroy(void \emph{*data}) const \\
+\hline
+void	&destruct(void \emph{*data}) const \\
+\hline
+QMetaType::TypeFlags &	flags() const \\
+\hline
+int	& id() const \\ 
+\hline
+bool	&isRegistered() const \\
+\hline
+bool	&isValid() const \\
+\hline
+const QMetaObject *	& metaObject() const \\
+\hline
+::QByteArray &	name() const \\
+\hline
+int	& sizeOf() const \\
+\hline
+\end{longtable}
+
+\section{静态公共成员}
+
+\begin{longtable}{|r|m{28em}|}   
+\hline
+返回类型 	& 函数 \\
+\hline
+bool	& compare(const void \emph{*lhs}, const void \emph{*rhs}, int \emph{typeId}, int \emph{*result})\\
+\hline
+void *	&construct(int \emph{type}, void \emph{*where}, const void \emph{*copy})\\
+\hline
+bool	& convert(const void \emph{*from}, int \emph{fromTypeId}, void \emph{*to}, int \emph{toTypeId})\\
+\hline
+void *	& create(int \emph{ype}, const void \emph{*copy} = nullptr)\\
+\hline
+bool	& debugStream(QDebug \emph{\&dbg}, const void \emph{*rhs}, int \emph{typeId})\\
+\hline
+void	& destroy(int \emph{type}, void \emph{*data})\\
+\hline
+void	& destruct(int \emph{type}, void \emph{*where})\\
+\hline
+bool	&equals(const void \emph{*lhs}, const void \emph{*rhs}, int \emph{typeId}, int \emph{*result})\\
+\hline
+QMetaType&	fromType()\\
+\hline
+bool	& hasRegisteredComparators()\\
+\hline
+bool	& hasRegisteredComparators(int \emph{typeId})\\
+\hline
+bool	&hasRegisteredConverterFunction(int \emph{fromTypeId}, int \emph{toTypeId})\\
+\hline
+bool	&hasRegisteredConverterFunction()\\
+\hline
+bool	&hasRegisteredDebugStreamOperator()\\
+\hline
+bool	&hasRegisteredDebugStreamOperator(int \emph{typeId})\\
+\hline
+bool	&load(QDataStream  \emph{\&stream}, int  \emph{type}, void \emph{*data})\\
+\hline
+const QMetaObject *&	metaObjectForType(int \emph{type})\\
+\hline
+bool&	registerComparators()\\
+\hline
+bool&	registerConverter()\\
+\hline
+bool&	registerConverter(MemberFunction \emph{function})\\
+\hline
+bool&	registerConverter(MemberFunctionOk \emph{function})\\
+\hline
+bool&	registerConverter(UnaryFunction \emph{function})\\
+\hline
+bool&	registerDebugStreamOperator()\\
+\hline
+bool&	registerEqualsComparator()\\
+\hline
+bool&	save(QDataStream \emph{\&stream}, int \emph{type}, const void \emph{*data}) \\
+\hline
+int	&sizeOf(int \emph{type}) \\
+\hline
+int	& type(const char  \emph{*typeName}) \\
+\hline
+int	 & type(const ::QByteArray \emph{\&typeName}) \\
+\hline
+QMetaType::TypeFlags &	typeFlags(int \emph{type}) \\
+\hline
+const char * &	typeName(int \emph{typeId}) \\
+\hline
+\end{longtable}
+
+
+\section{相关非成员函数}
+
+\begin{tabular}{|r|m{25em}|}   
+\hline
+返回类型 	& 函数 \\
+\hline
+int &	qMetaTypeId()  \\ 
+\hline
+int &	qRegisterMetaType(const char \emph{*typeName}) \\ 
+\hline
+int	 & qRegisterMetaType() \\ 
+\hline
+void &	qRegisterMetaTypeStreamOperators(const char \emph{*typeName}) \\ 
+\hline
+bool &	operator!=(const QMetaType \emph{\&a}, const QMetaType \emph{\&b}) \\ 
+\hline
+bool &	operator==(const QMetaType \emph{\&a}, const QMetaType \emph{\&b}) \\ 
+\hline
+\end{tabular}
+
+\section{宏定义}
+
+\begin{tabular}{|l|}   
+\hline
+宏定义 \\
+\hline
+Q\_DECLARE\_ASSOCIATIVE\_CONTAINER\_METATYPE(\emph{Container}) \\
+\hline
+Q\_DECLARE\_METATYPE(\emph{Type}) \\
+\hline
+Q\_DECLARE\_OPAQUE\_POINTER(\emph{PointerType}) \\
+\hline
+Q\_DECLARE\_SEQUENTIAL\_CONTAINER\_METATYPE(\emph{Container}) \\ 
+\hline
+Q\_DECLARE\_SMART\_POINTER\_METATYPE(\emph{SmartPointer})\\
+\hline
+\end{tabular}
+
+
+\section{详细描述}
+
+此类是一个辅助类，被用作序列化 QVariant 以及队列连接信号槽中的类型。
+它将类型名称关联到对应类型，以支持运行时动态创建和销毁此类型。
+通过 Q\_DECLARE\_METATYPE() 声明新类型，让它可以被 QVariant 和其它模板函数（qMetaTypeId() 等）使用。
+调用 qRegisterMetaType() 来让其可以被非模板型函数使用，如信号槽的队列连接。
+
+任何包含一个公共默认构造函数、一个公共拷贝构造函数、一个默认析构函数的类或结构体都可以被注册为元类型。
+
+下述代码展示了如何分配和销毁一个 MyClass 的实例：
+
+\begin{lstlisting}[language=C++]
+int id = QMetaType::type("MyClass");
+if (id != QMetaType::UnknownType) {
+    void *myClassPtr = QMetaType::create(id);
+    ...
+    QMetaType::destroy(id, myClassPtr);
+    myClassPtr = 0;
+}
+\end{lstlisting}
+
+若我们想让流运算符 operator<<() 和 operator>>() 可被用于存储了自定义类型的 QVariant 对象，则这个自定义类型必须提供 operator<<() 和 operator>>() 运算符重载。
+
+\begin{seeAlso}
+Q\_DECLARE\_METATYPE()，QVariant::setValue()，QVariant::value() 和 QVariant::fromValue().
+\end{seeAlso}
+
+\section{成员类型文档}
+
+enum QMetaType::Type
+
+下表是 QMetaType 内置支持的类型：
