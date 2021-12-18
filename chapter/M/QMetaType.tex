@@ -204,3 +204,174 @@ Q\_DECLARE\_METATYPE()，QVariant::setValue()，QVariant::value() 和 QVariant::
 enum QMetaType::Type
 
 下表是 QMetaType 内置支持的类型：
+
+
+\begin{longtable}{|l|l|m{20em}|}   
+\hline
+常量 &	数值 &	描述 \\ 
+\hline
+QMetaType::Void &	43&	void \\
+\hline
+QMetaType::Bool	&1&	bool \\
+\hline
+QMetaType::Int	&2&	int \\
+\hline
+QMetaType::UInt	&3	&unsigned int \\
+\hline
+QMetaType::Double&	6	&double \\
+\hline
+QMetaType::QChar&	7	&QChar \\
+\hline
+QMetaType::QString	&10&	QString \\
+\hline
+QMetaType::QByteArray&	12&	QByteArray \\
+\hline
+QMetaType::Nullptr&	51&	std::nullptr\_t \\
+\hline
+QMetaType::VoidStar	&31&	void * \\
+\hline
+QMetaType::Long	&32	&long \\
+\hline
+QMetaType::LongLong	&4	&long long \\
+\hline
+QMetaType::Short	&33&	short \\
+\hline
+QMetaType::Char&	34	&char \\
+\hline
+QMetaType::ULong	&35	&unsigned long \\
+\hline
+QMetaType::ULongLong&	5	&unsigned long long \\
+\hline
+QMetaType::UShort&	36&	unsigned short \\
+\hline
+QMetaType::SChar&	40&	signed char \\
+\hline
+QMetaType::UChar&	37&	unsigned char \\
+\hline
+QMetaType::Float	&38&	float \\
+\hline
+QMetaType::QObjectStar	&39&	QObject * \\
+\hline
+QMetaType::QVariant	&41	&QVariant \\
+\hline
+QMetaType::QCursor	&74&	QCursor \\
+\hline
+QMetaType::QDate&	14	&QDate \\
+\hline
+QMetaType::QSize&	21&	QSize \\
+\hline
+QMetaType::QTime&	15	&QTime\\
+\hline
+QMetaType::QVariantList&	9	&QVariantList\\
+\hline
+QMetaType::QPolygon&	71	&QPolygon\\
+\hline
+QMetaType::QPolygonF&	86&	QPolygonF\\
+\hline
+QMetaType::QColor	&67&	QColor\\
+\hline
+QMetaType::QColorSpace&	87&	QColorSpace（在 Qt 5.15 中被引入）\\
+\hline
+QMetaType::QSizeF	&22	&QSizeF\\
+\hline
+QMetaType::QRectF	&20	&QRectF\\
+\hline
+QMetaType::QLine	&23	&QLine\\
+\hline
+QMetaType::QTextLength	&77&	QTextLength\\
+\hline
+QMetaType::QStringList	&11&	QStringList\\
+\hline
+QMetaType::QVariantMap	&8&	QVariantMap\\
+\hline
+QMetaType::QVariantHash	&28&	QVariantHash\\
+\hline
+QMetaType::QIcon&	69&	QIcon\\
+\hline
+QMetaType::QPen	&76	&QPen \\
+\hline
+QMetaType::QLineF	&24&	QLineF\\
+\hline
+QMetaType::QTextFormat&	78&	QTextFormat \\
+\hline
+QMetaType::QRect&	19	&QRect \\
+\hline
+QMetaType::QPoint&	25	&QPoint \\
+\hline
+QMetaType::QUrl	&17	&QUrl \\
+\hline
+QMetaType::QRegExp	&27	&QRegExp \\
+\hline
+QMetaType::QRegularExpression	&44	&QRegularExpression \\
+\hline
+QMetaType::QDateTime	&16&	QDateTime\\
+\hline
+QMetaType::QPointF	&26&	QPointF\\
+\hline
+QMetaType::QPalette	&68	&QPalette\\
+\hline
+QMetaType::QFont	&64&	QFont\\
+\hline
+QMetaType::QBrush	&66	&QBrush\\
+\hline
+QMetaType::QRegion&	72&	QRegion\\
+\hline
+QMetaType::QBitArray&	13	&QBitArray\\
+\hline
+QMetaType::QImage	&70	&QImage\\
+\hline
+QMetaType::QKeySequence	&75	&QKeySequence\\
+\hline
+QMetaType::QSizePolicy&	121&	QSizePolicy\\
+\hline
+QMetaType::QPixmap&	65	&QPixmap\\
+\hline
+QMetaType::QLocale&	18	&QLocale\\
+\hline
+QMetaType::QBitmap&	73&	QBitmap\\
+\hline
+QMetaType::QMatrix&	79&	QMatrix\\
+\hline
+QMetaType::QTransform	&80	&QTransform\\
+\hline
+QMetaType::QMatrix4x4	&81	&QMatrix4x4\\
+\hline
+QMetaType::QVector2D	&82	&QVector2D\\
+\hline
+QMetaType::QVector3D	&83	&QVector3D\\
+\hline
+QMetaType::QVector4D	&84	&QVector4D\\
+\hline
+QMetaType::QQuaternion&	85	&QQuaternion\\
+\hline
+QMetaType::QEasingCurve	&29&	QEasingCurve\\
+\hline
+QMetaType::QJsonValue	&45&	QJsonValue\\
+\hline
+QMetaType::QJsonObject&	46&	QJsonObject\\
+\hline
+QMetaType::QJsonArray	&47	&QJsonArray\\
+\hline
+QMetaType::QJsonDocument	&48&	QJsonDocument\\
+\hline
+QMetaType::QCborValue	&53&	QCborValue\\
+\hline
+QMetaType::QCborArray	&54	&QCborArray \\
+\hline
+QMetaType::QCborMap	&55&	QCborMap \\
+\hline
+QMetaType::QCborSimpleType	&52&	QCborSimpleType \\
+\hline
+QMetaType::QModelIndex&	42	&QModelIndex \\
+\hline
+QMetaType::QPersistentModelIndex&	50	&QPersistentModelIndex（在 Qt 5.5 中被引入） \\
+\hline
+QMetaType::QUuid	&30	&QUuid \\
+\hline
+QMetaType::QByteArrayList&	49&	QByteArrayList \\
+\hline
+QMetaType::User	&1024&	用户类型的基础值（译者注：即起始值）\\
+\hline
+QMetaType::UnknownType&	0	&这是无效的类型编号，QMetaType 会在类型未注册时返回此值。\\
+\hline
+\end{longtable}
