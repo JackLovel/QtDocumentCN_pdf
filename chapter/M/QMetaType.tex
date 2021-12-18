@@ -375,3 +375,17 @@ QMetaType::User	&1024&	用户类型的基础值（译者注：即起始值）\\
 QMetaType::UnknownType&	0	&这是无效的类型编号，QMetaType 会在类型未注册时返回此值。\\
 \hline
 \end{longtable}
+
+可以使用 Q\_DECLARE\_METATYPE() 注册额外的类型。
+
+\begin{seeAlso}
+type() 和 typeName()。
+\end{seeAlso}
+
+\splitLine
+
+enum QMetaType::TypeFlag
+
+flags QMetaType::TypeFlags
+
+此枚举类型描述了被 QMetaType 支持的类型的属性
