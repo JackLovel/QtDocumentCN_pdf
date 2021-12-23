@@ -389,3 +389,453 @@ enum QMetaType::TypeFlag
 flags QMetaType::TypeFlags
 
 此枚举类型描述了被 QMetaType 支持的类型的属性
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量 	&数值 &	描述\\
+\hline
+QMetaType::NeedsConstruction &	0x1 &	此类型具有非平凡的构造函数。若某类型不具备此标志，则可通过 memset() 安全地清零。\\
+\hline
+QMetaType::NeedsDestruction &	0x2 	&此类型非平凡的析构函数。若某类型不具备此标志，则丢弃对象前不需要调用析构函数（译者注：即可以用 free() 释放对象）\\
+\hline
+QMetaType::MovableType &	0x4 &	具有此标志的类型实例可以通过 memcpy() 安全地移动。\\
+\hline
+QMetaType::IsEnumeration 	&0x10 &	此类型是枚举值。\\
+\hline
+QMetaType::PointerToQObject &	0x8 &	此类型是指向继承自 QObject 的类型的指针。\\
+\hline
+\end{tabular}
+
+\hl{TypeFlags} 类型是 QFlags<TypeFlag> 的别名，支持通过或操作合并不同的 \hl{TypeFlag} 值。
+
+\section{成员函数文档}
+
+QMetaType::QMetaType(const int typeId = QMetaType::UnknownType)
+
+构造一个包含 typeId 对应的类型信息的 QMetaType 对象。
+
+注意： 默认参数在 Qt 5.15 中被引入。
+
+此函数在 Qt 5.0 中被引入。
+
+QMetaType::$\sim$QMetaType()
+
+析构此对象。
+
+[static] bool QMetaType::compare(const void \emph{*lhs}, const void \emph{*rhs}, int typeId, int \emph{*result})
+
+比较 lhs 和 rhs 对象，双方都需要是 typeid 中的类型。result 会被设为小于、等于或大于零，表示 lhs 小于、等于或大于 rhs。若比较成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] void *QMetaType::construct(int \emph{type}, void \emph{*where}, const void \emph{*copy})
+
+在给定的内存地址 where 上构造对应 type 类型的对象，该对象是 copy 的副本，并返回 where。若 copy 是空指针，则执行默认构造。
+
+这是用于显示管理存储 type 类型对象的内存的底层函数。若不需要此类底层控制，则考虑使用 create() 函数（也就是指，使用 new 而非 placement new）。
+
+您必须确保 where 指向的内存区域大小足够存储 type 对应的数据，并且 where 地址需要对齐，对应类型的大小可通过 sizeOf() 获取。
+
+内存对齐的规则是对齐至类型的自然边界，也就是大于等于类型大小的2的n次方值，直至平台有效对齐宽度上限为止。对于特定用途来说，超过 2 * sizeof(void*) 的对齐宽度只是某些特定硬件指令所必需的（例如，x86 平台中对齐后的 SSE 读取和存储）。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+destruct() 和 sizeOf()。
+\end{seeAlso}
+
+void *QMetaType::construct(void \emph{*where}, const void \emph{*copy} = 0) const
+
+在给定的内存地址 where 上构造此 QMetaType 类型的对象，
+该对象是 copy 的副本，并返回 where。
+若 copy 是空指针，则执行默认构造。
+
+这是用于显示管理存储 type 类型对象的内存的底层函数。
+若不需要此类底层控制，则考虑使用 create() 函数（也就是指，使用 new 而非 placement new）。
+
+您必须确保 where 指向的内存区域大小足够存储 type 对应的数据，
+并且 where 地址需要对齐，对应类型的大小可通过 sizeOf() 获取。
+
+内存对齐的规则是对齐至类型的自然边界，也就是大于等于类型大小的2的n次方值
+，直至平台有效对齐宽度上限为止。对于特定用途来说，超过 2 * sizeof(void*) 的对齐宽度只是某些特定硬件指令所必需的（例如，x86 平台中对齐后的 SSE 读取和存储）。
+
+此函数在 Qt 5.0 中被引入。
+
+[static] bool QMetaType::convert(const void \emph{*from}, int \emph{fromTypeId}, void \emph{*to}, int \emph{toTypeId})
+
+将 from 对象从 fromTypeId 转换至 toTypeId 并存储到预分配空间 to 中。若转换成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] void *QMetaType::create(int \emph{type}, const void \emph{*copy} = nullptr)
+
+假设 copy 的类型是 type，返回它的的拷贝。若 copy 是空指针，则返回默认构造的实例。
+
+\begin{seeAlso}
+destroy()，isRegistered() 和 Type。
+\end{seeAlso}
+
+void *QMetaType::create(const void \emph{*copy} = 0) const
+
+假设 copy 的类型是此 QMetaType ，返回它的的拷贝。若 copy 是空指针，则返回默认构造的实例。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+QMetaType::destroy()。
+\end{seeAlso}
+
+[static] bool QMetaType::debugStream(QDebug \emph{\&dbg}, const void \emph{*rhs}, int \emph{typeId})
+
+将 typeId 类型的 rhs 对象输出至调试流 debug，输出成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] void QMetaType::destroy(int \emph{type}, void \emph{*data})
+
+假设 data 的类型是 type，销毁该对象。
+
+\begin{seeAlso}
+create()，isRegistered() 和 Type。
+\end{seeAlso}
+
+void QMetaType::destroy(void \emph{*data}) const
+
+假设 data 的类型是此 QMetaType ，销毁该对象。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+QMetaType::create()。
+\end{seeAlso}
+
+[static] void QMetaType::destruct(int \emph{type}, void \emph{*where})
+
+假设 where 地址中存储的对象类型是 type，销毁该对象。
+
+与 destroy() 不同，此函数只会执行该类型的析构函数，但不会执行 delete 运算符（译者注：即不会释放内存，与 placement new 相同机制）。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+construct()。
+\end{seeAlso}
+
+void QMetaType::destruct(void \emph{*data}) const
+
+假设 data 地址中存储的对象类型是此 QMetaType ，销毁该对象。
+
+与 destroy() 不同，此函数只会执行该类型的析构函数，但不会执行 delete 运算符（译者注：即不会释放内存，与 placement new 相同机制）。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+QMetaType::construct()。
+\end{seeAlso}
+
+[static] bool QMetaType::equals(const void \emph{*lhs}, const void \emph{*rhs}, int \emph{typeId}, int \emph{*result})
+
+比较 lhs 和 rhs 对象，双方都需要是 typeid 中的类型。若 lhs 等于 rhs，则 result 会被设为零。若比较成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.5 中被引入。
+
+QMetaType::TypeFlags QMetaType::flags() const
+
+返回此 QMetaType 实例的类型标志。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+QMetaType::TypeFlags 和 QMetaType::typeFlags()。
+\end{seeAlso}
+
+[static] template <typename T> QMetaType QMetaType::fromType()
+
+返回模板类型 T 对应的 QMetaType 实例。
+
+此函数在 Qt 5.15 中被引入。
+
+[static] template <typename T> bool QMetaType::hasRegisteredComparators()
+
+若模板类型 T 已被注册至元对象系统则返回 true。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] bool QMetaType::hasRegisteredComparators(int \emph{typeId})
+
+若 typeId 的类型已被注册至元对象系统则返回 true。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] bool QMetaType::hasRegisteredConverterFunction(int \emph{fromTypeId}, int \emph{toTypeId})
+
+若自 fromTypeId 到 toTypeId 的类型转换已被注册至元对象系统则返回 true。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] template <typename From, typename To> bool QMetaType::hasRegisteredConverterFunction()
+
+若自模板类型 From 到 To 的类型转换已被注册至元对象系统则返回 true。
+
+这是一个重载函数。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] template <typename T> bool QMetaType::hasRegisteredDebugStreamOperator()
+
+若自模板类型 T 的 QDebug 流运算符已被注册至元对象系统则返回 true。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] bool QMetaType::hasRegisteredDebugStreamOperator(int \emph{typeId})
+
+若自 typeId 对应类型的 QDebug 流运算符已被注册至元对象系统则返回 true。
+
+此函数在 Qt 5.2 中被引入。
+
+int QMetaType::id() const
+
+返回此 QMetatype 实例的类型编号。
+
+此函数在 Qt 5.13 中被引入。
+
+[static] bool QMetaType::isRegistered(int \emph{type})
+
+若 typeId 对应已被注册至元对象系统则返回 true，否则返回 false。
+
+\begin{seeAlso}
+type()，typeName() 和 Type。
+\end{seeAlso}
+
+bool QMetaType::isRegistered() const
+
+若此 QMetaType 包含某类型的有效信息则返回 true，否则返回 false。
+
+此函数在 Qt 5.0 中被引入。
+
+bool QMetaType::isValid() const
+
+若此 QMetaType 包含某类型的有效信息则返回 true，否则返回 false。
+
+此函数在 Qt 5.0 中被引入。
+
+[static] bool QMetaType::load(QDataStream \emph{\&stream}, int \emph{type}, void \emph{*data})
+
+从数据流 stream 中读取对应 type 类型的对象至 data 中，若读取成功则返回 true，否则返回 false。
+
+此类型必须在这之前通过 qRegisterMetaType() 和 qRegisterMetaTypeStreamOperators() 完成注册。
+
+通常来说，您不需要显示调用此函数，而是应使用 QVariant 的 operator>>()，该运算符依赖 load() 来传递自定义类型。
+
+\begin{seeAlso}
+save() 和 qRegisterMetaTypeStreamOperators()。
+\end{seeAlso}
+
+const QMetaObject *QMetaType::metaObject() const
+
+返回此类型对应的 QMetaObject。
+
+若此类型是 QObject 子类的指针，即 flags() 包含 QMetaType::PointerToQObject，则此函数会返回对应类型的 QMetaObject。这可被用于结合 QMetaObject::construct（译者注：无此函数，请使用 QMetaObject::constructor 或 QMetaType::construct）来创建此类型的 QObject 实例。
+
+若此类型是 Q\_GADGET，即 flags() 包含 QMetaType::IsGadget（译者注：文档中未给出，但 QMetaType::TypeFlag 中的确包含此枚举值），则此函数会返回对应类型的 QMetaObject。
+这可以被用于获取 QMetaMethod 和 QMetaProperty，并将其用于此类型的对象指针上（例如通过 QVariant::data 获取指针 译者注：文档中无此函数，但此函数的确存在）。
+
+若此类型是枚举，即 flags() 包含 QMetaType::IsEnumeration，
+且该枚举值是通过 Q\_ENUM 注册的成员枚举类型，
+则此函数会返回其所属的 QObject 对象的元对象，否则返回 nullptr。
+
+此函数在 Qt 5.5 中被引入。
+
+\begin{seeAlso}
+QMetaType::metaObjectForType() 和 QMetaType::flags()。
+\end{seeAlso}
+
+[static] const QMetaObject *QMetaType::metaObjectForType(int \emph{type})
+
+返回 type 类型对应的 QMetaType::metaObject。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+metaObject()。
+\end{seeAlso}
+
+QByteArray QMetaType::name() const
+
+返回此 QMetaType 对应的类型名称，若无有效类型则返回空指针。
+
+此函数在 Qt 5.15 中被引入。
+
+\begin{seeAlso}
+typeName()。
+\end{seeAlso}
+
+[static] template <typename T> bool QMetaType::registerComparators()
+
+将用户注册类型 T 的比较运算符注册至元对象系统。要求 T 具有 operator== 和 operator< 运算符。若注册成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] template <typename From, typename To> bool QMetaType::registerConverter()
+
+将类型 From 到 To 的可能的隐式转换注册到元对象系统，若注册成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+[static] template <typename MemberFunction, int> bool QMetaType::registerConverter(MemberFunction \emph{function})
+
+这是一个重载函数。
+
+将形如 To From::function() const 的成员方法 function 作为从 From 到 To 的转换函数注册至元对象系统，若注册成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+\begin{quote}
+译者注：
+
+第二个模板参数是官方使用 doxygen 生成文档时的变通写法，
+实际代码中的函数签名是 \hl{template<typename From, typename To> static bool registerConverter(To(From::*function)() const)}。
+使用时无需指定 \hl{int} 模板参数，在函数参数中直接填入用于转换的成员函数指针即可。
+\end{quote}
+
+[static] template <typename MemberFunctionOk, char> bool QMetaType::registerConverter(MemberFunctionOk \emph{function})
+
+这是一个重载函数。
+
+将形如 To From::function(bool *ok) const 的成员方法 function 作为从 From 到 To 的转换函数注册至元对象系统，若注册成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+\begin{quote}
+译者注：
+
+第二个模板参数是官方使用 doxygen 生成文档时的变通写法，
+实际代码中的函数签名是 \hl{template<typename From, typename To> static bool registerConverter(To(From::*function)(bool*) const)}。
+使用时无需指定 \hl{char} 模板参数，在函数参数中直接填入用于转换的成员函数指针即可。
+\end{quote}
+
+
+[static] template <typename UnaryFunction> bool QMetaType::registerConverter(UnaryFunction \emph{function})
+
+这是一个重载函数。
+
+将把类型 From 转换为类型 To 的一元函数 function 注册至元对象系统，若注册成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.2 中被引入。
+
+\begin{quote}
+译者注：
+
+原文描述地非常晦涩，实际指的是任何可被 \hl{To dst = function(src)} 方式调用的函数对象，
+包括全局函数、类静态函数、仿函数或 lamba 等，比上文另外两个 \hl{registerConverter} 的约束更为宽松。
+\end{quote}
+
+
+%%%%%%%%%%%%%%%%
+[static] template <typename T> bool QMetaType::registerDebugStreamOperator()
+
+将已注册类型 T 的 QDebug 流运算符注册至元对象系统，
+要求类型 T 具备流运算符 operator<<(QDebug dbg, T)。
+若注册成功则返回 true，否则返回 false。
+
+[static] template <typename T> bool QMetaType::registerEqualsComparator()
+
+将已注册类型 T 的等号运算符注册至元对象系统，要求类型 T 具备等号运算符 operator==。
+若注册成功则返回 true，否则返回 false。
+
+此函数在 Qt 5.5 中被引入。
+
+[static] bool QMetaType::save(QDataStream \emph{\&stream}, int \emph{type}, const void \emph{*data})
+
+从数据流 stream 中读取对应 type 类型的对象至 data 中，若读取成功则返回 true，否则返回 false。
+
+此类型必须在这之前通过 qRegisterMetaType() 和 qRegisterMetaTypeStreamOperators() 完成注册。
+
+通常来说，您不需要显示调用此函数，而是应使用 QVariant 的 operator>>()，
+该运算符依赖 load() 来传递自定义类型。
+
+\begin{seeAlso}
+save() 和 qRegisterMetaTypeStreamOperators()。
+\end{seeAlso}
+
+将 type 类型对应的 data 对象输出至数据流 stream 中，若读取成功则返回 true，否则返回 false。
+
+此类型必须在这之前通过 qRegisterMetaType() 和 qRegisterMetaTypeStreamOperators() 完成注册。
+
+通常来说，您不需要显示调用此函数，而是应使用 QVariant 的 operator<<()，
+该运算符依赖 save() 来传递自定义类型。
+
+\begin{seeAlso}
+load() 和 qRegisterMetaTypeStreamOperators()。
+\end{seeAlso}
+
+[static] int QMetaType::sizeOf(int \emph{type})
+
+返回 type 对应类型的以字节为单位的大小（即 sizeof(T)，其中 T 是 type 对应的实际类型）。
+
+此函数通常结合 construct() 使用，来进行对此类型的更底层的内存管理。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+construct()。
+\end{seeAlso}
+
+int QMetaType::sizeOf() const
+
+返回此类型的以字节为单位的大小（即 sizeof(T)，其中 T 是 QMetaType 对应的实际类型）。
+
+此函数通常结合 construct() 使用，来进行对此类型的更底层的内存管理。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+QMetaType::construct() 和 QMetaType::sizeOf()。
+\end{seeAlso}
+
+[static] int QMetaType::type(const char \emph{*typeName})
+
+返回名为 typeName 的类型的元类型编号，若无此元类型则返回 QMetaType::UnknownType。
+
+\begin{seeAlso}
+isRegistered()，typeName() 和 Type。
+\end{seeAlso}
+
+[static] int QMetaType::type(const ::QByteArray \emph{\&typeName})
+
+这是一个重载函数。
+
+返回名为 typeName 的类型的元类型编号，若无此元类型则返回 0（译者注：即QMetaType::UnknownType）。
+
+此函数在 Qt 5.5 中被引入。
+
+\begin{seeAlso}
+isRegistered() 和 typeName()。
+\end{seeAlso}
+
+[static] QMetaType::TypeFlags QMetaType::typeFlags(int \emph{type})
+
+返回 type 类型的类型标志。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+QMetaType::TypeFlags。
+\end{seeAlso}
+
+[static] const char *QMetaType::typeName(int \emph{typeId})
+
+返回 typeId 对应类型的类型名称，若该类型不存在则返回空指针。返回的指针不可被删除。
+
+\begin{seeAlso}
+type()，isRegistered()，Type 和 name()。
+\end{seeAlso}
+
+\section{相关非成员函数}
+
+template <typename T> int qMetaTypeId()
+
+返回类型 T 对应的元类型编号。若该类型未通过 Q\_DECLARE\_METATYPE() 声明，则会引发编译错误。
+
+典型用法：
+
