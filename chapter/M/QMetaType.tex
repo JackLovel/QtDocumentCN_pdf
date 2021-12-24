@@ -801,7 +801,7 @@ QMetaType::construct() 和 QMetaType::sizeOf()。
 isRegistered()，typeName() 和 Type。
 \end{seeAlso}
 
-[static] int QMetaType::type(const ::QByteArray \emph{\&typeName})
+[static] int QMetaType::type(const::QByteArray \emph{\&typeName})
 
 这是一个重载函数。
 
@@ -835,7 +835,196 @@ type()，isRegistered()，Type 和 name()。
 
 template <typename T> int qMetaTypeId()
 
-返回类型 T 对应的元类型编号。若该类型未通过 Q\_DECLARE\_METATYPE() 声明，则会引发编译错误。
+返回类型 T 对应的元类型编号。
+若该类型未通过 Q\_DECLARE\_METATYPE() 声明，则会引发编译错误。
 
 典型用法：
 
+\begin{lstlisting}[language=C++]
+int id = qMetaTypeId<QString>();    // id 是 QMetaType::QString
+id = qMetaTypeId<MyStruct>();       // 若 MyStruct 未被声明，则会产生编译错误
+\end{lstlisting}
+
+QMetaType::type() 返回值与 qMetaTypeId() 相同，
+但会基于类型名称进行运行时检索。
+QMetaType::type() 会稍慢一些，但即使类型未注册也能编译成功。
+
+此函数在 Qt 4.1 中被引入。
+
+\begin{seeAlso}
+Q\_DECLARE\_METATYPE() 和 QMetaType::type()。
+\end{seeAlso}
+
+template <typename T> int qRegisterMetaType(const char \emph{*typeName})
+
+将类型 T 通过类型名称 typeName 注册至元对象系统，
+并返回 QMetaType 使用的类型编号。
+任何包含一个公共默认构造函数、公共拷贝构造函数、公共析构函数的类或结构体均可被注册。
+
+此函数要求类型 T 在此函数调用时被完整定义；对于指针类型，
+同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
+可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
+
+类型被注册后，可以在运行时动态地创建或销毁对象。
+
+下述为注册 MyClass 类的示例：
+
+\begin{lstlisting}[language=C++]
+qRegisterMetaType<MyClass>("MyClass");
+\end{lstlisting}
+
+此函数可被用于注册类型别名，以便于将别名用于 QMetaProperty 或队列连接中。
+
+\begin{lstlisting}[language=C++]
+typedef QString CustomString;
+qRegisterMetaType<CustomString>("CustomString");
+\end{lstlisting}
+
+\begin{warning}
+此函数仅应被用于注册类型别名，其它场合请使用 Q\_DECLARE\_METATYPE 和 qMetaTypeId()。
+\end{warning}
+
+\begin{seeAlso}
+qRegisterMetaTypeStreamOperators()，isRegistered() 和 Q\_DECLARE\_METATYPE()。
+\end{seeAlso}
+
+template <typename T> int qRegisterMetaType()
+
+调用此函数来注册类型 T。
+T 必须被 Q\_DECLARE\_METATYPE() 所声明。
+返回此类型对应的元类型编号。
+
+示例：
+
+\begin{lstlisting}[language=C++]
+int id = qRegisterMetaType<MyStruct>();
+\end{lstlisting}
+
+此函数要求类型 T 在此函数调用时被完整定义；
+对于指针类型，同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
+可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
+
+类型被注册后，可以在运行时动态地创建或销毁对象。
+
+为了在 QVariant 中使用类型 T，使用 Q\_DECLARE\_METATYPE() 便已足够。
+若要在信号槽的队列连接中使用 T，
+则 qRegisterMetaType<T>() 必须在第一个连接建立前被调用。
+
+同样地，若要在 QObject::property() 中使用 T，qRegisterMetaType<T>() 必须在这之前被调用。通常在使用到 T 的类的构造函数中，或在 main() 函数中调用。
+
+此函数在 Qt 4.2 中被引入。
+
+\begin{seeAlso}
+Q\_DECLARE\_METATYPE()。
+\end{seeAlso}
+
+template <typename T> void qRegisterMetaTypeStreamOperators(const char \emph{*typeName})
+
+通过类型名称 typeName 将 T 的流运算符注册至元对象系统。
+
+在此之后，该类型可通过 QMetaType::load() 和 QMetaType::save() 进行序列化和反序列化。
+这两个函数在将 QVariant 传递至数据流时被调用。
+
+\begin{lstlisting}[language=C++]
+qRegisterMetaTypeStreamOperators<MyClass>("MyClass");
+\end{lstlisting}
+
+流运算符需要具有下述的函数签名：
+
+\begin{lstlisting}[language=C++]
+QDataStream &operator<<(QDataStream &out, const MyClass &myObj);
+QDataStream &operator>>(QDataStream &in, MyClass &myObj);
+\end{lstlisting}
+
+%%%%%%%%%%%%
+
+\begin{seeAlso}
+qRegisterMetaType()，QMetaType::isRegistered() 和 Q\_DECLARE\_METATYPE()。
+\end{seeAlso}
+
+bool operator!=(const QMetaType \emph{\&a}, const QMetaType \emph{\&b})
+
+这是一个重载函数。
+
+若 QMetaType a 的类型与 QMetaType b 不同则返回 true，否则返回false。
+
+此函数在 Qt 5.15 中被引入。
+
+bool operator==(const QMetaType \emph{\&a}, const QMetaType \emph{\&b})
+
+这是一个重载函数。
+
+若 QMetaType \emph{a} 的类型与 QMetaType \emph{b} 相同则返回 \hl{true}，否则返回 \hl{false}。
+
+此函数在 Qt 5.15 中被引入。
+
+%%%%%%%%%%%%
+
+
+\section{宏定义文档}
+
+Q\_DECLARE\_ASSOCIATIVE\_CONTAINER\_METATYPE(Container)
+
+此宏令容器类型 \hl{Container} 作为关联型容器被注册至 QMetaType，
+即允许将 \hl{Container<T, U>} 实例存入 QVariant，
+前提是 \hl{T} 和 \hl{U} 也已经被注册为 QMetaType。
+
+\begin{warning}
+所有 Qt 的关联型容器已被内置支持，
+无需使用此宏进行声明。std::map 容器也已被内置支持。
+\end{warning}
+
+下述代码展示了 Q\_DECLARE\_ASSOCIATIVE\_CONTAINER\_METATYPE() 的典型用法：
+
+\begin{lstlisting}[language=C++]
+#include <unordered_list>
+
+Q_DECLARE_ASSOCIATIVE_CONTAINER_METATYPE(std::unordered_map)
+
+void someFunc()
+{
+    std::unordered_map<int, bool> container;
+    QVariant var = QVariant::fromValue(container);
+    // ...
+}
+\end{lstlisting}
+
+\begin{quote}
+译者注：
+
+用户的自定义类型只需要通过 \hl{Q\_DECLARE\_METATYPE(T)} 注册后，
+即可被已注册的所有容器使用，
+无需再注册 \hl{Q\_DECLARE\_METATYPE(QMap<QString, T>)}。
+\end{quote}
+
+Q\_DECLARE\_METATYPE(\emph{Type})
+
+此宏将类型 Type 注册至 QMetaType ，前提是该类型具备一个公共默认构造函数、公共拷贝构造函数和公共析构函数。这是把类型 Type 用于 QVariant 的前提。
+
+此宏要求类型 T 在此函数调用时被完整定义；
+对于指针类型，同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
+可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
+
+理想情况下，此宏应被放置在该类型的声明位置之后。若不可行的话，
+也可以将其放置在一个私有头文件中，
+然后在每次在 QVariant 中使用此类型之前包含该头文件。
+
+Q\_DECLARE\_METATYPE() 使此类型可被所有基于模板的函数使用，
+包括 QVariant 中的模板函数。
+
+\begin{notice}
+若想在信号槽的队列连接或 QObject 的属性系统中使用此类型，
+则还需要调用 qRegisterMetaType()，因为该类型的名称会在运行时被解析。
+\end{notice}
+
+此示例为 Q\_DECLARE\_METATYPE() 的典型用法：
+
+\begin{lstlisting}[language=C++]
+struct MyStruct
+{
+    int i;
+    ...
+};
+
+Q_DECLARE_METATYPE(MyStruct)
+\end{lstlisting}
