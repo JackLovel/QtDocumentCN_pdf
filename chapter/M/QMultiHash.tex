@@ -1,6 +1,8 @@
-\chapter{QMetaType}
+\chapter{QMultiHash}
 
-QMetaType 类管理元对象系统中的注名类型。更多内容...
+template <typename Key, typename T> class QMultiHash
+
+QMultiHash 类是一个便利的 QHash 派生类，提供多值哈希表功能。更多内容...
 
 \begin{tabular}{|r|l|}
 	\hline
@@ -8,12 +10,12 @@ QMetaType 类管理元对象系统中的注名类型。更多内容...
 	\hline
     头文件  &	\hl{\#include <QMetaType>} \\
     \hline
-    qmake: & \hl{QT += core}    \\
+    基类: & QHash    \\
 	\hline
 \end{tabular}
 
 \begin{notice}
-此类中所有函数都是线程安全的。
+该类中的所有函数都是可重入的。
 \end{notice}
 
 \section{公共成员类型}
