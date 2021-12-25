@@ -999,9 +999,9 @@ void someFunc()
 
 Q\_DECLARE\_METATYPE(\emph{Type})
 
-此宏将类型 Type 注册至 QMetaType ，前提是该类型具备一个公共默认构造函数、公共拷贝构造函数和公共析构函数。这是把类型 Type 用于 QVariant 的前提。
+此宏将类型 \hl{Type} 注册至 QMetaType ，前提是该类型具备一个公共默认构造函数、公共拷贝构造函数和公共析构函数。这是把类型 Type 用于 QVariant 的前提。
 
-此宏要求类型 T 在此函数调用时被完整定义；
+此宏要求类型 \hl{T} 在此函数调用时被完整定义；
 对于指针类型，同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
 可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
 
@@ -1017,7 +1017,7 @@ Q\_DECLARE\_METATYPE() 使此类型可被所有基于模板的函数使用，
 则还需要调用 qRegisterMetaType()，因为该类型的名称会在运行时被解析。
 \end{notice}
 
-此示例为 Q\_DECLARE\_METATYPE() 的典型用法：
+此示例为 \hl{Q\_DECLARE\_METATYPE()} 的典型用法：
 
 \begin{lstlisting}[language=C++]
 struct MyStruct
@@ -1028,3 +1028,175 @@ struct MyStruct
 
 Q_DECLARE_METATYPE(MyStruct)
 \end{lstlisting}
+
+若 \hl{MyStruct} 处于命名空间中，则 \hl{Q\_DECLARE\_METATYPE()} 宏必须在命令空间外使用：
+
+\begin{lstlisting}[language=C++]
+namespace MyNamespace
+{
+    ...
+}
+
+Q_DECLARE_METATYPE(MyNamespace::MyStruct)
+\end{lstlisting}
+
+当 \hl{MyStruct} 被注册至 QMetaType 后，便可将其用于 QVariant 中
+
+\begin{lstlisting}[language=C++]
+MyStruct s;
+QVariant var;
+var.setValue(s); // 将 v 拷贝至 QVariant
+
+...
+
+// 获取类型值
+MyStruct s2 = var.value<MyStruct>();
+\end{lstlisting}
+
+下述类型已被自动注册，无需使用此宏：
+
+\begin{compactitem}
+\item 继承自 QObject 的类型的指针；
+\item QList<T>，QVector<T>，QQueue<T>，QStack<T>，QSet<T> 或 QLinkedList<T>，前提是 T 被注册为元类型；
+\item QHash<T1, T2>，QMap<T1, T2> 或 QPair<T1, T2>，前提是 T1 和 T2 都被注册为元类型；
+\item QPointer<T>，QSharedPointer<T>，QWeakPointer<T>，前提是 T 为 QObject 的子类；
+\item 通过 Q\_ENUM 或 Q\_FLAG 注册的枚举类型；
+\item 包含 Q\_GADGET 宏的类。
+\end{compactitem}
+
+\begin{seeAlso}
+qRegisterMetaType()。
+\end{seeAlso}
+
+%%%%%%%%%%%%%%%%
+
+Q\_DECLARE\_OPAQUE\_POINTER(\hl{PointerType})
+
+此宏使得前置声明类型的指针类型 PointerType 可被 Q\_DECLARE\_METATYPE() 或 qRegisterMetaType() 注册至 QMetaType。
+
+此函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+Q\_DECLARE\_METATYPE() 和 qRegisterMetaType()。
+\end{seeAlso}
+
+Q\_DECLARE\_SEQUENTIAL\_CONTAINER\_METATYPE(\emph{Container})
+
+此宏令容器类型 \hl{Container} 作为顺序容器被注册至 QMetaType，
+即允许将 \hl{Container<T>} 实例存入 QVariant，
+前提是 \hl{T} 已经被注册为 QMetaType。
+
+\begin{notice}
+所有 Qt 的顺序容器已被内置支持，无需使用此宏进行声明。
+\end{notice}
+
+\hl{std::vector} 和 \hl{std::list} 容器已也被内置支持。
+
+下述代码展示了 \hl{Q\_DECLARE\_SEQUENTIAL\_CONTAINER\_METATYPE()} 的典型用法：
+
+\begin{lstlisting}[language=C++]
+#include <deque>
+
+Q_DECLARE_SEQUENTIAL_CONTAINER_METATYPE(std::deque)
+
+void someFunc()
+{
+    std::deque<QFile*> container;
+    QVariant var = QVariant::fromValue(container);
+    // ...
+}
+\end{lstlisting}
+
+\begin{quote}
+译者注：
+
+用户的自定义类型只需要通过 \hl{Q\_DECLARE\_METATYPE(T)} 注册后，
+即可被已注册的所有容器使用，
+无需再注册 \hl{Q\_DECLARE\_METATYPE(QVector<T>)}。
+\end{quote}
+
+Q\_DECLARE\_SMART\_POINTER\_METATYPE(\emph{SmartPointer})
+
+此宏令智能指针类型 \hl{SmartPointer} 作为智能指针被注册至 QMetaType，
+即允许将 \hl{Container<T>} 实例存入 QVariant，
+前提是 T 已经被注册为 QMetaType。
+
+\begin{notice}
+QWeakPointer，QSharedPointer 和 QPointer 已被内置支持，
+无需使用此宏进行声明。
+\end{notice}
+
+下述代码展示了 \hl{Q\_DECLARE\_SMART\_POINTER\_METATYPE()} 的典型用法：
+
+\begin{lstlisting}[language=C++]
+#include <memory>
+
+Q_DECLARE_SMART_POINTER_METATYPE(std::shared_ptr)
+
+void someFunc()
+{
+    auto smart_ptr = std::make_shared<QFile>();
+    QVariant var = QVariant::fromValue(smart_ptr);
+    // ...
+    if (var.canConvert<QObject*>()) {
+        QObject *sp = var.value<QObject*>();
+        qDebug() << sp->metaObject()->className(); // Prints 'QFile'.
+    }
+}
+\end{lstlisting}
+
+\begin{quote}
+译者注：
+
+用户继承自 QObject 的自定义类型可直接被已注册的智能指针使用，
+无需再注册 \hl{Q\_DECLARE\_METATYPE(QSharedPointer<T>)}。
+
+与容器不同的是，通过 \hl{Q\_DECLARE\_METATYPE(T)} 
+注册的自定义类型无法直接被已注册的智能指针使用，
+必须单独注册 \hl{Q\_DECLARE\_METATYPE(QSharedPointer<T>)}。
+\end{quote}
+
+\section{已废弃成员}
+
+QMetaType 类的以下成员已被废弃。
+它们仅为了保证老代码能够运行而保留，
+我们强烈反对在新代码中使用。
+
+\subsection{静态公共成员}
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 	函数 \\
+\hline
+\hl{(obsolete)} void * 	& construct(int \emph{type}, const void \emph{*copy} = nullptr) \\
+\end{tabular}
+
+\subsection{成员函数文档}
+
+\emph{[static]} void *QMetaType::construct(int \emph{type}, const void \emph{*copy} = nullptr)
+
+在给定的内存地址 \hl{where} 上构造对应 \hl{type} 类型的对象，
+该对象是 \hl{copy} 的副本，并返回 \hl{where}。若 \hl{copy} 是空指针，
+则执行默认构造。
+
+这是用于显示管理存储 hl{type} 类型对象的内存的底层函数。
+若不需要此类底层控制，则考虑使用 create() 函数（也就是指，
+使用 \hl{new} 而非 \hl{placement new}）。
+
+您必须确保 \hl{where} 指向的内存区域大小足够存储 \hl{type} 对应的数据，
+并且 \hl{where} 地址需要对齐，对应类型的大小可通过 sizeOf() 获取。
+
+内存对齐的规则是对齐至类型的自然边界，也就是大于等于类型大小的2的n次方值，
+直至平台有效对齐宽度上限为止。对于特定用途来说，
+超过 \hl{2 * sizeof(void*)} 的对齐宽度只是某些特定硬件指令所必需的
+（例如，x86 平台中对齐后的 SSE 读取和存储）。
+
+此函数在 Qt 5.0 中被引入。
+
+此函数已被废弃，仅为了保证老代码能够运行而保留，
+我们强烈反对在新代码中使用。
+
+构造对应 \hl{type} 类型的对象，该对象是 \hl{copy} 的副本。
+copy 的默认值是 \hl{nullptr}。
+
+已弃用，该用新的静态函数 QMetaType::create(int type, const void *copy)。
