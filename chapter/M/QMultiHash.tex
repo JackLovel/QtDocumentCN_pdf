@@ -8,1197 +8,311 @@ QMultiHash 类是一个便利的 QHash 派生类，提供多值哈希表功能�
 	\hline
 	属性 & 方法 \\
 	\hline
-    头文件  &	\hl{\#include <QMetaType>} \\
+    头文件  &	\hl{\#include <QMultiHash>} \\
+    \hline
+    qmake: & QT += core    \\
     \hline
     基类: & QHash    \\
 	\hline
 \end{tabular}
 
+\begin{compactitem}
+\item 所有成员列表，包括继承的成员
+\end{compactitem}
+
 \begin{notice}
 该类中的所有函数都是可重入的。
 \end{notice}
 
-\section{公共成员类型}
-
-\begin{tabular}{|r|m{25em}|}   
-\hline
-类型 	& 名称 \\
-\hline
-enum &	Type \{ Void, Bool, Int, UInt, Double, ..., UnknownType \} \\
-\hline
-enum &	TypeFlag \{ NeedsConstruction, NeedsDestruction, MovableType, IsEnumeration, PointerToQObject \}\\
-\hline
-flags &	TypeFlags\\
-\hline
-\end{tabular}
 
 \section{公共成员函数}
 
-\begin{longtable}{|r|m{28em}|}   
-\hline
-返回类型 	& 函数 \\
-\hline
-& QMetaType(const int \emph{typeId} = QMetaType::UnknownType) \\ 
-\hline
-& $\sim$QMetaType() \\
-\hline
-void *	&construct(void \emph{*where}, const void \emph{*copy} = 0) const \\
-\hline
-void *	&create(const void \emph{*copy} = 0) const \\
-\hline
-void	&destroy(void \emph{*data}) const \\
-\hline
-void	&destruct(void \emph{*data}) const \\
-\hline
-QMetaType::TypeFlags &	flags() const \\
-\hline
-int	& id() const \\ 
-\hline
-bool	&isRegistered() const \\
-\hline
-bool	&isValid() const \\
-\hline
-const QMetaObject *	& metaObject() const \\
-\hline
-::QByteArray &	name() const \\
-\hline
-int	& sizeOf() const \\
-\hline
-\end{longtable}
-
-\section{静态公共成员}
 
 \begin{longtable}{|r|m{28em}|}   
+    \hline
+    返回类型 	& 函数 \\
+    \hline
+    &QMultiHash(const QHash<Key, T> \emph{\&other}) \\
+    \hline
+	&QMultiHash(InputIterator \emph{begin}, InputIterator \emph{end}) \\
+    \hline
+	&QMultiHash(std::initializer\_list<std::pair<Key, T>> \emph{list}) \\
+    \hline
+	&QMultiHash()\\
 \hline
-返回类型 	& 函数 \\
+typename QHash<Key, T>::const\_iterator &	constFind(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-bool	& compare(const void \emph{*lhs}, const void \emph{*rhs}, int \emph{typeId}, int \emph{*result})\\
+bool 	& contains(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-void *	&construct(int \emph{type}, void \emph{*where}, const void \emph{*copy})\\
+int &	count(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-bool	& convert(const void \emph{*from}, int \emph{fromTypeId}, void \emph{*to}, int \emph{toTypeId})\\
+typename QHash<Key, T>::iterator & find(const Key \emph{\&key}, const T \emph{\&value}) \\
 \hline
-void *	& create(int \emph{ype}, const void \emph{*copy} = nullptr)\\
+typename QHash<Key, T>::const\_iterator &	find(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-bool	& debugStream(QDebug \emph{\&dbg}, const void \emph{*rhs}, int \emph{typeId})\\
+typename QHash<Key, T>::iterator &	insert(const Key \emph{\&key}, const T \emph{\&value}) \\
 \hline
-void	& destroy(int \emph{type}, void \emph{*data})\\
+int &	remove(const Key  \emph{\&key}, const T  \emph{\&value}) \\
 \hline
-void	& destruct(int \emph{type}, void \emph{*where})\\
+typename QHash<Key, T>::iterator &	replace(const Key \emph{\&key}, const T \emph{\&value}) \\
 \hline
-bool	&equals(const void \emph{*lhs}, const void \emph{*rhs}, int \emph{typeId}, int \emph{*result})\\
+void 	& swap(QMultiHash<K, V>  \emph{\&other})\\
 \hline
-QMetaType&	fromType()\\
+QList 	& uniqueKeys() const\\
 \hline
-bool	& hasRegisteredComparators()\\
+QMultiHash<K, V> \& &	unite(const QMultiHash<K, V> \emph{\&other}) \\
 \hline
-bool	& hasRegisteredComparators(int \emph{typeId})\\
+QList<T> &	values(const Key \&key) const \\
 \hline
-bool	&hasRegisteredConverterFunction(int \emph{fromTypeId}, int \emph{toTypeId})\\
+QMultiHash<K, V> 	&operator+(const QMultiHash<K, V> \emph{\&other}) const\\
 \hline
-bool	&hasRegisteredConverterFunction()\\
-\hline
-bool	&hasRegisteredDebugStreamOperator()\\
-\hline
-bool	&hasRegisteredDebugStreamOperator(int \emph{typeId})\\
-\hline
-bool	&load(QDataStream  \emph{\&stream}, int  \emph{type}, void \emph{*data})\\
-\hline
-const QMetaObject *&	metaObjectForType(int \emph{type})\\
-\hline
-bool&	registerComparators()\\
-\hline
-bool&	registerConverter()\\
-\hline
-bool&	registerConverter(MemberFunction \emph{function})\\
-\hline
-bool&	registerConverter(MemberFunctionOk \emph{function})\\
-\hline
-bool&	registerConverter(UnaryFunction \emph{function})\\
-\hline
-bool&	registerDebugStreamOperator()\\
-\hline
-bool&	registerEqualsComparator()\\
-\hline
-bool&	save(QDataStream \emph{\&stream}, int \emph{type}, const void \emph{*data}) \\
-\hline
-int	&sizeOf(int \emph{type}) \\
-\hline
-int	& type(const char  \emph{*typeName}) \\
-\hline
-int	 & type(const ::QByteArray \emph{\&typeName}) \\
-\hline
-QMetaType::TypeFlags &	typeFlags(int \emph{type}) \\
-\hline
-const char * &	typeName(int \emph{typeId}) \\
-\hline
+QMultiHash<K, V> \& &	operator+=(const QMultiHash<K, V> \emph{\&other})\\
+    \hline
 \end{longtable}
-
 
 \section{相关非成员函数}
 
-\begin{tabular}{|r|m{25em}|}   
-\hline
-返回类型 	& 函数 \\
-\hline
-int &	qMetaTypeId()  \\ 
-\hline
-int &	qRegisterMetaType(const char \emph{*typeName}) \\ 
-\hline
-int	 & qRegisterMetaType() \\ 
-\hline
-void &	qRegisterMetaTypeStreamOperators(const char \emph{*typeName}) \\ 
-\hline
-bool &	operator!=(const QMetaType \emph{\&a}, const QMetaType \emph{\&b}) \\ 
-\hline
-bool &	operator==(const QMetaType \emph{\&a}, const QMetaType \emph{\&b}) \\ 
-\hline
-\end{tabular}
-
-\section{宏定义}
-
-\begin{tabular}{|l|}   
-\hline
-宏定义 \\
-\hline
-Q\_DECLARE\_ASSOCIATIVE\_CONTAINER\_METATYPE(\emph{Container}) \\
-\hline
-Q\_DECLARE\_METATYPE(\emph{Type}) \\
-\hline
-Q\_DECLARE\_OPAQUE\_POINTER(\emph{PointerType}) \\
-\hline
-Q\_DECLARE\_SEQUENTIAL\_CONTAINER\_METATYPE(\emph{Container}) \\ 
-\hline
-Q\_DECLARE\_SMART\_POINTER\_METATYPE(\emph{SmartPointer})\\
-\hline
-\end{tabular}
-
+\begin{longtable}{|r|l|}   
+    \hline
+    返回类型 	& 函数 \\
+    \hline
+    uint &	qHash(const QMultiHash<Key, T> \emph{\&key}, uint \emph{seed} = 0) \\ 
+    \hline
+\end{longtable}
 
 \section{详细描述}
 
-此类是一个辅助类，被用作序列化 QVariant 以及队列连接信号槽中的类型。
-它将类型名称关联到对应类型，以支持运行时动态创建和销毁此类型。
-通过 Q\_DECLARE\_METATYPE() 声明新类型，让它可以被 QVariant 和其它模板函数（qMetaTypeId() 等）使用。
-调用 qRegisterMetaType() 来让其可以被非模板型函数使用，如信号槽的队列连接。
+QMultiHash<Key, T> 是一种 Qt 泛型容器类。它继承 QHash 并扩展了一些便利的功能，使之比 QHash 更适合存储多值哈希。多值哈希是一种允许将多个值关联到同一个键的哈希。
 
-任何包含一个公共默认构造函数、一个公共拷贝构造函数、一个默认析构函数的类或结构体都可以被注册为元类型。
+因为 QMultiHash 继承 QHash，所有 QHash 的功能也适用于 QMultiHash。例如，可以使用 isEmpty() 测试哈希表是否为空，可以使用 QHash 的迭代器类（例如 QHashIterator）遍历 QMultiHash。但是与 QHash 不同，QMultiHash 提供的 insert() 函数允许同一个键插入多个元素。而 replace() 函数对应于 QHash::insert()。此外，该类还提供便利的 operator+() 和 operator+=() 运算符。
 
-下述代码展示了如何分配和销毁一个 MyClass 的实例：
+与 QMultiMap 不同，QMultiHash 不对插入的元素排序。唯一的保证是共享同一键的元素将按照从最新到最早插入的顺序连续出现。
+
+例子：
 
 \begin{lstlisting}[language=C++]
-int id = QMetaType::type("MyClass");
-if (id != QMetaType::UnknownType) {
-    void *myClassPtr = QMetaType::create(id);
-    ...
-    QMetaType::destroy(id, myClassPtr);
-    myClassPtr = 0;
+QMultiHash<QString, int> hash1, hash2, hash3;
+
+hash1.insert("plenty", 100);
+hash1.insert("plenty", 2000);
+// hash1.size() == 2
+
+hash2.insert("plenty", 5000);
+// hash2.size() == 1
+
+hash3 = hash1 + hash2;
+// hash3.size() == 3
+\end{lstlisting}
+
+%%%%%%%
+
+与 QHash 不同，QMultiHash 不提供 operator[] 运算符。如果想用特定键访问最新插入的元素，使用 value() 或 replace()。
+
+如果想取得单个键关联的所有值，
+可以使用 values(const Key \&key)，
+该函数返回一个 QList：
+
+\begin{lstlisting}[language=C++]
+QList<int> values = hash.values("plenty");
+for (int i = 0; i < values.size(); ++i)
+    cout << values.at(i) << Qt::endl;
+\end{lstlisting}
+
+共享同一键的元素按照从最新到最早插入的顺序返回。
+
+更有效的方法是传递键调用 find() 取得第一个元素的 STL 风格迭代器，从该元素开始遍历：
+
+\begin{lstlisting}[language=C++]
+QMultiHash<QString, int>::iterator i = hash.find("plenty");
+while (i != hash.end() && i.key() == "plenty") {
+    cout << i.value() << Qt::endl;
+    ++i;
 }
 \end{lstlisting}
 
-若我们想让流运算符 operator<<() 和 operator>>() 可被用于存储了自定义类型的 QVariant 对象，则这个自定义类型必须提供 operator<<() 和 operator>>() 运算符重载。
+QMultiHash 键和值的数据类型必须是可赋值数据类型。
+不能存储类似 QWidget 这样的对象作为值；
+应该存储 QWidget *。
+另外，QMultiHash 的键类型必须提供 operator==() 运算符， 
+并且在键类型的命名空间内还必须有一个为键类型参数返回哈希值的 qHash() 函数。具体请参考 QHash 文档。
 
 \begin{seeAlso}
-Q\_DECLARE\_METATYPE()，QVariant::setValue()，QVariant::value() 和 QVariant::fromValue().
+QHash，QHashIterator，QMutableHashIterator 和 QMultiMap。
 \end{seeAlso}
-
-\section{成员类型文档}
-
-enum QMetaType::Type
-
-下表是 QMetaType 内置支持的类型：
-
-
-\begin{longtable}{|l|l|m{20em}|}   
-\hline
-常量 &	数值 &	描述 \\ 
-\hline
-QMetaType::Void &	43&	void \\
-\hline
-QMetaType::Bool	&1&	bool \\
-\hline
-QMetaType::Int	&2&	int \\
-\hline
-QMetaType::UInt	&3	&unsigned int \\
-\hline
-QMetaType::Double&	6	&double \\
-\hline
-QMetaType::QChar&	7	&QChar \\
-\hline
-QMetaType::QString	&10&	QString \\
-\hline
-QMetaType::QByteArray&	12&	QByteArray \\
-\hline
-QMetaType::Nullptr&	51&	std::nullptr\_t \\
-\hline
-QMetaType::VoidStar	&31&	void * \\
-\hline
-QMetaType::Long	&32	&long \\
-\hline
-QMetaType::LongLong	&4	&long long \\
-\hline
-QMetaType::Short	&33&	short \\
-\hline
-QMetaType::Char&	34	&char \\
-\hline
-QMetaType::ULong	&35	&unsigned long \\
-\hline
-QMetaType::ULongLong&	5	&unsigned long long \\
-\hline
-QMetaType::UShort&	36&	unsigned short \\
-\hline
-QMetaType::SChar&	40&	signed char \\
-\hline
-QMetaType::UChar&	37&	unsigned char \\
-\hline
-QMetaType::Float	&38&	float \\
-\hline
-QMetaType::QObjectStar	&39&	QObject * \\
-\hline
-QMetaType::QVariant	&41	&QVariant \\
-\hline
-QMetaType::QCursor	&74&	QCursor \\
-\hline
-QMetaType::QDate&	14	&QDate \\
-\hline
-QMetaType::QSize&	21&	QSize \\
-\hline
-QMetaType::QTime&	15	&QTime\\
-\hline
-QMetaType::QVariantList&	9	&QVariantList\\
-\hline
-QMetaType::QPolygon&	71	&QPolygon\\
-\hline
-QMetaType::QPolygonF&	86&	QPolygonF\\
-\hline
-QMetaType::QColor	&67&	QColor\\
-\hline
-QMetaType::QColorSpace&	87&	QColorSpace（在 Qt 5.15 中被引入）\\
-\hline
-QMetaType::QSizeF	&22	&QSizeF\\
-\hline
-QMetaType::QRectF	&20	&QRectF\\
-\hline
-QMetaType::QLine	&23	&QLine\\
-\hline
-QMetaType::QTextLength	&77&	QTextLength\\
-\hline
-QMetaType::QStringList	&11&	QStringList\\
-\hline
-QMetaType::QVariantMap	&8&	QVariantMap\\
-\hline
-QMetaType::QVariantHash	&28&	QVariantHash\\
-\hline
-QMetaType::QIcon&	69&	QIcon\\
-\hline
-QMetaType::QPen	&76	&QPen \\
-\hline
-QMetaType::QLineF	&24&	QLineF\\
-\hline
-QMetaType::QTextFormat&	78&	QTextFormat \\
-\hline
-QMetaType::QRect&	19	&QRect \\
-\hline
-QMetaType::QPoint&	25	&QPoint \\
-\hline
-QMetaType::QUrl	&17	&QUrl \\
-\hline
-QMetaType::QRegExp	&27	&QRegExp \\
-\hline
-QMetaType::QRegularExpression	&44	&QRegularExpression \\
-\hline
-QMetaType::QDateTime	&16&	QDateTime\\
-\hline
-QMetaType::QPointF	&26&	QPointF\\
-\hline
-QMetaType::QPalette	&68	&QPalette\\
-\hline
-QMetaType::QFont	&64&	QFont\\
-\hline
-QMetaType::QBrush	&66	&QBrush\\
-\hline
-QMetaType::QRegion&	72&	QRegion\\
-\hline
-QMetaType::QBitArray&	13	&QBitArray\\
-\hline
-QMetaType::QImage	&70	&QImage\\
-\hline
-QMetaType::QKeySequence	&75	&QKeySequence\\
-\hline
-QMetaType::QSizePolicy&	121&	QSizePolicy\\
-\hline
-QMetaType::QPixmap&	65	&QPixmap\\
-\hline
-QMetaType::QLocale&	18	&QLocale\\
-\hline
-QMetaType::QBitmap&	73&	QBitmap\\
-\hline
-QMetaType::QMatrix&	79&	QMatrix\\
-\hline
-QMetaType::QTransform	&80	&QTransform\\
-\hline
-QMetaType::QMatrix4x4	&81	&QMatrix4x4\\
-\hline
-QMetaType::QVector2D	&82	&QVector2D\\
-\hline
-QMetaType::QVector3D	&83	&QVector3D\\
-\hline
-QMetaType::QVector4D	&84	&QVector4D\\
-\hline
-QMetaType::QQuaternion&	85	&QQuaternion\\
-\hline
-QMetaType::QEasingCurve	&29&	QEasingCurve\\
-\hline
-QMetaType::QJsonValue	&45&	QJsonValue\\
-\hline
-QMetaType::QJsonObject&	46&	QJsonObject\\
-\hline
-QMetaType::QJsonArray	&47	&QJsonArray\\
-\hline
-QMetaType::QJsonDocument	&48&	QJsonDocument\\
-\hline
-QMetaType::QCborValue	&53&	QCborValue\\
-\hline
-QMetaType::QCborArray	&54	&QCborArray \\
-\hline
-QMetaType::QCborMap	&55&	QCborMap \\
-\hline
-QMetaType::QCborSimpleType	&52&	QCborSimpleType \\
-\hline
-QMetaType::QModelIndex&	42	&QModelIndex \\
-\hline
-QMetaType::QPersistentModelIndex&	50	&QPersistentModelIndex（在 Qt 5.5 中被引入） \\
-\hline
-QMetaType::QUuid	&30	&QUuid \\
-\hline
-QMetaType::QByteArrayList&	49&	QByteArrayList \\
-\hline
-QMetaType::User	&1024&	用户类型的基础值（译者注：即起始值）\\
-\hline
-QMetaType::UnknownType&	0	&这是无效的类型编号，QMetaType 会在类型未注册时返回此值。\\
-\hline
-\end{longtable}
-
-可以使用 Q\_DECLARE\_METATYPE() 注册额外的类型。
-
-\begin{seeAlso}
-type() 和 typeName()。
-\end{seeAlso}
-
-\splitLine
-
-enum QMetaType::TypeFlag
-
-flags QMetaType::TypeFlags
-
-此枚举类型描述了被 QMetaType 支持的类型的属性
-
-\begin{tabular}{|l|l|l|}
-\hline
-常量 	&数值 &	描述\\
-\hline
-QMetaType::NeedsConstruction &	0x1 &	此类型具有非平凡的构造函数。若某类型不具备此标志，则可通过 memset() 安全地清零。\\
-\hline
-QMetaType::NeedsDestruction &	0x2 	&此类型非平凡的析构函数。若某类型不具备此标志，则丢弃对象前不需要调用析构函数（译者注：即可以用 free() 释放对象）\\
-\hline
-QMetaType::MovableType &	0x4 &	具有此标志的类型实例可以通过 memcpy() 安全地移动。\\
-\hline
-QMetaType::IsEnumeration 	&0x10 &	此类型是枚举值。\\
-\hline
-QMetaType::PointerToQObject &	0x8 &	此类型是指向继承自 QObject 的类型的指针。\\
-\hline
-\end{tabular}
-
-\hl{TypeFlags} 类型是 QFlags<TypeFlag> 的别名，支持通过或操作合并不同的 \hl{TypeFlag} 值。
 
 \section{成员函数文档}
 
-QMetaType::QMetaType(const int typeId = QMetaType::UnknownType)
+QMultiHash::QMultiHash(const QHash<Key, T> \emph{\&other})
 
-构造一个包含 typeId 对应的类型信息的 QMetaType 对象。
-
-注意： 默认参数在 Qt 5.15 中被引入。
-
-此函数在 Qt 5.0 中被引入。
-
-QMetaType::$\sim$QMetaType()
-
-析构此对象。
-
-[static] bool QMetaType::compare(const void \emph{*lhs}, const void \emph{*rhs}, int typeId, int \emph{*result})
-
-比较 lhs 和 rhs 对象，双方都需要是 typeid 中的类型。result 会被设为小于、等于或大于零，表示 lhs 小于、等于或大于 rhs。若比较成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.2 中被引入。
-
-[static] void *QMetaType::construct(int \emph{type}, void \emph{*where}, const void \emph{*copy})
-
-在给定的内存地址 where 上构造对应 type 类型的对象，该对象是 copy 的副本，并返回 where。若 copy 是空指针，则执行默认构造。
-
-这是用于显示管理存储 type 类型对象的内存的底层函数。若不需要此类底层控制，则考虑使用 create() 函数（也就是指，使用 new 而非 placement new）。
-
-您必须确保 where 指向的内存区域大小足够存储 type 对应的数据，并且 where 地址需要对齐，对应类型的大小可通过 sizeOf() 获取。
-
-内存对齐的规则是对齐至类型的自然边界，也就是大于等于类型大小的2的n次方值，直至平台有效对齐宽度上限为止。对于特定用途来说，超过 2 * sizeof(void*) 的对齐宽度只是某些特定硬件指令所必需的（例如，x86 平台中对齐后的 SSE 读取和存储）。
-
-此函数在 Qt 5.0 中被引入。
+构造一个 \emph{other} 的副本（可能是一个 QHash 或 QMultiHash）。
 
 \begin{seeAlso}
-destruct() 和 sizeOf()。
+operator=()。
 \end{seeAlso}
 
-void *QMetaType::construct(void \emph{*where}, const void \emph{*copy} = 0) const
+template QMultiHash::QMultiHash(InputIterator \emph{begin}, InputIterator \emph{end})
 
-在给定的内存地址 where 上构造此 QMetaType 类型的对象，
-该对象是 copy 的副本，并返回 where。
-若 copy 是空指针，则执行默认构造。
+用迭代器范围 [\emph{begin}, \emph{end}) 内每个元素的副本构造一个多值哈希表。
+需要满足下列两个条件之一：迭代范围内的元素是包含 first 和 second 数据成员的对象（像 QPair，std::pair等），
+分别可以转换为 Key 类型和 T 类型；或者迭代器必须含有 key() 和 value() 成员函数，分别返回可以转换为 Key 类型的键 T 类型的值。
 
-这是用于显示管理存储 type 类型对象的内存的底层函数。
-若不需要此类底层控制，则考虑使用 create() 函数（也就是指，使用 new 而非 placement new）。
+Qt 5.14 中引入该函数。
 
-您必须确保 where 指向的内存区域大小足够存储 type 对应的数据，
-并且 where 地址需要对齐，对应类型的大小可通过 sizeOf() 获取。
+QMultiHash::QMultiHash(std::initializer\_list<std::pair<Key, T>> \emph{list})
 
-内存对齐的规则是对齐至类型的自然边界，也就是大于等于类型大小的2的n次方值
-，直至平台有效对齐宽度上限为止。对于特定用途来说，超过 2 * sizeof(void*) 的对齐宽度只是某些特定硬件指令所必需的（例如，x86 平台中对齐后的 SSE 读取和存储）。
+用初始化列表 \emph{list} 中每个元素的副本构造一个哈希表。
 
-此函数在 Qt 5.0 中被引入。
+只有当程序在 C++11 模式下编译时，该函数才可用。
 
-[static] bool QMetaType::convert(const void \emph{*from}, int \emph{fromTypeId}, void \emph{*to}, int \emph{toTypeId})
+Qt 5.1 中引入该函数。
 
-将 from 对象从 fromTypeId 转换至 toTypeId 并存储到预分配空间 to 中。若转换成功则返回 true，否则返回 false。
+QMultiHash::QMultiHash()
 
-此函数在 Qt 5.2 中被引入。
+构造一个空哈希表。
 
-[static] void *QMetaType::create(int \emph{type}, const void \emph{*copy} = nullptr)
+typename QHash<Key, T>::const\_iterator QMultiHash::constFind(const Key \emph{\&key}, const T \emph{\&value}) const
 
-假设 copy 的类型是 type，返回它的的拷贝。若 copy 是空指针，则返回默认构造的实例。
+返回迭代器，指向哈希表中键为 \emph{key}，值为 \emph{value} 的元素。
+
+如果哈希表中不包含这样的元素，该函数返回 constEnd()。
+
+Qt 4.3 中引入该函数。
 
 \begin{seeAlso}
-destroy()，isRegistered() 和 Type。
+QHash::constFind().
 \end{seeAlso}
 
-void *QMetaType::create(const void \emph{*copy} = 0) const
+bool QMultiHash::contains(const Key \emph{\&key}, const T \emph{\&value}) const
 
-假设 copy 的类型是此 QMetaType ，返回它的的拷贝。若 copy 是空指针，则返回默认构造的实例。
+如果该哈希表包含键为 \emph{key}，值为 \emph{value} 的元素，返回 true；否则返回 false。
 
-此函数在 Qt 5.0 中被引入。
+Qt 4.3 中引入该函数。
 
 \begin{seeAlso}
-QMetaType::destroy()。
+QHash::contains().
 \end{seeAlso}
 
-[static] bool QMetaType::debugStream(QDebug \emph{\&dbg}, const void \emph{*rhs}, int \emph{typeId})
+int QMultiHash::count(const Key \emph{\&key}, const T \emph{\&value}) const
 
-将 typeId 类型的 rhs 对象输出至调试流 debug，输出成功则返回 true，否则返回 false。
+返回键为 \emph{key}，值为 \emph{value} 的元素个数。
 
-此函数在 Qt 5.2 中被引入。
-
-[static] void QMetaType::destroy(int \emph{type}, void \emph{*data})
-
-假设 data 的类型是 type，销毁该对象。
+Qt 4.3 中引入该函数。
 
 \begin{seeAlso}
-create()，isRegistered() 和 Type。
+QHash::count()。
 \end{seeAlso}
 
-void QMetaType::destroy(void \emph{*data}) const
+typename QHash<Key, T>::iterator QMultiHash::find(const Key \emph{\&key}, const T \emph{\&value})
 
-假设 data 的类型是此 QMetaType ，销毁该对象。
+返回迭代器，指向键为 \emph{key}，值为 \emph{value} 的元素。
+如果哈希表中不包含这样的元素，该函数返回 end()。
 
-此函数在 Qt 5.0 中被引入。
+如果哈希表包含多个键为  \emph{key}，值为 \emph{value} 的元素，迭代器指向最新插入的元素。
+
+Qt 4.3 中引入该函数。
 
 \begin{seeAlso}
-QMetaType::create()。
+另请参阅 QHash::find()。
 \end{seeAlso}
 
-[static] void QMetaType::destruct(int \emph{type}, void \emph{*where})
-
-假设 where 地址中存储的对象类型是 type，销毁该对象。
-
-与 destroy() 不同，此函数只会执行该类型的析构函数，但不会执行 delete 运算符（译者注：即不会释放内存，与 placement new 相同机制）。
-
-此函数在 Qt 5.0 中被引入。
-
-\begin{seeAlso}
-construct()。
-\end{seeAlso}
-
-void QMetaType::destruct(void \emph{*data}) const
-
-假设 data 地址中存储的对象类型是此 QMetaType ，销毁该对象。
-
-与 destroy() 不同，此函数只会执行该类型的析构函数，但不会执行 delete 运算符（译者注：即不会释放内存，与 placement new 相同机制）。
-
-此函数在 Qt 5.0 中被引入。
-
-\begin{seeAlso}
-QMetaType::construct()。
-\end{seeAlso}
-
-[static] bool QMetaType::equals(const void \emph{*lhs}, const void \emph{*rhs}, int \emph{typeId}, int \emph{*result})
-
-比较 lhs 和 rhs 对象，双方都需要是 typeid 中的类型。若 lhs 等于 rhs，则 result 会被设为零。若比较成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.5 中被引入。
-
-QMetaType::TypeFlags QMetaType::flags() const
-
-返回此 QMetaType 实例的类型标志。
-
-此函数在 Qt 5.0 中被引入。
-
-\begin{seeAlso}
-QMetaType::TypeFlags 和 QMetaType::typeFlags()。
-\end{seeAlso}
-
-[static] template <typename T> QMetaType QMetaType::fromType()
-
-返回模板类型 T 对应的 QMetaType 实例。
-
-此函数在 Qt 5.15 中被引入。
-
-[static] template <typename T> bool QMetaType::hasRegisteredComparators()
-
-若模板类型 T 已被注册至元对象系统则返回 true。
-
-此函数在 Qt 5.2 中被引入。
-
-[static] bool QMetaType::hasRegisteredComparators(int \emph{typeId})
-
-若 typeId 的类型已被注册至元对象系统则返回 true。
-
-此函数在 Qt 5.2 中被引入。
-
-[static] bool QMetaType::hasRegisteredConverterFunction(int \emph{fromTypeId}, int \emph{toTypeId})
-
-若自 fromTypeId 到 toTypeId 的类型转换已被注册至元对象系统则返回 true。
-
-此函数在 Qt 5.2 中被引入。
-
-[static] template <typename From, typename To> bool QMetaType::hasRegisteredConverterFunction()
-
-若自模板类型 From 到 To 的类型转换已被注册至元对象系统则返回 true。
+typename QHash<Key, T>::const\_iterator QMultiHash::find(const Key \emph{\&key}, const T \emph{\&value}) const
 
 这是一个重载函数。
 
-此函数在 Qt 5.2 中被引入。
+Qt 4.3 中引入该函数。
 
-[static] template <typename T> bool QMetaType::hasRegisteredDebugStreamOperator()
+typename QHash<Key, T>::iterator QMultiHash::insert(const Key \emph{\&key}, const T \emph{\&value})
 
-若自模板类型 T 的 QDebug 流运算符已被注册至元对象系统则返回 true。
+用键 \emph{key} 和值 \emph{value} 插入一个新元素。
 
-此函数在 Qt 5.2 中被引入。
-
-[static] bool QMetaType::hasRegisteredDebugStreamOperator(int \emph{typeId})
-
-若自 typeId 对应类型的 QDebug 流运算符已被注册至元对象系统则返回 true。
-
-此函数在 Qt 5.2 中被引入。
-
-int QMetaType::id() const
-
-返回此 QMetatype 实例的类型编号。
-
-此函数在 Qt 5.13 中被引入。
-
-[static] bool QMetaType::isRegistered(int \emph{type})
-
-若 typeId 对应已被注册至元对象系统则返回 true，否则返回 false。
+如果哈希表中已经存在相同键的元素，该函数将创建一个新元素。
+（这与 replace() 不同，replace() 是覆盖已经存在元素的值。)
 
 \begin{seeAlso}
-type()，typeName() 和 Type。
+replace()。
 \end{seeAlso}
 
-bool QMetaType::isRegistered() const
+int QMultiHash::remove(const Key \emph{\&key}, const T \emph{\&value})
 
-若此 QMetaType 包含某类型的有效信息则返回 true，否则返回 false。
+从哈希表中移除所有键为 \emph{key}，值为 \emph{value} 的元素。返回被移除元素的个数。
 
-此函数在 Qt 5.0 中被引入。
-
-bool QMetaType::isValid() const
-
-若此 QMetaType 包含某类型的有效信息则返回 true，否则返回 false。
-
-此函数在 Qt 5.0 中被引入。
-
-[static] bool QMetaType::load(QDataStream \emph{\&stream}, int \emph{type}, void \emph{*data})
-
-从数据流 stream 中读取对应 type 类型的对象至 data 中，若读取成功则返回 true，否则返回 false。
-
-此类型必须在这之前通过 qRegisterMetaType() 和 qRegisterMetaTypeStreamOperators() 完成注册。
-
-通常来说，您不需要显示调用此函数，而是应使用 QVariant 的 operator>>()，该运算符依赖 load() 来传递自定义类型。
+Qt 4.3 中引入该函数。
 
 \begin{seeAlso}
-save() 和 qRegisterMetaTypeStreamOperators()。
+QHash::remove()。
 \end{seeAlso}
 
-const QMetaObject *QMetaType::metaObject() const
+typename QHash<Key, T>::iterator QMultiHash::replace(const Key \emph{\&key}, const T \emph{\&value})
 
-返回此类型对应的 QMetaObject。
+用键 \emph{key} 和值 \emph{value} 插入一个新元素。
 
-若此类型是 QObject 子类的指针，即 flags() 包含 QMetaType::PointerToQObject，则此函数会返回对应类型的 QMetaObject。这可被用于结合 QMetaObject::construct（译者注：无此函数，请使用 QMetaObject::constructor 或 QMetaType::construct）来创建此类型的 QObject 实例。
+如果已经存在键为 \emph{key} 的元素，该元素的值将被 \emph{value} 替换。
 
-若此类型是 Q\_GADGET，即 flags() 包含 QMetaType::IsGadget（译者注：文档中未给出，但 QMetaType::TypeFlag 中的确包含此枚举值），则此函数会返回对应类型的 QMetaObject。
-这可以被用于获取 QMetaMethod 和 QMetaProperty，并将其用于此类型的对象指针上（例如通过 QVariant::data 获取指针 译者注：文档中无此函数，但此函数的确存在）。
-
-若此类型是枚举，即 flags() 包含 QMetaType::IsEnumeration，
-且该枚举值是通过 Q\_ENUM 注册的成员枚举类型，
-则此函数会返回其所属的 QObject 对象的元对象，否则返回 nullptr。
-
-此函数在 Qt 5.5 中被引入。
+如果有多个键为 \emph{key} 的元素，最新插入的元素的值将被 \emph{value} 替换。
 
 \begin{seeAlso}
-QMetaType::metaObjectForType() 和 QMetaType::flags()。
+另请参阅 insert()。
 \end{seeAlso}
 
-[static] const QMetaObject *QMetaType::metaObjectForType(int \emph{type})
+void QMultiHash::swap(QMultiHash<K, V> \emph{\&other})
 
-返回 type 类型对应的 QMetaType::metaObject。
+将 \emph{other} 哈希表与本哈希表。该操作非常快，永远不失败。
 
-此函数在 Qt 5.0 中被引入。
+Qt 4.8 中引入该函数。
+
+QList QMultiHash::uniqueKeys() const
+
+以升序返回哈希表中所有键的列表。在哈希表中多次出现的键在返回的列表中只出现一次。
+
+Qt 5.13 中引入该函数。
 
 \begin{seeAlso}
-metaObject()。
+keys() 和 values()。
 \end{seeAlso}
 
-QByteArray QMetaType::name() const
+QMultiHash<K, V> \&QMultiHash::unite(const QMultiHash<K, V> \emph{\&other})
 
-返回此 QMetaType 对应的类型名称，若无有效类型则返回空指针。
+将 \emph{other} 哈希表中的所有元素插入到本哈希表中，返回本哈希表的引用。
 
-此函数在 Qt 5.15 中被引入。
+Qt 5.13 中引入该函数。
 
 \begin{seeAlso}
-typeName()。
+insert()。
 \end{seeAlso}
 
-[static] template <typename T> bool QMetaType::registerComparators()
-
-将用户注册类型 T 的比较运算符注册至元对象系统。要求 T 具有 operator== 和 operator< 运算符。若注册成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.2 中被引入。
-
-[static] template <typename From, typename To> bool QMetaType::registerConverter()
-
-将类型 From 到 To 的可能的隐式转换注册到元对象系统，若注册成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.2 中被引入。
-
-[static] template <typename MemberFunction, int> bool QMetaType::registerConverter(MemberFunction \emph{function})
+QList QMultiHash::values(const Key \emph{\&key}) const
 
 这是一个重载函数。
 
-将形如 To From::function() const 的成员方法 function 作为从 From 到 To 的转换函数注册至元对象系统，若注册成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.2 中被引入。
-
-\begin{quote}
-译者注：
-
-第二个模板参数是官方使用 doxygen 生成文档时的变通写法，
-实际代码中的函数签名是 \hl{template<typename From, typename To> static bool registerConverter(To(From::*function)() const)}。
-使用时无需指定 \hl{int} 模板参数，在函数参数中直接填入用于转换的成员函数指针即可。
-\end{quote}
-
-[static] template <typename MemberFunctionOk, char> bool QMetaType::registerConverter(MemberFunctionOk \emph{function})
-
-这是一个重载函数。
-
-将形如 To From::function(bool *ok) const 的成员方法 function 作为从 From 到 To 的转换函数注册至元对象系统，若注册成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.2 中被引入。
-
-\begin{quote}
-译者注：
-
-第二个模板参数是官方使用 doxygen 生成文档时的变通写法，
-实际代码中的函数签名是 \hl{template<typename From, typename To> static bool registerConverter(To(From::*function)(bool*) const)}。
-使用时无需指定 \hl{char} 模板参数，在函数参数中直接填入用于转换的成员函数指针即可。
-\end{quote}
-
-
-[static] template <typename UnaryFunction> bool QMetaType::registerConverter(UnaryFunction \emph{function})
-
-这是一个重载函数。
-
-将把类型 From 转换为类型 To 的一元函数 function 注册至元对象系统，若注册成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.2 中被引入。
-
-\begin{quote}
-译者注：
-
-原文描述地非常晦涩，实际指的是任何可被 \hl{To dst = function(src)} 方式调用的函数对象，
-包括全局函数、类静态函数、仿函数或 lamba 等，比上文另外两个 \hl{registerConverter} 的约束更为宽松。
-\end{quote}
-
-
-%%%%%%%%%%%%%%%%
-[static] template <typename T> bool QMetaType::registerDebugStreamOperator()
-
-将已注册类型 T 的 QDebug 流运算符注册至元对象系统，
-要求类型 T 具备流运算符 operator<<(QDebug dbg, T)。
-若注册成功则返回 true，否则返回 false。
-
-[static] template <typename T> bool QMetaType::registerEqualsComparator()
-
-将已注册类型 T 的等号运算符注册至元对象系统，要求类型 T 具备等号运算符 operator==。
-若注册成功则返回 true，否则返回 false。
-
-此函数在 Qt 5.5 中被引入。
-
-[static] bool QMetaType::save(QDataStream \emph{\&stream}, int \emph{type}, const void \emph{*data})
-
-从数据流 stream 中读取对应 type 类型的对象至 data 中，若读取成功则返回 true，否则返回 false。
-
-此类型必须在这之前通过 qRegisterMetaType() 和 qRegisterMetaTypeStreamOperators() 完成注册。
-
-通常来说，您不需要显示调用此函数，而是应使用 QVariant 的 operator>>()，
-该运算符依赖 load() 来传递自定义类型。
+按照从最新到最早插入的顺序，返回所有与键 \emph{key} 相关联的值的列表。
 
 \begin{seeAlso}
-save() 和 qRegisterMetaTypeStreamOperators()。
+count() 和 insert()。
 \end{seeAlso}
 
-将 type 类型对应的 data 对象输出至数据流 stream 中，若读取成功则返回 true，否则返回 false。
+QMultiHash<K, V> QMultiHash::operator+(const QMultiHash<K, V> \emph{\&other}) const
 
-此类型必须在这之前通过 qRegisterMetaType() 和 qRegisterMetaTypeStreamOperators() 完成注册。
-
-通常来说，您不需要显示调用此函数，而是应使用 QVariant 的 operator<<()，
-该运算符依赖 save() 来传递自定义类型。
+返回一个哈希表，该哈希表包含本哈希表和 \emph{other} 哈希表中的所有元素。
+如果一个键在两个哈希表中同时存在，结果哈希表将多次包含这个键。
 
 \begin{seeAlso}
-load() 和 qRegisterMetaTypeStreamOperators()。
+另请参阅 operator+=()。
 \end{seeAlso}
 
-[static] int QMetaType::sizeOf(int \emph{type})
+QMultiHash<K, V> \&QMultiHash::operator+=(const QMultiHash<K, V> \emph{\&other})
 
-返回 type 对应类型的以字节为单位的大小（即 sizeof(T)，其中 T 是 type 对应的实际类型）。
-
-此函数通常结合 construct() 使用，来进行对此类型的更底层的内存管理。
-
-此函数在 Qt 5.0 中被引入。
+将 \emph{other} 哈希表中的所有元素插入到本哈希表中，返回本哈希表的引用。
 
 \begin{seeAlso}
-construct()。
-\end{seeAlso}
-
-int QMetaType::sizeOf() const
-
-返回此类型的以字节为单位的大小（即 sizeof(T)，其中 T 是 QMetaType 对应的实际类型）。
-
-此函数通常结合 construct() 使用，来进行对此类型的更底层的内存管理。
-
-此函数在 Qt 5.0 中被引入。
-
-\begin{seeAlso}
-QMetaType::construct() 和 QMetaType::sizeOf()。
-\end{seeAlso}
-
-[static] int QMetaType::type(const char \emph{*typeName})
-
-返回名为 typeName 的类型的元类型编号，若无此元类型则返回 QMetaType::UnknownType。
-
-\begin{seeAlso}
-isRegistered()，typeName() 和 Type。
-\end{seeAlso}
-
-[static] int QMetaType::type(const::QByteArray \emph{\&typeName})
-
-这是一个重载函数。
-
-返回名为 typeName 的类型的元类型编号，若无此元类型则返回 0（译者注：即QMetaType::UnknownType）。
-
-此函数在 Qt 5.5 中被引入。
-
-\begin{seeAlso}
-isRegistered() 和 typeName()。
-\end{seeAlso}
-
-[static] QMetaType::TypeFlags QMetaType::typeFlags(int \emph{type})
-
-返回 type 类型的类型标志。
-
-此函数在 Qt 5.0 中被引入。
-
-\begin{seeAlso}
-QMetaType::TypeFlags。
-\end{seeAlso}
-
-[static] const char *QMetaType::typeName(int \emph{typeId})
-
-返回 typeId 对应类型的类型名称，若该类型不存在则返回空指针。返回的指针不可被删除。
-
-\begin{seeAlso}
-type()，isRegistered()，Type 和 name()。
+unite() 和 insert()。
 \end{seeAlso}
 
 \section{相关非成员函数}
 
-template <typename T> int qMetaTypeId()
+template <typename Key, typename T> uint qHash(const QMultiHash<Key, T> \emph{\&key}, uint \emph{seed} = 0)
 
-返回类型 T 对应的元类型编号。
-若该类型未通过 Q\_DECLARE\_METATYPE() 声明，则会引发编译错误。
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
 
-典型用法：
+类型 \hl{T} 必须被 qHash() 支持。
 
-\begin{lstlisting}[language=C++]
-int id = qMetaTypeId<QString>();    // id 是 QMetaType::QString
-id = qMetaTypeId<MyStruct>();       // 若 MyStruct 未被声明，则会产生编译错误
-\end{lstlisting}
-
-QMetaType::type() 返回值与 qMetaTypeId() 相同，
-但会基于类型名称进行运行时检索。
-QMetaType::type() 会稍慢一些，但即使类型未注册也能编译成功。
-
-此函数在 Qt 4.1 中被引入。
-
-\begin{seeAlso}
-Q\_DECLARE\_METATYPE() 和 QMetaType::type()。
-\end{seeAlso}
-
-template <typename T> int qRegisterMetaType(const char \emph{*typeName})
-
-将类型 T 通过类型名称 typeName 注册至元对象系统，
-并返回 QMetaType 使用的类型编号。
-任何包含一个公共默认构造函数、公共拷贝构造函数、公共析构函数的类或结构体均可被注册。
-
-此函数要求类型 T 在此函数调用时被完整定义；对于指针类型，
-同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
-可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
-
-类型被注册后，可以在运行时动态地创建或销毁对象。
-
-下述为注册 MyClass 类的示例：
-
-\begin{lstlisting}[language=C++]
-qRegisterMetaType<MyClass>("MyClass");
-\end{lstlisting}
-
-此函数可被用于注册类型别名，以便于将别名用于 QMetaProperty 或队列连接中。
-
-\begin{lstlisting}[language=C++]
-typedef QString CustomString;
-qRegisterMetaType<CustomString>("CustomString");
-\end{lstlisting}
-
-\begin{warning}
-此函数仅应被用于注册类型别名，其它场合请使用 Q\_DECLARE\_METATYPE 和 qMetaTypeId()。
-\end{warning}
-
-\begin{seeAlso}
-qRegisterMetaTypeStreamOperators()，isRegistered() 和 Q\_DECLARE\_METATYPE()。
-\end{seeAlso}
-
-template <typename T> int qRegisterMetaType()
-
-调用此函数来注册类型 T。
-T 必须被 Q\_DECLARE\_METATYPE() 所声明。
-返回此类型对应的元类型编号。
-
-示例：
-
-\begin{lstlisting}[language=C++]
-int id = qRegisterMetaType<MyStruct>();
-\end{lstlisting}
-
-此函数要求类型 T 在此函数调用时被完整定义；
-对于指针类型，同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
-可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
-
-类型被注册后，可以在运行时动态地创建或销毁对象。
-
-为了在 QVariant 中使用类型 T，使用 Q\_DECLARE\_METATYPE() 便已足够。
-若要在信号槽的队列连接中使用 T，
-则 qRegisterMetaType<T>() 必须在第一个连接建立前被调用。
-
-同样地，若要在 QObject::property() 中使用 T，qRegisterMetaType<T>() 必须在这之前被调用。通常在使用到 T 的类的构造函数中，或在 main() 函数中调用。
-
-此函数在 Qt 4.2 中被引入。
-
-\begin{seeAlso}
-Q\_DECLARE\_METATYPE()。
-\end{seeAlso}
-
-template <typename T> void qRegisterMetaTypeStreamOperators(const char \emph{*typeName})
-
-通过类型名称 typeName 将 T 的流运算符注册至元对象系统。
-
-在此之后，该类型可通过 QMetaType::load() 和 QMetaType::save() 进行序列化和反序列化。
-这两个函数在将 QVariant 传递至数据流时被调用。
-
-\begin{lstlisting}[language=C++]
-qRegisterMetaTypeStreamOperators<MyClass>("MyClass");
-\end{lstlisting}
-
-流运算符需要具有下述的函数签名：
-
-\begin{lstlisting}[language=C++]
-QDataStream &operator<<(QDataStream &out, const MyClass &myObj);
-QDataStream &operator>>(QDataStream &in, MyClass &myObj);
-\end{lstlisting}
-
-%%%%%%%%%%%%
-
-\begin{seeAlso}
-qRegisterMetaType()，QMetaType::isRegistered() 和 Q\_DECLARE\_METATYPE()。
-\end{seeAlso}
-
-bool operator!=(const QMetaType \emph{\&a}, const QMetaType \emph{\&b})
-
-这是一个重载函数。
-
-若 QMetaType a 的类型与 QMetaType b 不同则返回 true，否则返回false。
-
-此函数在 Qt 5.15 中被引入。
-
-bool operator==(const QMetaType \emph{\&a}, const QMetaType \emph{\&b})
-
-这是一个重载函数。
-
-若 QMetaType \emph{a} 的类型与 QMetaType \emph{b} 相同则返回 \hl{true}，否则返回 \hl{false}。
-
-此函数在 Qt 5.15 中被引入。
-
-%%%%%%%%%%%%
-
-
-\section{宏定义文档}
-
-Q\_DECLARE\_ASSOCIATIVE\_CONTAINER\_METATYPE(Container)
-
-此宏令容器类型 \hl{Container} 作为关联型容器被注册至 QMetaType，
-即允许将 \hl{Container<T, U>} 实例存入 QVariant，
-前提是 \hl{T} 和 \hl{U} 也已经被注册为 QMetaType。
-
-\begin{warning}
-所有 Qt 的关联型容器已被内置支持，
-无需使用此宏进行声明。std::map 容器也已被内置支持。
-\end{warning}
-
-下述代码展示了 Q\_DECLARE\_ASSOCIATIVE\_CONTAINER\_METATYPE() 的典型用法：
-
-\begin{lstlisting}[language=C++]
-#include <unordered_list>
-
-Q_DECLARE_ASSOCIATIVE_CONTAINER_METATYPE(std::unordered_map)
-
-void someFunc()
-{
-    std::unordered_map<int, bool> container;
-    QVariant var = QVariant::fromValue(container);
-    // ...
-}
-\end{lstlisting}
-
-\begin{quote}
-译者注：
-
-用户的自定义类型只需要通过 \hl{Q\_DECLARE\_METATYPE(T)} 注册后，
-即可被已注册的所有容器使用，
-无需再注册 \hl{Q\_DECLARE\_METATYPE(QMap<QString, T>)}。
-\end{quote}
-
-Q\_DECLARE\_METATYPE(\emph{Type})
-
-此宏将类型 \hl{Type} 注册至 QMetaType ，前提是该类型具备一个公共默认构造函数、公共拷贝构造函数和公共析构函数。这是把类型 Type 用于 QVariant 的前提。
-
-此宏要求类型 \hl{T} 在此函数调用时被完整定义；
-对于指针类型，同样要求被指向的类型被完整定义（\hl{译者注：即不可为前置声明类型}）。
-可以使用 Q\_DECLARE\_OPAQUE\_POINTER() 来注册前置声明类型的指针类型。
-
-理想情况下，此宏应被放置在该类型的声明位置之后。若不可行的话，
-也可以将其放置在一个私有头文件中，
-然后在每次在 QVariant 中使用此类型之前包含该头文件。
-
-Q\_DECLARE\_METATYPE() 使此类型可被所有基于模板的函数使用，
-包括 QVariant 中的模板函数。
-
-\begin{notice}
-若想在信号槽的队列连接或 QObject 的属性系统中使用此类型，
-则还需要调用 qRegisterMetaType()，因为该类型的名称会在运行时被解析。
-\end{notice}
-
-此示例为 \hl{Q\_DECLARE\_METATYPE()} 的典型用法：
-
-\begin{lstlisting}[language=C++]
-struct MyStruct
-{
-    int i;
-    ...
-};
-
-Q_DECLARE_METATYPE(MyStruct)
-\end{lstlisting}
-
-若 \hl{MyStruct} 处于命名空间中，则 \hl{Q\_DECLARE\_METATYPE()} 宏必须在命令空间外使用：
-
-\begin{lstlisting}[language=C++]
-namespace MyNamespace
-{
-    ...
-}
-
-Q_DECLARE_METATYPE(MyNamespace::MyStruct)
-\end{lstlisting}
-
-当 \hl{MyStruct} 被注册至 QMetaType 后，便可将其用于 QVariant 中
-
-\begin{lstlisting}[language=C++]
-MyStruct s;
-QVariant var;
-var.setValue(s); // 将 v 拷贝至 QVariant
-
-...
-
-// 获取类型值
-MyStruct s2 = var.value<MyStruct>();
-\end{lstlisting}
-
-下述类型已被自动注册，无需使用此宏：
-
-\begin{compactitem}
-\item 继承自 QObject 的类型的指针；
-\item QList<T>，QVector<T>，QQueue<T>，QStack<T>，QSet<T> 或 QLinkedList<T>，前提是 T 被注册为元类型；
-\item QHash<T1, T2>，QMap<T1, T2> 或 QPair<T1, T2>，前提是 T1 和 T2 都被注册为元类型；
-\item QPointer<T>，QSharedPointer<T>，QWeakPointer<T>，前提是 T 为 QObject 的子类；
-\item 通过 Q\_ENUM 或 Q\_FLAG 注册的枚举类型；
-\item 包含 Q\_GADGET 宏的类。
-\end{compactitem}
-
-\begin{seeAlso}
-qRegisterMetaType()。
-\end{seeAlso}
-
-%%%%%%%%%%%%%%%%
-
-Q\_DECLARE\_OPAQUE\_POINTER(\hl{PointerType})
-
-此宏使得前置声明类型的指针类型 PointerType 可被 Q\_DECLARE\_METATYPE() 或 qRegisterMetaType() 注册至 QMetaType。
-
-此函数在 Qt 5.0 中被引入。
-
-\begin{seeAlso}
-Q\_DECLARE\_METATYPE() 和 qRegisterMetaType()。
-\end{seeAlso}
-
-Q\_DECLARE\_SEQUENTIAL\_CONTAINER\_METATYPE(\emph{Container})
-
-此宏令容器类型 \hl{Container} 作为顺序容器被注册至 QMetaType，
-即允许将 \hl{Container<T>} 实例存入 QVariant，
-前提是 \hl{T} 已经被注册为 QMetaType。
-
-\begin{notice}
-所有 Qt 的顺序容器已被内置支持，无需使用此宏进行声明。
-\end{notice}
-
-\hl{std::vector} 和 \hl{std::list} 容器已也被内置支持。
-
-下述代码展示了 \hl{Q\_DECLARE\_SEQUENTIAL\_CONTAINER\_METATYPE()} 的典型用法：
-
-\begin{lstlisting}[language=C++]
-#include <deque>
-
-Q_DECLARE_SEQUENTIAL_CONTAINER_METATYPE(std::deque)
-
-void someFunc()
-{
-    std::deque<QFile*> container;
-    QVariant var = QVariant::fromValue(container);
-    // ...
-}
-\end{lstlisting}
-
-\begin{quote}
-译者注：
-
-用户的自定义类型只需要通过 \hl{Q\_DECLARE\_METATYPE(T)} 注册后，
-即可被已注册的所有容器使用，
-无需再注册 \hl{Q\_DECLARE\_METATYPE(QVector<T>)}。
-\end{quote}
-
-Q\_DECLARE\_SMART\_POINTER\_METATYPE(\emph{SmartPointer})
-
-此宏令智能指针类型 \hl{SmartPointer} 作为智能指针被注册至 QMetaType，
-即允许将 \hl{Container<T>} 实例存入 QVariant，
-前提是 T 已经被注册为 QMetaType。
-
-\begin{notice}
-QWeakPointer，QSharedPointer 和 QPointer 已被内置支持，
-无需使用此宏进行声明。
-\end{notice}
-
-下述代码展示了 \hl{Q\_DECLARE\_SMART\_POINTER\_METATYPE()} 的典型用法：
-
-\begin{lstlisting}[language=C++]
-#include <memory>
-
-Q_DECLARE_SMART_POINTER_METATYPE(std::shared_ptr)
-
-void someFunc()
-{
-    auto smart_ptr = std::make_shared<QFile>();
-    QVariant var = QVariant::fromValue(smart_ptr);
-    // ...
-    if (var.canConvert<QObject*>()) {
-        QObject *sp = var.value<QObject*>();
-        qDebug() << sp->metaObject()->className(); // Prints 'QFile'.
-    }
-}
-\end{lstlisting}
-
-\begin{quote}
-译者注：
-
-用户继承自 QObject 的自定义类型可直接被已注册的智能指针使用，
-无需再注册 \hl{Q\_DECLARE\_METATYPE(QSharedPointer<T>)}。
-
-与容器不同的是，通过 \hl{Q\_DECLARE\_METATYPE(T)} 
-注册的自定义类型无法直接被已注册的智能指针使用，
-必须单独注册 \hl{Q\_DECLARE\_METATYPE(QSharedPointer<T>)}。
-\end{quote}
-
-\section{已废弃成员}
-
-QMetaType 类的以下成员已被废弃。
-它们仅为了保证老代码能够运行而保留，
-我们强烈反对在新代码中使用。
-
-\subsection{静态公共成员}
-
-\begin{tabular}{|l|l|}
-\hline
-返回类型 	函数 \\
-\hline
-\hl{(obsolete)} void * 	& construct(int \emph{type}, const void \emph{*copy} = nullptr) \\
-\end{tabular}
-
-\subsection{成员函数文档}
-
-\emph{[static]} void *QMetaType::construct(int \emph{type}, const void \emph{*copy} = nullptr)
-
-在给定的内存地址 \hl{where} 上构造对应 \hl{type} 类型的对象，
-该对象是 \hl{copy} 的副本，并返回 \hl{where}。若 \hl{copy} 是空指针，
-则执行默认构造。
-
-这是用于显示管理存储 hl{type} 类型对象的内存的底层函数。
-若不需要此类底层控制，则考虑使用 create() 函数（也就是指，
-使用 \hl{new} 而非 \hl{placement new}）。
-
-您必须确保 \hl{where} 指向的内存区域大小足够存储 \hl{type} 对应的数据，
-并且 \hl{where} 地址需要对齐，对应类型的大小可通过 sizeOf() 获取。
-
-内存对齐的规则是对齐至类型的自然边界，也就是大于等于类型大小的2的n次方值，
-直至平台有效对齐宽度上限为止。对于特定用途来说，
-超过 \hl{2 * sizeof(void*)} 的对齐宽度只是某些特定硬件指令所必需的
-（例如，x86 平台中对齐后的 SSE 读取和存储）。
-
-此函数在 Qt 5.0 中被引入。
-
-此函数已被废弃，仅为了保证老代码能够运行而保留，
-我们强烈反对在新代码中使用。
-
-构造对应 \hl{type} 类型的对象，该对象是 \hl{copy} 的副本。
-copy 的默认值是 \hl{nullptr}。
-
-已弃用，该用新的静态函数 QMetaType::create(int type, const void *copy)。
+Qt 5.8 中引入该函数。

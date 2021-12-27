@@ -28,12 +28,12 @@ QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github
 	\hline
 	类型 & 类型名称 \\
 	\hline
-enum class&	CheckIndexOption{ NoOption, IndexIsValid,
-  DoNotUseParent, ParentIsInvalid}\\
+enum class&	CheckIndexOption\{ NoOption, IndexIsValid,
+  DoNotUseParent, ParentIsInvalid\}\\
 \hline
 flags&	CheckIndexOptions\\
 \hline
-enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHint }\\
+enum&	LayoutChangeHint \{ NoLayoutChangeHint, VerticalSortHint, HorizontalSortHint \}\\
 \hline
 \end{tabular}
 
@@ -46,107 +46,107 @@ enum&	LayoutChangeHint { NoLayoutChangeHint, VerticalSortHint, HorizontalSortHin
 \hline
 类型 & 函数名称 \\
 \hline
-& QAbstractItemModel(QObject *parent = nullptr)\\
+& QAbstractItemModel(QObject \emph{*parent} = nullptr)\\
 \hline
 virtual	& $\sim$QAbstractItemModel()\\
 \hline
-virtual QModelIndex	& buddy(const QModelIndex \&index) const\\
+virtual QModelIndex	& buddy(const QModelIndex \emph{\&index}) const\\
 \hline
-virtual bool & canDropMimeData(const QMimeData *data, Qt::DropAction
-               action, int row, int column, const QModelIndex
-               \&parent) const s\\
+virtual bool & canDropMimeData(const QMimeData \emph{*data}, Qt::DropAction
+               \emph{action}, int \emph{row}, int \emph{column}, const QModelIndex
+               \emph{\&parent}) const s\\
 \hline
-virtual bool &canFetchMore(const QModelIndex \&parent) const\\
+virtual bool &canFetchMore(const QModelIndex \emph{\&parent}) const\\
 \hline
-bool & checkIndex(const QModelIndex \&index,
-       QAbstractItemModel::CheckIndexOptions options =
+bool & checkIndex(const QModelIndex \emph{\&index},
+       QAbstractItemModel::CheckIndexOptions \emph{options} =
        CheckIndexOption::NoOption) const\\
 \hline
-virtual int&columnCount(const QModelIndex \&parent = QModelIndex())
+virtual int&columnCount(const QModelIndex \emph{\&parent} = QModelIndex())
              const = 0\\
 \hline
-virtual QVariant&	data(const QModelIndex \&index, int role = Qt::DisplayRole) const = 0\\
+virtual QVariant&	data(const QModelIndex \emph{\&index}, int role = Qt::DisplayRole) const = 0\\
 \hline
-virtual bool&	dropMimeData(const QMimeData *data, Qt::DropAction
-              action, int row, int column, const QModelIndex \&parent)\\
+virtual bool&	dropMimeData(const QMimeData \emph{*data}, Qt::DropAction
+\emph{action}, int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent})\\
 \hline
-virtual void&	fetchMore(const QModelIndex \&parent)\\
+virtual void&	fetchMore(const QModelIndex \emph{\&parent})\\
 \hline
-virtual Qt::ItemFlags&	flags(const QModelIndex \&index) const\\
+virtual Qt::ItemFlags&	flags(const QModelIndex \emph{\&index}) const\\
 \hline
-virtual bool&	hasChildren QModelIndex \&parent = QModelIndex()) const\\
+virtual bool&	hasChildren(const QModelIndex \emph{\&parent} = QModelIndex()) const\\
 \hline
-bool	&hasIndex row, int column, const QModelIndex \&parent = QModelIndex()) const\\
+bool	&hasIndex(int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex()) const\\
 \hline
-virtual QVariant	&headerData section, Qt::Orientation orientation, int role = Qt::DisplayRole) const\\
+virtual QVariant	&headerData(int \emph{section}, Qt::Orientation \emph{orientation}, int \emph{role} = Qt::DisplayRole) const\\
 \hline
-virtual QModelIndex& index row, int column, const QModelIndex \&parent = QModelIndex()) const = 0\\
+virtual QModelIndex& index(int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex()) const = 0\\
 \hline
-bool	&insertColumn column, const QModelIndex \&parent = QModelIndex())\\
+bool	&insertColumn(int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-virtual bool & insertColumns column, int count, const QModelIndex \&parent = QModelIndex())\\
+virtual bool & insertColumns(int \emph{column}, int  \emph{count}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-bool&	insertRow(int row, const QModelIndex \&parent = QModelIndex())\\
+bool&	insertRow(int \emph{row}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-virtual bool&	insertRows row, int count, const QModelIndex \&parent
+virtual bool&	insertRows(int \emph{row}, int \emph{count}, const QModelIndex \emph{\&parent}
               = QModelIndex())\\
 \hline
-virtual QMap<int, QVariant>	&itemData QModelIndex \&index) const\\
+virtual QMap<int, QVariant>	&itemData(const QModelIndex \emph{\&index}) const\\
 \hline
-virtual QModelIndexList	& match QModelIndex \&start, int role, const QVariant \&value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags (Qt::MatchStartsWith\\
+virtual QModelIndexList	& match(const QModelIndex \emph{\&start}, int \emph{role}, const QVariant \emph{\&value}, int \emph{hits} = 1, Qt::MatchFlags \emph{flags} = Qt::MatchFlags (Qt::MatchStartsWith\\
 \hline
-virtual QMimeData *	&mimeData QModelIndexList \&indexes) const\\
+virtual QMimeData *	&mimeData(const QModelIndexList \emph{\&indexes}) const\\
 \hline
-virtual QStringList	& mimeTypes const\\
+virtual QStringList	& mimeTypes() const\\
 \hline
-bool	&moveColumn QModelIndex \&sourceParent, int sourceColumn,
-       const QModelIndex \&destinationParent, int destinationChild)\\
+bool	&moveColumn(const QModelIndex \emph{\&sourceParent}, int \emph{sourceColumn},
+       const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})\\
 \hline
-virtual bool & moveColumns QModelIndex \&sourceParent, int
-               sourceColumn, int count, const QModelIndex
-               \&destinationParent, int destinationChild)\\
+virtual bool & moveColumns(const QModelIndex \emph{\&sourceParent}, int
+\emph{sourceColumn}, int \emph{count}, const QModelIndex
+\emph{\&destinationParent}, int \emph{destinationChild})\\
 \hline
-bool& moveRow QModelIndex \&sourceParent, int sourceRow, const QModelIndex \&destinationParent, int d
-estinationChild)\\
+bool& moveRow(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, const QModelIndex \emph{\&destinationParent}, int \emph{d
+estinationChild})\\
 \hline
-virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, int destinationChild)\\
+virtual bool &moveRows(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, int \emph{destinationChild})\\
 \hline
-bool &moveRow QModelIndex \&sourceParent, int sourceRow, 
-       const QModelIndex \&destinationParent, 
-       int destinationChild)\\    
+bool &moveRow(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, 
+       const QModelIndex \emph{\&destinationParent}, 
+       int  \emph{destinationChild})\\    
 \hline           
-virtual bool &moveRows QModelIndex \&sourceParent, int sourceRow, 
-               int count, const QModelIndex \&destinationParent, int destinationChild)\\
+virtual bool &moveRows(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, 
+               int \emph{count}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})\\
 \hline
-virtual QModelIndex&	parent QModelIndex \&index) const = 0\\
+virtual QModelIndex& parent(cosnt QModelIndex \emph{\&index}) const = 0\\
 \hline
-bool&	removeColumn column, const QModelIndex \&parent = QModelIndex())\\
+bool&	removeColumn(int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-virtual bool&	removeColumns column, int count, const QModelIndex \&parent = QModelIndex())\\
+virtual bool&	removeColumns(int \emph{column}, int \emph{count}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-bool&	removeRow row, const QModelIndex \&parent = QModelIndex())\\
+bool&	removeRow(int \emph{row}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-virtual bool&	removeRows row, int count, const QModelIndex \&parent = QModelIndex())\\
+virtual bool&	removeRows(int \emph{row}, int \emph{count}, const QModelIndex \emph{\&parent} = QModelIndex())\\
 \hline
-virtual QHash<int, QByteArray>&	roleNames const\\
+virtual QHash<int, QByteArray>&	roleNames() const\\
 \hline
-virtual int	& rowCount QModelIndex \&parent = QModelIndex()) const = 0\\
+virtual int	& rowCount(const QModelIndex \emph{\&parent} = QModelIndex()) const = 0\\
 \hline
-virtual bool &setData QModelIndex \&index, const QVariant \&value, int role = Qt::EditRole)\\
+virtual bool &setData(const QModelIndex \emph{\&index}, const QVariant \emph{\&value}, int \emph{role} = Qt::EditRole)\\
 \hline
-virtual bool	&setHeaderData section, Qt::Orientation orientation, const QVariant \&value, int role = Qt::EditRole)\\
+virtual bool	&setHeaderData(int \emph{section}, Qt::Orientation \emph{orientation}, const QVariant \emph{\&value}, int \emph{role} = Qt::EditRole)\\
 \hline
-virtual bool	&setItemData QModelIndex \&index, const QMap<int, QVariant> \&roles)\\
+virtual bool	&setItemData(const QModelIndex \emph{\&index}, const QMap<int, QVariant> \emph{\&roles})\\
 \hline
-virtual QModelIndex&	sibling row, int column, const QModelIndex \&index) const\\
+virtual QModelIndex&	sibling(int \emph{row}, int \emph{column}, const QModelIndex \emph{\&index}) const\\
 \hline
-virtual void	&sort column, Qt::SortOrder order = Qt::AscendingOrder)\\
+virtual void	&sort(int \emph{column}, Qt::SortOrder \emph{order} = Qt::AscendingOrder)\\
 \hline
-virtual QSize	&span QModelIndex \&index) const\\
+virtual QSize	&span QModelIndex \emph{\&index}) const\\
 \hline
-virtual Qt::DropActions	&supportedDragActions const\\
+virtual Qt::DropActions	&supportedDragActions() const\\
 \hline
-virtual Qt::DropActions	&supportedDropActions const\\
+virtual Qt::DropActions	&supportedDropActions() const\\
 \hline
 \end{longtable}
 
