@@ -132,9 +132,9 @@ QHashIterator 和 QHash::iterator。
 
 bool QMutableHashIterator::findNext(const T \emph{\&value})
 
-从当前迭代器位置开始向前查找值 value。如果找到值为 value 的键值对，返回 true；否则返回 false。
+从当前迭代器位置开始向前查找值 \emph{value}。如果找到值为 \emph{value} 的键值对，返回 \hl{true}；否则返回 \hl{false}。
 
-调用该函数后，如果找到值 value，迭代器将被移动到匹配元素的后面；否则，迭代器将被移动到容器的末端。
+调用该函数后，如果找到值 \emph{value}，迭代器将被移动到匹配元素的后面；否则，迭代器将被移动到容器的末端。
 
 const Key \&QMutableHashIterator::key() const
 
@@ -152,7 +152,7 @@ T \&QMutableHashIterator::value()
 
 bool QMutableHashIterator::hasNext() const
 
-如果该迭代器后面至少有一个元素，返回 true，即该迭代器不在容器的末端；否则返回 false。
+如果该迭代器后面至少有一个元素，返回 \hl{true}，即该迭代器不在容器的末端；否则返回 \hl{false}。
 
 \begin{seeAlso}
 next()。
@@ -176,7 +176,8 @@ toBack() 和 next()。
 
 QMutableHashIterator<Key, T> \&QMutableHashIterator::operator=(QHash<Key, T> \emph{\&container})
 
-将迭代器关联到 container 来遍历哈希表。迭代器将被移动到哈希表的前端（第一个元素之前）。
+将迭代器关联到 \emph{container} 来遍历哈希表。
+迭代器将被移动到哈希表的前端（第一个元素之前）。
 
 \begin{seeAlso}
 toFront() 和 toBack()。
@@ -184,7 +185,7 @@ toFront() 和 toBack()。
 
 QMutableHashIterator::QMutableHashIterator(QHash<Key, T> \emph{\&hash})
 
-构造一个迭代器来遍历 hash。迭代器将被移动到哈希表的前端（第一个元素之前）。
+构造一个迭代器来遍历 \emph{hash}。迭代器将被移动到哈希表的前端（第一个元素之前）。
 
 \begin{seeAlso}
 operator=()。
@@ -225,7 +226,7 @@ setValue()。
 void QMutableHashIterator::setValue(const T \emph{\&value})
 
 
-用 value 替换使用遍历函数跳过的最后一个元素的值。
+用 \emph{value} 替换使用遍历函数跳过的最后一个元素的值。
 
 遍历函数包括 next() 和 findNext()。
 
