@@ -1,0 +1,242 @@
+\chapter{QMutableHashIterator}
+
+template <typename Key, typename T> class QMutableHashIterator
+
+QMutableHashIterator 类为 QHash 和 QMultiHash 提供 Java 风格的非常量迭代器。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+    头文件  &	\hl{\#include <QMutableHashIterator>} \\
+    \hline
+    qmake: & QT += core    \\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 所有成员列表，包括继承的成员
+\item 废弃的成员
+\end{compactitem}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{28em}|}   
+    \hline
+    返回类型 	& 函数 \\
+    \hline
+    & QMutableHashIterator(QHash<Key, T> \emph{\&hash}) \\
+    \hline
+    QMutableHashIterator<Key, T> \&  &	operator=(QHash<Key, T> \emph{\&container}) \\
+    \hline 
+    bool &	findNext(const T \emph{\&value}) \\
+    \hline
+    bool &	hasNext() const \\
+    \hline
+    const Key \& 	&key() const\\
+    \hline
+    QMutableHashIterator::Item 	&next() \\ 
+    \hline
+    QMutableHashIterator::Item &	peekNext() const\\
+    \hline
+    void &	remove() \\
+    \hline
+    void &	setValue(const T \emph{\&value}) \\
+    \hline
+    void &	toBack() \\
+    \hline
+    void 	&toFront() \\
+    \hline
+    const T \& 	&value() const \\
+    \hline
+    T \& 	&value()\\
+    \hline
+\end{longtable}
+
+
+\section{详细描述}
+
+QHash 同时提供 Java 风格迭代器 和 STL 风格迭代器。
+Java 风格迭代器比 STL 风格迭代器更高级，更容易使用；同时也略微低效。
+
+QMutableHashIterator<Key, T> 用来遍历并修改 QHash (或 QMultiHash) 。
+如果不想修改 map（或者 QHash 是 const 的），可以使用更快速的 QHashIterator。
+
+QMutableHashIterator 构造函数接受 QHash 为参数。
+构造后，迭代器位于哈希表的最开始位置（第一个元素之前）。
+下面的例子演示如何顺序遍历所有元素：
+
+例子：
+
+\begin{lstlisting}[language=C++]
+QHash<int, QWidget *> hash;
+...
+QMutableHashIterator<QString, QWidget *> i(hash);
+while (i.hasNext()) {
+    i.next();
+    qDebug() << i.key() << ": " << i.value();
+}
+\end{lstlisting}
+
+next() 函数返回哈希表中的下一个元素并将迭代器前移。
+key() 和 value() 函数返回跳过的最后一个元素的键和值。
+
+与 STL 风格迭代器不同，Java 风格迭代器指向元素之间而不是直接指向元素。
+第一次调用 next() 前移迭代器到第一个和第二个元素之间的位置，并返回第一个元素；
+第二次调用 next() 前移迭代器到第二个和第三个元素之间的位置；以此类推。
+
+%%%%%%%%
+
+\begin{figure}[hbt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{javaiterators1}
+	%\caption{model index}
+\end{figure}
+
+
+如果想查找特定值的所有实例，循环使用 findNext()。例如：
+
+\begin{lstlisting}[language=C++]
+QMutableHashIterator<int, QWidget *> i(hash);
+while (i.findNext(widget)) {
+    qDebug() << "Found widget " << widget << " under key "
+             << i.key();
+}
+\end{lstlisting}
+
+如果想在遍历哈希表时移除元素，使用 remove()。如果想修改元素的值，使用 setValue()。
+
+例子：
+
+\begin{lstlisting}[language=C++]
+QMutableHashIterator<QString, QString> i(hash);
+while (i.hasNext()) {
+    i.next();
+    if (i.key() == i.value())
+        i.remove();
+}
+\end{lstlisting}
+
+该示例移除所有键和值相等的键值对。
+
+任何时候，对于给定哈希表，只能有一个活动的可修改迭代器。
+而且，当迭代器处于活动状态时，
+不可以（不通过迭代器）直接修改哈希表，因为这会使迭代器失效，并导致未定义行为。
+
+\begin{seeAlso}
+QHashIterator 和 QHash::iterator。
+\end{seeAlso}
+
+\section{成员函数文档}
+
+
+bool QMutableHashIterator::findNext(const T \emph{\&value})
+
+从当前迭代器位置开始向前查找值 value。如果找到值为 value 的键值对，返回 true；否则返回 false。
+
+调用该函数后，如果找到值 value，迭代器将被移动到匹配元素的后面；否则，迭代器将被移动到容器的末端。
+
+const Key \&QMutableHashIterator::key() const
+
+调用遍历函数（next()，findNext()）后，该函数返回跳过的最后一个元素的键。
+
+\begin{seeAlso}
+value()。
+\end{seeAlso}
+
+T \&QMutableHashIterator::value()
+
+这是一个重载函数。
+
+返回调用遍历函数后跳过的最后一个元素值的非常量引用。
+
+bool QMutableHashIterator::hasNext() const
+
+如果该迭代器后面至少有一个元素，返回 true，即该迭代器不在容器的末端；否则返回 false。
+
+\begin{seeAlso}
+next()。
+\end{seeAlso}
+
+void QMutableHashIterator::toBack()
+
+将迭代器移动到容器的末端（最后一个元素之后）。
+
+\begin{seeAlso}
+toFront()。
+\end{seeAlso}
+
+void QMutableHashIterator::toFront()
+
+将迭代器移动到容器的前端（第一个元素之前）。
+
+\begin{seeAlso}
+toBack() 和 next()。
+\end{seeAlso}
+
+QMutableHashIterator<Key, T> \&QMutableHashIterator::operator=(QHash<Key, T> \emph{\&container})
+
+将迭代器关联到 container 来遍历哈希表。迭代器将被移动到哈希表的前端（第一个元素之前）。
+
+\begin{seeAlso}
+toFront() 和 toBack()。
+\end{seeAlso}
+
+QMutableHashIterator::QMutableHashIterator(QHash<Key, T> \emph{\&hash})
+
+构造一个迭代器来遍历 hash。迭代器将被移动到哈希表的前端（第一个元素之前）。
+
+\begin{seeAlso}
+operator=()。
+\end{seeAlso}
+
+QMutableHashIterator::Item QMutableHashIterator::next()
+
+返回下一个元素并将迭代器向前移动一个位置。
+
+对返回值调用 key() 获取元素的键，调用 value() 获取元素的值。
+
+对位于容器末端的迭代器调用该函数将导致未定义结果。
+
+\begin{seeAlso}
+hasNext() 和 peekNext()。
+\end{seeAlso}
+
+QMutableHashIterator::Item QMutableHashIterator::peekNext() const
+
+不移动迭代器而返回下一个元素。
+
+对返回值调用 key() 获取元素的键，调用 value() 获取元素的值。
+
+对位于容器末端的迭代器调用该函数将导致未定义结果。
+
+\begin{seeAlso}
+hasNext() 和 next()。
+\end{seeAlso}
+
+void QMutableHashIterator::remove()
+
+移除使用遍历函数（next()，findNext()）跳过的最后一个元素。
+
+\begin{seeAlso}
+setValue()。
+\end{seeAlso}
+
+void QMutableHashIterator::setValue(const T \emph{\&value})
+
+
+用 value 替换使用遍历函数跳过的最后一个元素的值。
+
+遍历函数包括 next() 和 findNext()。
+
+\begin{seeAlso}
+key()，value() 和 remove()。
+\end{seeAlso}
+
+const T \&QMutableHashIterator::value() const
+
+调用遍历函数（next()，findNext()）后，该函数返回跳过的最后一个元素的值。
+
+\begin{seeAlso}
+key() 和 setValue()。
+\end{seeAlso}
