@@ -77,15 +77,13 @@ QHash::key\_iterator 的默认构造函数创建一个未初始化的迭代器�
 
 \textbf{}： 
 
-\begin{notice}[警告]
+\begin{warning}
 隐式共享容器的迭代器的工作方式和 STL 迭代器不完全相同。当容器的迭代器还处于活动状态时，应该避免拷贝容器。更多信息请参阅隐式共享迭代器问题。
-\end{notice}
+\end{warning}
 
-
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QHash::const\_iterator 和 QHash::iterator。
-\end{notice}
+\end{seeAlso}
 
 
 \splitLine
@@ -101,9 +99,9 @@ bool key\_iterator::operator!=(key\_iterator \emph{other}) const
 如果 \emph{other} 与本迭代器指向的元素不同，返回 \hl{true}；否则返回 \hl{false}。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator==()。
-\end{notice}
+\end{seeAlso}
 
 const Key \&key\_iterator::operator*() const
 
@@ -117,9 +115,9 @@ key\_iterator \&key\_iterator::operator++()
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator--()。
-\end{notice}
+\end{seeAlso}
 
 
 key\_iterator key\_iterator::operator++(int)
@@ -137,9 +135,9 @@ bool key\_iterator::operator==(key\_iterator \emph{other}) const
 如果 \emph{other} 与本迭代器指向相同的元素，返回 \hl{true}；否则返回 \hl{false}。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator!=()。
-\end{notice}
+\end{seeAlso}
 
 %%% Local Variables:
 %%% mode: latex

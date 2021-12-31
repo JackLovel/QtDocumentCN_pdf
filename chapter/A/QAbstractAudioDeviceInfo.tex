@@ -6,7 +6,7 @@ QAbstractAudioDeviceInfo 是音频后端的基类。
 	\hline
 	属性 & 方法 \\
 	\hline
-	头文件 & \#include<QAbstractAudioDeviceInfo>\\      
+	头文件 & \#include <QAbstractAudioDeviceInfo>\\      
 	\hline
 	qmake & QT += multimedia\\      
 	\hline
@@ -62,6 +62,7 @@ bool QAbstractAudioDeviceInfo::isFormatSupported(const QAudioFormat \emph{\&form
 传入参数QAudioFormat（音频流）类，如果QAbstractAudioDeviceInfo支持的话，返回true（真是不好翻译）
 
 QAudioFormat QAbstractAudioDeviceInfo::preferredFormat() const [纯虚函数]
+
  返回QAbstractAudioDeviceInfo更加倾向于使用的音频流。
 
 QListQAudioFormat::Endian QAbstractAudioDeviceInfo::supportedByteOrders() 

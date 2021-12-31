@@ -91,11 +91,9 @@ void WriterThread::run()
 unlock() 的调用次数必须与 lockForWrite() 或 lockForRead() 的调用次数相同。
 请注意，当尝试递归锁定时，不能更改锁类型，也就是说，在已经为写入而锁定的线程中，不可能为读取而锁定（反之亦然）。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadLock、QWriteLock、QMutex、QSemaphore。
-\end{notice}
-
-%%  
+\end{seeAlso}
 
 \section{成员类型文档}
 
@@ -111,10 +109,9 @@ QReadWriteLock::NonRecursive &	0 	&  在这种模式下，线程只能锁定
 \hline
 \end{tabular}
 
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock()。
-\end{notice}
+\end{seeAlso}
 
 \section{成员函数文档}
 
@@ -126,34 +123,34 @@ QReadWriteLock::QReadWriteLock(QReadWriteLock::RecursionMode recursionMode = Non
 在 Qt 4.4 引入该函数。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lockForRead()、lockForWrite()、RecursiveMode。
-\end{notice} 
+\end{seeAlso} 
 
 QReadWriteLock::$\sim$QReadWriteLock()
 
 解锁，并析构。
 
-\begin{notice}[警告]
+\begin{warning}
 销毁正在使用的读写锁可能会导致未定义的行为。
-\end{notice} 
+\end{warning} 
 
 void QReadWriteLock::lockForRead()
 
 读锁定。如果另一个线程正写锁定，则此函数将阻塞当前线程。
 如果线程已写锁定，则不可读锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()、lockForWrite()、tryLockForWrite()。
-\end{notice} 
+\end{seeAlso} 
 
 void QReadWriteLock::lockForWrite()
 
 写锁定。如果另一个线程（包括当前线程）为读或写而锁定（除非锁是使用 QReadWriteLock::Recursive 模式创建的），则此函数将阻塞当前线程。   如果线程已读锁定，则不可写锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()、lockForWrite()、tryLockForWrite()。
-\end{notice} 
+\end{seeAlso} 
 
 bool QReadWriteLock::tryLockForRead()
 
@@ -162,9 +159,9 @@ bool QReadWriteLock::tryLockForRead()
 如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其写锁定。
 如果线程已写锁定，则不可读锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()、lockForRead()。
-\end{notice} 
+\end{seeAlso} 
 
 bool QReadWriteLock::tryLockForRead(int \emph{timeout})
 
@@ -177,9 +174,9 @@ bool QReadWriteLock::tryLockForRead(int \emph{timeout})
 如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其写锁定。
 如果线程已读锁定，则不可写锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()、lockForRead()。
-\end{notice} 
+\end{seeAlso} 
 
 bool QReadWriteLock::tryLockForWrite()
 
@@ -189,9 +186,9 @@ bool QReadWriteLock::tryLockForWrite()
 如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其锁定。
 如果线程已读锁定，则不可写锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()、lockForWrite()。
-\end{notice}
+\end{seeAlso}
 
 bool QReadWriteLock::tryLockForWrite(int \emph{timeout})
 
@@ -204,14 +201,14 @@ bool QReadWriteLock::tryLockForWrite(int \emph{timeout})
 如果获得了锁，请务必使用 unlock() 解锁，然后另一个线程才能成功地将其写锁定。
 如果线程已读锁定，则不可写锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()、lockForWrite()。
-\end{notice}
+\end{seeAlso}
 
 void QReadWriteLock::unlock()
 
 解锁。 试图解锁未锁定的锁是错误的，将导致程序终止。
  
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lockForRead()、lockForWrite()、tryLockForRead()、trylockForWrite()。
-\end{notice}
+\end{seeAlso}

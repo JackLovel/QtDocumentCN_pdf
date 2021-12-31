@@ -6,7 +6,7 @@ QWriteLocker 是工具类，它简化了对读写锁，写访问的的锁定和�
 	\hline
 	属性 & 方法 \\
 	\hline
-	头文件 & \#include<QWriteLocker>\\      
+	头文件 & \#include <QWriteLocker>\\      
 	\hline
 	qmake & QT += core\\      
 	\hline
@@ -71,9 +71,9 @@ void writeData(const QByteArray &data)
 
 QMutexLocker 文档展示了使用locker对象来大大简化编程的示例。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadLocker、QReadWriteLock。
-\end{notice}
+\end{seeAlso}
 
 
 \section{成员函数文档}
@@ -84,9 +84,9 @@ QWriteLocker::QWriteLocker(QReadWriteLock *lock)
 构造一个 QWriteLocker 并锁定用于写入的锁。当 QWriteLocker 被销毁时，锁将被解锁。如果 lock == nullptr，则 QWriteLocker 不执行任何操作。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock::lockForWrite()。
-\end{notice}
+\end{seeAlso}
 
 
 
@@ -94,9 +94,9 @@ QWriteLocker::$\sim$QWriteLocker()
 
 销毁 QWriteLocker 并解锁传递给构造函数的锁。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock::unlock()。
-\end{notice}
+\end{seeAlso}
 
 QReadWriteLock *QWriteLocker::readWriteLock() const
 
@@ -106,16 +106,16 @@ void QWriteLocker::relock()
 
 重新锁定。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unlock()。
-\end{notice}
+\end{seeAlso}
 
 void QWriteLocker::unlock()
 
 解锁。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QReadWriteLock::unlock()。
-\end{notice}
+\end{seeAlso}
 
 

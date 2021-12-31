@@ -77,9 +77,9 @@ for (i = hash.constBegin(); i != hash.constEnd(); ++i)
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  QHash::iterator 和 QHashIterator。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -95,12 +95,9 @@ const\_iterator::const\_iterator()
 
 一定不要对未初始化的迭代器调用 key()，value() 和 operator++() 等函数。使用前要用 operator=() 赋值。
 
-
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QHash::constBegin() 和 QHash::constEnd()。
-\end{notice}
-
+\end{seeAlso}
 
 const Key \&const\_iterator::key() const
 
@@ -108,9 +105,9 @@ const Key \&const\_iterator::key() const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  value()。
-\end{notice}
+\end{seeAlso}
 
 const T \&const\_iterator::value() const
 
@@ -118,18 +115,18 @@ const T \&const\_iterator::value() const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  key() 和 operator*()。
-\end{notice}
+\end{seeAlso}
 
 bool const\_iterator::operator!=(const const\_iterator \emph{\&other}) const
 
 如果 other 与本迭代器指向的元素不同，返回 \hl{true}；否则返回 \hl{false}。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator==()。
-\end{notice}
+\end{seeAlso}
 
 const T \&const\_iterator::operator*() const
 
@@ -137,9 +134,9 @@ const T \&const\_iterator::operator*() const
 
 同 value()。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 key()。
-\end{notice}
+\end{seeAlso}
 
 
 const\_iterator \&const\_iterator::operator++()
@@ -148,9 +145,9 @@ const\_iterator \&const\_iterator::operator++()
 
 对 QHash::end() 调用该函数将导致未定义结果。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator--()。
-\end{notice}
+\end{seeAlso}
 
 const\_iterator const\_iterator::operator++(int)
 
@@ -163,14 +160,14 @@ const T *const\_iterator::operator->() const
 
 返回指向当前元素值的指针。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 value()。
-\end{notice}
+\end{seeAlso}
 
 bool const\_iterator::operator==(const const\_iterator \&other) const
 
 如果 other 与本迭代器指向相同的元素，返回 \hl{true}；否则返回 \hl{false}。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 operator!=()。
-\end{notice}
+\end{seeAlso}

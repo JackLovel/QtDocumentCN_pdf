@@ -45,9 +45,9 @@ QRecursiveMutex 的构造和操作成本要高很多，因此尽可能使用纯 
 \item 或者使用递归互斥锁，所以第二个公共函数希望锁定互斥锁，与第一个公共函数是否锁定没有多大关系了。
 \end{compactitem}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QMutex，QMutexLocker，QReadWriteLock，QSemaphore 和 QWaitCondition。
-\end{notice}
+\end{seeAlso}
 
 
 \section{成员函数文档}
@@ -56,14 +56,14 @@ QRecursiveMutex::QRecursiveMutex()
 
 构造一个新的递归互斥锁。互斥锁是在解锁状态下创建的。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 lock()、unlock()
-\end{notice}
+\end{seeAlso}
 
 QRecursiveMutex::$\sim$QRecursiveMutex()
 
 析构。
 
-\begin{notice}[警告]
+\begin{warning}
 销毁锁定的互斥锁可能会导致未定义的行为。
-\end{notice}
+\end{warning}

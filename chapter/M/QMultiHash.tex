@@ -1,18 +1,18 @@
-\chapter{QMultiMap}
+\chapter{QMultiHash}
 
-template <typename Key, typename T> class QMultiMap
+template <typename Key, typename T> class QMultiHash
 
-QMultiMap 类是一个便利的 QMap 派生类，提供多值映射功能。更多内容...
+QMultiHash 类是一个便利的 QHash 派生类，提供多值哈希表功能。更多内容...
 
 \begin{tabular}{|r|l|}
 	\hline
 	属性 & 方法 \\
 	\hline
-    头文件  &	\hl{\#include <QMultiMap>} \\
+    头文件  &	\hl{\#include <QMultiHash>} \\
     \hline
     qmake: & QT += core    \\
     \hline
-    基类: & QMap    \\
+    基类: & QHash    \\
 	\hline
 \end{tabular}
 
@@ -32,41 +32,41 @@ QMultiMap 类是一个便利的 QMap 派生类，提供多值映射功能。更�
     \hline
     返回类型 	& 函数 \\
     \hline
-    &QMultiMap(const QMap<Key, T> \&other) \\
-    \hline 
-	&QMultiMap(std::initializer\_list<std::pair<Key, T>> list)\\
+    &QMultiHash(const QHash<Key, T> \emph{\&other}) \\
     \hline
-	&QMultiMap() \\
+	&QMultiHash(InputIterator \emph{begin}, InputIterator \emph{end}) \\
     \hline
-typename QMap<Key, T>::const\_iterator &	constFind(const Key \&key, const T \&value) const \\
+	&QMultiHash(std::initializer\_list<std::pair<Key, T>> \emph{list}) \\
+    \hline
+	&QMultiHash()\\
 \hline
-bool 	contains(const Key \&key, const T \&value) const\\
+typename QHash<Key, T>::const\_iterator &	constFind(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-int 	count(const Key \&key, const T \&value) const\\
+bool 	& contains(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-typename QMap<Key, T>::iterator 	find(const Key \&key, const T \&value)\\
+int &	count(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-typename QMap<Key, T>::const\_iterator &	find(const Key \&key, const T \&value) const\\
+typename QHash<Key, T>::iterator & find(const Key \emph{\&key}, const T \emph{\&value}) \\
 \hline
-typename QMap<Key, T>::iterator &insert(const Key \&key, const T \&value)\\
+typename QHash<Key, T>::const\_iterator &	find(const Key \emph{\&key}, const T \emph{\&value}) const \\
 \hline
-typename QMap<Key, T>::iterator & insert(typename QMap<Key, T>::const\_iterator pos, const Key \&key, const T \&value) \\
+typename QHash<Key, T>::iterator &	insert(const Key \emph{\&key}, const T \emph{\&value}) \\
 \hline
-int 	remove(const Key \&key, const T \&value) \\
+int &	remove(const Key  \emph{\&key}, const T  \emph{\&value}) \\
 \hline
-typename QMap<Key, T>::iterator 	replace(const Key \&key, const T \&value) \\
+typename QHash<Key, T>::iterator &	replace(const Key \emph{\&key}, const T \emph{\&value}) \\
 \hline
-void 	swap(QMultiMap<Key, T> \&other)\\
+void 	& swap(QMultiHash<K, V>  \emph{\&other})\\
 \hline
-QList 	uniqueKeys() const \\
+QList 	& uniqueKeys() const\\
 \hline
-QMultiMap<K, V> \& 	unite(const QMultiMap<K, V> \&other) \\
+QMultiHash<K, V> \& &	unite(const QMultiHash<K, V> \emph{\&other}) \\
 \hline
-QList 	values(const Key \&key) const \\
+QList<T> &	values(const Key \&key) const \\
 \hline
-QMultiMap<K, V> 	operator+(const QMultiMap<K, V> \&other) const \\
+QMultiHash<K, V> 	&operator+(const QMultiHash<K, V> \emph{\&other}) const\\
 \hline
-QMultiMap<K, V> \& 	operator+=(const QMultiMap<K, V> \&other) \\
+QMultiHash<K, V> \& &	operator+=(const QMultiHash<K, V> \emph{\&other})\\
     \hline
 \end{longtable}
 

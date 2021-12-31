@@ -27,8 +27,12 @@
 \usepackage{paralist}
 
 \usepackage{adjustbox}
+\usepackage{lstfiracode}
 
-\newfontfamily\consolas{Consolas}
+
+% \newfontfamily\consolas{Fira Code}
+\newfontfamily\consolas{Source Code Pro}
+% \newfontfamily\consolas{JetBrainsMono-Regular}
 %fc-list :lang=zh >> c:\font.txt
 
 % green
@@ -42,6 +46,8 @@
 
 \lstset{
 	basicstyle=\small\consolas,
+	% style=FiraCodeStyle,   % Use predefined FiraCodeStyle
+	% basicstyle=\ttfamily   % Use \ttfamily for source code listings
 	numberstyle= \tiny, 
 	keywordstyle= \color{ blue!70},
 	commentstyle=\color{mygreen},
@@ -69,11 +75,13 @@
 \setCJKmainfont{SourceHanSerifCN-Light}
 
 
-
+ 
 % 英文设置
-%\setmainfont{JetBrains Mono}
-%\setmainfont{Consolas}
-\setmainfont{SourceCodePro-Regular}
+% \setmainfont{JetBrains Mono}
+% \setmainfont{JetBrainsMono-Light}
+% \setmainfont{Consolas}
+\setmainfont{Source Code Pro}
+% \setmainfont{SourceCodePro-Regular}
 
 
 % 标题页
@@ -93,11 +101,17 @@
 % 定义需要强调的环境
 \newenvironment{notice}[1][注意]{{\textbf{#1}：}}
 
+\newenvironment{seeAlso}[1][另请参阅]{{\textbf{#1}：}}
+
+\newenvironment{warning}[1][警告]{{\textbf{#1}：}}
+
+
 \begin{document}
 % 正文区（文稿区）
 % 页眉页脚
 \pagestyle{fancy}
-\lhead{\includegraphics[scale=0.1]{./img/logo.png}}
+% \lhead{\includegraphics[scale=0.1]{./img/logo.png}}
+\lhead{\includegraphics[scale=0.1]{logo}}
 \renewcommand{\headrulewidth}{0.4pt}
 
 % 定义分隔线的样式
@@ -105,9 +119,16 @@
 % \hrulefill: 实线
 \newcommand{\splitLine}{\dotfill}
 
+% 行内高度
+\newcommand{\lineHigh}{\vspace{2em}}
+
 \maketitle
 \tableofcontents
-\thispagestyle{empty} % 目录页不显示页码
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+
+
 % \include{./contributors_table}
 \include{./chapter/A/API_Design_Principles}
 \include{./chapter/A/QAbstractAnimation}
@@ -139,6 +160,20 @@
 \include{./chapter/L/QList_Const_Iterator}
 \include{./chapter/M/ModelViewProgramming}
 \include{./chapter/M/ModelViewTutorial}
+\include{./chapter/M/MultithreadingTechnologiesInQt}
+\include{./chapter/M/QMainWindow}
+\include{./chapter/M/QMap}
+\include{./chapter/M/QMapIterator}
+\include{./chapter/M/QMetaClassInfo}
+\include{./chapter/M/QMetaMethod}
+\include{./chapter/M/QMetaObject}
+\include{./chapter/M/QMetaObject_Connection}
+\include{./chapter/M/QMetaProperty}
+\include{./chapter/M/QMetaType}
+\include{./chapter/M/QMultiHash}
+\include{./chapter/M/QMultiMap}
+\include{./chapter/M/QMutableHashIterator}
+\include{./chapter/M/QMutableMapIterator}
 \include{./chapter/R/QReadLocker}
 \include{./chapter/R/QReadWriteLock}
 \include{./chapter/R/QRcursiveMutex}
@@ -156,8 +191,3 @@
 \include{./chapter/W/QWriteLocker}
 \include{./chapter/X/QX11Info}
 \end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: master
-%%% End:

@@ -184,9 +184,9 @@ daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLe
 \end{compactitem}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QTime、QDateTime、QCalendar、QDateTime::YearRange、QDateEdit、QDateTimeEdit 和 QCalendarWidget。
-\end{notice}
+\end{seeAlso}
 
 
 \splitLine
@@ -280,10 +280,10 @@ ddd MMMM d yy&	Sun July 20 69\\
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 fromString()、QDateTime::toString()、QTime::toString() 和
 QLocale::toString()。
-\end{notice}
+\end{seeAlso}
 
 
 \splitLine
@@ -301,9 +301,9 @@ QDateTime QDate::endOfDay(const QTimeZone \emph{\&zone}) const
 函数在 Qt 5.14 中引入。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 startOfDay()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -321,9 +321,9 @@ QDateTime QDate::startOfDay(const QTimeZone \emph{\&zone}) const
 
 函数在 Qt 5.14 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 endOfDay()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -337,9 +337,9 @@ QDate::QDate(int \emph{y}, int \emph{m}, int \emph{d})
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isValid() 和 QCalendar::dateFromParts()。
-\end{notice}
+\end{seeAlso}
 
 
 
@@ -349,9 +349,9 @@ QDate::QDate()
 构造一个空的日期，也是不可用的。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isNull() 和 isValid()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -363,9 +363,9 @@ QDate QDate::addDays(qint64 \emph{ndays}) const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addMonths()、addYears() 和 daysTo()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -382,9 +382,9 @@ QDate QDate::addMonths(int \emph{nmonths}, QCalendar \emph{cal}) const
 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDays() 和 addYears()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -402,9 +402,9 @@ QDate QDate::addYears(int \emph{nyears}, QCalendar \emph{cal}) const
 如果新的日期超出年、月的合理范围，函数讲返回那个月中最接近的日期。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDays() 和 addMonths()。
-\end{notice}
+\end{seeAlso}
 
 
 \splitLine
@@ -415,9 +415,9 @@ addDays() 和 addMonths()。
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QTime::currentTime() 和 QDateTime::currentDateTime()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -431,9 +431,9 @@ int QDate::day(QCalendar \emph{cal}) const
 
 一些日历系统中，返回值可能大于7。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 year()、month() 和 dayOfWeek()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -447,9 +447,9 @@ int QDate::dayOfWeek(QCalendar \emph{cal}) const
 
 一些日历系统中，返回值可能大于7。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 day()、dayOfYear() 和 Qt::DayOfWeek。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -461,9 +461,9 @@ int QDate::dayOfYear(QCalendar \emph{cal}) const
 
 如果传入 cal 参数，会使用此日历系统，否则使用格里高利历。非法日期则返回0。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 day() 和 dayOfWeek()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -477,9 +477,9 @@ int QDate::daysInMonth(QCalendar \emph{cal}) const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 day() 和 daysInYear()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -493,9 +493,9 @@ int QDate::daysInYear(QCalendar \emph{cal}) const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 day() 和 daysInMonth()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -515,9 +515,9 @@ d2.daysTo(d1);          // returns -3
 \end{lstlisting}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 addDays()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -525,11 +525,9 @@ addDays()。
 
 将jd表示的儒略日解析为日期并返回。
 
-
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toJulianDay()。
-\end{notice}
-
+\end{seeAlso}
 
 \splitLine
 
@@ -548,9 +546,9 @@ Qt::TextDate：建议使用英文的简写月份名称（例如 "Jan"）。
 将在 Qt 6 被移除。使用 QLocale::toDate() 代替。
 \end{notice} 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toString() 和 QLocale::toDate()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -637,9 +635,9 @@ QDate::fromString("20000110", "yyyyMd");    // January 10, 2000
 \end{notice}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 toString()、QDateTime::fromString()、QTime::fromString() 和 QLocale::toDate()。
-\end{notice}
+\end{seeAlso}
 
 
 \splitLine
@@ -655,10 +653,10 @@ void QDate::getDate(int  \emph{*year}, int \emph{*month}, int \emph{*day}) const
 
 此函数在 Qt 4.5 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 year()，month()，day()，isValid() 和
 QCalendar::partsFromDate()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -666,9 +664,9 @@ QCalendar::partsFromDate()。
 
 判断是否是格里高利历的闰年，是则返回 \hl{true}。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QCalendar::isLeapYear()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -680,9 +678,9 @@ bool QDate::isNull() const
 行为与 isValid() 等价。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isValid()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -692,9 +690,9 @@ bool QDate::isValid() const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isNull() 和 QCalendar::isDateValid()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -717,9 +715,9 @@ QDate::isValid(1202, 6, 6);   // true (即使这一年在格里高利历之前)
 \end{lstlisting}
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isNull()，setDate() 和 QCalendar::isDateValid()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -737,9 +735,9 @@ int QDate::month(QCalendar \emph{cal}) const
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
  year() 和 day()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -751,9 +749,9 @@ bool QDate::setDate(int \emph{year}, int  \emph{month}, int \emph{day})
 此函数在 Qt 4.2 中引入。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isValid() 和 QCalendar::dateFromParts()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -763,9 +761,9 @@ bool QDate::setDate(int \emph{year}, int \emph{month}, int \emph{day}, QCalendar
 
 函数在 Qt 5.14 中引入。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isValid() 和 QCalendar::dateFromParts()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -773,9 +771,9 @@ qint64 QDate::toJulianDay() const
 
 将日期转换为儒略日。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 fromJulianDay()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -797,14 +795,13 @@ format 中的 Qt::LocaleDate，Qt::DefaultLocaleShortDate 和Qt::DefaultLocaleLo
 
 如果日期非法，返回空字符串。
 
-
-\begin{notice}[警告]
+\begin{warning}
 Qt::ISODate 格式只在0~9999年可用。
-\end{notice}
+\end{warning}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 fromString() 和 QLocale::toString()。
-\end{notice}
+\end{seeAlso}
 
 
 \splitLine
@@ -821,9 +818,9 @@ int QDate::weekNumber(int \emph{*yearNumber} = nullptr) const
  *yearNumber 不总是与 year() 相等。例如, 2000.1.1是1999年第52周, 2002.12.31是2003年第1周。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isValid()。
-\end{notice}
+\end{seeAlso}
 
 \splitLine
 
@@ -841,11 +838,9 @@ int QDate::year(QCalendar \emph{cal}) const
 
 一些日历中，没有0年份但是有负数年份。例如格里高利历，公元前x年就是年份-x。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 month()，day()，QCalendar::hasYearZero() 和QCalendar::isProleptic()。
-\end{notice}
-
-
+\end{seeAlso}
 
 \splitLine
 
@@ -871,14 +866,14 @@ QDataStream \&operator<<(QDataStream \emph{\&out}, const QDate \emph{\&date})
 
 向数据流写入日期
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Serializing Qt Data Types。
-\end{notice}
+\end{seeAlso}
 
 QDataStream \&operator>>(QDataStream \emph{\&in}, QDate \emph{\&date})
 
 从数据流读出日期
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 Serializing Qt Data Types。
-\end{notice}
+\end{seeAlso}
