@@ -58,7 +58,7 @@ QAbstractAnimation 定义了所有动画类相关的基础功能，通过继承�
 \hline
 返回类型 &	函数名\\
 \hline
-& QAbstractAnimation(QObject *parent = Q\_NULLPTR)\\
+& QAbstractAnimation(QObject \emph{*parent} = Q\_NULLPTR)\\
 \hline
 virtual&$\sim$QAbstractAnimation()\\
 \hline
@@ -76,9 +76,9 @@ QAnimationGroup *&	group() const\\
 \hline
 int	&loopCount() const\\
 \hline
-void&	setDirection(Direction direction)\\
+void&	setDirection(Direction \emph{direction})\\
 \hline
-void&	setLoopCount(int loopCount)\\
+void&	setLoopCount(int \emph{loopCount})\\
 \hline
 State&	state() const\\
 \hline
@@ -96,19 +96,12 @@ void&	pause()\\
 \hline
 void&	resume()\\
 \hline
-void&	setCurrentTime(int msecs)\\
+void&	setCurrentTime(int \emph{msecs})\\
 \hline
-void&	setPaused(bool paused)\\
+void&	setPaused(bool \emph{paused})\\
 \hline
-void&	start(QAbstractAnimation::DeletionPolicy policy = KeepWhenStopped)\\
+void&	start(QAbstractAnimation::DeletionPolicy \emph{policy} = KeepWhenStopped)\\
 \hline
 void&	stop() \\
 \hline
 \end{tabular}
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
