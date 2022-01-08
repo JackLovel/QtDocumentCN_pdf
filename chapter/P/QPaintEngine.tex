@@ -23,8 +23,8 @@ qmake:& 	QT += core\\
 \hline
 类型 &	名称\\
 \hline
-enum &	LoadHint { ResolveAllSymbolsHint, ExportExternalSymbolsHint,
-       LoadArchiveMemberHint, PreventUnloadHint, DeepBindHint }\\
+enum &	LoadHint \{ ResolveAllSymbolsHint, ExportExternalSymbolsHint,
+       LoadArchiveMemberHint, PreventUnloadHint, DeepBindHint \}\\
 \hline
 flags &	LoadHints \\ 
 \hline
@@ -43,15 +43,15 @@ flags &	LoadHints \\
 \hline
  类型& 	函数名\\
 \hline
-	&QLibrary(const QString \&fileName, const QString \&version,
-   QObject *parent = nullptr)\\
+	&QLibrary(const QString \emph{\&fileName}, const QString \emph{\&version},
+   QObject \emph{*parent} = nullptr)\\
 \hline
-	&QLibrary(const QString \&fileName, int verNum, QObject *parent =
+	&QLibrary(const QString \emph{\&fileName}, int \emph{verNum}, QObject \emph{*parent} =
    nullptr)\\
 \hline
-	&QLibrary(const QString \&fileName, QObject *parent = nullptr)\\
+	&QLibrary(const QString \emph{\&fileName}, QObject \emph{*parent} = nullptr)\\
 \hline
-	&QLibrary(QObject *parent = nullptr)\\
+	&QLibrary(QObject \emph{*parent} = nullptr)\\
 \hline
 virtual& 	$\sim$QLibrary()\\
 \hline
@@ -65,16 +65,16 @@ bool& 	load()\\
 \hline
 QLibrary::LoadHints& 	loadHints() const\\
 \hline
-QFunctionPointer& 	resolve(const char *symbol)\\
+QFunctionPointer& 	resolve(const char \emph{*symbol})\\
 \hline
-void& 	setFileName(const QString \&fileName)\\
+void& 	setFileName(const QString \emph{\&fileName})\\
 \hline
-void& 	setFileNameAndVersion(const QString \&fileName, int versionNumber)\\
+void& 	setFileNameAndVersion(const QString \emph{\&fileName}, int \emph{versionNumber})\\
 \hline
-void& 	setFileNameAndVersion(const QString \&fileName, const QString
-      \&version)\\
+void& 	setFileNameAndVersion(const QString \emph{\&fileName}, const QString
+      \emph{\&version})\\
 \hline
-void& 	setLoadHints(QLibrary::LoadHints hints)\\
+void& 	setLoadHints(QLibrary::LoadHints \emph{hints})\\
 \hline
 bool& 	unload()\\
 \hline
@@ -88,28 +88,39 @@ bool& 	unload()\\
 \hline
 bool& 	isLibrary(const QString \&fileName)\\
 \hline
-QFunctionPointer& 	resolve(const QString \&fileName, const char
-                  *symbol)\\
+QFunctionPointer& 	resolve(const QString \emph{\&fileName}, const char
+                  \emph{*symbol})\\
 \hline
-QFunctionPointer& 	resolve(const QString \&fileName, int verNum, const char *symbol)\\
+QFunctionPointer& 	resolve(const QString \emph{\&fileName}, int \emph{verNum}, const char \emph{*symbol})\\
 \hline
-QFunctionPointer& 	resolve(const QString \&fileName, const QString \&version, const char *symbol)\\
+QFunctionPointer& 	resolve(const QString \emph{\&fileName}, const QString \emph{\&version}, const char \emph{*symbol})\\
 \hline
 \end{tabular}
 
 \section{详细描述}
 
-QLibrary的实例用于操作一个动态链接库文件（文中称为库，也就是DLL）。QLibrary提供访问库中函数的一种平台无关方式。您可以在构造时传递库文件名，也可以通过 setFileName() 给对象显式设置。加载库时，QLibrary在所有系统指定的位置搜索 (例如： Unix上的 LD\_LIBRARY\_PATH), 除非文件名是绝对路径。
+QLibrary的实例用于操作一个动态链接库文件（文中称为库，也就是DLL）。
+QLibrary提供访问库中函数的一种平台无关方式。您可以在构造时传递库文件名，
+也可以通过 setFileName() 给对象显式设置。加载库时，QLibrary在所有系统指定的位置搜索 (例如： Unix上的 LD\_LIBRARY\_PATH), 除非文件名是绝对路径。
 
-如果文件路径是绝对路径，则会首先尝试在这个位置加载。如果找不到，QLibrary尝试不同系统相关的前后缀的文件名，比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀".dylib"，Windows的后缀".dll"。
+如果文件路径是绝对路径，则会首先尝试在这个位置加载。如果找不到，
+QLibrary尝试不同系统相关的前后缀的文件名，
+比如Unix系的前缀“lib”，后缀“.so”，Mac及IOS的后缀".dylib"，Windows的后缀".dll"。
 
-如果文件路径不是绝对路径，Qlibrary改变搜索顺序，首先尝试系统特定的前后缀，之后是特定文件路径。
+如果文件路径不是绝对路径，Qlibrary改变搜索顺序，
+首先尝试系统特定的前后缀，之后是特定文件路径。
 
-这让使用除去前后缀的库基本名称来指定库文件变得可能。因此代码可以在不同操作系统里执行，但不用太多代码尝试各种文件名称。
+这让使用除去前后缀的库基本名称来指定库文件变得可能。
+因此代码可以在不同操作系统里执行，但不用太多代码尝试各种文件名称。
 
-最重要的函数是 load() 用于动态加载库，isLoaded() 用于检查是否加载成功，以及 resolve() 来解析库中的符号。如果库还没加载，resolve() 函数隐式地加载这个库。多个QLibrary实例访问同一个物理库文件是可行的。一旦被加载，库在内存中一直保留到程序结束。您可以通过 unload() 尝试卸载一个库，但如果有其他QLibrary实例在使用同一个库文件，调用会失败。只有在每一个实例都调用过 unload() 后，库才会真正卸载。
+最重要的函数是 load() 用于动态加载库，isLoaded() 用于检查是否加载成功，
+以及 resolve() 来解析库中的符号。如果库还没加载，resolve() 函数隐式地加载这个库。
+多个QLibrary实例访问同一个物理库文件是可行的。一旦被加载，库在内存中一直保留到程序结束。
+您可以通过 unload() 尝试卸载一个库，但如果有其他QLibrary实例在使用同一个库文件，调用会失败。
+只有在每一个实例都调用过 unload() 后，库才会真正卸载。
 
-Qlibrary 的一种典型用法是解析库中的导出符号，并调用其对应的C语言函数。这叫做显式链接，对应于隐式链接。隐式链接是构建中的链接可执行文件和静态库的步骤。
+Qlibrary 的一种典型用法是解析库中的导出符号，并调用其对应的C语言函数。
+这叫做显式链接，对应于隐式链接。隐式链接是构建中的链接可执行文件和静态库的步骤。
 
 下面的代码片段加载了个库，解析"mysymbol"符号，并在一切就绪的情况下调用
 这个函数。如果出现了问题， 例如库文件不存在或者符号未定义，函数指针将
@@ -212,15 +223,20 @@ loadHints : LoadHints
 
 给 load() 函数一些关于如何执行的指示。
 
-您可以对于符号如何解析做指示。通常来说，符号不是在加载库时解析的，而是惰性解析的（也就是调用 resolve() 时）。如果您设置loadHints 为ResolveAllSymbolsHint，那么如果平台支持，所有符号会在库加载时一齐解析。
+您可以对于符号如何解析做指示。通常来说，符号不是在加载库时解析的，而是惰性解析的（也就是调用 resolve() 时）。
+如果您设置loadHints 为ResolveAllSymbolsHint，那么如果平台支持，所有符号会在库加载时一齐解析。
 
 设置 ExportExternalSymbolsHint 会使库中的外部符号在后续库解析中可用。
 
-如果设置了 LoadArchiveMemberHint ，文件名会被分解为两部分：归档文件的路径和归档成员的名称. 例如, fileName libGL.a(\hl{shr\_64.o}) 指向归档文件 \hl{libGL.a}中的库文件 \hl{shr\_64.o} . 这个特性只在AIX平台生效。
+如果设置了 LoadArchiveMemberHint ，文件名会被分解为两部分：归档文件的路径和归档成员的名称。
+例如, fileName libGL.a(\hl{shr\_64.o}) 指向归档文件 \hl{libGL.a}中的库文件 \hl{shr\_64.o} 。
+这个特性只在AIX平台生效。
 
-loadHints 的解释是平台相关的，如果您用这些特效，您大概已经对编译的系统平台做了一些假设。因此请仅在您明白您这些操作的结果的情况下设置这些指示。
+loadHints 的解释是平台相关的，如果您用这些特效，您大概已经对编译的系统平台做了一些假设。
+因此请仅在您明白您这些操作的结果的情况下设置这些指示。
 
-默认情况下，此属性没有设置任何flag，所有库文件会惰性加载，并且不会导出共其他动态链接库使用的外部符号。
+默认情况下，此属性没有设置任何flag，所有库文件会惰性加载，
+并且不会导出共其他动态链接库使用的外部符号。
 
 \begin{notice}
 在库已经加载后设置这个属性没有效果。 并且 loadHints() 不会体现出这些修
