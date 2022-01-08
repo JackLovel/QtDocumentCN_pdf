@@ -29,13 +29,14 @@ enmu 	& RecursionMode \{ Recursive, NonRecursive\}\\
 
 \section{公共成员函数}
 
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|m{27em}|}
 \hline
 返回类型 &	函数 \\ 
 \hline
 & QReadWriteLock(QReadWriteLock::RecursionMode \emph{recursionMode} = NonRecursive) \\
 \hline
 & $\sim$QReadWriteLock() \\ 
+\hline
 void &	lockForRead() \\ 
 \hline
 void &	lockForeWrite() \\ 
@@ -85,9 +86,11 @@ void WriterThread::run()
 \end{lstlisting}
 
 为了确保写者永远不会被读者阻塞，如果有写者被阻塞，则读者将无法获取锁，
-即使该锁当前正被其他读者访问。另外，如果一个写者正在写，而另一个写者想进入，则该写者将优先于其他可能正在等待的读者。
+即使该锁当前正被其他读者访问。另外，如果一个写者正在写，而另一个写者想进入，
+则该写者将优先于其他可能正在等待的读者。
 
-与 QMutex 类似，当使用 QReadWriteLock::Recursive 作为 QReadWriteLock::RecursiveMode 参数构造时，QReadWriteLock 可以被同一线程递归锁定。在这种情况下，
+与 QMutex 类似，当使用 QReadWriteLock::Recursive 作为 QReadWriteLock::RecursiveMode 参数构造时，
+QReadWriteLock 可以被同一线程递归锁定。在这种情况下，
 unlock() 的调用次数必须与 lockForWrite() 或 lockForRead() 的调用次数相同。
 请注意，当尝试递归锁定时，不能更改锁类型，也就是说，在已经为写入而锁定的线程中，不可能为读取而锁定（反之亦然）。
 
@@ -115,7 +118,7 @@ QReadWriteLock()。
 
 \section{成员函数文档}
 
-QReadWriteLock::QReadWriteLock(QReadWriteLock::RecursionMode recursionMode = NonRecursive)
+QReadWriteLock::QReadWriteLock(QReadWriteLock::RecursionMode \emph{recursionMode} = NonRecursive)
 
 构造一个 \hl{recursionMode} 模式的 \hl{QReadWriteLock}。
 默认 NonRecursive。
