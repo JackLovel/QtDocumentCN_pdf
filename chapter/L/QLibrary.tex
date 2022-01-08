@@ -138,9 +138,9 @@ if (myFunction)
     myFunction();
 \end{lstlisting}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 QPluginLoader.
-\end{notice}
+\end{seeAlso}
 
 \section{成员类型介绍}
 
@@ -181,9 +181,9 @@ QLibrary::DeepBindHint& 	0x10 	&Instructs the linker to prefer definitions in th
 
 LoadHints是一个 QFlags \hl{<LoadHint>} 类型的typedef。 它储存了LoadHint取值的OR（位或）方式的组合。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 loadHints.
-\end{notice}
+\end{seeAlso}
 
 \section{属性文档}
 
@@ -282,9 +282,9 @@ QLibrary::QLibrary(QObject \emph{*parent} = nullptr)
 
 除非显式调用 unload()，库会在一直驻留在内存中，知道应用结束。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 isLoaded() 和 unload().
-\end{notice}
+\end{seeAlso}
 
 
 QString QLibrary::errorString() const
@@ -320,17 +320,17 @@ bool QLibrary::isLoaded() const
 
 如果库已经被加载，返回true，否则返回false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 load().
-\end{notice}
+\end{seeAlso}
 
 bool QLibrary::load()
 
 加载一个库，如果成功加载则返回true；否则返回false。因为 resolve() 内部会自动调用此方法，您没必要显示调用这个函数。如果在某些情况下您想提前加载库，您可以主动调用它。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 unload().
-\end{notice}
+\end{seeAlso}
 
 QFunctionPointer QLibrary::res
 olve(const char \emph{*symbol})
@@ -378,9 +378,9 @@ extern "C" MY_EXPORT int avg(int a, int b)
 
 如果库无法加载或符号无法解析，返回 \hl{nullptr} 。
 
-\begin{notice}[另请参阅]
-resolve().
-\end{notice}
+\begin{seeAlso}
+resolve()。
+\end{seeAlso}
 
 \hl{[static]}QFunctionPointer QLibrary::resolve(const QString
 \emph{\&fileName}, int \emph{verNum}, const char \emph{*symbol})
@@ -391,9 +391,9 @@ resolve().
 
 如果库无法加载或符号无法解析，返回 \hl{nullptr} 。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 resolve().
-\end{notice}
+\end{seeAlso}
 
 [static]QFunctionPointer QLibrary::resolve(const QString \emph{\&fileName}, const QString \emph{\&version}, const char \emph{*symbol})
 
@@ -405,9 +405,9 @@ resolve().
 
 此函数引入自：Qt 4.4.
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 resolve().
-\end{notice}
+\end{seeAlso}
 
 void QLibrary::setFileNameAndVersion(const QString \emph{\&fileName}, int \emph{versionNumber})
 
@@ -415,9 +415,9 @@ void QLibrary::setFileNameAndVersion(const QString \emph{\&fileName}, int \emph{
 
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setFileName().
-\end{notice}
+\end{seeAlso}
 
 
 void QLibrary::setFileNameAndVersion(const QString \emph{\&fileName}, const
@@ -428,9 +428,9 @@ QString \emph{\&version})
 此函数引入自：Qt 4.4.
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setFileName().
-\end{notice}
+\end{seeAlso}
 
 
 bool QLibrary::unload()
@@ -445,6 +445,6 @@ bool QLibrary::unload()
 在 Mac OS X 10.3 (Panther)，无法卸载动态链接库。
 \end{notice}
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 resolve() 和 load().
-\end{notice}
+\end{seeAlso}

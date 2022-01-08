@@ -1,5 +1,7 @@
 \chapter{QAbstractAnimation}
 
+% \tocpart{QAbstractAnimation}
+
 QAbstractAnimation 是所有的动画相关的基类。
 
 QAbstractAnimation 定义了所有动画类相关的基础功能，通过继承该类，您可以实现动画的其它功能，或者添加自定义的特效。
@@ -8,7 +10,7 @@ QAbstractAnimation 定义了所有动画类相关的基础功能，通过继承�
 	\hline
 	属性 & 方法 \\
 	\hline
-	头文件 & \#include<QAbstractAnimation>\\      
+	头文件 & \#include <QAbstractAnimation>\\      
 	\hline
 	qmake & QT+=core\\      
 	\hline
@@ -56,7 +58,7 @@ QAbstractAnimation 定义了所有动画类相关的基础功能，通过继承�
 \hline
 返回类型 &	函数名\\
 \hline
-& QAbstractAnimation(QObject *parent = Q\_NULLPTR)\\
+& QAbstractAnimation(QObject \emph{*parent} = Q\_NULLPTR)\\
 \hline
 virtual&$\sim$QAbstractAnimation()\\
 \hline
@@ -74,9 +76,9 @@ QAnimationGroup *&	group() const\\
 \hline
 int	&loopCount() const\\
 \hline
-void&	setDirection(Direction direction)\\
+void&	setDirection(Direction \emph{direction})\\
 \hline
-void&	setLoopCount(int loopCount)\\
+void&	setLoopCount(int \emph{loopCount})\\
 \hline
 State&	state() const\\
 \hline
@@ -94,19 +96,12 @@ void&	pause()\\
 \hline
 void&	resume()\\
 \hline
-void&	setCurrentTime(int msecs)\\
+void&	setCurrentTime(int \emph{msecs})\\
 \hline
-void&	setPaused(bool paused)\\
+void&	setPaused(bool \emph{paused})\\
 \hline
-void&	start(QAbstractAnimation::DeletionPolicy policy = KeepWhenStopped)\\
+void&	start(QAbstractAnimation::DeletionPolicy \emph{policy} = KeepWhenStopped)\\
 \hline
 void&	stop() \\
 \hline
 \end{tabular}
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:

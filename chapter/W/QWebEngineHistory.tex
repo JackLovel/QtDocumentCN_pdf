@@ -81,9 +81,9 @@ qmake & QT + = webenginewidgets \\
 
 可以使用>>运算符将QWebEngineHistory的状态保存到QDataStream 中，并使用<<操作符进行加载。
 
-\begin{notice}[另请参阅]
-	QWebEngineHistoryItem and QWebEnginePage。
-\end{notice}
+\begin{seeAlso}
+QWebEngineHistoryItem and QWebEnginePage。
+\end{seeAlso}
 
 
 \section{成员函数文档}
@@ -103,17 +103,17 @@ QWebEngineHistoryItem QWebEngineHistory::backItem() const
 
 返回向后历史记录列表中的项目列表。 最多返回maxItems条目。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://doc.qt.io/qt-5/qwebenginehistory.html#forwardItems}{forwardItems()}。
-\end{notice}
+\end{seeAlso}
 
 bool QWebEngineHistory::canGoBack() const
 
 如果历史记录中当前项目之前有一个项目，则返回true， 否则返回false。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://doc.qt.io/qt-5/qwebenginehistory.html#canGoForward}{canGoForward}()。
-\end{notice}
+\end{seeAlso}
 
 
 bool QWebEngineHistory::canGoForward() const
@@ -126,9 +126,9 @@ void QWebEngineHistory::clear()
 
 清除历史记录。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://doc.qt.io/qt-5/qwebenginehistory.html#count}{count}() and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#items}{items}()。
-\end{notice}
+\end{seeAlso}
 
 
 int QWebEngineHistory::count() const
@@ -147,9 +147,9 @@ void QWebEngineHistory::forward()
 
 将当前项目设置为历史记录中的下一个项目，然后转到相应页面； 即，前进一个历史项目。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 back() and goToItem()。
-\end{notice}
+\end{seeAlso}
 
 
 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineHistoryItem/QWebEngineHistoryItem.md}{QWebEngineHistoryItem} QWebEngineHistory::forwardItem() const
@@ -160,17 +160,17 @@ QList<QWebEngineHistoryItem> QWebEngineHistory::forwardItems(int maxItems) const
 
 返回转发历史记录列表中的项目列表。 最多返回maxItems条目。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 	 \href{https://doc.qt.io/qt-5/qwebenginehistory.html#backItems}{backItems}().
-\end{notice}
+\end{seeAlso}
 
 void QWebEngineHistory::goToItem(const QWebEngineHistoryItem \&item)
 
 将当前项目设置为历史记录中的指定项目，然后转到页面。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://doc.qt.io/qt-5/qwebenginehistory.html#back}{back}() and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#forward}{forward}()。
-\end{notice}
+\end{seeAlso}
 
 \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWebEngineHistoryItem/QWebEngineHistoryItem.md}{QWebEngineHistoryItem} QWebEngineHistory::itemAt(int i) const
 
@@ -180,9 +180,9 @@ void QWebEngineHistory::goToItem(const QWebEngineHistoryItem \&item)
 
 返回历史记录中当前所有项目的列表。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 \href{https://doc.qt.io/qt-5/qwebenginehistory.html#count}{count}() and \href{https://doc.qt.io/qt-5/qwebenginehistory.html#clear}{clear}()。
-\end{notice}
+\end{seeAlso}
 
 相关非成员函数
 

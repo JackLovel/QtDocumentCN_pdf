@@ -98,9 +98,9 @@ int QAbstractAudioOutput::bufferSize() const [纯虚函数]
 以字节为单位，返回音频缓冲区的大小。
 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setBufferSize()。
-\end{notice}
+\end{seeAlso}
 
 int QAbstractAudioOutput :: bytesFree () const [纯虚函数] 
 
@@ -110,9 +110,9 @@ QString QAbstractAudioOutput::category() const [虚函数 virtual]
 
 音频缓冲区的类别（官方文档没有，这是我个人经验，当然可能有误，望指正） 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setCategory()。
-\end{notice}
+\end{seeAlso}
 
 qint64 QAbstractAudioOutput::elapsedUSecs() const [纯虚函数 pure virtual] 
 
@@ -131,9 +131,9 @@ QAudioFormat QAbstractAudioOutput::format() const [纯虚函数 pure virtual]
 
 返回正在使用的QAudioFormat()类 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setFormat()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioOutput::notify() [信号 signal] 
 
@@ -143,9 +143,9 @@ int QAbstractAudioOutput::notifyInterval() const [纯虚函数 pure virtual]
 
 以毫秒为单位，返回时间间隔 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setNotifyInterval()。
-\end{notice}
+\end{seeAlso}
 
 int QAbstractAudioOutput::periodSize() const [纯虚函数 pure virtual] 
 
@@ -168,40 +168,40 @@ void QAbstractAudioOutput::setBufferSize(int value) [纯虚函数 pure virtual]
 
 重新设置音频缓冲区的大小（以字节为单位 即输入参数value） 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 bufferSize()()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioOutput::setCategory(const QString \&) [虚函数 virtual] 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 category()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioOutput::setFormat(const QAudioFormat \&fmt) [纯虚函数 pure virtual] 
 
 QAbstractAudioOutput设置QAudioFormat类，只有当QAudio状态为QAudio::StoppedState时，音频格式才会被设置成功。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 format()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioOutput::setNotifyInterval(int \emph{ms}) [纯虚函数 pure virtual] 
 
 设置发送notify()信号的时间间隔。这个ms并不是实时处理的音频数据中的ms数。
 这个时间间隔是平台相关的。
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 notifyInterval()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioOutput::setVolume(qreal volume) [虚函数 virtual] 
 
 设置音量。音量的范围为[0.0 - 1.0]。 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 volume()。
-\end{notice}
+\end{seeAlso}
 
 void QAbstractAudioOutput::start(QIODevice *device) [纯虚函数 pure virtual] 
 
@@ -235,6 +235,6 @@ qreal QAbstractAudioOutput::volume() const [虚函数 virtual]
 
 音量范围为[0.0 - 1.0] 
 
-\begin{notice}[另请参阅]
+\begin{seeAlso}
 setVolume()。
-\end{notice}
+\end{seeAlso}

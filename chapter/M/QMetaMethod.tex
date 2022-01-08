@@ -1,0 +1,476 @@
+\chapter{QMetaMethod}
+
+QMetaMethod 类提供了对应一个成员函数的元数据。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QMetaMethod>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+\end{tabular}
+
+\section{公共类型}
+
+\begin{tabular}{|r|l|}   
+\hline
+类型	& 名称 \\ 
+\hline
+enum	&Access \{ Private, Protected, Public \} \\ 
+\hline
+enum	& MethodType \{ Method, Signal, Slot, Constructor \} \\
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|l|m{27em}|} 
+\hline
+返回类型 & 函数 \\   
+\hline
+QMetaMethod::Access	& access() const \\ 
+\hline
+bool &	invoke(QObject *object, Qt::ConnectionType connectionType, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invoke(QObject *object, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invoke(QObject *object, Qt::ConnectionType connectionType, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invoke(QObject *object, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invokeOnGadget(void *gadget, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+bool &	invokeOnGadget(void *gadget, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const \\
+\hline
+const char * 	&name() const \\
+\hline
+const char * 	& value() const \\ 
+\hline
+bool & 	isValid() const \\ 
+\hline
+int	& methodIndex() const \\ 
+\hline
+QByteArray &	methodSignature() const \\ 
+\hline
+QMetaMethod::MethodType	 & methodType() const \\
+\hline
+QByteArray & 	name() const \\ 
+\hline
+int	& parameterCount() const \\
+\hline
+QList<QByteArray>	& parameterNames() const \\
+\hline
+int	& parameterType(int index) const \\
+\hline
+QList<QByteArray> &	parameterTypes() const \\
+\hline
+int	& returnType() const \\
+\hline
+int	& revision() const \\ 
+\hline
+const char *	& tag() const \\ 
+\hline
+const char *	& typeName() const \\ 
+\hline
+\end{longtable}
+
+
+\section{静态公共成员}
+
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+QMetaMethod 	&fromSignal(PointerToMemberFunction \emph{signal}) \\ 
+\hline
+\end{tabular}
+
+\section{相关非成员函数}
+
+\begin{tabular}{|l|l|}
+\hline
+返回类型 &	函数 \\ 
+\hline
+bool  &	operator!=(const QMetaMethod \emph{\&m1}, const QMetaMethod \emph{\&m2}) \\
+\hline 
+bool  &	operator==(const QMetaMethod \emph{\&m1}, const QMetaMethod \emph{\&m2})  \\
+\hline
+\end{tabular}
+
+\section{宏定义}
+
+\begin{tabular}{|c|c|}
+	\hline
+	宏定义 \\ 
+	\hline
+Q\_METAMETHOD\_INVOKE\_MAX\_ARGS \\ 
+	\hline
+	\end{tabular}
+
+\section{详细描述}
+
+QMetaMethod 类具有一个 methodType()、一个 methodSignature()、一组 parameterTypes() 和 parameterNames()、返回值的 typeName()、一个 tag()、一个 access() 描述符。
+可以通过 invoke() 来执行任意 QObject 的方法。
+
+\begin{seeAlso}
+QMetaObject、QMetaEnum、QMetaProperty 和 Qt 属性系统。
+\end{seeAlso}
+
+\section{成员类型文档}
+
+enum QMetaMethod::Access
+
+此枚举描述某方法的访问权限，遵循 C++ 相关公约。
+
+
+\begin{tabular}{|c|c|}
+	\hline
+	常量 	& 数值  \\
+	\hline
+	QMetaMethod::Private  &	0 \\ 
+	\hline
+	QMetaMethod::Protected &	1 \\ 
+	\hline
+	QMetaMethod::Public &	2 \\ 
+	\hline
+	\end{tabular}
+
+enum QMetaMethod::MethodType	
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	常量  &	数值 	& 描述  \\ 
+	\hline
+	QMetaMethod::Method &	0 &	该函数是普通的成员函数。 \\
+	\hline
+	QMetaMethod::Signal &	1 	&该函数是信号函数。 \\
+	\hline
+	QMetaMethod::Slot &	2 &	该函数是槽函数。 \\ 
+	\hline
+	QMetaMethod::Constructor &	3 &	该函数是构造函数。 \\ 
+	\hline
+	\end{tabular}
+
+\section{成员函数文档}
+
+QMetaMethod::Access QMetaMethod::access() const
+
+返回该方法的访问权限(private、protected 或 `public)。
+
+\begin{notice}
+信号永远是公共的，但应将此认为是实现细节。在类外发射该类的信号通常是个坏主意。
+\end{notice}
+
+\begin{seeAlso}
+methodType()。
+\end{seeAlso}
+
+[static] template <typename PointerToMemberFunction> QMetaMethod QMetaMethod::fromSignal(PointerToMemberFunction signal)
+
+返回对应给定 signal 的元方法，若 signal 并非信号，则返回无效的 QMetaMethod 对象。
+
+范例：
+
+\begin{lstlisting}[language=C++]
+QMetaMethod destroyedSignal = QMetaMethod::fromSignal(&QObject::destroyed);
+\end{lstlisting}
+
+
+本函数在 Qt 5.0 中被引入。
+
+bool QMetaMethod::invoke(QObject *object, Qt::ConnectionType connectionType, QGenericReturnArgument returnValue, 
+   QGenericArgument val0 = QGenericArgument(nullptr), 
+   QGenericArgument val1 = QGenericArgument(), 
+QGenericArgument val2 = QGenericArgument(), 
+QGenericArgument val3 = QGenericArgument(), 
+QGenericArgument val4 = QGenericArgument(), 
+QGenericArgument val5 = QGenericArgument(), 
+QGenericArgument val6 = QGenericArgument(), 
+QGenericArgument val7 = QGenericArgument(),
+ QGenericArgument val8 = QGenericArgument(), 
+ QGenericArgument val9 = QGenericArgument()) const
+
+通过 object 对象动态调用本方法。若可被动态调用则返回 tue，若该对象无此方法或参数不匹配则返回 false。
+
+该动态调用可以是同步或异步的，由 connectionType 决定：
+
+\begin{compactitem}
+\item 若 type 是 Qt::DirectConnection，则该方法会被立即执行。
+\item 若 type 是 Qt::QueuedConnection，则会发送一个 QEvent ，该方法会在应用进入该对象所属线程的主事件循环后执行。
+\item 若 type 是 Qt::AutoConnection，当 object 与调用者处于相同线程中时，该方法会被同步执行，否则会被异步执行。
+\end{compactitem}
+
+返回值会被存放在 returnvalue 中。若调用方式是异步，则返回值无法被获取。
+最多可以传递十个参数 (val0, val1, val2, val3, val4, val5, val6, val7, val8 和 val9) 至本方法。
+
+QGenericArgument 和 QGenericReturnArgument 是内部的辅助类。
+为了动态调用信号槽，您需要将参数通过 Q\_ARG() 和 Q\_RETURN\_ARG() 宏进行封装。
+Q\_ARG() 接受一个类型名称和一个该类型的不可变引用；
+Q\_RETURN\_ARG() 接受一个类型名称和一个该类型的可变引用。
+
+通过异步方式动态调用 QPushButton 的 animateClick() 槽:
+
+\begin{lstlisting}[language=C++]
+int methodIndex = pushButton->metaObject()->indexOfMethod("animateClick()");
+QMetaMethod method = metaObject->method(methodIndex);
+method.invoke(pushButton, Qt::QueuedConnection);
+\end{lstlisting}
+
+当异步调用方法时，传递的参数必须被 Qt 的元对象系统所知悉，因为 Qt 需要在后台事件中拷贝并保存它们。
+如果您使用队列连接时遇到下述错误信息：
+
+\begin{lstlisting}
+QMetaMethod::invoke: Unable to handle unregistered datatype 'MyType'	
+\end{lstlisting}
+
+则在调用 invokeMethod() 之前通过 qRegisterMetaType() 来注册该数据类型。
+
+若想通过 obj 对象同步调用 \hl{compute(QString, int, double)} 槽，则代码如下：
+
+\begin{lstlisting}[language=C++]
+QString retVal;
+QByteArray normalizedSignature = QMetaObject::normalizedSignature("compute(QString, int, double)");
+int methodIndex = obj->metaObject()->indexOfMethod(normalizedSignature);
+QMetaMethod method = obj->metaObject()->method(methodIndex);
+method.invoke(obj,
+              Qt::DirectConnection,
+              Q_RETURN_ARG(QString, retVal),
+              Q_ARG(QString, "sqrt"),
+              Q_ARG(int, 42),
+              Q_ARG(double, 9.7));
+\end{lstlisting}
+
+
+此处使用了 QMetaObject::normalizedSignature() 来确保函数签名符合 invoke() 期望的格式，即将多余的空白移除。
+
+若 compute 槽通过特定顺序没有完整获取到一个 QString、一个 int 和一个 double，则此调用会失败。
+
+\begin{warning}
+此方法不会验证参数的有效性，object 必须是创建 QMetaMethod 的 QMetaObject 的类型实例，参数列表必须与该方法的保持一直，否则会导致未定义行为。
+\end{warning}
+
+\begin{seeAlso}
+Q\_ARG()、Q\_RETURN\_ARG()、qRegisterMetaType() 和 QMetaObject::invokeMethod()。
+\end{seeAlso}
+
+
+%%%%%%%%%
+
+bool QMetaMethod::invoke(QObject *object, QGenericReturnArgument returnValue, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const
+
+此函数是 invoke() 的重载。
+
+此重载始终通过 Qt::AutoConnection 调用本方法。
+
+bool QMetaMethod::invoke(QObject *object, Qt::ConnectionType connectionType, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const
+
+此函数是 invoke() 的重载。
+
+此重载用于不关心对返回值的场合。
+
+bool QMetaMethod::invoke(QObject *object, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const
+
+此函数是 invoke() 的重载。
+
+此重载通过 Qt::AutoConnection 调用本方法，并忽略返回值。
+
+bool QMetaMethod::invokeOnGadget(void \emph{*gadget}, QGenericReturnArgument \emph{returnValue}, QGenericArgument \emph{val0} = QGenericArgument(nullptr), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const
+
+通过 Q\_GADGET 对象动态调用本方法。
+若可被动态调用则返回 tue，若该对象无此方法或参数不匹配则返回 false。
+
+gadget 指针必须是 Q\_GADGET 类的实例。
+
+该调用始终是同步的。
+
+返回值会被存放在 returnvalue 中。若调用方式是异步，则返回值无法被获取。最多可以传递十个参数 (val0, val1, val2, val3, val4, val5, val6, val7, val8 和 val9) 至本方法。
+
+\begin{seeAlso}
+此方法不会验证参数的有效性，gadget 必须是创建 QMetaMethod 的 QMetaObject 的类型实例，参数列表必须与该方法的保持一直，否则会导致未定义行为。
+\end{seeAlso}
+
+本函数在 Qt 5.5 中被引入。
+
+\begin{seeAlso}
+Q\_ARG()、Q\_RETURN\_ARG()、qRegisterMetaType() 和 QMetaObject::invokeMethod()。
+\end{seeAlso}
+
+bool QMetaMethod::invokeOnGadget(void \*gadget, QGenericArgument val0 = QGenericArgument(0), QGenericArgument val1 = QGenericArgument(), QGenericArgument val2 = QGenericArgument(), QGenericArgument val3 = QGenericArgument(), QGenericArgument val4 = QGenericArgument(), QGenericArgument val5 = QGenericArgument(), QGenericArgument val6 = QGenericArgument(), QGenericArgument val7 = QGenericArgument(), QGenericArgument val8 = QGenericArgument(), QGenericArgument val9 = QGenericArgument()) const
+
+这是一个重载函数。
+
+此重载函数通过 gadget 对象动态调用本方法，并忽略返回值。
+
+本函数在 Qt 5.5 中被引入。
+
+bool QMetaMethod::isValid() const
+
+若此方法有效则返回 true（即可被自省并动态调用），否则返回 false。
+
+本函数在 Qt 5.0 中被引入。
+
+int QMetaMethod::methodIndex() const
+
+返回本方法的索引编号。
+
+本函数在 Qt 4.6 中被引入。
+
+QByteArray QMetaMethod::methodSignature() const
+
+返回本方法的签名（例如 setValue(double)）。
+
+本函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+parameterTypes() 和 parameterNames()。
+\end{seeAlso}
+
+QMetaMethod::MethodType QMetaMethod::methodType() const
+
+返回本方法的类型(signal、slot、method 或 constructor)。
+
+\begin{seeAlso}
+access()。
+\end{seeAlso}
+
+QByteArray QMetaMethod::name() const
+
+返回本方法的名字。
+
+本函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+methodSignature() 和 parameterCount()。
+\end{seeAlso}
+
+int QMetaMethod::parameterCount() const
+
+返回本方法的参数个数。
+
+本函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+parameterType() 和 parameterNames()。
+\end{seeAlso}
+
+QList<QByteArray> QMetaMethod::parameterNames() const
+
+返回参数名称列表。
+
+\begin{seeAlso}
+parameterTypes() 和 methodSignature()。
+\end{seeAlso}
+
+int QMetaMethod::parameterType(int \emph{index}) const
+
+返回对应 index 的参数类型。
+
+返回值是 QMetaType 中注册的类型之一，若该类型未被注册则返回 QMetaType::UnknownType。
+
+本函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+parameterCount()、returnType() 和 QMetaType。
+\end{seeAlso}
+
+QList<QByteArray> QMetaMethod::parameterTypes() const
+
+返回参数类型的列表。
+
+\begin{seeAlso}
+parameterNames() 和 methodSignature()。
+\end{seeAlso}
+
+int QMetaMethod::returnType() const
+
+返回本方法返回值的类型。
+
+返回
+
+返回值是 QMetaType 中注册的类型之一，若该类型未被注册则返回 QMetaType::UnknownType。
+
+本函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+parameterType()、QMetaType 和 typeName()。
+\end{seeAlso}
+
+int QMetaMethod::revision() const
+
+返回通过 Q\_REVISION 注明的版本，若未注明则返回 0。
+
+本函数在 Qt 5.1 中被引入。
+
+const char *QMetaMethod::tag() const
+
+返回与本方法关联的标签。
+
+标签在此处指的是可以被 moc 识别的特定宏，用于为方法添加附加信息。
+
+标签信息可以用如下方式添加到函数声明中：
+
+\begin{lstlisting}[language=C++]
+// 在 MainWindow 类声明中
+#ifndef Q_MOC_RUN
+// 将标签内容定义为空，以确保对编译器不可见
+#  define MY_CUSTOM_TAG
+#endif
+...
+private slots:
+	MY_CUSTOM_TAG void testFunc();
+\end{lstlisting}
+
+相关信息可通过如下方式获取：
+
+\begin{lstlisting}[language=C++]
+MainWindow win;
+win.show();
+
+int functionIndex = win.metaObject()->indexOfSlot("testFunc()");
+QMetaMethod mm = win.metaObject()->method(functionIndex);
+qDebug() << mm.tag(); // 将打印 MY_CUSTOM_TAG
+\end{lstlisting}
+
+%%%%%%%%
+
+此时，moc 会提取并记录所有标签，但不会对它们做任何特殊处理。您可以用标签来标注不同的方法，并在您的应用中通过特定的用途来使用它们。
+
+\begin{notice}
+自 Qt 5.0 开始，moc 会展开预编译宏，所以必须将标签定义包含在 \#ifndef Q\_MOC\_RUN 中，正如上文范例。
+这在 Qt 4 中不是必要的，但上述代码在 Qt 4 中同样也能生效。
+\end{notice}
+
+const char *QMetaMethod::typeName() const
+
+返回本方法的返回类型名称。
+
+\begin{seeAlso}
+returnType() 和 QMetaType::type()。
+\end{seeAlso}
+
+\section{相关非成员函数}
+
+bool operator!=(const QMetaMethod \emph{\&m1}, const QMetaMethod\emph{\&m2})
+
+这是一个重载函数。
+
+若 m1 与 m2 不相等则返回 true，否则返回 false。
+
+本函数在 Qt 5.0 中被引入。
+
+bool operator==(const QMetaMethod \emph{\&m1}, const QMetaMethod \emph{\&m2})
+
+这是一个重载函数。
+
+若 m1 与 m2 相等则返回 true，否则返回 false。
+
+本函数在 Qt 5.0 中被引入。
+
+\section{宏定义文档}
+
+Q\_METAMETHOD\_INVOKE\_MAX\_ARGS
+
+此宏的数值等于通过 QMetaMethod::invoke() 执行方法时，可以传递的最大参数个数。

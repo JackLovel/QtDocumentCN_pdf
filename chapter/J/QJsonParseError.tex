@@ -6,7 +6,7 @@ QJsonParseError类用于在JSON解析期间报告错误。
 	\hline
 	属性 & 方法 \\
 	\hline
-	头文件 & \#include<QJsonParseError>\\      
+	头文件 & \#include <QJsonParseError>\\      
 	\hline
 	qmake & QT+=core\\      
 	\hline
@@ -18,19 +18,17 @@ QJsonParseError类用于在JSON解析期间报告错误。
 
 该结构在 5.0 被引入。
 
- 
-
 \begin{notice}
 该结构的所有函数都是可重入。
 \end{notice}
 
 \section{公共类型}
 
-\begin{tabular}{|l|l|}
+\begin{tabular}{|l|m{26em}|}
 	\hline
 	类型& 	枚举\\
 \hline
-enum &	ParseError { NoError, UnterminatedObject, MissingNameSeparator, UnterminatedArray, MissingValueSeparator, …, GarbageAtEnd }\\
+enum &	ParseError \{NoError, UnterminatedObject, MissingNameSeparator, UnterminatedArray, MissingValueSeparator, …, GarbageAtEnd\}\\
 	\hline
 \end{tabular}
 
