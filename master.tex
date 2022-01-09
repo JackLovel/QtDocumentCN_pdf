@@ -1,9 +1,8 @@
 \documentclass[a4paper,titlepage,UTF8,zhihao=5]{ctexbook}
 
 % 导言区
-\usepackage[colorlinks, linkcolor=blue!50!black]{hyperref} % 超链接的颜色设置为红色
-% \usepackage{hyperref} % 超链接的颜色设置为红色
-% \hypersetup{colorlinks, linkcolor=blue!50!black}
+% 超链接的颜色设置为红色
+\usepackage[colorlinks, linkcolor=blue!50!black]{hyperref} 
 
 \usepackage{xcolor}
 \usepackage{listings}
@@ -45,6 +44,7 @@
 % 页眉页脚
 \pagestyle{empty}
 
+% 设定代码环境
 \newfontfamily\fira{Fira Code}
 \lstset{
 	basicstyle=\small\fira,
@@ -54,6 +54,7 @@
 	frame=shadowbox, 
 	rulesepcolor= \color{ red!20!green!20!blue!20},
 	columns=flexible, 
+	linewidth=1.1\linewidth,
 } 
 
 % 定义表格列宽
@@ -65,13 +66,13 @@
 \arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
 
 % 定义文本高亮
-% 使用方法 \hl{文本}
+% 使用方法：
+% \hl{文本}
 \usepackage[normalem]{ulem} 
 \newcommand\hl{\bgroup\markoverwith
   {\textcolor{yellow}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
 
 % 中文设置
-%\setCJKmainfont{SourceHanSansCN-Light}
 \setCJKmainfont{SourceHanSerifCN-Light}
 
 % 英文设置
@@ -99,12 +100,13 @@
 
 \newenvironment{warning}[1][警告]{{\textbf{#1}：}}
 
+% 不输出标题编号
+\newcommand\specialsectioning{\setcounter{secnumdepth}{-1}}
 
 \begin{document}
 % 正文区（文稿区）
 % 页眉页脚
 \pagestyle{fancy}
-% \lhead{\includegraphics[scale=0.1]{./img/logo.png}}
 \lhead{\includegraphics[scale=0.1]{logo}}
 \renewcommand{\headrulewidth}{0.4pt}
 
@@ -122,8 +124,9 @@
 \newpage
 \setcounter{page}{1}
 
+% 不输出标题编号
+\specialsectioning
 
-% \include{./contributors_table}
 \include{./chapter/A/API_Design_Principles}
 \include{./chapter/A/QAbstractAnimation}
 \include{./chapter/A/QAbstractAudioDeviceInfo}
