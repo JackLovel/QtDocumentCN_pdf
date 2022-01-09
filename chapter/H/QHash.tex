@@ -288,49 +288,49 @@ QHash 的功能与 QMap 非常相似。二者的区别在于：
 
 下面是一个键类型为 QString，值类型为 \hl{int} 的 QHash 的示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int> hash;
-\end{lstlisting}
+\end{cppcode}
 
 
 可以使用 operator 运算符将键值对插入到哈希表中：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 hash["one"] = 1;
 hash["three"] = 3;
 hash["seven"] = 7;
-\end{lstlisting}
+\end{cppcode}
 
 上面的代码将3个键值对插入到 QHash 中：("one", 1)，("three", 3) 和
 ("seven", 7)。另外一种向哈希表中插入元素的方法是使用 insert()：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 hash.insert("twelve", 12);
-\end{lstlisting}
+\end{cppcode}
 
 使用 operator 运算符或 value() 查找值：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 int num1 = hash["thirteen"];
 int num2 = hash.value("thirteen");
-\end{lstlisting}
+\end{cppcode}
 
 如果哈希表中不存在指定的键，这些函数返回默认构造的值。
 
 如果想检查哈希表中是否包含特定键，使用 contains()：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 int timeout = 30;
 if (hash.contains("TIMEOUT"))
     timeout = hash.value("TIMEOUT");
-\end{lstlisting}
+\end{cppcode}
 
 还有一个 value() 的重载函数，如果哈希表中不存在指定键的元素，该函数使
 用第2个参数作为默认值：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 int timeout = hash.value("TIMEOUT", 30);
-\end{lstlisting}
+\end{cppcode}
 
 一般推荐使用 contains() 和 value() 而不是 operator 运算符查找哈希表中
 的键。原因是如果哈希表中不存在相同键的元素，operator 运算符会默默地将
@@ -338,7 +338,7 @@ int timeout = hash.value("TIMEOUT", 30);
 将在内存中创建1000个元素：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 // 错误
 QHash<int, QWidget *> hash;
 ...
@@ -346,7 +346,7 @@ for (int i = 0; i < 1000; ++i) {
     if (hash[i] == okButton)
         cout << "Found button at index " << i << Qt::endl;
 }
-\end{lstlisting}
+\end{cppcode}
 
 为了避免这个问题，将上面代码中的 \hl{hash[i]} 替换为 \hl{hash.value(i)}。
 
@@ -357,23 +357,23 @@ Java 风格迭代器（QHashIterator 和 QMutableHashIterator）和 STL 风格�
 代器（QHash::const\_iterator 和 QHash::iterator）。下面是使用 Java 风格
 迭代器遍历 QHash<QString, int> 的方法：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHashIterator<QString, int> i(hash);
 while (i.hasNext()) {
     i.next();
     cout << i.key() << ": " << i.value() << Qt::endl;
 }
-\end{lstlisting}
+\end{cppcode}
 
 下面是相同的代码，不过这次使用 STL 风格迭代器：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int>::const_iterator i = hash.constBegin();
 while (i != hash.constEnd()) {
     cout << i.key() << ": " << i.value() << Qt::endl;
     ++i;
 }
-\end{lstlisting}
+\end{cppcode}
 
 QHash 是无序的，所以迭代器的顺序是不可预测的。如果需要通过键排序，使用 QMap。
 
@@ -381,20 +381,20 @@ QHash 是无序的，所以迭代器的顺序是不可预测的。如果需要�
 前的值将被删除。例如：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 hash.insert("plenty", 100);
 hash.insert("plenty", 2000);
 // hash.value("plenty") == 2000
-\end{lstlisting}
+\end{cppcode}
 
 如果只想从哈希表中获取值（而不是键），也可以使用 foreach：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int> hash;
 ...
 foreach (int value, hash)
     cout << value << Qt::endl;
-\end{lstlisting}
+\end{cppcode}
 
 移除元素有几种方法。一种是调用 remove()；该函数移除指定键的所有元素。另一种方法是使用 QMutableHashIterator::remove()。另外，还可以使用 clear() 清除整个哈希表。
 
@@ -410,7 +410,7 @@ QHash 的键类型除了必须是可赋值数据类型外，还有一个额外�
 
 例子：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
@@ -438,7 +438,7 @@ inline uint qHash(const Employee &key, uint seed)
 }
 
 #endif // EMPLOYEE_H
-\end{lstlisting}
+\end{cppcode}
 
 上例中，我们依赖 Qt 的全局 qHash(const QString \&, uint) 函数取得雇员名字的哈希值，然后将这个值与雇员的出生日期求异或，来为同名雇员生成各自唯一的哈希值。
 
@@ -720,7 +720,7 @@ QHash::iterator QHash::erase(QHash::const\_iterator pos)
 
 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QObject *, int> objectHash;
 ...
 QHash<QObject *, int>::iterator i = objectHash.find(obj);
@@ -731,7 +731,7 @@ while (i != objectHash.end() && i.key() == obj) {
         ++i;
     }
 }
-\end{lstlisting}
+\end{cppcode}
 
 Qt 5.7 中引入该函数。
 
@@ -751,7 +751,7 @@ QHash::iterator QHash::find(const Key \emph{\&key})
 
 如果哈希表包含多个键为 \emph{key} 的元素，函数返回指向最新插入的那个值的迭代器。其它值可以通过递增迭代器取得。例如，下面的代码遍历同一键的所有元素：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int> hash;
 ...
 QHash<QString, int>::const_iterator i = hash.find("HDR");
@@ -759,7 +759,7 @@ while (i != hash.end() && i.key() == "HDR") {
     cout << i.value() << Qt::endl;
     ++i;
 }
-\end{lstlisting}
+\end{cppcode}
 
 \begin{seeAlso}
 value()，values() 和 QMultiHash::find()。
@@ -918,12 +918,12 @@ void QHash::reserve(int \emph{size})
 
 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int> hash;
 hash.reserve(20000);
 for (int i = 0; i < 20000; ++i)
     hash.insert(keys[i], values[i]);
-\end{lstlisting}
+\end{cppcode}
 
 理想情况下，\emph{size} 应该比哈希表中期望的最大元素数略大。\emph{size} 不一定必须是质数，因为 QHash 内部总会使用一个质数。如果 \emph{size} 预估小了，可能发生的最坏情形就是 QHash 会变慢一点。
 
@@ -1173,9 +1173,9 @@ template <typename T1, typename T2> uint qHash(const std::pair<T1, T2> \&key, ui
 该函数的返回类型与下面函数调用的返回类型不同 ：
 \end{notice}
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 qHash(qMakePair(key.first, key.second), seed);
-\end{lstlisting}
+\end{cppcode}
 
 两个函数使用不同的哈希算法；因为二进制兼容的限制，我们不能在 Qt 6 之前修改 QPair 算法使其与 std::pair 保持一致。
 
@@ -1260,7 +1260,7 @@ uint qHashBits(const void \emph{*p}, size\_t \emph{len}, uint \emph{seed} = 0)
 仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为 std::vector 实现 qHash() 函数的例子：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 inline uint qHash(const std::vector<int> &key, uint seed = 0)
 {
     if (key.empty())
@@ -1268,7 +1268,7 @@ inline uint qHash(const std::vector<int> &key, uint seed = 0)
     else
         return qHashBits(&key.front(), key.size() * sizeof(int), seed);
 }
-\end{lstlisting}
+\end{cppcode}
 
 上面的例子利用了 std::vector 连续存储数据的优势。如果不是这种情况，或者包含的类型 has padding，应该使用 qHashRange()。
 
@@ -1287,27 +1287,27 @@ template uint qHashRange(InputIterator \emph{first}, InputIterator \emph{last}, 
 
 该函数的返回值依赖于范围中元素的顺序。这意味着
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 {0, 1, 2}
-\end{lstlisting}
+\end{cppcode}
 
 和
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 {1, 2, 0}
-\end{lstlisting}
+\end{cppcode}
 
 散列成不同的 值。如果顺序不重要，例如，对于哈希表，要使用 qHashRangeCommutative()。如果想散列原始内存，使用 qHashBits()。
 
 仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为
 std::vector 实现 qHash() 函数的例子：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 inline uint qHash(const std::vector<int> &key, uint seed = 0)
 {
     return qHashRange(key.begin(), key.end(), seed);
 }
-\end{lstlisting}
+\end{cppcode}
 
 需要再次强调，qHashRange() 的实现 - 与 Qt 提供的 qHash() 函数一样 - 可能在任何时候改变。一定不能 依赖于这个假定，认为不同 Qt 版本的 qHashRange() 函数（对于相同的输入）会计算出相同的结果，即使该元素类型的 qHash() 函数可以。
 
@@ -1324,27 +1324,27 @@ template uint qHashRangeCommutative(InputIterator \emph{first}, InputIterator \e
 
 该函数的返回值不依赖于范围中元素的顺序。这意味着
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 {0, 1, 2}
-\end{lstlisting}
+\end{cppcode}
 
 和
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 {1, 2, 0}
-\end{lstlisting}
+\end{cppcode}
 
 散列成相同的 值。如果顺序重要，例如，对于 vector 和数组， 要使用 qHashRange()。如果想散列原始内存，使用 qHashBits()。
 
 仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为
 std::unordered\_set 实现 qHash() 函数的例子：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 inline uint qHash(const std::unordered_set<int> &key, uint seed = 0)
 {
     return qHashRangeCommutative(key.begin(), key.end(), seed);
 }
-\end{lstlisting}
+\end{cppcode}
 
 需要再次强调，qHashRangeCommutative() 的实现 - 与 Qt 提供的 qHash() 函数一样 - 可能在任何时候改变。一定不能 依赖于这个假定，认为不同 Qt 版本的 qHashRangeCommutative() 函数（对于相同的输入）会计算出相同的结果，即使该元素类型的 qHash() 函数可以。
 

@@ -65,7 +65,7 @@ QMapIterator 构造函数接受 QMap 作为参数。
 构造后，迭代器位于 map 的最开始位置（第一个元素之前）。
 下面的例子演示如何顺序遍历所有元素：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMap<int, QWidget *> map;
 ...
 QMapIterator<int, QWidget *> i(map);
@@ -73,7 +73,7 @@ while (i.hasNext()) {
     i.next();
     qDebug() << i.key() << ": " << i.value();
 }
-\end{lstlisting}
+\end{cppcode}
 
 next() 函数返回 map 中的下一个元素并将迭代器前移。
 key() 和 value() 函数返回跳过的最后一个元素的键和值。
@@ -92,23 +92,23 @@ key() 和 value() 函数返回跳过的最后一个元素的键和值。
 
 下面的例子演示如何反序遍历元素：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMapIterator<int, QWidget *> i(map);
 i.toBack();
 while (i.hasPrevious()) {
     i.previous();
     qDebug() << i.key() << ": " << i.value();
-\end{lstlisting}
+\end{cppcode}
 
 如果想查找特定值的所有实例，循环使用 findNext() 或 findPrevious()。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMapIterator<int, QWidget *> i(map);
 while (i.findNext(widget)) {
     qDebug() << "Found widget " << widget << " under key "
              << i.key();
 }
-\end{lstlisting}
+\end{cppcode}
 
 同一 map 可以使用多个迭代器。
 如果在 QMapIterator 处于活动状态时修改 map，QMapIterator 将继续在原 map 上遍历，

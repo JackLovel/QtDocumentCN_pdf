@@ -68,7 +68,7 @@ QMutableHashIterator 构造函数接受 QHash 为参数。
 
 例子：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<int, QWidget *> hash;
 ...
 QMutableHashIterator<QString, QWidget *> i(hash);
@@ -76,7 +76,7 @@ while (i.hasNext()) {
     i.next();
     qDebug() << i.key() << ": " << i.value();
 }
-\end{lstlisting}
+\end{cppcode}
 
 next() 函数返回哈希表中的下一个元素并将迭代器前移。
 key() 和 value() 函数返回跳过的最后一个元素的键和值。
@@ -94,26 +94,26 @@ key() 和 value() 函数返回跳过的最后一个元素的键和值。
 
 如果想查找特定值的所有实例，循环使用 findNext()。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMutableHashIterator<int, QWidget *> i(hash);
 while (i.findNext(widget)) {
     qDebug() << "Found widget " << widget << " under key "
              << i.key();
 }
-\end{lstlisting}
+\end{cppcode}
 
 如果想在遍历哈希表时移除元素，使用 remove()。如果想修改元素的值，使用 setValue()。
 
 例子：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMutableHashIterator<QString, QString> i(hash);
 while (i.hasNext()) {
     i.next();
     if (i.key() == i.value())
         i.remove();
 }
-\end{lstlisting}
+\end{cppcode}
 
 该示例移除所有键和值相等的键值对。
 

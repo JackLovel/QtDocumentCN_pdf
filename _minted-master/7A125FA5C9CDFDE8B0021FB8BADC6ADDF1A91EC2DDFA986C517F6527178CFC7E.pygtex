@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// mymodel.h}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}QAbstractTableModel\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}QString\PYGZgt{}}
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{COLS}\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{ROWS}\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{MyModel}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{public}\PYG{+w}{ }\PYG{n}{QAbstractTableModel}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{Q\PYGZus{}OBJECT}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{MyModel}\PYG{p}{(}\PYG{n}{QObject}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{parent}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{rowCount}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{parent}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{p}{())}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{override}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{columnCount}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{parent}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{p}{())}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{override}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{QVariant}\PYG{+w}{ }\PYG{n+nf}{data}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{role}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{DisplayRole}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{override}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{setData}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QVariant}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{value}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{role}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{EditRole}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{override}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{ItemFlags}\PYG{+w}{ }\PYG{n+nf}{flags}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k}{override}\PYG{p}{;}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{m\PYGZus{}gridData}\PYG{p}{[}\PYG{n}{ROWS}\PYG{p}{][}\PYG{n}{COLS}\PYG{p}{];}\PYG{+w}{  }\PYG{c+c1}{//holds text entered into QTableView}
+\PYG{n+nl}{signals}\PYG{p}{:}
+\PYG{+w}{    }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{editCompleted}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{p}{);}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

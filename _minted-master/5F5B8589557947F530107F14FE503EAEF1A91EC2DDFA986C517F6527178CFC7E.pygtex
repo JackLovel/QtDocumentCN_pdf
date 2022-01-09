@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{DomModel::columnCount}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{parent}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{     }\PYG{n}{Q\PYGZus{}UNUSED}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{);}
+\PYG{+w}{     }\PYG{k}{return}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

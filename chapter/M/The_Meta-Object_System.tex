@@ -33,42 +33,42 @@ moc 工具读取 C++ 源文件，若在其中找到包含 Q\_OBJECT 宏的类声
 
 例如，假设 MyWidget 继承自 QWidget 类，并声明了 Q\_OBJECT 宏：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QObject *obj = new MyWidget;
-\end{lstlisting}
+\end{cppcode}
 
 QObject * 类型的变量 obj 实际指向一个 MyWidget 对象，于是我们可以进行如下转换：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QWidget *widget = qobject_cast<QWidget *>(obj);
-\end{lstlisting}
+\end{cppcode}
 
 从 QObject 到 QWidget 的转换成功进行，
 因为该对象实际是 QWidget 的子类 MyWidget。
 由于我们知道 obj 是 MyWidget 类型，
 我们可以将其转换为 MyWidget *：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 MyWidget *myWidget = qobject_cast<MyWidget *>(obj);
-\end{lstlisting}
+\end{cppcode}
 
 转换至 MyWidget 的操作可以成功进行，因为 qobject\_cast() 并不会将 Qt 内置类型和自定义类型区别对待。
 （译者注：Qt 是在运行时通过读取元对象信息进行动态转换，开发者可通过 Q\_OBJECT 宏让自定义类型支持被 qobject\_cast() 进行转换）
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QLabel *label = qobject_cast<QLabel *>(obj);
 // label is 0
-\end{lstlisting}
+\end{cppcode}
 
 另一个例子，转换为 QLabel 的操作失败了，该指针会被置零。但此机制也让运行时基于转换结果来区别处理不同类型成为可能：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 if (QLabel *label = qobject_cast<QLabel *>(obj)) {
     label->setText(tr("Ping"));
 } else if (QPushButton *button = qobject_cast<QPushButton *>(obj)) {
     button->setText(tr("Pong!"));
 }
-\end{lstlisting}
+\end{cppcode}
 
 虽然可以使用 QObject 作为基类，
 但不定义 Q\_OBJECT 宏，也不生成元对象代码，

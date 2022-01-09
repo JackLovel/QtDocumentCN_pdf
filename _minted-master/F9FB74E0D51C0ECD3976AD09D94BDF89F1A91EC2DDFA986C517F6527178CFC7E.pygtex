@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// Inefficient, keys() is expensive}
+\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{keys}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hash}\PYG{p}{.}\PYG{n}{keys}\PYG{p}{();}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{numPrimes}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{count\PYGZus{}if}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{.}\PYG{n}{cbegin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{keys}\PYG{p}{.}\PYG{n}{cend}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{isPrimeNumber}\PYG{p}{);}
+\PYG{n}{qDeleteAll}\PYG{p}{(}\PYG{n}{hash2}\PYG{p}{.}\PYG{n}{keys}\PYG{p}{());}
+
+\PYG{c+c1}{// Efficient, no memory allocation needed}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{numPrimes}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{count\PYGZus{}if}\PYG{p}{(}\PYG{n}{hash}\PYG{p}{.}\PYG{n}{keyBegin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{hash}\PYG{p}{.}\PYG{n}{keyEnd}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{isPrimeNumber}\PYG{p}{);}
+\PYG{n}{qDeleteAll}\PYG{p}{(}\PYG{n}{hash2}\PYG{p}{.}\PYG{n}{keyBegin}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{hash2}\PYG{p}{.}\PYG{n}{keyEnd}\PYG{p}{());}
+\end{Verbatim}

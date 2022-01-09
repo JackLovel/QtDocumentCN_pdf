@@ -174,9 +174,9 @@ methodType()。
 
 范例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMetaMethod destroyedSignal = QMetaMethod::fromSignal(&QObject::destroyed);
-\end{lstlisting}
+\end{cppcode}
 
 
 本函数在 Qt 5.0 中被引入。
@@ -213,11 +213,11 @@ Q\_RETURN\_ARG() 接受一个类型名称和一个该类型的可变引用。
 
 通过异步方式动态调用 QPushButton 的 animateClick() 槽:
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 int methodIndex = pushButton->metaObject()->indexOfMethod("animateClick()");
 QMetaMethod method = metaObject->method(methodIndex);
 method.invoke(pushButton, Qt::QueuedConnection);
-\end{lstlisting}
+\end{cppcode}
 
 当异步调用方法时，传递的参数必须被 Qt 的元对象系统所知悉，因为 Qt 需要在后台事件中拷贝并保存它们。
 如果您使用队列连接时遇到下述错误信息：
@@ -230,7 +230,7 @@ QMetaMethod::invoke: Unable to handle unregistered datatype 'MyType'
 
 若想通过 obj 对象同步调用 \hl{compute(QString, int, double)} 槽，则代码如下：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QString retVal;
 QByteArray normalizedSignature = QMetaObject::normalizedSignature("compute(QString, int, double)");
 int methodIndex = obj->metaObject()->indexOfMethod(normalizedSignature);
@@ -241,7 +241,7 @@ method.invoke(obj,
               Q_ARG(QString, "sqrt"),
               Q_ARG(int, 42),
               Q_ARG(double, 9.7));
-\end{lstlisting}
+\end{cppcode}
 
 
 此处使用了 QMetaObject::normalizedSignature() 来确保函数签名符合 invoke() 期望的格式，即将多余的空白移除。
@@ -412,7 +412,7 @@ const char *QMetaMethod::tag() const
 
 标签信息可以用如下方式添加到函数声明中：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 // 在 MainWindow 类声明中
 #ifndef Q_MOC_RUN
 // 将标签内容定义为空，以确保对编译器不可见
@@ -421,18 +421,18 @@ const char *QMetaMethod::tag() const
 ...
 private slots:
 	MY_CUSTOM_TAG void testFunc();
-\end{lstlisting}
+\end{cppcode}
 
 相关信息可通过如下方式获取：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 MainWindow win;
 win.show();
 
 int functionIndex = win.metaObject()->indexOfSlot("testFunc()");
 QMetaMethod mm = win.metaObject()->method(functionIndex);
 qDebug() << mm.tag(); // 将打印 MY_CUSTOM_TAG
-\end{lstlisting}
+\end{cppcode}
 
 %%%%%%%%
 

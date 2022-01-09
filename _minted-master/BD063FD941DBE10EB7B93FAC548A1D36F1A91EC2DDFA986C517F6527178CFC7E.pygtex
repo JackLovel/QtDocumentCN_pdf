@@ -1,0 +1,550 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SLOT}\PYG{p}{(}\PYG{n}{updateCaption}\PYG{p}{()));}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在多线程应用}\PYG{err}{，}\PYG{n}{你可以使用QTimer在任何一个有事件循环的线程}\PYG{err}{。}\PYG{n}{使用QThread}\PYG{o}{::}\PYG{n}{exec}\PYG{p}{()}\PYG{err}{，}\PYG{n}{开启一个非GUI线程的事件循环}\PYG{err}{。}\PYG{n}{Qt使用线程亲和性定义哪一个线程会发出timeout}\PYG{p}{()}\PYG{n}{信号}\PYG{err}{。}\PYG{n}{因此}\PYG{err}{，}\PYG{n}{你必须在指定线程内开启和关闭定时器}\PYG{err}{，}\PYG{+w}{ }\PYG{n}{它不可能开启一个定时器从另一个线程}\PYG{err}{。}
+
+\PYG{n}{在特殊案例里}\PYG{err}{，}\PYG{n}{窗口系统的事件队列中的所有事件都已处理后}\PYG{err}{，}\PYG{n}{超时为0的定时器将立即超时}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{在提供快速的用户界面时}\PYG{err}{，}\PYG{n}{这可以用来完成繁重的工作}\PYG{err}{：}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}[}\PYG{n}{language}\PYG{o}{=}\PYG{n}{C}\PYG{o}{++}\PYG{p}{]}
+\PYG{+w}{ }\PYG{n}{QTimer}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{p}{(}\PYG{k}{this}\PYG{p}{);}
+\PYG{+w}{ }\PYG{n}{connect}\PYG{p}{(}\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SIGNAL}\PYG{p}{(}\PYG{n}{timeout}\PYG{p}{()),}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SLOT}\PYG{p}{(}\PYG{n}{processOneThing}\PYG{p}{()));}
+\PYG{+w}{ }\PYG{n}{timer}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{start}\PYG{p}{();}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{从那以后}\PYG{err}{，}\PYG{n}{processOneThing}\PYG{p}{()}\PYG{n}{将会被重复调用}\PYG{err}{。}\PYG{n}{应该以始终快速返回}\PYG{err}{（}\PYG{n}{通常在处理一个数据项之后}\PYG{err}{）}\PYG{n}{的方式编写}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{因此}\PYG{err}{，}\PYG{n}{Qt一处理完定时器上所有工作后}\PYG{err}{，}\PYG{n}{就能够分发事件提供给用户接口和停止定时器}\PYG{err}{。}\PYG{n}{对于GUI应用来说}\PYG{err}{，}\PYG{n}{这是典型的方法实现繁重工作}\PYG{err}{。}\PYG{n}{但如今越来越多应用了多线程}\PYG{err}{，}\PYG{n}{我们期待0毫秒的定时器对象会逐渐被QThread取代}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{section}\PYG{p}{\PYGZob{}}\PYG{n}{精度和时间分辨率}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{定时器的精度依赖底层操作系统和硬件}\PYG{err}{。}\PYG{n}{大多数定时器支持1毫秒的分辨率}\PYG{err}{，}\PYG{n}{尽管在许多实际情况下定时器的精度将不等于该分辨率}\PYG{err}{。}
+
+\PYG{n}{定时器的精度依靠timer}\PYG{+w}{ }\PYG{n}{type}\PYG{err}{。}
+
+\PYG{n}{对于Qt}\PYG{o}{::}\PYG{n}{PreciseTimer}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QTimer会尽量保持一毫秒的精度}\PYG{err}{。}\PYG{n}{精确的定时器也永远不会比预期的超时}\PYG{err}{。}\PYG{n}{对于Qt}\PYG{o}{::}\PYG{n}{CoarseTimer}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{VeryCoarseTimer}\PYG{+w}{ }\PYG{n}{类型}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{+w}{ }\PYG{n}{可能会早于我们预期中唤醒}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{在这些类型的范围内}\PYG{o}{:}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{o}{\PYGZpc{}}\PYG{+w}{ }\PYG{n}{的间隔}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{CoarseTimer}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{l+m+mi}{500}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{VeryCoarseTimer}\PYG{p}{.}
+
+\PYG{n}{如果操作系统繁忙或是不能提供所需精度}\PYG{err}{，}\PYG{n}{所有的时间类型都可能会晚于我们期待的}\PYG{err}{。}\PYG{n}{在这种超时溢出的情况下}\PYG{err}{，}\PYG{n}{即使多个超时已过期}\PYG{err}{，}\PYG{n}{Qt也会仅发出一次}\PYG{err}{，}\PYG{n}{然后将恢复原始间隔}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{section}\PYG{p}{\PYGZob{}}\PYG{n}{精度和定时器分辨率}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{另一周使用}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{+w}{ }\PYG{n}{的方法是调用}\PYG{+w}{ }\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{startTimer}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{为你的对象}\PYG{+w}{ }\PYG{n}{和更新实现QObject}\PYG{o}{::}\PYG{n}{timerEvent}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{事件}\PYG{+w}{ }\PYG{n}{在类内处理}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{必须继承}\PYG{+w}{ }\PYG{n}{QObject}\PYG{p}{).}\PYG{+w}{ }\PYG{n}{timerEvent}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{的缺点是}\PYG{+w}{ }\PYG{n}{不支持单次定时器或信号的高级功能}\PYG{err}{。}\PYG{n}{另一种选择是QBasicTimer}\PYG{err}{。}\PYG{n}{通常}\PYG{err}{，}\PYG{n}{与直接使用}\PYG{+w}{ }\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{startTimer}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{相比}\PYG{err}{，}\PYG{n}{它不那么麻烦}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{有关这三种方法的概述}\PYG{err}{，}\PYG{n}{请参见}\PYG{+w}{ }\PYG{n}{Timers}\PYG{+w}{ }\PYG{err}{。}
+
+\PYG{n}{有些操作系统可能会限制定时器的使用数量}\PYG{err}{，}\PYG{n}{Qt尽量工作在这些范围之内}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{BasicTimer}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QTimerEvent}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{timerEvent}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{Timers}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Analog}\PYG{+w}{ }\PYG{n}{Clock}\PYG{+w}{ }\PYG{n}{Example}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{Wiggly}\PYG{+w}{ }\PYG{n}{Example}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{section}\PYG{p}{\PYGZob{}}\PYG{n}{属性文档}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{+w}{	}\PYG{n}{属性名}\PYG{o}{\PYGZam{}}\PYG{+w}{	}\PYG{n}{类型}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{active}\PYG{o}{\PYGZam{}}\PYG{+w}{	}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{如果定时器正在执行}\PYG{err}{，}\PYG{n}{这个属性是true}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{否则是false}\PYG{err}{。}
+
+\PYG{n}{访问函数}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{类型}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{	}\PYG{n}{函数名}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{bool}\PYG{+w}{	}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{isActive}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{属性名}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{类型}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{interval}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ 	}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{此属性保存超时间隔}\PYG{err}{（}\PYG{n}{以毫秒为单位}\PYG{err}{）}
+
+\PYG{n}{一旦处理完窗口系统事件队列中的所有事件}\PYG{err}{，}\PYG{n}{超时间隔为0的QTimer}\PYG{+w}{ }\PYG{n}{就会超时}\PYG{err}{。}
+
+\PYG{n}{此属性的默认值为0}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{设置活动定时器的间隔会改变}\PYG{+w}{ }\PYG{n}{timerId}\PYG{p}{()}\PYG{err}{。}
+
+\PYG{n}{访问函数}\PYG{err}{：}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{类型}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{函数名}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ 	}\PYG{n}{interval}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{void}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{setInterval}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{	}\PYG{n}{setInterval}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{value}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{+w}{	}\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{singleShot}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{属性名}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{类型}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{remainingTime}\PYG{+w}{	}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{此属性保留剩余时间}\PYG{err}{（}\PYG{n}{以毫秒为单位}\PYG{err}{）}
+
+\PYG{n}{返回定时器的剩余值}\PYG{err}{（}\PYG{n}{以毫秒为单位}\PYG{err}{），}\PYG{n}{直到超时为止}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{如果定时器处于非活动状态}\PYG{err}{，}\PYG{n}{则返回值为}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{如果定时器过期}\PYG{err}{，}\PYG{n}{则返回值为0}\PYG{err}{。}
+
+\PYG{n}{此属性在Qt}\PYG{+w}{ }\PYG{l+m+mf}{5.0}\PYG{n}{中引入}\PYG{err}{。}
+
+\PYG{n}{访问函数}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{类型}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{函数名}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{int}\PYG{+w}{	}\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{remainingTime}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{href}\PYG{p}{\PYGZob{}}\PYG{n}{https}\PYG{o}{:}\PYG{c+c1}{//github.com/JackLovel/QtDocumentCN/blob/master/Src/T/QTimer/qtimer.html\PYGZsh{}interval\PYGZhy{}prop\PYGZcb{}\PYGZob{}interval\PYGZcb{}。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{属性名}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{类型}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{singleShot}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{	}\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{n}{此属性保持定时器是否为单次定时器}\PYG{err}{。}
+
+\PYG{n}{单触发定时器仅触发一次}\PYG{err}{，}\PYG{n}{非单触发定时器每interval毫秒触发一次}\PYG{err}{。}
+
+\PYG{n}{此属性的默认值是false}\PYG{err}{。}
+
+\PYG{n}{访问函数}\PYG{err}{：}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{类型}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ 	}\PYG{n}{函数名}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{	}\PYG{n}{isSingleShot}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{void}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{setSingleShot}\PYG{p}{(}\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{singleShot}\PYG{p}{)}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{interval}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{singleShot}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{类型}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{属性名}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{timerType}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{控制定时器的精度}\PYG{err}{。}
+
+\PYG{n}{默认的属性是}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{CoarseTimer}\PYG{err}{。}
+
+\PYG{n}{访问函数}\PYG{err}{：}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}\PYGZob{}}\PYG{o}{|}\PYG{n}{r}\PYG{o}{|}\PYG{n}{l}\PYG{o}{|}\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{类型}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{函数名}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ 	}\PYG{n}{timerType}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{k+kt}{void}\PYG{+w}{	 }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{n}{setTimerType}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{atype}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYGZbs{}
+\PYG{err}{\PYGZbs{}}\PYG{n}{hline}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{tabular}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{section}\PYG{p}{\PYGZob{}}\PYG{n}{成员函数文档}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{QTimer}\PYG{p}{(}\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{parent}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{)}
+
+\PYG{n}{使用给定的}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{parent}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{n}{构造一个定时器}\PYG{err}{。}
+
+\PYG{p}{[}\PYG{k}{virtual}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{\PYGZdl{}}\PYG{err}{\PYGZbs{}}\PYG{n}{sim\PYGZdl{}QTimer}\PYG{p}{()}
+
+\PYG{n}{销毁定时器}\PYG{err}{。}
+
+\PYG{n}{QMetaObject}\PYG{o}{::}\PYG{n}{Connection}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{callOnTimeout}\PYG{p}{(}\PYG{n}{Functor}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{slot}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{ConnectionType}\PYG{+w}{ }\PYG{n}{connectionType}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{...)}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{创建一个从timeout}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{信号到slot的连接}\PYG{err}{，}\PYG{n}{并返回一个连接句柄}\PYG{err}{。}
+
+\PYG{n}{为了方便提供了这个方法}\PYG{err}{。}\PYG{n}{它等价于调用}\PYG{err}{：}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+\PYG{n}{It}\PYG{err}{\PYGZsq{}}\PYG{n}{s}\PYG{+w}{ }\PYG{n}{equivalent}\PYG{+w}{ }\PYG{n}{to}\PYG{+w}{ }\PYG{n}{calling}\PYG{+w}{ }\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timeout}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{slot}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{connectionType}\PYG{p}{).}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.12}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{timeout}\PYG{p}{().}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{QMetaObject}\PYG{o}{::}\PYG{n}{Connection}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{callOnTimeout}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{context}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Functor}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{slot}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{ConnectionType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{connectionType}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{...)}
+
+\PYG{n}{此函数重载}\PYG{+w}{ }\PYG{n}{callOnTimeout}\PYG{p}{().}
+
+\PYG{n}{创建一个从}\PYG{+w}{ }\PYG{n}{timeout}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{信号到slot的连接}\PYG{err}{，}\PYG{n}{将其放置在context的特定事件循环中}\PYG{err}{，}\PYG{n}{并返回该连接的句柄}\PYG{err}{。}
+
+\PYG{n}{为了方便提供了这个方法}\PYG{err}{。}\PYG{n}{它等价于调用}\PYG{err}{：}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timeout}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{context}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{slot}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{connectionType}\PYG{p}{).}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.12}\PYG{n}{引入该函数}\PYG{err}{。}
+\PYG{+w}{	}
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{timeout}\PYG{p}{().}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{QMetaObject}\PYG{o}{::}\PYG{n}{Connection}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{callOnTimeout}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{PointerToMemberFunction}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{slot}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{ConnectionType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{connectionType}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{...)}
+
+\PYG{n}{此函数重载}\PYG{+w}{ }\PYG{n}{callOnTimeout}\PYG{p}{().}
+
+\PYG{n}{创建一个从}\PYG{+w}{ }\PYG{n}{timeout}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{信号到slot的连接}\PYG{err}{，}\PYG{n}{将其放置在context的特定事件循环中}\PYG{err}{，}\PYG{n}{并返回该连接的句柄}\PYG{err}{。}
+
+\PYG{n}{为了方便提供了这个方法}\PYG{err}{。}\PYG{n}{它等价于调用}\PYG{err}{：}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timeout}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{receiver}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{slot}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{connectionType}\PYG{p}{).}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.12}\PYG{n}{引入该函数}\PYG{err}{。}
+\PYG{+w}{	}
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{()}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{timeout}\PYG{p}{().}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{o}{\PYGZpc{}}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{intervalAsDuration}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+
+\PYG{n}{以std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{n}{对象的形式返回此定时器的间隔}\PYG{err}{。}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.8}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{interval}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{isActive}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+
+\PYG{n}{如果定时器正在运行}\PYG{err}{（}\PYG{n}{正在等待}\PYG{err}{），}\PYG{n}{则返回true}\PYG{err}{；}\PYG{n}{否则}\PYG{err}{，}\PYG{n}{返回false}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{否则返回false}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{获取函数来自属性active}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{remainingTimeAsDuration}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+
+\PYG{n}{以}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{n}{对象的形式返回此定时器对象中剩余的时间}\PYG{err}{。}
+\PYG{n}{如果此定时器到期或过期}\PYG{err}{，}\PYG{n}{则返回的值为std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{o}{::}\PYG{n}{zero}\PYG{p}{()}\PYG{err}{。}
+\PYG{n}{如果找不到剩余时间或定时器未激活}\PYG{err}{，}\PYG{n}{则此函数返回负值持续时间}\PYG{err}{。}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.8}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{msec}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{member}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数调用slot}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}[}\PYG{n}{language}\PYG{o}{=}\PYG{n}{C}\PYG{o}{++}\PYG{p}{]}
+\PYG{n+nl}{Example}\PYG{p}{:}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}QApplication\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}QTimer\PYGZgt{}}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{main}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{argc}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{argv}\PYG{p}{[])}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{QApplication}\PYG{+w}{ }\PYG{n+nf}{app}\PYG{p}{(}\PYG{n}{argc}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{argv}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{l+m+mi}{600000}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{app}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SLOT}\PYG{p}{(}\PYG{n}{quit}\PYG{p}{()));}
+\PYG{+w}{	}\PYG{p}{...}
+\PYG{+w}{	}\PYG{k}{return}\PYG{+w}{ }\PYG{n}{app}\PYG{p}{.}\PYG{n}{exec}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{lstlisting}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{这个示例程序自动在10分钟}\PYG{p}{(}\PYG{l+m+mi}{600}\PYG{p}{,}\PYG{l+m+mo}{000}\PYG{n}{毫秒}\PYG{p}{)}\PYG{n}{触发}\PYG{err}{。}
+
+\PYG{n}{receiver}\PYG{+w}{ }\PYG{n}{是接收对象}\PYG{err}{，}\PYG{n}{而}\PYG{+w}{ }\PYG{n}{member}\PYG{+w}{ }\PYG{n}{是插槽}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{timerType}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{member}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数调用slot}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{receiver}\PYG{+w}{ }\PYG{n}{是接收对象}\PYG{err}{，}\PYG{n}{而}\PYG{+w}{ }\PYG{n}{member}\PYG{+w}{ }\PYG{n}{是插槽}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{timerType}\PYG{+w}{ }\PYG{n}{影响了定时器的精度}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{PointerToMemberFunction}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{method}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数调用slot}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{receiver}\PYG{+w}{ }\PYG{n}{是接收对象}\PYG{err}{，}\PYG{n}{而}\PYG{+w}{ }\PYG{n}{member}\PYG{+w}{ }\PYG{n}{是插槽}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}
+
+\PYG{n}{如果在间隔发生之前销毁了receiver}\PYG{err}{，}\PYG{n}{则不会调用该方法}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{该函数将在receiver的线程中运行}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{接收者的线程必须具有正在运行的Qt事件循环}\PYG{err}{。}
+
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.4}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{timerType}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{PointerToMemberFunction}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{method}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数调用slot}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{receiver}\PYG{+w}{ }\PYG{n}{是接收对象}\PYG{err}{，}\PYG{n}{而}\PYG{+w}{ }\PYG{n}{member}\PYG{+w}{ }\PYG{n}{是插槽}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{timerType}\PYG{+w}{ }\PYG{n}{影响了定时器的精度}\PYG{err}{。}
+
+\PYG{n}{如果在间隔发生之前销毁了receiver}\PYG{err}{，}\PYG{n}{则不会调用该方法}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{该函数将在receiver的线程中运行}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{接收者的线程必须具有正在运行的Qt事件循环}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.4}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Functor}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{functor}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数将调用functor}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{时间间隔是msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.4}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{timerType}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Functor}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{functor}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数将调用}\PYG{+w}{ }\PYG{n}{functor}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{+w}{ }\PYG{n}{对象}\PYG{err}{。}
+
+\PYG{n}{时间间隔是msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{timerType}\PYG{+w}{ }\PYG{n}{影响了定时器的精度}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{	}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.4}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{context}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Functor}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{functor}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数将调用functor}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}
+
+\PYG{n}{如果}\PYG{+w}{ }\PYG{n}{context}\PYG{+w}{ }\PYG{n}{在间隔发生之前被破坏}\PYG{err}{，}\PYG{n}{则不会调用该方法}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{该函数将在}\PYG{+w}{ }\PYG{n}{context}\PYG{+w}{ }\PYG{n}{线程中运行}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{上下文的线程必须具有正在运行的Qt事件循环}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.4}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{timerType}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{context}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Functor}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{functor}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数将调用functor}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{时间间隔是msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{timerType}\PYG{+w}{ }\PYG{n}{影响了定时器的精度}\PYG{err}{。}
+
+\PYG{n}{如果context在间隔发生之前被破坏}\PYG{err}{，}\PYG{n}{则不会调用该方法}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{该函数将在context线程中运行}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{上下文的线程必须具有正在运行的Qt事件循环}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.4}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{member}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{+w}{ }\PYG{n}{毫秒}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{timerType}\PYG{+w}{ }\PYG{n}{影响了定时器的精度}\PYG{err}{。}\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{n}{The}\PYG{+w}{ }\PYG{n}{receiver是接收对象}\PYG{err}{，}\PYG{n}{而member}\PYG{+w}{ }\PYG{n}{是插槽}\PYG{err}{。}\PYG{n}{时间间隔是}\PYG{+w}{ }\PYG{n}{msec}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.8}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{static}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TimerType}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{timerType}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QObject}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{receiver}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{member}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是一个重载函数}\PYG{err}{。}
+
+\PYG{n}{在给定的时间间隔后}\PYG{err}{，}\PYG{n}{此静态函数将调用}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{slot}\PYG{p}{\PYGZcb{}}\PYG{err}{。}
+
+\PYG{n}{非常方便去使用这个函数}\PYG{err}{。}\PYG{n}{因为你不需要关心timerEvent或创造一个局部的QTimer对象}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{receiver}\PYG{p}{\PYGZcb{}}\PYG{n}{是接收对象}\PYG{err}{，\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{member}\PYG{p}{\PYGZcb{}}\PYG{n}{是插槽}\PYG{err}{。}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{}}\PYG{n}{在持续时间对象毫秒中给出}\PYG{err}{。}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{timerType}\PYG{p}{\PYGZcb{}}\PYG{n}{影响定时器的准确性}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{该函数是可重入}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.8}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{n}{slot}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{start}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{以}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{hl}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{n}{毫秒的超时间隔启动或重新启动定时器}\PYG{err}{。}
+
+\PYG{n}{如果定时器已经在运行}\PYG{err}{，}\PYG{n}{它将被stopped并重新启动}\PYG{err}{。}\PYG{n}{如果singleShot}\PYG{+w}{ }\PYG{n}{是}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{则定时器将仅激活一次}\PYG{err}{。}
+
+\PYG{p}{[}\PYG{n}{slot}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{start}\PYG{p}{()}
+
+\PYG{n}{重载start}\PYG{p}{()}\PYG{n}{函数}\PYG{err}{。}
+
+\PYG{n}{以interval}\PYG{p}{.}\PYG{n}{中指定的超时时间启动或重新启动定时器}\PYG{err}{。}
+
+\PYG{n}{如果定时器已经运行}\PYG{err}{，}\PYG{n}{它将stopped}\PYG{+w}{ }\PYG{n}{和重新启动}\PYG{err}{。}
+
+\PYG{n}{如果}\PYG{+w}{ }\PYG{n}{singleShot}\PYG{+w}{ }\PYG{n}{是}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{则定时器将仅激活一次}\PYG{err}{。}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{start}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{chrono}\PYG{o}{::}\PYG{n}{milliseconds}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{n}{msec}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{这是重载函数}\PYG{err}{。}
+
+\PYG{n}{以msec毫秒的持续时间启动或重启定时器}\PYG{err}{。}
+
+\PYG{n}{如果定时器已经运行}\PYG{err}{，}\PYG{n}{它将stopped}\PYG{+w}{ }\PYG{n}{和重新启动}\PYG{err}{。}
+
+\PYG{n}{如果}\PYG{+w}{ }\PYG{n}{singleShot}\PYG{+w}{ }\PYG{n}{是}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{则定时器将仅激活一次}\PYG{err}{。}
+
+\PYG{n}{在Qt5}\PYG{l+m+mf}{.8}\PYG{n}{引入该函数}\PYG{err}{。}
+
+\PYG{p}{[}\PYG{n}{slot}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{stop}\PYG{p}{()}
+
+\PYG{n}{停止定时器}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{start}\PYG{p}{()}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{n}{signal}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timeout}\PYG{p}{()}
+
+\PYG{n}{定时器超时时发出此信号}\PYG{err}{。}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+\PYG{n}{这是一个私人信号}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{它可以用于信号连接}\PYG{err}{，}\PYG{n}{但不能由用户发射}\PYG{err}{。}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{notice}\PYG{p}{\PYGZcb{}}
+
+\PYG{err}{\PYGZbs{}}\PYG{n}{begin}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+\PYG{n}{interval}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{start}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{和}\PYG{+w}{ }\PYG{n}{stop}\PYG{p}{().}
+\PYG{err}{\PYGZbs{}}\PYG{n}{end}\PYG{p}{\PYGZob{}}\PYG{n}{seeAlso}\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{[}\PYG{k}{override}\PYG{+w}{ }\PYG{k}{virtual}\PYG{+w}{ }\PYG{k}{protected}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timerEvent}\PYG{p}{(}\PYG{n}{QTimerEvent}\PYG{+w}{ }\PYG{err}{\PYGZbs{}}\PYG{n}{emph}\PYG{p}{\PYGZob{}}\PYG{o}{*}\PYG{n}{e}\PYG{p}{\PYGZcb{})}
+
+\PYG{n}{重新实现自}\PYG{+w}{ }\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{timerEvent}\PYG{p}{()}\PYG{err}{。}
+
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timerId}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}
+
+\PYG{n}{如果定时器正在运行}\PYG{err}{，}\PYG{n}{则返回定时器的ID}\PYG{err}{。}\PYG{+w}{ }\PYG{n}{否则返回}\PYG{l+m+mi}{\PYGZhy{}1}\PYG{err}{。}
+
+
+
+
+\end{Verbatim}

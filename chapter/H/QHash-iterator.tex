@@ -55,7 +55,7 @@ QHash::iterator 的默认构造函数创建一个未初始化的迭代器。必�
 前使用 QHash::begin()， QHash::end()，或 QHash::find() 等 QHash 函数初
 始化它。下面是一个典型的循环，该循环打印出哈希表中的所有键值对：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int> hash;
 hash.insert("January", 1);
 hash.insert("February", 2);
@@ -65,21 +65,21 @@ hash.insert("December", 12);
 QHash<QString, int>::iterator i;
 for (i = hash.begin(); i != hash.end(); ++i)
     cout << i.key() << ": " << i.value() << Qt::endl;
-\end{lstlisting}
+\end{cppcode}
 
 与通过键的大小有序存储元素的 QMap 不同，QHash 无序存储元素。
 
 让我们通过几个例子来了解哪些情况下可以用 QHash::iterator 而不能用 QHash::const\_iterator。下面的例子将存储在 QHash 中的每个值增加2：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int>::iterator i;
 for (i = hash.begin(); i != hash.end(); ++i)
     i.value() += 2;
-\end{lstlisting}
+\end{cppcode}
 
 下面的例子移除所有键字符串的首字符是下划线的元素：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int>::iterator i = hash.begin();
 while (i != hash.end()) {
     if (i.key().startsWith('_'))
@@ -87,12 +87,12 @@ while (i != hash.end()) {
     else
         ++i;
 }
-\end{lstlisting}
+\end{cppcode}
 
 对 QHash::erase() 的调用从哈希表中移除迭代器所指元素，返回指向下一个元
 素的迭代器。下面是另一个在遍历时移除元素的方法：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int>::iterator i = hash.begin();
 while (i != hash.end()) {
     QHash<QString, int>::iterator prev = i;
@@ -100,18 +100,18 @@ while (i != hash.end()) {
     if (prev.key().startsWith('_'))
         hash.erase(prev);
 }
-\end{lstlisting}
+\end{cppcode}
 
 有人会写出像下面这样的代码：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 // WRONG
 while (i != hash.end()) {
     if (i.key().startsWith('_'))
         hash.erase(i);
     ++i;
 }
-\end{lstlisting}
+\end{cppcode}
 
 然而，这会导致程序在 ++i 处崩溃，因为调用完 erase() 后，i成为悬空迭代器。
 
@@ -179,10 +179,10 @@ T \&iterator::value() const
 
 可以通过在赋值运算符左边使用 value() 来修改元素的值，例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 if (i.key() == "Hello")
     i.value() = "Bonjour";
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{seeAlso}

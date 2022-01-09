@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{ }\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{CustomDataProxy}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{public}\PYG{+w}{ }\PYG{n}{QSortFilterProxyModel}
+\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{     }\PYG{n}{Q\PYGZus{}OBJECT}
+\PYG{+w}{ }\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{     }\PYG{n}{CustomDataProxy}\PYG{p}{(}\PYG{n}{QObject}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{parent}\PYG{p}{)}
+\PYG{+w}{       }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{QSortFilterProxyModel}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{)}
+\PYG{+w}{     }\PYG{p}{\PYGZob{}}
+\PYG{+w}{     }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{     }\PYG{p}{...}
+
+\PYG{+w}{     }\PYG{n}{QVariant}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{role}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{override}
+\PYG{+w}{     }\PYG{p}{\PYGZob{}}
+\PYG{+w}{         }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{role}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{BackgroundRole}\PYG{p}{)}
+\PYG{+w}{             }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QSortFilterProxyModel}\PYG{o}{::}\PYG{n}{data}\PYG{p}{(}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{role}\PYG{p}{);}
+
+\PYG{+w}{         }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{m\PYGZus{}customData}\PYG{p}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{n}{index}\PYG{p}{.}\PYG{n}{row}\PYG{p}{()))}
+\PYG{+w}{             }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{m\PYGZus{}customData}\PYG{p}{.}\PYG{n}{value}\PYG{p}{(}\PYG{n}{index}\PYG{p}{.}\PYG{n}{row}\PYG{p}{());}
+\PYG{+w}{         }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QSortFilterProxyModel}\PYG{o}{::}\PYG{n}{data}\PYG{p}{(}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{role}\PYG{p}{);}
+\PYG{+w}{     }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{ }\PYG{k}{private}\PYG{+w}{ }\PYG{n}{slots}\PYG{o}{:}
+\PYG{+w}{     }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{resetInternalData}\PYG{p}{()}
+\PYG{+w}{     }\PYG{p}{\PYGZob{}}
+\PYG{+w}{         }\PYG{n}{m\PYGZus{}customData}\PYG{p}{.}\PYG{n}{clear}\PYG{p}{();}
+\PYG{+w}{     }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{ }\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{   }\PYG{n}{QHash}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QVariant}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{m\PYGZus{}customData}\PYG{p}{;}
+\PYG{+w}{ }\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QMetaMethod}\PYG{+w}{ }\PYG{n}{destroyedSignal}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QMetaMethod}\PYG{o}{::}\PYG{n}{fromSignal}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{destroyed}\PYG{p}{);}
+\end{Verbatim}

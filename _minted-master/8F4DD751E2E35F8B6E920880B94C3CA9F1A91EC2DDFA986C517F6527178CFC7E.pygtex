@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{printError}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{msg}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{QFile}\PYG{+w}{ }\PYG{n}{file}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{file}\PYG{p}{.}\PYG{n}{open}\PYG{p}{(}\PYG{n}{stderr}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QIODevice}\PYG{o}{::}\PYG{n}{WriteOnly}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{file}\PYG{p}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{qstrlen}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{));}\PYG{+w}{        }\PYG{c+c1}{// 写入 stderr}
+\PYG{+w}{    }\PYG{n}{file}\PYG{p}{.}\PYG{n}{close}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

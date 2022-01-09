@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QTreeView}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{tree}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QTreeView}\PYG{p}{(}\PYG{n}{splitter}\PYG{p}{);}
+\PYG{n}{tree}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setModel}\PYG{p}{(}\PYG{n}{model}\PYG{p}{);}
+\PYG{n}{tree}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setRootIndex}\PYG{p}{(}\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{index}\PYG{p}{(}\PYG{n}{QDir}\PYG{o}{::}\PYG{n}{currentPath}\PYG{p}{()));}
+
+\PYG{n}{QListView}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{list}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QListView}\PYG{p}{(}\PYG{n}{splitter}\PYG{p}{);}
+\PYG{n}{list}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setModel}\PYG{p}{(}\PYG{n}{model}\PYG{p}{);}
+\PYG{n}{list}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setRootIndex}\PYG{p}{(}\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{index}\PYG{p}{(}\PYG{n}{QDir}\PYG{o}{::}\PYG{n}{currentPath}\PYG{p}{()));}
+\end{Verbatim}

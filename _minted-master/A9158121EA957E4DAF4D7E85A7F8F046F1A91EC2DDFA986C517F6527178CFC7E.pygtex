@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{forever}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{getchar}\PYG{p}{();}
+\PYG{+w}{	}\PYG{n}{keyPressed}\PYG{p}{.}\PYG{n}{wakeAll}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -173,30 +173,30 @@ The QTimer 类为定时器提供了高级编程接口。 要使用它，请创�
 
 一秒 (1000 毫秒) 定时器的示例 (来自 Analog Clock 例子):
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QTimer *timer = new QTimer(this);
 connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 timer->start(1000);
-\end{lstlisting}
+\end{cppcode}
 
 
 从那时起，update()槽函数每秒都被调用。
 
 你可以调用setSingleShot(true)仅触发一次定时器。你也可以使用静态QTimer::singleShot() 函数在特定的时间内调用一个槽函数
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QTimer::singleShot(200, this, SLOT(updateCaption()));
-\end{lstlisting}
+\end{cppcode}
 
 在多线程应用，你可以使用QTimer在任何一个有事件循环的线程。使用QThread::exec()，开启一个非GUI线程的事件循环。Qt使用线程亲和性定义哪一个线程会发出timeout()信号。因此，你必须在指定线程内开启和关闭定时器， 它不可能开启一个定时器从另一个线程。
 
 在特殊案例里，窗口系统的事件队列中的所有事件都已处理后，超时为0的定时器将立即超时。 在提供快速的用户界面时，这可以用来完成繁重的工作：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
  QTimer *timer = new QTimer(this);
  connect(timer, SIGNAL(timeout()), this, SLOT(processOneThing()));
  timer->start();
-\end{lstlisting}
+\end{cppcode}
 
 从那以后，processOneThing()将会被重复调用。应该以始终快速返回（通常在处理一个数据项之后）的方式编写。 因此，Qt一处理完定时器上所有工作后，就能够分发事件提供给用户接口和停止定时器。对于GUI应用来说，这是典型的方法实现繁重工作。但如今越来越多应用了多线程，我们期待0毫秒的定时器对象会逐渐被QThread取代。
 
@@ -383,9 +383,9 @@ QMetaObject::Connection QTimer::callOnTimeout(Functor \emph{slot}, Qt::Connectio
 
 为了方便提供了这个方法。它等价于调用：
 
-\begin{lstlisting}
+\begin{cppcode}
 It's equivalent to calling QObject::connect(timer, &QTimer::timeout, timer, slot, connectionType).
-\end{lstlisting}
+\end{cppcode}
 
 在Qt5.12引入该函数。
 
@@ -402,9 +402,9 @@ QMetaObject::Connection QTimer::callOnTimeout(const QObject \emph{*context}, Fun
 为了方便提供了这个方法。它等价于调用：
 
 
-\begin{lstlisting}
+\begin{cppcode}
 QObject::connect(timer, &QTimer::timeout, context, slot, connectionType).
-\end{lstlisting}
+\end{cppcode}
 	
 在Qt5.12引入该函数。
 	
@@ -421,9 +421,9 @@ QMetaObject::Connection QTimer::callOnTimeout(const QObject \emph{*receiver}, Po
 为了方便提供了这个方法。它等价于调用：
 
 
-\begin{lstlisting}
+\begin{cppcode}
 QObject::connect(timer, &QTimer::timeout, receiver, slot, connectionType).
-\end{lstlisting}
+\end{cppcode}
 	
 在Qt5.12引入该函数。
 	
@@ -464,7 +464,7 @@ std::chrono::milliseconds QTimer::remainingTimeAsDuration() const
 
 非常方便去使用这个函数。因为你不需要关心timerEvent或创造一个局部的QTimer对象。
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 Example:
 
 #include <QApplication>
@@ -477,7 +477,7 @@ int main(int argc, char *argv[])
 	...
 	return app.exec();
 }
-\end{lstlisting}
+\end{cppcode}
 
 这个示例程序自动在10分钟(600,000毫秒)触发。
 

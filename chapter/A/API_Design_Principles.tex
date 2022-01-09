@@ -187,19 +187,19 @@ struct Hsv { int hue, saturation, value }; Hsv getHsv() const;
 
 范例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 void setAge(int age);
 void setCategory(QChar cat);
 void setName(QLatin1String name);
 void setAlarm(const QSharedPointer<Alarm> &alarm); // 常引用远快于拷贝构造和析构
 // QDate, QTime, QPoint, QPointF, QSize, QSizeF, QRect 都是其它应该值传递的好例子
-\end{lstlisting}
+\end{cppcode}
 
 \section{虚函数}
 
 当 C++ 中的一个成员函数被声明为虚函数，这主要用于通过在子类中重写来自定义该函数的行为。将函数设为虚函数的目的是让对该函数的现有调用会被替代为访问自定义的代码分支。若在该类之外没人调用此函数，则在将其声明为虚函数之前需要小心斟酌：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 // Qt 3 中的 QTextEdit: 成员函数不需要作为虚函数的成员函数
 virtual void resetFormat();
 virtual void setUndoDepth( int d );
@@ -212,7 +212,7 @@ virtual void removeSelectedText( int selNum = 0 );
 virtual void removeSelection( int selNum = 0 );
 virtual void setCurrentFont( const QFont &f );
 virtual void setOverwriteMode( bool b ) { overWrite = b; }
-\end{lstlisting}
+\end{cppcode}
 
 当 QTextEdit 从 Qt 3 迁移至 Qt 4 时，几乎所有虚函数都被移除。有趣的是（但并未预料到），并没有大量的抱怨。为什么？因为 Qt 3 并未使用 QTextEdit 的多态性，Qt 3 并不会调用这些函数——只有使用者会。简单来说，否则并没有任何理由去继承 QTextEdit 并重写这些方法——除非您自己会通过多态去调用它们。若您需要在您的应用程序，也就是 Qt 之外使用多态机制，您应该自行添加。
 
@@ -249,7 +249,7 @@ virtual void setOverwriteMode( bool b ) { overWrite = b; }
 
 若需要以值语义拷贝、复制和对比一个类，则可能需要拷贝构造函数、赋值运算符重载和等于运算符重载：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 class CopyClass {
 	public:
 	CopyClass();
@@ -260,16 +260,17 @@ class CopyClass {
 	bool operator!=(const CopyClass &other) const;
 	virtual void setValue(int v);
 };
-\end{lstlisting}
+\end{cppcode}
+
 
 若创建该类的子类，则代码中会开始发生意料外的行为。通常来说，若没有虚函数和虚构造函数，则人们无法创建依赖于多态特性的子类。因此一旦虚函数或虚析构函数被添加，这会马上成为建立子类的理由，事情从此变得复杂。乍一看来，很容易觉得可以简单定义一下虚运算符重载。但顺着这条路深入下去，会导致混乱和毁灭（例如无可读性的代码）。请研究下这段代码：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 class OtherClass {
 	public:
-	const CopyClass &instance() const; // 此处会返回什么？我应该将返回值赋值给谁？
+	    const CopyClass &instance() const; // 此处会返回什么？我应该将返回值赋值给谁？
 };
-\end{lstlisting}
+\end{cppcode}
 （此小节正在施工中）
 
 \section{不变性}
@@ -290,21 +291,21 @@ const 自身并不提供太大的价值——许多语言甚至并未提供 cons
 
 修改之前：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 bool QWidget::isVisibleTo(const QWidget *ancestor) const;
 bool QWidget::isEnabledTo(const QWidget *ancestor) const;
 QPoint QWidget::mapFrom(const QWidget *ancestor, const QPoint &pos) const;
-\end{lstlisting}
+\end{cppcode}
 
 \begin{notice}
 我们在 QGraphicsItem 中修复了这些成员函数，但 QWidget 的修复需要等待 Qt 5：
 \end{notice}
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 bool isVisibleTo(const QGraphicsItem *parent) const;
 QPointF mapFromItem (const QGraphicsItem *item, const QPointF &point) const; 
-\end{lstlisting}
+\end{cppcode}
 
 返回值：const 值
 
@@ -318,7 +319,7 @@ QPointF mapFromItem (const QGraphicsItem *item, const QPointF &point) const;
 
 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 struct Foo {
 	void setValue(int v) { value = v; } int value;
 };
@@ -343,7 +344,7 @@ int main() {
 	// 其非 const 的成员函数：
 	cfoo().setValue(1); // 无法编译
 }
-\end{lstlisting}
+\end{cppcode}
 
 返回值：指针与 const 指针
 
@@ -351,22 +352,22 @@ const 成员函数应该返回指针还是 const 指针这个问题，令许多�
 
 下述范例展示了通过 const 成员函数返回的非 const 指针来规避不可变性的诸多方法之一：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QVariant CustomWidget::inputMethodQuery(Qt::InputMethodQuery query) const {
 	moveBy(10, 10); // 无法编译！
 	window()->childAt(mapTo(window(), rect().center()))->moveBy(10, 10); // 可以编译！
 }
-\end{lstlisting}
+\end{cppcode}
 
 返回 const 指针的函数，至少在一定程度上，避免了此类（可能并不希望/非预期的）副作用。但哪些函数会考虑返回 const 指针，或一组 const 指针？若我们使用 const正确 的方案，即令任何 const 成员函数返回成员变量（或一组成员变量的指针）时都是用 const 指针形式。很不幸的是，实际中这会造就无法使用的 API：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QGraphicsScene scene;
 // … 初始化场景
 foreach (const QGraphicsItem *item, scene.items()) {
 	item->setPos(qrand() % 500, qrand() % 500); // 无法编译！item 是 const 指针
 }
-\end{lstlisting}
+\end{cppcode}
 
 QGraphicsScene::items() 是 const 成员函数，这可能会让人觉得应该返回 const 指针。
 
@@ -382,14 +383,14 @@ const正确性 是 C 中的一场“圣战”（译者注：原文为 vi-emacs d
 
 但 const 成员函数的常规含义是值不会修改一个类对外可见的状态，状态在此处值“我自己的和我负责的”。这并不意味着 const 成员函数会改变它们自己的私有成员变量，但也不代表不能这么做。但通常来说，const 成员函数不会产生可见的副作用。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QSize size = widget->sizeHint(); // const
 widget->move(10, 10); // 非 const
-\end{lstlisting}
+\end{cppcode}
 
 代理对象负责处理对另一个对象的绘制工作，它的状态包含了它负责的内容，也就是包含它的绘制目标的状态。请求代理进行绘制是具有副作用的：这会改变正在被绘制的设备的外观（也意味着状态）。正因如此，令 paint() 成为 const 并不合理。任何视图控件或 QIcon 的 paint() 作为 const 都很不合理。没人会在 const 成员函数中去调用 QIcon::paint()，除非他们明确地像规避当前函数的 const 性质。而在这种场景中，显示的 const\_cast 会是更好的选择：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 // QAbstractItemDelegate::paint 是 const
 void QAbstractItemDelegate::paint(QPainter *painter,
 const QStyleOptionViewItem &option,
@@ -399,7 +400,7 @@ const QModelIndex &index) const
 void QGraphicsItem::paint(QPainter &painter, 
 const QStyleOptionGraphicsItem &option, 
 QWidget &widget = 0)
-\end{lstlisting}
+\end{cppcode}
 
 const 关键字不会为你做任何事，考虑将其移除，而非为一个成员函数提供 const/非 const 的重载版本。
 

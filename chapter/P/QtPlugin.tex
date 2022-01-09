@@ -39,28 +39,28 @@ Q\_DECLARE\_INTERFACE(ClassName, Identifier)
 该宏将给定的 Identifier（字符串字面量）与名为 ClassName 的接口类关联。
 Identifier 必须是唯一的。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 #define BrushInterface_iid "org.qt-project.Qt.Examples.PlugAndPaint.BrushInterface/1.0"
 
 Q_DECLARE_INTERFACE(BrushInterface, BrushInterface_iid)
-\end{lstlisting}
+\end{cppcode}
 
 通常在头文件中 ClassName 的类定义之后立即使用此宏。有关详细信息，请参见插件与绘制示例。
 
 如果要对命名空间中的接口类使用 Q\_DECLARE\_INTERFACE，请务必保证 Q\_DECLARE\_INTERFACE 不在命名空间中。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 namespace Foo
 {
     struct MyInterface { ... };
 }
 
 Q_DECLARE_INTERFACE(Foo::MyInterface, "org.examples.MyInterface")
-\end{lstlisting}
+\end{cppcode}
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 Q\_INTERFACES() 和如何创建 Qt 插件。
-\end{lstlisting}
+\end{cppcode}
 
 Q\_IMPORT\_PLUGIN(PluginName)
 
@@ -71,16 +71,16 @@ Q\_IMPORT\_PLUGIN(PluginName)
 
 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 Q_IMPORT_PLUGIN(qjpeg)
-\end{lstlisting}
+\end{cppcode}
 
 构建应用程序时，链接器必须包含静态插件。对于 Qt 预定义的插件，可以使用 QTPLUGIN 将插件加入你的构建系统。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 TEMPLATE      = app
 QTPLUGIN     += qjpeg qgif    # image formats
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{seeAlso}
@@ -97,12 +97,12 @@ Q\_PLUGIN\_METADATA(...)
 
 示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 class MyInstance : public QObject
 {
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QDummyPlugin" FILE "mymetadata.json")
 };
-\end{lstlisting}
+\end{cppcode}
 
 有关详细信息，请参见插件与绘制示例。
 

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{inline}\PYG{+w}{ }\PYG{n}{uint}\PYG{+w}{ }\PYG{n+nf}{qHash}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{key}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{uint}\PYG{+w}{ }\PYG{n}{seed}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{key}\PYG{p}{.}\PYG{n}{empty}\PYG{p}{())}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{seed}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{else}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{qHashBits}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{key}\PYG{p}{.}\PYG{n}{front}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{.}\PYG{n}{size}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{k}{sizeof}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{seed}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

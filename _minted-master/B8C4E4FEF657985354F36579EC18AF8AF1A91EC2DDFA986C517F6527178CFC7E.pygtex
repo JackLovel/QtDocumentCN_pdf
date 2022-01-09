@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{MyNamespace}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{p}{...}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Q\PYGZus{}DECLARE\PYGZus{}METATYPE}\PYG{p}{(}\PYG{n}{MyNamespace}\PYG{o}{::}\PYG{n}{MyStruct}\PYG{p}{)}
+\end{Verbatim}

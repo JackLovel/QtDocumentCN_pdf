@@ -194,7 +194,7 @@ QFileInfo 可以在构造函数中或稍后在 setFile() 设置文件，可以�
 在 Unix 系统（包括 macOS 和 iOS），此类的属性的 getter 函数（例如获取时间或大小）返回的都是目标文件的值，而不是符号链接的（因为Unix透明地处理符号链接）。使用 QFile 打开符号链接实际上是打开链接的目标。举例如下：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 #ifdef Q_OS_UNIX
 
 QFileInfo info1("/home/bob/bin/untabify");
@@ -209,13 +209,13 @@ info2.absoluteFilePath();   // returns "/opt/pretty++/bin/untabify"
 info2.size();               // returns 56201
 
 #endif
-\end{lstlisting}
+\end{cppcode}
 
 在Windows上，快捷方式（“.lnk”文件）当前被视为符号链接。 和Unix系统一样，
 属性的 getter 返回目标文件的大小，而不是.lnk文件本身。 此行为已被弃用，
 并且可能会在Qt的未来版本中删除，此后，\hl{.lnk} 文件将被视为常规文件。
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 #ifdef Q_OS_WIN
 
 QFileInfo info1("C:\\Documents and Settings\\Bob\\untabify.lnk");
@@ -230,7 +230,7 @@ info2.absoluteFilePath();   // returns "C:/Pretty++/untabify"
 info2.size();               // returns 63942
 
 #endif
-\end{lstlisting}
+\end{cppcode}
 
 Elements of the file's name can be extracted with path() and fileName(). The fileName()'s parts can be extracted with baseName(), suffix() or completeSuffix(). QFileInfo objects to directories created by Qt classes will not have a trailing file separator. If you wish to use trailing separators in your own file info objects, just append one to the file name given to the constructors or setFile().
 
@@ -249,16 +249,16 @@ Elements of the file's name can be extracted with path() and fileName(). The fil
 
 要启用它，请包含以下行：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-\end{lstlisting}
+\end{cppcode}
 
 然后，通过将\hl{qt\_ntfs\_permission\_lookup}递增和递减 1 来打开和关闭权限检查。
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 qt_ntfs_permission_lookup++; // 打开检查
 qt_ntfs_permission_lookup--; // 再次关闭
-\end{lstlisting}
+\end{cppcode}
 
 性能问题
 
@@ -368,6 +368,6 @@ the path will begin '//sharename/'. QFileInfo will uppercase drive
 letters. Note that QDir does not do this. The code snippet below shows
 this.
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QFileInfo fi("c:/temp/foo"); => fi.absoluteFilePath() => "C:/temp/foo"
-\end{lstlisting}
+\end{cppcode}

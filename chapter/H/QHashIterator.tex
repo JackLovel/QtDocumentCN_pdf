@@ -58,7 +58,7 @@ QHashIterator<Key, T> 用来遍历 QHash (或 QMultiHash)。如果想在遍历�
 
 QHashIterator 构造函数接受 QHash 作为参数。构造后，迭代器位于哈希表的最开始位置（第一个元素之前）。下面的例子演示如何顺序遍历所有元素：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<int, QWidget *> hash;
 ...
 QHashIterator<int, QWidget *> i(hash);
@@ -66,7 +66,7 @@ while (i.hasNext()) {
     i.next();
     qDebug() << i.key() << ": " << i.value();
 }
-\end{lstlisting}
+\end{cppcode}
 
 next() 函数返回哈希表中的下一个元素并将迭代器前移。key() 和 value() 函数返回跳过的最后一个元素的键和值。
 
@@ -84,13 +84,13 @@ next() 函数返回哈希表中的下一个元素并将迭代器前移。key() �
 
 如果想查找特定值的所有实例，循环使用 findNext()。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHashIterator<int, QWidget *> i(hash);
 while (i.findNext(widget)) {
     qDebug() << "Found widget " << widget << " under key "
              << i.key();
 }
-\end{lstlisting}
+\end{cppcode}
 
 同一哈希表可以使用多个迭代器。如果在 QHashIterator处于活动状态时修改哈希表，QHashIterator 将继续在原哈希表上遍历，而忽略修改后的副本。
 

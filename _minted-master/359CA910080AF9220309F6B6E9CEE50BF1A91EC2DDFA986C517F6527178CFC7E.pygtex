@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{forever}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{mutex}\PYG{p}{.}\PYG{n}{lock}\PYG{p}{();}
+\PYG{+w}{	}\PYG{n}{keyPressed}\PYG{p}{.}\PYG{n}{wait}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{mutex}\PYG{p}{);}
+\PYG{+w}{	}\PYG{n}{do\PYGZus{}something}\PYG{p}{();}
+\PYG{+w}{	}\PYG{n}{mutex}\PYG{p}{.}\PYG{n}{unlock}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

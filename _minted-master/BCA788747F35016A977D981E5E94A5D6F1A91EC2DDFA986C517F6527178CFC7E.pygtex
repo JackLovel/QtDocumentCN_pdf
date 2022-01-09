@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// 线程 1 调用 method1()}
+\PYG{n}{number}\PYG{+w}{ }\PYG{o}{*=}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 30}
+
+\PYG{c+c1}{// 线程 2 调用 method2().}
+\PYG{c+c1}{//}
+\PYG{c+c1}{// 很可能线程 1 已被操作系统置于等待队列}
+\PYG{c+c1}{// 操作系统运行线程 2}
+\PYG{n}{number}\PYG{+w}{ }\PYG{o}{*=}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 90}
+\PYG{n}{number}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 45}
+
+\PYG{c+c1}{// 线程 1 执行完毕}
+\PYG{n}{number}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 是 11，而不是 10}
+\end{Verbatim}

@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{indexA}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{index}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{p}{());}
+\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{indexC}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{index}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{p}{());}
+\end{Verbatim}
