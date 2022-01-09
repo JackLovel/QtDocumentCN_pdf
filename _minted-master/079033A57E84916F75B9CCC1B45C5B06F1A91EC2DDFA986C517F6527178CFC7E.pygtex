@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZlt{}}\PYG{n}{file}\PYG{+w}{ }\PYG{n}{alias}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}cut\PYGZhy{}img.png\PYGZdq{}}\PYG{o}{\PYGZgt{}}\PYG{n}{images}\PYG{o}{/}\PYG{n}{cut}\PYG{p}{.}\PYG{n}{png}\PYG{o}{\PYGZlt{}/}\PYG{n}{file}\PYG{o}{\PYGZgt{}}
+\end{Verbatim}

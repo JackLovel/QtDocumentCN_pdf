@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QLabel}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{label}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{qobject\PYGZus{}cast}\PYG{o}{\PYGZlt{}}\PYG{n}{QLabel}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{);}
+\PYG{c+c1}{// label is 0}
+\end{Verbatim}

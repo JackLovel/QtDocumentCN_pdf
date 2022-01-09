@@ -507,12 +507,12 @@ qint64 QDate::daysTo(const QDate \&\emph{d}) const
 
 示例:
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QDate d1(1995, 5, 17);  // May 17, 1995
 QDate d2(1995, 5, 20);  // May 20, 1995
 d1.daysTo(d2);          // returns 3
 d2.daysTo(d1);          // returns -3
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{seeAlso}
@@ -594,19 +594,19 @@ yyyy&	四位数年份。 如果是负数，加上符号是五个字符\\
 
 所有其他字符将会被舍弃，单引号('')包裹的内容，无论是否包含格式占位符也会被舍弃。例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QDate date = QDate::fromString("1MM12car2003", "d'MM'MMcaryyyy");
 // date is 1 December 2003
-\end{lstlisting}
+\end{cppcode}
 
 如果字符串不符合格式，一个将返回一个非法的 QDate。不需要前面补0的格式
 是贪婪的，这意味着他们会读取两位数，尽管数字大小超出日期合法范围，并且
 会占据给后续格式读取的数字位置。例如，下面的日期可以表示1月30日，但M格
 式会捕获两位数字，导致日期返回非法：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QDate date = QDate::fromString("130", "Md"); // invalid
-\end{lstlisting}
+\end{cppcode}
 
 年月日中，没有出现在格式中的，将会使用如下默认值
 
@@ -622,11 +622,11 @@ Day&	1\\
 
 下面是默认值的示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QDate::fromString("1.30", "M.d");           // January 30 1900
 QDate::fromString("20000110", "yyyyMMdd");  // January 10, 2000
 QDate::fromString("20000110", "yyyyMd");    // January 10, 2000
-\end{lstlisting}
+\end{cppcode}
 
 
 
@@ -704,7 +704,7 @@ isNull() 和 QCalendar::isDateValid()。
 
 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QDate::isValid(2002, 5, 17);  // true
 QDate::isValid(2002, 2, 30);  // false (2月没有20日)
 QDate::isValid(2004, 2, 29);  // true (是闰年)
@@ -712,7 +712,7 @@ QDate::isValid(2000, 2, 29);  // true (是闰年)
 QDate::isValid(2006, 2, 29);  // false (不是闰年)
 QDate::isValid(2100, 2, 29);  // false (不是闰年)
 QDate::isValid(1202, 6, 6);   // true (即使这一年在格里高利历之前)
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{seeAlso}

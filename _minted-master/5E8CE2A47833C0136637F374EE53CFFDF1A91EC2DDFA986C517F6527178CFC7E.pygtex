@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
+\PYG{n}{list}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}A\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}B\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}C\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}B\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}A\PYGZdq{}}\PYG{p}{;}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{indexOf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}B\PYGZdq{}}\PYG{p}{);}\PYG{+w}{          }\PYG{c+c1}{// 返回 1}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{indexOf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}B\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}\PYG{+w}{       }\PYG{c+c1}{// 返回 1}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{indexOf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}B\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{);}\PYG{+w}{       }\PYG{c+c1}{// 返回 3}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{indexOf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}X\PYGZdq{}}\PYG{p}{);}\PYG{+w}{          }\PYG{c+c1}{// 返回 \PYGZhy{}1}
+\end{Verbatim}

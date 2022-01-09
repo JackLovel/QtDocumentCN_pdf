@@ -158,7 +158,7 @@ size() 返回文件大小。您可以通过 pos() 获取当前文件位置，或
 
 如下例子逐行地直接读取文本文件：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QFile file("in.txt");
 if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     return;
@@ -167,7 +167,7 @@ while (!file.atEnd()) {
      QByteArray line = file.readLine();
      process_line(line);
 }
-\end{lstlisting}
+\end{cppcode}
 
 QIODevice::Text flag传递给 open() ，其告诉Qt将Windows风格的换行符
 ("$\backslash$r$\backslash$n") 转换为 C++风格的换行符("$\backslash$n")。默认情况下，QFile 假设为二进制模式读取，不做字节转换。
@@ -176,7 +176,7 @@ QIODevice::Text flag传递给 open() ，其告诉Qt将Windows风格的换行符
 
 如下例子逐行地通过 QTextStream 读取文本文件：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
     QFile file("in.txt");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
@@ -186,14 +186,14 @@ QIODevice::Text flag传递给 open() ，其告诉Qt将Windows风格的换行符
         QString line = in.readLine();
         process_line(line);
     }
-\end{lstlisting}
+\end{cppcode}
 
 QTextStream 会特意把8位文件中字节数据转换为QString中16位UTF-16字符。默认情况下，其假设用户使用系统默认编码（例如unix平台上是UTF-8；详情参看 QTextCodec::codecForLocale() ）。编码可以通过 QTextStream::setCodec() 改变。
 
 要写入文本，您可以使用左移运算符运算符 operator<<()，在 QTextStream 中，
 其重载用于讲右侧内容追加的左侧，示例如下：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
     QFile file("out.txt");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         return;
@@ -201,7 +201,7 @@ QTextStream 会特意把8位文件中字节数据转换为QString中16位UTF-16�
     QTextStream out(&file);
     out << "The magic number is: " << 49 << "\n";
 
-\end{lstlisting}
+\end{cppcode}
 
 QDataStream 和上文很相似，详情请见相当应类的文档。
 
@@ -214,7 +214,7 @@ size() 会返回0，但你依然可以读取更多数据；这些数据在你调
 readAll(), read() 或 readLine() 指导没有数据来替代此功能。下面的例子使
 用 QTextStream 逐行读取 \hl{/proc/modules}：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
     QFile file("/proc/modules");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
@@ -225,7 +225,7 @@ readAll(), read() 或 readLine() 指导没有数据来替代此功能。下面�
         process_line(line);
         line = in.readLine();
     }
-\end{lstlisting}
+\end{cppcode}
 
 \textbf{信号}
 
@@ -252,9 +252,9 @@ typedef QFile::DecoderFn
 这个类型定义了一个如下形式的函数的指针：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QString myDecoderFunc(const QByteArray &localFileName);
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{seeAlso}
@@ -455,7 +455,7 @@ bool QFile::open(FILE \emph{*fh}, QIODevice::OpenMode \emph{mode}, QFileDevice::
 例如：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 #include <stdio.h>
 
 void printError(const char* msg)
@@ -465,7 +465,7 @@ void printError(const char* msg)
     file.write(msg, qstrlen(msg));        // 写入 stderr
     file.close();
 }
-\end{lstlisting}
+\end{cppcode}
 
 当一个 QFile 通过此函数被被打开，close() 的行为由 AutoCloseHandle flag决定。如果指定了 AutoCloseHandle ，且此函数执行成功，那么 close() 会关闭传入的句柄。否则，close() 不会关闭文件，只会刷新数据(flush)。
 
@@ -488,9 +488,9 @@ mode}。顺序读取设备，例如标准输入输出，不受此限制影响。
 您需要启用控制台应用支持，才能在控制台使用标准输入输出。要启用，可以在
 项目文件中加入：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 CONFIG += console
-\end{lstlisting}
+\end{cppcode}
 
 \begin{seeAlso}
 close().
@@ -627,13 +627,13 @@ void QFile::setFileName(const QString \emph{\&name})
 
 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QFile file;
 QDir::setCurrent("/tmp");
 file.setFileName("readme.txt");
 QDir::setCurrent("/home");
 file.open(QIODevice::ReadOnly);      // 打开Unix下文件 "/home/readme.txt"
-\end{lstlisting}
+\end{cppcode}
 
 
 

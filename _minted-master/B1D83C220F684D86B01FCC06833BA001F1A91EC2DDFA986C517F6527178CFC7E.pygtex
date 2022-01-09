@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QGraphicsScene}\PYG{+w}{ }\PYG{n}{scene}\PYG{p}{;}
+\PYG{c+c1}{// … 初始化场景}
+\PYG{n}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QGraphicsItem}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{item}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{scene}\PYG{p}{.}\PYG{n}{items}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{n}{item}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setPos}\PYG{p}{(}\PYG{n}{qrand}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZpc{}}\PYG{+w}{ }\PYG{l+m+mi}{500}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{qrand}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZpc{}}\PYG{+w}{ }\PYG{l+m+mi}{500}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 无法编译！item 是 const 指针}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

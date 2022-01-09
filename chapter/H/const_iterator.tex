@@ -55,7 +55,7 @@ QHash::const\_iterator 的默认构造函数创建一个未初始化的迭代器
 等 QHash 函数初始化它。下面是一个典型的循环，该循环打印出 map 中的所有
 键值对：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QHash<QString, int> hash;
 hash.insert("January", 1);
 hash.insert("February", 2);
@@ -65,7 +65,7 @@ hash.insert("December", 12);
 QHash<QString, int>::const_iterator i;
 for (i = hash.constBegin(); i != hash.constEnd(); ++i)
     cout << i.key() << ": " << i.value() << Qt::endl;
-\end{lstlisting}
+\end{cppcode}
 
 与通过键的大小有序存储元素的 QMap 不同，QHash 无序存储元素。唯一的保证是共享同一键的元素（通过 QMultiHash 的函数插入）将按照从最新到最早插入值的顺序连续出现。
 

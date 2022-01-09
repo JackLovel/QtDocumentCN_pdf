@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QRegExp}\PYG{+w}{ }\PYG{n}{regExp}\PYG{p}{;}
+\PYG{n}{regExp}\PYG{p}{.}\PYG{n}{setCaseSensitive}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{CaseInsensitive}\PYG{p}{);}
+\PYG{n}{regExp}\PYG{p}{.}\PYG{n}{setPattern}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}.\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{regExp}\PYG{p}{.}\PYG{n}{setPatternSyntax}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{WildcardSyntax}\PYG{p}{);}
+\end{Verbatim}

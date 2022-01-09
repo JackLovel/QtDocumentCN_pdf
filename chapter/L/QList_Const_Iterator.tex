@@ -76,7 +76,7 @@ QList::const\_iterator 允许你遍历一个 QList (或一个 QQueue)。如果�
 
 QList::const\_iterator 的默认构造函数会创建一个未初始化的迭代器。在迭代之前你必须通过 QList 的方法，如 QList::constBegin(), QList::constEnd()，或 QList::insert() 将其初始化。这是一个常见的打印列表中保存的所有元素的循环:
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list.append("January");
 list.append("February");
@@ -86,18 +86,18 @@ list.append("December");
 QList<QString>::const_iterator i;
 for (i = list.constBegin(); i != list.constEnd(); ++i)
     cout << *i << Qt::endl;
-\end{lstlisting}
+\end{cppcode}
 
 大多数 QList 的方法接收一个整型索引而不是一个迭代器作为参数。因此，迭代器实际上在和 QList 交互时很少被使用。一个 STL 风格迭代器非常有使用意义的地方是作为泛型算法的参数。
 
 例如，下列代码展示了如何删除保存在一个 QList<QWidget *> 中的所有物件：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QWidget *> list;
 ...
 qDeleteAll(list.constBegin(), list.constEnd());
-\end{lstlisting}
+\end{cppcode}
 
 
 多个迭代器可以作用在同一个列表上。然而，需要注意的是对该 QList 进行任意非常量的方法调用都会使所有已存在的迭代器状态变成未定义。如果需要在一个比较长周期内保证迭代器有效，我们建议你使用 QLinkedList 而不是 QList。

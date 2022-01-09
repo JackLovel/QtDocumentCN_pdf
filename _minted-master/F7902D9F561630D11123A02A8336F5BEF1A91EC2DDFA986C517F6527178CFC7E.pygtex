@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{MyMfcView}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{public}\PYG{+w}{ }\PYG{n}{CView}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{Q\PYGZus{}DECLARE\PYGZus{}TR\PYGZus{}FUNCTIONS}\PYG{p}{(}\PYG{n}{MyMfcView}\PYG{p}{)}
+
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{MyMfcView}\PYG{p}{();}
+\PYG{+w}{    }\PYG{p}{...}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

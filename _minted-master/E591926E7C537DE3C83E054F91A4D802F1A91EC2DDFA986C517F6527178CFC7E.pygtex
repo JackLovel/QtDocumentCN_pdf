@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{cutAct}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QAction}\PYG{p}{(}\PYG{n}{QIcon}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}:/images/cut.png\PYGZdq{}}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{tr}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Cu\PYGZam{}t\PYGZdq{}}\PYG{p}{),}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{);}
+\end{Verbatim}

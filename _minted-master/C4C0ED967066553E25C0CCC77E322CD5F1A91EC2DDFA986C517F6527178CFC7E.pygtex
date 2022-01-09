@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{MainWindow::selectionChangedSlot}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QItemSelection}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{c+cm}{/*newSelection*/}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QItemSelection}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{c+cm}{/*oldSelection*/}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{c+c1}{//get the text of the selected item}
+\PYG{+w}{    }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{index}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{treeView}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{selectionModel}\PYG{p}{()}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{currentIndex}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{selectedText}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{index}\PYG{p}{.}\PYG{n}{data}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{DisplayRole}\PYG{p}{).}\PYG{n}{toString}\PYG{p}{();}
+\PYG{+w}{    }\PYG{c+c1}{//find out the hierarchy level of the selected item}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{hierarchyLevel}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{seekRoot}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{index}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{seekRoot}\PYG{p}{.}\PYG{n}{parent}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{seekRoot}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{seekRoot}\PYG{p}{.}\PYG{n}{parent}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{hierarchyLevel}\PYG{o}{++}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{showString}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}1, Level \PYGZpc{}2\PYGZdq{}}\PYG{p}{).}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{selectedText}\PYG{p}{)}
+\PYG{+w}{                         }\PYG{p}{.}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{hierarchyLevel}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{n}{showString}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

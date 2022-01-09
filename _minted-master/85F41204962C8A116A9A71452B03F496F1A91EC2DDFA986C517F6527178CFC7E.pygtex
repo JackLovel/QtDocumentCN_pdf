@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{TEMPLATE}\PYG{+w}{      }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{app}
+\PYG{n}{QTPLUGIN}\PYG{+w}{     }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{qjpeg}\PYG{+w}{ }\PYG{n}{qgif}\PYG{+w}{    }\PYG{err}{\PYGZsh{}}\PYG{+w}{ }\PYG{n}{image}\PYG{+w}{ }\PYG{n}{formats}
+\end{Verbatim}

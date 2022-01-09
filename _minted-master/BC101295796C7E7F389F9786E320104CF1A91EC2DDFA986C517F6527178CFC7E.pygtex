@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// 在 MainWindow 类声明中}
+\PYG{c+cp}{\PYGZsh{}ifndef Q\PYGZus{}MOC\PYGZus{}RUN}
+\PYG{c+c1}{// 将标签内容定义为空，以确保对编译器不可见}
+\PYG{c+cp}{\PYGZsh{}  define MY\PYGZus{}CUSTOM\PYGZus{}TAG}
+\PYG{c+cp}{\PYGZsh{}endif}
+\PYG{p}{...}
+\PYG{k}{private}\PYG{+w}{ }\PYG{n}{slots}\PYG{o}{:}
+\PYG{+w}{	}\PYG{n}{MY\PYGZus{}CUSTOM\PYGZus{}TAG}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{testFunc}\PYG{p}{();}
+\end{Verbatim}

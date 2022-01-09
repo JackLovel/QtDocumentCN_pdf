@@ -8,9 +8,9 @@ QUdpSocket等类继承。QAbstractSocket 类为所有的socket通信类提供了
 	\hline
 	属性 & 方法 \\
   \hline
-	头文件 & \#include<QAbstractSocket>\\      
+	头文件 & \#include <QAbstractSocket>\\      
 	\hline
-	qmake & QT+=network\\      
+	qmake & QT += network\\      
 	\hline
 	父类 & QIODevice\\
 	\hline
@@ -24,24 +24,24 @@ QUdpSocket等类继承。QAbstractSocket 类为所有的socket通信类提供了
 \hline
 类型&方法 \\ 
 \hline
-enum&	BindFlag { ShareAddress, DontShareAddress, ReuseAddressHint,
-      DefaultForPlatform }\\
+enum&	BindFlag \{ ShareAddress, DontShareAddress, ReuseAddressHint,
+      DefaultForPlatform \}\\
 \hline
 flags&	BindMode\\
 \hline
-enum&	NetworkLayerProtocol{ IPv4Protocol, IPv6Protocol, AnyIPProtocol, UnknownNetworkLayerProtocol }\\
+enum&	NetworkLayerProtocol \{ IPv4Protocol, IPv6Protocol, AnyIPProtocol, UnknownNetworkLayerProtocol \}\\
 \hline
-enum&	PauseMode { PauseNever, PauseOnSslErrors }\\
+enum&	PauseMode \{ PauseNever, PauseOnSslErrors \}\\
 \hline
 flags&	PauseModes\\
 \hline
-enum&	SocketError { ConnectionRefusedError, RemoteHostClosedError, HostNotFoundError, SocketAccessError, SocketResourceError, …, UnknownSocketError }\\
+enum&	SocketError \{ ConnectionRefusedError, RemoteHostClosedError, HostNotFoundError, SocketAccessError, SocketResourceError, …, UnknownSocketError \}\\
 \hline
-enum&	SocketOption{ LowDelayOption, KeepAliveOption, MulticastTtlOption, MulticastLoopbackOption, TypeOfServiceOption, …, PathMtuSocketOption }\\
+enum&	SocketOption \{ LowDelayOption, KeepAliveOption, MulticastTtlOption, MulticastLoopbackOption, TypeOfServiceOption, …, PathMtuSocketOption \}\\
 \hline
-enum&	SocketState { UnconnectedState, HostLookupState, ConnectingState, ConnectedState, BoundState, …, ListeningState }\\
+enum&	SocketState \{ UnconnectedState, HostLookupState, ConnectingState, ConnectedState, BoundState, …, ListeningState \}\\
 \hline
-enum&	SocketType { TcpSocket, UdpSocket, SctpSocket, UnknownSocketType }\\
+enum&	SocketType \{ TcpSocket, UdpSocket, SctpSocket, UnknownSocketType \}\\
   \hline
 \end{tabular}
 
@@ -245,7 +245,7 @@ QAbstractSocket 提供了一组函数，这些函数可以挂起调用线程，�
 
 Qt官方提供了如下示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 int numRead = 0, numReadTotal = 0;
 char buffer[50];
 
@@ -259,7 +259,7 @@ forever {
 		break;
 }
 
-\end{lstlisting}
+\end{cppcode}
 
 waitForReadyRead() 成员函数返回值为 false，则说明连接已关闭或发生了错误。
 
@@ -731,7 +731,7 @@ void QAbstractSocket::abort()
 
 在循环中从套接字读取数据时，最常使用此功能。 例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 // This slot is connected to QAbstractSocket::readyRead()
 void SocketClass::readyReadSlot()
 {
@@ -740,7 +740,7 @@ void SocketClass::readyReadSlot()
 		....
 	}
 }
-\end{lstlisting}
+\end{cppcode}
 
 
 
@@ -1114,9 +1114,9 @@ void QAbstractSocket::setProxy(const QNetworkProxy \&networkProxy )
 您可以通过指定 networkProxy 为 QNetworkProxy::NoProxy 以禁止套接字使用代理网络：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 socket->setProxy(QNetworkProxy::NoProxy);
-\end{lstlisting} 
+\end{cppcode}
 
 
 套接字默认使用的代理为 QNetworkProxy::DefaultProxy 即套接字会使用应用程序的代理设置，将代理设置为 QNetworkProxy::setApplicationProxy 也可以达到同样的效果。如果您使用 QNetworkProxyFactory :: setApplicationProxyFactory 设置了 QNetworkProxy 插件工厂，它将使用 QNetworkProxyQuery :: TcpSocket 类型查询该插件工厂。
@@ -1265,11 +1265,11 @@ waitForReadyRead()。
 这里Qt官方给了一个1秒内等待套接字建立到主机的连接的示例：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 socket->connectToHost("imap", 143);
 if (socket->waitForConnected(1000))
 	qDebug("Connected!");
-\end{lstlisting}
+\end{cppcode}
 
 如果将 msecs 设置为-1，这个函数将不会超时。
 
@@ -1300,13 +1300,13 @@ connectToHost() 和 connected()。
 
 这里Qt官方给了一个1秒内等待套接字从主机断开连接的示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 socket->disconnectFromHost();
 if (socket->state() == QAbstractSocket::UnconnectedState
 	|| socket->waitForDisconnected(1000)) {
 		qDebug("Disconnected!");
  }
-\end{lstlisting}
+\end{cppcode}
 
 如果 msecs 设为-1，该函数将不会超时。
 

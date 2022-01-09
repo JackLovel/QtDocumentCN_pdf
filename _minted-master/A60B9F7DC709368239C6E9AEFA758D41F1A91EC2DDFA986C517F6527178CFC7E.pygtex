@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
+\PYG{p}{...}
+\PYG{n}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{str}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{str}\PYG{p}{;}
+\PYG{n}{和其他}\PYG{+w}{ }\PYG{n}{C}\PYG{o}{++}\PYG{+w}{ }\PYG{n}{循环结构类似}\PYG{err}{，}\PYG{n}{你可以使用大括号将循环体包围}\PYG{err}{，}\PYG{n}{也可以使用}\PYG{+w}{ }\PYG{k}{break}\PYG{+w}{ }\PYG{n}{跳出循环}\PYG{err}{。}
+
+\PYG{n}{QLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
+\PYG{p}{...}
+\PYG{n}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{str}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{str}\PYG{p}{.}\PYG{n}{isEmpty}\PYG{p}{())}
+\PYG{+w}{        }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{str}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

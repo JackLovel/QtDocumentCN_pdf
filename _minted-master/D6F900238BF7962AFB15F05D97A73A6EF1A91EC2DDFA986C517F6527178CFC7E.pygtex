@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{MyStruct}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{...}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{Q\PYGZus{}DECLARE\PYGZus{}METATYPE}\PYG{p}{(}\PYG{n}{MyStruct}\PYG{p}{)}
+\end{Verbatim}

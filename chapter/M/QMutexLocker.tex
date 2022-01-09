@@ -49,7 +49,7 @@ QMutexLocker 应该在需要锁定 QMutex 的函数中创建。在创建 QMutexL
 例如，此复杂函数在进入函数时锁定 QMutex，并在所有出口点解锁互斥量：很方便确保成对执行锁和解锁。
 例如，假设有一个方法将消息打印到两行上：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
     int complexFunction(int flag)
     {
         mutex.lock();
@@ -82,12 +82,12 @@ QMutexLocker 应该在需要锁定 QMutex 的函数中创建。在创建 QMutexL
         mutex.unlock();
         return retVal;
     }
-\end{lstlisting}
+\end{cppcode}
 
 该示例在开发过程中会变得更加复杂，也更加容易出错。 
 使用 QMutexLocker 可大大简化代码，且可读性更好：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
     int complexFunction(int flag)
     {
         QMutexLocker locker(&mutex);
@@ -114,7 +114,7 @@ QMutexLocker 应该在需要锁定 QMutex 的函数中创建。在创建 QMutexL
 
         return retVal;
     }
-\end{lstlisting}
+\end{cppcode}
 
 现在，当 QMutexLocker 对象被销毁时（当函数返回时，因为 locker 是一个栈变量），互斥量将始终被解锁。
 同样的原则也适用于抛出和捕获异常的代码。
@@ -128,7 +128,7 @@ QMutexLocker 还提供一个 mutex() 成员函数，该函数返回QMutexLocker 
 
 例如:
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
     class SignalWaiter
     {
     private:
@@ -148,7 +148,7 @@ QMutexLocker 还提供一个 mutex() 成员函数，该函数返回QMutexLocker 
             ...
         }
     };
-\end{lstlisting}
+\end{cppcode}
 
 \begin{seeAlso}
 ReadLockr，QWriteLocker，QMutex。

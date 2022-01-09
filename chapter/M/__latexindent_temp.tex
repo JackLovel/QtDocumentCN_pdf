@@ -90,7 +90,7 @@ QMultiHash<Key, T> 是一种 Qt 泛型容器类。它继承 QHash 并扩展了�
 
 例子：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMultiHash<QString, int> hash1, hash2, hash3;
 
 hash1.insert("plenty", 100);
@@ -102,7 +102,7 @@ hash2.insert("plenty", 5000);
 
 hash3 = hash1 + hash2;
 // hash3.size() == 3
-\end{lstlisting}
+\end{cppcode}
 
 %%%%%%%
 
@@ -112,23 +112,23 @@ hash3 = hash1 + hash2;
 可以使用 values(const Key \&key)，
 该函数返回一个 QList：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<int> values = hash.values("plenty");
 for (int i = 0; i < values.size(); ++i)
     cout << values.at(i) << Qt::endl;
-\end{lstlisting}
+\end{cppcode}
 
 共享同一键的元素按照从最新到最早插入的顺序返回。
 
 更有效的方法是传递键调用 find() 取得第一个元素的 STL 风格迭代器，从该元素开始遍历：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QMultiHash<QString, int>::iterator i = hash.find("plenty");
 while (i != hash.end() && i.key() == "plenty") {
     cout << i.value() << Qt::endl;
     ++i;
 }
-\end{lstlisting}
+\end{cppcode}
 
 QMultiHash 键和值的数据类型必须是可赋值数据类型。
 不能存储类似 QWidget 这样的对象作为值；

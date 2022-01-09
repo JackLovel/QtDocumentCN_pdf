@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{2002}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{17}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// true}
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{2002}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{30}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// false (2月没有20日)}
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{2004}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{29}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// true (是闰年)}
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{2000}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{29}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// true (是闰年)}
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{2006}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{29}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// false (不是闰年)}
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{2100}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{29}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// false (不是闰年)}
+\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{isValid}\PYG{p}{(}\PYG{l+m+mi}{1202}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{);}\PYG{+w}{   }\PYG{c+c1}{// true (即使这一年在格里高利历之前)}
+\end{Verbatim}

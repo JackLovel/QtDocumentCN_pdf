@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}memory\PYGZgt{}}
+
+\PYG{n}{Q\PYGZus{}DECLARE\PYGZus{}SMART\PYGZus{}POINTER\PYGZus{}METATYPE}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{shared\PYGZus{}ptr}\PYG{p}{)}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{someFunc}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{smart\PYGZus{}ptr}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{make\PYGZus{}shared}\PYG{o}{\PYGZlt{}}\PYG{n}{QFile}\PYG{o}{\PYGZgt{}}\PYG{p}{();}
+\PYG{+w}{    }\PYG{n}{QVariant}\PYG{+w}{ }\PYG{n}{var}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QVariant}\PYG{o}{::}\PYG{n}{fromValue}\PYG{p}{(}\PYG{n}{smart\PYGZus{}ptr}\PYG{p}{);}
+\PYG{+w}{    }\PYG{c+c1}{// ...}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{var}\PYG{p}{.}\PYG{n}{canConvert}\PYG{o}{\PYGZlt{}}\PYG{n}{QObject}\PYG{o}{*\PYGZgt{}}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{QObject}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{sp}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{var}\PYG{p}{.}\PYG{n}{value}\PYG{o}{\PYGZlt{}}\PYG{n}{QObject}\PYG{o}{*\PYGZgt{}}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{sp}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{metaObject}\PYG{p}{()}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{className}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// Prints \PYGZsq{}QFile\PYGZsq{}.}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

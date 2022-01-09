@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}define BrushInterface\PYGZus{}iid \PYGZdq{}org.qt\PYGZhy{}project.Qt.Examples.PlugAndPaint.BrushInterface/1.0\PYGZdq{}}
+
+\PYG{n}{Q\PYGZus{}DECLARE\PYGZus{}INTERFACE}\PYG{p}{(}\PYG{n}{BrushInterface}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{BrushInterface\PYGZus{}iid}\PYG{p}{)}
+\end{Verbatim}

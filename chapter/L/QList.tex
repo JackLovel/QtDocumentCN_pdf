@@ -286,45 +286,45 @@ QLinkedList 的迭代器和在堆上分配内存的 QList 的引用只要其指�
 下方是使用 QList 保存整型数字和使用 QList 保存 QDate 的例子:
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<int> integerList;
 QList<QDate> dateList;
-\end{lstlisting}
+\end{cppcode}
 
 Qt 提供了 QStringList 类，其继承于 QList<QString> ，提供了一些快捷方法，例如 QStringList::join() 和 QStringList::filter()。QString::split() 用于从 QString 创建 QStringList。
 
 QList 以列表的形式保存元素，默认构造函数会创建一个空列表，你可以使用带
 有初始化列表的构造函数创建出一个带有元素的的列表：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list = { "one", "two", "three" };
-\end{lstlisting}
+\end{cppcode}
 
 QList 提供了这些基础方法用于添加，移动和删除元素：insert(), replace(), removeAt(), move() 和 swap()。另外，它还提供了下列快捷方法：append(), operator<<(), operator+=(), prepend(), removeFirst() 和 removeLast()。
 
 operator<<() 可以方便地添加多个元素到列表中:
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 list << "four" << "five";
-\end{lstlisting}
+\end{cppcode}
 
 和 C++ 数组一样，QList 索引从 0 开始。要访问在指定位置的元素，你可以使
 用 operator[]()。对于非常量列表，operator[]() 用于返回一个元素的引用，
 可以被用在赋值运算符的左侧（译注：即可作为左值）：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 if (list[0] == "Bob")
     list[0] = "Robert";
-\end{lstlisting}
+\end{cppcode}
 
 由于对于大小大于一个指针或不可移动的元素类型，QList 基于该类型的指针数组实现，因此该操作需要(常量时间复杂度)。对于只读访问，一个可替代的语法是使用 at()：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 for (int i = 0; i < list.size(); ++i) {
     if (list.at(i) == "Jane")
         cout << "Found Jane at position " << i << Qt::endl;
 }
-\end{lstlisting}
+\end{cppcode}
 
 at() 可能会比 \hl{operator[]()} 快，因为其永远不会导致深拷贝的发生。
 
@@ -332,12 +332,12 @@ at() 可能会比 \hl{operator[]()} 快，因为其永远不会导致深拷贝�
 了 takeAt(), takeFirst() 和 takeLast() 来实现该操作。下面是一个将元素
 逐个从列表中移除并对该元素调用 \hl{delete} 的循环实现：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QWidget *> list;
 ...
 while (!list.isEmpty())
     delete list.takeFirst();
-\end{lstlisting}
+\end{cppcode}
 
 在列表两端插入或删除元素是非常快的（通常是常量时间复杂度)，因为QList在内部缓存的两端都预分配了额外的内存空间用于支持列表两端的快速增长。
 
@@ -346,11 +346,11 @@ lastIndexOf()。前一个用于从给定的索引位置向列表尾部方向查�
 相反。二者都会在找到时返回匹配元素的索引，未找到时返回 -1。例如:
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 int i = list.indexOf("Jane");
 if (i != -1)
     cout << "Jane 首次出现的位置是 " << i << Qt::endl;
-\end{lstlisting}
+\end{cppcode}
 
 如果你仅仅是想简单地检查特定值是否存在于列表中，可以使用 contains()。如果你想要统计特定值在列表中出现的次数，可以使用 count()。如果你想将所有特定值替换为一个另一个指定值，可以使用 replace()。
 
@@ -505,13 +505,13 @@ void QList::append(const T \emph{\&value})
 
 示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list.append("one");
 list.append("two");
 list.append("three");
 // list: ["one", "two", "three"]
-\end{lstlisting}
+\end{cppcode}
 
 % gog 
 该方法等同于 list.insert(size(), value)。
@@ -760,13 +760,13 @@ const T \&QList::first() const
 示例:
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QSet<int> set;
 set << 20 << 30 << 40 << ... << 70;
 
 QList<int> list = QList<int>::fromSet(set);
 std::sort(list.begin(), list.end());
-\end{lstlisting}
+\end{cppcode}
 
 \begin{notice}
 从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
@@ -785,14 +785,14 @@ fromVector(), toSet() 和 QSet::toList()。
 示例：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 std::list<double> stdlist;
 list.push_back(1.2);
 list.push_back(0.5);
 list.push_back(3.14);
 
 QList<double> list = QList<double>::fromStdList(stdlist);
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{notice}
@@ -812,13 +812,13 @@ toStdList() 和 QVector::fromStdVector()。
 示例：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QVector<double> vect;
 vect << 20.0 << 30.0 << 40.0 << 50.0;
 
 QList<double> list = QVector<T>::fromVector(vect);
 // list: [20.0, 30.0, 40.0, 50.0]
-\end{lstlisting}
+\end{cppcode}
 
 
 \begin{notice}
@@ -845,14 +845,14 @@ int QList::indexOf(const T \emph{\&value}, int \emph{from} = 0) const
 
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list << "A" << "B" << "C" << "B" << "A";
 list.indexOf("B");          // 返回 1
 list.indexOf("B", 1);       // 返回 1
 list.indexOf("B", 2);       // 返回 3
 list.indexOf("X");          // 返回 -1
-\end{lstlisting}
+\end{cppcode}
 
 
 
@@ -874,12 +874,12 @@ void QList::insert(int i, const T \emph{\&value})
 示例：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list << "alpha" << "beta" << "delta";
 list.insert(2, "gamma");
 // list: ["alpha", "beta", "gamma", "delta"]
-\end{lstlisting}
+\end{cppcode}
 
 
 
@@ -922,14 +922,14 @@ int QList::lastIndexOf(const T \emph{\&value}, int \emph{from} = -1) const
 
 示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list << "A" << "B" << "C" << "B" << "A";
 list.lastIndexOf("B");      // 返回 3
 list.lastIndexOf("B", 3);   // 返回 3
 list.lastIndexOf("B", 2);   // 返回 1
 list.lastIndexOf("X");      // 返回 -1
-\end{lstlisting}
+\end{cppcode}
 
 该方法要求值类型实现了 \hl{operator==()}。
 
@@ -966,12 +966,12 @@ void QList::move(int \emph{from}, int \emph{to})
 示例：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list << "A" << "B" << "C" << "D" << "E" << "F";
 list.move(1, 4);
 // list: ["A", "C", "D", "E", "B", "F"]
-\end{lstlisting}
+\end{cppcode}
 
 等同于 insert(\emph{to}, takeAt(\emph{from}))。该方法会假定 \emph{from} 和 \emph{to} 都不小于 0 且小于 size()。为了避免调用出错，应提前检查 from 和 to 是否不小于 0 且小于 size()。
 
@@ -994,13 +994,13 @@ void QList::prepend(const T \emph{\&value})
 示例：
 
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list.prepend("one");
 list.prepend("two");
 list.prepend("three");
 // list: ["three", "two", "one"]
-\end{lstlisting}
+\end{cppcode}
 
 
 该方法等同于 list.insert(0, value)。
@@ -1042,12 +1042,12 @@ int QList::removeAll(const T \emph{\&value})
 
 示例：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QList<QString> list;
 list << "sun" << "cloud" << "sun" << "rain";
 list.removeAll("sun");
 // list: ["cloud", "rain"]
-\end{lstlisting}
+\end{cppcode}
 
 该方法要求值类型实现了 \hl{operator==()}。
 
