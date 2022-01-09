@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{Hsv}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{hue}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{saturation}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{value}\PYG{+w}{ }\PYG{p}{\PYGZcb{};}\PYG{+w}{ }\PYG{n}{Hsv}\PYG{+w}{ }\PYG{n+nf}{getHsv}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\end{Verbatim}

@@ -31,6 +31,20 @@
 
 \ctexset{section/format += \raggedright}
 
+
+%%%%%%%%% 代码块样式设定
+\usepackage{minted}
+
+\setminted{
+	frame=lines,
+	tabsize=4,
+	encoding=utf8,
+	framesep=2mm,
+}
+
+\newminted{cpp}{frame=single}
+%%%%%%%%%
+
 % \newfontfamily\consolas{Fira Code}
 \newfontfamily\consolas{Source Code Pro}
 % \newfontfamily\consolas{JetBrainsMono-Regular}

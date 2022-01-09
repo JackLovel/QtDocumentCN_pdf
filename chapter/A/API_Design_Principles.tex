@@ -74,42 +74,42 @@ Matthias 在 Qt 季刊弟13期，关于 API 设计的文章中，声称他坚信
 
 比较新的 Qt 类倾向于使用基于属性的 API，例如：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QTimer timer;
 timer.setInterval(1000);
 timer.setSingleShot(true);
-timer.start(); 
-\end{lstlisting}
+timer.start();
+\end{cppcode}
 
 此处的属性，指的是作为对象状态一部分的任何概念性的特征——无论是否是实际的 Q\_PROPERTY。只要可行，用户都应该允许以任何顺序设置属性，也就是说，这些属性应该是正交的。例如，上文的代码也可以写为：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QTimer timer;
 timer.setSingleShot(true);
 timer.setInterval(1000);
-timer.start(); 
-\end{lstlisting}
+timer.start();
+\end{cppcode}
 
 为了方便，我们也可以这样写：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 timer.start(1000);
-\end{lstlisting}
+\end{cppcode}
 
 类似的，对于 QRegExp，我们可以：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 QRegExp regExp;
 regExp.setCaseSensitive(Qt::CaseInsensitive);
 regExp.setPattern(".");
 regExp.setPatternSyntax(Qt::WildcardSyntax);
-\end{lstlisting}
+\end{cppcode}
 
 为了实现此类 API，内部的对象需要被惰性构造。例如在 QRegExp 的案例中，不应该在还不知道表达式使用何种语法之前，就在 setPattern() 中过早地编译 . 表达式。
 
 属性通常是级联的，此时我们应该谨慎地处理。仔细考虑下当前样式提供的“默认图标大小”与 QToolButton 的 iconSize 属性：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 toolButton->iconSize(); // 返回当前样式表的默认大小
 toolButton->setStyle(otherStyle);
 toolButton->iconSize(); // 返回 otherStyle 的默认大小
@@ -117,7 +117,8 @@ toolButton->setIconSize(QSize(52, 52));
 toolButton->iconSize(); // 返回 (52, 52)
 toolButton->setStyle(yetAnotherStyle);
 toolButton->iconSize(); // 返回 (52, 52) 
-\end{lstlisting}
+\end{cppcode}
+
 
 \begin{notice}
 	一旦 iconSize 被设置，它会被一直留存，此时修改当前样式不会影响它。这是 好的。有时，提供重置属性的渠道会很方便，这有两种实现方式：
@@ -153,24 +154,25 @@ QProperty
 
 作为输出参数，指针与引用哪个更好？
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 void getHsv(int *h, int *s, int *v) const void getHsv(int &h, int &s, int &v) const
-\end{lstlisting}
+\end{cppcode}
 
 绝大多数 C++ 数据都推荐尽可能使用引用，因为引用在感知上比指针“更安全更漂亮”。事实上，我们在 Qt 软件中更倾向于使用指针，因为这会令代码更加已读。如对比：
 
-\begin{lstlisting}[language=C++]
+
+\begin{cppcode}
 color.getHsv(&h, &s, &v);
 color.getHsv(h, s, v);
-\end{lstlisting}
+\end{cppcode}
 
 第一行代码能很清晰地表示，h、s、v 对象有很大概率会被该函数调用所修改。
 
 即便如此，由于编译器并不喜欢输出参数，在新 APi 中应该避免此用法，而是返回一个小结构体：
 
-\begin{lstlisting}[language=C++]
+\begin{cppcode}
 struct Hsv { int hue, saturation, value }; Hsv getHsv() const;
-\end{lstlisting}
+\end{cppcode}
 
 \begin{quote}
 	译者注：对于可能失败的带返回值的函数，Qt 倾向于返回数值，使用 bool* ok = 0 参数来存储调用结果，以便在不关心时忽略之。同样在 Qt 6 以后，该方式不再被建议使用，而是改用 std::optional<T> 返回类型。
