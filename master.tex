@@ -2,38 +2,12 @@
 
 % 导言区
 % 超链接的颜色设置为红色
-\usepackage[colorlinks, linkcolor=blue!50!black]{hyperref} 
-
-\usepackage{xcolor}
-\usepackage{listings}
-\usepackage{geometry}
-\usepackage{fancyhdr}
-\usepackage{cite}
-\usepackage[super]{gbt7714} % 中文文献包
-\usepackage{graphicx} % 导入图片包
-\graphicspath{{img/game/},{img/install/},{img/screenfetch/}}
-\usepackage{subfig}
-\usepackage{tabularx}
-\usepackage{chngpage}
-\usepackage{array}
-\usepackage{parskip}
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{makecell} % 表格
-\usepackage{pbox}
-\usepackage{graphicx} % 导入图片包
-\graphicspath{{img/}}
-\usepackage[bodytextleadingratio=1.45]{zhlineskip}
-\usepackage{paralist}
-
-\usepackage{adjustbox}
-\usepackage{lstfiracode}
+\input{./global_setup/package}
+\input{./global_setup/macros}
 
 \ctexset{section/format += \raggedright}
 
-
 %%%%%%%%% 代码块样式设定
-\usepackage{minted}
 
 \setminted{
 	frame=lines,
@@ -79,13 +53,6 @@
 \newcolumntype{C}[1]{>{\vspace{0.5em}\begin{minipage}{#1}\centering\let\newline\\
 \arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
 
-% 定义文本高亮
-% 使用方法：
-% \hl{文本}
-\usepackage[normalem]{ulem} 
-\newcommand\hl{\bgroup\markoverwith
-  {\textcolor{yellow}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
-
 % 中文设置
 \setCJKmainfont{SourceHanSerifCN-Light}
 
@@ -107,30 +74,12 @@
 
 \setlength{\headheight}{20pt}
 
-% 定义需要强调的环境
-\newenvironment{notice}[1][注意]{{\textbf{#1}：}}
-
-\newenvironment{seeAlso}[1][另请参阅]{{\textbf{#1}：}}
-
-\newenvironment{warning}[1][警告]{{\textbf{#1}：}}
-
-% 不输出标题编号
-\newcommand\specialsectioning{\setcounter{secnumdepth}{-1}}
-
 \begin{document}
 % 正文区（文稿区）
 % 页眉页脚
 \pagestyle{fancy}
 \lhead{\includegraphics[scale=0.1]{logo}}
 \renewcommand{\headrulewidth}{0.4pt}
-
-% 定义分隔线的样式
-% \dotfill: 虚线
-% \hrulefill: 实线
-\newcommand{\splitLine}{\dotfill}
-
-% 行内高度
-\newcommand{\lineHigh}{\vspace{2em}}
 
 \maketitle
 \tableofcontents
