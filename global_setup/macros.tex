@@ -1,0 +1,21 @@
+% 定义需要强调的环境
+\newenvironment{notice}[1][注意]{{\textbf{#1}：}}
+
+\newenvironment{seeAlso}[1][另请参阅]{{\textbf{#1}：}}
+
+\newenvironment{warning}[1][警告]{{\textbf{#1}：}}
+
+% 定义文本高亮
+\newcommand\hl{\bgroup\markoverwith
+  {\textcolor{yellow}{\rule[-.5ex]{2pt}{2.5ex}}}\ULon}
+
+% 定义分隔线的样式
+% \dotfill: 虚线
+% \hrulefill: 实线
+\newcommand{\splitLine}{\dotfill}
+
+% 行内高度
+\newcommand{\lineHigh}{\vspace{2em}}
+
+% 不输出标题编号
+\newcommand\specialsectioning{\setcounter{secnumdepth}{-1}}
