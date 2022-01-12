@@ -1,0 +1,363 @@
+\chapter{QSerialPort}
+
+QSerialPort 类用于访问串口。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSerialPort>\\      
+	\hline
+	qmake & QT += serialport\\      
+	\hline
+	父类: & QIODevice \\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 列出所有成员, 包括子类成员
+\item 废弃的类
+\end{compactitem}
+
+\begin{notice}
+该类中的所有函数均为 reentrant。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{longtable}{|r|m{30em}|}
+	\hline 
+	类型	& 方法 \\ 
+	\hline 
+	enum &	BaudRate \{Baud1200, Baud2400, Baud4800, Baud9600, Baud19200, …, UnknownBaud \} \\ 
+	\hline
+	enum &	DataBits \{ Data5, Data6, Data7, Data8, UnknownDataBits \} \\ 
+	\hline
+	enum &	Direction \{ Input, Output, AllDirections \} \\ 
+	\hline 
+	flags& ParamType	Directions \\ 
+	\hline 
+	enum&	FlowControl \{ NoFlowControl, HardwareControl, SoftwareControl, UnknownFlowControl \} \\ 
+	\hline
+	enum&	DataBitsParity \{ NoParity, EvenParity, OddParity, SpaceParity, MarkParity, UnknownParity \} \\ 
+	\hline
+	enum&	PinoutSignal \{ NoSignal, TransmittedDataSignal, ReceivedDataSignal, DataTerminalReadySignal, DataCarrierDetectSignal, …, SecondaryReceivedDataSignal \}\\ 
+     \hline 
+	flags&	PinoutSignals \\ 
+	\hline
+	enum&	SerialPortError \{ NoError, DeviceNotFoundError, PermissionError, OpenError, NotOpenError, …, UnknownError \} \\ 
+	\hline
+	enum&	StopBits \{ OneStop, OneAndHalfStop, TwoStop, UnknownStopBits \} \\ 
+	\hline
+\end{longtable}
+
+
+\section{属性}
+
+\begin{tabular}{|r|l|}
+\hline
+属性名	& 类型  \\
+\hline
+baudRate &	qint32 \\ 
+\hline
+breakEnabled	&bool \\ 
+\hline
+dataBits&	dataBits \\ 
+\hline
+dataTerminalReady	&bool \\ 
+\hline
+error&	SerialPortError \\ 
+\hline
+flowControl&	FlowControl \\ 
+\hline
+parity	&Parity \\ 
+\hline
+requestToSend&	bool \\ 
+\hline
+stopBits	&StopBits \\ 
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{25em}|}
+\hline
+返回类型&	函数名 \\ 
+\hline
+&QSerialPort(const QSerialPortInfo \&serialPortInfo, QObject *parent = nullptr) \\
+\hline
+&QSerialPort(const QString \&name, QObject *parent = nullptr) \\ 
+\hline
+&[QSerialPort](QObject *parent = nullptr) \\ 
+\hline
+virtual&	$\sim$QSerialPort() \\ 
+\hline
+qint32&	baudRate(QSerialPort::Directions directions = AllDirections) const \\ 
+\hline
+bool&	clear(QSerialPort::Directions directions = AllDirections) \\ 
+\hline
+void&	clearError() \\ 
+\hline
+QSerialPort::DataBits&	dataBits() const \\ 
+\hline
+QSerialPort::SerialPortError&	error() const \\ 
+\hline
+QSerialPort::FlowControl&	flowControl() const \\ 
+\hline
+bool&	flush() \\ 
+\hline
+QSerialPort::Handle	&handle() const \\ 
+\hline
+bool&	isBreakEnabled() const \\ 
+\hline
+bool&	isDataTerminalReady()  \\ 
+\hline
+bool&	isRequestToSend() \\ 
+\hline
+QSerialPort::Parity	&parity() const \\ 
+\hline
+QSerialPort::PinoutSignals	&pinoutSignals() \\ 
+\hline
+QString	&portName() const \\ 
+\hline
+qint64	&readBufferSize() const \\ 
+\hline
+bool	&sendBreak(int duration = 0) \\ 
+\hline
+bool	&setBaudRate(qint32 baudRate, QSerialPort::Directions directions = AllDirections) \\ 
+\hline
+bool	&setBreakEnabled(bool set = true) \\ 
+\hline
+bool	&setDataBits(QSerialPort::DataBits dataBits) \\ 
+\hline
+bool	&setDataTerminalReady(bool set) \\ 
+\hline
+bool	&setFlowControl(QSerialPort::FlowControl flowControl) \\ 
+\hline
+bool	&setParity(QSerialPort::Parity parity) \\ 
+\hline
+void	&setPort(const QSerialPortInfo \&serialPortInfo) \\ 
+\hline
+void	&setPortName(const QString \&name) \\ 
+\hline
+void	&setReadBufferSize(qint64 size) \\ 
+\hline
+bool	&setRequestToSend(bool set) \\ 
+\hline
+bool	&setStopBits(QSerialPort::StopBits stopBits) \\ 
+\hline
+QSerialPort::StopBits &	stopBits() const \\ 
+\hline
+\end{longtable}
+
+
+\section{重写公共成员函数}
+
+\begin{longtable}{|r|m{25em}|}
+	\hline
+	返回类型&	函数名 \\ 
+	\hline
+	virtual bool 	&atEnd() const override \\ 
+	\hline
+virtual qint64&	bytesAvailable() const override \\ 
+\hline
+virtual qint64&	bytesToWrite() const override \\ 
+\hline
+virtual bool&	canReadLine() const override \\ 
+\hline
+virtual void&	close() override \\ 
+\hline
+virtual bool	&isSequential() const override \\ 
+\hline
+virtual bool&	open(QIODevice::OpenMode mode) override \\ 
+\hline
+virtual bool&	waitForBytesWritten(int msecs = 30000) override \\ 
+\hline
+virtual bool&	waitForReadyRead(int msecs = 30000) override \\
+	\hline
+\end{longtable}
+
+
+\section{信号}
+
+\begin{longtable}{|r|l|}
+\hline
+返回类型&	函数名 \\ 
+\hline
+void	&baudRateChanged(qint32 baudRate, QSerialPort::Directions directions) \\ 
+\hline
+void	&breakEnabledChanged(bool set) \\ 
+\hline
+void	&dataBitsChanged(QSerialPort::DataBits dataBits) \\ 
+\hline
+void	&dataTerminalReadyChanged(bool set) \\ 
+\hline
+void	&errorOccurred(QSerialPort::SerialPortError error) \\  
+\hline
+void&	flowControlChanged(QSerialPort::FlowControl flow) \\ 
+\hline
+void&	parityChanged(QSerialPort::Parity parity) \\ 
+\hline
+void&	requestToSendChanged(bool set) \\ 
+\hline
+void&	stopBitsChanged(QSerialPort::StopBits stopBits) \\ 
+\hline
+\end{longtable}
+
+\section{重写保护成员函数}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型&	函数名 \\ 
+\hline
+virtual qint64&	readData(char \emph{*data}, qint64 \emph{maxSize}) override \\
+\hline
+virtual qint64&	readLineData(char \emph{*data}, qint64 \emph{maxSize}) override \\ 
+\hline
+virtual qint64&	writeData(const char \emph{*data}, qint64 \emph{maxSize}) override \\ 
+\hline
+\end{tabular}
+
+
+
+\section{详细描述}
+
+您可以使用 QSerialPortInfo 帮助类来获取可用串口的信息，这个类可以枚举系统中的所有串口，当您想使用某个串口时，使用这个类可以获得正确的串口名。可以通过把 QSerialPortInfo 类实例对象作为参数传递给 setPort() 或 setPortName() 方法来指定串口设备。
+
+串口设置完毕以后，可以使用 open() 方法以只读 (r/o)、只写 (w/o)、读写 (r/w) 模式打开串口。
+
+\begin{notice}
+串口总是以独占访问的方式打开，即其它进程或线程无法访问已经打开的串口。
+\end{notice}
+
+请使用 close() 方法来关闭串口或取消串口读写操作。
+
+串口打开以后，QSerialPort 会检查串口当前的配置并初始化。
+您可以使用 setBaudRate(), setDataBits(), setParity(), setStopBits(), 和 setFlowControl() 方法重新配置串口。
+
+QSerialPort::dataTerminalReady 和 QSerialPort::requestToSend 属性用来设置串口引脚信号，还可以使用 pinoutSignals() 方法来查询串口引脚信号。
+
+当串口准备好时，可以用 read() 或 write() 方法来读写串口。
+您还可以使用 readLine() 和 readAll() 这样的便捷方法读写串口。
+如果数据没有一次读完，剩下的数据会被接下来有新数据被添加至 QSerialPort 内部读缓冲器时再读出。
+您可以使用 setReadBufferSize() 方法来设置串口读缓冲区的大小。
+
+QSerialPort 提供了一组函数来暂停线程调用直到触发特定的信号。这些函数可以用来阻塞串口：
+
+\begin{compactitem}
+\item waitForReadyRead() 函数阻塞线程调用直到串口有新数据准备读出
+\item waitForBytesWritten() 函数阻塞线程调用直到有新数据被写进串口
+\end{compactitem}
+
+阻塞串口代码示例：
+
+\begin{cppcode}
+int numRead = 0, numReadTotal = 0;
+char buffer[50];
+
+for (;;) {
+    numRead  = serial.read(buffer, 50);
+
+    // Do whatever with the array
+
+    numReadTotal += numRead;
+    if (numRead == 0 && !serial.waitForReadyRead())
+        break;
+}
+\end{cppcode}
+
+如果 waitForReadyRead() 返回 false，说明串口连接已经关闭或者有错误出现。
+
+如果串口出现错误，QSerialPort 将会发射 errorOccurred() 信号。
+您还可以调用 error() 方法来查询串口最近一次出现错误的类型。
+
+\begin{notice}
+在 QSerialPort 中，并非所有的错误都是以操作系统平台无关的方式处理。
+诸如帧、奇偶校验、终止条件这样的错误需要由应用程序代码来处理，可能需要使用设备描述符中的操作系统相关的 ioctls 和(或)解析串口数据流中的字节填充。
+\end{notice}
+
+编程阻塞串口与编程非阻塞串口完全不同。阻塞串口不需要事件循环，通常会让编程更简单。
+然而，在图形用户界面程序中，阻塞串口应该仅用于非图形用户界面线程，这样做可以避免用户界面卡顿。
+
+若想更深入了解这方面内容，请参考 example 中的例程。
+
+QSerialPort 类还可以与 QTextStream 和 QDataStream 的流运算符(<<()和>>())一起使用。
+有一点需要注意：在使用流运算符 >>() 之前请确保串口缓冲区有足够多的数据可读。
+
+\begin{seeAlso}
+QSerialPortInfo。
+\end{seeAlso}
+
+\section{成员类型文档}
+
+enum QSerialPort::BaudRate
+
+该枚举描述了串口通信波特率。
+
+\begin{notice}
+该枚举仅列出了最常用的串口通信波特率。
+\end{notice}
+
+
+\begin{longtable}{|r|c|m{20em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline
+QSerialPort::Baud1200 &	1200&	1200 比特/秒 \\ 
+\hline
+QSerialPort::Baud2400	&2400&	2400 比特/秒 \\ 
+\hline
+QSerialPort::Baud4800	&4800&	4800 比特/秒 \\ 
+\hline
+QSerialPort::Baud9600	&9600&	9600 比特/秒 \\ 
+\hline
+QSerialPort::Baud19200	&19200&	19200 比特/秒 \\ 
+\hline
+QSerialPort::Baud38400	&38400	&38400 比特/秒 \\ 
+\hline
+QSerialPort::Baud57600	&57600	&57600 比特/秒 \\ 
+\hline
+QSerialPort::Baud115200&	115200&	115200 比特/秒 \\ 
+\hline
+QSerialPort::UnknownBaud	&-1	&波特率未知。这个值已经废弃了。此处保留是为了兼容旧的代码。
+ 强烈建议您在新开发的代码中不使用这个值 \\ 
+\hline
+\end{longtable}
+
+\begin{seeAlso}
+QSerialPort::baudRate。
+\end{seeAlso}
+
+enum QSerialPort::DataBits
+
+该枚举描述了每个字符所使用的数据比特数。
+
+\begin{longtable}{|r|c|m{20em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::Data5 &	5&	每个字符用5比特表示，用于波特码，常见于旧式设备，例如电传打字机 \\ 
+\hline
+QSerialPort::Data6	&6&	每个字符用6比特表示，很少这样用 \\ 
+\hline
+QSerialPort::Data7&	7&	每个字符用7比特表示，用于ASCII码，常见于旧式设备，例如电传打字机 \\ 
+\hline
+QSerialPort::Data8	&8	&每个字符用8比特表示，大部分数据采用此格式，因为1个字节包含8比特。它在新应用中广泛使用 \\ 
+\hline
+QSerialPort::UnknownDataBits&	-1&	比特数未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+\end{longtable}
+
+\begin{seeAlso}
+QSerialPort::dataBits。
+\end{seeAlso}
+
+enum QSerialPort::Direction
+
+flags QSerialPort::Directions
+
+该枚举描述了串口数据传输方向。
+
+\begin{notice}
+在某些操作系统中(例如类 POSIX 系统)，该枚举对串口的输入/输出波特率单独设置。
+\end{notice}
