@@ -1,0 +1,215 @@
+\chapter{QSerialPortInfo}
+
+QSerialPortInfo 类提供了系统中现有串口的相关信息。 更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSerialPortInfo>\\      
+	\hline
+	qmake & QT += serialport\\      
+	\hline
+	始自: &	Qt 5.1\\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 列出所有成员, 包括子类成员
+\item 废弃的类
+\end{compactitem}
+
+\section{公共成员函数}
+
+\begin{longtable}{|r|m{30em}|}
+\hline 
+返回类型 &	函数名	\\ 
+\hline 
+&QSerialPortInfo(const QSerialPortInfo \&other) \\
+\hline
+&QSerialPortInfo(const QString \&name)  \\
+\hline
+&QSerialPortInfo(const QSerialPort \&port) \\ 
+\hline
+&QSerialPortInfo() \\ 
+\hline
+QSerialPortInfo & 	operator=(const QSerialPortInfo \&other) \\
+\hline
+& $\sim$QSerialPortInfo() \\
+\hline
+QString 	&description() const \\
+\hline
+bool &	hasProductIdentifier() const\\
+\hline
+bool 	&hasVendorIdentifier() const \\
+\hline
+bool &isNull() const \\
+\hline
+QString &	manufacturer() const \\
+\hline
+QString &	portName() const \\
+\hline
+quint16 &	productIdentifier() const \\
+\hline
+QString &	serialNumber() const\\
+\hline
+void 	&swap(QSerialPortInfo \&other) \\
+\hline
+QString 	&systemLocation() const\\
+\hline
+quint16 &	vendorIdentifier() const\\
+\hline
+\end{longtable}
+
+\section{静态公共成员函数}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 	&函数名 \\ 
+\hline
+QList &	availablePorts() \\ 
+\hline
+QList &	standardBaudRates() \\ 
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+使用静态函数生成 QSerialPortInfo 类实例对象列表。
+列表中的每一个对象代表一个串口设备，可以通过串口名、系统地址、设备描述以及制造商查询串口。 
+QSerialPortInfo 类还可以用作 QSerialPort 类成员方法 setPort() 的输入参数。
+
+\begin{seeAlso}
+QSerialPort。
+\end{seeAlso}
+
+
+\section{成员函数文档}
+
+QSerialPortInfo::QSerialPortInfo(const QSerialPortInfo \emph{\&other})
+
+构造 QSerialPortInfo 类实例 other 的副本。
+
+QSerialPortInfo::QSerialPortInfo(const QString \emph{\&name})
+
+构造串口名为 name 的 QSerialPortInfo 类实例。
+
+该构造函数在现有的串口设备中按照名称检索名为 name 的串口，找到后为那个串口构造串口信息类实例。
+
+QSerialPortInfo::QSerialPortInfo(const QSerialPort \emph{\&port})
+
+从串口 port 构造 QSerialPortInfo 类实例。
+
+QSerialPortInfo::QSerialPortInfo()
+
+构造一个空的 QSerialPortInfo 类实例。
+
+\begin{seeAlso}
+isNull()。
+\end{seeAlso}
+
+QSerialPortInfo \&QSerialPortInfo::operator=(const QSerialPortInfo \emph{\&other})
+
+将 QSerialPortInfo 类实例 other 赋值给另一个 QSerialPortInfo 类实例。
+
+QSerialPortInfo::$\sim$QSerialPortInfo()
+
+销毁 QSerialPortInfo 类实例，销毁后该实例的引用无效。
+
+[static] QList QSerialPortInfo::availablePorts()
+
+该函数返回系统中现有串口设备列表。
+
+QString QSerialPortInfo::description() const
+
+该函数返回描述串口的字符串，若没有描述字符串，则返回空字符串。
+
+\begin{seeAlso}
+manufacturer() 和 serialNumber()。
+\end{seeAlso}
+
+bool QSerialPortInfo::hasProductIdentifier() const
+
+若串口设备有16位产品编号，函数返回true，否则返回false。
+
+\begin{seeAlso}
+productIdentifier(), vendorIdentifier(), 和 hasVendorIdentifier()。
+\end{seeAlso}
+
+bool QSerialPortInfo::hasVendorIdentifier() const
+
+若串口设备有16位厂商编号，函数返回true，否则返回false。
+
+\begin{seeAlso}
+vendorIdentifier(), productIdentifier(), 和 hasProductIdentifier()。
+\end{seeAlso}
+
+bool QSerialPortInfo::isNull() const
+
+若 QSerialPortInfo 类实例没有串口定义，函数返回true，否则返回false。
+
+\begin{seeAlso}
+isBusy()。
+\end{seeAlso}
+
+QString QSerialPortInfo::manufacturer() const
+
+返回串口设备制造商字符串，若该串口没有制造商字符串，则返回空字符串。
+
+\begin{seeAlso}
+description() 和 serialNumber()。
+\end{seeAlso}
+
+QString QSerialPortInfo::portName() const
+
+返回串口名。
+
+\begin{seeAlso}
+systemLocation()。
+\end{seeAlso}
+
+quint16 QSerialPortInfo::productIdentifier() const
+
+若串口设备有16位产品编号，函数返回产品编号，否则返回0。
+
+\begin{seeAlso}
+hasProductIdentifier(), vendorIdentifier(), 和 hasVendorIdentifier()。
+\end{seeAlso}
+
+QString QSerialPortInfo::serialNumber() const
+
+若串口设备有序列号，函数返回序列号字符串，否则返回空字符串。
+
+\begin{notice}
+串口序列号可能包含字母。
+\end{notice}
+
+该函数从 Qt 5.3 开始使用。
+
+\begin{seeAlso}
+description() 和 manufacturer()。
+\end{seeAlso}
+
+[static] QList QSerialPortInfo::standardBaudRates()
+
+返回目标操作系统支持的标准串口通信波特率列表。
+
+void QSerialPortInfo::swap(QSerialPortInfo \emph{\&other})
+
+用 QSerialPortInfo 类实例 other 与当前 QSerialPortInfo 类实例互换。此操作非常快并且从不失败。
+
+QString QSerialPortInfo::systemLocation() const
+
+返回串口设备的系统地址。
+
+\begin{seeAlso}
+portName()。
+\end{seeAlso}
+
+quint16 QSerialPortInfo::vendorIdentifier() const
+
+若串口设备有16位厂商编号，函数返回厂商编号，否则返回0。
+
+\begin{seeAlso}
+hasVendorIdentifier(), productIdentifier(), 和 hasProductIdentifier()。
+\end{seeAlso}
