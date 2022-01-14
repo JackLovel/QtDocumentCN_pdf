@@ -361,3 +361,428 @@ flags QSerialPort::Directions
 \begin{notice}
 在某些操作系统中(例如类 POSIX 系统)，该枚举对串口的输入/输出波特率单独设置。
 \end{notice}
+
+\begin{tabular}{|r|c|l|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::Input	& 1 &	输入方向 \\ 
+\hline
+QSerialPort::Output	 &2	 &输出方向 \\ 
+\hline
+QSerialPort::AllDirections&	Input&	Output \\
+\hline
+\end{tabular}
+
+
+方向类型是 QFlags 的类型定义(typedef)，它保存了方向值的 OR 组合。
+
+enum QSerialPort::FlowControl
+
+该枚举描述了串口使用的流控制方式。
+
+\begin{tabular}{|r|c|m{20em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::NoFlowControl&	0	&没有流控制 \\ 
+\hline
+QSerialPort::HardwareControl&	1&	硬件流控制 (RTS/CTS) \\ 
+\hline
+QSerialPort::SoftwareControl&	2	&软件流控制 (XON/XOFF) \\ 
+\hline
+QSerialPort::UnknownFlowControl	&-1 &	流控制未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+QSerialPort::flowControl。
+\end{seeAlso}
+
+enum QSerial::Parity
+
+该枚举描述了串口使用的奇偶校验模式。
+
+\begin{tabular}{|r|c|m{22em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::NoParity	&0&	没有奇偶校验。这是最常见的奇偶校验设置。错误检测由通信协议完成 \\ 
+\hline 
+QSerialPort::EvenParity&	2	&每个字符包含1比特奇偶校验，字符比特数为偶数(含奇偶校验位) \\ 
+\hline
+QSerialPort::OddParity&	3	&每个字符包含1比特奇偶校验，字符比特数为奇数(含奇偶校验位)。它确保了每个字符至少有一次状态转换 \\ 
+\hline
+QSerialPort::SpaceParity&	4	&间隔奇偶校验。奇偶校验位在间隔信号中发送。它不提供错误检测信息 \\ 
+\hline
+QSerialPort::MarkParity	&5&	标志奇偶校验。奇偶校验位总是被置为标志信号(逻辑 1)。它不提供错误检测信息 \\ 
+\hline
+QSerialPort::UnknownParity&	-1	&奇偶校验未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+QSerialPort::parity。
+\end{seeAlso}
+
+enum QSerialPort::PinoutSignal
+
+flags QSerialPort::PinoutSignals
+
+该枚举用于描述串口引脚信号。
+
+\begin{longtable}{|r|c|m{9em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::NoSignal	&0x00&	无信号 \\ 
+\hline
+QSerialPort::TransmittedDataSignal&	0x01&	TxD (发送数据)。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\
+\hline
+QSerialPort::ReceivedDataSignal	&0x02	&RxD (接收数据)。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值\\
+\hline
+QSerialPort::DataTerminalReadySignal	&0x04&	DTR (数据终端就绪) \\ 
+\hline
+QSerialPort::DataCarrierDetectSignal	&0x08&	DCD (数据载波检测) \\ 
+\hline
+QSerialPort::DataSetReadySignal	&0x10	&DSR (数据就绪) \\ 
+\hline
+QSerialPort::RingIndicatorSignal&	0x20&	RNG (振铃提示) \\ 
+\hline
+QSerialPort::RequestToSendSignal	&0x40&	RTS (请求发送) \\ 
+\hline
+QSerialPort::ClearToSendSignal	&0x80&	CTS (清除发送) \\
+\hline 
+QSerialPort::SecondaryTransmittedDataSignal	&0x100&	STD (辅助发送数据) \\
+\hline
+QSerialPort::SecondaryReceivedDataSignal&	0x200	&SRD (辅助接收数据) \\ 
+\hline
+\end{longtable}
+
+PinoutSignals类型是 QFlags 的类型定义(typedef)，它保存了PinoutSignal值的 OR 组合。
+
+\begin{seeAlso}
+pinoutSignals(), QSerialPort::dataTerminalReady, 和 QSerialPort::requestToSend。
+\end{seeAlso}
+
+enum QSerialPort::SerialPortError
+
+该枚举描述了 QSerialPort::error 属性的错误类型。
+
+\begin{longtable}{|r|c|m{9em}|}
+	\hline
+	常量	&值&	描述 \\ 
+	\hline 
+	QSerialPort::NoError &	0 &	没有错误 \\ 
+	\hline
+	QSerialPort::DeviceNotFoundError &	1 &	尝试打开一个不存在的串口设备 \\ 
+	\hline
+	QSerialPort::PermissionError 	&2 	&其它进程试图打开一个已经开启的串口设备或者用户没有足够的权限打开串口 \\ 
+	\hline
+	QSerialPort::OpenError &	3& 	在当前对象中试图打开一个已经开启的串口 \\ 
+	\hline
+	QSerialPort::NotOpenError 	&13 &	在串口未开启时执行某个操作。这个值从 QtSerialPort 5.2 开始使用 \\
+	\hline 
+	QSerialPort::ParityError &	4 &	读串口时硬件检测到奇偶校验错误。这个值已经废弃了。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+	QSerialPort::FramingError &	5 &	读串口时硬件检测到帧错误。这个值已经废弃了。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+	QSerialPort::BreakConditionError &	6 &	串口输入线上检测到终止条件。这个值已经废弃了。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+	QSerialPort::WriteError &	7 	&写串口时出现的 I/O 错误 \\ 
+	\hline
+	QSerialPort::ReadError &	8 &	读串口时出现的 I/O 错误 \\ 
+\hline
+	QSerialPort::ResourceError 	&9 	&当资源无法访问时出现的 I/O 错误。例如：当串口设备意外断开时 \\ 
+	\hline
+	QSerialPort::UnsupportedOperationError& 	10 &	操作系统禁止或不支持请求的串口操作 \\ 
+	\hline
+	QSerialPort::TimeoutError 	&12 &	超时错误。这个值从 QtSerialPort 5.2 开始使用 \\ 
+	\hline
+	QSerialPort::UnknownError &	11 &	未知错误 \\ 
+	\hline
+\end{longtable}
+
+
+enum QSerialPort::StopBits
+
+该枚举描述了串口停止位的比特数。
+
+\begin{tabular}{|r|c|m{15em}|}
+	\hline
+	常量	&值&	描述 \\ 
+	\hline 
+	QSerialPort::OneStop 	&1& 	1比特停止位 \\ 
+	\hline
+	QSerialPort::OneAndHalfStop &	3 &	1.5比特停止位(仅适用于Windows系统) \\ 
+	\hline
+	QSerialPort::TwoStop &	2 	&2比特停止位 \\ 
+	\hline
+	QSerialPort::UnknownStopBits &	-1& 	停止位比特数未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+   \hline
+\end{tabular}
+
+\begin{seeAlso}
+QSerialPort::stopBits。
+\end{seeAlso}
+
+\section{成员属性文档}
+
+
+baudRate : qint32
+
+该属性为串口在指定方向(输入/输出)上的通信波特率。
+
+如果串口波特率设置成功或者打开串口前设置好波特率，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。您可以使用枚举 QSerialPort::BaudRate 或者任何 qint32 型正整数值设置串口通信波特率。
+
+\begin{notice}
+如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+\end{notice}
+
+\begin{warning}
+所有操作系统均支持 AllDirections 标志位设置，但 Windows 系统仅支持这种模式。
+\end{warning}
+
+\begin{warning}
+在 Windows 系统中无论串口输入还是输出，其波特率均相同。
+\end{warning}
+
+该属性的默认值为 Baud9600，即 9600 比特/秒。
+
+存取函数:
+
+\begin{tabular}{|r|m{25em}|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+qint32 	&baudRate(QSerialPort::Directions \emph{directions} = AllDirections) const \\ 
+\hline
+bool 	&setBaudRate(qint32 baudRate, QSerialPort::Directions \emph{directions} = AllDirections) \\ 
+\hline
+\end{tabular} 
+
+通知信号:
+
+\begin{tabular}{|r|m{25em}|}
+\hline
+返回类型 &	函数名 \\
+\hline
+void 	& baudRateChanged(qint32 baudRate, QSerialPort::Directions directions) \\ 
+\hline
+\end{tabular} 
+
+breakEnabled : bool
+
+该属性为串口是否终止传输的标志位。
+
+若串口终止通信，则该属性为 true，否则为 false。
+
+注意: 在设置或访问该属性前串口必须已经打开，否则返回 false 并且 NotOpenError 错误码将被置 1。这一点与常规的 Qt 类属性设置不同。然而，这种差异性源于该属性是通过操作系统内核与串口硬件之间的交互来设置的，因此 Qt 串口类属性与其它 Qt 类属性不完全等同。
+
+该属性从 Qt 5.5 开始使用。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 	& 函数名 \\ 
+\hline 
+bool 	&isBreakEnabled() const \\ 
+\hline
+bool &	setBreakEnabled(bool set = true) \\ 
+\hline
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型  &	函数名 \\ 
+\hline
+void &	breakEnabledChanged(bool set) \\ 
+\hline
+\end{tabular}
+
+dataBits : DataBits 
+
+该属性为串口数据帧中的比特数。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+注意: 如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+
+该属性的默认值为 Data8，即数据帧为8比特。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型  &	函数名 \\ 
+\hline
+QSerialPort::DataBits  &	dataBits() const \\
+\hline
+bool &	setDataBits(QSerialPort::DataBits dataBits) \\ 
+\hline
+\end{tabular}
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型  &	函数名 \\ 
+	\hline
+	void 	& dataBitsChanged(QSerialPort::DataBits dataBits) \\ 
+	\hline
+\end{tabular}
+
+dataTerminalReady : bool
+
+该属性为串口信号线 DTR 的状态(高或低)。
+
+如果串口信号线 DTR 被置为高电平，则返回true，否则返回false.
+
+注意: 在设置或访问该属性前串口必须已经打开，否则返回 false 并且 NotOpenError 错误码将被置 1。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型  &	函数名 \\ 
+\hline
+bool &	isDataTerminalReady() \\ 
+\hline
+bool &	setDataTerminalReady(bool set) \\ 
+\hline
+\end{tabular}
+ 
+通知信号:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型  &	函数名 \\ 
+	\hline
+	void 	& dataTerminalReadyChanged(bool set) \\ 
+	\hline
+\end{tabular}
+
+另请参阅 pinoutSignals()。
+
+error : SerialPortError
+
+该属性为串口的错误码。
+
+串口设备会返回一个错误码。
+例如：如果函数 open() 返回false，或者读/写操作返回-1，该属性可以用来判断操作失败的原因。
+
+当调用clearError()函数后，错误码会被置为默认值 QSerialPort::NoError.
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型  &	函数名 \\ 
+	\hline
+	QSerialPort::SerialPortError 	&error() const \\ 
+	\hline
+void 	&clearError() \\ 
+	\hline
+\end{tabular}
+
+
+
+flowControl : FlowControl
+
+该属性为串口使用的流控制方式。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+注意: 如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+
+该属性的默认值为 NoFlowControl，即没有流控制。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+	\hline
+返回类型 &	函数名 \\ 
+\hline
+QSerialPort::FlowControl &	flowControl() const \\ 
+\hline
+bool &	setFlowControl(QSerialPort::FlowControl flowControl) \\ 
+\hline
+\end{tabular}
+
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &函数名 \\ 
+\hline
+void 	&flowControlChanged(QSerialPort::FlowControl flow) \\ 
+\hline
+\end{tabular}
+
+parity : Parity 
+
+该属性为串口使用的奇偶校验模式。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+\begin{notice}
+如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+\end{notice}
+
+该属性的默认值为 NoParity，即没有奇偶校验。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &函数名 \\ 
+\hline
+QSerialPort::Parity &	parity() const \\
+\hline
+bool &	setParity(QSerialPort::Parity parity) \\ 
+\hline
+\end{tabular}
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 &函数名 \\ 
+	\hline
+	void 	& parityChanged(QSerialPort::Parity parity) \\
+\hline
+\end{tabular}
+
+
+requestToSend : bool
+
+该属性为串口信号线 RTS 的状态(高或低)。
+
+如果串口信号线 RTS 被置为高电平，则返回true，否则返回false.
+
+\begin{notice}
+在设置或访问该属性前串口必须已经打开，否则返回 false 并且 NotOpenError 错误码将被置 1。
+\end{notice}
+
+\begin{notice}
+在 HardwareControl 模式下直接控制 RTS 信号会出错， 错误码 UnsupportedOperationError 会被置1，因为 RTS 信号由驱动自动控制。
+\end{notice}
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+bool &	isRequestToSend() \\ 
+\hline
+bool 	& setRequestToSend(bool set) \\ 
+\hline
+\end{tabular}
