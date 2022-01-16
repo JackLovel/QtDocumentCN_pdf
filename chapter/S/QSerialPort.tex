@@ -1,0 +1,1188 @@
+\chapter{QSerialPort}
+
+QSerialPort 类用于访问串口。更多内容...
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSerialPort>\\      
+	\hline
+	qmake & QT += serialport\\      
+	\hline
+	父类: & QIODevice \\
+	\hline
+\end{tabular}
+
+\begin{compactitem}
+\item 列出所有成员, 包括子类成员
+\item 废弃的类
+\end{compactitem}
+
+\begin{notice}
+该类中的所有函数均为 reentrant。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{longtable}[l]{|r|m{30em}|}
+	\hline 
+	类型	& 方法 \\ 
+	\hline 
+	enum &	BaudRate \{Baud1200, Baud2400, Baud4800, Baud9600, Baud19200, …, UnknownBaud \} \\ 
+	\hline
+	enum &	DataBits \{ Data5, Data6, Data7, Data8, UnknownDataBits \} \\ 
+	\hline
+	enum &	Direction \{ Input, Output, AllDirections \} \\ 
+	\hline 
+	flags& ParamType	Directions \\ 
+	\hline 
+	enum&	FlowControl \{ NoFlowControl, HardwareControl, SoftwareControl, UnknownFlowControl \} \\ 
+	\hline
+	enum&	DataBitsParity \{ NoParity, EvenParity, OddParity, SpaceParity, MarkParity, UnknownParity \} \\ 
+	\hline
+	enum&	PinoutSignal \{ NoSignal, TransmittedDataSignal, ReceivedDataSignal, DataTerminalReadySignal, DataCarrierDetectSignal, …, SecondaryReceivedDataSignal \}\\ 
+     \hline 
+	flags&	PinoutSignals \\ 
+	\hline
+	enum&	SerialPortError \{ NoError, DeviceNotFoundError, PermissionError, OpenError, NotOpenError, …, UnknownError \} \\ 
+	\hline
+	enum&	StopBits \{ OneStop, OneAndHalfStop, TwoStop, UnknownStopBits \} \\ 
+	\hline
+\end{longtable}
+
+
+\section{属性}
+
+\begin{tabular}{|r|l|}
+\hline
+属性名	& 类型  \\
+\hline
+baudRate &	qint32 \\ 
+\hline
+breakEnabled	&bool \\ 
+\hline
+dataBits&	dataBits \\ 
+\hline
+dataTerminalReady	&bool \\ 
+\hline
+error&	SerialPortError \\ 
+\hline
+flowControl&	FlowControl \\ 
+\hline
+parity	&Parity \\ 
+\hline
+requestToSend&	bool \\ 
+\hline
+stopBits	&StopBits \\ 
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|r|m{25em}|}
+\hline
+返回类型&	函数名 \\ 
+\hline
+&QSerialPort(const QSerialPortInfo \&serialPortInfo, QObject *parent = nullptr) \\
+\hline
+&QSerialPort(const QString \&name, QObject *parent = nullptr) \\ 
+\hline
+&[QSerialPort](QObject *parent = nullptr) \\ 
+\hline
+virtual&	$\sim$QSerialPort() \\ 
+\hline
+qint32&	baudRate(QSerialPort::Directions directions = AllDirections) const \\ 
+\hline
+bool&	clear(QSerialPort::Directions directions = AllDirections) \\ 
+\hline
+void&	clearError() \\ 
+\hline
+QSerialPort::DataBits&	dataBits() const \\ 
+\hline
+QSerialPort::SerialPortError&	error() const \\ 
+\hline
+QSerialPort::FlowControl&	flowControl() const \\ 
+\hline
+bool&	flush() \\ 
+\hline
+QSerialPort::Handle	&handle() const \\ 
+\hline
+bool&	isBreakEnabled() const \\ 
+\hline
+bool&	isDataTerminalReady()  \\ 
+\hline
+bool&	isRequestToSend() \\ 
+\hline
+QSerialPort::Parity	&parity() const \\ 
+\hline
+QSerialPort::PinoutSignals	&pinoutSignals() \\ 
+\hline
+QString	&portName() const \\ 
+\hline
+qint64	&readBufferSize() const \\ 
+\hline
+bool	&sendBreak(int duration = 0) \\ 
+\hline
+bool	&setBaudRate(qint32 baudRate, QSerialPort::Directions directions = AllDirections) \\ 
+\hline
+bool	&setBreakEnabled(bool set = true) \\ 
+\hline
+bool	&setDataBits(QSerialPort::DataBits dataBits) \\ 
+\hline
+bool	&setDataTerminalReady(bool set) \\ 
+\hline
+bool	&setFlowControl(QSerialPort::FlowControl flowControl) \\ 
+\hline
+bool	&setParity(QSerialPort::Parity parity) \\ 
+\hline
+void	&setPort(const QSerialPortInfo \&serialPortInfo) \\ 
+\hline
+void	&setPortName(const QString \&name) \\ 
+\hline
+void	&setReadBufferSize(qint64 size) \\ 
+\hline
+bool	&setRequestToSend(bool set) \\ 
+\hline
+bool	&setStopBits(QSerialPort::StopBits stopBits) \\ 
+\hline
+QSerialPort::StopBits &	stopBits() const \\ 
+\hline
+\end{longtable}
+
+
+\section{重写公共成员函数}
+
+\begin{longtable}[l]{|r|m{25em}|}
+	\hline
+	返回类型&	函数名 \\ 
+	\hline
+	virtual bool 	&atEnd() const override \\ 
+	\hline
+virtual qint64&	bytesAvailable() const override \\ 
+\hline
+virtual qint64&	bytesToWrite() const override \\ 
+\hline
+virtual bool&	canReadLine() const override \\ 
+\hline
+virtual void&	close() override \\ 
+\hline
+virtual bool	&isSequential() const override \\ 
+\hline
+virtual bool&	open(QIODevice::OpenMode mode) override \\ 
+\hline
+virtual bool&	waitForBytesWritten(int msecs = 30000) override \\ 
+\hline
+virtual bool&	waitForReadyRead(int msecs = 30000) override \\
+	\hline
+\end{longtable}
+
+
+\section{信号}
+
+\begin{longtable}[l]{|r|l|}
+\hline
+返回类型&	函数名 \\ 
+\hline
+void	&baudRateChanged(qint32 baudRate, QSerialPort::Directions directions) \\ 
+\hline
+void	&breakEnabledChanged(bool set) \\ 
+\hline
+void	&dataBitsChanged(QSerialPort::DataBits dataBits) \\ 
+\hline
+void	&dataTerminalReadyChanged(bool set) \\ 
+\hline
+void	&errorOccurred(QSerialPort::SerialPortError error) \\  
+\hline
+void&	flowControlChanged(QSerialPort::FlowControl flow) \\ 
+\hline
+void&	parityChanged(QSerialPort::Parity parity) \\ 
+\hline
+void&	requestToSendChanged(bool set) \\ 
+\hline
+void&	stopBitsChanged(QSerialPort::StopBits stopBits) \\ 
+\hline
+\end{longtable}
+
+\section{重写保护成员函数}
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型&	函数名 \\ 
+\hline
+virtual qint64&	readData(char \emph{*data}, qint64 \emph{maxSize}) override \\
+\hline
+virtual qint64&	readLineData(char \emph{*data}, qint64 \emph{maxSize}) override \\ 
+\hline
+virtual qint64&	writeData(const char \emph{*data}, qint64 \emph{maxSize}) override \\ 
+\hline
+\end{tabular}
+
+
+
+\section{详细描述}
+
+您可以使用 QSerialPortInfo 帮助类来获取可用串口的信息，这个类可以枚举系统中的所有串口，当您想使用某个串口时，使用这个类可以获得正确的串口名。可以通过把 QSerialPortInfo 类实例对象作为参数传递给 setPort() 或 setPortName() 方法来指定串口设备。
+
+串口设置完毕以后，可以使用 open() 方法以只读 (r/o)、只写 (w/o)、读写 (r/w) 模式打开串口。
+
+\begin{notice}
+串口总是以独占访问的方式打开，即其它进程或线程无法访问已经打开的串口。
+\end{notice}
+
+请使用 close() 方法来关闭串口或取消串口读写操作。
+
+串口打开以后，QSerialPort 会检查串口当前的配置并初始化。
+您可以使用 setBaudRate(), setDataBits(), setParity(), setStopBits(), 和 setFlowControl() 方法重新配置串口。
+
+QSerialPort::dataTerminalReady 和 QSerialPort::requestToSend 属性用来设置串口引脚信号，还可以使用 pinoutSignals() 方法来查询串口引脚信号。
+
+当串口准备好时，可以用 read() 或 write() 方法来读写串口。
+您还可以使用 readLine() 和 readAll() 这样的便捷方法读写串口。
+如果数据没有一次读完，剩下的数据会被接下来有新数据被添加至 QSerialPort 内部读缓冲器时再读出。
+您可以使用 setReadBufferSize() 方法来设置串口读缓冲区的大小。
+
+QSerialPort 提供了一组函数来暂停线程调用直到触发特定的信号。这些函数可以用来阻塞串口：
+
+\begin{compactitem}
+\item waitForReadyRead() 函数阻塞线程调用直到串口有新数据准备读出
+\item waitForBytesWritten() 函数阻塞线程调用直到有新数据被写进串口
+\end{compactitem}
+
+阻塞串口代码示例：
+
+\begin{cppcode}
+int numRead = 0, numReadTotal = 0;
+char buffer[50];
+
+for (;;) {
+    numRead  = serial.read(buffer, 50);
+
+    // Do whatever with the array
+
+    numReadTotal += numRead;
+    if (numRead == 0 && !serial.waitForReadyRead())
+        break;
+}
+\end{cppcode}
+
+如果 waitForReadyRead() 返回 false，说明串口连接已经关闭或者有错误出现。
+
+如果串口出现错误，QSerialPort 将会发射 errorOccurred() 信号。
+您还可以调用 error() 方法来查询串口最近一次出现错误的类型。
+
+\begin{notice}
+在 QSerialPort 中，并非所有的错误都是以操作系统平台无关的方式处理。
+诸如帧、奇偶校验、终止条件这样的错误需要由应用程序代码来处理，可能需要使用设备描述符中的操作系统相关的 ioctls 和(或)解析串口数据流中的字节填充。
+\end{notice}
+
+编程阻塞串口与编程非阻塞串口完全不同。阻塞串口不需要事件循环，通常会让编程更简单。
+然而，在图形用户界面程序中，阻塞串口应该仅用于非图形用户界面线程，这样做可以避免用户界面卡顿。
+
+若想更深入了解这方面内容，请参考 example 中的例程。
+
+QSerialPort 类还可以与 QTextStream 和 QDataStream 的流运算符(<<()和>>())一起使用。
+有一点需要注意：在使用流运算符 >>() 之前请确保串口缓冲区有足够多的数据可读。
+
+\begin{seeAlso}
+QSerialPortInfo。
+\end{seeAlso}
+
+\section{成员类型文档}
+
+enum QSerialPort::BaudRate
+
+该枚举描述了串口通信波特率。
+
+\begin{notice}
+该枚举仅列出了最常用的串口通信波特率。
+\end{notice}
+
+
+\begin{longtable}[l]{|r|c|m{20em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline
+QSerialPort::Baud1200 &	1200&	1200 比特/秒 \\ 
+\hline
+QSerialPort::Baud2400	&2400&	2400 比特/秒 \\ 
+\hline
+QSerialPort::Baud4800	&4800&	4800 比特/秒 \\ 
+\hline
+QSerialPort::Baud9600	&9600&	9600 比特/秒 \\ 
+\hline
+QSerialPort::Baud19200	&19200&	19200 比特/秒 \\ 
+\hline
+QSerialPort::Baud38400	&38400	&38400 比特/秒 \\ 
+\hline
+QSerialPort::Baud57600	&57600	&57600 比特/秒 \\ 
+\hline
+QSerialPort::Baud115200&	115200&	115200 比特/秒 \\ 
+\hline
+QSerialPort::UnknownBaud	&-1	&波特率未知。这个值已经废弃了。此处保留是为了兼容旧的代码。
+ 强烈建议您在新开发的代码中不使用这个值 \\ 
+\hline
+\end{longtable}
+
+\begin{seeAlso}
+QSerialPort::baudRate。
+\end{seeAlso}
+
+enum QSerialPort::DataBits
+
+该枚举描述了每个字符所使用的数据比特数。
+
+\begin{longtable}[l]{|r|c|m{20em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::Data5 &	5&	每个字符用5比特表示，用于波特码，常见于旧式设备，例如电传打字机 \\ 
+\hline
+QSerialPort::Data6	&6&	每个字符用6比特表示，很少这样用 \\ 
+\hline
+QSerialPort::Data7&	7&	每个字符用7比特表示，用于ASCII码，常见于旧式设备，例如电传打字机 \\ 
+\hline
+QSerialPort::Data8	&8	&每个字符用8比特表示，大部分数据采用此格式，因为1个字节包含8比特。它在新应用中广泛使用 \\ 
+\hline
+QSerialPort::UnknownDataBits&	-1&	比特数未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+\end{longtable}
+
+\begin{seeAlso}
+QSerialPort::dataBits。
+\end{seeAlso}
+
+enum QSerialPort::Direction
+
+flags QSerialPort::Directions
+
+该枚举描述了串口数据传输方向。
+
+\begin{notice}
+在某些操作系统中(例如类 POSIX 系统)，该枚举对串口的输入/输出波特率单独设置。
+\end{notice}
+
+\begin{tabular}{|r|c|l|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::Input	& 1 &	输入方向 \\ 
+\hline
+QSerialPort::Output	 &2	 &输出方向 \\ 
+\hline
+QSerialPort::AllDirections&	Input&	Output \\
+\hline
+\end{tabular}
+
+
+方向类型是 QFlags 的类型定义(typedef)，它保存了方向值的 OR 组合。
+
+enum QSerialPort::FlowControl
+
+该枚举描述了串口使用的流控制方式。
+
+\begin{tabular}{|r|c|m{20em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::NoFlowControl&	0	&没有流控制 \\ 
+\hline
+QSerialPort::HardwareControl&	1&	硬件流控制 (RTS/CTS) \\ 
+\hline
+QSerialPort::SoftwareControl&	2	&软件流控制 (XON/XOFF) \\ 
+\hline
+QSerialPort::UnknownFlowControl	&-1 &	流控制未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+QSerialPort::flowControl。
+\end{seeAlso}
+
+enum QSerial::Parity
+
+该枚举描述了串口使用的奇偶校验模式。
+
+\begin{tabular}{|r|c|m{22em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::NoParity	&0&	没有奇偶校验。这是最常见的奇偶校验设置。错误检测由通信协议完成 \\ 
+\hline 
+QSerialPort::EvenParity&	2	&每个字符包含1比特奇偶校验，字符比特数为偶数(含奇偶校验位) \\ 
+\hline
+QSerialPort::OddParity&	3	&每个字符包含1比特奇偶校验，字符比特数为奇数(含奇偶校验位)。它确保了每个字符至少有一次状态转换 \\ 
+\hline
+QSerialPort::SpaceParity&	4	&间隔奇偶校验。奇偶校验位在间隔信号中发送。它不提供错误检测信息 \\ 
+\hline
+QSerialPort::MarkParity	&5&	标志奇偶校验。奇偶校验位总是被置为标志信号(逻辑 1)。它不提供错误检测信息 \\ 
+\hline
+QSerialPort::UnknownParity&	-1	&奇偶校验未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+QSerialPort::parity。
+\end{seeAlso}
+
+enum QSerialPort::PinoutSignal
+
+flags QSerialPort::PinoutSignals
+
+该枚举用于描述串口引脚信号。
+
+\begin{longtable}[l]{|r|c|m{9em}|}
+\hline
+常量	&值&	描述 \\ 
+\hline 
+QSerialPort::NoSignal	&0x00&	无信号 \\ 
+\hline
+QSerialPort::TransmittedDataSignal&	0x01&	TxD (发送数据)。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\
+\hline
+QSerialPort::ReceivedDataSignal	&0x02	&RxD (接收数据)。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值\\
+\hline
+QSerialPort::DataTerminalReadySignal	&0x04&	DTR (数据终端就绪) \\ 
+\hline
+QSerialPort::DataCarrierDetectSignal	&0x08&	DCD (数据载波检测) \\ 
+\hline
+QSerialPort::DataSetReadySignal	&0x10	&DSR (数据就绪) \\ 
+\hline
+QSerialPort::RingIndicatorSignal&	0x20&	RNG (振铃提示) \\ 
+\hline
+QSerialPort::RequestToSendSignal	&0x40&	RTS (请求发送) \\ 
+\hline
+QSerialPort::ClearToSendSignal	&0x80&	CTS (清除发送) \\
+\hline 
+QSerialPort::SecondaryTransmittedDataSignal	&0x100&	STD (辅助发送数据) \\
+\hline
+QSerialPort::SecondaryReceivedDataSignal&	0x200	&SRD (辅助接收数据) \\ 
+\hline
+\end{longtable}
+
+PinoutSignals类型是 QFlags 的类型定义(typedef)，它保存了PinoutSignal值的 OR 组合。
+
+\begin{seeAlso}
+pinoutSignals(), QSerialPort::dataTerminalReady, 和 QSerialPort::requestToSend。
+\end{seeAlso}
+
+enum QSerialPort::SerialPortError
+
+该枚举描述了 QSerialPort::error 属性的错误类型。
+
+\begin{longtable}[l]{|r|c|m{9em}|}
+	\hline
+	常量	&值&	描述 \\ 
+	\hline 
+	QSerialPort::NoError &	0 &	没有错误 \\ 
+	\hline
+	QSerialPort::DeviceNotFoundError &	1 &	尝试打开一个不存在的串口设备 \\ 
+	\hline
+	QSerialPort::PermissionError 	&2 	&其它进程试图打开一个已经开启的串口设备或者用户没有足够的权限打开串口 \\ 
+	\hline
+	QSerialPort::OpenError &	3& 	在当前对象中试图打开一个已经开启的串口 \\ 
+	\hline
+	QSerialPort::NotOpenError 	&13 &	在串口未开启时执行某个操作。这个值从 QtSerialPort 5.2 开始使用 \\
+	\hline 
+	QSerialPort::ParityError &	4 &	读串口时硬件检测到奇偶校验错误。这个值已经废弃了。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+	QSerialPort::FramingError &	5 &	读串口时硬件检测到帧错误。这个值已经废弃了。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+	QSerialPort::BreakConditionError &	6 &	串口输入线上检测到终止条件。这个值已经废弃了。强烈建议您在新开发的代码中不使用这个值 \\ 
+	\hline
+	QSerialPort::WriteError &	7 	&写串口时出现的 I/O 错误 \\ 
+	\hline
+	QSerialPort::ReadError &	8 &	读串口时出现的 I/O 错误 \\ 
+\hline
+	QSerialPort::ResourceError 	&9 	&当资源无法访问时出现的 I/O 错误。例如：当串口设备意外断开时 \\ 
+	\hline
+	QSerialPort::UnsupportedOperationError& 	10 &	操作系统禁止或不支持请求的串口操作 \\ 
+	\hline
+	QSerialPort::TimeoutError 	&12 &	超时错误。这个值从 QtSerialPort 5.2 开始使用 \\ 
+	\hline
+	QSerialPort::UnknownError &	11 &	未知错误 \\ 
+	\hline
+\end{longtable}
+
+
+enum QSerialPort::StopBits
+
+该枚举描述了串口停止位的比特数。
+
+\begin{tabular}{|r|c|m{15em}|}
+	\hline
+	常量	&值&	描述 \\ 
+	\hline 
+	QSerialPort::OneStop 	&1& 	1比特停止位 \\ 
+	\hline
+	QSerialPort::OneAndHalfStop &	3 &	1.5比特停止位(仅适用于Windows系统) \\ 
+	\hline
+	QSerialPort::TwoStop &	2 	&2比特停止位 \\ 
+	\hline
+	QSerialPort::UnknownStopBits &	-1& 	停止位比特数未知。这个值已经废弃了。此处保留是为了兼容旧的代码。强烈建议您在新开发的代码中不使用这个值 \\ 
+   \hline
+\end{tabular}
+
+\begin{seeAlso}
+QSerialPort::stopBits。
+\end{seeAlso}
+
+\section{成员属性文档}
+
+
+baudRate : qint32
+
+该属性为串口在指定方向(输入/输出)上的通信波特率。
+
+如果串口波特率设置成功或者打开串口前设置好波特率，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。您可以使用枚举 QSerialPort::BaudRate 或者任何 qint32 型正整数值设置串口通信波特率。
+
+\begin{notice}
+如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+\end{notice}
+
+\begin{warning}
+所有操作系统均支持 AllDirections 标志位设置，但 Windows 系统仅支持这种模式。
+\end{warning}
+
+\begin{warning}
+在 Windows 系统中无论串口输入还是输出，其波特率均相同。
+\end{warning}
+
+该属性的默认值为 Baud9600，即 9600 比特/秒。
+
+存取函数:
+
+\begin{tabular}{|r|m{25em}|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+qint32 	&baudRate(QSerialPort::Directions \emph{directions} = AllDirections) const \\ 
+\hline
+bool 	&setBaudRate(qint32 baudRate, QSerialPort::Directions \emph{directions} = AllDirections) \\ 
+\hline
+\end{tabular} 
+
+通知信号:
+
+\begin{tabular}{|r|m{25em}|}
+\hline
+返回类型 &	函数名 \\
+\hline
+void 	& baudRateChanged(qint32 baudRate, QSerialPort::Directions directions) \\ 
+\hline
+\end{tabular} 
+
+breakEnabled : bool
+
+该属性为串口是否终止传输的标志位。
+
+若串口终止通信，则该属性为 true，否则为 false。
+
+注意: 在设置或访问该属性前串口必须已经打开，否则返回 false 并且 NotOpenError 错误码将被置 1。这一点与常规的 Qt 类属性设置不同。然而，这种差异性源于该属性是通过操作系统内核与串口硬件之间的交互来设置的，因此 Qt 串口类属性与其它 Qt 类属性不完全等同。
+
+该属性从 Qt 5.5 开始使用。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 	& 函数名 \\ 
+\hline 
+bool 	&isBreakEnabled() const \\ 
+\hline
+bool &	setBreakEnabled(bool set = true) \\ 
+\hline
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型  &	函数名 \\ 
+\hline
+void &	breakEnabledChanged(bool set) \\ 
+\hline
+\end{tabular}
+
+dataBits : DataBits 
+
+该属性为串口数据帧中的比特数。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+注意: 如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+
+该属性的默认值为 Data8，即数据帧为8比特。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型  &	函数名 \\ 
+\hline
+QSerialPort::DataBits  &	dataBits() const \\
+\hline
+bool &	setDataBits(QSerialPort::DataBits dataBits) \\ 
+\hline
+\end{tabular}
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型  &	函数名 \\ 
+	\hline
+	void 	& dataBitsChanged(QSerialPort::DataBits dataBits) \\ 
+	\hline
+\end{tabular}
+
+dataTerminalReady : bool
+
+该属性为串口信号线 DTR 的状态(高或低)。
+
+如果串口信号线 DTR 被置为高电平，则返回true，否则返回false.
+
+注意: 在设置或访问该属性前串口必须已经打开，否则返回 false 并且 NotOpenError 错误码将被置 1。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型  &	函数名 \\ 
+\hline
+bool &	isDataTerminalReady() \\ 
+\hline
+bool &	setDataTerminalReady(bool set) \\ 
+\hline
+\end{tabular}
+ 
+通知信号:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型  &	函数名 \\ 
+	\hline
+	void 	& dataTerminalReadyChanged(bool set) \\ 
+	\hline
+\end{tabular}
+
+另请参阅 pinoutSignals()。
+
+error : SerialPortError
+
+该属性为串口的错误码。
+
+串口设备会返回一个错误码。
+例如：如果函数 open() 返回false，或者读/写操作返回-1，该属性可以用来判断操作失败的原因。
+
+当调用clearError()函数后，错误码会被置为默认值 QSerialPort::NoError.
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型  &	函数名 \\ 
+	\hline
+	QSerialPort::SerialPortError 	&error() const \\ 
+	\hline
+void 	&clearError() \\ 
+	\hline
+\end{tabular}
+
+
+
+flowControl : FlowControl
+
+该属性为串口使用的流控制方式。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+注意: 如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+
+该属性的默认值为 NoFlowControl，即没有流控制。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+	\hline
+返回类型 &	函数名 \\ 
+\hline
+QSerialPort::FlowControl &	flowControl() const \\ 
+\hline
+bool &	setFlowControl(QSerialPort::FlowControl flowControl) \\ 
+\hline
+\end{tabular}
+
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &函数名 \\ 
+\hline
+void 	&flowControlChanged(QSerialPort::FlowControl flow) \\ 
+\hline
+\end{tabular}
+
+parity : Parity 
+
+该属性为串口使用的奇偶校验模式。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+\begin{notice}
+如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+\end{notice}
+
+该属性的默认值为 NoParity，即没有奇偶校验。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &函数名 \\ 
+\hline
+QSerialPort::Parity &	parity() const \\
+\hline
+bool &	setParity(QSerialPort::Parity parity) \\ 
+\hline
+\end{tabular}
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 &函数名 \\ 
+	\hline
+	void 	& parityChanged(QSerialPort::Parity parity) \\
+\hline
+\end{tabular}
+
+
+requestToSend : bool
+
+该属性为串口信号线 RTS 的状态(高或低)。
+
+如果串口信号线 RTS 被置为高电平，则返回true，否则返回false.
+
+\begin{notice}
+在设置或访问该属性前串口必须已经打开，否则返回 false 并且 NotOpenError 错误码将被置 1。
+\end{notice}
+
+\begin{notice}
+在 HardwareControl 模式下直接控制 RTS 信号会出错， 错误码 UnsupportedOperationError 会被置1，因为 RTS 信号由驱动自动控制。
+\end{notice}
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+bool &	isRequestToSend() \\ 
+\hline
+bool 	& setRequestToSend(bool set) \\ 
+\hline
+\end{tabular}
+
+通知信号：
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+void &	requestToSendChanged(bool \emph{set}) \\ 
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+pinoutSignals()。
+\end{seeAlso}
+
+stopBits : StopBits
+
+该属性为串口帧的停止位比特数。
+
+若设置成功或者打开串口前设置好该属性，那么返回true，否则返回false并且把错误码置1。
+该错误码可以通过读取 QSerialPort::error 属性的值获得。
+
+\begin{notice}
+如果在打开串口前设置该属性，那么真实的串口设置将会在串口打开后，在 QSerialPort::open() 方法中自动完成。
+\end{notice}
+
+该属性的默认值为 OneStop, 即1比特停止位。
+
+存取函数:
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 &	函数名 \\ 
+	\hline
+	QSerialPort::StopBits &	stopBits() const\\
+	\hline
+	bool 	&setStopBits(QSerialPort::StopBits \emph{stopBits}) \\
+	\hline
+	\end{tabular}
+
+通知信号:
+
+\begin{tabular}{|r|l|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+void &	stopBitsChanged(QSerialPort::StopBits \emph{stopBits}) \\ 
+\hline
+\end{tabular}
+
+%%%%%%%%
+
+\section{成员函数文档}
+
+QSerialPort::QSerialPort(const QSerialPortInfo \&serialPortInfo, QObject *parent = nullptr)
+
+创建一个新的串口对象并指定父对象，用指定的帮助类 serialPortInfo 表示串口。
+
+QSerialPort::QSerialPort(const QString \&name, QObject *parent = nullptr)
+
+创建一个新的串口对象并指定父对象，用指定的串口名来表示串口。
+
+串口名必须符合特定的格式，详见 setPort() 方法。
+
+QSerialPort::QSerialPort(QObject *parent = nullptr)
+
+创建一个新的串口对象并指定父对象。
+
+[signal] void QSerialPort::baudRateChanged(qint32 baudRate, QSerialPort::Directions directions)
+
+当串口通信波特率改变时会触发该信号。新的波特率在参数 baudRate 中，
+数据传输方向在参数 directions 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 baudRate 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+QSerialPort::baudRate.
+\end{seeAlso}
+
+[signal] void QSerialPort::dataBitsChanged(QSerialPort::DataBits dataBits)
+
+当串口帧数据比特数改变时会触发该信号。新的帧数据比特数在参数 dataBits 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 dataBits 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+QSerialPort::dataBits.
+\end{seeAlso}
+
+[signal] void QSerialPort::dataTerminalReadyChanged(bool set)
+
+当串口信号线 DTR 的电平状态改变时会触发该信号。新的电平状态(高或低)在参数 set 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 dataTerminalReady 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+QSerialPort::dataTerminalReady.
+\end{seeAlso}
+
+[signal] void QSerialPort::errorOccurred(QSerialPort::SerialPortError error)
+
+当串口出错时会触发该信号。错误类型码在参数 error 中。
+
+此函数从 Qt 5.8 开始使用。
+
+\begin{seeAlso}
+QSerialPort::error。
+\end{seeAlso}
+
+[signal] void QSerialPort::flowControlChanged(QSerialPort::FlowControl flow)
+
+当串口流控制方式改变时会触发该信号。新的流控制方式在参数 flow 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 flowControl 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+QSerialPort::flowControl.
+\end{seeAlso}
+
+[signal] void QSerialPort::parityChanged(QSerialPort::Parity parity)
+
+当串口的奇偶校验模式改变时会触发该信号。新的奇偶校验模式在参数 parity 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 parity 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+另请参阅 QSerialPort::parity.
+\end{seeAlso}
+
+[signal] void QSerialPort::requestToSendChanged(bool set)
+
+当串口信号线 RTS 的电平状态改变时会触发该信号。新的电平状态(高或低)在参数 set 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 requestToSend 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+QSerialPort::requestToSend。
+\end{seeAlso}
+
+[signal] void QSerialPort::stopBitsChanged(QSerialPort::StopBits stopBits)
+
+当串口帧停止位比特数改变时会触发该信号。新的帧停止位比特数在参数 stopBits 中。
+
+\begin{notice}
+这是 QSerialPort 类成员属性 stopBits 的通知信号。
+\end{notice}
+
+\begin{seeAlso}
+QSerialPort::stopBits。
+\end{seeAlso}
+
+[virtual] QSerialPort::$\sim$QSerialPort()
+
+关闭串口，若有必要，销毁对象。
+
+[override virtual] bool QSerialPort::atEnd() const
+
+该函数是 QIODevice::atEnd() 的重写函数。
+
+若串口有更多数据待读取，函数返回true，否则返回false.
+
+该函数常出现在循环中读取串口数据，代码示例：
+
+\begin{cppcode}
+// This slot is connected to QSerialPort::readyRead()
+void QSerialPortClass::readyReadSlot()
+{
+    while (!port.atEnd()) {
+        QByteArray data = port.read(100);
+        ....
+    }
+}
+\end{cppcode}
+
+\begin{seeAlso}
+bytesAvailable() 和 readyRead()。
+\end{seeAlso}
+
+[override virtual] qint64 QSerialPort::bytesAvailable() const
+
+该函数是 QIODevice::bytesAvailable() 的重写函数。
+
+函数返回串口待读取的数据字节数。
+
+\begin{seeAlso}
+bytesToWrite() 和 read().
+\end{seeAlso}
+
+[override virtual] qint64 QSerialPort::bytesToWrite() const
+
+该函数是 QIODevice::bytesToWrite() 的重写函数。
+
+函数返回待写入串口的数据字节数。当控制交还给事件循环或者调用函数 flush() 后，这些数据被写入串口。
+
+\begin{seeAlso}
+bytesAvailable() 和 flush().
+\end{seeAlso}
+
+[override virtual] bool QSerialPort::canReadLine() const
+
+该函数是 QIODevice::canReadLine() 的重写函数。
+
+若可以从串口读取一行数据，函数返回true，否则返回false。
+
+\begin{seeAlso}
+readLine().
+\end{seeAlso}
+
+bool QSerialPort::clear(QSerialPort::Directions directions = AllDirections)
+
+清空串口输入/输出(取决于串口通信方向)缓冲区中的数据。包括清空内部类缓冲器和串口驱动缓冲区，并且终止后续的读/写串口操作。如果清空串口缓冲区成功，函数返回true，否则返回false。
+
+\begin{notice}
+清空串口缓冲区之前串口必须是打开的，否则函数返回false并且将 NotOpenError 错误码置1。
+\end{notice}
+
+[override virtual] void QSerialPort::close()
+
+该函数是 QIODevice::close() 的重写函数。
+
+\begin{notice}
+串口关闭前必须处于打开状态，否则会将 NotOpenError 错误码置1。
+\end{notice}
+
+\begin{seeAlso}
+QIODevice::close().
+\end{seeAlso}
+
+bool QSerialPort::flush()
+
+该函数以非阻塞的方式把内部写缓冲区中的数据尽可能的写入串口。若写入成功，返回返回true，否则返回false。
+
+调用该函数把缓冲区中的数据立即发送至串口，成功发送的数据字节数取决于操作系统。大部分情况下无需调用此函数，因为当控制权交还给事件循环后，QSerialPort 类会自动发送数据。当没有事件循环时，调用 waitForBytesWritten() 函数。
+
+\begin{notice}
+在把缓冲区数据写入串口前串口必须处于打开状态，否则函数返回false并且将 NotOpenError 错误码置1。
+\end{notice}
+
+\begin{seeAlso}
+write() 和 waitForBytesWritten().
+\end{seeAlso}
+
+QSerialPort::Handle QSerialPort::handle() const
+
+如果操作系统支持并且串口是打开的，返回原生串口句柄，否则返回-1。
+
+\begin{warning}
+该函数仅限专家使用并且需要承担相应的风险。并且该函数在 Qt 的小版本中不保证兼容性。
+\end{warning}
+
+该函数从 Qt 5.2 开始使用。
+
+[override virtual] bool QSerialPort::isSequential() const
+
+该函数是 QIODevice::isSequential() 的重写函数。
+
+该函数总是返回true，因为串口为顺序设备。
+
+[override virtual] bool QSerialPort::open(QIODevice::OpenMode mode)
+
+该函数是 QIODevice::open(QIODevice::OpenMode mode) 的重写函数。
+
+使用 OpenMode 模式打开串口。若串口打开成功，函数返回true，否则返回false并且将错误码置1，该错误码可以通过调用 error() 方法获得。
+
+\begin{notice}
+若串口可以成功打开但不能成功设置串口参数时，该函数返回false。在这种情况下，串口会自动关闭，从而避免串口设置错误。
+\end{notice}
+
+\begin{warning}
+该函数的参数 mode 只能是 QIODevice::ReadOnly, QIODevice::WriteOnly,或 QIODevice::ReadWrite.
+\end{warning}
+
+\begin{seeAlso}
+另请参阅 QIODevice::OpenMode and setPort().
+\end{seeAlso}
+
+QSerialPort::PinoutSignals QSerialPort::pinoutSignals()
+
+以位图格式返回串口信号线的状态。
+
+您可以通过把该函数的返回值和一个模板做逻辑与运算来配置串口信号线的状态。这个模板是QSerialPort::PinoutSignals 的期望枚举值。
+
+\begin{notice}
+该函数执行系统调用以确保串口能正常返回信号线状态。这一点是非常必要的，尤其是当底层操作系统不能提供关于串口信号线状态的通知时。
+\end{notice}
+
+\begin{notice}
+注意: 执行该函数之前，串口必须是打开的，否则函数返回 NoSignal 并且将 NotOpenError 错误码置1。
+\end{notice}
+
+QString QSerialPort::portName() const
+
+返回串口名，该名字由函数 setPort() 设置或者通过 QSerialPort 类构造函数传递。返回的名字是简略版的串口名，它从设备地址的内部变量系统提取和转换而来。转换算法因系统而异：
+操作系统 	简要描述
+Windows 	从系统设备地址中移除前缀"\\.\"或"//./"，返回剩余的字符串
+Unix, BSD 	从系统设备地址中移除前缀"/dev/"，返回剩余的字符串
+
+\begin{seeAlso}
+setPortName(), setPort(), 和 QSerialPortInfo::portName().
+\end{seeAlso}
+
+qint64 QSerialPort::readBufferSize() const
+
+返回串口读缓冲区的大小。此返回值决定了程序调用 read() 或 readAll() 方法最多能读取多少字节数据。若返回值为0，则串口读缓冲区没有大小限制，数据不会因为读缓冲区不足而丢失。
+
+\begin{seeAlso}
+setReadBufferSize() 和 read().
+\end{seeAlso}
+
+[override virtual protected] qint64 QSerialPort::readData(char *data, qint64 maxSize)
+
+该函数是 QIODevice::readData(char *data, qint64 maxSize) 的重写函数。
+
+[override virtual protected] qint64 QSerialPort::readLineData(char *data, qint64 maxSize)
+
+该函数是 QIODevice::readLineData(char *data, qint64 maxSize) 的重写函数。
+
+bool QSerialPort::sendBreak(int duration = 0)
+
+若在串口异步通信中使用停止位，在 duration 毫秒的时间内连续发送值为0的比特流。若发送成功，函数返回true，否则返回false。
+
+若函数参数 duration 的值为0，那么值为0的比特流至少发送0.25秒，但不超过0.5秒。
+
+若函数参数 duration 的值不等于0，那么传输值为0的比特流的时间长度取决于具体实现。
+
+\begin{notice}
+执行该函数之前，串口必须是打开的，否则函数返回 NoSignal 并且将 NotOpenError 错误码置1。
+\end{notice}
+
+\begin{seeAlso}
+setBreakEnabled().
+\end{seeAlso}
+
+void QSerialPort::setPort(const QSerialPortInfo \&serialPortInfo)
+
+该函数用于设置串口，串口参数在 serialPortInfo 类实例中。
+
+\begin{seeAlso}
+portName() 和 QSerialPortInfo.
+\end{seeAlso}
+
+void QSerialPort::setPortName(const QString \&name)
+
+设置串口名。
+
+串口名字既可以用简略版的名字也可以用包好系统设备地址的全名。
+
+\begin{seeAlso}
+portName() 和 QSerialPortInfo.
+\end{seeAlso}
+
+void QSerialPort::setReadBufferSize(qint64 size)
+
+设置串口内部读缓冲区的大小为 size 字节。
+
+如果 size 不为0，那么串口读缓冲区不会超过 size 字节。如果 size 为0，
+那么串口读缓冲区没有大小限制，所有读入串口的数据都将被缓存。 size 的默认值为0。
+
+该函数在一些情况下非常有用，比如仅需要在特定时间读串口(例如实时流应用)或者需要防止串口读入太多数据从而造成内存耗尽的情形。
+
+\begin{seeAlso}
+readBufferSize() 和 read()。
+\end{seeAlso}
+
+[override virtual] bool QSerialPort::waitForBytesWritten(int msecs = 30000)
+
+该函数是QIODevice::waitForBytesWritten(int msecs) 的重写函数。
+
+该函数会阻塞串口通信线程直至最后一个字节写入到串口并且触发了 bytesWritten() 信号。
+函数经过 msecs 毫秒后超时， msecs 的默认值是30000毫秒，如果 msecs 的值为-1，那么该函数不会超时。
+
+如果成功触发 bytesWritten() 信号，函数将返回true，否则返回false(写串口过程中出错或者操作超时)。
+
+[override virtual] bool QSerialPort::waitForReadyRead(int msecs = 30000)
+
+该函数是 QIODevice::waitForReadyRead(int msecs) 的重写函数。
+
+该函数会阻塞串口通信线程直至新数据已经准备好读入串口并且触发了 readyRead() 信号。函数经过 msecs 毫秒后超时， msecs 的默认值是30000毫秒，如果 msecs 的值为-1，那么该函数不会超时。
+
+如果成功触发 readyRead() 信号并且串口读缓冲区有新数据，函数将返回true，否则返回false(读串口过程中出错或者操作超时)。
+
+\begin{seeAlso}
+waitForBytesWritten()。
+\end{seeAlso}
+
+[override virtual protected] qint64 QSerialPort::writeData(const char *data, qint64 maxSize)
+
+该函数是 QIODevice::writeData(const char *data, qint64 maxSize) 的重写函数。
