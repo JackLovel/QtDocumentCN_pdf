@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QFileSystemModel}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{model}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QFileSystemModel}\PYG{p}{;}
-\PYG{n}{connect}\PYG{p}{(}\PYG{n}{model}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QFileSystemModel}\PYG{o}{::}\PYG{n}{directoryLoaded}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{model}\PYG{p}{](}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{directory}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{parentIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{index}\PYG{p}{(}\PYG{n}{directory}\PYG{p}{);}
-\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{numRows}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{rowCount}\PYG{p}{(}\PYG{n}{parentIndex}\PYG{p}{);}
-\PYG{p}{\PYGZcb{});}
-\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setRootPath}\PYG{p}{(}\PYG{n}{QDir}\PYG{o}{::}\PYG{n}{currentPath}\PYG{p}{);}
-\end{Verbatim}

@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QResource}\PYG{o}{::}\PYG{n}{registerResource}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/path/to/myresource.rcc\PYGZdq{}}\PYG{p}{);}
-\end{Verbatim}

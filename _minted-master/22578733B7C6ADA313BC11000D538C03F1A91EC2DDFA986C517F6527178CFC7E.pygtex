@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{qt\PYGZus{}ntfs\PYGZus{}permission\PYGZus{}lookup}\PYG{o}{++}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 打开检查}
-\PYG{n}{qt\PYGZus{}ntfs\PYGZus{}permission\PYGZus{}lookup}\PYG{o}{\PYGZhy{}\PYGZhy{}}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 再次关闭}
-\end{Verbatim}

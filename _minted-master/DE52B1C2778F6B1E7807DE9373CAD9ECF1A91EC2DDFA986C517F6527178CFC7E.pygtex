@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{timeout}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{30}\PYG{p}{;}
-\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{hash}\PYG{p}{.}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}TIMEOUT\PYGZdq{}}\PYG{p}{))}
-\PYG{+w}{    }\PYG{n}{timeout}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hash}\PYG{p}{.}\PYG{n}{value}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}TIMEOUT\PYGZdq{}}\PYG{p}{);}
-\end{Verbatim}

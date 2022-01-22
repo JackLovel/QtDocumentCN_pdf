@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{id}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{qMetaTypeId}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{p}{();}\PYG{+w}{    }\PYG{c+c1}{// id 是 QMetaType::QString}
-\PYG{n}{id}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{qMetaTypeId}\PYG{o}{\PYGZlt{}}\PYG{n}{MyStruct}\PYG{o}{\PYGZgt{}}\PYG{p}{();}\PYG{+w}{       }\PYG{c+c1}{// 若 MyStruct 未被声明，则会产生编译错误}
-\end{Verbatim}

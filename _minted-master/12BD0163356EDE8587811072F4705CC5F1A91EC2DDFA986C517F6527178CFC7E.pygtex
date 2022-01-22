@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QMouseEvent}\PYG{+w}{ }\PYG{n+nf}{event}\PYG{p}{(}\PYG{n}{QEvent}\PYG{o}{::}\PYG{n}{MouseButtonPress}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{pos}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{);}
-\PYG{n}{QApplication}\PYG{o}{::}\PYG{n}{sendEvent}\PYG{p}{(}\PYG{n}{mainWindow}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{event}\PYG{p}{);}
-\end{Verbatim}

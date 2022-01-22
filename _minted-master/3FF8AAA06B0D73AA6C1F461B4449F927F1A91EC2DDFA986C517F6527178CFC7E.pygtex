@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{fromString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}1.30\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}M.d\PYGZdq{}}\PYG{p}{);}\PYG{+w}{           }\PYG{c+c1}{// January 30 1900}
-\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{fromString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}20000110\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}yyyyMMdd\PYGZdq{}}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// January 10, 2000}
-\PYG{n}{QDate}\PYG{o}{::}\PYG{n}{fromString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}20000110\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}yyyyMd\PYGZdq{}}\PYG{p}{);}\PYG{+w}{    }\PYG{c+c1}{// January 10, 2000}
-\end{Verbatim}

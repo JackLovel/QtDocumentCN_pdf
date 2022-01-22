@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+cp}{\PYGZsh{}ifdef Q\PYGZus{}OS\PYGZus{}WIN}
-\PYG{c+cp}{\PYGZsh{}define MY\PYGZus{}EXPORT \PYGZus{}\PYGZus{}declspec(dllexport)}
-\PYG{c+cp}{\PYGZsh{}else}
-\PYG{c+cp}{\PYGZsh{}define MY\PYGZus{}EXPORT}
-\PYG{c+cp}{\PYGZsh{}endif}
-\end{Verbatim}

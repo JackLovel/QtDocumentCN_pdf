@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QDate}\PYG{+w}{ }\PYG{n+nf}{d1}\PYG{p}{(}\PYG{l+m+mi}{1995}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{17}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// May 17, 1995}
-\PYG{n}{QDate}\PYG{+w}{ }\PYG{n+nf}{d2}\PYG{p}{(}\PYG{l+m+mi}{1995}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{20}\PYG{p}{);}\PYG{+w}{  }\PYG{c+c1}{// May 20, 1995}
-\PYG{n}{d1}\PYG{p}{.}\PYG{n}{daysTo}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{);}\PYG{+w}{          }\PYG{c+c1}{// returns 3}
-\PYG{n}{d2}\PYG{p}{.}\PYG{n}{daysTo}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{);}\PYG{+w}{          }\PYG{c+c1}{// returns \PYGZhy{}3}
-\end{Verbatim}

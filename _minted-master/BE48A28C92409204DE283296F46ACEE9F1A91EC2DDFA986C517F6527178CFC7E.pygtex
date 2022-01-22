@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
-\PYG{p}{...}
-\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{list}\PYG{p}{.}\PYG{n}{isEmpty}\PYG{p}{())}
-\PYG{+w}{    }\PYG{k}{delete}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{.}\PYG{n}{takeFirst}\PYG{p}{();}
-\end{Verbatim}

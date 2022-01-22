@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{extern}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}C\PYGZdq{}}\PYG{+w}{ }\PYG{n}{MY\PYGZus{}EXPORT}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{avg}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{)}
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{a}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{b}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

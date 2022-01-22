@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{// 错误}
-\PYG{n}{QSqlDatabase}\PYG{+w}{ }\PYG{n}{db}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{database}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sales\PYGZdq{}}\PYG{p}{);}
-\PYG{n}{QSqlQuery}\PYG{+w}{ }\PYG{n+nf}{query}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SELECT NAME, DOB FROM EMPLOYEES\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{db}\PYG{p}{);}
-\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{removeDatabase}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sales\PYGZdq{}}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 将会输出警告}
-\PYG{c+c1}{// “db”现在是一个悬而未决的无效数据库连接，}
-\PYG{c+c1}{// “查询”包含无效的结果集}
-\end{Verbatim}

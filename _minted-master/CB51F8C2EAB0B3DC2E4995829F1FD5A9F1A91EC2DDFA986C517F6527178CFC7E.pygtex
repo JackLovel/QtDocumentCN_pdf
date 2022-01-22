@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QFile}\PYG{+w}{ }\PYG{n}{file}\PYG{p}{;}
-\PYG{n}{QDir}\PYG{o}{::}\PYG{n}{setCurrent}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/tmp\PYGZdq{}}\PYG{p}{);}
-\PYG{n}{file}\PYG{p}{.}\PYG{n}{setFileName}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}readme.txt\PYGZdq{}}\PYG{p}{);}
-\PYG{n}{QDir}\PYG{o}{::}\PYG{n}{setCurrent}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/home\PYGZdq{}}\PYG{p}{);}
-\PYG{n}{file}\PYG{p}{.}\PYG{n}{open}\PYG{p}{(}\PYG{n}{QIODevice}\PYG{o}{::}\PYG{n}{ReadOnly}\PYG{p}{);}\PYG{+w}{      }\PYG{c+c1}{// 打开Unix下文件 \PYGZdq{}/home/readme.txt\PYGZdq{}}
-\end{Verbatim}

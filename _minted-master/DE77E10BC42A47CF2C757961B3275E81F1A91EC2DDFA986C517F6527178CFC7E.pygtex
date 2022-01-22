@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QAbstractItemModel}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{model}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{index}\PYG{p}{.}\PYG{n}{model}\PYG{p}{();}
-\end{Verbatim}

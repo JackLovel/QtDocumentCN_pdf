@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QListIterator}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{(}\PYG{n}{list}\PYG{p}{);}
-\PYG{n}{i}\PYG{p}{.}\PYG{n}{toBack}\PYG{p}{();}
-\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{hasPrevious}\PYG{p}{())}
-\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{.}\PYG{n}{previous}\PYG{p}{();}
-
-\end{Verbatim}

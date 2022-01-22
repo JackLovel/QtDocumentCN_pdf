@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{MyMainWindow::closeEvent}\PYG{p}{(}\PYG{n}{QCloseEvent}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{event}\PYG{p}{)}
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{QSettings}\PYG{+w}{ }\PYG{n}{settings}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}MyCompany\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}MyApp\PYGZdq{}}\PYG{p}{);}
-\PYG{+w}{    }\PYG{n}{settings}\PYG{p}{.}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}geometry\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{saveGeometry}\PYG{p}{());}
-\PYG{+w}{    }\PYG{n}{settings}\PYG{p}{.}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}windowState\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{saveState}\PYG{p}{());}
-\PYG{+w}{    }\PYG{n}{QMainWindow}\PYG{o}{::}\PYG{n}{closeEvent}\PYG{p}{(}\PYG{n}{event}\PYG{p}{);}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

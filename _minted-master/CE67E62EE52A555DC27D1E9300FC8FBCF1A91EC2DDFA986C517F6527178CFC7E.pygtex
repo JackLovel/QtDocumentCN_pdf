@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QTimer}\PYG{+w}{ }\PYG{n}{timer}\PYG{p}{;}
-\PYG{n}{timer}\PYG{p}{.}\PYG{n}{setInterval}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{);}
-\PYG{n}{timer}\PYG{p}{.}\PYG{n}{setSingleShot}\PYG{p}{(}\PYG{n+nb}{true}\PYG{p}{);}
-\PYG{n}{timer}\PYG{p}{.}\PYG{n}{start}\PYG{p}{();}
-\end{Verbatim}

@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QTimer}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QTimer}\PYG{p}{(}\PYG{k}{this}\PYG{p}{);}
-\PYG{n}{connect}\PYG{p}{(}\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SIGNAL}\PYG{p}{(}\PYG{n}{timeout}\PYG{p}{()),}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SLOT}\PYG{p}{(}\PYG{n}{update}\PYG{p}{()));}
-\PYG{n}{timer}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{start}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{);}
-\end{Verbatim}

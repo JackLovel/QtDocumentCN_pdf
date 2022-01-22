@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{color}\PYG{p}{.}\PYG{n}{getHsv}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{h}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{s}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{v}\PYG{p}{);}
-\PYG{n}{color}\PYG{p}{.}\PYG{n}{getHsv}\PYG{p}{(}\PYG{n}{h}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{);}
-\end{Verbatim}

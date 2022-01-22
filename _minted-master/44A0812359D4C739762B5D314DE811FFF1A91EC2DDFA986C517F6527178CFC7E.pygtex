@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{PGconn}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{con}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{PQconnectdb}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}host=server user=bart password=simpson dbname=springfield\PYGZdq{}}\PYG{p}{);}
-\PYG{n}{QPSQLDriver}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{drv}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QPSQLDriver}\PYG{p}{(}\PYG{n}{con}\PYG{p}{);}
-\PYG{n}{QSqlDatabase}\PYG{+w}{ }\PYG{n}{db}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{addDatabase}\PYG{p}{(}\PYG{n}{drv}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 产生成新的默认连接}
-\PYG{n}{QSqlQuery}\PYG{+w}{ }\PYG{n}{query}\PYG{p}{;}
-\PYG{n}{query}\PYG{p}{.}\PYG{n}{exec}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SELECT NAME, ID FROM STAFF\PYGZdq{}}\PYG{p}{);}\PYG{+w}{	}
-\end{Verbatim}

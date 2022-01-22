@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{MyModel::timerHit}\PYG{p}{()}
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{c+c1}{//we identify the top left cell}
-\PYG{+w}{    }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{topLeft}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{createIndex}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
-\PYG{+w}{    }\PYG{c+c1}{//emit a signal to make the view reread identified data}
-\PYG{+w}{    }\PYG{n}{emit}\PYG{+w}{ }\PYG{n}{dataChanged}\PYG{p}{(}\PYG{n}{topLeft}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{topLeft}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{DisplayRole}\PYG{p}{\PYGZcb{});}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

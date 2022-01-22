@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QMetaObject}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{metaObject}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{obj}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{metaObject}\PYG{p}{();}
-\PYG{+w}{ }\PYG{n}{QStringList}\PYG{+w}{ }\PYG{n}{properties}\PYG{p}{;}
-\PYG{+w}{ }\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{metaObject}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{propertyOffset}\PYG{p}{();}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{metaObject}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{propertyCount}\PYG{p}{();}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
-\PYG{+w}{     }\PYG{n}{properties}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{QString}\PYG{o}{::}\PYG{n}{fromLatin1}\PYG{p}{(}\PYG{n}{metaObject}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{property}\PYG{p}{(}\PYG{n}{i}\PYG{p}{).}\PYG{n}{name}\PYG{p}{());}
-\end{Verbatim}

@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QString}\PYG{+w}{ }\PYG{n+nf}{myDecoderFunc}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QByteArray}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{localFileName}\PYG{p}{);}
-\end{Verbatim}

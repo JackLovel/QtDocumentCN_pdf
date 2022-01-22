@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{// method1()}
-\PYG{n}{number}\PYG{+w}{ }\PYG{o}{*=}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 30}
-\PYG{n}{number}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number  7}
-
-\PYG{c+c1}{// method2()}
-\PYG{n}{number}\PYG{+w}{ }\PYG{o}{*=}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 21}
-\PYG{n}{number}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}\PYG{+w}{        }\PYG{c+c1}{// number 10}
-\end{Verbatim}

@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n+nl}{unix}\PYG{p}{:}\PYG{n}{LIBS}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{lpq}
-\PYG{n+nl}{win32}\PYG{p}{:}\PYG{n}{LIBS}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{libpqdll}\PYG{p}{.}\PYG{n}{lib}
-\end{Verbatim}

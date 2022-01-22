@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QMutableListIterator}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{(}\PYG{n}{list}\PYG{p}{);}
-\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{hasNext}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{next}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{128}\PYG{p}{)}
-\PYG{+w}{        }\PYG{n}{i}\PYG{p}{.}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+m+mi}{128}\PYG{p}{);}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

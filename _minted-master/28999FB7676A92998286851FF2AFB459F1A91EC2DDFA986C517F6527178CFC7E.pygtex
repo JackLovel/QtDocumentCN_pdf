@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }\PYG{n}{splitter}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setWindowTitle}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Two views onto the same file system model\PYGZdq{}}\PYG{p}{);}
-\PYG{+w}{    }\PYG{n}{splitter}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{show}\PYG{p}{();}
-\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{app}\PYG{p}{.}\PYG{n}{exec}\PYG{p}{();}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}
