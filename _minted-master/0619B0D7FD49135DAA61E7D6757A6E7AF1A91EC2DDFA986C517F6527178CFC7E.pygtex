@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setAge}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{age}\PYG{p}{);}
-\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setCategory}\PYG{p}{(}\PYG{n}{QChar}\PYG{+w}{ }\PYG{n}{cat}\PYG{p}{);}
-\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setName}\PYG{p}{(}\PYG{n}{QLatin1String}\PYG{+w}{ }\PYG{n}{name}\PYG{p}{);}
-\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setAlarm}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QSharedPointer}\PYG{o}{\PYGZlt{}}\PYG{n}{Alarm}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{alarm}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 常引用远快于拷贝构造和析构}
-\PYG{c+c1}{// QDate, QTime, QPoint, QPointF, QSize, QSizeF, QRect 都是其它应该值传递的好例子}
-\end{Verbatim}

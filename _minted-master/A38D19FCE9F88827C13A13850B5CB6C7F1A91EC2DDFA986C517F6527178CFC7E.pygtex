@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{MyClass}\PYG{o}{::}\PYG{n}{MyClass}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{BaseClass}\PYG{p}{()}
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{Q\PYGZus{}INIT\PYGZus{}RESOURCE}\PYG{p}{(}\PYG{n}{resources}\PYG{p}{);}
-
-\PYG{+w}{    }\PYG{n}{QFile}\PYG{+w}{ }\PYG{n+nf}{file}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}:/myfile.dat\PYGZdq{}}\PYG{p}{);}
-\PYG{+w}{    }\PYG{p}{...}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

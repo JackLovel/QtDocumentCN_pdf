@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{n}{indexB}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{model}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{index}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{indexA}\PYG{p}{);}
-\end{Verbatim}

@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{socket}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{disconnectFromHost}\PYG{p}{();}
-\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{socket}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{state}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{QAbstractSocket}\PYG{o}{::}\PYG{n}{UnconnectedState}
-\PYG{+w}{	}\PYG{o}{||}\PYG{+w}{ }\PYG{n}{socket}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{waitForDisconnected}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{		}\PYG{n}{qDebug}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Disconnected!\PYGZdq{}}\PYG{p}{);}
-\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

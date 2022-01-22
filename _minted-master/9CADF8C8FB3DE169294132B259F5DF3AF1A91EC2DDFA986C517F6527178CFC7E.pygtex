@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QObject}\PYG{o}{::}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{timer}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{timeout}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{context}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{slot}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{connectionType}\PYG{p}{).}
-\end{Verbatim}

@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QTimer}\PYG{o}{::}\PYG{n}{singleShot}\PYG{p}{(}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SLOT}\PYG{p}{(}\PYG{n}{updateCaption}\PYG{p}{()));}
-\end{Verbatim}

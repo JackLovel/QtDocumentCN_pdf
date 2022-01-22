@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-
-\PYG{n}{QLinkedList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
-\PYG{p}{...}
-\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{str}\PYG{p}{;}
-\PYG{n}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{str}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{)}
-\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{str}\PYG{p}{;}
-\end{Verbatim}

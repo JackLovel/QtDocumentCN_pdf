@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{ }\PYG{n}{QByteArray}\PYG{+w}{ }\PYG{n}{normType}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QMetaObject}\PYG{o}{::}\PYG{n}{normalizedType}\PYG{p}{(}\PYG{l+s}{\PYGZdq{} int    const  *\PYGZdq{}}\PYG{p}{);}
-\PYG{+w}{ }\PYG{c+c1}{// 规范化的类型将为 \PYGZdq{}const int*\PYGZdq{}}
-\end{Verbatim}

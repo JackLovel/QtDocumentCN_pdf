@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
-\PYG{n}{list}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}alpha\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}beta\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}delta\PYGZdq{}}\PYG{p}{;}
-\PYG{n}{list}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}gamma\PYGZdq{}}\PYG{p}{);}
-\PYG{c+c1}{// list: [\PYGZdq{}alpha\PYGZdq{}, \PYGZdq{}beta\PYGZdq{}, \PYGZdq{}gamma\PYGZdq{}, \PYGZdq{}delta\PYGZdq{}]}
-\end{Verbatim}

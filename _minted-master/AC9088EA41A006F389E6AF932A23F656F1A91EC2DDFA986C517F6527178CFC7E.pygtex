@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{socket}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{connectToHost}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}imap\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{143}\PYG{p}{);}
-\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{socket}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{waitForConnected}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{))}
-\PYG{+w}{	}\PYG{n}{qDebug}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Connected!\PYGZdq{}}\PYG{p}{);}
-\end{Verbatim}

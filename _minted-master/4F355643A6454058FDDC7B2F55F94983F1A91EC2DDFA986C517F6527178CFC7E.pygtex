@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QMutableMapIterator}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{(}\PYG{n}{map}\PYG{p}{);}
-\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{hasNext}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{i}\PYG{p}{.}\PYG{n}{next}\PYG{p}{();}
-\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{key}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{.}\PYG{n}{value}\PYG{p}{())}
-\PYG{+w}{        }\PYG{n}{i}\PYG{p}{.}\PYG{n}{remove}\PYG{p}{();}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

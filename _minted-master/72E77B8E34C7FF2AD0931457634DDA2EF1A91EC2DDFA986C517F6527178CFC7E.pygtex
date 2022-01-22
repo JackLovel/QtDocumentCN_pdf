@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
-\PYG{n}{list}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}sun\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}cloud\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}sun\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}rain\PYGZdq{}}\PYG{p}{;}
-\PYG{n}{list}\PYG{p}{.}\PYG{n}{removeAll}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sun\PYGZdq{}}\PYG{p}{);}
-\PYG{c+c1}{// list: [\PYGZdq{}cloud\PYGZdq{}, \PYGZdq{}rain\PYGZdq{}]}
-\end{Verbatim}

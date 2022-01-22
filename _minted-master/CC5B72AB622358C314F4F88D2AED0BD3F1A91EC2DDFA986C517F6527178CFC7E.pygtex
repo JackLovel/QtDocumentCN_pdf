@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QFileInfo}\PYG{+w}{ }\PYG{n+nf}{fi}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}c:/temp/foo\PYGZdq{}}\PYG{p}{);}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{n}{fi}\PYG{p}{.}\PYG{n}{absoluteFilePath}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=\PYGZgt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}C:/temp/foo\PYGZdq{}}
-\end{Verbatim}

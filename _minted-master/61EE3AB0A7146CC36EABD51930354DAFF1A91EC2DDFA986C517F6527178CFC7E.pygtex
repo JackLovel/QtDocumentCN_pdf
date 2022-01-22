@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{MyInstance}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{k}{public}\PYG{+w}{ }\PYG{n}{QObject}
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{Q\PYGZus{}PLUGIN\PYGZus{}METADATA}\PYG{p}{(}\PYG{n}{IID}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}org.qt\PYGZhy{}project.Qt.QDummyPlugin\PYGZdq{}}\PYG{+w}{ }\PYG{k+kt}{FILE}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}mymetadata.json\PYGZdq{}}\PYG{p}{)}
-\PYG{p}{\PYGZcb{};}
-\end{Verbatim}

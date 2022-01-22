@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{QSqlDatabase}\PYG{+w}{ }\PYG{n}{db}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{database}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sales\PYGZdq{}}\PYG{p}{);}
-\PYG{+w}{    }\PYG{n}{QSqlQuery}\PYG{+w}{ }\PYG{n+nf}{query}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SELECT NAME, DOB FROM EMPLOYEES\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{db}\PYG{p}{);}
-\PYG{p}{\PYGZcb{}}
-\PYG{c+c1}{// “db”和“query”都被销毁，因为它们超出了范围}
-\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{removeDatabase}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sales\PYGZdq{}}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 正确的}
-\end{Verbatim}

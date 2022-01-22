@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{qHash}\PYG{p}{(}\PYG{n}{qMakePair}\PYG{p}{(}\PYG{n}{key}\PYG{p}{.}\PYG{n}{first}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{.}\PYG{n}{second}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{seed}\PYG{p}{);}
-\end{Verbatim}

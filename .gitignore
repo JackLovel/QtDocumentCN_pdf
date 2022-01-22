@@ -10,3 +10,6 @@
 .vscode
 
 auto/
+_minted-master/
+.vscode
+.texpadtmp

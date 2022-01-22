@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{QLabel}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{label}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{qobject\PYGZus{}cast}\PYG{o}{\PYGZlt{}}\PYG{n}{QLabel}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{label}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Ping\PYGZdq{}}\PYG{p}{));}
-\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{QPushButton}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{button}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{qobject\PYGZus{}cast}\PYG{o}{\PYGZlt{}}\PYG{n}{QPushButton}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
-\PYG{+w}{    }\PYG{n}{button}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setText}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Pong!\PYGZdq{}}\PYG{p}{));}
-\PYG{p}{\PYGZcb{}}
-\end{Verbatim}

@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QLibrary}\PYG{+w}{ }\PYG{n+nf}{myLib}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}mylib\PYGZdq{}}\PYG{p}{);}
-\PYG{k}{typedef}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{*}\PYG{n}{MyPrototype}\PYG{p}{)();}
-\PYG{n}{MyPrototype}\PYG{+w}{ }\PYG{n}{myFunction}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{MyPrototype}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{myLib}\PYG{p}{.}\PYG{n}{resolve}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}mysymbol\PYGZdq{}}\PYG{p}{);}
-\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{myFunction}\PYG{p}{)}
-\PYG{+w}{    }\PYG{n}{myFunction}\PYG{p}{();}
-\end{Verbatim}

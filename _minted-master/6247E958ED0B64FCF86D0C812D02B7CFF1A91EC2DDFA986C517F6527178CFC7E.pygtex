@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{MainWindow}\PYG{+w}{ }\PYG{n}{win}\PYG{p}{;}
-\PYG{n}{win}\PYG{p}{.}\PYG{n}{show}\PYG{p}{();}
-
-\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{functionIndex}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{win}\PYG{p}{.}\PYG{n}{metaObject}\PYG{p}{()}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{indexOfSlot}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}testFunc()\PYGZdq{}}\PYG{p}{);}
-\PYG{n}{QMetaMethod}\PYG{+w}{ }\PYG{n}{mm}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{win}\PYG{p}{.}\PYG{n}{metaObject}\PYG{p}{()}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{method}\PYG{p}{(}\PYG{n}{functionIndex}\PYG{p}{);}
-\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{mm}\PYG{p}{.}\PYG{n}{tag}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 将打印 MY\PYGZus{}CUSTOM\PYGZus{}TAG}
-\end{Verbatim}

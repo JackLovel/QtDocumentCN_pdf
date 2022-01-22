@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{QSize}\PYG{+w}{ }\PYG{n}{size}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{widget}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{sizeHint}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// const}
-\PYG{n}{widget}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{move}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 非 const}
-\end{Verbatim}
