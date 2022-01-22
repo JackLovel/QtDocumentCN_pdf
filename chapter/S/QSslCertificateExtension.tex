@@ -1,0 +1,160 @@
+\chapter{QSslCertificateExtension}
+
+QSslCertificateExtension 类为使用 X509证书扩展提供了 API 支持。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSslCertificateExtension>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	引入版本 &	Qt 5.0 \\ 
+	\hline
+\end{tabular}
+
+该类最初在 Qt 5.0版本引入。
+
+\begin{notice}
+该类所有的成员函数都是可重入的。
+\end{notice}
+
+\section{公共成员函数}
+
+%%%%%%%%%%
+
+\begin{tabular}{|r|m{20em}|}
+\hline 
+类型 	& 函数名 \\ 
+\hline
+&QSslCertificateExtension(const QSslCertificateExtension \&other) \\
+\hline
+&QSslCertificateExtension()\\
+\hline
+QSslCertificateExtension & 	operator=(const QSslCertificateExtension \&other) \\
+\hline
+&$\sim$QSslCertificateExtension() \\ 
+\hline
+bool 	&isCritical() const \\ 
+\hline
+bool 	&isSupported() const \\ 
+\hline
+QString &	name() const \\ 
+\hline
+QString &	oid() const \\ 
+\hline
+void 	&swap(QSslCertificateExtension \&other) \\ 
+\hline
+QVariant 	&value() const \\ 
+\hline
+\end{tabular}
+
+
+%%%%%%%%%
+
+
+\section{详细描述}
+
+QSslCertificateExtension 类为使用 
+X509证书扩展提供了 API 集成。
+该类可获取哪些信息取决于该扩展的类型。
+
+所有的 X509证书扩展都拥有以下属性：
+
+\section{公共成员类型}
+
+\begin{tabular}{|r|l|}
+\hline 
+属性 &	描述 \\ 
+\hline
+name &	该扩展的名称。例如：“basicConstraints”。 \\ 
+\hline 
+criticality &	布尔值，指定该扩展是否对正确解释该证书至关重要。 \\
+\hline 
+oid 	&ASN.1对象标识符，指定此扩展身份。 \\ 
+\hline
+supported &	如果该值为 true 则该扩展的结构不会在不同的 Qt 版本中发生变化。\\
+\hline
+value &	一个储存着该扩展类型相关的结构的 QVariant 对象。\\
+\hline
+\end{tabular}
+
+
+尽管此类提供了对任何类型的扩展的使用支持，
+但是仅保证某些扩展在不同发行版之间有保持不变的格式化返回信息。 
+您可以使用 isSupported() 函数来检查是否支持该扩展。
+
+现在支持的扩展及其返回信息结构如下：
+
+\begin{tabular}{|l|l|m{15em}|}
+\hline 
+扩展名 	&OID &	描述 \\ 
+\hline
+basicConstraints &	2.5.29.19 &	作为 QVariantMap 返回。ca 关键字包含着一个布尔值。可选的pathLenConstraint关键字包含值一个整型变量。 \\ 
+\hline
+authorityInfoAccess &	1.3.6.1.5.5.7.1.1 &	作为 QVariantMap 返回。每种访问方法都有一个关键字，其值为 URI 。 \\ 
+\hline
+subjectKeyIdentifier 	&2.5.29.14 	&作为包含一个 QString 对象的 QVariant 返回。 该字符串是密钥标识符。 \\ 
+\hline
+authorityKeyIdentifier &	2.5.29.35 &	作为 QVariantMap 返回。可选的关键字keyid 包含着一个以十六进制形式储存在 QByteArray 中的密钥标识符。可选的serial关键字包含着 qlonglong 格式的授权密钥序列号。现在已经不支持该扩展的通用名称域。 \\ 
+\hline
+\end{tabular}
+
+
+除了上面支持的扩展之外，QSslCertificateExtension 还许多其他常见的扩展，
+这些扩展的返回信息将以合理的结式返回。 
+SSL 后端不支持的扩展将作为QByteArray 返回。
+
+关于扩展证书更多的信息您可以在 RFC 5280 标准文档中找到。
+
+\begin{seeAlso}
+QSslCertificate::extensions()。
+\end{seeAlso}
+
+
+\section{成员函数文档}
+
+QSslCertificateExtension::QSslCertificateExtension(const QSslCertificateExtension \&other)
+
+拷贝构造函数。
+由 other 拷贝一个新的 QSslCertificateExtension 对象。
+
+QSslCertificateExtension::QSslCertificateExtension()
+
+构造函数。构造一个 QSslCertificateExtension 对象。
+
+QSslCertificateExtension \&QSslCertificateExtension::operator=(const QSslCertificateExtension \&other)
+
+将 other 赋值给该对象，并返回该对象的引用。
+
+QSslCertificateExtension::$\sim$QSslCertificateExtension()
+
+析构函数。销毁该扩展对象。
+
+bool QSslCertificateExtension::isCritical() const
+
+返回该扩展的关键程度。
+
+bool QSslCertificateExtension::isSupported() const
+
+如果该扩展受支持则返回true 。在这种情况下，
+受支持仅仅意味着 value() 函数返回的 QVariant 值的结构不会因为版本差异而发生变化。
+即使不受支持也是可以自由使用的，
+但是不能保证 value() 函数返回的 QVariant 值的结构不会因为版本差异而发生变化
+
+QString QSslCertificateExtension::name() const
+
+返回该扩展名称。若该扩展无已知名称，则返回该扩展的 OID 。
+
+QString QSslCertificateExtension::oid() const
+
+返回该扩展的 ASN.1 OID。
+
+void QSslCertificateExtension::swap(QSslCertificateExtension \&other)
+
+与 other 迅速交换证书扩展。该函数执行速度极快并保证操作成功。
+
+QVariant QSslCertificateExtension::value() const
+
+返回该证书的值。该返回值的结构取决于扩展的类型。
