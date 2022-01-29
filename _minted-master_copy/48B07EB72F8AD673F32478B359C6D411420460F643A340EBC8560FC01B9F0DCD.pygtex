@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QHash}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{hash}\PYG{p}{;}
+\end{Verbatim}

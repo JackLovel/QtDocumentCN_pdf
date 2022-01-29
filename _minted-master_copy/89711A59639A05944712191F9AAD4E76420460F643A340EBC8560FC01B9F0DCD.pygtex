@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{integerList}\PYG{p}{;}
+\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QDate}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{dateList}\PYG{p}{;}
+\end{Verbatim}

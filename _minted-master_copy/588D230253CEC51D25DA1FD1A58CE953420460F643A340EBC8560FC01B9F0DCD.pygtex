@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// This slot is connected to QAbstractSocket::readyRead()}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{SocketClass::readyReadSlot}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{socket}\PYG{p}{.}\PYG{n}{atEnd}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{		}\PYG{n}{QByteArray}\PYG{+w}{ }\PYG{n}{data}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{socket}\PYG{p}{.}\PYG{n}{read}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{p}{);}
+\PYG{+w}{		}\PYG{p}{....}
+\PYG{+w}{	}\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

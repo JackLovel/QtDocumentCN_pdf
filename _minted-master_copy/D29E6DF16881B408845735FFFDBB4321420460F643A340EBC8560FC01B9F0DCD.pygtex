@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{hash}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}plenty\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{p}{);}
+\PYG{n}{hash}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}plenty\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2000}\PYG{p}{);}
+\PYG{c+c1}{// hash.value(\PYGZdq{}plenty\PYGZdq{}) == 2000}
+\end{Verbatim}

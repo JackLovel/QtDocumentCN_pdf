@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{ItemFlags}\PYG{+w}{ }\PYG{n+nf}{MyModel::flags}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{ItemIsEditable}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{QAbstractTableModel}\PYG{o}{::}\PYG{n}{flags}\PYG{p}{(}\PYG{n}{index}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

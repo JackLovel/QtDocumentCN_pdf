@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}::}\PYG{n}{const\PYGZus{}iterator}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{;}
+\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{.}\PYG{n}{constBegin}\PYG{p}{();}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{.}\PYG{n}{constEnd}\PYG{p}{();}\PYG{+w}{ }\PYG{o}{++}\PYG{n}{i}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{i}\PYG{p}{;}
+\end{Verbatim}

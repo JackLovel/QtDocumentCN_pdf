@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QMultiHash}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{hash1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{hash2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{hash3}\PYG{p}{;}
+
+\PYG{n}{hash1}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}plenty\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{p}{);}
+\PYG{n}{hash1}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}plenty\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2000}\PYG{p}{);}
+\PYG{c+c1}{// hash1.size() == 2}
+
+\PYG{n}{hash2}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}plenty\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5000}\PYG{p}{);}
+\PYG{c+c1}{// hash2.size() == 1}
+
+\PYG{n}{hash3}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hash1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{hash2}\PYG{p}{;}
+\PYG{c+c1}{// hash3.size() == 3}
+\end{Verbatim}

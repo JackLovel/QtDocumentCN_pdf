@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{registerSqlDriver}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}MYDRIVER\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QSqlDriverCreator}\PYG{o}{\PYGZlt{}}\PYG{n}{QSqlDriver}\PYG{o}{\PYGZgt{}}\PYG{p}{);}
+\PYG{n}{QVERIFY}\PYG{p}{(}\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{drivers}\PYG{p}{().}\PYG{n}{contains}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}MYDRIVER\PYGZdq{}}\PYG{p}{));}
+\PYG{n}{QSqlDatabase}\PYG{+w}{ }\PYG{n}{db}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{addDatabase}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}MYDRIVER\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{QVERIFY}\PYG{p}{(}\PYG{n}{db}\PYG{p}{.}\PYG{n}{isValid}\PYG{p}{());}
+\end{Verbatim}

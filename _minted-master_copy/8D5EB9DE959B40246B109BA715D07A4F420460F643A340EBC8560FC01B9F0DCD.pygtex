@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QMutableMapIterator}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{(}\PYG{n}{map}\PYG{p}{);}
+\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{findNext}\PYG{p}{(}\PYG{n}{widget}\PYG{p}{))}
+\PYG{+w}{    }\PYG{n}{i}\PYG{p}{.}\PYG{n}{remove}\PYG{p}{();}
+\end{Verbatim}

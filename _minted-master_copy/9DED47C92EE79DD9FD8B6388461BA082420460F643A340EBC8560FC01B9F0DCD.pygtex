@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{Movie}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{id}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{title}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{QDate}\PYG{+w}{ }\PYG{n}{releaseDate}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+\end{Verbatim}

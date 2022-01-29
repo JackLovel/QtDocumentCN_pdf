@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// QAbstractItemDelegate::paint 是 const}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QAbstractItemDelegate}\PYG{o}{::}\PYG{n}{paint}\PYG{p}{(}\PYG{n}{QPainter}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{painter}\PYG{p}{,}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QStyleOptionViewItem}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{option}\PYG{p}{,}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+
+\PYG{c+c1}{// QGraphicsItem::paint 不是 const}
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n}{QGraphicsItem}\PYG{o}{::}\PYG{n}{paint}\PYG{p}{(}\PYG{n}{QPainter}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{painter}\PYG{p}{,}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QStyleOptionGraphicsItem}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{option}\PYG{p}{,}
+\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{widget}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QSqlDatabase}\PYG{+w}{ }\PYG{n}{db}\PYG{p}{;}
+\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{db}\PYG{p}{.}\PYG{n}{isValid}\PYG{p}{();}\PYG{+w}{    }\PYG{c+c1}{// 返回 false}
+
+\PYG{n}{db}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{database}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sales\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{db}\PYG{p}{.}\PYG{n}{isValid}\PYG{p}{();}\PYG{+w}{    }\PYG{c+c1}{// 如果 \PYGZdq{}sales\PYGZdq{} 连接存在，就返回 true}
+
+\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{removeDatabase}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sales\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{db}\PYG{p}{.}\PYG{n}{isValid}\PYG{p}{();}\PYG{+w}{    }\PYG{c+c1}{// 返回 false}
+\end{Verbatim}

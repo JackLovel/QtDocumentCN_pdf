@@ -1,0 +1,41 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// mymodel.cpp}
+\PYG{n}{QVariant}\PYG{+w}{ }\PYG{n+nf}{MyModel::data}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QModelIndex}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{index}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{role}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{row}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{index}\PYG{p}{.}\PYG{n}{row}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{index}\PYG{p}{.}\PYG{n}{column}\PYG{p}{();}
+\PYG{+w}{    }\PYG{c+c1}{// generate a log message when this method gets called}
+\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{QString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}row \PYGZpc{}1, col\PYGZpc{}2, role \PYGZpc{}3\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{            }\PYG{p}{.}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{row}\PYG{p}{).}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{col}\PYG{p}{).}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{role}\PYG{p}{);}
+
+\PYG{+w}{    }\PYG{k}{switch}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{role}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{DisplayRole}\PYG{o}{:}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZlt{}\PYGZhy{}\PYGZhy{}left\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}right\PYGZhy{}\PYGZhy{}\PYGZgt{}\PYGZdq{}}\PYG{p}{);}
+
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QString}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Row\PYGZpc{}1, Column\PYGZpc{}2\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{.}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{.}\PYG{n}{arg}\PYG{p}{(}\PYG{n}{col}\PYG{+w}{ }\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{FontRole}\PYG{o}{:}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{//change font only for cell(0,0)}
+\PYG{+w}{            }\PYG{n}{QFont}\PYG{+w}{ }\PYG{n}{boldFont}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{boldFont}\PYG{p}{.}\PYG{n}{setBold}\PYG{p}{(}\PYG{n+nb}{true}\PYG{p}{);}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{boldFont}\PYG{p}{;}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{BackgroundRole}\PYG{o}{:}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{+w}{  }\PYG{c+c1}{//change background only for cell(1,2)}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QBrush}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{red}\PYG{p}{);}
+\PYG{+w}{        }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{TextAlignmentRole}\PYG{o}{:}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{//change text alignment only for cell(1,1)}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{AlignRight}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{AlignVCenter}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{CheckStateRole}\PYG{o}{:}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{row}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{col}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{//add a checkbox to cell(1,0)}
+\PYG{+w}{            }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{Checked}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{QVariant}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

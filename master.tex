@@ -1,4 +1,4 @@
-\documentclass[a4paper,titlepage,UTF8,zhihao=5]{ctexbook}
+\documentclass[a4paper,titlepage,UTF8]{ctexbook}
 
 % 导言区
 
@@ -14,9 +14,17 @@
 \renewcommand{\headrulewidth}{0.4pt}
 
 \maketitle
-\tableofcontents
+
 \thispagestyle{empty}
-\newpage
+\clearpage
+\setcounter{page}{1}
+
+\clearpage
+% \newgeometry{top=0in}
+\tableofcontents
+% \restoregeometry
+\clearpage
+
 \setcounter{page}{1}
 
 % 不输出标题编号
@@ -88,6 +96,8 @@
 \include{./chapter/S/QSsl}
 \include{./chapter/S/QSslCertificate}
 \include{./chapter/S/QSslCertificateExtension}
+\include{./chapter/S/QSslCertificate_Obsolete}
+\include{./chapter/S/QSslCipher}
 \include{./chapter/T/QTcpServer}
 \include{./chapter/T/QTcpSocket}
 \include{./chapter/T/QTimer}

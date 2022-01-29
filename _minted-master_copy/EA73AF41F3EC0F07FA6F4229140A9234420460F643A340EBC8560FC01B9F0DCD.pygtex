@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{i}\PYG{p}{.}\PYG{n}{key}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Hello\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{i}\PYG{p}{.}\PYG{n}{value}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Bonjour\PYGZdq{}}\PYG{p}{;}
+\end{Verbatim}

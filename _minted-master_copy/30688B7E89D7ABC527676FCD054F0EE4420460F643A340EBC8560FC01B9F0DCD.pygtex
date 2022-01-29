@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{MainWindow::readSettings}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{QSettings}\PYG{+w}{ }\PYG{n}{settings}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}MyCompany\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}MyApp\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{restoreGeometry}\PYG{p}{(}\PYG{n}{settings}\PYG{p}{.}\PYG{n}{value}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}myWidget/geometry\PYGZdq{}}\PYG{p}{).}\PYG{n}{toByteArray}\PYG{p}{());}
+\PYG{+w}{    }\PYG{n}{restoreState}\PYG{p}{(}\PYG{n}{settings}\PYG{p}{.}\PYG{n}{value}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}myWidget/windowState\PYGZdq{}}\PYG{p}{).}\PYG{n}{toByteArray}\PYG{p}{());}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
