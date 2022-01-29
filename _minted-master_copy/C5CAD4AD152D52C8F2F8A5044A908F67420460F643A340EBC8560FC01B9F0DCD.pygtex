@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QPushButton}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{quitButton}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QPushButton}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Quit\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{connect}\PYG{p}{(}\PYG{n}{quitButton}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QPushButton}\PYG{o}{::}\PYG{n}{clicked}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{app}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{QCoreApplication}\PYG{o}{::}\PYG{n}{quit}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{QueuedConnection}\PYG{p}{);}
+\end{Verbatim}

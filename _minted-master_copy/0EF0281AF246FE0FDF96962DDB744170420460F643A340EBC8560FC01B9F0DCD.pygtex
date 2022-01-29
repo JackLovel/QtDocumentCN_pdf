@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{isVisibleTo}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QGraphicsItem}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{parent}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{n}{QPointF}\PYG{+w}{ }\PYG{n+nf}{mapFromItem}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QGraphicsItem}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{item}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QPointF}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{point}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\end{Verbatim}

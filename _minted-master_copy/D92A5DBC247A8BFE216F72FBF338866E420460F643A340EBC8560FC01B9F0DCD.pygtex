@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QList}\PYG{o}{\PYGZlt{}}\PYG{n}{QString}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{list}\PYG{p}{;}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{prepend}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}one\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{prepend}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}two\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{list}\PYG{p}{.}\PYG{n}{prepend}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}three\PYGZdq{}}\PYG{p}{);}
+\PYG{c+c1}{// list: [\PYGZdq{}three\PYGZdq{}, \PYGZdq{}two\PYGZdq{}, \PYGZdq{}one\PYGZdq{}]}
+\end{Verbatim}

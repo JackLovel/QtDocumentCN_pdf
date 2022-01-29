@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{MainWindow::createToolBars}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{fileToolBar}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{addToolBar}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}File\PYGZdq{}}\PYG{p}{));}
+\PYG{+w}{    }\PYG{n}{fileToolBar}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{addAction}\PYG{p}{(}\PYG{n}{newAct}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

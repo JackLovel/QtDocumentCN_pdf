@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{widget}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{qobject\PYGZus{}cast}\PYG{o}{\PYGZlt{}}\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*\PYGZgt{}}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{);}
+\end{Verbatim}

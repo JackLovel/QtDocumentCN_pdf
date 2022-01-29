@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{struct}\PYG{+w}{ }\PYG{n+nc}{Foo}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setValue}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n}{value}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{;}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{n}{Foo}\PYG{+w}{ }\PYG{n+nf}{foo}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Foo}\PYG{p}{();}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Foo}\PYG{+w}{ }\PYG{n+nf}{cfoo}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Foo}\PYG{p}{();}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n+nf}{main}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{c+c1}{// 下述代码可以编译，foo() 返回非 const 右值，无法}
+\PYG{+w}{	}\PYG{c+c1}{// 成为赋值目标（这通常需要左值），但对成员变量的访问}
+\PYG{+w}{	}\PYG{c+c1}{// 是左值：}
+\PYG{+w}{	}\PYG{n}{foo}\PYG{p}{().}\PYG{n}{value}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 可以编译，但该临时值在这个完整的表达式结束后会被抛弃}
+\PYG{+w}{	}
+\PYG{+w}{	}\PYG{c+c1}{// 下述代码可以编译，foo() 返回非 const 右值，无法}
+\PYG{+w}{	}\PYG{c+c1}{// 成为赋值目标，但可以调用（甚至于非 const 的)成员函数：}
+\PYG{+w}{	}\PYG{n}{foo}\PYG{p}{().}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 可以编译，但该临时值在这个完整的表达式结束后会被抛弃}
+\PYG{+w}{	}
+\PYG{+w}{	}\PYG{c+c1}{// 下述代码无法编译，cfoo() 返回 const 右值，因此其}
+\PYG{+w}{	}\PYG{c+c1}{// 成员变量是 const 授权，无法被赋值：}
+\PYG{+w}{	}\PYG{n}{cfoo}\PYG{p}{().}\PYG{n}{value}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 无法编译}
+\PYG{+w}{	}
+\PYG{+w}{	}\PYG{c+c1}{// 下述代码无法编译，cfoo() 返回 const 右值，无法调用}
+\PYG{+w}{	}\PYG{c+c1}{// 其非 const 的成员函数：}
+\PYG{+w}{	}\PYG{n}{cfoo}\PYG{p}{().}\PYG{n}{setValue}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}\PYG{+w}{ }\PYG{c+c1}{// 无法编译}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

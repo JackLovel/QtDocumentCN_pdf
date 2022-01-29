@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{extern}\PYG{+w}{ }\PYG{n}{Q\PYGZus{}CORE\PYGZus{}EXPORT}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{qt\PYGZus{}ntfs\PYGZus{}permission\PYGZus{}lookup}\PYG{p}{;}
+\end{Verbatim}

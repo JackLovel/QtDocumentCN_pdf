@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QDataStream}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{k}{operator}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{p}{(}\PYG{n}{QDataStream}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{out}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Movie}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{movie}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{out}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{quint32}\PYG{p}{)}\PYG{n}{movie}\PYG{p}{.}\PYG{n}{id}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{movie}\PYG{p}{.}\PYG{n}{title}
+\PYG{+w}{        }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{movie}\PYG{p}{.}\PYG{n}{releaseDate}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{QDataStream}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{k}{operator}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{p}{(}\PYG{n}{QDataStream}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{in}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Movie}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{movie}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{quint32}\PYG{+w}{ }\PYG{n}{id}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{QDate}\PYG{+w}{ }\PYG{n}{date}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{in}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{id}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{movie}\PYG{p}{.}\PYG{n}{title}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{date}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{movie}\PYG{p}{.}\PYG{n}{id}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{id}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{movie}\PYG{p}{.}\PYG{n}{releaseDate}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{date}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{in}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

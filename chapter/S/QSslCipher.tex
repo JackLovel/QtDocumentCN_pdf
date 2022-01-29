@@ -1,0 +1,187 @@
+\chapter{QSslCipher}
+
+QSslCipher 类提供了 SSL 密钥的支持。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSslCipher>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	引入 &	Qt4.3 \\ 
+	\hline
+\end{tabular}
+
+该类最初在 Qt 4.3 版本引入。
+
+您可以在此查看已经废弃的类成员。
+
+\begin{notice}
+所有的函数都是可重入的。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|m{19em}|m{24em}|}
+\hline 
+属性 &	方法\\ 
+\hline 
+ &QSslCipher(const QSslCipher \&other) \\ 
+ \hline
+&	QSslCipher(const QString \&name, QSsl::SslProtocol protocol) \\
+\hline
+&	QSslCipher(const QString \&name) \\
+\hline
+&	QSslCipher() \\ 
+	\hline
+QSslCipher \& &	operator=(const QSslCipher \&other) \\ 
+\hline
+& $\sim$QSslCipher() \\ 
+	\hline
+QString &	authenticationMethod() const \\ 
+\hline
+QString &	encryptionMethod() const \\ 
+\hline
+bool &	isNull() const \\ 
+\hline
+QString &	keyExchangeMethod() const \\ 
+\hline
+QString &	name() const \\ 
+\hline
+QSsl::SslProtocol &	protocol() const \\ 
+\hline
+QString &	protocolString() const \\ 
+\hline
+int 	&supportedBits() const \\ 
+\hline
+void 	&swap(QSslCipher \&other) \\ 
+\hline
+int 	&usedBits() const \\ 
+\hline
+bool 	&operator!=(const QSslCipher \&other) const \\ 
+\hline
+bool 	&operator==(const QSslCipher \&other) const \\ 
+\hline 
+\end{longtable}
+
+\section{详细描述}
+
+QSslCipher 储存着一个密钥的信息。
+该类型的对象通常被 QSslSocket 
+用来指定某套接字可以使用哪种密钥或者展现某套接字所使用的密钥。
+
+\begin{seeAlso}
+QSslSocket 和 QSslKey。
+\end{seeAlso}
+
+\section{成员函数文档}
+
+QSslCipher::QSslCipher(const QSslCipher \&other)
+
+拷贝构造函数。
+
+由 other 拷贝出一个相同的 QSslCipher 对象。
+
+QSslCipher::QSslCipher(const QString \&name, QSsl::SslProtocol protocol)
+
+构造函数。通过鉴定 name 和 protocol 来构造一个 QSslCipher 对象来储存密钥信息。
+该构造函数仅接受受支持的密钥（即您指定的 name 和 protocol 
+所鉴定出的密钥必须位于 QSslSocket::supportedCiphers() 函数返回的列表中）。
+
+构造后，您可以调用 isNull() 函数检查 name 和 protocol 是否能正确地鉴定出一个支持的密钥。
+
+QSslCipher::QSslCipher(const QString \&name)
+
+构造函数。通过判断 name 参数构造一个 QSslCipher 对象储存密钥信息。该构造函数仅接受受支持的密钥（即您指定的 name 所鉴定出的密钥必须位于 QSslSocket::supportedCiphers() 函数返回的列表中）。
+
+构造后，可以调用 isNull() 函数检查 name 是否正确标识了受支持的密码。
+
+该函数最初在 Qt 5.3 版本中引入。
+
+QSslCipher::QSslCipher()
+
+构造函数。
+构造一个空的 QSslCipher 对象。
+
+QSslCipher \&QSslCipher::operator=(const QSslCipher \&other)
+
+将 other 的内容拷贝到等式左值，是两个密钥相同。
+
+QSslCipher::$\sim$QSslCipher()
+
+析构函数。销毁 QSslCipher 对象。
+
+QString QSslCipher::authenticationMethod() const
+
+以 QString 格式返回密钥的身份验证方式。
+
+QString QSslCipher::encryptionMethod() const
+
+以 QString 格式返回密钥的加密方式。
+
+bool QSslCipher::isNull() const
+
+如果该密钥未空，函数返回 true ，否则返回 false 。
+
+QString QSslCipher::keyExchangeMethod() const
+
+以 QString 格式返回该密钥的密钥交换方法。
+
+QString QSslCipher::name() const
+
+返回该密钥的名称。如果密钥未空，函数将返回一个空的 QString 对象。
+
+\begin{seeAlso}
+isNull()。
+\end{seeAlso}
+
+QSsl::SslProtocol QSslCipher::protocol() const
+
+返回该协议使用的密钥。
+如果不能判断 QSslCipher 使用的协议，
+函数将返回 QSsl::UnknownProtocol 
+（您可以使用 protocolString() 函数来获取更多的信息）。
+
+\begin{seeAlso}
+protocolString()。
+\end{seeAlso}
+
+QString QSslCipher::protocolString() const
+
+以 QString 的形式返回该密钥使用的协议。
+
+\begin{seeAlso}
+protocol()。
+\end{seeAlso}
+
+int QSslCipher::supportedBits() const
+
+返回该密钥支持的字节数。
+
+\begin{seeAlso}
+usedBits()。
+\end{seeAlso}
+
+void QSslCipher::swap(QSslCipher \&other)
+
+与 other 快速交换密钥信息。该函数操作速度飞快并保证操作成功。
+
+该函数最初在 Qt 5.0 版本引入。
+
+int QSslCipher::usedBits() const
+
+返回密钥所用的字节数。
+
+\begin{seeAlso}
+supportedBits()。
+\end{seeAlso}
+
+bool QSslCipher::operator!=(const QSslCipher \&other) const
+
+如果当前密钥与 other 不同则返回 true ，否则返回 false 。
+
+bool QSslCipher::operator==(const QSslCipher \&other) const
+
+如果当前密钥与 other 相同则返回 true ，否则返回 false 。

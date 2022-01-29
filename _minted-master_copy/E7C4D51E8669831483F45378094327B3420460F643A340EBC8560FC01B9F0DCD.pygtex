@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QReadWriteLock}\PYG{+w}{ }\PYG{n}{lock}\PYG{p}{;}
+
+\PYG{n}{QByteArray}\PYG{+w}{ }\PYG{n+nf}{readData}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{QReadLocker}\PYG{+w}{ }\PYG{n}{locker}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{lock}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{...}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{data}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

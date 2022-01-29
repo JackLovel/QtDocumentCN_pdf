@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QSemaphore}\PYG{+w}{ }\PYG{n+nf}{sem}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{      }\PYG{c+c1}{// sem.available() == 5}
+
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{acquire}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{);}\PYG{+w}{         }\PYG{c+c1}{// sem.available() == 2}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{acquire}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}\PYG{+w}{         }\PYG{c+c1}{// sem.available() == 0}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{release}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{         }\PYG{c+c1}{// sem.available() == 5}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{release}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{         }\PYG{c+c1}{// sem.available() == 10}
+
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{tryAcquire}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}\PYG{+w}{      }\PYG{c+c1}{// sem.available() == 9, returns true}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{tryAcquire}\PYG{p}{(}\PYG{l+m+mi}{250}\PYG{p}{);}\PYG{+w}{    }\PYG{c+c1}{// sem.available() == 9, returns false}
+\end{Verbatim}

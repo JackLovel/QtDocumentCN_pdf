@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QWebEngineView}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{view}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QWebEngineView}\PYG{p}{(}\PYG{n}{parent}\PYG{p}{);}
+\PYG{n}{view}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{load}\PYG{p}{(}\PYG{n}{QUrl}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}http://qt\PYGZhy{}project.org/\PYGZdq{}}\PYG{p}{));}
+\PYG{n}{view}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{show}\PYG{p}{();}
+\end{Verbatim}

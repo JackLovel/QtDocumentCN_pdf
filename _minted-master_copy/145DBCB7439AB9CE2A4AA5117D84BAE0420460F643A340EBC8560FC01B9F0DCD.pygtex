@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{foreach}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{path}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{app}\PYG{p}{.}\PYG{n}{libraryPaths}\PYG{p}{())}
+\PYG{+w}{    }\PYG{n}{do\PYGZus{}something}\PYG{p}{(}\PYG{n}{path}\PYG{p}{);}
+\end{Verbatim}

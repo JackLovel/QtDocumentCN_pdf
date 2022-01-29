@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// ...}
+\PYG{n}{QSqlDatabase}\PYG{+w}{ }\PYG{n}{db}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSqlDatabase}\PYG{o}{::}\PYG{n}{addDatabase}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}QODBC\PYGZdq{}}\PYG{p}{);}
+\PYG{n}{db}\PYG{p}{.}\PYG{n}{setDatabaseName}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}DRIVER=\PYGZob{}Microsoft Access Driver (*.mdb, *.accdb)\PYGZcb{};}
+\PYG{n}{FIL}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{n}{MS}\PYG{+w}{ }\PYG{n}{Access}\PYG{p}{\PYGZcb{};}\PYG{n}{DBQ}\PYG{o}{=}\PYG{n}{myaccessfile}\PYG{p}{.}\PYG{n}{mdb}\PYG{l+s}{\PYGZdq{});}
+\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{db}\PYG{p}{.}\PYG{n}{open}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{	}\PYG{c+c1}{// 成功!}
+\PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{// ...}
+\end{Verbatim}

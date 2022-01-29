@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}ifndef EMPLOYEE\PYGZus{}H}
+\PYG{c+cp}{\PYGZsh{}define EMPLOYEE\PYGZus{}H}
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{Employee}
+\PYG{p}{\PYGZob{}}
+\PYG{k}{public}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{Employee}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{Employee}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{name}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QDate}\PYG{+w}{ }\PYG{n}{dateOfBirth}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{...}
+
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{myName}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{QDate}\PYG{+w}{ }\PYG{n}{myDateOfBirth}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k+kr}{inline}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{k}{operator}\PYG{o}{\PYGZlt{}}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Employee}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{e1}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{Employee}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{e2}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{e1}\PYG{p}{.}\PYG{n}{name}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{n}{e2}\PYG{p}{.}\PYG{n}{name}\PYG{p}{())}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{e1}\PYG{p}{.}\PYG{n}{name}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{e2}\PYG{p}{.}\PYG{n}{name}\PYG{p}{();}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{e1}\PYG{p}{.}\PYG{n}{dateOfBirth}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{e2}\PYG{p}{.}\PYG{n}{dateOfBirth}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cp}{\PYGZsh{}endif }\PYG{c+c1}{// EMPLOYEE\PYGZus{}H}
+\end{Verbatim}

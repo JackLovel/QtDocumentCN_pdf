@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// Called once QCoreApplication exists}
+\PYG{k}{static}\PYG{+w}{ }\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{preRoutineMyDebugTool}\PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{MyDebugTool}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{tool}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{MyDebugTool}\PYG{p}{(}\PYG{n}{QCoreApplication}\PYG{o}{::}\PYG{n}{instance}\PYG{p}{());}
+\PYG{+w}{    }\PYG{n}{QCoreApplication}\PYG{o}{::}\PYG{n}{instance}\PYG{p}{()}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{installEventFilter}\PYG{p}{(}\PYG{n}{tool}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Q\PYGZus{}COREAPP\PYGZus{}STARTUP\PYGZus{}FUNCTION}\PYG{p}{(}\PYG{n}{preRoutineMyDebugTool}\PYG{p}{)}
+\end{Verbatim}

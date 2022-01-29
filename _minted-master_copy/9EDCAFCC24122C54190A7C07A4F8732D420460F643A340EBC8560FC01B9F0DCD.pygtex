@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{server}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setProxy}\PYG{p}{(}\PYG{n}{QNetworkProxy}\PYG{o}{::}\PYG{n}{NoProxy}\PYG{p}{);}
+\end{Verbatim}

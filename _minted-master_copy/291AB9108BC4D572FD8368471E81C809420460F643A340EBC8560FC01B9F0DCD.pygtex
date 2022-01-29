@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{const}\PYG{+w}{ }\PYG{k}{auto}\PYG{+w}{ }\PYG{n}{certs}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{QSslCertificate}\PYG{o}{::}\PYG{n}{fromPath}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}C:/ssl/certificate.*.pem\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{n}{QSsl}\PYG{o}{::}\PYG{n}{Pem}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{QSslCertificate}\PYG{o}{::}\PYG{n}{Wildcard}\PYG{p}{);}
+\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QSslCertificate}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{cert}\PYG{+w}{ }\PYG{o}{:}\PYG{+w}{ }\PYG{n}{certs}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{qDebug}\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{cert}\PYG{p}{.}\PYG{n}{issuerInfo}\PYG{p}{(}\PYG{n}{QSslCertificate}\PYG{o}{::}\PYG{n}{Organization}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

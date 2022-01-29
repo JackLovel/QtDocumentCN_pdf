@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{n}{QFile}\PYG{+w}{ }\PYG{n+nf}{file}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}in.txt\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{file}\PYG{p}{.}\PYG{n}{open}\PYG{p}{(}\PYG{n}{QIODevice}\PYG{o}{::}\PYG{n}{ReadOnly}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{QIODevice}\PYG{o}{::}\PYG{n}{Text}\PYG{p}{))}
+\PYG{+w}{        }\PYG{k}{return}\PYG{p}{;}
+
+\PYG{+w}{    }\PYG{n}{QTextStream}\PYG{+w}{ }\PYG{n+nf}{in}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{file}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{!}\PYG{n}{in}\PYG{p}{.}\PYG{n}{atEnd}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{line}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{in}\PYG{p}{.}\PYG{n}{readLine}\PYG{p}{();}
+\PYG{+w}{        }\PYG{n}{process\PYGZus{}line}\PYG{p}{(}\PYG{n}{line}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
