@@ -1,0 +1,190 @@
+\chapter{QSslKey}
+
+QSslKey 类为私钥、公钥提供了相应的接口。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSslKey>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	引入 &	Qt4.3 \\ 
+	\hline
+\end{tabular}
+
+该类最初在 Qt 4.3 版本引入。
+
+\begin{notice}
+该类所有的函数都是可重入的。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|l|m{30em}|}
+\hline 
+类型 &	函数名\\ 
+\hline 
+&QSslKey(const QSslKey \&other) \\ 
+	\hline
+	&QSslKey(Qt::HANDLE handle, QSsl::KeyType type = QSsl::PrivateKey) \\ 
+	\hline
+	& QSslKey(QIODevice *device, QSsl::KeyAlgorithm algorithm, QSsl::EncodingFormat encoding = QSsl::Pem, QSsl::KeyType type = QSsl::PrivateKey, const QByteArray \&passPhrase = QByteArray()) \\ 
+	\hline
+	& QSslKey(const QByteArray \&encoded, QSsl::KeyAlgorithm algorithm, QSsl::EncodingFormat encoding = QSsl::Pem, QSsl::KeyType type = QSsl::PrivateKey, const QByteArray \&passPhrase = QByteArray()) \\
+	\hline
+	& QSslKey() \\ 
+	\hline
+QSslKey \& 	& operator=(const QSslKey \&other) \\ 
+\hline
+& $\sim$QSslKey() \\ 
+	\hline
+QSsl::KeyAlgorithm &	algorithm() const \\ 
+\hline
+void 	& clear() \\ 
+\hline
+Qt::HANDLE &	handle() const \\ 
+\hline
+bool &	isNull() const \\ 
+\hline
+int &	length() const \\ 
+\hline
+void &	swap(QSslKey \&other) \\ 
+\hline
+QByteArray &	toDer(const QByteArray \&passPhrase = QByteArray()) const \\ 
+\hline
+QByteArray& 	toPem(const QByteArray \&passPhrase = QByteArray()) const \\ 
+\hline
+QSsl::KeyType &	type() const \\ 
+\hline
+bool 	&operator!=(const QSslKey \&other) const \\ 
+\hline
+bool &	operator==(const QSslKey \&other) const \\
+\hline 
+\end{longtable}
+
+\section{详细描述}
+
+QSslKey 类为密钥管理提供了简单的 API 支持。
+
+另外您也可以在 QSslSocket ，QSslCertificate 和 QSslCipher 类文档中找到相关介绍。
+
+\section{成员函数文档}
+
+QSslKey::QSslKey(const QSslKey \&other)
+
+拷贝构造函数。
+
+由 other 拷贝一份新的 QSslKey 对象。
+
+QSslKey::QSslKey(Qt::HANDLE handle, QSsl::KeyType type = QSsl::PrivateKey)
+
+从一个可以用的本地句柄 handle 构造一个 QSslKey 对象。type 参数用来指定该密钥是公钥还是私钥。
+
+QSsl 将会接管该密钥，您不得使用本机库来释放该密钥。
+
+该函数最初在 Qt 5.0版本引入。
+
+QSslKey::QSslKey(QIODevice \*device, 
+    QSsl::KeyAlgorithm algorithm, 
+	QSsl::EncodingFormat encoding = QSsl::Pem,
+	QSsl::KeyType type = QSsl::PrivateKey, 
+	const QByteArray \&passPhrase = QByteArray())
+
+使用 algorithm 指定的算法和 encoding 指定的格式从 device 指定的设备中读取并解码数据，
+构造 QSslKey 对象。type 参数指定了该密钥是公钥还是私钥。
+
+如果该密钥被加密，则将使用 passPhrase 来解密。
+
+构造后该对象后，您可以使用 isNull() 函数来检查 device 设备是否提供了一个有效的密钥。
+
+QSslKey::QSslKey(const QByteArray \&encoded, 
+	QSsl::KeyAlgorithm algorithm, 
+	QSsl::EncodingFormat encoding = QSsl::Pem, 
+	QSsl::KeyType type = QSsl::PrivateKey, 
+	const QByteArray \&passPhrase = QByteArray())
+
+使用 algorithm 指定的算法和 encoding 指定的格式从字符数组 encoded 读取并解密字符串，构造 QSslKey 对象。 type 将指定该密钥是公钥还是私钥。
+
+如果该密钥被加密，则将使用 passPhrase 解密。
+
+构造后该对象后，您可以使用 isNull() 函数来检查 encoded 字符数组是否包含了一个有效的密钥。
+
+QSslKey::QSslKey()
+
+构造一个空的密钥。
+
+另外您可以在 isNull() 函数介绍中找到更多相关信息。
+
+QSslKey \&QSslKey::operator=(const QSslKey \&other)
+
+将 other 中的内容拷贝到此密钥中，是等式左右值相等。
+
+返回该对象的引用。
+
+QSslKey::$\sim$QSslKey()
+
+析构函数。销毁该 QSslKey 对象。
+
+QSsl::KeyAlgorithm QSslKey::algorithm() const
+
+返回该密钥加密算法。
+
+void QSslKey::clear()
+
+清除该密钥的内容，将密钥变为空密钥。
+
+\begin{seeAlso}
+isNull()。
+\end{seeAlso}
+
+Qt::HANDLE QSslKey::handle() const
+
+若本地密钥句柄存在，则返回指向本地密钥句柄的指针，否则返回nullptr。
+
+你可以将此句柄与本地 API 结合使用，获得关于该密钥更多的信息。
+
+\begin{warning}
+使用该函数有很大的可能并不能移植，并且该函数的返回值可能会在不同平台之间或者不同 Qt 发行版本之间变化。
+\end{warning}
+
+bool QSslKey::isNull() const
+
+如果该密钥为空则返回true ，否则返回false。
+
+\begin{seeAlso}
+clear() 。
+\end{seeAlso}
+
+int QSslKey::length() const
+
+返回密钥的长度（以位为单位）；如果密钥为空，则返回-1。
+
+void QSslKey::swap(QSslKey \&other)
+
+与 oher 交换密钥信息。该函数执行速度很快并且保证操作一定成功。
+
+该函数最初在 Qt 5.0 版本引入。
+
+QByteArray QSslKey::toDer(const QByteArray \&passPhrase = QByteArray()) const
+
+以 DER 编码格式返回该密钥。
+
+您应该忽略 passPhrase 参数，因为 DER 不能被加密。未来的 Qt 版本中将移除该参数。
+
+QByteArray QSslKey::toPem(const QByteArray \&passPhrase = QByteArray()) const
+
+以 PEM 编码格式返回该密钥。如果该密钥为私钥并且 passPhrase 不为空，该密钥将利用 passPhrase 加密。
+
+QSsl::KeyType QSslKey::type() const
+
+返回该密钥的类型（即公钥或私钥）。
+
+bool QSslKey::operator!=(const QSslKey \&other) const
+
+若该密钥与 other 不相等则返回true ，否则返回false 。
+
+bool QSslKey::operator==(const QSslKey \&other) const
+
+若该密钥与 other 相等则返回true ，否则返回false 。
