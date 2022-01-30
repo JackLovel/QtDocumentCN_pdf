@@ -1,0 +1,175 @@
+\chapter{QSslSocket}
+
+QSslSocket 类为客户端和服务端提供了一个 SSL 加密的套接字。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSslSocket>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	引入 &	Qt4.3 \\ 
+	\hline
+\end{tabular}
+
+该类最初在 Qt 4.3 版本引入。
+
+您可以在 QSslSocket\_Obsolete 界面找到过时的成员函数介绍。
+
+\begin{notice}
+该类所有的函数都是可重入的。
+\end{notice}
+
+
+%%%%%%%555
+
+\section{公共成员类型}
+
+\begin{tabular}[l]{|l|m{30em}|}
+\hline 
+类型 &	属性\\ 
+\hline 
+enum 	&PeerVerifyMode \{ VerifyNone, QueryPeer, VerifyPeer, AutoVerifyPeer \} \\ 
+\hline  
+enum &	SslMode \{ UnencryptedMode, SslClientMode, SslServerMode \} \\ 
+	\hline
+\end{tabular}
+
+%%%%%%%
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|l|m{30em}|}
+\hline 
+类型 &	函数名\\ 
+\hline 
+& QSslSocket(QObject *parent = nullptr) \\ 
+\hline
+virtual &	$\sim$QSslSocket() \\ 
+\hline
+void 	&abort() \\ 
+\hline
+void &	connectToHostEncrypted(const QString \&hostName, quint16 port, QIODevice::OpenMode mode = ReadWrite, QAbstractSocket::NetworkLayerProtocol protocol = AnyIPProtocol) \\ 
+\hline
+void &	connectToHostEncrypted(const QString \&hostName, quint16 port, const QString \&sslPeerName, QIODevice::OpenMode mode = ReadWrite, QAbstractSocket::NetworkLayerProtocol protocol = AnyIPProtocol) \\ 
+\hline
+qint64 	&encryptedBytesAvailable() const \\ 
+\hline
+qint64 &	encryptedBytesToWrite() const \\ 
+\hline
+bool &	flush() \\ 
+\hline
+void &	ignoreSslErrors(const QList<QSslError> \&errors) \\ 
+\hline
+bool 	&isEncrypted() const \\ 
+\hline
+QSslCertificate &	localCertificate() const \\ 
+\hline
+QList<QSslCertificate> &	localCertificateChain() const \\ 
+\hline
+QSslSocket::SslMode &	mode() const \\ 
+\hline
+QVector<QOcspResponse> &	ocspResponses() const \\ 
+\hline
+QSslCertificate &	peerCertificate() const \\ 
+\hline 
+QList<QSslCertificate> 	&peerCertificateChain() const \\ 
+\hline
+int 	&peerVerifyDepth() const \\ 
+\hline
+QSslSocket::PeerVerifyMode &peerVerifyMode() const \\ 
+\hline
+QString &	peerVerifyName() const \\ 
+\hline 
+QSslKey &	privateKey() const \\ 
+\hline
+QSsl::SslProtocol &	protocol() const \\ 
+\hline
+QSslCipher 	&sessionCipher() const \\ 
+\hline 
+QSsl::SslProtocol 	&sessionProtocol() const \\
+\hline
+void &	setLocalCertificate(const QSslCertificate \&certificate) \\ 
+\hline
+void 	&setLocalCertificate(const QString \&path, QSsl::EncodingFormat format = QSsl::Pem) \\ 
+\hline
+void &	setLocalCertificateChain(const QList<QSslCertificate> \&localChain) \\
+\hline
+void &	setPeerVerifyDepth(int depth) \\ 
+\hline
+void &	setPeerVerifyMode(QSslSocket::PeerVerifyMode mode) \\
+\hline
+void &	setPeerVerifyName(const QString \&hostName) \\ 
+\hline
+void &	setPrivateKey(const QSslKey \&key) \\ 
+\hline 
+void 	&setPrivateKey(const QString \&fileName, QSsl::KeyAlgorithm algorithm = QSsl::Rsa, QSsl::EncodingFormat format = QSsl::Pem, const QByteArray \&passPhrase = QByteArray()) \\ 
+\hline
+void &	setProtocol(QSsl::SslProtocol protocol) \\ 
+\hline
+void &	setSslConfiguration(const QSslConfiguration \&configuration) \\ 
+\hline
+QSslConfiguration &	sslConfiguration() const \\ 
+\hline
+QList<QSslError> 	&sslHandshakeErrors() const \\ 
+\hline
+bool 	&waitForEncrypted(int msecs = 30000) \\ 
+\hline 
+\end{longtable}
+
+
+%%%%%%%%%%%%%%%%%%
+
+\section{重写公共成员函数}
+
+\begin{longtable}[l]{|l|m{30em}|}
+\hline 
+类型 &	函数名\\ 
+\hline 
+virtual bool &	atEnd() const override \\ 
+\hline
+virtual qint64 	&bytesAvailable() const override \\ 
+\hline
+virtual qint64 &	bytesToWrite() const override \\ 
+\hline
+virtual bool &	canReadLine() const override \\ 
+\hline
+virtual void &	close() override \\
+\hline
+virtual void &	resume() override \\ 
+\hline
+virtual void &	setReadBufferSize(qint64 size) override \\ 
+\hline
+virtual bool &	setSocketDescriptor(qintptr socketDescriptor, QAbstractSocket::SocketState state = ConnectedState, QIODevice::OpenMode openMode = ReadWrite) override \\ 
+\hline
+virtual void &	setSocketOption(QAbstractSocket::SocketOption option, const QVariant \&value) override \\
+\hline
+virtual QVariant &	socketOption(QAbstractSocket::SocketOption option) override \\ 
+\hline
+virtual bool &	waitForBytesWritten(int msecs = 30000) override \\ 
+\hline
+virtual bool &	waitForConnected(int msecs = 30000) override \\ 
+\hline
+virtual bool &	waitForDisconnected(int msecs = 30000) override \\ 
+\hline
+virtual bool &	waitForReadyRead(int msecs = 30000) override \\ 
+	\hline
+\end{longtable}
+
+\section{公共槽函数}
+
+\begin{tabular}[l]{|l|m{30em}|}
+	\hline 
+	类型 &	函数名\\ 
+	\hline 
+	void &	ignoreSslErrors() \\ 
+	\hline
+	void &	startClientEncryption() \\ 
+	\hline
+	void &	startServerEncryption() \\ 
+	\hline
+\end{tabular}
+
+
