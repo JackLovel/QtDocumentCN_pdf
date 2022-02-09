@@ -12,6 +12,8 @@ QSslSocket 类为客户端和服务端提供了一个 SSL 加密的套接字。
 	\hline
 	引入 &	Qt4.3 \\ 
 	\hline
+	继承自 	& QTcpSocket \\
+	\hline
 \end{tabular}
 
 该类最初在 Qt 4.3 版本引入。
@@ -21,9 +23,6 @@ QSslSocket 类为客户端和服务端提供了一个 SSL 加密的套接字。
 \begin{notice}
 该类所有的函数都是可重入的。
 \end{notice}
-
-
-%%%%%%%555
 
 \section{公共成员类型}
 
@@ -37,7 +36,6 @@ enum &	SslMode \{ UnencryptedMode, SslClientMode, SslServerMode \} \\
 	\hline
 \end{tabular}
 
-%%%%%%%
 
 \section{公共成员函数}
 
@@ -118,9 +116,6 @@ QList<QSslError> 	&sslHandshakeErrors() const \\
 bool 	&waitForEncrypted(int msecs = 30000) \\ 
 \hline 
 \end{longtable}
-
-
-%%%%%%%%%%%%%%%%%%
 
 \section{重写公共成员函数}
 
@@ -359,9 +354,6 @@ SslConfiguration::defaultConfiguration()::setCaCertificates()。
 QSslCertificate，QSslCipher 和 QSslError。
 \end{seeAlso}
 
-%%%%%%%%%%%%%%%%%%
-
-
 \section{成员类型文档}
 
 enum QSslSocket::PeerVerifyMode
@@ -414,7 +406,6 @@ QSslSocket::SslServerMode &	2 	&该套接字为服务端 SSL 套接字。它既�
 	\hline
 \end{tabular}
 
-%%%%%%%%%%%%%%%%%%%%%%
 \section{成员函数文档}
 
 QSslSocket::QSslSocket(QObject \emph{*parent} = nullptr)
@@ -553,10 +544,9 @@ connect(sslSocket, QOverload<const QList<QSslError> &>::of(&QSslSocket::sslError
      [=](const QList<QSslError> &errors){ /* ... */ });
 \end{cppcode}
 
-
-%%%%%%%%%%%%%%%%%%
-
-另外您也可以在 peerVerifyError() 函数介绍中找到相关信息。
+\begin{seeAlso}
+peerVerifyError()。
+\end{seeAlso}
 
 [slot] void QSslSocket::startClientEncryption()
 
@@ -590,7 +580,8 @@ connectToHostEncrypted() 和 startClientEncryption()。
 
 void QSslSocket::abort()
 
-关闭连接并将套接字重新初始化。不像 disconnectFromHost() 函数，该还书会立即关闭套接字，并清空任何在写入缓冲区的数据。
+关闭连接并将套接字重新初始化。
+不像 disconnectFromHost() 函数，该还书会立即关闭套接字，并清空任何在写入缓冲区的数据。
 
 \begin{seeAlso}
 disconnectFromHost() 和 close()。
@@ -628,7 +619,11 @@ void QSslSocket::connectToHostEncrypted(const QString \&hostName, quint16 port, 
 
 QSslSocket 首先会进入查询主机（HostLookupState）状态。然后，套接字会进入事件循环或者一个 waitFor...() 函数，进入连接中（ConnectingState）状态，连接成功后，套接字会发出 connected() 信号。紧接着套接字会初始化 SSL 客户端握手。每次状态发生改变后， QSslSocket 都会发出 stateChanged() 信号。
 
-初始化 SSL 客户端握手后，若对等端身份认证未能成功建立，套接字将会发出 sslErrors() 信号。如果你想忽略出现的错误并继续连接，您必须在连接到 sslErrors() 信号的槽函数中或者在进入加密模式之前调用 ignoreSslErrors() 函数。如果没有调用 ignoreSslErrors() 函数，该连接将会断开，并发出 disconnected() 信号，返回到未连接（UnconnectedState）状态。
+初始化 SSL 客户端握手后，若对等端身份认证未能成功建立，套接字将会发出 sslErrors() 信号。
+如果你想忽略出现的错误并继续连接，您必须在连接到 sslErrors() 
+信号的槽函数中或者在进入加密模式之前调用 ignoreSslErrors() 函数。
+如果没有调用 ignoreSslErrors() 函数，该连接将会断开，
+并发出 disconnected() 信号，返回到未连接（UnconnectedState）状态。
 
 若 SSL 握手连接建立成功，套接字将会发出 encrypted() 信号。
 
