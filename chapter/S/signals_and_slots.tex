@@ -291,3 +291,74 @@ void objectDestroyed(QObject* obj = nullptr);
 \end{cppcode}
 
 为了将该信号连接至此槽，我们使用 QObject::connect()。有多种方式可以连接信号槽，首先是使用函数指针：
+
+\begin{cppcode}
+connect(sender, &QObject::destroyed, this, &MyObject::objectDestroyed);   
+\end{cppcode}
+
+使用函数指针来执行 QObject::connect() 有诸多优点。首先，这允许编译器检查信号的参数是否与槽的参数相匹配；
+同时，如果有必要，编译器可以对参数进行隐式转换（译者注：如将信号的 int 参数转换为槽的 double 参数）。
+
+您也可以使用仿函数(functor)或 C++11 的匿名函数(lambda)：
+
+\begin{cppcode}
+connect(sender, &QObject::destroyed, this, [=](){ this->m_objects.remove(sender); });
+\end{cppcode}
+
+在这两种场景中，我们使用this作为connect()调用中的上下文对象。上下文对象指明了接收函数应该在哪个线程被执行。
+这非常重要，因为它提供了上下文，以确保接收者可以在上下文所处的线程中被执行。
+
+仿函数/匿名函数可以在发送者或上下文对象被销毁时断开连接。您需要注意确保仿函数/匿名函数中用到的所有对象，在信号发射时保持可用。
+
+另一种连接信号槽的方法，是通过SIGNAL和SLOT宏使用 QObject::connect()。
+若参数列表中包含默认值，则SIGNAL()和SLOT()中是否包含该参数的规则是，
+传递给SIGNAL()宏的参数列表必须不少于传递给SLOT()宏的参数列表。
+
+以下方式都可以生效：
+
+\begin{cppcode}
+ connect(sender, SIGNAL(destroyed(QObject*)), this, SLOT(objectDestroyed(Qbject*)));
+ connect(sender, SIGNAL(destroyed(QObject*)), this, SLOT(objectDestroyed()));
+ connect(sender, SIGNAL(destroyed()), this, SLOT(objectDestroyed()));
+\end{cppcode}
+
+但下面这个无法生效：
+
+\begin{cppcode}
+connect(sender, SIGNAL(destroyed()), this, SLOT(objectDestroyed(QObject*)));
+\end{cppcode}
+
+——因为槽希望获得一个 QObject 对象，但信号并不会发送它。这个连接会在运行时汇报一条错误信息。
+
+\begin{notice}
+注意，使用这个 QObject::connect() 重载时，信号和槽的参数并不会被编译器进行检查。
+（译者注：即使用 SIGNAL() / SLOT() 的连接方式）
+\end{notice}
+
+\section{信号槽的进阶应用}
+
+对于想要获取信号发送方信息的的场景，Qt 提供了 QObject::sender() 函数，该函数返回发送信号的对象的指针。
+
+匿名表达式(lambda)可以用更简单的方法来将自定义参数传递至槽（译者注：使用捕获列表）：
+
+\begin{cppcode}
+connect(action, &QAction::triggered, engine,
+         [=]() { engine->processAction(action->text()); });
+\end{cppcode}
+
+
+\section{在 Qt 中使用第三方的信号槽机制}
+
+Qt 中可以使用第三方的信号槽机制。您可以在项目中同时使用这两种机制，只需要将下述代码添加至您的 qmake 工程文件(.pro)中：
+
+\begin{cppcode}
+CONFIG += no_keywords
+\end{cppcode}
+
+它告诉 Qt 不要定义 moc 关键字signals、slots和emit，因为这些名称会被三方库所使用，
+如 Boost。在no\_keyword标识下继续使用 Qt 信号槽时，
+只需简单地将代码中的 Qt moc 关键字替换为对应的 Qt 宏 Q\_SIGNALS(或 Q\_SIGNAL)、Q\_SLOTS(或 Q\_SLOT)，以及 Q\_EMIT。
+
+\begin{seeAlso}
+QLCDNumber、QObject::connect()、Digital Clock Example、Tetrix Example、Meta-Object\_System，以及 Qt 属性系统。
+\end{seeAlso}
