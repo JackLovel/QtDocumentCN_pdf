@@ -213,48 +213,48 @@ QMap 的功能与 QHash 非常相似。二者的区别在于：
 
 下面是一个键类型为 QString，值类型为 int 的 QMap 的示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<QString, int> map;
-\end{cppcode}
+\end{lstlisting}
 
 可以使用 operator[]() 运算符将键值对插入到 map 中：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 map["one"] = 1;
 map["three"] = 3;
 map["seven"] = 7;
-\end{cppcode}
+\end{lstlisting}
 
 
 上面的代码将3个键值对插入到 QMap 中：("one", 1)，("three", 3) 和 ("seven", 7)。另外一种向 map 中插入元素的方法是使用 insert()：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 map.insert("twelve", 12);
-\end{cppcode}
+\end{lstlisting}
 
 使用 operator[]() 运算符或 value() 查找值：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int num1 = map["thirteen"];
 int num2 = map.value("thirteen");
-\end{cppcode}
+\end{lstlisting}
 
 如果 map 中不存在指定的键，这些函数返回默认构造的值。
 
 如果想检查 map 中是否包含特定键，使用 contains()：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int timeout = 30;
 if (map.contains("TIMEOUT"))
     timeout = map.value("TIMEOUT");
-\end{cppcode}
+\end{lstlisting}
 
 还有一个 value() 的重载函数，如果 map 中不存在指定键的元素，该函数使用第2个参数作为默认值：
 
 
 一般推荐使用 contains() 和 value() 而不是 operator[]() 运算符查找 map 中的键。原因是如果 map 中不存在相同键的元素，operator[]() 运算符会默默地将一个元素插入到 map 中（除非 map 是 const 的）。例如，下面的代码片段将在内存中创建1000个元素：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // 错误
 QMap<int, QWidget *> map;
 ...
@@ -262,7 +262,7 @@ for (int i = 0; i < 1000; ++i) {
     if (map[i] == okButton)
         cout << "Found button at index " << i << Qt::endl;
 }
-\end{cppcode}
+\end{lstlisting}
 
 为了避免这个问题，将上面代码中的 map[i] 替换为 map.value(i)。
 
@@ -270,62 +270,62 @@ for (int i = 0; i < 1000; ++i) {
 QMap 同时提供 Java 风格迭代器（QMapIterator 和 QMutableMapIterator）和 STL 风格迭代器（QMap::const\_iterator 和 QMap::iterator）。
 下面是使用 Java 风格迭代器遍历 QMap<QString, int> 的方法：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMapIterator<QString, int> i(map);
 while (i.hasNext()) {
     i.next();
     cout << i.key() << ": " << i.value() << Qt::endl;
 }
-\end{cppcode}
+\end{lstlisting}
 
 下面是相同的代码，不过这次使用 STL 风格迭代器：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<QString, int>::const_iterator i = map.constBegin();
 while (i != map.constEnd()) {
     cout << i.key() << ": " << i.value() << Qt::endl;
     ++i;
 }
-\end{cppcode}
+\end{lstlisting}
 
 上面的代码按照键的升序遍历各元素。
 
 通常，QMap 每个键只允许有一个值。如果用已经存在的键调用 insert()，先前的值将被删除。例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 map.insert("plenty", 100);
 map.insert("plenty", 2000);
 // map.value("plenty") == 2000
-\end{cppcode}
+\end{lstlisting}
 
 然而，可以使用派生类 QMultiMap 在一个键中存储多个值。使用 values(const Key \&key) 取得单个键关联的所有值，该函数返回一个 QList<T>：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QList<int> values = map.values("plenty");
 for (int i = 0; i < values.size(); ++i)
     cout << values.at(i) << Qt::endl;
-\end{cppcode}
+\end{lstlisting}
 
 共享同一键的多个元素按照从最新到最早插入的顺序返回。
 另外一种方法是调用 find() 取得 STL 风格迭代器，该迭代器指向共享同一键的多个元素中的第一个元素，
 然后从该元素开始遍历：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<QString, int>::iterator i = map.find("plenty");
 while (i != map.end() && i.key() == "plenty") {
     cout << i.value() << Qt::endl;
     ++i;
 }
-\end{cppcode}
+\end{lstlisting}
 
 如果只想从 map 中获取值（而不是键），也可以使用 foreach：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<QString, int> map;
 ...
 foreach (int value, map)
     cout << value << Qt::endl;
-\end{cppcode}
+\end{lstlisting}
 
 移除元素有几种方法。一种是调用 remove()；
 该函数移除指定键的所有元素。
@@ -339,7 +339,7 @@ QMap 用它来保持元素有序，并假定两个键 x 和 y 在 x < y 和 y < 
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
@@ -363,7 +363,7 @@ inline bool operator<(const Employee &e1, const Employee &e2)
 }
 
 #endif // EMPLOYEE_H
-\end{cppcode}
+\end{lstlisting}
 
 该例中，先比较雇员名。如果雇员名相等，再比较二者的生日来分出大小。
 
@@ -697,7 +697,7 @@ QMap::iterator QMap::find(const Key \emph{\&key})
 
 例如，下面的代码遍历同一键的所有元素：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<QString, int> map;
 ...
 QMap<QString, int>::const_iterator i = map.find("HDR");
@@ -705,7 +705,7 @@ while (i != map.end() && i.key() == "HDR") {
     cout << i.value() << Qt::endl;
     ++i;
 }
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 constFind()，value()，values()，lowerBound()，upperBound() 和 QMultiMap::find()。
@@ -983,7 +983,7 @@ QMap::iterator QMap::lowerBound(const Key \emph{\&key})
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<int, QString> map;
 map.insert(1, "one");
 map.insert(5, "five");
@@ -994,11 +994,11 @@ map.lowerBound(1);      // 返回指向 (1, "one") 的迭代器
 map.lowerBound(2);      // 返回指向 (5, "five") 的迭代器
 map.lowerBound(10);     // 返回指向 (10, "ten") 的迭代器
 map.lowerBound(999);    // 返回 end()
-\end{cppcode}
+\end{lstlisting}
 
 如果 map 包含多个键为 key 的元素，该函数返回指向最新插入的值的迭代器。其它值可以通过递增迭代器访问。例如，下面的例子遍历同一键所关联的所有元素：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<QString, int> map;
 ...
 QMap<QString, int>::const_iterator i = map.lowerBound("HDR");
@@ -1007,7 +1007,7 @@ while (i != upperBound) {
     cout << i.value() << Qt::endl;
     ++i;
 }
-\end{cppcode}
+\end{lstlisting}
 
 %%%%%%%%%
 \begin{seeAlso}
@@ -1076,7 +1076,7 @@ QMap::iterator QMap::upperBound(const Key \emph{\&key})
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<int, QString> map;
 map.insert(1, "one");
 map.insert(5, "five");
@@ -1087,7 +1087,7 @@ map.upperBound(1);      // 返回指向 (5, "five") 的迭代器
 map.upperBound(2);      // 返回指向 (5, "five") 的迭代器
 map.upperBound(10);     // 返回 end()
 map.upperBound(999);    // 返回 end()
-\end{cppcode}
+\end{lstlisting}
 
 %%%%%%
 \begin{seeAlso}

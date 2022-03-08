@@ -146,9 +146,9 @@ QSqlDatabase 类提供接口用于数据库的连接 。一个 QSqlDatabase 实�
 
 通过调用一个静态的 addDatabase()函数，来创建一个连接（即：实例化一个QSqlDatabase类）,并且可以指定驱动或者驱动类型去使用（依赖于数据库的类型 ）和 一个连接的名称。 一个连接是通过它自已的名称，而不是通过数据库的名称去连接的。对于一个数据库您可以有多个连接。QSqlDatabase 也支持默认连接，您可以不 传递连接名参数给 addDatabase() 来创建 它。随后，这个默认连接假定您 在调用任何静态函数情况下，而不去指定连接名称。 下面的一段代码片段展示了 如何去创建 和打开一个默认连接，去连接 PostgreSQL 数据库：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSqlDatabase db = QSqlDatabase::database();
-\end{cppcode}
+\end{lstlisting}
 
 QSqlDatabase是一个值类。通过一个 QSqlDatabase 实例对数据库连接所做的操作将影响表示相同连接的其他 QSqlDatabase 实例。 使用 cloneDatabase() 在基于已存在数据库的连接 来 创建 独立的数据库的连接。
 
@@ -303,13 +303,13 @@ QSqlDatabase::$\sim$QSqlDatabase()
 
 这个重载函数是非常有用的，当您想创建一个带有\href{https://doc.qt.io/qt-5/qsqldriver.html}{驱动} 连接时，您可以实例化它。有可能您想拥有自己的数据库驱动，或者去实例化 Qt自带的驱动。如果您真的想这样做，我非常建议您把驱动的代码导入到您的应用程序中。例如，您可用自已的 QPSQL 驱动来创建一个 PostgreSQL 连接，像下面这样:
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 PGconn *con = PQconnectdb("host=server user=bart password=simpson dbname=springfield");
 QPSQLDriver *drv = new QPSQLDriver(con);
 QSqlDatabase db = QSqlDatabase::addDatabase(drv); // 产生成新的默认连接
 QSqlQuery query;
 query.exec("SELECT NAME, ID FROM STAFF");	
-\end{cppcode}
+\end{lstlisting}
 
 上面的代码用于设置一个 PostgreSQL 连接和实例化一个 QPSQLDriver 对象。接下来，addDatabase() 被调用产生一个已知的连接，以便于它可以使用 Qt SQL 相关的类。Qt假定您已经打开了数据库连接，当使用连接句柄（或一组句柄）实例化驱动程序时。
 
@@ -321,10 +321,10 @@ query.exec("SELECT NAME, ID FROM STAFF");
 
 请记住，必须将数据库客户端库到您的程序里。确保客户端库在您的链接器的搜索路径中，并且像下面这样添加到您的 .pro 文件里：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 unix:LIBS += -lpq
 win32:LIBS += libpqdll.lib
-\end{cppcode}
+\end{lstlisting}
 
 这里介绍了所有驱动支持的方法。只有驱动的构造参数有所不同。列举了一个关于 Qt附带的程序，以及它们的源代码文件，和它们的构造函数参数的列表：
 
@@ -562,7 +562,7 @@ bool QSqlDatabase::isValid() const
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSqlDatabase db;
 qDebug() << db.isValid();    // 返回 false
 
@@ -571,7 +571,7 @@ qDebug() << db.isValid();    // 如果 "sales" 连接存在，就返回 true
 
 QSqlDatabase::removeDatabase("sales");
 qDebug() << db.isValid();    // 返回 false
-\end{cppcode}
+\end{lstlisting}
 
 \href{https://doc.qt.io/qt-5/qsqlerror.html}{QSqlError} QSqlDatabase::lastError() const
 
@@ -671,12 +671,12 @@ QSqlRecord QSqlDatabase::record(const QString \emph{\&tablename}) const
 
 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSqlDatabase::registerSqlDriver("MYDRIVER", new QSqlDriverCreator<QSqlDriver>);
 QVERIFY(QSqlDatabase::drivers().contains("MYDRIVER"));
 QSqlDatabase db = QSqlDatabase::addDatabase("MYDRIVER");
 QVERIFY(db.isValid());
-\end{cppcode}
+\end{lstlisting}
 
 QSqlDatabase拥有 creator 指针的所有权，因此您不能自己删除它。
 
@@ -696,26 +696,26 @@ drivers()。
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // 错误
 QSqlDatabase db = QSqlDatabase::database("sales");
 QSqlQuery query("SELECT NAME, DOB FROM EMPLOYEES", db);
 QSqlDatabase::removeDatabase("sales"); // 将会输出警告
 // “db”现在是一个悬而未决的无效数据库连接，
 // “查询”包含无效的结果集
-\end{cppcode}
+\end{lstlisting}
 
 
 正确的做法：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 {
     QSqlDatabase db = QSqlDatabase::database("sales");
     QSqlQuery query("SELECT NAME, DOB FROM EMPLOYEES", db);
 }
 // “db”和“query”都被销毁，因为它们超出了范围
 QSqlDatabase::removeDatabase("sales"); // 正确的
-\end{cppcode}
+\end{lstlisting}
 
 如果要删除默认连接，这个连接可能是通过调用 addDatabase() 函数而创建的，但未指定连接名称，可以通过对database()返回的数据库调用connectionName() 来检索默认连接名称。
 
@@ -821,7 +821,7 @@ void QSqlDatabase::setConnectOptions(const QString \emph{\&options} = QString())
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 db.setConnectOptions("SSL_KEY=client-key.pem;SSL_CERT=client-cert.pem;SSL_CA=ca-cert.pem;CLIENT_IGNORE_SPACE=1"); // 使用安全套连字进行连接
 if (!db.open()) {
 	db.setConnectOptions(); // 清除连接的字符串
@@ -842,7 +842,7 @@ if (!db.open()) {
 	// ...
 }
 }
-\end{cppcode}
+\end{lstlisting}
 
 查阅这个客户端库文档，获得更多关于不同可选项的更多信息。
 
@@ -873,7 +873,7 @@ void QSqlDatabase::setDatabaseName(const QString \&name)
 
 \clearpage
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // ...
 QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 db.setDatabaseName("DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};
@@ -882,7 +882,7 @@ if (db.open()) {
 	// 成功!
 }
 // ...
-\end{cppcode}
+\end{lstlisting}
 
 这个没有默认的值
 

@@ -115,7 +115,7 @@ Qt 在 qobjectdefs\_impl.h 中，通过 operator,
 
 若有一个最小化的 C++ 类定义，如下所示：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  class Counter
  {
  public:
@@ -127,11 +127,11 @@ Qt 在 qobjectdefs\_impl.h 中，通过 operator,
  private:
      int m_value;
  };
-\end{cppcode}
+\end{lstlisting}
 
 则它对应的最小化的基于 QObject 的类型则为：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  #include <QObject>
 
 class Counter : public QObject
@@ -152,7 +152,7 @@ signals:
 private:
 	int m_value;
 };
-\end{cppcode}
+\end{lstlisting}
 
 基于 QObject 的版本具备一些内部状态，并且提供了公共方法来获取这些状态，
 同时还具备使用信号槽机制的组件化编程支持。
@@ -165,7 +165,7 @@ private:
 
 槽需要程序开发者提供定义，此处为Counter::setValue()槽的一个可能的定义：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void Counter::setValue(int value)
  {
      if (value != m_value) {
@@ -173,21 +173,21 @@ void Counter::setValue(int value)
          emit valueChanged(value);
      }
  }
-\end{cppcode}
+\end{lstlisting}
 
 emit 一行从该对象发射valueChanged()信号，并携带新的值作为参数。
 
 在下方代码片段中，我们创建了两个Counter对象，使用 QObject::connect() 
 将第一个对象的valueChanged()信号连接至第二个对象的setValue()槽。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 Counter a, b;
 QObject::connect(&a, &Counter::valueChanged,
                       &b, &Counter::setValue);
 
 a.setValue(12);     // a.value() == 12, b.value() == 12
 b.setValue(48);     // a.value() == 12, b.value() == 48
-\end{cppcode}
+\end{lstlisting}
 
 调用a.setValue(12)会发射信号valueChanged(12)，该信号被b的setValue()槽中接收，
 即调用b.setValue(12)。然后b会发射相同的valueChanged()信号，
@@ -211,7 +211,7 @@ b.setValue(48);     // a.value() == 12, b.value() == 48
 下文为一个简单的控件类的头文件范例，不包含成员函数。
 此代码目为演示如何在您自己的应用中利用信号槽。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  #ifndef LCDNUMBER_H
  #define LCDNUMBER_H
 
@@ -220,7 +220,7 @@ b.setValue(48);     // a.value() == 12, b.value() == 48
  class LcdNumber : public QFrame
  {
      Q_OBJECT
-\end{cppcode}
+\end{lstlisting}
 
 LcdNumber通过 QFrame 和 QWidget，间接继承自 QObject，后者提供了绝大部分信号槽特性。
 这和内置的 QLCDNumber 控件有部分相似之处。
@@ -231,13 +231,13 @@ LcdNumber通过 QFrame 和 QWidget，间接继承自 QObject，后者提供了�
 （译者注：对于 qmake 工程，将包含 Q\_OBJECT 的头文件添加到 .pro 文件的 HEADERS 变量中，
 即可自动执行 moc 并链接其输出）
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  public:
      LcdNumber(QWidget *parent = nullptr);
 
  signals:
      void overflow();
-\end{cppcode}
+\end{lstlisting}
 
 在类构造函数和公共成员之后，我们声明该类的信号。
 当被要求显示不可能的数值时，LcdNumber类会发射信号overflow()。
@@ -247,7 +247,7 @@ LcdNumber通过 QFrame 和 QWidget，间接继承自 QObject，后者提供了�
 另一方面，如果您想在数值溢出时调用两个不同的错误处理函数，只需简单地将信号连接至两个不同的槽。
 Qt 会确保它们都被调用（按照连接的顺序）。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  public slots:
      void display(int num);
      void display(double num);
@@ -260,7 +260,7 @@ Qt 会确保它们都被调用（按照连接的顺序）。
  };
 
  #endif
-\end{cppcode}
+\end{lstlisting}
 
 
 槽是指接收信号的函数，用于获取其它控件状态改变的信息。
@@ -278,32 +278,32 @@ display()函数被重载；当连接信号至这个槽时，Qt 会选取适合�
 
 信号槽可以包含默认参数，即具有默认值的参数。如 QObject::destroyed()：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void destroyed(QObject* = nullptr);
-\end{cppcode}
+\end{lstlisting}
 
 当一个 QObject 对象被删除时，它会发射 QObject::destroyed() 信号。
 我们可以捕获此信号，此时我们可能仍持有被删除的 QObject 对象的悬空引用，
 则可以将其清理掉。一个对应的槽函数签名可能为：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void objectDestroyed(QObject* obj = nullptr);
-\end{cppcode}
+\end{lstlisting}
 
 为了将该信号连接至此槽，我们使用 QObject::connect()。有多种方式可以连接信号槽，首先是使用函数指针：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 connect(sender, &QObject::destroyed, this, &MyObject::objectDestroyed);   
-\end{cppcode}
+\end{lstlisting}
 
 使用函数指针来执行 QObject::connect() 有诸多优点。首先，这允许编译器检查信号的参数是否与槽的参数相匹配；
 同时，如果有必要，编译器可以对参数进行隐式转换（译者注：如将信号的 int 参数转换为槽的 double 参数）。
 
 您也可以使用仿函数(functor)或 C++11 的匿名函数(lambda)：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 connect(sender, &QObject::destroyed, this, [=](){ this->m_objects.remove(sender); });
-\end{cppcode}
+\end{lstlisting}
 
 在这两种场景中，我们使用this作为connect()调用中的上下文对象。上下文对象指明了接收函数应该在哪个线程被执行。
 这非常重要，因为它提供了上下文，以确保接收者可以在上下文所处的线程中被执行。
@@ -316,17 +316,17 @@ connect(sender, &QObject::destroyed, this, [=](){ this->m_objects.remove(sender)
 
 以下方式都可以生效：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  connect(sender, SIGNAL(destroyed(QObject*)), this, SLOT(objectDestroyed(Qbject*)));
  connect(sender, SIGNAL(destroyed(QObject*)), this, SLOT(objectDestroyed()));
  connect(sender, SIGNAL(destroyed()), this, SLOT(objectDestroyed()));
-\end{cppcode}
+\end{lstlisting}
 
 但下面这个无法生效：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 connect(sender, SIGNAL(destroyed()), this, SLOT(objectDestroyed(QObject*)));
-\end{cppcode}
+\end{lstlisting}
 
 ——因为槽希望获得一个 QObject 对象，但信号并不会发送它。这个连接会在运行时汇报一条错误信息。
 
@@ -341,19 +341,19 @@ connect(sender, SIGNAL(destroyed()), this, SLOT(objectDestroyed(QObject*)));
 
 匿名表达式(lambda)可以用更简单的方法来将自定义参数传递至槽（译者注：使用捕获列表）：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 connect(action, &QAction::triggered, engine,
          [=]() { engine->processAction(action->text()); });
-\end{cppcode}
+\end{lstlisting}
 
 
 \section{在 Qt 中使用第三方的信号槽机制}
 
 Qt 中可以使用第三方的信号槽机制。您可以在项目中同时使用这两种机制，只需要将下述代码添加至您的 qmake 工程文件(.pro)中：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 CONFIG += no_keywords
-\end{cppcode}
+\end{lstlisting}
 
 它告诉 Qt 不要定义 moc 关键字signals、slots和emit，因为这些名称会被三方库所使用，
 如 Boost。在no\_keyword标识下继续使用 Qt 信号槽时，

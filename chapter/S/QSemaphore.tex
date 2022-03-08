@@ -54,7 +54,7 @@ QSemaphore类提供了一个通用的信号量。\href{}{更多内容...}
 
 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSemaphore sem(5);      // sem.available() == 5
 
 sem.acquire(3);         // sem.available() == 2
@@ -64,7 +64,7 @@ sem.release(5);         // sem.available() == 10
 
 sem.tryAcquire(1);      // sem.available() == 9, returns true
 sem.tryAcquire(250);    // sem.available() == 9, returns false
-\end{cppcode}
+\end{lstlisting}
 
 信号量的一个典型应用场景，是控制生产者线程和消费者线程对共享循环缓冲区的访问。生产者消费者示例展示了如何使用 QSemaphore 来解决这个问题。
 
@@ -117,12 +117,12 @@ void QSemaphore::release(int \emph{n} = 1)
 
 这个函数也可以用来“创建”资源。例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSemaphore sem(5);      // 信号量保护 5 个资源  sem.avilable() == 5
 sem.acquire(5);         // 请求 5 个资源       sem.avilable() == 0
 sem.release(5);         // 释放 5 个资源       sem.avilable() == 5
 sem.release(10);        // “创建” 10 个新资源  sem.avilable() == 15
-\end{cppcode}
+\end{lstlisting}
 
 QSemaphoreReleaser 是一个围绕此函数的 RAII 包装器。
 
@@ -136,11 +136,11 @@ bool QSemaphore::tryAcquire(int \emph{n} = 1)
 
 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSemaphore sem(5);      // sem.available() == 5
 sem.tryAcquire(250);    // sem.available() == 5, returns false
 sem.tryAcquire(3);      // sem.available() == 2, returns true
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 acquire()。
@@ -156,11 +156,11 @@ bool QSemaphore::tryAcquire(int \emph{n}, int \emph{timeout})
 
 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSemaphore sem(5);            // sem.available() == 5
 sem.tryAcquire(250, 1000);    // sem.available() == 5, 等待 1000 毫秒，returns false
 sem.tryAcquire(3, 30000);     // sem.available() == 2, 立即返回，returns true
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 acquire()。

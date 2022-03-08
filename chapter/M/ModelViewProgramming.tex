@@ -140,7 +140,7 @@ QListView 和 QTreeView 类是最适合与 QFileSystemModel一起使用的视图
 
 我们使用了现成的模型 QFileSystemModel，并创建了一些视图来显示目录的内容。展示了使用模型的最简单方法。 该模型的构建和使用是在单个 main() 函数中执行的：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -148,13 +148,13 @@ int main(int argc, char *argv[])
 
     QFileSystemModel *model = new QFileSystemModel;
     model->setRootPath(QDir::currentPath());
-\end{cppcode}
+\end{lstlisting}
 
 该模型被设置为使用来自特定文件系统的数据。调用 setRootPath() 将告诉模型文件系统上的哪个驱动器会暴露给视图。
 
 我们使用同一个模型创建两个不同的视图，来查看模型中的项目呈现出来的效果：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QTreeView *tree = new QTreeView(splitter);
 tree->setModel(model);
 tree->setRootIndex(model->index(QDir::currentPath()));
@@ -162,7 +162,7 @@ tree->setRootIndex(model->index(QDir::currentPath()));
 QListView *list = new QListView(splitter);
 list->setModel(model);
 list->setRootIndex(model->index(QDir::currentPath()));
-\end{cppcode}
+\end{lstlisting}
 
 视图的构造方法与其他部件一样。设置视图来显示模型中的项目仅需使用目录模型作为参数来调用视图的 setModel() 函数即可。我们通过在每个视图上调用 setRootIndex() 函数来过滤模型提供的数据，并从文件系统模型中为当前目录传递合适的模型索引。
 
@@ -170,12 +170,12 @@ list->setRootIndex(model->index(QDir::currentPath()));
 
 该函数的其余部分是在分裂器部件中显示视图，并运行应用程序的事件循环：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
     splitter->setWindowTitle("Two views onto the same file system model");
     splitter->show();
     return app.exec();
 }
-\end{cppcode}
+\end{lstlisting}
 
 在上面的示例中，我们忽略了如何处理项目选择。 在 处理项目视图中的选择项 部分中将更详细地介绍。
 
@@ -202,9 +202,9 @@ list->setRootIndex(model->index(QDir::currentPath()));
 
 所以，只有模型需要知道如何获取数据和定义数据类型。模型索引包含一个指向创建它们的模型的指针，以免在使用多个模型时造成混淆。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QAbstractItemModel *model = index.model();
-\end{cppcode}
+\end{lstlisting}
 
 模型索引提供了一个对信息的临时的引用，可用于通过模型检索或修改数据。由于模型可能会不时重组其内部结构，因此模型索引可能会变得无效，不应进行存储。如果需要长期使用一条信息，则必须创建一个持久的模型索引。这为模型保持最新状态提供了参考。临时模型索引由 QModelIndex 类提供，而持久模型索引由 QPersistentModelIndex 类提供。
 
@@ -218,9 +218,9 @@ QAbstractItemModel *model = index.model();
 
 我们可以通过在模型中指定给定项目的行号和列号来检索有关任何给定项目的信息，我们接收到的是代表该项目的索引：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QModelIndex index = model->index(row, column, ...);
-\end{cppcode}
+\end{lstlisting}
 
 
 为简单的单层数据结构（例如列表和表）提供接口的模型不需要提供任何其他信息，但是，如上述代码所示，在获取模型索引时，我们需要提供更多信息。
@@ -233,11 +233,11 @@ QModelIndex index = model->index(row, column, ...);
   
 该图显示了基本表模型的表示形式，其中每个项目都由一对行号和列号定位。通过将相关的行号和列号传递给模型，我们获得了一个引用数据项的模型索引。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QModelIndex indexA = model->index(0, 0, QModelIndex());
 QModelIndex indexB = model->index(1, 1, QModelIndex());
 QModelIndex indexC = model->index(2, 1, QModelIndex());
-\end{cppcode}
+\end{lstlisting}
 
 始终通过用 QModelIndex() 指定为其父项来引用模型中的顶级项目。下一节将对此进行讨论。\\
 \hline	
@@ -248,9 +248,9 @@ QModelIndex indexC = model->index(2, 1, QModelIndex());
 
 当请求模型项的索引时，我们必须提供有关该项父项的一些信息。在模型之外，引用项目的唯一方法是通过模型索引，因此还必须提供父模型索引：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QModelIndex index = model->index(row, column, parent);
-\end{cppcode}
+\end{lstlisting}
 
 \begin{tabular}{|l|m{25em}|}
 \hline
@@ -262,16 +262,16 @@ QModelIndex index = model->index(row, column, parent);
 
 “A”和“C”项在模型中为同级顶级：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QModelIndex indexA = model->index(0, 0, QModelIndex());
 QModelIndex indexC = model->index(2, 1, QModelIndex());
-\end{cppcode}
+\end{lstlisting}
 
 “A”项有多个子项。使用以下代码获得“B”项的模型索引：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QModelIndex indexB = model->index(1, 0, indexA);
-\end{cppcode}
+\end{lstlisting}
 \\
 \hline	
 \end{tabular}
@@ -282,9 +282,9 @@ QModelIndex indexB = model->index(1, 0, indexA);
 
 我们可以通过向模型传递与该项相对应的模型索引，并指定一个角色来获取所需的数据类型，从而获得我们想要的数据：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QVariant value = model->data(index, role);
-\end{cppcode}
+\end{lstlisting}
 
 
 \begin{tabular}{|l|m{25em}|}
@@ -321,32 +321,32 @@ QFileSystemModel 加载是异步的，以最大程度地减少系统资源的使
 
 我们通过以下方式构造文件系统模型：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QFileSystemModel *model = new QFileSystemModel;
 connect(model, &QFileSystemModel::directoryLoaded, [model](const QString &directory) {
     QModelIndex parentIndex = model->index(directory);
     int numRows = model->rowCount(parentIndex);
 });
 model->setRootPath(QDir::currentPath);
-\end{cppcode}
+\end{lstlisting}
 
 在这种情况下，我们首先设置默认的 QFileSystemModel 。我们将其连接到 \hl{lambda}，在其中我们将使用该模型提供的 index() 的特定实现来获取父索引。 在 \hl{lambda} 中，我们使用 rowCount() 函数计算模型中的行数。最后，我们设 QFileSystemModel 的根路径，以便它开始加载数据并触发 \hl{lambda} 。
 
 为简单起见，我们只处理模型第一栏中的项目。我们依次检查每一行，获取每一行中第一项的模型索引，然后读取模型中为该项存储的数据。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 for (int row = 0; row < numRows; ++row) {
     QModelIndex index = model->index(row, 0, parentIndex);
-\end{cppcode}
+\end{lstlisting}
 
 为了获得模型索引，我们指定行号，列号（第一列为零），并为所需的所有项的父项指定适当的模型索引。使用模型的 data() 函数检索存储在每个项目中的文本。我们指定模型索引和 DisplayRole 获取字符串形式的项数据。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QString text = model->data(index, Qt::DisplayRole).toString();
     // Display the text in a widget.
 
 }
-\end{cppcode}
+\end{lstlisting}
 
 以上示例演示了从模型中检索数据的基本用法：
 

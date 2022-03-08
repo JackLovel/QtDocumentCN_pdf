@@ -40,7 +40,7 @@ QReadLocker（和 QWriteLocker）的目的是简化 QReadWriteLock 的锁定和�
 
 下面是一个使用 QReadLocker 锁定和解锁读写锁的示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QReadWriteLock lock;
 
 QByteArray readData()
@@ -49,11 +49,11 @@ QByteArray readData()
     ...
     return data;
 }
-\end{cppcode}
+\end{lstlisting}
 
 等价于以下代码：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 ReadWriteLock lock;
 
 QByteArray readData()
@@ -63,7 +63,7 @@ QByteArray readData()
     lock.unlock();
     return data;
 }
-\end{cppcode}
+\end{lstlisting}
 
 QMutexLocker 文档展示了使用locker对象来大大简化编程的示例。
 

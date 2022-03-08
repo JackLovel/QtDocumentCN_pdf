@@ -186,7 +186,7 @@ QMetaClassInfo QMetaObject::classInfo(int \emph{index}) const
 
 范例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 class MyClass : public QObject
  {
      Q_OBJECT
@@ -196,7 +196,7 @@ class MyClass : public QObject
  public:
      ...
  };
-\end{cppcode}
+\end{lstlisting}
 
 
 %%%%%%%%%%%%%%%%
@@ -241,9 +241,9 @@ void on_<对象名>_<信号名>(<信号参数>);
 
 假设有一个对象名 为 button1 的 QPushButton 类型的子对象，则捕获它的 clicked() 信号的槽应为：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void on_button1_clicked();
-\end{cppcode}
+\end{lstlisting}
 
 若 object 对象自身的名字已设置，则它自己的信号也会被连接至对应的槽。
 
@@ -411,10 +411,10 @@ Q\_RETURN\_ARG() 接受一个类型名称和一个该类型的可变引用。
 
 例如，异步调用某个 QThread 对象的 quit() 槽需要的代码如下：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMetaObject::invokeMethod(thread, "quit",
                            Qt::QueuedConnection);
-\end{cppcode}
+\end{lstlisting}
 
 当异步调用方法时，传递的参数必须被 Qt 的元对象系统所知悉，因为 Qt 需要在后台事件中拷贝并保存它们。
 如果您使用队列连接时遇到下述错误信息：
@@ -427,14 +427,14 @@ QMetaObject::invokeMethod: Unable to handle unregistered datatype 'MyType'
 
 若想通过 obj 对象同步调用 compute(QString, int, double) 槽，则代码如下：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  QString retVal;
  QMetaObject::invokeMethod(obj, "compute", Qt::DirectConnection,
                            Q_RETURN_ARG(QString, retVal),
                            Q_ARG(QString, "sqrt"),
                            Q_ARG(int, 42),
                            Q_ARG(double, 9.7));
-\end{cppcode}
+\end{lstlisting}
 
 若 compute 槽通过特定顺序没有完整获取到一个 QString、一个 int 和一个 double，则此调用会失败。
 
@@ -533,12 +533,12 @@ int QMetaObject::methodCount() const
 
 使用下述代码来将所给类的所有方法签名存储至 QStringList：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  const QMetaObject* metaObject = obj->metaObject();
  QStringList methods;
  for(int i = metaObject->methodOffset(); i < metaObject->methodCount(); ++i)
      methods << QString::fromLatin1(metaObject->method(i).methodSignature());
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 method()、methodOffset() 和 indexOfMethod()。
@@ -591,10 +591,10 @@ checkConnectArgs() 和 normalizedType()。
 
 范例:
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  QByteArray normType = QMetaObject::normalizedType(" int    const  *");
  // 规范化的类型将为 "const int*"
-\end{cppcode}
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%
 
@@ -619,12 +619,12 @@ int QMetaObject::propertyCount() const
 
 使用如下代码来将给定类的所有属性名称保存至 QStringList: 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  const QMetaObject* metaObject = obj->metaObject();
  QStringList properties;
  for(int i = metaObject->propertyOffset(); i < metaObject->propertyCount(); ++i)
      properties << QString::fromLatin1(metaObject->property(i).name());
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 property()、propertyOffset() 和 indexOfProperty()。

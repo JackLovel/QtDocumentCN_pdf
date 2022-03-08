@@ -86,7 +86,7 @@ QMap 不允许多值映射。
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMultiMap<QString, int> map1, map2, map3;
 
 map1.insert("plenty", 100);
@@ -98,7 +98,7 @@ map2.insert("plenty", 5000);
 
 map3 = map1 + map2;
 // map3.size() == 3
-\end{cppcode}
+\end{lstlisting}
 
 %%%%%%%
 
@@ -108,23 +108,23 @@ map3 = map1 + map2;
 如果想取得单个键关联的所有值，可以使用 values(const Key \&key)，
 该函数返回一个 QList：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QList<int> values = map.values("plenty");
 for (int i = 0; i < values.size(); ++i)
     cout << values.at(i) << Qt::endl;
-\end{cppcode}
+\end{lstlisting}
 
 共享同一键的元素按照从最新到最早插入的顺序返回。
 
 如果习惯用 STL 风格迭代器，可以传递键调用 find() 取得第一个元素的迭代器，从该元素开始遍历：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMultiMap<QString, int>::iterator i = map.find("plenty");
 while (i != map.end() && i.key() == "plenty") {
     cout << i.value() << Qt::endl;
     ++i;
 }
-\end{cppcode}
+\end{lstlisting}
 
 QMultiMap 键和值的数据类型必须是可赋值数据类型。
 这涵盖了大多数可能会遇到的数据类型，但是编译器不会允许存储类似 QWidget 这样的对象作为值，

@@ -46,21 +46,21 @@ bool 	&operator==(key\_iterator other) const\\
 
 通过调用QHash::iterator::key() 可以很容易地取得键：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 for (QHash<int, QString>::const_iterator it = hash.cbegin(), 
 end = hash.cend(); it != end; ++it) {
     cout << "The key: " << it.key() << Qt::endl
     cout << "The value: " << it.value() << Qt::endl;
     cout << "Also the value: " << (*it) << Qt::endl;
 }
-\end{cppcode}
+\end{lstlisting}
 
 然而，如果想对 QHash 的键应用 STL 算法，就需要一个能解引用出键而不是值
 的迭代器。
 
 通过 QHash::key\_iterator 就能直接对一组键应用 STL 算法而不必调用 QHash::keys()，这个函数比较低效，因为它首先要遍历一遍 QHash，然后分配内存创建一个临时的 QList。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // Inefficient, keys() is expensive
 QList<int> keys = hash.keys();
 int numPrimes = std::count_if(keys.cbegin(), keys.cend(), isPrimeNumber);
@@ -69,7 +69,7 @@ qDeleteAll(hash2.keys());
 // Efficient, no memory allocation needed
 int numPrimes = std::count_if(hash.keyBegin(), hash.keyEnd(), isPrimeNumber);
 qDeleteAll(hash2.keyBegin(), hash2.keyEnd());
-\end{cppcode}
+\end{lstlisting}
 
 QHash::key\_iterator 是 const 的，键是不可能被修改的。
 

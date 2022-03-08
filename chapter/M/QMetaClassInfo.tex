@@ -27,7 +27,7 @@ const char * 	& value() const \\
 类型信息对象指的在源代码中通过 Q\_CLASSINFO() 指定的名称-值对。
 这些信息可以通过 name() 和 value() 获取，例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 class MyClass
 {
     Q_OBJECT
@@ -37,7 +37,7 @@ class MyClass
 public:
     ...
 };
-\end{cppcode}
+\end{lstlisting}
 
 此机制可以在您的应用中自由使用，Qt 不会在自身的任何类中使用它。
 
