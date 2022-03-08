@@ -149,7 +149,7 @@ QCompleter使用模型作为其数据源。
 我们从使用 QTableView 来显示数据的应用程序开始。稍后我们将添加编辑功能。
 (文件: examples/widgets/tutorials/modelview/1\_readonly/main.cpp)
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // main.cpp
 #include <QApplication>
 #include <QTableView>
@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 	tableView.show();
 	return a.exec();
 }
-\end{cppcode}
+\end{lstlisting}
 
 main() 函数：
 
@@ -182,7 +182,7 @@ main() 函数：
 
 (文件：examples/widgets/tutorials/modelview/1\_readonly/mymodel.h)
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // mymodel.h
 #include <QAbstractTableModel>
 	
@@ -195,13 +195,13 @@ public:
 	int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 };
-\end{cppcode}
+\end{lstlisting}
 
 QAbstractTableModel 需要实现三个抽象方法。
 
 (文件：\hl{examples/widgets/tutorials/modelview/1\_readonly/mymodel.cpp})
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 	// mymodel.cpp
 #include "mymodel.h"
 
@@ -229,7 +229,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
-\end{cppcode}
+\end{lstlisting}
 
 
 行数和列数由 MyModel::rowCount() 和 MyModel::columnCount() 提供。
@@ -258,7 +258,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 
 (文件： examples/widgets/tutorials/modelview/2\_formatting/mymodel.cpp)
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // mymodel.cpp
 QVariant MyModel::data(const QModelIndex &index, int role) const
 {
@@ -298,7 +298,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
     }
     return QVariant();
 }
-\end{cppcode}
+\end{lstlisting}
 
 每个格式化属性将通过对 data() 方法的单独调用从模型中请求。
 角色参数用于让模型知道请求哪个属性：
@@ -337,7 +337,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 
 （文件：examples/widgets/tutorials/modelview/3\_changingmodel/mymodel.cpp）
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QVariant MyModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
@@ -348,7 +348,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
-\end{cppcode}
+\end{lstlisting}
 
 缺少一些东西来使时钟滴答作响。我们需要每秒告诉视图时间已更改，并且需要再次读取。
 我们用一个计时器来做到这一点。
@@ -356,7 +356,7 @@ QVariant MyModel::data(const QModelIndex &index, int role) const
 
 (文件：examples/widgets/tutorials/modelview/3\_changingmodel/mymodel.cpp)
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 MyModel::MyModel(QObject *parent)
     : QAbstractTableModel(parent)
     , timer(new QTimer(this))
@@ -365,13 +365,13 @@ MyModel::MyModel(QObject *parent)
     connect(timer, &QTimer::timeout , this, &MyModel::timerHit);
     timer->start();
 }
-\end{cppcode}
+\end{lstlisting}
 
 （文件：examples/widgets/tutorials/modelview/3\_changingmodel/mymodel.cpp）
 
 槽函数：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void MyModel::timerHit()
 {
     //we identify the top left cell
@@ -379,7 +379,7 @@ void MyModel::timerHit()
     //emit a signal to make the view reread identified data
     emit dataChanged(topLeft, topLeft, {Qt::DisplayRole});
 }
-\end{cppcode}
+\end{lstlisting}
 
 我们通过发射 dataChanged() 信号要求视图再次读取左上角单元格中的数据。
 请注意，我们没有将 dataChanged 信号显式连接到视图。这在我们调用 setModel 时自动发生。
@@ -396,7 +396,7 @@ void MyModel::timerHit()
 
 （文件：examples/widgets/tutorials/modelview/4\_headers/mymodel.cpp）
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
@@ -411,7 +411,7 @@ QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role)
     }
     return QVariant();
 }
-\end{cppcode}
+\end{lstlisting}
 
 \begin{lstlisting}
 方法 headerData() 也具有角色参数，该角色与 MyModel::data() 中的含义相同。
@@ -426,7 +426,7 @@ QVariant MyModel::headerData(int section, Qt::Orientation orientation, int role)
 （文件：examples/widgets/tutorials/modelview/5\_edit/mymodel.h）
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // mymodel.h
 #include <QAbstractTableModel>
 #include <QString>
@@ -449,7 +449,7 @@ private:
 signals:
     void editCompleted(const QString &);
 };
-\end{cppcode}
+\end{lstlisting}
 
 我们使用二维数组 QString m\_gridData 来存储我们的数据。这使 m\_gridData 成为 MyModel 的核心。
 MyModel 的其余部分就像包装器一样，将 m\_gridData 调整为 QAbstractItemModel 接口。
@@ -457,7 +457,7 @@ MyModel 的其余部分就像包装器一样，将 m\_gridData 调整为 QAbstra
 
 (文件：examples/widgets/tutorials/modelview/5\_edit/mymodel.cpp)
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 bool MyModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (role == Qt::EditRole) {
@@ -476,7 +476,7 @@ bool MyModel::setData(const QModelIndex &index, const QVariant &value, int role)
     }
     return false;
 }
-\end{cppcode}
+\end{lstlisting}
     
 每次用户编辑单元格时都会调用　setData() 。index 参数告诉我们哪个字段已被编辑，value 提供了编辑过程的结果。
 该角色将始终设置为 Qt::EditRole，因为我们的单元格仅包含文本。
@@ -484,12 +484,12 @@ bool MyModel::setData(const QModelIndex &index, const QVariant &value, int role)
 
 (文件：\hl{examples/widgets/tutorials/modelview/5\_edit/mymodel.cpp})
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 Qt::ItemFlags MyModel::flags(const QModelIndex &index) const
 {
     return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 }
-\end{cppcode}
+\end{lstlisting}
 
 单元格的各种属性可以使用 flags() 进行调整。
 
@@ -532,7 +532,7 @@ QListView，QTableView 和 QTreeView 均使用了合并了列表、表和树的�
 
 (文件：\hl{examples/widgets/tutorials/modelview/6\_treeview/mainwindow.cpp})
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // modelview.cpp
 #include "mainwindow.h"
 
@@ -568,7 +568,7 @@ QList<QStandardItem *> MainWindow::prepareRow(const QString &first,
             new QStandardItem(second),
             new QStandardItem(third)};
 }
-\end{cppcode}
+\end{lstlisting}
 
 我们只需实例化一个 QStandardItemModel 并向构造函数添加几个 QStandardItem。
 然后，我们可以建立分层数据结构，因为 QStandardItem 可以容纳其他 QStandardItem。节点在视图内折叠并展开。
@@ -585,7 +585,7 @@ QList<QStandardItem *> MainWindow::prepareRow(const QString &first,
 
 （文件： \hl{examples/widgets/tutorials/modelview/7\_selections/mainwindow.cpp}）
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 #include "mainwindow.h"
 
 #include <QTreeView>
@@ -629,13 +629,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(selectionModel, &QItemSelectionModel::selectionChanged,
             this, &MainWindow::selectionChangedSlot);
 }
-\end{cppcode}
+\end{lstlisting}
 
 视图在单独的选择模型中管理选择，可以使用 selectionModel() 方法进行检索。我们检索选择模型，以便将槽函数连接到其 selectionChanged() 信号。
 
 (文件： \hl{examples/widgets/tutorials/modelview/7\_selections/mainwindow.cpp})
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void MainWindow::selectionChangedSlot(const QItemSelection & /*newSelection*/, const QItemSelection & /*oldSelection*/)
 {
     //get the text of the selected item
@@ -652,7 +652,7 @@ void MainWindow::selectionChangedSlot(const QItemSelection & /*newSelection*/, c
                          .arg(hierarchyLevel);
     setWindowTitle(showString);
 }
-\end{cppcode}
+\end{lstlisting}
 
 我们通过调用 treeView->selectionModel()->currentIndex() 来获得与选择相对应的模型索引，并通过使用模型索引来获取字段的字符串。
 然后我们只计算项目的hierarchyLevel。顶级项没有父级，并且 parent() 方法将返回默认构造的 QModelIndex()。这就是为什么我们在迭代计算期间使用 parent() 方法迭代到最高级别的原因。
@@ -701,7 +701,7 @@ QSortFilterProxyModel	& 排序或者过滤其他模型 \\
 可以通过创建从 QStyledItemDelegate 继承的类来编写新的委托。为了编写一个显示星星但没有输入功能的委托，我们只需要重写2个方法即可。
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 class StarDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
@@ -712,7 +712,7 @@ public:
     QSize sizeHint(const QStyleOptionViewItem &option,
                    const QModelIndex &index) const;
 };
-\end{cppcode}
+\end{lstlisting}
 
 paint() 根据底层数据的内容绘制星形。可以通过调用 index.data() 查找数据。委托的 sizeHint() 方法用于获取每个星星的尺寸，因此该单元格将提供足够的高度和宽度来容纳星星。
 

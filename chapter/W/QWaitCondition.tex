@@ -52,28 +52,28 @@ QWaitCondition允许线程告诉其他线程某种条件已经满足。一个或
 
 例，假设我们有三个任务，当用户按下一个键时，应该执行某些任务。每个任务可以分成一个线程，每个线程都有一个 run() 主体, 如下所示：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 forever {
 	mutex.lock();
 	keyPressed.wait(&mutex);
 	do_something();
 	mutex.unlock();
 }
-\end{cppcode}
+\end{lstlisting}
 
 这里，keyPressed 变量是 QWaitCondition 类型的全局变量。
 第四个线程将读取按键，并在每次收到按键时唤醒其他三个线程，如下所示：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 forever {
 	getchar();
 	keyPressed.wakeAll();
 }
-\end{cppcode}
+\end{lstlisting}
 
 唤醒三个线程的顺序是未知的。另外，如果某些线程在按下键时仍在 do\_something() 中，它们将不会被唤醒（因为它们没有等待条件变量），因此该按键不会执行任务。这个问题可以通过使用计数器和 QMutex() 来解决。例如，下面是工作线程的新代码：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 forever {
 	mutex.lock();
 	keyPressed.wait(&mutex);
@@ -86,11 +86,11 @@ forever {
 	--count;
 	mutex.unlock();
 }
-\end{cppcode}
+\end{lstlisting}
 
 下面是第四个线程的代码：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 forever {
 	getchar();
 	
@@ -104,7 +104,7 @@ forever {
 	keyPressed.wakeAll();
 	mutex.unlock();
 }
-\end{cppcode}
+\end{lstlisting}
 
 互斥量是必需的，因为当两个线程同时更改同一变量的值时，结果是不可预测的。
 等待条件是一个强大的线程同步原语。Wait Conditions示例演示了如何使用 QWaitCondition 作为 QSemaphore() 的替代品，来控制生产者消费者的共享循环缓冲区的访问。

@@ -126,13 +126,13 @@ Qlibrary 的一种典型用法是解析库中的导出符号，并调用其对�
 这个函数。如果出现了问题， 例如库文件不存在或者符号未定义，函数指针将
 会是nullptr，且不会调用。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QLibrary myLib("mylib");
 typedef void (*MyPrototype)();
 MyPrototype myFunction = (MyPrototype) myLib.resolve("mysymbol");
 if (myFunction)
     myFunction();
-\end{cppcode}
+\end{lstlisting}
 
 符号必须作为C函数导出，resolve()才能工作。这意味着用C++编译器编译的函
 数必须由 \hl{extern "C"}块包裹。在Windows上，还要求导出函数要使用dllexport宏；
@@ -140,13 +140,13 @@ if (myFunction)
 实加载库的情况下使用：
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 typedef void (*MyPrototype)();
 MyPrototype myFunction =
         (MyPrototype) QLibrary::resolve("mylib", "mysymbol");
 if (myFunction)
     myFunction();
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 QPluginLoader.
@@ -356,7 +356,7 @@ olve(const char \emph{*symbol})
 
 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 typedef int (*AvgFunction)(int, int);
 
 AvgFunction avg = (AvgFunction) library->resolve("avg");
@@ -364,28 +364,28 @@ if (avg)
     return avg(5, 8);
 else
     return -1;
-\end{cppcode}
+\end{lstlisting}
 
 符号必须作为C语言函数导出。这意味着如果使用C++编译器，函数必须由
 \hl{extern "C"} 包裹。在Windows平台，您还必须显式通过 \hl{\_\_declspec(dllexport)}
 指导编译器导出符号，例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 extern "C" MY_EXPORT int avg(int a, int b)
 {
     return (a + b) / 2;
 }
-\end{cppcode}
+\end{lstlisting}
 
 宏 \hl{MY\_EXPORT} 定义如下
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 #ifdef Q_OS_WIN
 #define MY_EXPORT __declspec(dllexport)
 #else
 #define MY_EXPORT
 #endif
-\end{cppcode}
+\end{lstlisting}
 
 
 % gog 

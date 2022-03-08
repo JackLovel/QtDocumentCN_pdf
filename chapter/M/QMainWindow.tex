@@ -239,7 +239,7 @@ QMainWindow 默认有一个菜单栏，可以用setMenuBar()自定义一个新�
 
 创建菜单代码示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
@@ -247,7 +247,7 @@ void MainWindow::createMenus()
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
 }
-\end{cppcode}
+\end{lstlisting}
 
 createPopupMenu()可以创建弹出式菜单，它会在主窗口收到 context menu 事件时弹出。
 停靠部件和菜单栏默认实现了右键菜单，可以重写createPopupMenu()创建自定义菜单。
@@ -262,13 +262,13 @@ Qt 用 QToolBar 类实现工具栏，可以用addToolBar()添加工具栏到主�
 
 创建工具栏代码示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void MainWindow::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(newAct);
 }
-\end{cppcode}
+\end{lstlisting}
 
 \subsection{创建停靠部件}
 
@@ -282,12 +282,12 @@ Qt 用 QDockWidget 类实现停靠部件。停靠部件即可以停靠在主窗�
 创建并添加停靠部件到主窗口的代码示例：
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QDockWidget *dockWidget = new QDockWidget(tr("Dock Widget"), this);
 dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 dockWidget->setWidget(dockWidgetContents);
 addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
-\end{cppcode}
+\end{lstlisting}
 
 \subsection{状态栏}
 
@@ -730,9 +730,9 @@ QMenuBar *QMainWindow::menuBar() const
 
 这样创建：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMenuBar *menuBar = new QMenuBar(nullptr);
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 setMenuBar()
@@ -777,9 +777,9 @@ void QMainWindow::resizeDocks(const QList<QDockWidget *> \emph{\&docks},
 
 示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 resizeDocks({blueWidget, yellowWidget}, {20 , 40}, Qt::Horizontal);
-\end{cppcode}
+\end{lstlisting}
 
 
 如果蓝色和黄色部件嵌套在同一级别上，它们将被调整大小，使黄色部件是蓝色部件的两倍大
@@ -809,14 +809,14 @@ version 编号与存储在 state 中的号码进行比较。
 
 若要恢复用 QSettings 保存的窗口 geometry，可以这么写：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void MainWindow::readSettings()
 {
     QSettings settings("MyCompany", "MyApp");
     restoreGeometry(settings.value("myWidget/geometry").toByteArray());
     restoreState(settings.value("myWidget/windowState").toByteArray());
 }
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 saveState()，QWidget::saveGeometry()，QWidget::restoreGeometry() 和 restoreDockWidget()
@@ -837,7 +837,7 @@ objectName 属性用于标识每个 QToolBar 和 QDockWidget。
 
 若要在窗口关闭时保存 geometry，可以这样实现关闭事件：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 void MyMainWindow::closeEvent(QCloseEvent *event)
 {
     QSettings settings("MyCompany", "MyApp");
@@ -845,7 +845,7 @@ void MyMainWindow::closeEvent(QCloseEvent *event)
     settings.setValue("windowState", saveState());
     QMainWindow::closeEvent(event);
 }
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 restoreState()， QWidget::saveGeometry() 和 QWidget::restoreGeometry()

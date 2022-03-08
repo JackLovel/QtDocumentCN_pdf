@@ -73,7 +73,7 @@ QMutableMapIterator 构造函数接受 QMap 作为参数。
 构造后，迭代器位于 map 的最开始位置（第一个元素之前）。
 下面的例子演示如何顺序遍历所有元素：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMap<int, QWidget *> map;
 ...
 QMutableMapIterator<int, QWidget *> i(map);
@@ -81,7 +81,7 @@ while (i.hasNext()) {
     i.next();
     qDebug() << i.key() << ": " << i.value();
 }
-\end{cppcode}
+\end{lstlisting}
 
 next() 函数返回 map 中的下一个元素并将迭代器前移。
 key() 和 value() 函数返回跳过的最后一个元素的键和值。
@@ -101,37 +101,37 @@ key() 和 value() 函数返回跳过的最后一个元素的键和值。
 
 下面的例子演示如何反序遍历元素：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMutableMapIterator<int, QWidget *> i(map);
 i.toBack();
 while (i.hasPrevious()) {
     i.previous();
     qDebug() << i.key() << ": " << i.value();
 }
-\end{cppcode}
+\end{lstlisting}
 
 如果想查找特定值的所有实例，循环使用 findNext() 或 findPrevious()。例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMutableMapIterator<int, QWidget *> i(map);
 while (i.findNext(widget)) {
     qDebug() << "Found widget " << widget << " under key "
              << i.key();
 }
-\end{cppcode}
+\end{lstlisting}
 
 如果想在遍历 map 时移除元素，使用 remove()。如果想修改元素的值，使用 setValue()。
 
 例子：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QMutableMapIterator<QString, QString> i(map);
 while (i.hasNext()) {
     i.next();
     if (i.key() == i.value())
         i.remove();
 }
-\end{cppcode}
+\end{lstlisting}
 
 
 该示例移除所有键和值相等的键值对。

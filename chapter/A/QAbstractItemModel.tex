@@ -630,7 +630,7 @@ endResetModel() 和 modelAboutToBeReset()。
 
 QSortFilterProxyModel 的子类。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  class CustomDataProxy : public QSortFilterProxyModel
  {
      Q_OBJECT
@@ -659,7 +659,7 @@ QSortFilterProxyModel 的子类。
  private:
    QHash<int, QVariant> m_customData;
  };
-\end{cppcode}
+\end{lstlisting}
 
 \begin{notice}
 由于错误，该槽函数没有出现在 Qt 5.0 中。
@@ -1151,13 +1151,13 @@ QModelIndex。
 
 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int DomModel::columnCount(const QModelIndex &parent) const
 {
      Q_UNUSED(parent);
      return 3;
 }
-\end{cppcode}
+\end{lstlisting}
 
 \begin{notice}
 在实现基于表的模型时，当父模型有效时，columnCount() 应该返回 0。

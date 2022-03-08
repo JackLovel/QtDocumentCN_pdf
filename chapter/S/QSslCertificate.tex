@@ -260,13 +260,13 @@ path 必须是一个文件，pattern 指定的模式必须能检测到至少一�
 
 Qt 官方示例如下：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 const auto certs = QSslCertificate::fromPath("C:/ssl/certificate.*.pem",
                                               QSsl::Pem, QSslCertificate::Wildcard);
 for (const QSslCertificate &cert : certs) {
     qDebug() << cert.issuerInfo(QSslCertificate::Organization);
 }
-\end{cppcode}
+\end{lstlisting}
 
 该函数最初在 Qt 5.15版本引入。
 

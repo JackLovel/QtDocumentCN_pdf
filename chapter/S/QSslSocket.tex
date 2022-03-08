@@ -241,12 +241,12 @@ QSslSocket 仅仅使用被认为是安全的（ QSsl::SecureProtocols ） SSL �
 函数开启一个安全连接，
 这种方法会在连接建立后开启一个即时的 SSL 握手。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSslSocket *socket = new QSslSocket(this);
 connect(socket, SIGNAL(encrypted()), this, SLOT(ready()));
 
 socket->connectToHostEncrypted("imap.example.com", 993);
-\end{cppcode}
+\end{lstlisting}
 
 与普通的 QTcpSocket 相同，若成功建立连接， QSslSocket 会依次进入 HostLookupState ，
 ConnectingState 和 ConnectedState 状态。连接成功后，握手会自动开始，若握手连接成功，
@@ -262,7 +262,7 @@ QSsslSocket 将会发送 encrypted() 信号，表明该套接字已经进入加�
 首先构造一个 QSslSocket 对象并调用 setSocketDescriptor() 函数将新的套接字描述符设置为传入的已有的套接字描述符。
 然后调用 startServerEncryption() 函数初始化 SSL 握手。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  void SslServer::incomingConnection(qintptr socketDescriptor)
  {
      QSslSocket *serverSocket = new QSslSocket;
@@ -274,7 +274,7 @@ QSsslSocket 将会发送 encrypted() 信号，表明该套接字已经进入加�
          delete serverSocket;
      }
  }
-\end{cppcode}
+\end{lstlisting}
 
 如果出现了错误， QSslSocket 将会发出 sslErrors() 信号。在这种情况下，
 如果没有采取任何操作去忽略出现的错误，该连接将会掉线。
@@ -294,7 +294,7 @@ waitForBytesWritten() 和 waitForDisconnected()。它也提供了 waitForEncrypt
  函数来在加密连接建立之前阻塞调用的线程。
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  QSslSocket socket;
  socket.connectToHostEncrypted("http.example.com", 443);
  if (!socket.waitForEncrypted()) {
@@ -305,7 +305,7 @@ waitForBytesWritten() 和 waitForDisconnected()。它也提供了 waitForEncrypt
  socket.write("GET / HTTP/1.0\r\n\r\n");
  while (socket.waitForReadyRead())
      qDebug() << socket.readAll().data();
-\end{cppcode}
+\end{lstlisting}
 
 QSslSocket 提供了广泛的、易于使用的 API ，用于处理密码，私钥以及本地，
 对等端和证书颁发机构（CA）证书。它也为处理握手阶段出现的错误提供了 API 支持。
@@ -320,12 +320,12 @@ QSslSocket 提供了广泛的、易于使用的 API ，用于处理密码，私�
 
 要扩展在 SSL 握手期间 SSL 套接字使用的默认 CA 证书列表，您必须像下面的代码片段一样更新默认配置：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  QList<QSslCertificate> certificates = getCertificates();
  QSslConfiguration configuration = QSslConfiguration::defaultConfiguration();
  configuration.addCaCertificates(certificates);
  QSslConfiguration::setDefaultConfiguration(configuration);
-\end{cppcode}
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%
 
@@ -539,10 +539,10 @@ error 参数包括着一个或者多个阻止 QSslSocket 验证对等端身份�
 
 为了通过使用函数指针连接到该信号，Qt 提供了一个便捷的助手来包含函数指针，示例如下：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 connect(sslSocket, QOverload<const QList<QSslError> &>::of(&QSslSocket::sslErrors),
      [=](const QList<QSslError> &errors){ /* ... */ });
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 peerVerifyError()。
@@ -627,13 +627,13 @@ QSslSocket 首先会进入查询主机（HostLookupState）状态。然后，套
 
 若 SSL 握手连接建立成功，套接字将会发出 encrypted() 信号。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QSslSocket socket;
 connect(&socket, SIGNAL(encrypted()), receiver, SLOT(socketEncrypted()));
 
 socket.connectToHostEncrypted("imap", 993);
 socket->write("1 CAPABILITY\r\n");
-\end{cppcode}
+\end{lstlisting}
 
 \begin{notice}
 上面的例子中文本可以在请求加密连接之后、 encrypted() 信号发出之前立即写入套接字中。

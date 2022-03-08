@@ -251,7 +251,7 @@ QSerialPort 提供了一组函数来暂停线程调用直到触发特定的信�
 
 阻塞串口代码示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int numRead = 0, numReadTotal = 0;
 char buffer[50];
 
@@ -264,7 +264,7 @@ for (;;) {
     if (numRead == 0 && !serial.waitForReadyRead())
         break;
 }
-\end{cppcode}
+\end{lstlisting}
 
 如果 waitForReadyRead() 返回 false，说明串口连接已经关闭或者有错误出现。
 
@@ -961,7 +961,7 @@ QSerialPort::stopBits。
 
 该函数常出现在循环中读取串口数据，代码示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // This slot is connected to QSerialPort::readyRead()
 void QSerialPortClass::readyReadSlot()
 {
@@ -970,7 +970,7 @@ void QSerialPortClass::readyReadSlot()
         ....
     }
 }
-\end{cppcode}
+\end{lstlisting}
 
 \begin{seeAlso}
 bytesAvailable() 和 readyRead()。

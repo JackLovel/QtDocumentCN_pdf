@@ -245,7 +245,7 @@ QAbstractSocket 提供了一组函数，这些函数可以挂起调用线程，�
 
 Qt官方提供了如下示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int numRead = 0, numReadTotal = 0;
 char buffer[50];
 
@@ -259,7 +259,7 @@ forever {
 		break;
 }
 
-\end{cppcode}
+\end{lstlisting}
 
 waitForReadyRead() 成员函数返回值为 false，则说明连接已关闭或发生了错误。
 
@@ -731,7 +731,7 @@ void QAbstractSocket::abort()
 
 在循环中从套接字读取数据时，最常使用此功能。 例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 // This slot is connected to QAbstractSocket::readyRead()
 void SocketClass::readyReadSlot()
 {
@@ -740,7 +740,7 @@ void SocketClass::readyReadSlot()
 		....
 	}
 }
-\end{cppcode}
+\end{lstlisting}
 
 
 
@@ -1114,9 +1114,9 @@ void QAbstractSocket::setProxy(const QNetworkProxy \&networkProxy )
 您可以通过指定 networkProxy 为 QNetworkProxy::NoProxy 以禁止套接字使用代理网络：
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 socket->setProxy(QNetworkProxy::NoProxy);
-\end{cppcode}
+\end{lstlisting}
 
 
 套接字默认使用的代理为 QNetworkProxy::DefaultProxy 即套接字会使用应用程序的代理设置，将代理设置为 QNetworkProxy::setApplicationProxy 也可以达到同样的效果。如果您使用 QNetworkProxyFactory :: setApplicationProxyFactory 设置了 QNetworkProxy 插件工厂，它将使用 QNetworkProxyQuery :: TcpSocket 类型查询该插件工厂。
@@ -1265,11 +1265,11 @@ waitForReadyRead()。
 这里Qt官方给了一个1秒内等待套接字建立到主机的连接的示例：
 
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 socket->connectToHost("imap", 143);
 if (socket->waitForConnected(1000))
 	qDebug("Connected!");
-\end{cppcode}
+\end{lstlisting}
 
 如果将 msecs 设置为-1，这个函数将不会超时。
 
@@ -1300,13 +1300,13 @@ connectToHost() 和 connected()。
 
 这里Qt官方给了一个1秒内等待套接字从主机断开连接的示例：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 socket->disconnectFromHost();
 if (socket->state() == QAbstractSocket::UnconnectedState
 	|| socket->waitForDisconnected(1000)) {
 		qDebug("Disconnected!");
  }
-\end{cppcode}
+\end{lstlisting}
 
 如果 msecs 设为-1，该函数将不会超时。
 

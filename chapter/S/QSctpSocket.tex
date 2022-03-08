@@ -101,7 +101,7 @@ QSctpSocket 可以在以下两种模式之一中运行：
 如果两个端点都使用默认值，则连接通道的数量取决于系统。 建立连接后，
 可以通过调用 readChannelCount() 和 writeChannelCount() 获取实际的通道数。
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  QSctpSocket *socket = new QSctpSocket(this);
 
 socket->setMaxChannelCount(16);
@@ -113,7 +113,7 @@ if (socket->waitForConnected(1000)) {
 
 	....
 }
-\end{cppcode}
+\end{lstlisting}
 
 
 在数据报模式，QSctpSocket 为每一个通道单独执行数据报的缓冲操作。

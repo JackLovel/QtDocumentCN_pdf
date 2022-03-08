@@ -79,7 +79,7 @@ UDP（用户数据报协议）是一种轻量级，不可靠，面向数据报�
 
 Qt官方示例如下：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
  void Server::initSocket()
  {
      udpSocket = new QUdpSocket(this);
@@ -96,7 +96,7 @@ Qt官方示例如下：
          processTheDatagram(datagram);
      }
  }
-\end{cppcode}
+\end{lstlisting}
 
 QUdpSocket 还支持 UDP 多播功能。您可以使用 \href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/U/QUdpSocket/QUdpSocket.md#bool-qudpsocketjoinmulticastgroupconst-qhostaddress-groupaddress}{joinMulticastGroup()}  和 LeaveMulticastGroup() 函数来控制组成员身份，并使用 QAbstractSocket :: MulticastTtlOption 和 QAbstractSocket :: MulticastLoopbackOption 来设置 TTL 和回送套接字选项。您也可以使用 setMulticastInterface() 函数控制多播数据报的传出接口，并使用 multicastInterface() 函数来查询传出接口。
 

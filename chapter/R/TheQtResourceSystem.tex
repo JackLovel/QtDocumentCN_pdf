@@ -32,9 +32,9 @@ Qt 资源系统是一套平台独立的机制，用于将二进制文件存储�
 
 例如，文件路径 :/images/cut.png，或 链接地址 qrc:///images/cut.png，可以用于访问 cut.png 文件，该文件在应用程序资源树中的路径为 images/cut.png。该路径也可以通过 file 标签的 alias 属性进行修改：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 <file alias="cut-img.png">images/cut.png</file>
-\end{cppcode}
+\end{lstlisting}
 
 此时，该文件可通过 :/cut-img.png 路径访问。也可以通过 qresource 标签的 prefix 属性为 .qrc 文件中的所有资源文件设置路径前缀：
 
@@ -79,17 +79,17 @@ rcc -binary myresource.qrc -o myresource.rcc
 
 在应用程序中，通过如下代码注册资源：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 QResource::registerResource("/path/to/myresource.rcc");
-\end{cppcode}
+\end{lstlisting}
 
 \section{内建资源}
 
 若要将资源编译至二进制程序内，您需要在应用程序的 .pro 文件中指定 .qrc 文件，从而让 qmake 可以感知到它。例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 RESOURCES     = application.qrc
-\end{cppcode}
+\end{lstlisting}
 
 \hl{qmake} 会生成编译规则来创建名为 \hl{qrc\_application.cpp} 的源文件，并将其链接至应用程序。
 
@@ -112,9 +112,9 @@ RESOURCES     = application.qrc
 通常情况下，会通过启发式的检查来决定是否值得进行压缩，并且在无法有效压缩的情况下直接存储未压缩的内容。
 您可以使用 \hl{-threshold} 来控制判断阈值，该选项告知 \hl{rcc} 源文件压缩后获得的体积缩减必须不小于该百分比。
 
-\begin{cppcode}   
+\begin{lstlisting}[language=C++]   
 rcc -threshold 25 myresources.qrc
-\end{cppcode}
+\end{lstlisting}
 
 默认值为 \hl{70}，意味着压缩后的文件必须比源文件小 70\%（即不大于源文件的 30\% 大小）。
 
@@ -128,9 +128,9 @@ rcc -no-compress myresources.qrc
 
 \hl{rcc} 同样给予用户控制压缩算法和压缩等级的权限，例如：
 
-\begin{cppcode}   
+\begin{lstlisting}[language=C++]   
 rcc -compress 2 -compress-algo zlib myresources.qrc
-\end{cppcode}
+\end{lstlisting}
 
 另外，也可以在 \hl{.qrc} 文件中 \hl{file} 标签的 \hl{threshold}、\hl{compress} 和 \hl{compress-algo} 属性来进行设置：
 
@@ -162,9 +162,9 @@ Zstandard 和 zlib 均为可选支持。若运行时未检测到对应的库，�
 在应用程序中，资源路径可用于绝大多数常规文件系统路径的中。
 例如，可以传递资源路径而非文件路径至 QIcon，QImage 或 QPixmap 的构造函数：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 cutAct = new QAction(QIcon(":/images/cut.png"), tr("Cu&t"), this);
-\end{cppcode}
+\end{lstlisting}
 
 \begin{notice}
 Application 范例以了解实际程序中如何使用 Qt 的资源系统来存储图标。
@@ -180,7 +180,7 @@ Qt 的资源系统支持搜索路径列表概念。若通过 \hl{:} 而非 \hl{:
 
 若在库中包含资源，则需要调用 Q\_INIT\_RESOURCE() 来强制初始化资源，调用参数为 \hl{.qrc} 文件的基本名称，例如
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 MyClass::MyClass() : BaseClass()
 {
     Q_INIT_RESOURCE(resources);
@@ -188,7 +188,7 @@ MyClass::MyClass() : BaseClass()
     QFile file(":/myfile.dat");
     ...
 }
-\end{cppcode}
+\end{lstlisting}
 
 
 这确保了在静态链接时，资源数据可被链接至最终的应用程序。
@@ -200,7 +200,7 @@ MyClass::MyClass() : BaseClass()
 
 若该库包含的资源不在内部使用，而是暴露给库的使用者，则初始化操作需要发生在应用程序代码中，例如：
 
-\begin{cppcode}
+\begin{lstlisting}[language=C++]
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
     ...
     return app.exec();
 }    
-\end{cppcode}
+\end{lstlisting}
 
 如上文所述，此方式确保了资源数据可在静态链接时被链接至最终的应用程序，同时也会在动态链接时触发库的加载动作，如加载插件。
 
