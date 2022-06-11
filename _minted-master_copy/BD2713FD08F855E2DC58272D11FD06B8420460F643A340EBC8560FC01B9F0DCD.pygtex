@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QDockWidget}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{dockWidget}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{new}\PYG{+w}{ }\PYG{n}{QDockWidget}\PYG{p}{(}\PYG{n}{tr}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Dock Widget\PYGZdq{}}\PYG{p}{),}\PYG{+w}{ }\PYG{k}{this}\PYG{p}{);}
+\PYG{n}{dockWidget}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setAllowedAreas}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{LeftDockWidgetArea}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{RightDockWidgetArea}\PYG{p}{);}
+\PYG{n}{dockWidget}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setWidget}\PYG{p}{(}\PYG{n}{dockWidgetContents}\PYG{p}{);}
+\PYG{n}{addDockWidget}\PYG{p}{(}\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{LeftDockWidgetArea}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{dockWidget}\PYG{p}{);}
+\end{Verbatim}

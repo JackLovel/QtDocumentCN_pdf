@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QSemaphore}\PYG{+w}{ }\PYG{n+nf}{sem}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{      }\PYG{c+c1}{// 信号量保护 5 个资源  sem.avilable() == 5}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{acquire}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{         }\PYG{c+c1}{// 请求 5 个资源       sem.avilable() == 0}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{release}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{         }\PYG{c+c1}{// 释放 5 个资源       sem.avilable() == 5}
+\PYG{n}{sem}\PYG{p}{.}\PYG{n}{release}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{);}\PYG{+w}{        }\PYG{c+c1}{// “创建” 10 个新资源  sem.avilable() == 15}
+\end{Verbatim}

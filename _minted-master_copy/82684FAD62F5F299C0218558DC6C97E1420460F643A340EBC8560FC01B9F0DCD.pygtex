@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{typedef}\PYG{+w}{ }\PYG{n}{QString}\PYG{+w}{ }\PYG{n}{CustomString}\PYG{p}{;}
+\PYG{n}{qRegisterMetaType}\PYG{o}{\PYGZlt{}}\PYG{n}{CustomString}\PYG{o}{\PYGZgt{}}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}CustomString\PYGZdq{}}\PYG{p}{);}
+\end{Verbatim}

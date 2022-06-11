@@ -1,0 +1,337 @@
+\chapter{QTransform}
+
+QTransform为2D坐标系提供坐标转化
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QTransform>\\      
+	\hline
+	qmake & QT+=gui\\      
+	\hline
+	自从 	&Qt 4.3\\ 
+	\hline
+\end{tabular}
+
+\section{公共成员类型}
+
+\begin{tabular}{|r|m{32em}|}
+\hline
+类型 &	方法 \\
+\hline
+enum 	& TransformationType \{ TxNone, TxTranslate, TxScale, TxRotate, TxShear, TxProject \}\\
+\hline
+\end{tabular}
+
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+属性 	&类型 	&属性 	&类型 \\ 
+\hline
+currentLoop &	const int &	duration &	const int \\ 
+\hline
+currentTime &	int &	loopCount &	int \\ 
+\hline
+direction &	Direction &	state &	const  State \\ 
+\hline
+\end{tabular}
+
+%%%%%%%%%%%%
+
+
+\section{公共成员类型}
+
+\begin{longtable}{|l|m{25em}|}
+\hline
+返回类型 	&函数名\\
+\hline
+	&QTransform(qreal m11, qreal m12, qreal m21, qreal m22, qreal dx, qreal dy)\\
+	\hline
+	&QTransform(qreal m11, qreal m12, qreal m13, qreal m21, qreal m22, qreal m23, qreal m31, qreal m32, qreal m33 = 1.0)\\
+	\hline
+	&QTransform()\\
+	\hline
+QTransform \& &	operator=(const QTransform \&matrix)\\
+\hline
+qreal &	m11() const\\
+\hline
+qreal &	m12() const\\
+\hline
+qreal &	m13() const\\
+\hline
+qreal &	m21() const\\
+\hline
+qreal &	m22() const\\
+\hline
+qreal &	m23() const\\
+\hline
+qreal &	m31() const\\
+\hline
+qreal &	m32() const\\
+\hline
+qreal &	m33() const\\
+\hline
+QTransform &	adjoint() const\\
+\hline
+qreal &	determinant() const\\
+\hline
+qreal &	dx() const\\
+\hline
+qreal &	dy() const\\
+\hline
+QTransform &	inverted(bool *invertible = nullptr) const\\
+\hline
+bool 	&isAffine() const\\
+\hline
+bool 	&isIdentity() const\\
+\hline
+bool &	isInvertible() const\\
+\hline
+bool &	isRotating() const\\
+\hline
+bool &	isScaling() const\\
+\hline
+bool 	&isTranslating() const\\
+\hline
+void &	map(qreal x, qreal y, qreal *tx, qreal *ty) const\\
+\hline
+QPoint &	map(const QPoint \&point) const\\
+\hline
+QPointF &	map(const QPointF \&p) const\\
+\hline
+QLine &	map(const QLine \&l) const\\
+\hline
+QLineF 	&map(const QLineF \&line) const\\
+\hline
+QPolygonF &	map(const QPolygonF \&polygon) const\\
+\hline
+QPolygon &	map(const QPolygon \&polygon) const\\
+\hline
+QRegion &	map(const QRegion \&region) const\\
+\hline
+QPainterPath 	&map(const QPainterPath \&path) const\\
+\hline
+void 	&map(int x, int y, int *tx, int *ty) const\\
+\hline
+QRectF &	mapRect(const QRectF \&rectangle) const\\
+\hline
+QRect &	mapRect(const QRect \&rectangle) const\\
+\hline
+QPolygon 	&mapToPolygon(const QRect \&rectangle) const\\
+\hline
+void &	reset()\\
+\hline
+QTransform \& 	&rotate(qreal angle, Qt::Axis axis = Qt::ZAxis)\\
+\hline
+QTransform \& 	&rotateRadians(qreal angle, Qt::Axis axis = Qt::ZAxis)\\
+\hline
+QTransform \& 	&scale(qreal sx, qreal sy)\\
+\hline
+void 	&setMatrix(qreal m11, qreal m12, qreal m13, qreal m21, qreal m22, qreal m23, qreal m31, qreal m32, qreal m33)\\
+\hline
+QTransform \& &	shear(qreal sh, qreal sv)\\
+\hline
+QTransform \& &	translate(qreal dx, qreal dy)\\
+\hline
+QTransform &	transposed() const\\
+\hline
+QTransform::TransformationType &	type() const\\
+\hline
+QVariant &	operator QVariant() const\\
+\hline
+bool 	&operator!=(const QTransform \&matrix) const\\
+\hline
+QTransform &	operator*(const QTransform \&matrix) const\\
+\hline
+QTransform \& &	operator*=(const QTransform \&matrix)\\
+\hline
+QTransform \& &	operator*=(qreal scalar) \\
+\hline
+QTransform \& &	operator+=(qreal scalar)\\
+\hline
+QTransform \& &	operator-=(qreal scalar)\\
+\hline
+QTransform \& &	operator/=(qreal scalar) \\
+\hline
+bool &	operator==(const QTransform \&matrix) const \\
+\hline
+\end{longtable}
+
+%%%%%%%%%%%%
+
+
+\section{静态公共成员函数}
+
+\begin{tabular}{|l|m{32em}|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+QTransform &	fromScale(qreal sx, qreal sy) \\ 
+\hline
+QTransform &	fromTranslate(qreal dx, qreal dy) \\
+\hline
+bool& 	quadToQuad(const QPolygonF \&one, const QPolygonF \&two, QTransform \&trans) \\ 
+\hline 
+bool 	&quadToSquare(const QPolygonF \&quad, QTransform \&trans) \\ 
+\hline
+bool &	squareToQuad(const QPolygonF \&quad, QTransform \&trans) \\ 
+\hline
+\end{tabular}
+
+\section{相关非成员函数}
+
+\begin{tabular}{|c|l|}
+\hline
+返回类型 &	函数名 \\ 
+\hline
+bool &	qFuzzyCompare(const QTransform \&t1, const QTransform \&t2) \\ 
+\hline
+uint &	qHash(const QTransform \&key, uint seed = 0) \\ 
+\hline
+QPainterPath &	operator*(const QPainterPath \&path, const QTransform \&matrix) \\ 
+\hline
+QPoint &	operator*(const QPoint \&point, const QTransform \&matrix) \\ 
+\hline
+QPointF &	operator*(const QPointF  \&point, const QTransform \&matrix) \\ 
+\hline
+QLineF 	&operator*(const QLineF \&line, const QTransform \&matrix) \\ 
+\hline
+QLine &	operator*(const QLine \&line, const QTransform \&matrix) \\ 
+\hline
+QPolygon &	operator*(const QPolygon \&polygon, const QTransform \&matrix) \\ 
+\hline
+QPolygonF &	operator*(const QPolygonF \&polygon, const QTransform \&matrix) \\ 
+\hline
+QRegion &	operator*(const QRegion \&region, const QTransform \&matrix) \\ 
+\hline
+QDataStream \& &	operator<<(QDataStream \&stream, const QTransform \&matrix) \\ 
+\hline
+QDataStream \& &	operator>>(QDataStream \&stream, QTransform \&matrix)\\
+\hline
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%
+
+\section{详细介绍}
+
+这里填一些详细介绍。
+
+一个转化是指如何平移，缩放，剪切，旋转或投影坐标系，通常在渲染图形时使用。
+
+QTransform与QMatrix的不同之处在于，它是真正的3x3矩阵，允许映射变换。QTransform的toAffine()方法允许将QTransform强制转换为QMatrix。如果在矩阵上指定了映射变换，则该变换将导致其数据丢失。
+
+QTransform是Qt中推荐的坐标转换类。
+
+QTransform 可以使用函数 setMatrix(), scale(), rotate(), translate() , shear() 来构建 ,或者，可以通过应用基本矩阵运算来构建它。
+也可以在构造矩阵时对其进行定义，并可以使用reset()函数将其重置为恒等矩阵（默认值）
+
+QTransform类支持基本图元的映射：可以使用map()函数将给定的点，线，多边形，区域或绘画路径映射到此矩阵定义的坐标系。如果是矩形，可以使用mapRect()函数转换其坐标。
+也可以使用mapToPolygon()函数将矩形转换为多边形（映射到由此矩阵定义的坐标系）。
+
+QTransform提供isIdentity()函数，来判断是否为单位矩阵(在矩阵的乘法中，有一种矩阵起着特殊的作用，如同数的乘法中的1，这种矩阵被称为单位矩阵。
+它是个方阵，从左上角到右下角的对角线（称为主对角线）上的元素均为1。除此以外全都为0。via百度百科)， isInvertible() 函数来判断矩阵是否可逆(i.e. AB = BA = I).inverted()函数提供一个翻转的拷贝矩阵(否则返回单位矩阵)，adjoint() 函数来判断矩阵是否为共轭矩阵。另外，QTransform提供了determinant()函数，该函数返回矩阵的行列式。
+
+最后，QTransform类支持矩阵乘法，加法和减法，并且可以比较该类的其它对象。
+
+\section{渲染图形}
+
+\section{成员变量文档}
+
+enum QAbstractAnimation::DeletionPolicy
+
+
+\begin{tabular}{|c|c|l|}
+\hline
+函数 	&值 &	描述 \\ 
+\hline
+QAbstractAnimation::KeepWhenStopped &	0 &	动画停止时不会被删除 \\
+\hline 
+QAbstractAnimation::DeleteWhenStopped &	1 & 	动画停止时会被自动删除 \\ 
+\hline
+\end{tabular}
+
+enum QAbstractAnimation::Direction	
+
+\begin{tabular}{|c|c|l|}
+\hline
+函数 	&值 &	描述 \\ 
+\hline
+QAbstractAnimation::Forward &	0 &	“当前时间”随时间递增（即从0向终点/duration 移动）\\
+\hline
+QAbstractAnimation::Backward &	1 &	”当前时间“随时间递减（即从终点/duration 向0移动）\\
+\hline
+\end{tabular}
+
+\section{属性文档}	
+
+currentLoop : const int
+
+
+存取函数
+
+\begin{tabular}{|c|l|}
+\hline
+返回类型 	&函数名 \\ 
+\hline
+int &	currentLoop() const \\ 
+\hline
+\end{tabular}
+
+
+通知信号
+
+\begin{tabular}{|c|l|}
+\hline
+返回类型 	&函数名 \\ 
+\hline
+void &	currentLoopChanged(int currentLoop) \\
+\hline
+\end{tabular}
+
+
+currentTime : int
+
+存取函数
+
+\begin{tabular}{|c|l|}
+\hline
+返回类型 	&函数名 \\ 
+\hline
+int &	currentTime() const \\ 
+\hline
+void 	&setCurrentTime(int msecs) \\
+\hline
+\end{tabular}
+
+\section{成员类型文档}
+
+enum QAbstractSocket::BindFlag | flags QAbstractSocket::BindMode
+
+这里填该类型详细信息。
+
+\section{成员函数文档}
+
+QAbstractAnimation::QAbstractAnimation(QObject \emph{*parent} = Q\_NULLPTR)
+
+构造 QAbstractAnimation 基类，并将 parent 参数传递给 QObject 的构造函数。
+
+\begin{seeAlso}
+QVariantAnimation 和 QAnimationGroup
+\end{seeAlso}
+
+[signal] void QAbstractAnimation::currentLoopChanged(int \emph{currentLoop})
+
+每当当前循环发生变化时，QAbstractAnimation 会发射该信号。currentLoop 为当前循环。
+
+\begin{notice}
+属性 currentLoop 的通知信号。
+\end{notice}
+
+
+\begin{seeAlso}
+currentLoop() 和 loopCount()。
+\end{seeAlso}

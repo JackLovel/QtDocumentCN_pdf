@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{QWidget::isVisibleTo}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{ancestor}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n+nf}{QWidget::isEnabledTo}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{ancestor}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\PYG{n}{QPoint}\PYG{+w}{ }\PYG{n+nf}{QWidget::mapFrom}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QWidget}\PYG{+w}{ }\PYG{o}{*}\PYG{n}{ancestor}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{n}{QPoint}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{pos}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{const}\PYG{p}{;}
+\end{Verbatim}

@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.out
+*.toc
+*.bbl 
+*.blg 
+*.fdb_latexmk
+*.fls
+*.synctex.gz 
+.vscode
+
+auto/
+_minted-master/
+.vscode
+.texpadtmp

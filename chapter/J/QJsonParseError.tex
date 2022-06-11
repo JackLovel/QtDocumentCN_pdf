@@ -1,0 +1,143 @@
+\chapter{QJsonParseError}
+
+QJsonParseError类用于在JSON解析期间报告错误。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QJsonParseError>\\      
+	\hline
+	qmake & QT+=core\\      
+	\hline
+	自从 & Qt5.0\\
+	\hline
+	继承&QObject \\
+	\hline
+\end{tabular}
+
+该结构在 5.0 被引入。
+
+\begin{notice}
+该结构的所有函数都是可重入。
+\end{notice}
+
+\section{公共类型}
+
+\begin{tabular}{|l|m{26em}|}
+	\hline
+	类型& 	枚举\\
+\hline
+enum &	ParseError \{NoError, UnterminatedObject, MissingNameSeparator, UnterminatedArray, MissingValueSeparator, …, GarbageAtEnd\}\\
+	\hline
+\end{tabular}
+
+
+\section{公共成员函数}
+
+
+\begin{tabular}{|l|l|}
+	\hline
+类型 &	函数名\\
+\hline
+QString &	errorString() const\\
+	\hline
+\end{tabular}
+
+
+\section{公共变量}
+
+\begin{tabular}{|l|l|}
+\hline
+类型 	&变量名\\
+\hline
+QJsonParseError::ParseError& 	error\\
+\hline
+int 	&offset\\
+\hline
+\end{tabular}
+
+
+\section{详细说明}
+
+
+\begin{notice}[另外参阅]
+JSON Support in Qt 和 JSON Save Game Example。
+\end{notice}
+
+\section{成员类型文档}
+
+enum QJsonParseError::ParseError
+
+该枚举描述了在解析JSON文档期间发生的错误类型。
+
+\begin{longtable}[l]{|l|l|l|}
+\hline
+不变量& 	值& 	描述\\
+\hline
+QJsonParseError::NoError& 	0& 	没有发生错误\\
+\hline
+QJsonParseError::UnterminatedObject& 	1& 	对象未正确使用大括号\\
+\hline
+QJsonParseError::MissingNameSeparator& 	2& 	缺少分隔不同项目的逗号\\
+\hline
+QJsonParseError::UnterminatedArray& 	3& 	数组未正确用方括号括起来\\
+\hline
+QJsonParseError::MissingValueSeparator& 	4& 	缺少将键与对象内的值分
+                                               隔开的冒号\\
+\hline
+QJsonParseError::IllegalValue& 	5& 	该值是非法的\\
+\hline
+QJsonParseError::TerminationByNumber& 	6& 	输入流在解析数字时结束\\
+\hline
+QJsonParseError::IllegalNumber& 	7& 	数字格式不正确\\
+\hline
+QJsonParseError::IllegalEscapeSequence& 	8& 	输入中发生非法的转义序
+                                               列\\
+\hline
+QJsonParseError::IllegalUTF8String& 	9& 	输入中出现非法的UTF8序列\\
+\hline
+QJsonParseError::UnterminatedString& 	10& 	字符串未以引号终止\\
+\hline
+QJsonParseError::MissingObject& 	11& 	预期有对象，但找不到\\
+\hline
+QJsonParseError::DeepNesting& 	12& 	JSON文档的嵌套太深，解析器无法对其进行解析\\
+\hline
+QJsonParseError::DocumentTooLarge& 	13& 	JSON文档太大，解析器无法解析它\\
+\hline
+QJsonParseError::GarbageAtEnd& 	14& 	解析的文档末尾包含其他垃圾字符\\
+\hline
+\end{longtable}
+
+
+\section{公有成员函数文档}
+
+QString QJsonParseError::errorString() const
+
+返回适合于所报告的JSON解析错误的人类可读消息。
+
+
+\begin{notice}[另外参阅]
+error。
+\end{notice}
+
+\section{成员变量文档}
+
+QJsonParseError::ParseError QJsonParseError::error
+
+包含解析错误的类型。如果文档被正确解析，则等于QJsonParseError::NoError。
+
+
+\begin{notice}[另外参阅]
+ParseError 和 errorString()。
+\end{notice}
+
+int QJsonParseError::offset
+
+包含发生解析错误的输入字符串中的偏移量。
+
+
+
+\begin{notice}[另外参阅]
+	error 和 errorString()。
+\end{notice}

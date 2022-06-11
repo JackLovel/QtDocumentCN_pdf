@@ -1,0 +1,1393 @@
+\chapter{QHash}\label{hash}
+
+template <typename Key, typename T> class QHash
+
+QHash 类是一种模板类，提供基于哈希表的字典类结构。更多内容...\ref{detail}
+
+
+\begin{tabular}{|l|l|}
+\hline
+属性& 	内容\\
+\hline
+头文件& 	\hl{\#include <QHash>}\\
+\hline
+qmake& 	\hl{QT += core}\\
+\hline
+派生类& 	QMultiHash\\
+\hline
+\end{tabular}
+
+
+\begin{compactitem}
+\item 所有成员列表，包括继承的成员
+\item 废弃的成员
+\end{compactitem}
+
+\begin{notice}
+该类中的所有函数都是可重入的。
+\end{notice}
+
+\splitLine
+
+\section{公共成员类型}
+
+\begin{tabular}{|m{5em}|m{30em}|}
+\hline
+class& 	const\_iterator\\
+\hline
+class& 	iterator\\
+\hline
+class& 	key\_iterator\\
+\hline
+typedef& 	ConstIterator\\
+\hline
+typedef& 	Iterator\\
+\hline
+typedef& 	const\_key\_value\_iterator\\
+\hline
+typedef& 	difference\_type\\
+\hline
+typedef& 	key\_type\\
+\hline
+typedef& 	key\_value\_iterator\\
+\hline
+typedef& 	mapped\_type\\
+\hline
+typedef& 	size\_type\\
+\hline
+\end{tabular}
+
+\splitLine
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|l|l|}
+\hline
+ 	&QHash(InputIterator begin, InputIterator end)\\
+\hline
+	&QHash(QHash<K, V> \&\&other)\\
+\hline
+	&QHash(const QHash<K, V> \&other)\\
+\hline
+	&QHash(std::initializer\_list<std::pair<Key, T> > list)\\
+\hline
+	&QHash()\\
+\hline
+QHash<K, V> \& 	&operator=(QHash<K, V> \&\&other)\\
+\hline
+QHash<K, V> \& &	operator=(const QHash<K, V> \&other)\\
+\hline
+	&$\sim$QHash()\\
+\hline
+QHash::iterator 	&begin()\\
+\hline
+QHash::const\_iterator &	begin() const\\
+\hline
+int 	&capacity() const\\
+\hline
+QHash::const\_iterator 	&cbegin() const\\
+\hline
+QHash::const\_iterator &	cend() const\\
+\hline
+void &	clear()\\
+\hline
+QHash::const\_iterator& 	constBegin() const\\
+\hline
+QHash::const\_iterator &	constEnd() const\\
+\hline
+QHash::const\_iterator &	constFind(const Key \&key) const\\
+\hline
+QHash::const\_key\_value\_iterator& 	constKeyValueBegin() const\\
+\hline
+QHash::const\_key\_value\_iterator &	constKeyValueEnd() const\\
+\hline
+bool& 	contains(const Key \&key) const\\
+\hline
+int& 	count(const Key \&key) const\\
+\hline
+int& 	count() const\\
+\hline
+bool& 	empty() const\\
+\hline
+QHash::iterator &	end()\\
+\hline
+QHash::const\_iterator &	end() const\\
+\hline
+QPair<QHash::iterator, QHash::iterator> &	equal\_range(const Key
+  \&key)\\
+\hline
+QPair<QHash::const\_iterator, QHash::const\_iterator> &
+                                                        equal\_range(const
+                                                        Key \&key)
+                                                        const\\
+\hline
+QHash::iterator &	erase(QHash::const\_iterator pos)\\
+\hline
+QHash::iterator &	erase(QHash::iterator pos)\\
+\hline
+QHash::iterator &	find(const Key \&key)\\
+\hline
+QHash::const\_iterator& 	find(const Key \&key) const\\
+\hline
+QHash::iterator 	&insert(const Key \&key, const T \&value)\\
+\hline
+void& 	insert(const QHash<K, V> \&other)\\
+\hline
+bool &	isEmpty() const\\
+\hline
+const Key& 	key(const T \&value) const\\
+\hline
+const Key &	key(const T \&value, const Key \&defaultKey) const\\
+\hline
+QHash::key\_iterator &	keyBegin() const\\
+\hline
+QHash::key\_iterator &	keyEnd() const\\
+\hline
+QHash::key\_value\_iterator 	&keyValueBegin()\\
+\hline
+QHash::const\_key\_value\_iterator& 	keyValueBegin() const\\
+\hline
+QHash::key\_value\_iterator 	&keyValueEnd()\\
+\hline
+QHash::const\_key\_value\_iterator &	keyValueEnd() const\\
+\hline
+QList& 	keys() const\\
+\hline
+QList& 	keys(const T \&value) const\\
+\hline
+int &	remove(const Key \&key)\\
+\hline
+void &	reserve(int size)\\
+\hline
+int &	size() const\\
+\hline
+void &	squeeze()\\
+\hline
+void &	swap(QHash<K, V> \&other)\\
+\hline
+T 	&take(const Key \&key)\\
+\hline
+const T &	value(const Key \&key) const\\
+\hline
+const T &	value(const Key \&key, const T \&defaultValue) const\\
+\hline
+QList 	&values() const\\
+\hline
+bool 	&operator!=(const QHash<K, V> \emph{\&other}) const\\
+\hline
+bool 	&operator==(const QHash<K, V> \emph{\&other}) const\\
+\hline
+T \& 	&operator[](const Key \emph{\&key})\\
+\hline
+const T& 	operator[](const Key \emph{\&key}) const\\
+\hline
+\end{longtable}
+
+\section{相关非成员函数}
+
+\begin{longtable}[l]{|l|l|}
+\hline
+类型	&函数名\\
+\hline
+int& 	qGlobalQHashSeed()\\
+\hline
+uint& 	qHash(const QSslDiffieHellmanParameters \&dhparam, uint
+      seed)\\
+\hline
+uint& 	qHash(const QUrl \&url, uint seed = 0)\\
+\hline
+uint& 	qHash(const QOcspResponse \&response, uint seed)\\
+\hline
+uint& 	qHash(const QHash<Key, T> \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QBitArray \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(char key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QDateTime \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(QSslEllipticCurve curve, uint seed)\\
+\hline
+uint& 	qHash(QLatin1String key, uint seed = 0)\\
+\hline
+uint& 	qHash(uchar key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QDate \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(signed char key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QTime \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QSet \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const T *key, uint seed = 0)\\
+\hline
+uint& 	qHash(ushort key, uint seed = 0)\\
+\hline
+uint& 	qHash(short key, uint seed = 0)\\
+\hline
+uint& 	qHash(uint key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QPair<T1, T2> \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(int key, uint seed = 0)\\
+\hline
+uint& 	qHash(const std::pair<T1, T2> \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QVersionNumber \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(ulong key, uint seed = 0)\\
+\hline
+uint& 	qHash(long key, uint seed = 0)\\
+\hline
+uint& 	qHash(quint64 key, uint seed = 0)\\
+\hline
+uint& 	qHash(qint64 key, uint seed = 0)\\
+\hline
+uint& 	qHash(float key, uint seed = 0)\\
+\hline
+uint& 	qHash(double key, uint seed = 0)\\
+\hline
+uint& 	qHash(long double key, uint seed = 0)\\
+\hline
+uint& 	qHash(const Char key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QByteArray \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QString \&key, uint seed = 0)\\
+\hline
+uint& 	qHash(const QStringRef \&key, uint seed = 0)\\
+\hline
+uint& 	qHashBits(const void *p, size\_t len, uint seed = 0)\\
+\hline
+uint& 	qHashRange(InputIterator first, InputIterator last, uint seed = 0)\\
+\hline
+uint& 	qHashRangeCommutative(InputIterator first, InputIterator last, uint seed = 0)\\
+\hline
+void& 	qSetGlobalQHashSeed(int newSeed)\\
+\hline
+QDataStream \& & 	operator<<(QDataStream \&out, const QHash<Key, T> \&hash)\\
+\hline
+QDataStream \& &	operator>>(QDataStream \&in, QHash<Key, T> \&hash)\\
+\hline
+\end{longtable}
+
+\splitLine
+
+\section{详细描述}\label{detail}
+
+QHash<Key, T> 是一种 Qt 泛型容器类。该类存储键值对，可以用相关联的键非常快速地查找值。
+
+QHash 的功能与 QMap 非常相似。二者的区别在于：
+
+\begin{compactitem}
+\item QHash 的查找速度比 QMap 快。（详情请看算法复杂度 。）
+\item 遍历 QMap 时，元素总是按照键的顺序排好序的。而遍历 QHash时，元素的顺序是任意的。
+\item QMap 的键类型必须提供 operator<() 运算符。QHash 的键类型必须提供 operator==() 运算符和名为 qHash() 的全局哈希函数 (参考 qHash 哈希函数)。
+\end{compactitem}
+
+下面是一个键类型为 QString，值类型为 \hl{int} 的 QHash 的示例：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+\end{lstlisting}
+
+
+可以使用 operator 运算符将键值对插入到哈希表中：
+
+\begin{lstlisting}[language=C++]
+hash["one"] = 1;
+hash["three"] = 3;
+hash["seven"] = 7;
+\end{lstlisting}
+
+上面的代码将3个键值对插入到 QHash 中：("one", 1)，("three", 3) 和
+("seven", 7)。另外一种向哈希表中插入元素的方法是使用 insert()：
+
+\begin{lstlisting}[language=C++]
+hash.insert("twelve", 12);
+\end{lstlisting}
+
+使用 operator 运算符或 value() 查找值：
+
+\begin{lstlisting}[language=C++]
+int num1 = hash["thirteen"];
+int num2 = hash.value("thirteen");
+\end{lstlisting}
+
+如果哈希表中不存在指定的键，这些函数返回默认构造的值。
+
+如果想检查哈希表中是否包含特定键，使用 contains()：
+
+\begin{lstlisting}[language=C++]
+int timeout = 30;
+if (hash.contains("TIMEOUT"))
+    timeout = hash.value("TIMEOUT");
+\end{lstlisting}
+
+还有一个 value() 的重载函数，如果哈希表中不存在指定键的元素，该函数使
+用第2个参数作为默认值：
+
+\begin{lstlisting}[language=C++]
+int timeout = hash.value("TIMEOUT", 30);
+\end{lstlisting}
+
+一般推荐使用 contains() 和 value() 而不是 operator 运算符查找哈希表中
+的键。原因是如果哈希表中不存在相同键的元素，operator 运算符会默默地将
+一个元素插入到哈希表中（除非哈希表是 const 的）。例如，下面的代码片段
+将在内存中创建1000个元素：
+
+
+\begin{lstlisting}[language=C++]
+// 错误
+QHash<int, QWidget *> hash;
+...
+for (int i = 0; i < 1000; ++i) {
+    if (hash[i] == okButton)
+        cout << "Found button at index " << i << Qt::endl;
+}
+\end{lstlisting}
+
+为了避免这个问题，将上面代码中的 \hl{hash[i]} 替换为 \hl{hash.value(i)}。
+
+QHash 内部使用哈希表来执行查找。哈希表自动增长和收缩以保证在不浪费太多内存的情况下快速查找。如果已经大概知道 QHash 将包含多少元素，可以通过调用 reserve() 来控制哈希表的大小，但是不能保证一定获得更好的性能。还可以调用 capacity() 来获取哈希表的大小。
+
+如果想遍历 QHash 中存储的所有键值对，可以使用迭代器。QHash 同时提供
+Java 风格迭代器（QHashIterator 和 QMutableHashIterator）和 STL 风格迭
+代器（QHash::const\_iterator 和 QHash::iterator）。下面是使用 Java 风格
+迭代器遍历 QHash<QString, int> 的方法：
+
+\begin{lstlisting}[language=C++]
+QHashIterator<QString, int> i(hash);
+while (i.hasNext()) {
+    i.next();
+    cout << i.key() << ": " << i.value() << Qt::endl;
+}
+\end{lstlisting}
+
+下面是相同的代码，不过这次使用 STL 风格迭代器：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int>::const_iterator i = hash.constBegin();
+while (i != hash.constEnd()) {
+    cout << i.key() << ": " << i.value() << Qt::endl;
+    ++i;
+}
+\end{lstlisting}
+
+QHash 是无序的，所以迭代器的顺序是不可预测的。如果需要通过键排序，使用 QMap。
+
+通常，QHash 每个键只允许有一个值。如果用已经存在的键调用 insert()，先
+前的值将被删除。例如：
+
+
+\begin{lstlisting}[language=C++]
+hash.insert("plenty", 100);
+hash.insert("plenty", 2000);
+// hash.value("plenty") == 2000
+\end{lstlisting}
+
+如果只想从哈希表中获取值（而不是键），也可以使用 foreach：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+...
+foreach (int value, hash)
+    cout << value << Qt::endl;
+\end{lstlisting}
+
+移除元素有几种方法。一种是调用 remove()；该函数移除指定键的所有元素。另一种方法是使用 QMutableHashIterator::remove()。另外，还可以使用 clear() 清除整个哈希表。
+
+QHash 键和值的数据类型必须是可赋值数据类型。不能存储 QWidget 作为值；而应该存储 QWidget *。
+qHash() 哈希函数
+
+QHash 的键类型除了必须是可赋值数据类型外，还有一个额外要求：它必须提供 operator==() 运算符，并且在键类型的命名空间内还必须有一个为键类型参数返回哈希值的 qHash() 函数。
+
+该 qHash() 函数基于键计算数值。可以使用任何可以想到的算法计算，只要保证相同参数返回相同值就可以。也就是说，如果 \hl{e1 == e2}，那么 \hl{qHash(e1) == qHash(e2)} 也保持成立。然而，为了获得更好的性能，qHash() 函数应该尽最大可能对不同的键返回不同的哈希值。
+
+对于键类型 \hl{K}，qHash 函数必须是下面两种签名之一：
+
+
+例子：
+
+\begin{lstlisting}[language=C++]
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+
+class Employee
+{
+public:
+    Employee() {}
+    Employee(const QString &name, QDate dateOfBirth);
+    ...
+
+private:
+    QString myName;
+    QDate myDateOfBirth;
+};
+
+inline bool operator==(const Employee &e1, const Employee &e2)
+{
+    return e1.name() == e2.name()
+           && e1.dateOfBirth() == e2.dateOfBirth();
+}
+
+inline uint qHash(const Employee &key, uint seed)
+{
+    return qHash(key.name(), seed) ^ key.dateOfBirth().day();
+}
+
+#endif // EMPLOYEE_H
+\end{lstlisting}
+
+上例中，我们依赖 Qt 的全局 qHash(const QString \&, uint) 函数取得雇员名字的哈希值，然后将这个值与雇员的出生日期求异或，来为同名雇员生成各自唯一的哈希值。
+
+\begin{notice}
+Qt 提供的 qHash() 重载函数的实现可能在任何时候改变。一定不能依赖于这个假定，认为不同 Qt 版本的 qHash() 函数（对于相同的输入）会计算出相同的结果。
+算法复杂度攻击
+\end{notice}
+
+所有哈希表都容易受到一种特殊类型的拒绝服务攻击，攻击者预先仔细计算好一组不同的键，用这些键在哈希表的同一个 bucket 中（甚至具有相同哈希值）进行散列。攻击的目的是在数据输入表中时达到最坏情形的算法行为（O(n) 而不是平均的 O(1)，详情参考算法复杂度）。
+
+为了避免这种最坏情形的行为，可以在 qHash() 计算哈希值时通过随机种子进行掺杂，抵消攻击的程度。 该种子由 QHash 自动生成，每个进程单独一个，由 QHash 传给两个参数的 qHash() 重载函数的第2个参数。
+
+QHash 的这种随机化处理默认是激活的。尽管如此，使用者不应该依赖于特定的 QHash 顺序，这可能是在调试或回归测试等临时需要这种确定性行为的时候。要想关闭随机化处理，可以将环境变量 \hl{QT\_HASH\_SEED} 设置为 0，或者使用参数 0 调用 qSetGlobalQHashSeed() 函数。
+
+另请参阅 QHashIterator, QMutableHashIterator, QMap 和 QSet.
+
+\section{成员类型文档}
+
+typedef QHash::ConstIterator
+
+QHash::const\_iterator 的 Qt 风格的别名。
+
+typedef QHash::Iterator
+
+QHash::iterator 的 Qt 风格的别名。
+
+typedef QHash::const\_key\_value\_iterator
+
+QMap::const\_key\_value\_iterator 类型定义为 QHash 和 QMultiHash 提供 STL 风格迭代器。
+
+除了 operator*() 运算符返回的是键值对而不是值之外，QHash::const\_key\_value\_iterator 基本和 QHash::const\_iterator 相同。
+
+Qt 5.10 中引入该类型定义。
+
+\begin{seeAlso}
+QKeyValueIterator
+\end{seeAlso}
+
+typedef QHash::difference\_type
+
+ptrdiff\_t 的类型别名。为兼容 STL 提供。
+
+typedef QHash::key\_type
+
+Key 的类型别名。为兼容 STL 提供。
+
+typedef QHash::key\_value\_iterator
+
+QHash::key\_value\_iterator 类型定义为 QHash 和 QMultiHash 提供 STL 风格迭代器。
+
+除了 operator*() 运算符返回的是键值对而不是值之外，QHash::key\_value\_iterator 基本和 QHash::iterator 相同。
+
+Qt 5.10 中引入该类型定义。
+
+\begin{seeAlso}
+QKeyValueIterator。
+\end{seeAlso}
+
+typedef QHash::mapped\_type
+
+T 的类型别名。为兼容 STL 提供。
+
+typedef QHash::size\_type
+
+int 的类型别名。为兼容 STL 提供。
+
+\section{成员函数文档}
+
+template QHash::QHash(InputIterator begin, InputIterator end)
+
+用迭代器范围 [begin, end) 内每个元素的副本构造一个哈希表。需要满足下列两个条件之一：迭代范围内的元素是包含 first 和 second 数据成员的对象（像 QPair，std::pair 等），分别可以转换为 Key 类型和 T 类型；或者迭代器必须含有 key() 和 value() 成员函数，分别返回可以转换为 Key 类型的键和 T 类型的值。
+
+Qt 5.14 中引入该函数。
+
+QHash::QHash(QHash<K, V> \emph{\&\&other})
+
+移动构造一个 QHash 实例，使该实例指向 \emph{other} 所指向的同一对象。
+
+Qt 5.2 中引入该函数。
+
+QHash::QHash(const QHash<K, V> \emph{\&other})
+
+构造一个 \emph{other} 的副本。
+
+该操作需要常数时间，因为 QHash 是隐式共享的。这使得从一个函数返回 QHash 非常快。如果共享实例被修改了，它将以线性时间被复制一份（写时拷贝）。
+
+\begin{seeAlso}
+operator=()。
+\end{seeAlso}
+
+
+QHash::QHash(std::initializer\_list<std::pair<Key, T>> list)
+
+用初始化列表 list 中每个元素的副本构造一个哈希表。
+
+只有当程序在 C++11 模式下编译时，该函数才可用。
+
+Qt 5.1 中引入该函数。
+
+QHash::QHash()
+
+构造一个空哈希表。
+
+\begin{seeAlso}
+clear()。
+\end{seeAlso}
+
+
+QHash<K, V> \&QHash::operator=(QHash<K, V> \emph{\&\&other})
+
+移动赋值 \emph{other} 到该 QHash 实例。
+
+Qt 5.2 中引入该函数。
+
+QHash<K, V> \&QHash::operator=(const QHash<K, V> \emph{\&other})
+
+将 \emph{other} 赋值给该哈希表并返回该哈希表的引用。
+
+QHash::$\sim$QHash()
+
+析构哈希表。该哈希表中值的引用及所有该哈希表的迭代器都将失效。
+
+QHash::iterator QHash::begin()
+
+返回 STL 风格迭代器 pointing to the first item in the hash.
+
+\begin{seeAlso}
+constBegin() 和 end()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::begin() const
+
+这是一个重载函数。
+
+int QHash::capacity() const
+
+返回 QHash 内部哈希表中的 bucket 数。
+
+该函数的唯一目的是提供一种调节 QHash 内存使用的方法。一般很少需要调用该函数。如果想知道哈希表中的元素数，请调用 size()。
+
+\begin{seeAlso}
+reserve() 和 squeeze()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::cbegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一个元素。
+
+Qt 5.0 中引入该函数。
+
+\begin{seeAlso}
+begin() 和 cend()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::cend() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
+
+Qt 5.0 中引入该函数。
+
+\begin{seeAlso}
+cbegin() 和 end()。
+\end{seeAlso}
+
+void QHash::clear()
+
+从哈希表中移除所有元素。
+
+\begin{seeAlso}
+remove()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::constBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一个元素。
+
+
+\begin{seeAlso}
+begin() 和 constEnd()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::constEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
+
+\begin{seeAlso}
+constBegin() 和 end()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::constFind(const Key \&key) const
+
+返回常量类型（译者注：原文没有const）的迭代器，指向哈希表中键为 key 的元素。
+
+如果哈希表不包含键为 key 的元素，该函数返回 constEnd()。
+
+Qt 4.1 中引入该函数。
+
+
+\begin{seeAlso}
+find() 和 QMultiHash::constFind()。
+\end{seeAlso}
+
+QHash::const\_key\_value\_iterator QHash::constKeyValueBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一项.
+
+Qt 5.10 中引入该函数。
+
+\begin{seeAlso}
+keyValueBegin()。
+\end{seeAlso}
+
+QHash::const\_key\_value\_iterator QHash::constKeyValueEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一项之后的假想项。
+
+Qt 5.10 中引入该函数。
+
+\begin{seeAlso}
+constKeyValueBegin()。
+\end{seeAlso}
+
+bool QHash::contains(const Key \&key) const
+
+如果该哈希表包含键为 key 的元素，返回 true；否则返回 false。
+
+\begin{seeAlso}
+count() 和 QMultiHash::contains()。
+\end{seeAlso}
+
+int QHash::count(const Key \emph{\&key}) const
+
+返回与键 \emph{key} 相关联的元素个数。
+
+\begin{seeAlso}
+contains() 和 insertMulti()。
+\end{seeAlso}
+
+int QHash::count() const
+
+这是一个重载函数。
+
+同 size()。
+
+bool QHash::empty() const
+
+该函数为兼容 STL 提供。与 isEmpty() 等价，如果哈希表为空，返回 true；否则返回 false。
+
+QHash::iterator QHash::end()
+
+返回 STL 风格迭代器，指向哈希表中最后一个元素之后的假想元素。
+
+\begin{seeAlso}
+begin() 和 constEnd()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::end() const
+
+这是一个重载函数。
+
+QPair<QHash::iterator, QHash::iterator> QHash::equal\_range(const Key \&key)
+
+返回一对迭代器界定与 key 相关联的值的范围 [first, second)。如果范围为空，则两个迭代器都为 end()。
+
+Qt 5.7 中引入该函数。
+
+QPair<QHash::const\_iterator, QHash::const\_iterator> QHash::equal\_range(const Key \&key) const
+
+这是一个重载函数。
+
+Qt 5.7 中引入该函数。
+
+QHash::iterator QHash::erase(QHash::const\_iterator pos)
+
+从哈希表中移除迭代器 pos 指向的键值对，返回指向哈希表中下一个元素的迭代器。
+
+与 remove() 和 take() 不同，该函数绝不会使 QHash 重新散列其内部数据结
+构。这意味着可以在迭代时安全调用该函数而不会影响哈希表中元素的顺序。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QHash<QObject *, int> objectHash;
+...
+QHash<QObject *, int>::iterator i = objectHash.find(obj);
+while (i != objectHash.end() && i.key() == obj) {
+    if (i.value() == 0) {
+        i = objectHash.erase(i);
+    } else {
+        ++i;
+    }
+}
+\end{lstlisting}
+
+Qt 5.7 中引入该函数。
+
+\begin{seeAlso}
+remove()，take() 和 find()。
+\end{seeAlso}
+
+QHash::iterator QHash::erase(QHash::iterator \emph{pos})
+
+这是一个重载函数。
+
+QHash::iterator QHash::find(const Key \emph{\&key})
+
+返回迭代器，指向哈希表中键为 key 的元素。
+
+如果哈希表不包含键为 \emph{key} 的元素，函数返回 end().
+
+如果哈希表包含多个键为 \emph{key} 的元素，函数返回指向最新插入的那个值的迭代器。其它值可以通过递增迭代器取得。例如，下面的代码遍历同一键的所有元素：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+...
+QHash<QString, int>::const_iterator i = hash.find("HDR");
+while (i != hash.end() && i.key() == "HDR") {
+    cout << i.value() << Qt::endl;
+    ++i;
+}
+\end{lstlisting}
+
+\begin{seeAlso}
+value()，values() 和 QMultiHash::find()。
+\end{seeAlso}
+
+QHash::const\_iterator QHash::find(const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+QHash::iterator QHash::insert(const Key \emph{\&key}, const T \emph{\&value})
+
+用键 \emph{key} 和值 \emph{value} 插入一个新元素。
+
+如果已经存在键为 \emph{key} 的元素，该元素的值将被 \emph{value} 替换。
+
+如果有多个键为 \emph{key} 的元素，最新插入的元素的值将被 \emph{value }替换。
+
+void QHash::insert(const QHash<K, V> \emph{\&other})
+
+将 \emph{other} 哈希表中的所有元素插入到本哈希表中。
+
+如果一个键同时在两个哈希表中出现，其值将被 \emph{other} 中存储的值替换。
+
+\begin{notice}
+如果 \emph{other} 中同一键关联多个元素，则该键的最终值未定义。
+\end{notice}
+
+Qt 5.15 中引入该函数。
+
+bool QHash::isEmpty() const
+
+如果哈希表中不包含元素，返回 \hl{true}；否则返回 \hl{false}。
+
+\begin{seeAlso}
+size()
+\end{seeAlso}
+
+const Key QHash::key(const T \emph{\&value}) const
+
+返回与值 \emph{value} 对应的第一个键。
+
+如果哈希表不包含值为 \emph{value} 的元素，函数返回默认构造的键.
+
+该函数可能会比较慢（线性时间），因为 QHash 的内部数据结构是以快速查找键而不是值为目标来优化的。
+
+\begin{seeAlso}
+value() 和 keys()。
+\end{seeAlso}
+
+const Key QHash::key(const T \emph{\&value}, const Key \emph{\&defaultKey}) const
+
+这是一个重载函数。
+
+返回与值 \emph{value} 对应的第一个键，如果哈希表不包含值为 \emph{value} 的元素，返回 \emph{defaultKey}。
+
+该函数可能会比较慢（线性时间），因为 QHash 的内部数据结构是以快速查找键而不是值为目标来优化的。
+
+Qt 4.3 中引入该函数。
+
+QHash::key\_iterator QHash::keyBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一个键。
+
+Qt 5.6 中引入该函数。
+
+\begin{seeAlso}
+ keyEnd()。
+\end{seeAlso}
+
+QHash::key\_iterator QHash::keyEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的最后一个元素之后的假想元素的键。
+
+Qt 5.6 中引入该函数。
+
+\begin{seeAlso}
+keyBegin()。
+\end{seeAlso}
+
+QHash::key\_value\_iterator QHash::keyValueBegin()
+
+返回 STL 风格迭代器，指向哈希表中的第一项。
+
+Qt 5.10 中引入该函数。
+
+\begin{seeAlso}
+ keyValueEnd()。
+\end{seeAlso}
+
+
+QHash::const\_key\_value\_iterator QHash::keyValueBegin() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中的第一项。
+
+Qt 5.10 中引入该函数。
+
+\begin{seeAlso}
+ keyValueEnd()。
+\end{seeAlso}
+
+QHash::key\_value\_iterator QHash::keyValueEnd()
+
+返回 STL 风格迭代器，指向哈希表中最后一项之后的假想项。
+
+Qt 5.10 中引入该函数。
+
+\begin{seeAlso}
+keyValueBegin()。
+\end{seeAlso}
+
+
+QHash::const\_key\_value\_iterator QHash::keyValueEnd() const
+
+返回常量类型的 STL 风格迭代器，指向哈希表中最后一项之后的假想项。
+
+Qt 5.10 中引入该函数。
+
+\begin{seeAlso}
+keyValueBegin()。
+\end{seeAlso}
+
+QList QHash::keys() const
+
+以任意顺序返回哈希表中所有键的列表。在哈希表中多次出现的键（当该方法应用在 QMultiHash 时）也会在列表中多次出现。
+
+键的顺序将确保与通过 values() 返回的值的顺序相同。
+
+
+\begin{seeAlso}
+QMultiMap::uniqueKeys()，values() 和 key()。
+\end{seeAlso}
+
+QList QHash::keys(const T \emph{\&value}) const
+
+这是一个重载函数。
+
+以任意顺序返回所有与值 \emph{value} 相关联的键的列表。
+
+该函数可能会比较慢（线性时间），因为 QHash 的内部数据结构是以快速查找键而不是值为目标来优化的。
+
+int QHash::remove(const Key \emph{\&key})
+
+从哈希表中移除所有键为 \emph{key} 的元素。返回被移除的元素个数，如果键存在，则为1，否则为0。
+
+
+\begin{seeAlso}
+clear()，take() 和 QMultiHash::remove()。
+\end{seeAlso}
+
+
+void QHash::reserve(int \emph{size})
+
+确保 QHash 的内部哈希表包含至少 \emph{size} 数量的 bucket。
+
+该函数对于需要构建大型哈希表，并且不想重复分配内存的使用者来说很有用。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QHash<QString, int> hash;
+hash.reserve(20000);
+for (int i = 0; i < 20000; ++i)
+    hash.insert(keys[i], values[i]);
+\end{lstlisting}
+
+理想情况下，\emph{size} 应该比哈希表中期望的最大元素数略大。\emph{size} 不一定必须是质数，因为 QHash 内部总会使用一个质数。如果 \emph{size} 预估小了，可能发生的最坏情形就是 QHash 会变慢一点。
+
+一般很少需要调用该函数。QHash 的内部哈希表会自动收缩或增长来保证不浪费太多内存的情况下达到最优性能。
+
+\begin{seeAlso}
+squeeze() 和 capacity()。
+\end{seeAlso}
+
+int QHash::size() const
+
+返回哈希表中的元素个数。
+
+\begin{seeAlso}
+isEmpty() 和 count()。
+\end{seeAlso}
+
+void QHash::squeeze()
+
+减少 QHash 内部哈希表的大小以节约内存。
+
+该函数的唯一目的是提供一种调节 QHash 内存使用的方法。一般很少需要调用该函数。
+
+\begin{seeAlso}
+reserve() 和 capacity()。
+\end{seeAlso}
+
+void QHash::swap(QHash<K, V> \emph{\&other})
+
+将哈希表 \emph{other} 与本哈希表。该操作非常快，永远不失败。
+
+Qt 4.8 中引入该函数。
+
+T QHash::take(const Key \emph{\&key})
+
+从哈希表中移除键为 \emph{key} 的元素，返回键 \emph{key} 所关联的值。
+
+如果哈希表中不存在该元素，该函数简单返回一个默认构造的值。如果哈希表中有多个键为 \emph{key} 的元素，只移除最新插入的元素并返回值。
+
+如果不使用返回值，使用 remove() 更高效一些。
+
+\begin{seeAlso}
+remove()。
+\end{seeAlso}
+
+
+const T QHash::value(const Key \emph{\&key}) const
+
+返回键 \emph{key} 关联的值。
+
+如果哈希表不包含键为 \emph{key} 的元素，该函数返回默认构造的值。如果哈希表中有多个键为 \emph{key} 的元素，返回最新插入的元素的值。
+
+\begin{seeAlso}
+key()，values()，contains() 和 [operator]()。
+\end{seeAlso}
+
+const T QHash::value(const Key \emph{\&key}, const T \emph{\&defaultValue}) const
+
+这是一个重载函数。
+
+如果哈希表不包含键为 \emph{key} 的元素，该函数返回 \emph{defaultValue}。
+
+QList QHash::values() const
+
+以任意顺序返回哈希表中所有值的列表。如果一个键关联到多个值，该键的所有值都将被放入列表中，而不只是最新插入的值。
+
+顺序将确保与通过 keys() 返回的键的顺序相同。
+
+\begin{seeAlso}
+keys() 和 value()。
+\end{seeAlso}
+
+
+
+bool QHash::operator!=(const QHash<K, V> \emph{\&other}) const
+
+如果 other 与本哈希表不相等，返回 \hl{true}，否则返回 \hl{false}。
+
+如果两个哈希表包含相同的键值对，则认为二者相等。
+
+该函数需要值类型实现 \hl{operator==()}。
+
+\begin{seeAlso}
+operator==()。
+\end{seeAlso}
+
+
+bool QHash::operator==(const QHash<K, V> \emph{\&other}) const
+
+如果 \hl{other} 与本哈希表相等，返回 \emph{true}，否则返回 \emph{false}。
+
+如果两个哈希表包含相同的键值对，则认为二者相等。
+
+该函数需要值类型实现 \hl{operator==()}。
+
+\begin{seeAlso}
+operator!=()。
+\end{seeAlso}
+
+T \&QHash::operator[](const Key \emph{\&key})
+
+返回键 \emph{key} 所关联的值的可修改引用。
+
+如果哈希表不包含键为 \emph{key} 的元素，该函数用键 \emph{key} 插入一个默认构
+造的值，并返回该值的引用。如果哈希表包含多个键为 \emph{key} 的元素，该函数返回最新插入的那个值的引用。
+
+\begin{seeAlso}
+insert() 和 value()。
+\end{seeAlso}
+
+
+const T QHash::operator[](const Key \emph{\&key}) const
+
+这是一个重载函数。
+
+同 value()。
+
+\section{相关非成员函数}
+
+int qGlobalQHashSeed()
+
+返回当前全局 QHash 种子。
+
+任何新创建的 QHash 都会设置该种子。请参考 qHash 了解 QHash 如何使用该种子。
+
+Qt 5.6 中引入该函数。
+
+\begin{seeAlso}
+qSetGlobalQHashSeed。
+\end{seeAlso}
+
+uint qHash(const QUrl \emph{\&url}, uint \emph{seed} = 0)
+
+返回 \emph{url} 的哈希值。如果指定了 \emph{seed}，该值用于初始化哈希表。
+
+Qt 5.0 中引入该函数。
+
+template <typename Key, typename T> uint qHash(const QHash<Key, T> \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 seed 来 seed 计算。
+
+类型 \hl{T} 必须被 qHash() 支持。
+
+Qt 5.8 中引入该函数。
+
+uint qHash(const QBitArray \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(char \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QDateTime \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(QLatin1String \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(uchar \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QDate \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(signed char \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QTime \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+template uint qHash(const QSet \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+哈希值不依赖于 \emph{key} 中元素的顺序，即包含相同元素的 set 散列相同的值。
+
+Qt 5.5 中引入该函数。
+
+template uint qHash(const T \emph{*key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(ushort \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(short \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(uint \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+template <typename T1, typename T2> uint qHash(const QPair<T1, T2> \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed }来随机化计算结果。
+
+类型 \hl{T1} 和 \hl{T2} 必须被 qHash() 支持。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(int key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+template <typename T1, typename T2> uint qHash(const std::pair<T1, T2> \&key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+类型 T1 和 T2 必须被 qHash() 支持。
+
+\begin{notice}
+该函数的返回类型与下面函数调用的返回类型不同 ：
+\end{notice}
+
+\begin{lstlisting}[language=C++]
+qHash(qMakePair(key.first, key.second), seed);
+\end{lstlisting}
+
+两个函数使用不同的哈希算法；因为二进制兼容的限制，我们不能在 Qt 6 之前修改 QPair 算法使其与 std::pair 保持一致。
+
+Qt 5.7 中引入该函数。
+
+uint qHash(const QVersionNumber \&key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.6 中引入该函数。
+
+uint qHash(ulong key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(long key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(quint64 key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(qint64 key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(float key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.3 中引入该函数。
+
+uint qHash(double key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.3 中引入该函数。
+
+uint qHash(long double key, uint seed = 0)
+
+返回 key 的哈希值，使用 seed 来随机化计算结果。
+
+Qt 5.3 中引入该函数。
+
+uint qHash(const QChar \emph{key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QByteArray \emph{\&key},  uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QString \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHash(const QStringRef \emph{\&key}, uint \emph{seed} = 0)
+
+返回 \emph{key} 的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+Qt 5.0 中引入该函数。
+
+uint qHashBits(const void \emph{*p}, size\_t \emph{len}, uint \emph{seed} = 0)
+
+返回 \emph{p} 指向的大小为 \emph{len} 的内存块的哈希值，使用 \emph{seed} 来随机化计算结果。
+
+仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为 std::vector 实现 qHash() 函数的例子：
+
+
+\begin{lstlisting}[language=C++]
+inline uint qHash(const std::vector<int> &key, uint seed = 0)
+{
+    if (key.empty())
+        return seed;
+    else
+        return qHashBits(&key.front(), key.size() * sizeof(int), seed);
+}
+\end{lstlisting}
+
+上面的例子利用了 std::vector 连续存储数据的优势。如果不是这种情况，或者包含的类型 has padding，应该使用 qHashRange()。
+
+需要再次强调，qHashBits() 的实现 - 与 Qt 提供的 qHash() 函数一样 - 可能在任何时候改变。一定不能 依赖于这个假定，认为不同 Qt 版本的 qHashBits() 函数（对于相同的输入）会计算出相同的结果。
+
+Qt 5.4 中引入该函数。
+
+
+\begin{seeAlso}
+qHashRange() 和 qHashRangeCommutative()。
+\end{seeAlso}
+
+template uint qHashRange(InputIterator \emph{first}, InputIterator \emph{last}, uint \emph{seed} = 0)
+
+返回范围 [\emph{first},\emph{last}) 的哈希值，使用 \emph{seed} 来随机化计算结果，该函数依次对每个元素执行 qHash()，然后将所有哈希值组合成一个值。
+
+该函数的返回值依赖于范围中元素的顺序。这意味着
+
+\begin{lstlisting}[language=C++]
+{0, 1, 2}
+\end{lstlisting}
+
+和
+
+\begin{lstlisting}[language=C++]
+{1, 2, 0}
+\end{lstlisting}
+
+散列成不同的 值。如果顺序不重要，例如，对于哈希表，要使用 qHashRangeCommutative()。如果想散列原始内存，使用 qHashBits()。
+
+仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为
+std::vector 实现 qHash() 函数的例子：
+
+\begin{lstlisting}[language=C++]
+inline uint qHash(const std::vector<int> &key, uint seed = 0)
+{
+    return qHashRange(key.begin(), key.end(), seed);
+}
+\end{lstlisting}
+
+需要再次强调，qHashRange() 的实现 - 与 Qt 提供的 qHash() 函数一样 - 可能在任何时候改变。一定不能 依赖于这个假定，认为不同 Qt 版本的 qHashRange() 函数（对于相同的输入）会计算出相同的结果，即使该元素类型的 qHash() 函数可以。
+
+Qt 5.5 中引入该函数。
+
+\begin{seeAlso}
+qHashBits() 和 qHashRangeCommutative()。
+\end{seeAlso}
+
+
+template uint qHashRangeCommutative(InputIterator \emph{first}, InputIterator \emph{last}, uint \emph{seed} = 0)
+
+返回范围 [\emph{first},\emph{last}) 的哈希值，使用 \emph{seed} 来随机化计算结果，该函数依次对每个元素执行 qHash()，然后将所有哈希值组合成一个值。
+
+该函数的返回值不依赖于范围中元素的顺序。这意味着
+
+\begin{lstlisting}[language=C++]
+{0, 1, 2}
+\end{lstlisting}
+
+和
+
+\begin{lstlisting}[language=C++]
+{1, 2, 0}
+\end{lstlisting}
+
+散列成相同的 值。如果顺序重要，例如，对于 vector 和数组， 要使用 qHashRange()。如果想散列原始内存，使用 qHashBits()。
+
+仅使用该函数为自定义类型实现 qHash() 函数。例如，下面是一个如何为
+std::unordered\_set 实现 qHash() 函数的例子：
+
+\begin{lstlisting}[language=C++]
+inline uint qHash(const std::unordered_set<int> &key, uint seed = 0)
+{
+    return qHashRangeCommutative(key.begin(), key.end(), seed);
+}
+\end{lstlisting}
+
+需要再次强调，qHashRangeCommutative() 的实现 - 与 Qt 提供的 qHash() 函数一样 - 可能在任何时候改变。一定不能 依赖于这个假定，认为不同 Qt 版本的 qHashRangeCommutative() 函数（对于相同的输入）会计算出相同的结果，即使该元素类型的 qHash() 函数可以。
+
+Qt 5.5 中引入该函数。
+
+\begin{seeAlso}
+qHashBits() 和 qHashRange()。
+\end{seeAlso}
+
+void qSetGlobalQHashSeed(int \emph{newSeed})
+
+将全局 QHash 种子设置为 \emph{newSeed}。
+
+只有在测试和调试时才需要手动设置全局 QHash 种子值，此时需要 QHash 具有确定的和可复制的行为。我们不鼓励在产品代码中这么做因为这会使软件容易受到 算法复杂度攻击。
+
+从 Qt 5.10 开始，只能在 0 和 -1 之间设置值。传递 -1 将重新初始化全局 QHash 种子为一个随机值，传递 0 用来为 C++ 基本类型（例如 \hl{int}）和字符串类型（QString，QByteArray）请求稳定算法。
+
+任何新创建的 QHash 都会设置种子值。参考 qHash 了解 QHash 如何使用种子。
+
+如果设置了环境变量 \hl{QT\_HASH\_SEED}，调用该函数什么也不做。
+
+Qt 5.6 中引入该函数。
+
+\begin{seeAlso}
+qGlobalQHashSeed。
+\end{seeAlso}
+
+template <typename Key, typename T> QDataStream \&operator<<(QDataStream \emph{\&out}, const QHash<Key, T> \emph{\&hash})
+
+将哈希表 \emph{hash} 写出到流 \emph{out}。
+
+该函数需要键和值类型实现 \hl{operator<<()}。
+
+\begin{seeAlso}
+Serializing Qt Data Types。
+\end{seeAlso}
+
+template <typename Key, typename T> QDataStream \&operator>>(QDataStream \emph{\&in}, QHash<Key, T> \emph{\&hash})
+
+从流 in 读入数据到哈希表 hash。
+
+该函数需要键和值类型实现 \hl{operator>>()}。
+
+\begin{seeAlso}
+Serializing Qt Data Types。
+\end{seeAlso}

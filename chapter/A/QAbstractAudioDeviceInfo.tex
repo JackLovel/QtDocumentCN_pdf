@@ -1,0 +1,92 @@
+\chapter{QAbstractAudioDeviceInfo}
+
+% \tocpart{QAbstractAudioDeviceInfo}
+
+QAbstractAudioDeviceInfo 是音频后端的基类。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QAbstractAudioDeviceInfo>\\      
+	\hline
+	qmake & QT += multimedia\\      
+	\hline
+	继承&QObject \\
+	\hline
+\end{tabular}
+
+\section{公共功能}
+
+\resizebox{\textwidth}{!}{ % Latex表格宽度超出文本宽度
+\begin{tabular}{|r|l|}
+	\hline
+	类型 & 方法 \\
+	\hline
+	virtual QString	 & deviceName() const = 0 \\
+	\hline
+	virtual bool &isFormatSupported(const QAudioFormat \&format) const = 0 \\
+	\hline
+	virtual QAudioFormat &	preferredFormat() const = 0\\
+	\hline
+	virtual QListQAudioFormat::Endian &	supportedByteOrders() = 0 \\
+	\hline
+	virtual QList &	supportedChannelCounts() = 0 \\
+	\hline
+	virtual QStringList&	supportedCodecs() = 0\\
+	\hline
+	virtual QList&	supportedSampleRates() = 0\\
+	\hline
+	virtual QList&	supportedSampleSizes() = 0\\
+	\hline
+	virtual QListQAudioFormat::SampleType&	supportedSampleTypes() = 0 \\
+	\hline
+\end{tabular}
+}
+
+
+\section{类型}
+
+详细说明
+
+QAbstractAudioDeviceInfo是音频后端的基类。
+
+该类实现了QAudioDeviceInfo的音频功能，即QAudioDeviceInfo类中会保留一个QAbstractAudioDeviceInfo，并对其进行调用。关于QAbstractAudioDeviceInfo的实现的其它功能，您可以参考QAudioDeviceInfo的类与函数文档
+
+\section{成员函数文档}
+
+QString QAbstractAudioDeviceInfo::deviceName() const [纯虚函数] 
+
+返回音频设备名称
+
+bool QAbstractAudioDeviceInfo::isFormatSupported(const QAudioFormat \emph{\&format}) const [纯虚函数] 
+
+传入参数QAudioFormat（音频流）类，如果QAbstractAudioDeviceInfo支持的话，返回true（真是不好翻译）
+
+QAudioFormat QAbstractAudioDeviceInfo::preferredFormat() const [纯虚函数]
+
+ 返回QAbstractAudioDeviceInfo更加倾向于使用的音频流。
+
+QListQAudioFormat::Endian QAbstractAudioDeviceInfo::supportedByteOrders() 
+
+[纯虚函数] 返回当前支持可用的字节顺序(QAudioFormat::Endian)列表
+
+QList QAbstractAudioDeviceInfo::supportedChannelCounts() [纯虚函数] 
+
+返回当前可用的通道（应该是这样翻译）列表
+
+QStringList QAbstractAudioDeviceInfo::supportedCodecs() [纯虚函数] 
+
+返回当前可用编解码器的列表
+
+QList QAbstractAudioDeviceInfo::supportedSampleRates() [纯虚函数] 
+
+返回当前可用的采样率列表。(突然发现Google翻译真心吊啊)
+
+QList QAbstractAudioDeviceInfo::supportedSampleSizes() [纯虚函数] 
+
+返回当前可用的样本大小列表。
+
+QListQAudioFormat::SampleType QAbstractAudioDeviceInfo::supportedSampleTypes() [纯虚函数] 
+
+返回当前可用样本类型的列表。

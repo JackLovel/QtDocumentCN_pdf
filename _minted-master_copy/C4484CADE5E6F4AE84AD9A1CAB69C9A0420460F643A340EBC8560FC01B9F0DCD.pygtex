@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{num1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{[}\PYG{l+s}{\PYGZdq{}thirteen\PYGZdq{}}\PYG{p}{];}
+\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{num2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{.}\PYG{n}{value}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}thirteen\PYGZdq{}}\PYG{p}{);}
+\end{Verbatim}

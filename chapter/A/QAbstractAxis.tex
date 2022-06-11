@@ -1,0 +1,1301 @@
+\chapter{QAbstractAxis}
+
+QAbstractAxis类是用于专门处理坐标轴的类
+
+\begin{longtable}[l]{|l|l|}
+\hline
+属性 & 方法 \\
+\hline
+头文件 & \#include <QAbstractAxis>\\      
+\hline
+实例化 & AbstractAxis\\      
+\hline
+继承&QObject \\
+\hline
+派生 & QBarCategoryAxis, QDateTimeAxis, QLogValueAxis, and QValueAxis \\
+\hline
+\end{longtable}
+
+\splitLine
+
+\section{公共类型}
+
+\begin{longtable}[l]{|l|p{6in}|}
+\hline
+类型 & 方法 \\
+\hline
+enum & AxisType \{ AxisTypeNoAxis, AxisTypeValue, AxisTypeBarCategory, AxisTypeCategory, AxisTypeDateTime, AxisTypeLogValue \}\\
+\hline
+flags &	AxisTypes\\
+\hline
+\end{longtable}
+
+\section{属性}
+
+\begin{longtable}[l]{|r|l|}
+\hline
+函数名 & 类型 \\
+\hline
+alignment :&	const Qt::Alignment\\
+\hline
+color :&	QColor\\
+\hline
+gridLineColor :&	QColor\\
+\hline
+gridLinePen :&	QPen\\
+\hline
+gridVisible :&	bool\\
+\hline
+labelsAngle :&	int\\
+\hline
+labelsBrush :&	QBrush\\
+\hline
+labelsColor :&	QColor\\
+\hline
+labelsFont :&	QFont\\
+\hline
+labelsVisible :&	bool\\
+\hline
+linePen :&	QPen\\
+\hline
+lineVisible :&	bool\\
+\hline
+minorGridLineColor :&	QColor\\
+\hline
+minorGridLinePen :&	QPen\\
+\hline
+minorGridVisible :&	bool\\
+\hline
+orientation :&	const Qt::Orientation\\
+\hline
+reverse :&	bool\\
+\hline
+shadesBorderColor :&	QColor\\
+\hline
+shadesBrush :&	QBrush\\
+\hline
+shadesColor :&	QColor\\
+\hline
+shadesPen :&	QPen\\
+\hline
+shadesVisible :&	bool\\
+\hline
+titleBrush :&	QBrush\\
+\hline
+titleFont :&	QFont\\
+\hline
+titleText :&	QString\\
+\hline
+titleVisible :&	bool\\
+\hline
+visible :&	bool\\
+\hline
+\end{longtable}
+
+\section{公共函数}
+
+\begin{longtable}[l]{|l|l|}
+\hline
+类型  & 函数名\\
+\hline
+& $\sim$QAbstractAxis() \\
+\hline
+Qt::Alignment&	alignment() const \\
+\hline
+QColor&	gridLineColor()\\
+\hline
+QPen&	gridLinePen() const\\
+\hline
+void&	hide()\\
+\hline
+bool&	isGridLineVisible() const\\
+\hline
+bool&	isLineVisible() const\\
+\hline
+bool&	isMinorGridLineVisible() const\\
+\hline
+bool&	isReverse() const\\
+\hline
+bool&	isTitleVisible() const\\
+\hline
+bool&	isVisible() const\\
+\hline
+int&	labelsAngle() const\\
+\hline
+QBrush&	labelsBrush() const\\
+\hline
+QColor&	labelsColor() const\\
+\hline
+QFont&	labelsFont() const\\
+\hline
+bool&	labelsVisible() const\\
+\hline
+QPen&	linePen() const\\
+\hline
+QColor&	linePenColor() const\\
+\hline
+QColor&	minorGridLineColor()\\
+\hline
+QPen&	minorGridLinePen() const\\
+\hline
+Qt::Orientation &orientation() const\\
+\hline
+void&	setGridLineColor(const QColor \&color)\\
+\hline
+void&	setGridLinePen(const QPen \&pen)\\
+\hline
+void&	setGridLineVisible(bool visible = true)\\
+\hline
+void&	setLabelsAngle(int angle)\\
+\hline
+void&	setLabelsBrush(const QBrush \&brush)\\
+\hline
+void&	setLabelsColor(QColor color)\\
+\hline
+void&	setLabelsFont(const QFont \&font)\\
+\hline
+void	&setLabelsVisible(bool visible = true)\\
+\hline
+void	&setLinePen(const QPen \&pen)\\
+\hline
+void	&setLinePenColor(QColor color)\\
+\hline
+void	&setLineVisible(bool visible = true)\\
+\hline
+void	&setMax(const QVariant \&max)\\
+\hline
+void	&setMin(const QVariant \&min)\\
+\hline
+void	&setMinorGridLineColor(const QColor \&color)\\
+\hline
+void	&setMinorGridLinePen(const QPen \&pen)\\
+\hline
+void	&setMinorGridLineVisible(bool visible = true)\\
+\hline
+void	&setRange(const QVariant \&min, const QVariant \&max)\\
+\hline
+void	&setReverse(bool reverse = true)\\
+\hline
+void	&setShadesBorderColor(QColor color)\\
+\hline
+void	&setShadesBrush(const QBrush \&brush)\\
+\hline
+void	&setShadesColor(QColor color)\\
+\hline
+void	&setShadesPen(const QPen \&pen)\\
+\hline
+void&	setShadesVisible(bool visible = true)\\
+\hline
+void&	setTitleBrush(const QBrush \&brush)\\
+\hline
+void&	setTitleFont(const QFont \&font)\\
+\hline
+void&	setTitleText(const QString \&title)\\
+\hline
+void&	setTitleVisible(bool visible = true)\\
+\hline
+void&	setVisible(bool visible = true)\\
+\hline
+QColor&	shadesBorderColor() const\\
+\hline
+QBrush&	shadesBrush() const\\
+\hline
+QColor&	shadesColor() const\\
+\hline
+QPen&	shadesPen() const\\
+\hline
+bool&	shadesVisible() const\\
+\hline
+void&	show()\\
+\hline
+QBrush&	titleBrush() const\\
+\hline
+QFont&	titleFont() const\\
+\hline
+QString&	titleText() const\\
+\hline
+virtual AxisType &type() const = 0\\
+\hline
+\end{longtable}
+
+\section{信号}
+
+\begin{tabular}{|r|l|}
+\hline 
+类型 & 函数名\\
+\hline
+void&	colorChanged(QColor color)\\
+\hline
+void&	gridLineColorChanged(const QColor \&color)\\
+\hline
+void&	gridLinePenChanged(const QPen \&pen)\\
+\hline
+void&	gridVisibleChanged(bool visible)\\
+\hline
+void&	labelsAngleChanged(int angle)\\
+\hline
+void&	labelsBrushChanged(const QBrush \&brush)\\
+\hline
+void&	labelsColorChanged(QColor color)\\
+\hline
+void&	labelsFontChanged(const QFont \&font)\\
+\hline
+void&	labelsVisibleChanged(bool visible)\\
+\hline
+void&	linePenChanged(const QPen \&pen)\\
+\hline
+void&	lineVisibleChanged(bool visible)\\
+\hline
+void&	minorGridLineColorChanged(const QColor \&color)\\
+\hline
+void&	minorGridLinePenChanged(const QPen \&pen)\\
+\hline
+void&	minorGridVisibleChanged(bool visible)\\
+\hline
+void&	reverseChanged(bool reverse)\\
+\hline
+void&	shadesBorderColorChanged(QColor color)\\
+\hline
+void&	shadesBrushChanged(const QBrush \&brush)\\
+\hline
+void&	shadesColorChanged(QColor color)\\
+\hline
+void&	shadesPenChanged(const QPen \&pen)\\
+\hline
+void&	shadesVisibleChanged(bool visible)\\
+\hline
+void&	titleBrushChanged(const QBrush \&brush)\\
+\hline
+void&	titleFontChanged(const QFont \&font)\\
+\hline
+void&	titleTextChanged(const QString \&text)\\
+\hline
+void&	titleVisibleChanged(bool visible)\\
+\hline
+void&	visibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\section{详细说明}
+
+QAbstractAxis是专门用于处理坐标轴的基类。
+
+每一个连续的序列可以绑定到一个或者多个水平轴和垂直轴，但是不同域的混合轴的类型是不支持的。比如在同一个方向指定QValueAxis和QLogValueAxis。
+
+每个轴的元素（比如轴线，标题，标签，网格线，阴影，可见性）都是可以控制的。
+
+成员变量
+enum QAbstractAxis::AxisType flags QAbstractAxis::AxisTypes
+
+这个枚举类型指定了轴对象的类型
+
+\begin{tabular}{|r|l|}
+\hline
+变量&值\\
+\hline
+QAbstractAxis::AxisTypeNoAxis&	0x0\\
+\hline
+QAbstractAxis::AxisTypeValue&	0x1\\
+\hline
+QAbstractAxis::AxisTypeBarCategory&	0x2\\
+\hline
+QAbstractAxis::AxisTypeCategory&	0x4\\
+\hline
+QAbstractAxis::AxisTypeDateTime&	0x8\\
+\hline
+QAbstractAxis::AxisTypeLogValue&	0x10\\
+\hline
+\end{tabular}
+
+AxisTypes是QFlags<AxisType>的typedef。它是AxisType类型的组合。 （也就是个宏呗）
+
+alignment : const Qt::Alignment 该属性是轴的对齐属性 其值可以为
+Qt::AlignLeft, Qt::AlignRight, Qt::AlignBottom, or Qt::AlignTop. 相关
+函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\
+\hline
+Qt::Alignment&	alignment() const\\
+\hline
+\end{tabular}
+
+\splitLine
+
+color : QColor 该属性是指坐标轴与刻度的颜色
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型 & 函数名\\
+\hline
+QColor&	linePenColor() const\\
+\hline
+void&	setLinePenColor(QColor color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void	&colorChanged(QColor color)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+gridLinePen : QPen 该属性是指绘制网格线的笔
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QPen&	gridLinePen() const\\
+\hline
+void&	setGridLinePen(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void	&gridLinePenChanged(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+labelsAngle : int 该属性以度数保存轴坐标的角度
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+int	& 	labelsAngle() const\\
+\hline
+void & setLabelsAngle(int angle)\\
+\hline
+\end{tabular}
+
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & labelsAngleChanged(int angle)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+labelsBrush : QBrush 该属性表示用于绘制标签的画笔 只有画刷的颜色是相关的（这句话其实我不太理解Only the color of the brush is relevant.）
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QBrush	&labelsBrush() const\\
+\hline
+void & setLabelsBrush(const QBrush \&brush)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	labelsBrushChanged(const QBrush \&brush)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+labelsColor : QColor 该属性表示轴标签的颜色
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QColor	&labelsColor() const\\
+\hline
+void &setLabelsColor(QColor color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	labelsColorChanged(QColor color)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+labelsFont : QFont 该属性表示轴标签的字体信息
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QFont	&labelsFont() const\\
+\hline
+void	&setLabelsFont(const QFont \&font)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void	&labelsFontChanged(const QFont \&font)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+labelsVisible : bool 该属性表示轴标签是否可见
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	labelsVisible() const\\
+\hline
+void	&setLabelsVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void	&labelsVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+linePen : QPen 该属性表示绘制轴线的笔相关
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QPen	&linePen() const\\
+\hline
+void	& setLinePen(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	linePenChanged(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+lineVisible : bool 该属性表示轴线是否可见
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isLineVisible() const\\
+\hline
+void &	setLineVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	lineVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+minorGridLineColor : QColor 该属性表示副格线的颜色 仅适用于支持副网格线的轴
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QColor	&minorGridLineColor()\\
+\hline
+void &	setMinorGridLineColor(const QColor \&color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void &	minorGridLineColorChanged(const QColor \&color)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+minorGridVisible : bool 该属性表示副格线是否可见 仅适用于支持副网格线的轴
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isMinorGridLineVisible() const\\
+\hline
+void & setMinorGridLineVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& minorGridVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+orientation : const Qt::Orientation 该属性表示坐标轴的方向。 当坐标轴被添加到图表时，该属性为Qt::Horizontal或者Qt::Vertical
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+Qt::Orientation	&orientation() const\\
+\hline
+\end{tabular}
+
+\splitLine
+
+reverse : bool 该属性表示是否使用反转轴。 该值默认为false。 
+反转轴由直线，样条，散列图系列以及笛卡尔图表组成的区域支持。
+如果一个方向相反，或者行为为定义，则所有相同方向的所有轴必须保持一致。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool&	isReverse() const\\
+\hline
+void&	setReverse(bool reverse = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void&	reverseChanged(bool reverse)\\
+\hline
+\end{tabular}
+
+%\hrulefill %实线
+\splitLine % 虚线
+ 
+shadesBorderColor : QColor 该属性表示坐标轴阴影的边框（笔）颜色
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QColor	&shadesBorderColor() const\\
+\hline
+void&	setShadesBorderColor(QColor color)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& shadesBorderColorChanged(QColor color)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+
+shadesBrush : QBrush 该属性表示用于绘制轴阴影的画笔（网格线之间的区域）
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QPen&	shadesPen() const\\
+\hline
+void& setShadesPen(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& 	shadesPenChanged(const QPen \&pen)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+shadesVisible : bool 该属性表示轴阴影是否可见
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool& 	shadesVisible() const\\
+\hline
+void & setShadesVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void& 	shadesVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine 
+
+titleBrush : QBrush 该属性表示用于绘制坐标轴标题文本的画笔。 只影响画刷的颜色。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QBrush	&titleBrush() const\\
+\hline
+void & setTitleBrush(const QBrush \&brush)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleBrushChanged(const QBrush \&brush)\\
+\hline
+\end{tabular}
+
+\splitLine 
+
+titleFont : QFont 该属性表示坐标轴标题的字体。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QFont&	titleFont() const\\
+\hline
+void & setTitleFont(const QFont \&font)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleFontChanged(const QFont \&font)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+titleText : QString 该属性表示坐标轴的标题 默认为空，坐标轴的标题支持HTML的格式。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+QString & titleText() const\\ 
+\hline
+void & setTitleText(const QString \&title)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleTextChanged(const QString \&text)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+titleVisible : bool 该属性表示坐标轴的可见性。 默认值为true。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool & isTitleVisible() const\\
+\hline
+void & setTitleVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+void & titleVisibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+visible : bool 该属性表示坐标轴的可见性。
+
+相关函数
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool & isVisible() const\\
+\hline
+void & 	setVisible(bool visible = true)\\
+\hline
+\end{tabular}
+
+通知信号
+
+\begin{tabular}{|r|l|}
+\hline
+类型&函数名\\ 
+\hline
+bool & isVisible() const\\
+\hline
+void & 	visibleChanged(bool visible)\\
+\hline
+\end{tabular}
+
+\splitLine
+
+成员函数
+
+QAbstractAxis::$\sim$QAbstractAxis() 
+
+析构函数，销毁轴对象，当一个坐标轴添加到图表时，该图表获得该坐标轴的所有权。
+
+void QAbstractAxis::colorChanged(QColor \emph{color}) [信号] 
+
+当坐标轴的颜色变化时，该信号被发射。 
+
+\begin{notice}
+属性color的通知信号。
+\end{notice}
+
+void QAbstractAxis::gridLineColorChanged(const QColor \emph{\&color}) [信号] 
+
+当绘制网格线的笔的颜色改变时，该信号被发射。
+
+\begin{notice}
+属性gridLineColor的通知信号。
+\end{notice}
+
+QPen QAbstractAxis::gridLinePen() const
+
+返回用于绘制网格的笔。 
+
+\begin{notice}
+属性gridLinePen的Getter函数。 
+\end{notice}
+
+\begin{seeAlso}
+setGridLinePen()。
+\end{seeAlso}
+
+void QAbstractAxis::gridLinePenChanged（const QPen \emph{\&pen}） [信号] 
+
+当用于绘制网格线的笔变化时，会发出此信号。 
+
+\begin{notice}
+属性gridLinePen的通知信号。
+\end{notice}
+
+void QAbstractAxis::gridVisibleChanged(bool \emph{visible}) [信号] 
+
+当坐标轴的网格线的可见性变化时，发出该信号。 
+
+\begin{notice}
+属性gridVisible的通知信号。
+\end{notice}
+
+void QAbstractAxis::hide() 
+
+使坐标轴，阴影，标签，网格线不可见。
+
+void QAbstractAxis::labelsAngleChanged(int \emph{angle}) [信号]
+
+当坐标轴标签的角度变化时，发出该信号。 
+
+\begin{notice}
+属性标签角度的通知信号
+\end{notice}
+
+QBrush QAbstractAxis::labelsBrush() const 
+
+返回用于绘制标签的画笔。 
+
+\begin{notice}
+属性labelsBrush的Getter函数。
+\end{notice}
+
+\begin{seeAlso}
+setLabelsBrush()。
+\end{seeAlso}
+
+
+void QAbstractAxis::labelsBrushChanged(const QBrush \emph{\&brush}) [信号] 
+
+当用于绘制坐标轴标签的画笔改变时，会发出此信号。 属性Brush的通知信号。
+
+void QAbstractAxis :: labelsColorChanged（QColor \emph{color}） [信号signal] 
+
+当坐标轴标签的颜色改变时，会发出此信号。 属性labelsColor的通知信号。
+
+QFont QAbstractAxis::labelsFont() const 
+
+返回用于绘制标签的字体。 
+
+\begin{notice}
+属性labelsFont的Getter函数。
+\end{notice}
+
+\begin{seeAlso}
+setLabelsFont()。
+\end{seeAlso}
+
+void QAbstractAxis :: labelsFontChanged（const QFont \emph{\&font}）[信号] 
+
+当坐标轴的字体改变时，会发出此信号。 属性labelsFont的通知信号。
+
+void QAbstractAxis::labelsVisibleChanged(bool \emph{visible}) [信号] 
+
+当坐标轴标签的可见性变化时，会发出此信号。 属性labelsVisible的通知信号。
+
+QPen QAbstractAxis::linePen() const 
+
+返回用于绘制轴线与刻度线的笔。 
+
+\begin{notice}
+属性linePen的Getter函数。
+\end{notice}
+
+\begin{seeAlso}
+setLinePen()。
+\end{seeAlso}
+
+void QAbstractAxis::linePenChanged(const QPen \emph{\&pen}) [信号] 
+
+当绘制坐标轴的笔变化时，会发出此信号。 
+
+\begin{notice}
+属性linePen的通知信号。
+\end{notice}
+
+void QAbstractAxis::lineVisibleChanged(bool \emph{visible}) [信号] 
+
+当坐标轴线的可见性变化时，会发出此信号。
+
+\begin{notice}
+属性lineVisible的通知信号。
+\end{notice}
+
+void QAbstractAxis::minorGridLineColorChanged(const QColor \emph{\&color})
+[信号]
+
+ 当绘制副格线的笔的颜色变化时，该信号被发射。 
+
+\begin{notice}
+属性minorGridLineColor的通知信号。
+\end{notice}
+
+void QAbstractAxis::minorGridLinePenChanged(const QPen \emph{\&pen}) [信号] 
+
+当绘制副格线的笔变化时，该信号被发射。 
+
+\begin{notice}
+属性minorGridLinePen的通知信号。
+\end{notice}
+
+void QAbstractAxis::minorGridVisibleChanged(bool \emph{visible}) [信号] 
+
+当绘制副格线的可见性变化时，该信号被发射。 
+
+\begin{notice}
+属性minorGridVisible的通知信号。
+\end{notice}
+
+Qt::Orientation QAbstractAxis::orientation() const 
+
+返回坐标轴的方向(垂直或者水平) 
+
+\begin{notice}
+坐标轴方向的Getter函数。
+\end{notice}
+
+void QAbstractAxis::setGridLinePen(const QPen \emph{\&pen}) 
+
+设置绘制网格线的笔。 
+
+\begin{notice}
+gridLinePen的Setter函数。
+\end{notice}
+
+\begin{seeAlso}
+gridLinePen()。
+\end{seeAlso}
+
+void QAbstractAxis::setLabelsBrush(const QBrush \emph{\&brush})
+
+设置用于绘制标签的画笔。 
+
+\begin{notice}
+属性LabelsBrush的Setter函数。
+\end{notice}
+
+\begin{seeAlso}
+labelsBrush()。
+\end{seeAlso}
+
+void QAbstractAxis::setLabelsFont(const QFont \emph{\&font}) 
+
+设置用于绘制标签的字体相关 
+
+\begin{notice}
+属性labelsFont的Setter函数。
+\end{notice}
+    
+\begin{seeAlso}
+labelsFont()。
+\end{seeAlso}
+    
+void QAbstractAxis::setLinePen(const QPen \emph{\&pen}) 
+
+设置用于绘制坐标轴线和刻度线的笔。 
+
+
+\begin{notice}
+属性linePen的Setter函数。
+\end{notice}
+ 
+\begin{seeAlso}
+linePen()。
+\end{seeAlso}
+
+void QAbstractAxis::setLineVisible(bool \emph{visible} = true) 
+
+设置坐标轴线与刻度线是否可见。 
+
+\begin{notice}
+属性lineVisible的Setter函数
+\end{notice}
+     
+\begin{seeAlso}
+isLineVisible()。
+\end{seeAlso}
+
+void QAbstractAxis::setMax(const QVariant \emph{\&max}) 
+
+设置坐标轴上显示的最大值。根据当前坐标轴的类型，最大值参数会被转换为适当的值。如果转化失败，该函数设置无效。
+
+void QAbstractAxis::setMin(const QVariant \emph{\&min}) 
+
+设置坐标轴上显示的最小值。根据当前坐标轴的类型，最小值参数会被转换为适当的值。如果转化失败，该函数设置无效。
+
+void QAbstractAxis::setRange(const QVariant \emph{\&min}, const QVariant
+\emph{\&max}) 
+
+设置坐标轴的范围。根据当前坐标轴的类型，最大值最小值会被转换为适当的值。如果转化失败，该函数设置无效。
+
+void QAbstractAxis::setShadesBrush(const QBrush \emph{\&brush})
+
+设置用于绘制阴影的画笔。 
+
+\begin{notice}
+属性shadesBrush的Setter函数。
+\end{notice}
+         
+\begin{seeAlso}
+shadesBrush()。
+\end{seeAlso}
+    
+
+void QAbstractAxis::setShadesPen(const QPen \emph{\&pen})
+
+设置用于绘制阴影的笔。 
+
+\begin{notice}
+属性shadesPen的Setter函数。
+\end{notice}
+             
+\begin{seeAlso}
+shadesPen()。
+\end{seeAlso}
+
+void QAbstractAxis::setTitleBrush(const QBrush \emph{\&brush}) 
+
+设置用于绘制标题的画笔。
+
+\begin{notice}
+属性titleBrush的Setter函数。
+\end{notice}
+    
+\begin{seeAlso}
+titleBrush()。
+\end{seeAlso}
+
+void QAbstractAxis::setTitleFont(const QFont \emph{\&font}) 
+
+设置用于绘制标题的笔。
+
+\begin{notice}
+属性titleFont的Setter函数。
+\end{notice}
+        
+\begin{seeAlso}
+titleFont()。
+\end{seeAlso}
+
+void QAbstractAxis::setVisible(bool \emph{visible} = true) 
+
+设置坐标轴，阴影，标签，网格线是否可见。 
+
+\begin{notice}
+属性visible的Setter函数。
+\end{notice}
+            
+\begin{seeAlso}
+isVisible()。
+\end{seeAlso}
+
+void QAbstractAxis::shadesBorderColorChanged(QColor \emph{color}) [信号] 
+
+当绘制坐标轴边框的颜色变化时，会发出此信号。  
+
+\begin{notice}
+属性shadesBorderColor的通知信号。
+\end{notice}
+
+QBrush QAbstractAxis::shadesBrush() const 
+
+返回用于绘制阴影的画笔。
+
+\begin{notice}
+属性shadesBrush()的Getter函数。
+\end{notice}
+        
+\begin{seeAlso}
+setShadesBrush()
+\end{seeAlso}
+
+void QAbstractAxis::shadesBrushChanged(const QBrush \emph{\&brush}) [信号] 
+
+当绘制坐标轴阴影的画刷变化时，会发出此信号。 
+
+\begin{notice}
+属性shadesBrush()的通知信号。
+\end{notice}
+
+void QAbstractAxis::shadesColorChanged(QColor \emph{color}) [信号] 
+
+当绘制坐标轴阴影颜色发生变化时，会发出此信号。 
+
+\begin{notice}
+属性shadesColor()的通知信号。
+\end{notice}
+
+QPen QAbstractAxis::shadesPen() const 
+
+返回用于绘制阴影的笔。
+
+\begin{notice}
+属性shadesPen()的Getter函数。
+\end{notice}
+    
+\begin{seeAlso}
+setShadesPen()。
+\end{seeAlso}
+
+void QAbstractAxis::shadesPenChanged(const QPen \emph{\&pen}) [信号] 
+
+当绘制坐标轴阴影的笔发生变化时，会发出此信号。
+
+\begin{notice}
+属性shadesPen()的通知信号。
+\end{notice}
+
+void QAbstractAxis::shadesVisibleChanged(bool \emph{visible}) [信号] 
+
+当坐标轴的阴影可见性变化时，会发出此信号。
+
+\begin{notice}
+属性shadesVisible()的通知信号。
+\end{notice}
+
+
+void QAbstractAxis::show() 
+
+使坐标轴，阴影，标签，网格线可见。
+
+QBrush QAbstractAxis::titleBrush() const 
+
+返回用于绘制标题的画刷
+
+\begin{notice}
+属性titleBrush的Getter函数。
+\end{notice}
+
+\begin{seeAlso}
+setTitleBrush()。
+\end{seeAlso}
+
+void QAbstractAxis::titleBrushChanged(const QBrush \emph{\&brush}) [信号] 
+
+当绘制坐标轴标题的画刷变化时，该信号被发射 
+
+\begin{notice}
+titleBrush的通知信号。
+\end{notice}
+
+QFont QAbstractAxis::titleFont() const 
+
+返回绘制标题的笔相关属性。 
+
+\begin{notice}
+titleFont的Getter函数。
+\end{notice}
+
+\begin{seeAlso}
+setTitleFont()。
+\end{seeAlso}
+
+void QAbstractAxis::titleFontChanged(const QFont \emph{\&font}) [信号]
+
+当坐标轴标题的字体属性更改时，会发出此信号。 
+
+\begin{notice}
+titleFont的通知信号。
+\end{notice}
+
+void QAbstractAxis::titleTextChanged(const QString \emph{\&text}) [信号] 
+
+当坐标轴标题的文本内容改变时，会发出此信号。 
+
+\begin{notice}
+titleText的通知信号。
+\end{notice}
+
+void QAbstractAxis::titleVisibleChanged(bool \emph{visible}) [信号] 
+
+当坐标轴的标题文本的可见性变化时，会发出此信号。 
+
+\begin{notice}
+titleVisible的通知信号。
+\end{notice}
+
+AxisType QAbstractAxis::type() const 
+
+返回坐标轴的类型
+
+void QAbstractAxis::visibleChanged(bool \emph{visible}) 
+
+当坐标轴的可见性变化时，会发出此信号。 
+
+\begin{notice}
+坐标轴的visible的通知信号。
+\end{notice}

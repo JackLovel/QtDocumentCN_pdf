@@ -1,0 +1,241 @@
+\chapter{QSslError}
+
+QSslError 类提供了一些关于 SSl 错误的相关信息与操作。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSslError>\\      
+	\hline
+	qmake & QT += network\\      
+	\hline
+	引入 &	Qt4.3 \\ 
+	\hline
+\end{tabular}
+
+该类最初在 Qt 4.3 版本引入。
+
+\begin{notice}
+该类所有的函数都是可重入的。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|m{24em}|}
+\hline 
+类型 &	属性\\ 
+\hline 
+enum 	 &SslError \{ NoError, UnableToGetIssuerCertificate, 
+			UnableToDecryptCertificateSignature, 
+			UnableToDecodeIssuerPublicKey, 
+			CertificateSignatureFailed, …, 
+			OcspStatusUnknown \} \\
+ \hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|m{19em}|m{24em}|}
+\hline 
+类型 &	函数名\\ 
+\hline 
+&QSslError(const QSslError \&other) \\ 
+\hline
+&QSslError(QSslError::SslError error, const QSslCertificate \&certificate) \\ 
+\hline
+&QSslError(QSslError::SslError error) \\ 
+\hline
+&QSslError() \\ 
+\hline
+QSslError \& &	operator=(const QSslError \&other) \\ 
+\hline
+& $\sim$QSslError()\\
+\hline
+QSslCertificate &	certificate() const\\
+\hline
+QSslError::SslError &	error() const\\
+\hline
+QString &	errorString() const\\
+\hline
+void &	swap(QSslError \&other) \\
+\hline
+bool &	operator!=(const QSslError \&other) const \\
+\hline
+bool &	operator==(const QSslError \&other) const\\
+\hline 
+\end{longtable}
+
+\section{详细描述}
+
+\subsection{成员类型文档}
+
+enum QSslError::SslError
+
+该枚举类型描述了所有可以辨认的 SSL 握手时可能出现的错误类型。
+
+\begin{longtable}[l]{|l|r|}
+\hline 
+常量 &	值  \\ 
+\hline
+QSslError::NoError &	0 \\ 
+\hline
+QSslError::UnableToGetIssuerCertificate &	1 \\ 
+\hline
+QSslError::UnableToDecryptCertificateSignature &	2 \\ 
+\hline
+QSslError::UnableToDecodeIssuerPublicKey &	3 \\ 
+\hline
+QSslError::CertificateSignatureFailed &	4 \\ 
+\hline
+QSslError::CertificateNotYetValid &	5 \\ 
+\hline
+QSslError::CertificateExpired &	6 \\
+\hline
+QSslError::InvalidNotBeforeField &	7 \\ 
+\hline
+QSslError::InvalidNotAfterField &	8 \\ 
+\hline
+QSslError::SelfSignedCertificate 	&9 \\ 
+\hline
+QSslError::SelfSignedCertificateInChain &	10 \\ 
+\hline
+QSslError::UnableToGetLocalIssuerCertificate 	&11 \\ 
+\hline
+QSslError::UnableToVerifyFirstCertificate &	12 \\ 
+\hline
+QSslError::CertificateRevoked& 	13 \\ 
+\hline
+QSslError::InvalidCaCertificate &	14 \\ 
+\hline
+QSslError::PathLengthExceeded &	15 \\ 
+\hline
+QSslError::InvalidPurpose &	16 \\ 
+\hline
+QSslError::CertificateUntrusted &	17 \\ 
+\hline
+QSslError::CertificateRejected &	18 \\ 
+\hline
+QSslError::SubjectIssuerMismatch &	19 \\ 
+\hline
+QSslError::AuthorityIssuerSerialNumberMismatch &	20 \\ 
+\hline
+QSslError::NoPeerCertificate &	21 \\ 
+\hline
+QSslError::HostNameMismatch &	22 \\ 
+\hline
+QSslError::UnspecifiedError &	-1 \\ 
+\hline
+QSslError::NoSslSupport 	&23 \\  
+\hline
+QSslError::CertificateBlacklisted &	24 \\ 
+\hline
+QSslError::CertificateStatusUnknown &	25 \\ 
+\hline
+QSslError::OcspNoResponseFound &	26 \\ 
+\hline
+QSslError::OcspMalformedRequest &	27 \\ 
+\hline
+QSslError::OcspMalformedResponse &	28 \\ 
+\hline
+QSslError::OcspInternalError &	29 \\ 
+\hline
+QSslError::OcspTryLater &	30 \\ 
+\hline
+QSslError::OcspSigRequred &	31 \\ 
+\hline
+QSslError::OcspUnauthorized &	32 \\ 
+\hline
+QSslError::OcspResponseCannotBeTrusted &	33 \\ 
+\hline
+QSslError::OcspResponseCertIdUnknown &	34 \\ 
+\hline
+QSslError::OcspResponseExpired& 	35 \\
+\hline
+QSslError::OcspStatusUnknown &	36 \\ 
+\hline 
+\end{longtable}
+
+\begin{seeAlso}
+QSslError::errorString。
+\end{seeAlso}
+
+\section{成员函数文档}
+
+QSslError::QSslError(const QSslError \&other)
+
+拷贝构造函数。
+
+从另外一个 QSslError 对象中构造一个 QSslError 对象。
+
+QSslError::QSslError(QSslError::SslError error, const QSslCertificate \&certificate)
+
+构造函数。
+两个参数，error 指定了出现的错误，certificate 指定了该错误相关的证书。
+
+\begin{seeAlso}
+QSslCertificate。
+\end{seeAlso}
+
+QSslError::QSslError(QSslError::SslError error)
+
+构造函数。
+error 参数指定了出现的错误。
+
+QSslError::QSslError()
+
+构造函数。使用默认证书构造一个 QSslError 对象，该对象无错误发生。
+
+QSslError \&QSslError::operator=(const QSslError \&other)
+
+将 error 的内容分配到等式左值。
+
+该函数最初在 Qt4.4 版本引入。
+
+QSslError::$\sim$QSslError()
+
+析构函数。销毁 QSslError 对象。
+
+QSslCertificate QSslError::certificate() const
+
+返回与该错误相联系的证书。若该错误为与任何证书相关联，函数将返回 null 。
+
+\begin{seeAlso}
+error() 和 errorString()。
+\end{seeAlso}
+
+QSslError::SslError QSslError::error() const
+
+返回出现的错误的类型。
+
+\begin{seeAlso}
+errorString() 和 certificate()。
+\end{seeAlso}
+
+QString QSslError::errorString() const
+
+返回有关于该错误的便于阅读的、简短的描述。
+
+\begin{seeAlso}
+error() 和 certificate()。
+\end{seeAlso}
+
+void QSslError::swap(QSslError \&other)
+
+与 other 交换迅速地错误信息。
+
+该函数交换速度极快并保证成功执行。
+
+该函数最初在 Qt 5.0版本引入。
+
+bool QSslError::operator!=(const QSslError \&other) const
+
+如果当前的错误与 other 的错误并不相同则返回 true ，否则返回 false 。
+
+该函数最初在 Qt 4.4版本引入。
+
+bool QSslError::operator==(const QSslError \&other) const
+
+如果当前的错误与 other 的错误相同则返回 true ，否则返回 false 。
+
+该函数最初在 Qt 4.4版本引入。

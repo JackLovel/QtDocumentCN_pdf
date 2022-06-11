@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{QMetaObject}\PYG{o}{::}\PYG{n}{invokeMethod}\PYG{p}{(}\PYG{k+kr}{thread}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}quit\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{                           }\PYG{n}{Qt}\PYG{o}{::}\PYG{n}{QueuedConnection}\PYG{p}{);}
+\end{Verbatim}

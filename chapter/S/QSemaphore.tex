@@ -1,0 +1,168 @@
+\chapter{QSemaphore}
+
+QSemaphore类提供了一个通用的信号量。\href{}{更多内容...}
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QSemaphore>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+\end{tabular}
+
+\begin{warning}
+此类中所有函数都是线程安全的。
+\end{warning}
+
+\section{公共成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline 
+	返回类型	& 函数名 \\ 
+	\hline 
+	& QSemaphore(int \emph{n} = 0) \\ 
+	\hline
+	& $\sim$QSemaphore() \\
+	\hline
+	void	& acquire(int \emph{n} = 1) const \\ 
+	\hline
+	int	& available() const \\ 
+	\hline
+	void &	release(int \emph{n} = 1) \\
+	\hline
+	bool &	tryAcquire(int \emph{n} = 1) \\ 
+	\hline 
+	bool	&tryAcquire(int \emph{n}, int \emph{timeout}) \\ 
+	\hline
+\end{tabular}
+
+
+\section{详细描述}
+
+信号量是互斥量的泛化。虽然互斥量只能锁定一次，但可以多次获取信号。信号量通常用于保护一定数量的相同资源。
+
+信号量支持两个基本操作，acquire() 和 release()：
+
+\begin{compactitem}
+\item acquire(n) 尝试获取 n 个资源。如果没有那么多可用资源，调用将被阻塞，直到能够获取。
+\item release(n) 释放 n 个资源。
+\end{compactitem}
+
+还有 tryAcquire() 函数，如果无法获取资源，它将立即返回；还有一个 available() 函数，可以随时返回可用资源的数量。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QSemaphore sem(5);      // sem.available() == 5
+
+sem.acquire(3);         // sem.available() == 2
+sem.acquire(2);         // sem.available() == 0
+sem.release(5);         // sem.available() == 5
+sem.release(5);         // sem.available() == 10
+
+sem.tryAcquire(1);      // sem.available() == 9, returns true
+sem.tryAcquire(250);    // sem.available() == 9, returns false
+\end{lstlisting}
+
+信号量的一个典型应用场景，是控制生产者线程和消费者线程对共享循环缓冲区的访问。生产者消费者示例展示了如何使用 QSemaphore 来解决这个问题。
+
+一个非计算信号量（non-computing）的例子是在餐馆就餐。用餐厅里的椅子数初始化信号量。
+当人们到达时，他们需要要一个座位。入座后，available() 将减少。当人们离开时，available() 会增加，允许更多的人进入。
+如果有一个 10 人的聚会，但是餐馆只有 9 个座位，那这 10 个人会等待空出位置。
+但是如果此时有一个 4 人的聚会，那么他们会入座（将可用的座位减少到 5 个，10 人聚会将等待更长时间）。
+
+\begin{seeAlso}
+QSemaphoreReleaser，QMutex，QWaitCondition，QThread 和 生产者消费者示例。
+\end{seeAlso}
+
+\section{成员类型文档}
+
+QSemaphore::QSemaphore(int \emph{n} = 0)
+
+构造一个信号量并将其保护的资源数量初始化为 \hl{n}（默认为0）。
+
+\begin{seeAlso}
+release()，available()。
+\end{seeAlso}
+
+QSemaphore::$\sim$QSemaphore()
+
+析构。
+
+\begin{warning}
+析构正在使用的信号量可能会导致未定义的行为。
+\end{warning}
+
+void QSemaphore::acquire(int \emph{n} = 1)
+
+尝试获取由信号量保护的 n 个资源。如果 \hl{n > available()}，则此调用将阻塞，直到有足够的资源可用。
+
+\begin{seeAlso}
+release()，available()，tryAcquire()。
+\end{seeAlso}
+
+int QSemaphore::available() const
+
+返回信号量当前可用的资源数。返回值永远不会是负数。
+
+\begin{seeAlso}
+release()，available()。
+\end{seeAlso}
+
+void QSemaphore::release(int \emph{n} = 1)
+
+释放 n 个信号量保护的资源。
+
+这个函数也可以用来“创建”资源。例如：
+
+\begin{lstlisting}[language=C++]
+QSemaphore sem(5);      // 信号量保护 5 个资源  sem.avilable() == 5
+sem.acquire(5);         // 请求 5 个资源       sem.avilable() == 0
+sem.release(5);         // 释放 5 个资源       sem.avilable() == 5
+sem.release(10);        // “创建” 10 个新资源  sem.avilable() == 15
+\end{lstlisting}
+
+QSemaphoreReleaser 是一个围绕此函数的 RAII 包装器。
+
+\begin{seeAlso}
+acquire()，available()，QSemaphoreReleaser。
+\end{seeAlso}
+
+bool QSemaphore::tryAcquire(int \emph{n} = 1)
+
+尝试获取由信号量保护的 n 个资源，并在成功时返回 \hl{true}。如果 \hl{available() < n}，此调用立即返回 \hl{false}，而不获取任何资源。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QSemaphore sem(5);      // sem.available() == 5
+sem.tryAcquire(250);    // sem.available() == 5, returns false
+sem.tryAcquire(3);      // sem.available() == 2, returns true
+\end{lstlisting}
+
+\begin{seeAlso}
+acquire()。
+\end{seeAlso}
+
+bool QSemaphore::tryAcquire(int \emph{n}, int \emph{timeout})
+
+尝试获取由信号量保护的 n 个资源，并在成功时返回 \hl{true}。如果 \hl{available() < n}，此调用将等待 \hl{timeout} 毫秒，以尝试获取。
+
+\begin{notice}
+传递一个负数作为超时相当于调用 \hl{acquire()}，也就是说，如果 \hl{timeout} 为负数，这个函数将永远等待资源可用。
+\end{notice}
+
+例如：
+
+\begin{lstlisting}[language=C++]
+QSemaphore sem(5);            // sem.available() == 5
+sem.tryAcquire(250, 1000);    // sem.available() == 5, 等待 1000 毫秒，returns false
+sem.tryAcquire(3, 30000);     // sem.available() == 2, 立即返回，returns true
+\end{lstlisting}
+
+\begin{seeAlso}
+acquire()。
+\end{seeAlso}
+

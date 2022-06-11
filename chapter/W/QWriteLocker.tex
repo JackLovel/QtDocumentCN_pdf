@@ -1,0 +1,121 @@
+\chapter{QWriteLocker}
+
+QWriteLocker 是工具类，它简化了对读写锁，写访问的的锁定和解锁。\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWriteLocker/QWriteLocker.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{更多...}
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QWriteLocker>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+\end{tabular}
+
+
+\begin{notice}
+此类中所有函数都是\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/R/Reentrancy_and_Thread-Safety/Reentrancy_and_Thread-Safety.md}{线程安全}的。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 & 函数 \\
+	\hline
+	&	\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWriteLocker/QWriteLocker.md#qwritelockerqwritelockerqreadwritelock-lock}{QWriteLocker}(QReadWrtiteLock *lock) \\
+	\hline
+	& \href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWriteLocker/QWriteLocker.md#qwritelockerqwritelocker}{$\sim$QWriteLocker()} \\
+	\hline
+		&const QString\\
+	\hline
+	QReadWriteLock *	&\href{https://github.com/QtDocumentCN/QtDocumentCN/blob/master/Src/W/QWriteLocker/QWriteLocker.md#qreadwritelock-qwritelockerreadwritelock-const}{readWriteLock()}  const\\
+	\hline
+	void&	relock()\\
+	\hline
+	void &	unlock()\\
+	\hline
+\end{tabular}
+
+
+\section{详细描述}
+
+
+QWriteLocker（和 QReadLocker）的目的是简化 QReadWriteLock 的锁定和解锁。锁定和解锁语句、异常处理代码是很容易出错的，而且很难调试。QWriteLocker 可以确保在此类情况下，锁的状态始终定义良好。
+
+下面是一个使用 QWriteLocker 锁定和解锁读写锁的示例：
+
+
+\begin{lstlisting}[language=C++]
+QReadWriteLock lock;
+
+void writeData(const QByteArray &data)
+{
+	QWriteLocker locker(&lock);
+	...
+}
+\end{lstlisting}
+
+等价于以下代码：
+
+\begin{lstlisting}[language=C++]
+QReadWriteLock lock;
+	
+void writeData(const QByteArray &data)
+{
+	lock.lockForWrite();
+	...
+	lock.unlock();
+}
+\end{lstlisting}
+
+QMutexLocker 文档展示了使用locker对象来大大简化编程的示例。
+
+\begin{seeAlso}
+QReadLocker、QReadWriteLock。
+\end{seeAlso}
+
+
+\section{成员函数文档}
+
+QWriteLocker::QWriteLocker(QReadWriteLock *lock)
+
+
+构造一个 QWriteLocker 并锁定用于写入的锁。当 QWriteLocker 被销毁时，锁将被解锁。如果 lock == nullptr，则 QWriteLocker 不执行任何操作。
+
+
+\begin{seeAlso}
+QReadWriteLock::lockForWrite()。
+\end{seeAlso}
+
+
+
+QWriteLocker::$\sim$QWriteLocker()
+
+销毁 QWriteLocker 并解锁传递给构造函数的锁。
+
+\begin{seeAlso}
+QReadWriteLock::unlock()。
+\end{seeAlso}
+
+QReadWriteLock *QWriteLocker::readWriteLock() const
+
+返回传递给构造函数的读写锁的指针。
+
+void QWriteLocker::relock()
+
+重新锁定。
+
+\begin{seeAlso}
+unlock()。
+\end{seeAlso}
+
+void QWriteLocker::unlock()
+
+解锁。
+
+\begin{seeAlso}
+QReadWriteLock::unlock()。
+\end{seeAlso}
+
+

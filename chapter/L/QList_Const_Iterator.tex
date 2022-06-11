@@ -1,0 +1,278 @@
+\chapter{QList\_Const\_Iterator}
+
+类 QList::const\_iterator
+
+QList::const\_iterator 类为 QList 和 QQueue 提供了 STL 风格的常量迭代器.
+更多...
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|l|}
+\hline
+类型 &	名称\\
+\hline
+typedef &	iterator\_category\\
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|l|l|}
+\hline
+类型 &	名称\\
+\hline
+    &const\_iterator(const iterator \emph{\&other})\\
+\hline
+	&const\_iterator(const const\_iterator \emph{\&other})\\
+\hline
+	&const\_iterator()\\
+\hline
+bool &	operator!=(const const\_iterator \emph{\&other}) const\\
+\hline
+const T & 	operator*() const\\
+\hline
+const\_iterator &	operator+(const\_iterator::difference\_type \emph{j})
+                  const\\
+\hline
+const\_iterator \& &	operator++()\\
+\hline
+const\_iterator &	operator++(\emph{int})\\
+\hline
+const\_iterator \& & 	operator+=(const\_iterator::difference\_type
+                     \emph{j})\\
+\hline
+const\_iterator &	operator-(const\_iterator::difference\_type \emph{j})
+                  const\\
+\hline
+int 	&operator-(const\_iterator other) const\\
+\hline
+const\_iterator \& &	operator--()\\
+\hline
+const\_iterator 	& operator--(\emph{int})\\
+\hline
+const\_iterator \& 	& operator-=(const\_iterator::difference\_type \emph{j})\\
+const T * &	operator->() const\\
+\hline
+bool& 	operator<(const const\_iterator \emph{\&other}) const\\
+\hline
+bool& 	operator<=(const const\_iterator \emph{\&other}) const\\
+\hline
+bool& 	operator==(const const\_iterator \emph{\&other}) const\\
+\hline
+bool& 	operator>(const const\_iterator \emph{\&other}) const\\
+\hline
+bool& 	operator>=(const const\_iterator \emph{\&other}) const\\
+\hline
+const T \& &	[operator](const\_iterator::difference\_type \emph{j}) const\\
+\hline
+\end{longtable}
+
+
+\section{详细描述}
+
+QList 同时支持 STL 风格迭代器 和 Java 风格迭代器。STL 风格迭代器更偏底层且易用性较差，但在性能上更胜一筹，且对熟悉 STL 的开发者来说能更快上手。
+
+QList::const\_iterator 允许你遍历一个 QList (或一个 QQueue)。如果需要在遍历时修改 QList，可以使用 QList::iterator 来代替。除非你需要通过迭代器修改一个非常量 QList，否则对非常量 QList 也继续使用 QList::const\_iterator 通常是一个最佳实践。常量迭代器速度上略快，并且可以提升代码可读性。
+
+QList::const\_iterator 的默认构造函数会创建一个未初始化的迭代器。在迭代之前你必须通过 QList 的方法，如 QList::constBegin(), QList::constEnd()，或 QList::insert() 将其初始化。这是一个常见的打印列表中保存的所有元素的循环:
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list.append("January");
+list.append("February");
+...
+list.append("December");
+
+QList<QString>::const_iterator i;
+for (i = list.constBegin(); i != list.constEnd(); ++i)
+    cout << *i << Qt::endl;
+\end{lstlisting}
+
+大多数 QList 的方法接收一个整型索引而不是一个迭代器作为参数。因此，迭代器实际上在和 QList 交互时很少被使用。一个 STL 风格迭代器非常有使用意义的地方是作为泛型算法的参数。
+
+例如，下列代码展示了如何删除保存在一个 QList<QWidget *> 中的所有物件：
+
+
+\begin{lstlisting}[language=C++]
+QList<QWidget *> list;
+...
+qDeleteAll(list.constBegin(), list.constEnd());
+\end{lstlisting}
+
+
+多个迭代器可以作用在同一个列表上。然而，需要注意的是对该 QList 进行任意非常量的方法调用都会使所有已存在的迭代器状态变成未定义。如果需要在一个比较长周期内保证迭代器有效，我们建议你使用 QLinkedList 而不是 QList。
+
+\begin{warning}
+支持隐式共享的容器的迭代器的行为和 STL 迭代器并不完全一样。当这类容器的迭代器在使用时你应当避免容器的拷贝。更多信息请阅读 隐式共享迭代器问题 一文。
+\end{warning}
+
+\begin{seeAlso}
+QList::iterator and QListIterator.
+\end{seeAlso}
+
+\section{成员类型文档}
+
+typedef const\_iterator::iterator\_category
+
+等同于 std::random\_access\_iterator\_tag ，指示该迭代器是一个随机访问迭代器。
+
+\section{成员函数文档}
+
+
+const\_iterator::const\_iterator(const iterator \emph{\&other})
+
+构造一个 \emph{other} 的副本。
+
+const\_iterator::const\_iterator(const const\_iterator \emph{\&other})
+
+构造一个 \emph{other} 的副本。
+
+const\_iterator::const\_iterator()
+
+构造一个未初始化的迭代器。
+
+类似于 operator*() and operator++() 的方法不允许对未初始化的迭代器调用，在使用前先通过 operator=() 进行赋值。
+
+\begin{seeAlso}
+QList::constBegin() 和 QList::constEnd().
+\end{seeAlso}
+
+
+bool const\_iterator::operator!=(const const\_iterator  \emph{\&other}) const
+
+如果该迭代器指向的元素的值不等于 \emph{other} 迭代器指向的元素的值则返回 true。
+
+
+\begin{seeAlso}
+operator==()。
+\end{seeAlso}
+
+
+const T \&const\_iterator::operator*() const
+
+返回当前的元素。
+
+\begin{seeAlso}
+operator->()。
+\end{seeAlso}
+
+
+const\_iterator const\_iterator::operator+(const\_iterator::difference\_type \emph{j}) const
+
+返回一个指向当前迭代器向列表尾部移动 \emph{j} 步的位置的元素的迭代器。(如果 \emph{j} 为负值，则迭代器向列表头部移动。)
+
+
+\begin{seeAlso}
+operator-() 和 operator+=().
+\end{seeAlso}
+
+
+const\_iterator \&const\_iterator::operator++()
+
+前缀 ++ 运算符(\hl{++it})将迭代器向列表尾部移动到列表中的下一个元素并返回一个指向移动后的元素的迭代器。
+
+对 QList::end() 调用该方法是未定义行为。
+
+\begin{seeAlso}
+operator--().
+\end{seeAlso}
+
+const\_iterator const\_iterator::operator++(\emph{int})
+
+这是一个重载函数。
+
+后缀 ++ 运算符(\hl{++it})将迭代器向列表尾部移动到列表中的下一个元素并返回一个指向移动前的元素的迭代器。
+
+iterator \&iterator::operator+=(iterator::difference\_type \emph{j})
+
+const\_iterator \&const\_iterator::operator+=(const\_iterator::difference\_type \emph{j})
+
+将该迭代器列表尾部移动 \emph{j} 个元素。(如果 \emph{j} 为负值，则向列表头部移动)
+
+\begin{seeAlso}
+operator-=() 和 operator+().
+\end{seeAlso}
+
+const\_iterator const\_iterator::operator-(const\_iterator::difference\_type \emph{j}) const
+
+返回一个指向当前迭代器向列表头部移动 \emph{j} 步的位置的元素的迭代器。(如果 \emph{j} 为负值，则迭代器向列表尾部移动。)
+
+\begin{seeAlso}
+operator+() 和 operator-=().
+\end{seeAlso}
+
+int const\_iterator::operator-(const\_iterator \emph{other}) const
+
+返回 \emph{other} 指向的元素和该迭代器指向元素之间间隔的元素个数。
+
+const\_iterator \&const\_iterator::operator--()
+
+前缀 -- 运算符(\hl{--it})将迭代器向列表头部移动到列表中的上一个元素并返回一个指向移动后的元素的迭代器。
+
+对 QList::begin() 调用该方法是未定义行为。
+
+
+\begin{seeAlso}
+operator++().
+\end{seeAlso}
+
+
+const\_iterator const\_iterator::operator--(\emph{int})
+
+这是一个重载函数。
+
+前缀 -- 运算符(\hl{--it})将迭代器向列表头部移动到列表中的上一个元素并返回一个指向移动前的元素的迭代器。
+
+const\_iterator \&const\_iterator::operator-=(const\_iterator::difference\_type \emph{j})
+
+将迭代器向列表头部回退 \emph{j} 元素。(如果 \emph{j} 为负值，则迭代器向列表尾部移动。)
+
+\begin{seeAlso}
+operator+=() 和 operator-().
+\end{seeAlso}
+
+
+const T *const\_iterator::operator->() const
+
+返回一个指向当前元素的指针。
+
+\begin{seeAlso}
+operator*().
+\end{seeAlso}
+
+
+bool const\_iterator::operator<(const const\_iterator \emph{\&other}) const
+
+如果该迭代器指向的元素的值小于 \emph{other} 迭代器指向的元素的值则返回 \hl{true}。
+
+bool const\_iterator::operator<=(const const\_iterator \&other) const
+
+如果该迭代器指向的元素的值小于等于 \emph{other} 迭代器指向的元素的值则返回
+\hl{true}。
+
+bool const\_iterator::operator==(const const\_iterator \emph{\&other}) const
+
+如果该迭代器指向的元素的值等于 \emph{other} 迭代器指向的元素的值则返回 \hl{true}。
+
+\begin{seeAlso}
+operator!=().
+\end{seeAlso}
+
+bool const\_iterator::operator>(const const\_iterator \&other) const
+
+如果该迭代器指向的元素的值不等于 \emph{other} 迭代器指向的元素的值则返回 \hl{true}。
+
+bool const\_iterator::operator>=(const const\_iterator \emph{\&other}) const
+
+如果该迭代器指向的元素的值大于等于 \emph{other} 迭代器指向的元素的值则
+返回 \hl{true}。
+
+const T \&const\_iterator::operator[](const\_iterator::difference\_type \emph{j}) const
+
+返回位于 \emph{this} + \emph{j} 的元素。
+
+提供该方法是为了使 QList 迭代器行为类似 C++ 指针。
+
+\begin{seeAlso}
+operator+().
+\end{seeAlso}

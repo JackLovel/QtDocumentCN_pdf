@@ -1,0 +1,1057 @@
+\chapter{QList}
+
+QList Class
+
+template <typename T> class QList
+
+QList 类是一个用于提供列表支持的模板类。更多...
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	内容\\
+\hline
+Header:	&\#include <QList>\\
+\hline
+qmake: 	& QT += core\\
+\hline
+子类:& 	QByteArrayList, QItemSelection, QQueue 和 QStringList\\
+\hline
+\end{tabular}
+
+\begin{notice}
+本页面提到的方法都是可重入的。
+\end{notice}
+
+\section{公共成员类型}
+
+\begin{tabular}{|l|l|}
+\hline
+类型 &	名称\\
+\hline
+class& 	const\_iterator\\
+\hline
+class& 	iterator\\
+\hline
+typedef& 	ConstIterator\\
+\hline
+typedef& 	Iterator\\
+\hline
+typedef& 	const\_pointer\\
+\hline
+typedef& 	const\_reference\\
+\hline
+typedef& 	const\_reverse\_iterator\\
+\hline
+typedef& 	difference\_type\\
+\hline
+typedef& 	pointer\\
+\hline
+typedef& 	reference\\
+\hline
+typedef& 	reverse\_iterator\\
+\hline
+typedef& 	size\_type\\
+\hline
+typedef& 	value\_type\\
+\hline
+\end{tabular}
+
+
+\section{公共成员方法}
+
+
+\begin{longtable}[l]{|l|m{25em}|}
+\hline
+ 类型& 	函数名\\
+\hline
+ &	QList(InputIterator first, InputIterator last)\\
+\hline
+&	QList(std::initializer\_list args)\\
+\hline
+&	QList(QList \&\&other)\\
+\hline
+&	QList(const QList \&other)\\
+\hline
+&	QList()\\
+\hline
+QList \&& 	operator=(QList \&\&other)\\
+\hline
+QList \& &	operator=(const QList \&other)\\
+\hline
+	& $\sim$QList()\\
+\hline
+void &	append(const T \&value)\\
+\hline
+void &	append(const QList \&value)\\
+\hline
+const T \& & 	at(int i) const\\
+\hline
+T \& &	back()\\
+\hline
+const T \& &	back() const\\
+\hline
+QList::iterator &	begin()\\
+\hline
+QList::const\_iterator& 	begin() const\\
+\hline
+QList::const\_iterator& 	cbegin() const\\
+\hline
+QList::const\_iterator& 	cend() const\\
+\hline
+void &	clear()\\
+\hline
+QList::const\_iterator & 	constBegin() const\\
+\hline
+QList::const\_iterator &	constEnd() const\\
+\hline
+const T \& &	constFirst() const\\
+\hline
+const T \& &	constLast() const\\
+\hline
+bool& 	contains(const T \&value) const\\
+\hline
+int& 	count(const T \&value) const\\
+\hline
+int& 	count() const\\
+\hline
+QList::const\_reverse\_iterator &	crbegin() const\\
+\hline
+QList::const\_reverse\_iterator &	crend() const\\
+\hline
+bool 	& empty() const\\
+\hline
+QList::iterator& 	end()\\
+\hline
+QList::const\_iterator &	end() const\\
+\hline
+bool &	endsWith(const T \&value) const\\
+\hline
+QList::iterator &	erase(QList::iterator pos)\\
+\hline
+QList::iterator &	erase(QList::iterator begin, QList::iterator
+                  end)\\
+\hline
+T \& &	first()\\
+\hline
+const T \& &	first() const\\
+\hline
+T \& &	front()\\
+\hline
+const T \& & 	front() const\\
+\hline
+int &	indexOf(const T \&value, int from = 0) const\\
+\hline
+void &	insert(int i, const T \&value)\\
+\hline
+QList::iterator& 	insert(QList::iterator before, const T \&value)\\
+\hline
+bool 	&isEmpty() const\\
+\hline
+T \& &	last()\\
+\hline
+const T& \& 	last() const\\
+\hline
+int &	lastIndexOf(const T \&value, int from = -1) const\\
+\hline
+int 	&length() const\\
+\hline
+QList& 	mid(int pos, int length = -1) const\\
+\hline
+void& 	move(int from, int to)\\
+\hline
+void& 	pop\_back()\\
+\hline
+void& 	pop\_front()\\
+\hline
+void& 	prepend(const T \&value)\\
+\hline
+void& 	push\_back(const T \&value)\\
+\hline
+void& 	push\_front(const T \&value)\\
+\hline
+QList::reverse\_iterator &	rbegin()\\
+\hline
+QList::const\_reverse\_iterator &	rbegin() const\\
+\hline
+int& 	removeAll(const T \&value)\\
+\hline
+void& 	removeAt(int i)\\
+\hline
+void& 	removeFirst()\\
+\hline
+void& 	removeLast()\\
+\hline
+bool& 	removeOne(const T \&value)\\
+\hline
+QList::reverse\_iterator &	rend()\\
+\hline
+QList::const\_reverse\_iterator &	rend() const\\
+\hline
+void& 	replace(int i, const T \&value)\\
+\hline
+void& 	reserve(int alloc)\\
+\hline
+int& 	size() const\\
+\hline
+bool& 	startsWith(const T \&value) const\\
+\hline
+void& 	swap(QList \&other)\\
+\hline
+void& 	swapItemsAt(int i, int j)\\
+\hline
+T& 	takeAt(int i)\\
+\hline
+T& 	takeFirst()\\
+\hline
+T& 	takeLast()\\
+\hline
+QSet 	&toSet() const\\
+\hline
+std::list& 	toStdList() const\\
+\hline
+QVector &	toVector() const\\
+\hline
+T 	&value(int i) const\\
+\hline
+T 	&value(int i, const T \&defaultValue) const\\
+\hline
+bool &	operator!=(const QList \&other) const\\
+\hline
+QList& 	operator+(const QList \&other) const\\
+\hline
+QList \& &	operator+=(const QList \&other)\\
+\hline
+QList \& &	operator+=(const T \&value)\\
+\hline
+QList \& &	operator<<(const QList \&other)\\
+\hline
+QList \& &	operator<<(const T \&value)\\
+\hline
+bool 	&operator==(const QList \&other) const\\
+\hline
+T \& 	& operator[](int i)\\
+\hline
+const T \& & 	operator[](int i) const\\
+\hline
+\end{longtable}
+
+% GOG
+
+\section{静态公共成员}
+
+\begin{tabular}{|l|l|}
+\hline
+ 类型& 	函数名\\
+\hline
+QList& 	fromSet(const QSet \&set)\\
+\hline
+QList& 	fromStdList(const std::list \&list)\\
+\hline
+QList& 	fromVector(const QVector emph{\&vector})\\
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+QList 是 Qt 泛型容器之一，通过列表保存元素，提供了基于索引的快速访问以及基于索引的插入和删除功能。
+
+QList，QLinkedList 和 QVector 提供了类似的接口和功能。 大部分情况下它
+们之间是可以互相替换的，但可能会带来一些性能问题。这里有一个各自适用场
+景的总结：
+
+\begin{compactitem}
+
+\item QVector 应当是你的默认首选。QVector 的性能通常要优于 QList, 因为 QVector 总是在内存中连续存储其元素，而 QList 则只会在sizeof(T) <= sizeof(void*) 且通过 Q\_DECLARE\_TYPEINFO 将 T 声明为 Q\_MOVABLE\_TYPE 或 Q\_PRIMITIVE\_TYPE 的情况下才会这么做，否则将会在堆上分配其元素的内存。QList 使用利弊分析 一文对此做了解释。
+\item    然而，QList 在 Qt API 中总是被用来传递参数和保存返回值，和这些 API 交互时请使用 QList。
+\item    如果你需要一个真正的基于链表实现的列表，以保证列表中间插入元素是常量时间复杂度以及基于迭代器而不是索引来访问元素，你可以使用 QLinkedList。
+
+\end{compactitem}
+
+\begin{notice}
+QVector 和 QVarLengthArray 都提供了对 C 数组内存布局的兼容，但 QList 不保证这一点。这一点在你的应用需要和 C API 交互时可能会非常重要。
+\end{notice}
+
+\begin{notice}
+QLinkedList 的迭代器和在堆上分配内存的 QList 的引用只要其指向的元素还在容器中，将会一直保持有效。但 QVector 和非在堆上分配内存的的 QList 的迭代器以及引用并不保证这一点。
+\end{notice}
+
+内部实现中，如果 \hl{sizeof(T) <= sizeof(void*)} 且通过 \hl{Q\_DECLARE\_TYPEINFO} 将 T 声明为 \hl{Q\_MOVABLE\_TYPE} 或 \hl{Q\_PRIMITIVE\_TYPE} 时，QList 将表现为一个 T 类型的数组。否则，QList 表现为一个 T* 类型的数组，元素实际在堆上分配内存。
+
+基于数组的实现的 QList 支持快速插入和基于索引的访问。prepend() and append() 操作也非常快，因为 QList 在内部数组的头尾均预分配了内存。（详见算法复杂度）
+
+注意，如果上面的条件不能满足，每一次追加或插入一个新的元素都需要在堆上分配这个新元素的内存。这会导致在有大量元素的追加和插入时使用 QVector 成为一个更好的选择，因为 QVector 可以在一次性为多个元素在堆上分配内存。
+
+另一个需要注意的是内部数组在列表的整个生命周期内只会不断增大，永远不会缩小。内部数组将会在列表析构时调用的析构函数或列表被赋予另一个列表时调用的赋值运算符函数中被析构。
+
+下方是使用 QList 保存整型数字和使用 QList 保存 QDate 的例子:
+
+
+\begin{lstlisting}[language=C++]
+QList<int> integerList;
+QList<QDate> dateList;
+\end{lstlisting}
+
+Qt 提供了 QStringList 类，其继承于 QList<QString> ，提供了一些快捷方法，例如 QStringList::join() 和 QStringList::filter()。QString::split() 用于从 QString 创建 QStringList。
+
+QList 以列表的形式保存元素，默认构造函数会创建一个空列表，你可以使用带
+有初始化列表的构造函数创建出一个带有元素的的列表：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list = { "one", "two", "three" };
+\end{lstlisting}
+
+QList 提供了这些基础方法用于添加，移动和删除元素：insert(), replace(), removeAt(), move() 和 swap()。另外，它还提供了下列快捷方法：append(), operator<<(), operator+=(), prepend(), removeFirst() 和 removeLast()。
+
+operator<<() 可以方便地添加多个元素到列表中:
+
+\begin{lstlisting}[language=C++]
+list << "four" << "five";
+\end{lstlisting}
+
+和 C++ 数组一样，QList 索引从 0 开始。要访问在指定位置的元素，你可以使
+用 operator[]()。对于非常量列表，operator[]() 用于返回一个元素的引用，
+可以被用在赋值运算符的左侧（译注：即可作为左值）：
+
+\begin{lstlisting}[language=C++]
+if (list[0] == "Bob")
+    list[0] = "Robert";
+\end{lstlisting}
+
+由于对于大小大于一个指针或不可移动的元素类型，QList 基于该类型的指针数组实现，因此该操作需要(常量时间复杂度)。对于只读访问，一个可替代的语法是使用 at()：
+
+\begin{lstlisting}[language=C++]
+for (int i = 0; i < list.size(); ++i) {
+    if (list.at(i) == "Jane")
+        cout << "Found Jane at position " << i << Qt::endl;
+}
+\end{lstlisting}
+
+at() 可能会比 \hl{operator[]()} 快，因为其永远不会导致深拷贝的发生。
+
+从列表中移除一个元素，然后对其做一些处理是一个很常用的操作。QList 提供
+了 takeAt(), takeFirst() 和 takeLast() 来实现该操作。下面是一个将元素
+逐个从列表中移除并对该元素调用 \hl{delete} 的循环实现：
+
+\begin{lstlisting}[language=C++]
+QList<QWidget *> list;
+...
+while (!list.isEmpty())
+    delete list.takeFirst();
+\end{lstlisting}
+
+在列表两端插入或删除元素是非常快的（通常是常量时间复杂度)，因为QList在内部缓存的两端都预分配了额外的内存空间用于支持列表两端的快速增长。
+
+如果需要在列表中查找所有特定值的元素的索引，可以使用 indexOf() 或
+lastIndexOf()。前一个用于从给定的索引位置向列表尾部方向查找，后一个则
+相反。二者都会在找到时返回匹配元素的索引，未找到时返回 -1。例如:
+
+
+\begin{lstlisting}[language=C++]
+int i = list.indexOf("Jane");
+if (i != -1)
+    cout << "Jane 首次出现的位置是 " << i << Qt::endl;
+\end{lstlisting}
+
+如果你仅仅是想简单地检查特定值是否存在于列表中，可以使用 contains()。如果你想要统计特定值在列表中出现的次数，可以使用 count()。如果你想将所有特定值替换为一个另一个指定值，可以使用 replace()。
+
+QList 中的元素类型必须是 可赋值数据类型。绝大部分常用数据类型都满足这一点，但某些情况编译器可能会报错，例如以值的形式保存 QWidget，可改成保存 QWidget * 来代替。一些方法会有额外的要求，例如，indexOf() 和 lastIndexOf() 要求值类型支持 operator==() 运算符。这些要求在每个函数的文档中有说明。
+
+正如其他的容器类一样，QList 提供了 Java 风格迭代器(QListIterator 和 QMutableListIterator) 和 STL 风格迭代器 (QList::const\_iterator 和 QList::iterator)。实际使用中，这些迭代器其实很少被使用，因为你可以使用列表索引。QList 的实现使得直接基于索引访问的方式实现和使用迭代器一样快。
+
+QList 并 不 支持通过其元素的引用来进行插入，头部追加，尾部追加和替换，这样做会导致你的应用崩溃并显示错误信息。
+
+为了使 QList 尽可能高效，其成员函数在使用前并不会对输入进行校验，但 isEmpty() 例外，成员函数通常会假定列表 不 为空。带有索引值作为参数的的成员函数总是会假定索引值位于合法的范围内。这意味着 QList 成员函数可能会调用失败。如果在编译时定义了 QT\_NO\_DEBUG，这些错误将不会被检测到。而如果 没有 定义 QT\_NO\_DEBUG，此类错误将会通过 Q\_ASSERT() 或 Q\_ASSERT\_X() 被检测到并显示对应的错误信息。
+
+为了避免在在列表可能为空时报错，在调用其他成员函数前应先调用 isEmpty()
+检查。如果你必须传递一个可能不在有效范围内的索引值，应先检查其是否小于
+size() 的返回值且 不 小于0。
+
+% gog 
+
+更多成员
+
+如果 T 是 QByteArray 类型，这个类会提供更多可以使用的成员，详见 QByteArrayList。
+
+如果 T 是 QString 类型，这个类提供了这些额外的成员函数：filter, join, removeDuplicates, sort。
+
+使用 Qt 容器的更多信息
+
+如果想要详细了解 Qt 和 STL 对应容器之间的对比，可阅读 理解 Qt 容器一文。
+
+\begin{seeAlso}
+QListIterator, QMutableListIterator, QLinkedList 和 QVector。
+\end{seeAlso}
+
+\section{成员类型文档}
+
+typedef QList::ConstIterator
+
+Qt 风格的 QList::const\_iterator 的同义词。
+
+typedef QList::Iterator
+
+Qt 风格的 QList::iterator 的同义词。
+
+typedef QList::const\_pointer
+
+const T * 的类型别名，提供了对 STL 的兼容。
+
+typedef QList::const\_reference
+
+const T \& 的类型别名，提供了对 STL 的兼容。
+
+typedef QList::const\_reverse\_iterator
+
+QList::const\_reverse\_iterator 仅仅是 std::reverse\_iterator<const\_iterator> 的类型别名，用于提供 STL 风格的 QList 常量反向迭代器。
+
+\begin{notice}
+支持隐式共享的容器的迭代器的行为和 STL 迭代器并不完全一样。当这类容器的迭代器在使用时你应当避免容器的拷贝。更多信息请阅读 隐式共享迭代器问题 一文。
+\end{notice}
+
+该类型在 Qt 5.6 中引入。
+
+\begin{seeAlso}
+QList::rbegin(), QList::rend(), QList::reverse\_iterator 和QList::const\_iterator。
+typedef QList::difference\_type
+\end{seeAlso}
+
+ptrdiff\_t 的别名，提供了对 STL 的兼容。
+
+typedef QList::pointer
+
+T * 的别名，提供了对 STL 的兼容。
+
+typedef QList::reference
+
+T \& 的别名，提供了对 STL 的兼容。
+
+typedef QList::reverse\_iterator
+
+QList::reverse\_iterator 仅仅是 \hl{std::reverse\_iterator<iterator>} 的类型别名，用于提供 STL 风格的 QList 非常量反向迭代器。
+
+\begin{notice}
+警告： 支持隐式共享的容器的迭代器的行为和 STL 迭代器并不完全一样。当这类容器的迭代器在使用时你应当避免容器的拷贝。更多信息请阅读 隐式共享迭代器问题 一文。
+\end{notice}
+
+该类型在 Qt 5.6 中引入。
+
+\begin{seeAlso}
+QList::rbegin(), QList::rend(), QList::const\_reverse\_iterator 和 QList::iterator。
+\end{seeAlso}
+
+typedef QList::size\_type
+
+int 类型的别名，提供了对 STL 的兼容。
+
+typedef QList::value\_type
+
+T 类型的别名，提供了对 STL 的兼容。
+
+\section{成员函数文档}
+
+template QList::QList(InputIterator first, InputIterator last)
+
+使用迭代器范围 [first, last)指定的内容构造一个 QList。
+
+InputIterator 的值类型必须可转换为 T。
+
+该方法在 Qt 5.14 中引入。
+
+QList::QList(std::initializer\_list args)
+
+从由 args 指定的 std::initializer\_list 构造一个列表。
+
+此构造函数仅在编译器支持 C++11 初始化列表特性时可用。
+
+该方法在 Qt 4.8 中引入。
+
+QList::QList(QList \emph{\&\&other})
+
+移动构造一个 QList 实例，使它和 \emph{other} 指向同一个对象。
+
+该方法在 Qt 5.2 中引入。
+
+QList::QList(const QList \emph{\&other})
+
+构造一个 \emph{other} 的拷贝。
+
+该操作为 常量时间复杂度，因为 QList 是隐式共享的，所以一个函数返回 QList 是非常快的。如果一个共享实例被修改了，其将会被复制一份（写时拷贝），复杂度为线性时间复杂度。
+
+\begin{seeAlso}
+operator=()。
+\end{seeAlso}
+
+QList::QList()
+
+构造一个空列表。
+
+QList \&QList::operator=(QList \&\&other)
+
+移动赋值 other 给该 QList 实例。
+
+该方法在 Qt 5.2 中引入。
+
+QList \&QList::operator=(const QList \emph{\&other})
+
+将 \emph{other} 赋值给当前列表，然后返回当前列表的引用。
+
+QList::$\sim$QList()
+
+析构列表。列表中的值的引用及所有的迭代器都将失效。
+
+void QList::append(const T \emph{\&value})
+
+插入 \emph{value} 到列表尾部。
+
+示例：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list.append("one");
+list.append("two");
+list.append("three");
+// list: ["one", "two", "three"]
+\end{lstlisting}
+
+% gog 
+该方法等同于 list.insert(size(), value)。
+
+如果该列表是非共享的，那么此操作通常会非常快（均摊下来为 常量时间复杂度），因为QList 在内部缓存的两端都预分配了额外的内存空间用于支持列表两端的快速增长。
+
+
+
+
+\begin{seeAlso}
+operator<<(), prepend() 和 insert()。
+\end{seeAlso}
+
+
+
+void QList::append(const QList \&value)
+
+这是个重载函数。
+
+插入另一个列表 value 中的元素到列表尾部。
+
+该方法在 Qt 4.5 中引入。
+
+\begin{seeAlso}
+ operator<<() 和 operator+=()。
+\end{seeAlso}
+
+
+const T \&QList::at(int i) const
+
+返回位于列表索引位置为 i 的元素。i 必须是列表中合法的索引位置 (例如，0 <= i < size()）。
+
+该方法非常快，为(常量时间复杂度)。
+
+\begin{seeAlso}
+value() 和 operator[]()。
+\end{seeAlso}
+
+T \&QList::back()
+
+该方法用于提供对 STL 的兼容，等同于 last()。该方法要求列表不能为空， 如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+const T \&QList::back() const
+
+这是个重载函数。
+
+QList::iterator QList::begin()
+
+返回一个指向列表第一个元素的 STL 风格迭代器
+
+
+\begin{seeAlso}
+constBegin() 和 end()。
+\end{seeAlso}
+
+
+QList::const\_iterator QList::begin() const
+
+这是个重载函数。
+
+QList::const\_iterator QList::cbegin() const
+
+返回指向列表中第一个元素的常量 STL 风格迭代器。
+
+该方法在 Qt 5.0 中引入。
+
+
+\begin{seeAlso}
+begin() and cend()。
+\end{seeAlso}
+
+
+QList::const\_iterator QList::cend() const
+
+返回一个指向位于最后一个元素之后的虚拟元素的常量 STL 风格迭代器。
+
+该方法在 Qt 5.0 中引入。
+
+
+\begin{seeAlso}
+cbegin() and end()。
+\end{seeAlso}
+
+void QList::clear()
+
+移除列表中所有的元素。
+
+
+
+\begin{seeAlso}
+removeAll()。
+\end{seeAlso}
+
+
+QList::const\_iterator QList::constBegin() const
+
+返回指向列表中第一个元素的常量 STL 风格迭代器。
+
+
+\begin{seeAlso}
+begin() 和 constEnd()。
+\end{seeAlso}
+
+
+QList::const\_iterator QList::constEnd() const
+
+返回一个指向位于最后一个元素之后的虚拟元素的常量 STL 风格迭代器。
+
+
+
+
+\begin{seeAlso}
+constBegin() 和 end()。
+\end{seeAlso}
+
+
+const T \&QList::constFirst() const
+
+返回一个列表中第一个元素的常量引用，列表必须不为空。如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+该方法在 Qt 5.6 中引入。
+
+\begin{seeAlso}
+constLast(), isEmpty() 和 first()。
+\end{seeAlso}
+
+
+const T \&QList::constLast() const
+
+返回一个列表中最后一个元素的常量引用，列表必须不为空。如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+该方法在 Qt 5.6 中引入。
+
+
+
+
+\begin{seeAlso}
+constFirst(), isEmpty() 和 last()。
+\end{seeAlso}
+
+
+bool QList::contains(const T \&value) const
+
+如果列表中包含 value 则返回 true，否则返回false。
+
+该方法要求值类型实现了 operator==()。
+
+\begin{seeAlso}
+indexOf() 和 count()。
+\end{seeAlso}
+
+int QList::count(const T \&value) const
+
+返回 value 在列表中的出现次数。
+
+该方法要求值类型实现了 operator==()。
+
+
+
+\begin{seeAlso}
+contains() 和 indexOf()。
+\end{seeAlso}
+
+
+int QList::count() const
+
+返回列表中元素的数量。该方法的性能等同于 size()。
+
+QList::const\_reverse\_iterator QList::crbegin() const
+
+返回指向逆序列表的第一个元素的常量 STL 风格迭代器。
+
+该方法在 Qt 5.6 中引入。
+
+\begin{seeAlso}
+begin(), rbegin() 和 rend()。
+\end{seeAlso}
+
+QList::const\_reverse\_iterator QList::crend() const
+
+返回指向逆序列表的最后一个元素的下一个元素的常量 STL 风格迭代器。
+
+该方法在 Qt 5.6 中引入。
+
+\begin{seeAlso}
+end(), rend() 和 rbegin()。
+\end{seeAlso}
+
+bool QList::empty() const
+
+该方法用于提供对 STL 的兼容，等同于 isEmpty()，当列表为空时返回 true。
+
+QList::iterator QList::end()
+
+返回一个指向位于最后一个元素之后的虚拟元素的常量 STL 风格迭代器。
+
+\begin{seeAlso}
+begin() 和 constEnd()。
+\end{seeAlso}
+
+QList::const\_iterator QList::end() const
+
+这是个重载函数。
+
+bool QList::endsWith(const T \&value) const
+
+如果列表非空且最后一个元素等于 value 则返回true 否则返回 false。
+
+该方法在 Qt 4.5 中引入。
+
+\begin{seeAlso}
+isEmpty() 和 contains()。
+\end{seeAlso}
+
+QList::iterator QList::erase(QList::iterator pos)
+
+从列表中移除和迭代器 pos 关联的元素，然会返回列表中下一个元素的迭代器 (可能是 end())。
+
+\begin{seeAlso}
+insert() 和 removeAt()。
+\end{seeAlso}
+
+QList::iterator QList::erase(QList::iterator begin, QList::iterator end)
+
+这是个重载函数。
+
+移除从 begin 到 (但不包括) end 的所有元素，然会返回调用该方法之前 end
+所指向元素的迭代器。
+
+T \&QList::first()
+
+返回列表中第一个元素的引用，列表必须非空。如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+\begin{seeAlso}
+constFirst(), last() 和 isEmpty()。
+\end{seeAlso}
+
+const T \&QList::first() const
+
+这是个重载函数。
+
+\hl{[static]} QList QList::fromSet(const QSet \&set)
+
+返回一个包含且仅包含 set 中所有的数据的 QList 对象。QList 中元素的顺序是未定义的。
+
+示例:
+
+
+\begin{lstlisting}[language=C++]
+QSet<int> set;
+set << 20 << 30 << 40 << ... << 70;
+
+QList<int> list = QList<int>::fromSet(set);
+std::sort(list.begin(), list.end());
+\end{lstlisting}
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{seeAlso}
+fromVector(), toSet() 和 QSet::toList()。
+\end{seeAlso}
+
+
+\hl{[static]} QList QList::fromStdList(const std::list \emph{\&list})
+
+返回一个包含且仅包含 \emph{list} 中所有的数据的 QList 对象。QList 中元素的顺序和 \emph{list} 一致。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+std::list<double> stdlist;
+list.push_back(1.2);
+list.push_back(0.5);
+list.push_back(3.14);
+
+QList<double> list = QList<double>::fromStdList(stdlist);
+\end{lstlisting}
+
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+
+\begin{seeAlso}
+toStdList() 和 QVector::fromStdVector()。
+\end{seeAlso}
+
+
+\hl{[static]} QList QList::fromVector(const QVector \emph{\&vector})
+
+返回包含且仅包含 \emph{vector} 中所有的元素的 QList 对象。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QVector<double> vect;
+vect << 20.0 << 30.0 << 40.0 << 50.0;
+
+QList<double> list = QVector<T>::fromVector(vect);
+// list: [20.0, 30.0, 40.0, 50.0]
+\end{lstlisting}
+
+
+\begin{notice}
+从 Qt 5.14 开始，Qt 泛型容器类支持范围构造函数，建议用来取代这个方法。
+\end{notice}
+
+\begin{seeAlso}
+fromSet(), toVector() 和 QVector::toList()。
+\end{seeAlso}
+
+T \&QList::front()
+
+该方法用于提供对 STL 的兼容，等同于 first()。要求列表不能为空， 如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+const T \&QList::front() const
+
+这是个重载函数。
+
+int QList::indexOf(const T \emph{\&value}, int \emph{from} = 0) const
+
+返回从索引位置 \emph{from} 开始向列表尾部方向搜索，在列表中 \emph{value} 第一次出现的索引位置。如果没有找到则返回 -1。
+
+示例：
+
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "B" << "A";
+list.indexOf("B");          // 返回 1
+list.indexOf("B", 1);       // 返回 1
+list.indexOf("B", 2);       // 返回 3
+list.indexOf("X");          // 返回 -1
+\end{lstlisting}
+
+
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
+
+\begin{seeAlso}
+lastIndexOf() 和 contains()。
+\end{seeAlso}
+
+
+void QList::insert(int i, const T \emph{\&value})
+
+将 \emph{value} 插入到列表的索引位置 \emph{i}。
+
+如果 \emph{i} == 0，该值将会被追加到列表头部。如果 \emph{i} == size()，该值将会被追加到列表尾部。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "alpha" << "beta" << "delta";
+list.insert(2, "gamma");
+// list: ["alpha", "beta", "gamma", "delta"]
+\end{lstlisting}
+
+
+
+\begin{seeAlso}
+append(), prepend(), replace() 和 removeAt()。
+\end{seeAlso}
+
+QList::iterator QList::insert(QList::iterator \emph{before}, const T \emph{\&value})
+
+这是个重载函数。
+
+将 \emph{value} 插入到迭代器 \emph{before} 指向元素的前面，并返回一个指向插入元素的迭代器。需要注意的是传递给该函数的迭代器在调用完成后将会失效，返回的迭代器可以用来代替它。
+
+bool QList::isEmpty() const
+
+如果列表中没有任何元素则返回 true ，否则返回 false。
+
+\begin{seeAlso}
+size()。
+\end{seeAlso}
+
+
+T \&QList::last()
+
+返回列表最后一个元素的引用，列表必须非空。如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+
+\begin{seeAlso}
+constLast(), first() 和 isEmpty()。
+\end{seeAlso}
+
+
+const T \&QList::last() const
+
+这是个重载函数。
+
+int QList::lastIndexOf(const T \emph{\&value}, int \emph{from} = -1) const
+
+返回从索引位置 \emph{from} 开始向列表头部方向搜索，在列表中 \emph{value} 最后一次出现的索引位置。如果 \emph{from} 是 -1，将会从最后一个元素开始搜索。如果没有找到则返回 -1。
+
+示例：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "B" << "A";
+list.lastIndexOf("B");      // 返回 3
+list.lastIndexOf("B", 3);   // 返回 3
+list.lastIndexOf("B", 2);   // 返回 1
+list.lastIndexOf("X");      // 返回 -1
+\end{lstlisting}
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+需要注意的是 QList 和 C 数组类似，索引也是从 0 开始。除了上面提到的值，其他的负索引值不被支持。
+
+
+\begin{seeAlso}
+indexOf()。
+\end{seeAlso}
+
+
+int QList::length() const
+
+该方法等同于 count()。
+
+该方法在 Qt 4.5 中引入。
+
+
+\begin{seeAlso}
+count()。
+\end{seeAlso}
+
+
+QList QList::mid(int \emph{pos}, int \emph{length} = -1) const
+
+返回一个包含从列表的 \emph{pos} 位置开始的元素的子列表，如果
+\emph{length} 为 -1（默认值），那么从 \emph{pos} 开始的所有元素都会被
+子列表包含，否则子列表将会包含 \emph{length} 个（如果剩余元素个数不足 \emph{length} 则为剩下的全部）元素。
+
+void QList::move(int \emph{from}, int \emph{to})
+
+将位于索引位置 \emph{from} 的元素移动到索引位置 \emph{to}。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "A" << "B" << "C" << "D" << "E" << "F";
+list.move(1, 4);
+// list: ["A", "C", "D", "E", "B", "F"]
+\end{lstlisting}
+
+等同于 insert(\emph{to}, takeAt(\emph{from}))。该方法会假定 \emph{from} 和 \emph{to} 都不小于 0 且小于 size()。为了避免调用出错，应提前检查 from 和 to 是否不小于 0 且小于 size()。
+
+\begin{seeAlso}
+swap(), insert() 和 takeAt()。
+\end{seeAlso}
+
+void QList::pop\_back()
+
+该方法用于提供对 STL 的兼容，等同于 removeLast()。该方法要求列表不能为空，如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+void QList::pop\_front()
+
+该方法用于提供对 STL 的兼容，等同于 removeFirst()。该方法要求列表不能为空，如果列表可能为空，应先调用 isEmpty() 进行检查。
+
+void QList::prepend(const T \emph{\&value})
+
+在列表头部插入 \emph{value} 。
+
+示例：
+
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list.prepend("one");
+list.prepend("two");
+list.prepend("three");
+// list: ["three", "two", "one"]
+\end{lstlisting}
+
+
+该方法等同于 list.insert(0, value)。
+
+如果该列表是非共享的,那么此操作通常会非常快（均摊下来为 常量时间复杂度），因为 QList 在内部缓存的两端都预分配了额外的内存空间用于支持列表两端的快速增长。
+
+
+\begin{seeAlso}
+append() 和 insert()。
+\end{seeAlso}
+
+void QList::push\_back(const T \&value)
+
+该方法用于提供对 STL 的兼容，等同于 append(value)。
+
+void QList::push\_front(const T \&value)
+
+该方法用于提供对 STL 的兼容，等同于 prepend(value)。
+
+QList::reverse\_iterator QList::rbegin()
+
+返回一个指向列表在逆序遍历时第一个元素 STL 风格的反向迭代器。
+
+该方法在 Qt 5.6 中引入。
+
+\begin{seeAlso}
+begin(), crbegin() 和 rend()。
+\end{seeAlso}
+
+QList::const\_reverse\_iterator QList::rbegin() const
+
+这是个重载函数。
+
+该方法在 Qt 5.6 中引入。
+
+int QList::removeAll(const T \emph{\&value})
+
+移除列表中所有值为 \emph{value} 的元素，然后返回移除的数量。
+
+示例：
+
+\begin{lstlisting}[language=C++]
+QList<QString> list;
+list << "sun" << "cloud" << "sun" << "rain";
+list.removeAll("sun");
+// list: ["cloud", "rain"]
+\end{lstlisting}
+
+该方法要求值类型实现了 \hl{operator==()}。
+
+\begin{seeAlso}
+removeOne(), removeAt(), takeAt() 和 replace()。
+\end{seeAlso}
+

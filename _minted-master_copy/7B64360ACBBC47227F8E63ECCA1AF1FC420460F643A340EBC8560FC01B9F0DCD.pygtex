@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{iconSize}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 返回当前样式表的默认大小}
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setStyle}\PYG{p}{(}\PYG{n}{otherStyle}\PYG{p}{);}
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{iconSize}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 返回 otherStyle 的默认大小}
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setIconSize}\PYG{p}{(}\PYG{n}{QSize}\PYG{p}{(}\PYG{l+m+mi}{52}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{52}\PYG{p}{));}
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{iconSize}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 返回 (52, 52)}
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{setStyle}\PYG{p}{(}\PYG{n}{yetAnotherStyle}\PYG{p}{);}
+\PYG{n}{toolButton}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{iconSize}\PYG{p}{();}\PYG{+w}{ }\PYG{c+c1}{// 返回 (52, 52)}
+\end{Verbatim}

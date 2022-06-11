@@ -1,0 +1,1840 @@
+\chapter{QAbstractItemModel}
+
+QAbstractItemModel类为项模型类提供了抽象接口。\href{https://github.com/JackLovel/QtDocumentCN/blob/master/Src/A/QAbstractItemModel}{更多...} 
+
+\setlength\extrarowheight{2pt}
+\begin{tabular}{|m{5em}|m{25em}|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QAbstractItemModel>\\      
+	\hline
+	qmake & QT+=core\\      
+	\hline
+	自从 & Qt 4.6\\
+	\hline
+	继承&QObject \\
+	\hline
+	派生 & QAbstractListModel、QAbstractProxyModel、
+           QAbstractTableModel、QConcatenateTablesProxyModel、QDirModel、QFileSystemModel 和 QStandardItemModel \\
+	\hline
+\end{tabular}
+
+\splitLine
+
+\section{公有成员类型}
+
+\begin{tabular}{|m{10em}|m{30em}|}
+	\hline
+	类型 & 类型名称 \\
+	\hline
+enum class&	CheckIndexOption\{ NoOption, IndexIsValid,
+  DoNotUseParent, ParentIsInvalid\}\\
+\hline
+flags&	CheckIndexOptions\\
+\hline
+enum&	LayoutChangeHint \{ NoLayoutChangeHint, VerticalSortHint, HorizontalSortHint \}\\
+\hline
+\end{tabular}
+
+
+\splitLine
+
+\section{公共成员函数}
+
+\begin{longtable}[l]{|m{10em}|m{30em}|}
+\hline
+类型 & 函数名称 \\
+\hline
+& QAbstractItemModel(QObject \emph{*parent} = nullptr)\\
+\hline
+virtual	& $\sim$QAbstractItemModel()\\
+\hline
+virtual QModelIndex	& buddy(const QModelIndex \emph{\&index}) const\\
+\hline
+virtual bool & canDropMimeData(const QMimeData \emph{*data}, Qt::DropAction
+               \emph{action}, int \emph{row}, int \emph{column}, const QModelIndex
+               \emph{\&parent}) const s\\
+\hline
+virtual bool &canFetchMore(const QModelIndex \emph{\&parent}) const\\
+\hline
+bool & checkIndex(const QModelIndex \emph{\&index},
+       QAbstractItemModel::CheckIndexOptions \emph{options} =
+       CheckIndexOption::NoOption) const\\
+\hline
+virtual int&columnCount(const QModelIndex \emph{\&parent} = QModelIndex())
+             const = 0\\
+\hline
+virtual QVariant&	data(const QModelIndex \emph{\&index}, int role = Qt::DisplayRole) const = 0\\
+\hline
+virtual bool&	dropMimeData(const QMimeData \emph{*data}, Qt::DropAction
+\emph{action}, int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent})\\
+\hline
+virtual void&	fetchMore(const QModelIndex \emph{\&parent})\\
+\hline
+virtual Qt::ItemFlags&	flags(const QModelIndex \emph{\&index}) const\\
+\hline
+virtual bool&	hasChildren(const QModelIndex \emph{\&parent} = QModelIndex()) const\\
+\hline
+bool	&hasIndex(int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex()) const\\
+\hline
+virtual QVariant	&headerData(int \emph{section}, Qt::Orientation \emph{orientation}, int \emph{role} = Qt::DisplayRole) const\\
+\hline
+virtual QModelIndex& index(int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex()) const = 0\\
+\hline
+bool	&insertColumn(int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+virtual bool & insertColumns(int \emph{column}, int  \emph{count}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+bool&	insertRow(int \emph{row}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+virtual bool&	insertRows(int \emph{row}, int \emph{count}, const QModelIndex \emph{\&parent}
+              = QModelIndex())\\
+\hline
+virtual QMap<int, QVariant>	&itemData(const QModelIndex \emph{\&index}) const\\
+\hline
+virtual QModelIndexList	& match(const QModelIndex \emph{\&start}, int \emph{role}, const QVariant \emph{\&value}, int \emph{hits} = 1, Qt::MatchFlags \emph{flags} = Qt::MatchFlags (Qt::MatchStartsWith\\
+\hline
+virtual QMimeData *	&mimeData(const QModelIndexList \emph{\&indexes}) const\\
+\hline
+virtual QStringList	& mimeTypes() const\\
+\hline
+bool	&moveColumn(const QModelIndex \emph{\&sourceParent}, int \emph{sourceColumn},
+       const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})\\
+\hline
+virtual bool & moveColumns(const QModelIndex \emph{\&sourceParent}, int
+\emph{sourceColumn}, int \emph{count}, const QModelIndex
+\emph{\&destinationParent}, int \emph{destinationChild})\\
+\hline
+bool& moveRow(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, const QModelIndex \emph{\&destinationParent}, int \emph{d
+estinationChild})\\
+\hline
+virtual bool &moveRows(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, int \emph{destinationChild})\\
+\hline
+bool &moveRow(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, 
+       const QModelIndex \emph{\&destinationParent}, 
+       int  \emph{destinationChild})\\    
+\hline           
+virtual bool &moveRows(const QModelIndex \emph{\&sourceParent}, int \emph{sourceRow}, 
+               int \emph{count}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})\\
+\hline
+virtual QModelIndex& parent(cosnt QModelIndex \emph{\&index}) const = 0\\
+\hline
+bool&	removeColumn(int \emph{column}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+virtual bool&	removeColumns(int \emph{column}, int \emph{count}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+bool&	removeRow(int \emph{row}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+virtual bool&	removeRows(int \emph{row}, int \emph{count}, const QModelIndex \emph{\&parent} = QModelIndex())\\
+\hline
+virtual QHash<int, QByteArray>&	roleNames() const\\
+\hline
+virtual int	& rowCount(const QModelIndex \emph{\&parent} = QModelIndex()) const = 0\\
+\hline
+virtual bool &setData(const QModelIndex \emph{\&index}, const QVariant \emph{\&value}, int \emph{role} = Qt::EditRole)\\
+\hline
+virtual bool	&setHeaderData(int \emph{section}, Qt::Orientation \emph{orientation}, const QVariant \emph{\&value}, int \emph{role} = Qt::EditRole)\\
+\hline
+virtual bool	&setItemData(const QModelIndex \emph{\&index}, const QMap<int, QVariant> \emph{\&roles})\\
+\hline
+virtual QModelIndex&	sibling(int \emph{row}, int \emph{column}, const QModelIndex \emph{\&index}) const\\
+\hline
+virtual void	&sort(int \emph{column}, Qt::SortOrder \emph{order} = Qt::AscendingOrder)\\
+\hline
+virtual QSize	&span QModelIndex \emph{\&index}) const\\
+\hline
+virtual Qt::DropActions	&supportedDragActions() const\\
+\hline
+virtual Qt::DropActions	&supportedDropActions() const\\
+\hline
+\end{longtable}
+
+\splitLine
+
+\section{公共槽函数}
+
+\begin{tabular}{|r|l|}
+\hline
+类型 & 函数名称 \\
+\hline
+virtual void	&revert()\\
+\hline
+virtual bool	&submit()\\
+\hline
+\end{tabular}
+
+\splitLine
+
+\section{信号}
+
+\begin{longtable}[l]{|m{4em}|m{36em}|}
+\hline
+类型 & 函数名称 \\
+\hline
+void&	columnsAboutToBeInserted QModelIndex \&parent, int first, int last)\\
+\hline
+void&	columnsAboutToBeMoved(const QModelIndex \&sourceParent, int sourceStart, int sourceEnd, const QModelIndex \&destinationParent, int destinationColumn)\\
+\hline
+void&	columnsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	columnsInserted(QModelIndex \&parent, int first, int last)\\
+\hline
+void&	columnsMoved(const QModelIndex \&parent, int start, int end, const QModelIndex \&destination, int column)\\
+\hline
+void&	columnsRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector \&roles = QVector())\\
+\hline
+void&	headerDataChanged(Qt::Orientation orientation, int first, int last)\\
+\hline
+void&	layoutAboutToBeChanged(const QList \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)\\
+\hline
+void&	layoutChanged(const QList \&parents = QList(),
+      QAbstractItemModel::LayoutChangeHint hint = QA
+bstractItemModel::NoLayoutChangeHint)\\
+\hline
+void&	modelAboutToBeReset()\\
+\hline
+void&	modelReset()\\
+\hline
+void&	rowsAboutToBeInserted(const QModelIndex \&parent, int start, int end)\\
+\hline
+void&	rowsAboutToBeMoved(const QModelInd
+ex \&sourceParent, int
+      sourceStart, int sourceEnd, const QM
+odelIndex \&destinationParent, int destinationRow)\\
+\hline
+void&	rowsAboutToBeRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	rowsInserted(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&rowsMoved(const QModelIndex \&parent, int start, 
+  int end, const QModelIndex \&destination, int row) \\
+\hline
+void&	rowsRemoved(const QModelIndex \&parent, int first, int last)\\
+\hline
+\end{longtable}
+
+\splitLine
+
+\section{受保护的函数}
+
+\begin{longtable}[l]{|m{10em}|m{30em}|}
+\hline
+类型　&	　函数名称\\
+\hline
+void&	beginInsertColumns(const QModelIndex \&parent, int first, int
+      last)\\
+\hline
+void&	beginInsertRows(const QModelIndex \&parent, int first, int
+      last)\\
+\hline
+bool&	beginMoveColumns(const QModelIndex \&sourceParent, int
+  sourceFirst, int sourceLast, const QModelIndex \&destinationParent,
+  int destinationChild)\\
+\hline
+bool&	beginMoveRows(const QModelIndex \&sourceParent, int
+      sourceFirst, int sourceLast, const QModelIndex
+      \&destinationParent, int destinationChild)\\
+\hline
+void&	beginRemoveColumns(const QModelIndex \&parent, int first, int
+      last)\\
+\hline
+void&	beginRemoveRows(const QModelIndex \&parent, int first, int last)\\
+\hline
+void&	beginResetModel()\\
+\hline
+void&	changePersistentIndex(const QModelIndex \&from, const QModelIndex \&to)\\
+\hline
+void&	changePersistentIndexList(const QModelIndexList \&from, const
+   QModelIndexList \&to)\\
+\hline
+QModelIndex&	createIndex(int row, int column, void *ptr = nullptr) const\\
+\hline
+QModelIndex&	createIndex(int row, int column, quintptr id) const\\
+\hline
+void&	endInsertColumns()\\
+\hline
+void&	endInsertRows()\\
+\hline
+void&	endMoveColumns()\\
+\hline
+void&	endMoveRows()\\
+\hline
+void&	endRemoveColumns()\\
+\hline
+void&	endRemoveRows()\\
+\hline
+void&	endResetModel()\\
+\hline
+QModelIndexList&	persistentIndexList() const\\
+\hline
+\end{longtable}
+
+\section{受保护的槽函数}
+
+\splitLine
+
+\begin{tabular}{|r|l|}
+\hline
+类型　	&函数名称\\
+\hline
+void	&resetInternalData()\\
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+\splitLine
+
+QAbstractItemModel 类定义了项模型与模型/视图体系结构中的其他组件进行交互操作时必须使用的标准接口。应该子类化该类创建新的模型，而不是直接实例化使用。
+
+QAbstractItemModel 类是模型/视图类中的一个，也是 Qt 模型/视图框架的一部分。它可以用作 QML 中的项视图元素或 Qt Widgets 模块中的项视图类的底层数据模型。
+
+如果需要一个模型来使用项视图，比如 QML 的 List View 元素或者 C++ widgets 的　QListView 或者　 QTableView，应该考虑子类化 QAbstractListModel 或者 QAbstractTableModel 而不是使用该类。
+
+底层数据模型作为表的层次结构暴露给视图和委托。如果不使用层次结构，那么模型就是一个简单的具有行和列的表。每个项都有一个由　QModelIndex 指定的惟一索引。
+
+\begin{figure}[hbt!]  
+	\centering
+    \includegraphics[width=0.5\textwidth]{modelindex-no-parent}
+	\caption{model index}
+\end{figure}
+
+每个数据项都可以通过包含一个关联的模型索引的模型进行访问。
+该索引可以通过　index() 函数获得。每个索引可能有一个　sibling() 索引；子项有一个 parent()　索引。
+
+每个项目都有许多与之关联的数据元素，可以通过为模型的 data() 函数指定一个角色（请参阅 Qt::ItemDataRole）来检索它们。
+可以使用 itemData() 函数同时获取所有可用角色的数据。
+
+使用特定的 Qt::ItemDataRole 设置每个角色的数据。
+可以使用 setData() 单独设置各个角色的数据，也可以使用 setItemData 设置所有角色的数据。
+
+可以使用 flags() 查询项（请参阅 Qt::ItemFlag），以查看是否可以通过其他方式选择，拖动或操纵它们。
+
+如果项具有子对象，则 hasChildren 为相应的索引返回 true。
+
+该模型在层次结构的每个级别都有一个 rowCount() 和 columnCount。
+可以使用 insertRows()，insertColumns()，removeRows() 和 removeColumns() 插入和删除行和列。
+
+模型发出信号以指示变化。例如，只要模型可用的数据项发生更改，就会发出 dataChanged()。对模型提供的标题的更改将将发射　headerDataChanged() 信号。如果底层数据的结构发生了变化，则模型可以发出　layoutChanged() 来向任何附加的视图指示它们应该重新显示所显示的任何项，并需要考虑到新的结构。
+
+可以使用 match() 函数在模型中搜索可用的项以查找特定数据。
+
+要对模型进行排序，可以使用 sort()。
+
+\splitLine
+
+子类化
+
+\begin{notice}
+在模型子类化参考中有一些关于模型子类化的通用指南。
+\end{notice}
+
+子类化　QAbstractItemModel 时，至少必须实现 index()，parent()，rowCount()，columnCount() 和 data()。这些函数在所有的只读模型中使用，同样也构成了可编辑模型的基础。
+
+还可以为模型重新实现 hasChildren()　来提供特殊的行为，而不是重新实现成本很高的 rowCount()。这使得模型可以限制视图请求的数据量，并且可以作为实现模型数据的惰性填充的一种方式。
+
+要在模型中启用编辑，还必须实现　setData 和重新实现 flags() 以确保返回 ItemIsEditable。还可以重新实现 headerData() 和 setHeaderData 来控制呈现模型标题的方式。
+
+当分别重新实现 setData() 和 setHeaderData() 函数时，必须显式发射　dataChanged() 和 headerDataChanged() 信号。
+
+定制模型需要创建模型索引以供其他组件使用。为此，请使用适当的行号和列号以及相应的标识符调用 createIndex()，并将其作为指针或整数值。这些值的组合对于每个项都必须是唯一的。定制模型通常在其他重新实现的函数中使用这些唯一标识符，以检索项数据并访问有关该项的父项和子项的信息。有关唯一标识符的更多信息，请参见简单树模型示例。
+
+不必支持 Qt::ItemDataRole 中定义的每个角色。根据模型中包含的数据类型，可能只有实现 data() 函数以返回一些更常见角色的有效信息才有用。大多数模型至少为 Qt::DisplayRole 提供项数据的文本表示，行为良好的模型也应为 Qt::ToolTipRole 和 Qt::WhatsThisRole 提供有效信息。支持这些角色可使模型与标准 Qt 视图一起使用。但是，对于某些处理高度专业化数据的模型，仅为用户定义的角色提供数据可能是合适的。
+
+提供可调整数据结构大小的接口的模型可以提供 insertRows()，removeRows()，
+insertColumns() 和 removeColumns() 的实现。在实现这些函数时，重要的是
+要在模型尺寸大小发生 之前 和 之后 将有关模型尺寸的更改通知所有连接的视
+图：
+
+\begin{compactitem}
+\item insertRows() 的实现必须在将新行插入数据结构 之前 调用
+  beginInsertRows()，然后立即 调用 endInsertRows()。
+\item insertColumns() 的实现必须在将新列插入数据结构　之前 调用
+  beginInsertColumns()，然后立即 调用 endInsertColumns()。
+\item removeRows() 的实现必须在从数据结构中删除行　之前 调用
+  beginRemoveRows()，然后立即 调用 endRemoveRows()。
+\item removeColumns() 的实现必须在列从数据结构中删除之前调用 beginRemoveColumns()，然后立即 调用 endRemoveColumns()。
+\end{compactitem}
+
+这些函数发出的私有信号使附加组件有机会在任何数据变得不可用之前采取行动。使用这些 begin 和 end 函数封装插入和删除操作还使模型能够正确地管理持久模型索引。如果希望正确处理选择，则必须确保调用了这些函数。 如果插入或移除带有子项的项，则不需要为子项调用这些函数。换句话说，父项将管理其子项。
+
+要创建增量填充的模型，可以重新实现 fetchMore() 和 canFetchMore()。如果 fetchMore() 的重新实现向模型中添加了行，则必须调用 beginInsertRows() 和 endInsertRows()。
+
+参见模型类、模型子类化参考、QModelIndex、QAbstractItemView、在项视图中
+使用拖放、简单DOM模型示例、简单树模型示例、可编辑树模型示例和 Fetch
+More示例。
+
+\splitLine
+
+\section{成员类型文档}
+
+CheckIndexOption CheckIndexOptions
+enum class QAbstractItemModel::CheckIndexOption flags QAbstractItemModel::CheckIndexOptions
+
+这个枚举可以用来控制 QAbstractItemModel::checkIndex() 执行的检查。
+
+\begin{tabular}{|m{25em}|m{4em}|m{13em}|}
+\hline
+常量 &值&描述\\
+\hline
+QAbstractItemModel::CheckIndexOption::NoOption & 0x0000	& 没有指定检查选项。\\
+\hline
+QAbstractItemModel::CheckIndexOption::IndexIsValid & 0x0001 & 传递给 QAbstractItemModel::checkIndex()的模型索引被检查为有效的模型索引。\\
+\hline
+QAbstractItemModel::CheckIndexOption::DoNotUseParent & 0x0002 & 不执行任何涉及到传递给 QAbstractItemModel::checkIndex() 的父索引的使用的检查。\\
+\hline
+\end{tabular}
+
+该枚举是在 Qt 5.11 中引入或修改的。
+
+CheckIndexOptions 类型是一个 QFlags<CheckIndexOption> 的类型定义。它存储一个或组合的 CheckIndexOption 值。
+
+\splitLine
+
+enum QAbstractItemModel::LayoutChangeHint
+
+这个枚举描述了模型改变布局的方式。
+
+\begin{tabular}{|l|l|l|}
+\hline
+常量 &值&描述\\
+\hline
+QAbstractItemModel::NoLayoutChangeHint&	0&	没有任何提示。\\
+\hline
+QAbstractItemModel::VerticalSortHint&	1&	正在对行进行排序。\\
+\hline
+QAbstractItemModel::HorizontalSortHint&	2&	正在对列进行排序。\\
+\hline
+\end{tabular}
+
+
+\begin{notice}
+VerticalSortHint　和 HorizontalSortHint 表示项在同一父级中移动，
+而不是移动到模型中的不同父级，也没有过滤掉或过滤进来。
+\end{notice}
+
+\splitLine
+
+\section{成员函数文档}
+
+QAbstractItemModel::QAbstractItemModel(QObject *parent = nullptr)
+
+构造指定父类对象 parent 的抽象项模型。
+
+[signal] void QAbstractItemModel::columnsAboutToBeInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+在将列插入模型之前就发射此信号。新项将位于给定父项 parent 下的首 first 尾 last之间。
+
+\begin{notice}
+	连接到这个信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 的实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。它可以用于信号连接，但不能由用户发射。
+\end{notice}
+
+\begin{seeAlso}
+insertColumns() 和 beginInsertColumns()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::columnsAboutToBeMoved(const QModelIndex \emph{\&sourceParent}, int \emph{sourceStart}, int \emph{sourceEnd}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationColumn})
+
+模型中的列被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationColumn 列开始移动到destinationParent。
+ 
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginMoveRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::columnsAboutToBeRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+模型中的列被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。 
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice} 
+
+\begin{seeAlso}
+removeColumns() 和 beginRemoveColumns()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::columnsInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+将列插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+  
+\begin{seeAlso}
+insertColumns() 和 beginInsertColumns()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::columnsMoved(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end}, const QModelIndex \emph{\&destination}, int \emph{column})
+
+模型中的列被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginMoveRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::columnsRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+模型中的列被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+\begin{seeAlso}
+removeColumns() 和 beginRemoveColumns()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::dataChanged(const QModelIndex \&topLeft, const QModelIndex \&bottomRight, const QVector<int> \&roles = QVector())
+
+现有的项的数据发生改变时发射该信号。
+
+如果项是同一父项，则受影响的项是在 topLeft 和 bottomRight（包含）之间的项目。如果项没有相同的父项，则行为是不确定的。
+
+当重新实现 setData() 函数时，必须显示地发射该信号。
+
+可选的 roles 参数可用于指定实际修改了哪些数据角色。Roles 参数中的向量为空，表示应将所有角色视为已修改。角色参数中元素的顺序没有任何关联。
+
+\begin{seeAlso}
+headerDataChanged()、setData() 和 layoutChanged()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::headerDataChanged(const Qt::Orientation \emph{\&orientation}, int \emph{first}, int \emph{last})
+
+当标题改变时发射该信号。orientation 表示是横向标题还是竖向标题发生了改变。标题中从 first 到 last 的部分需要更新。
+
+当重新实现 setData() 函数时，必须显示地发射该信号。
+
+如果要更改列数或行数，则不需要发出此信号，而可以使用 begin/end 函数（有关详细信息，请参见 QAbstractItemModel 类描述中的子类化部分）。
+
+\begin{seeAlso}
+headerData()、setHeaderData() 和 dataChanged()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::layoutAboutToBeChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
+
+这个信号会在模型的布局改变之前发出。连接到这个信号的组件使用它来适应模型布局的变化。
+
+在发出 layoutAboutToBeChanged() 之后，子类应该更新所有的持久化模型索引。
+
+可选的 parents 参数用于提供更具体的通知关于模型布局的哪些部分正在被改变。空列表表示对整个模型的布局进行了更改。parents 列表中元素的顺序不重要。可选的 hint 参数用于提示模型重新布局时都发生了什么。
+
+该函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+layoutChanged() 和 changePersistentIndex()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::layoutChanged(const QList<QPersistentModelIndex> \&parents = QList(), QAbstractItemModel::LayoutChangeHint hint = QAbstractItemModel::NoLayoutChangeHint)
+
+每当模型公开的项的布局发生变化时，就会发出这个信号，例如，对模型进行排序时。当视图接收到该信号时，应更新项的布局来反映此更改。
+
+当对 QAbstractItemModel 或 QAbstractProxyModel 进行子类化时，请确保在更改项顺序或更改要公开给视图的数据的结构之前发出 layoutAboutToBeChanged() 信号，并在更改布局后发出 layoutChanged() 信号。
+
+可选的 parents 参数用于给出有关模型布局的哪些部分正在更改的具体的通知。空列表表示更改了整个模型的布局。parents 列表中元素的顺序并不重要。可选的 hint 参数用于提示模型重新布局时发生的情况。
+
+子类应在发​​出 layoutChanged() 信号之前更新所有持久模型索引。换句话说，
+当结构改变时：
+
+\begin{compactitem}
+\item 发出 layoutAboutToBeChanged
+\item 记住将会改变的 QModelIndex
+\item 更新内部数据
+\item 调用 changePersistentIndex()
+\item 发出 layoutChanged
+\end{compactitem}
+
+该函数在 Qt 5.0 中被引入。
+
+\begin{seeAlso}
+layoutAboutToBeChanged()、dataChanged()、headerDataChanged()、modelReset() 和 changePersistentIndex()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::modelAboutToBeReset()
+
+当调用 beginResetModel() 时，在模型的内部状态(例如持久模型索引)失效之前发出这个信号。
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+该函数在 Qt 4.2 中被引入。
+
+\begin{seeAlso}
+beginResetModel() 和 modelReset()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::modelReset()
+
+当调用 endResetModel() 时，在模型的内部状态(例如持久模型索引)失效之后发出这个信号。
+
+\begin{notice}
+如果模型被重置，则应该认为之前从模型中检索的所有信息都是无效的。这包括但不限于 rowCount()、columnCount()、flags()、通过 data()检索的数据和 roleNames()。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+该函数在 Qt 4.1 中被引入。
+
+\begin{seeAlso}
+endResetModel() 和 modelAboutToBeReset()。
+\end{seeAlso}
+
+[protected slot] void QAbstractItemModel::resetInternalData()
+
+该槽函数在模型的内部数据被清除并被重置之后被调用。
+
+该槽函数为具体代理模型的子类提供了便利，例如维护了额外的数据的
+
+QSortFilterProxyModel 的子类。
+
+\begin{lstlisting}[language=C++]
+ class CustomDataProxy : public QSortFilterProxyModel
+ {
+     Q_OBJECT
+ public:
+     CustomDataProxy(QObject *parent)
+       : QSortFilterProxyModel(parent)
+     {
+     }
+
+     ...
+
+     QVariant data(const QModelIndex &index, int role) override
+     {
+         if (role != Qt::BackgroundRole)
+             return QSortFilterProxyModel::data(index, role);
+
+         if (m_customData.contains(index.row()))
+             return m_customData.value(index.row());
+         return QSortFilterProxyModel::data(index, role);
+     }
+ private slots:
+     void resetInternalData()
+     {
+         m_customData.clear();
+     }
+ private:
+   QHash<int, QVariant> m_customData;
+ };
+\end{lstlisting}
+
+\begin{notice}
+由于错误，该槽函数没有出现在 Qt 5.0 中。
+\end{notice}
+
+该函数在 Qt 4.8 中被引入。
+
+\begin{seeAlso}
+modelAboutToBeReset() 和 modelReset()。
+\end{seeAlso}
+
+[virtual slot] void QAbstractItemModel::revert()
+
+让模型知道它应该丢弃缓存的信息。这个函数通常用于行编辑。
+
+该函数在 Qt 4.2 中被引入。
+
+\begin{seeAlso}
+submit()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::rowsAboutToBeInserted(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end})
+
+在将行插入模型之前就发出该信号。新项将位于给定 parent 项目下的包含 start 和 end 之间。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发出，而不能在子类代码中显式发出。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+\begin{seeAlso}
+insertRows() 和 beginInsertRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::rowsAboutToBeMoved(const QModelIndex \emph{\&sourceParent}, int \emph{sourceStart}, int \emph{sourceEnd}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationRow})
+
+模型中的行被移动之前发射该信号。将要移动的项是在给定 sourceParent 下在 sourceStart 和 sourceEnd 之间（包括首尾）的项。它们将从 destinationRow 列开始移动到destinationParent。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginMoveRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::rowsAboutToBeRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+模型中的行被移除之前发射该信号。将要移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice} 
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+\begin{seeAlso}
+removeRows() 和 beginRemoveRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::rowsInserted(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+将行插入到模型之后发射该信号。新的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+\begin{seeAlso}
+insertRows() 和 beginInsertRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::rowsMoved(const QModelIndex \emph{\&parent}, int \emph{start}, int \emph{end}, const QModelIndex \emph{\&destination}, int \emph{column})
+
+模型中的行被移动之后发射该信号。新的项是在给定 parent 下在 start 和 end 之间（包括首尾）的项。它们将从 column 列开始移动到destination。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginMoveRows()。
+\end{seeAlso}
+
+[signal] void QAbstractItemModel::rowsRemoved(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+模型中的行被移除之后发射该信号。移除的项是在给定 parent 下在 first 和 last 之间（包括首尾）的项。
+
+\begin{notice}
+连接到该信号的组件使用它来适应模型尺寸的变化。它只能由 QAbstractItemModel 实现发射，不能在子类代码中显式发射。
+\end{notice}
+
+\begin{notice}
+这是一个私有信号。仅用于信号连接，而不能由用户发射。
+\end{notice}
+
+\begin{seeAlso}
+removeRows() 和 beginRemoveRows()。
+\end{seeAlso}
+
+[virtual slot] void QAbstractItemModel::submit()
+
+让模型知道它应该将缓存的信息提交到永久存储。这个函数通常用于行编辑。
+
+如果没有错误，返回 true;否则返回 false。
+
+\begin{seeAlso}
+revert()。
+\end{seeAlso}
+
+[virtual] void QAbstractItemModel::$\sim$QAbstractItemModel()
+
+销毁抽象项模型。
+
+[protected] void QAbstractItemModel::beginInsertColumns(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+开始一个列插入操作。
+
+在子类中重新实现 insertColumns() 时，必须在将数据插入模型的底层数据存
+储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新
+列插入后的列号。
+
+\begin{tabular}{|m{13em}|m{26em}|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-columns}}
+\end{minipage}
+&指定要插入到模型项中的列的范围的第一个和最后一个列号。例如，如图所示，我们在列4之前插入三列，所以 first 是4，last 是 6:beginInsertColumns(parent, 4, 6);这将插入三个新列作为列4、5和6。\\
+
+\hline
+%modelview-begin-append-columns.png
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-append-columns}}
+\end{minipage}
+&
+要追加列，请将它们插入到最后一列之后。例如，如图所示我们，、将三列附加到一个包含六列的集合(以列5结尾)，因此 first 是 6 and last 是 8:
+beginInsertColumns(parent, 6, 8);
+这将追加两个新列作为列6、7和8。  \\ 
+\hline
+\end{tabular}
+
+\begin{notice}
+此函数发出 columnAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+\end{notice}
+
+\begin{seeAlso}
+endInsertColumns()。
+\end{seeAlso}
+
+\splitLine
+
+[protected] void QAbstractItemModel::beginInsertRows(const QModelIndex \&parent, int first, int last)
+
+开始一个行插入操作。
+
+在子类中重新实现 insertRows() 时，必须在将数据插入模型的底层数据存储之前调用此函数。parent 索引对应于插入新列的父索引;first 和 last 是新行插入后的行号。
+
+\begin{tabular}{|m{13em}|m{26em}|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-insert-rows}}
+\end{minipage}
+&
+为要插入模型中项的行范围指定第一行和最后一行。
+例如，如图所示，我们在第2行之前插入三行，因此first 是2，first 是4：
+
+beginInsertRows(parent, 2, 4);
+这将插入三行新行，即第2、3和4行。
+\\
+\hline
+%modelview-begin-append-columns.png
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-append-rows}}
+\end{minipage}
+&
+要追加行，请将它们插入到最后一行之后。例如，如图所示，我们将两行附加到一个包含4个现有行的集合(以第3行结束)，因此 first 是4，last 是5:
+beginInsertRows(parent, 4, 5);
+这将追加两个新行作为第4行和第5行。\\ 
+\hline
+\end{tabular}
+
+\begin{notice}
+此函数发出 rowsAboutToBeInserted() 信号，在插入数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+\end{notice}
+
+\begin{seeAlso}
+endInsertRows()。
+\end{seeAlso}
+  
+
+\splitLine
+
+[protected] void QAbstractItemModel::beginMoveColumns(const QModelIndex \emph{\&sourceParent}, int \emph{sourceFirst}, int \emph{sourceLast}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})
+
+开始一个列移动操作。
+
+当重新实现子类时，此方法简化了模型中实体的移动。此方法负责在模型中移动持久索引，否则您将需要自己执行此操作。使用 beginMoveColumns 和 endMoveColumns() 是直接发送与 changePersistentIndex() 一起的 layoutAboutToBeChanged() 和 layoutChanged() 的另一种选择。
+
+sourceParent 索引对应于从其移出列的父级；sourceFirst 和 sourceLast 是要移动的列的第一列和最后一列。destinationParent 索引对应于将这些列移入的父级。destinationChild 是要将列移动到的列。也就是说，sourceParent 中 sourceFirst 列的索引将成为 destinationParent 中的 destinationChild 列，然后是所有其他列，直到 sourceLast。
+
+但是，当在同一父目录下移动列时(sourceParent 和 destinationParent 是相等的)，这些列将被放置在 destinationChild 索引之前。也就是说，如果您希望移动列0和1，使它们变成列 1 和列 2,destinationChild 应该是 3。在本例中，源列 i (位于 sourceFirst 和 sourceLast 之间)的新索引等于(destinationChild-sourceLast-1+i)。
+
+注意，如果 sourceParent 和 destinationParent 是相同的，您必须确保 destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须确保不会尝试将列移动到它自己的子列或祖先列中。如果任一条件为真，此方法将返回 false，在这种情况下，应中止移动操作。
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+endMoveColumns()。
+\end{seeAlso}
+
+\splitLine
+
+[protected] void QAbstractItemModel::beginMoveRows(const QModelIndex \emph{\&sourceParent}, int \emph{sourceFirst}, int \emph{sourceLast}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})
+
+开始一个行移动操作。
+
+当重新实现子类时，此方法简化了模型中实体的移动。此方法负责在模型中移动持久索引，否则您将需要自己执行此操作。使用 beginMoveRows 和 endMoveRows 是直接发送与 changePersistentIndex() 一起的 layoutAboutToBeChanged() 和 layoutChanged() 的另一种选择。
+
+sourceParent 索引对应于从其移出行的父级；sourceFirst 和 sourceLast 是要移动的行的第一行和最后一行。destinationParent 索引对应于将这些行移入的父级。destinationChild 是要将行移动到的行。也就是说，sourceParent 中的 sourceFirst 行的索引将成为 destinationParent 中的 destinationChild 行，然后是所有其他行，直到 sourceLast。
+
+但是，当在同一父目录下移动列时(sourceParent 和 destinationParent 是相等的)，这些行将被放置在 destinationChild 索引之前。也就是说，如果您希望移动列0和1，使它们变成行 1 和行 2,destinationChild 应该是 3。在本例中，源行 i (位于 sourceFirst 和 sourceLast 之间)的新索引等于(destinationChild-sourceLast-1+i)。
+
+\begin{notice}
+如果 sourceParent 和 destinationParent 是相同的，您必须确保
+destinationChild 不在 sourceFirst 和 sourceLast + 1 的范围内。还必须确
+保不会尝试将行移动到它自己的子列或祖先行中。如果任一条件为真，此方法将
+返回 false，在这种情况下，应中止移动操作。
+\end{notice}
+
+
+\begin{longtable}[l]{|m{13em}|m{26em}|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-1}}
+\end{minipage}
+&
+指定源父行中您希望在模型中移动的行跨度的第一行和最后一行编号。还要在目
+                 标父级中指定要将范围内的行移动到的行。例如，如图所示，
+                 我们将源中的第 2 行到第 3 行移动了三行，因此
+                 sourceFirst 为 2，sourceLast 为 4。
+
+我们将这些项移动到目标的第2行上方，因此 destinationChild 为2。
+beginMoveRows(sourceParent, 2, 4, destinationParent, 2);
+这会将源中的三行第 2、3 和 4 行移动到目标中的 2、3 和 4 行。其他受影响的同级项也因此被移位。
+\\
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-2}}
+\end{minipage}
+&
+若要将行追加到另一个父元素，请将它们移到最后一行的后面。例如，如图所示，我们将三行移动到一个包含 6 个现有行的集合中(以第 5 行结束)，因此 destinationChild 为6：
+beginMoveRows(sourceParent, 2, 4, destinationParent, 6);
+这会将目标行移到目标父级的末尾，分别为 6、7 和 8。\\ 
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-3}}
+\end{minipage}
+&
+要在同一父级中移动行，请指定要将其移动到的行。 例如，如图所示，我们将
+                 一项从第 2 行移至第 0 行，因此 sourceFirst 和
+                 sourceLast 为2，destinationChild 为0。
+
+beginMoveRows(parent, 2, 2, parent, 0);
+注意，其他行可能会相应移位。另请注意，在同一父级中移动项时，请勿尝试无效移动或无操作移动。在上面的示例中，项 2 位于移动之前的第 2 行，因此无法将其移动到第 2 行（已经存在）或第 3 行（空操作，因为第 3 行意味着已经在第 3 行之上）\\
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-move-rows-4}}
+\end{minipage}
+&
+要在同一父级中移动行，请指定要将其移动到的行。例如，如图所示，我们将一项从第 2 行移至第 4 行，因此 sourceFirst 和 sourceLast 为2，destinationChild 为4。
+beginMoveRows(parent, 2, 2, parent, 4);
+注意，其他行可能会相应移位。\\
+\hline
+\end{longtable}
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+endMoveRows()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::beginRemoveColumns(const QModelIndex \emph{\&parent}, int \emph{first}, int \emph{last})
+
+开始一个列移除操作。
+
+在子类中重新实现 removeColumns() 时，必须在从模型的底层数据存储中删除数据之前调用此函数。parent 索引对应于删除新列的父索引; first 和 last 是要删除的第一个和最后一个列的列号。
+
+\begin{notice}
+此函数发出 columnAboutToBeRemoved() 信号，在删除数据之前，已连接的视图（或代理）必须处理该信号。否则，视图可能会以无效状态结束。
+\end{notice}
+
+\begin{seeAlso}
+endRemoveColumns()。
+\end{seeAlso}
+
+\begin{tabular}{|m{13em}|m{26em}|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-remove-columns}}
+\end{minipage}
+&
+指定要从模型中的项中删除的列的范围的第一个和最后一个列号。例如，如图所示，我们将这三列从第4列移到第6列，因此 first 是4，last 是6:
+beginRemoveColumns(parent, 4, 6);\\
+\hline
+\end{tabular}
+
+[protected] void QAbstractItemModel::beginRemoveRows(const QModelIndex \&parent, int first, int last)
+
+开始一个行移除操作。
+
+在子类中重新实现 removeRows() 时，必须在从模型的基础数据存储中删除数据之前调用此函数。
+
+parent 引对应于从中删除新行的父索引；first 和 last 是要删除的行的行号。
+
+\begin{tabular}{|m{13em}|m{26em}|}
+\hline
+\begin{minipage}[b]{0.3\columnwidth}
+		\centering
+		\raisebox{-.5\height}{\includegraphics[width=\linewidth]{modelview-begin-remove-rows}}
+\end{minipage}
+&
+指定要从模型中的项中删除的行范围的第一个和最后一个行号。例如，如图所示，我们将从第 2 行到第 3 行的两行删除，因此 first 是 2，last 是 3：
+beginRemoveRows(parent, 2, 3);\\
+\hline
+\end{tabular}
+
+\begin{notice}
+此函数发出 rowsAboutToBeRemoved() 信号，连接的视图（或代理）必须在删除数据之前处理该信号。否则，视图可能会以无效状态结束。
+\end{notice}
+
+\begin{seeAlso}
+endRemoveRows()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::beginResetModel()
+
+开始模型重置操作。
+
+重置操作会在任何附加的视图中将模型重置为当前状态。
+
+\begin{notice}
+附加到这个模型的任何视图都将被重置。
+\end{notice}
+
+当一个模型被重置时，这意味着以前从该模型报告的任何数据现在都是无效的，必须再次进行查询。这也意味着当前项和任何选定项都将无效。当模型从根本上更改其数据时，有时只需调用此函数比在底层数据源或其结构发生更改时发出 dataChanged() 通知其他组件更容易。
+
+在重新设置模型或代理模型中的任何内部数据结构之前，必须调用此函数。
+
+这个函数发出信号 modelAboutToBeReset()。
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+modelAboutToBeReset()、modelReset() 和 endResetModel()。
+\end{seeAlso}
+
+[virtual] void QAbstractItemModel::buddy(const QModelIndex \emph{\&index}) const
+
+返回由 index 表示的项的伙伴的模型索引。当用户想要编辑项目时，视图将调用此函数以检查是否应改为编辑模型中的另一个项。然后，视图将使用伙伴项返回的模型索引构造一个委托。
+
+此功能的默认实现将每个项都作为自己的伙伴。
+
+[virtual] bool QAbstractItemModel::canDropMimeData(const QMimeData \emph{*data}, Qt::DropAction \emph{action}, int \emph{row}, int \emph{column}, const QModelIndex \emph{\&parent}) const
+
+如果模型接受放置 data，则返回 true。这个默认实现只检查 mimeTypes() 列表中数据是否至少有一种格式，以及操作是否在模型的 supportedDropActions() 中。
+
+如果您想要测试是否可以在 row、column、parent节点上放置 data，请在自定义模型中重新实现此函数。如果您不需要该测试，那么就没有必要重新实现此函数。
+
+\begin{seeAlso}
+dropMimeData() 和 在项视图中使用拖放。
+\end{seeAlso}
+
+
+[virtual] bool QAbstractItemModel::canFetchMore(const QModelIndex \&parent) const
+
+如果在 parent 索引下有更多可用的数据返回 true；否则返回 fasle;
+
+默认的实现总是返回 false。
+
+如果 canFetchMore() 返回 true，则应该调用 fetchMore() 函数。比如 QAbstractItemView 就是这样做的。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+\href{}{Q\_INVOKABLE}
+\end{seeAlso}
+
+\begin{seeAlso}
+fetchMore()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::changePersistentIndex(const QModelIndex \&from, const QModelIndex \&to)
+
+将等于给定的 from 的 QPersistentModelIndex() 模型索引更改为 to 模型索引。
+
+如果没有找到与给定的模型索引 from 相等的持久模型索引，则什么也不会改变。
+
+如果 canFetchMore() 返回 true，则应该调用 fetchMore() 函数。比如 QAbstractItemView 就是这样做的。
+
+
+\begin{seeAlso}
+persistentIndexList() 和 changePersistentIndexList()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::changePersistentIndexList(const QModelIndexList \emph{\&from}, const QModelIndexList \emph{\&to})
+
+将等于给定的 from 的 QPersistentModelIndex()es 模型索引列表更改为 to 模型索引列表。
+
+如果没有找到与给定的模型索引 from 相等的持久模型索引，则什么也不会改变。
+
+该函数在 Qt4.1 中被引入。
+
+\begin{seeAlso}
+persistentIndexList() 和 changePersistentIndex()。
+\end{seeAlso}
+  
+bool QAbstractItemModel::checkIndex(const QModelIndex \&index, QAbstractItemModel::CheckIndexOptions options = CheckIndexOption::NoOption) const
+
+此函数检查索引是否为此模型的合法模型索引。 合法模型索引要么是无效的模型索引，要么是具有以下所有条件的有效模型索引：
+
+\begin{compactitem}
+\item index 的模型就是 this；
+\item index 的行数大于等于零；
+\item index 的行数小于父索引的行数；
+\item index 的列数大于等于零；
+\item index 的列数小于父索引的列数。
+\end{compactitem}
+
+options 参数可能会改变其中一些检查。如果 options 包含 IndexIsValid，那么 index 必须是一个有效的索引;这在重新实现 data() 或 setData() 等需要有效索引的函数时非常有用。
+
+如果 options 包含 DoNotUseParent，那么将调用 parent() 的检查将被省略;允许在重新实现的 parent() 函数中调用此函数(否则，将导致无穷递归和崩溃)。
+
+如果 options 不包含 DoNotUseParent，但包含 IndexIsValid，那么将执行额外的检查:检查父索引是否有效。这在实现平面模型(如列表或表)时非常有用，在这种情况下，模型索引不应该具有有效的父索引。
+
+该函数如果检查成功返回 true，否则返回 false。允许在 Q\_ASSERT 和类似的其他调试机制中使用该函数。如果某些检查失败，则将在 qt.core.qabstractitemmodel.checkindex 日志记录类别中显示一条警告消息，其中包含一些可能对调试失败有用的信息。
+
+\begin{notice}
+这个函数是一个调试助手，用于实现您自己的项模型。在开发复杂模型时，以及在构建复杂的模型层次结构时(例如使用代理模型)，调用这个函数来捕获传递给某个 QAbstractItemModel() API 的非法模型索引(如上定义)相关的bug是很有用的。
+\end{notice}
+
+\begin{warning}
+请注意，将非法索引传递给项模型是未定义的行为，因此应用程序必须避免这样做，并且不能依赖于项模型可以用来优雅地处理非法索引的任何“防御性”编程。
+\end{warning}
+
+
+该函数在 Qt5.11 中被引入。
+
+\begin{seeAlso}
+QModelIndex。
+\end{seeAlso}
+
+[pure virtual] int QAbstractItemModel::columnCount(const QModelIndex \&parent = QModelIndex()) const
+
+返回给定 parent 索引的子项的列的数量。
+
+在大多数子类中，列的数量独立于 parent。
+
+例如：
+
+\begin{lstlisting}[language=C++]
+int DomModel::columnCount(const QModelIndex &parent) const
+{
+     Q_UNUSED(parent);
+     return 3;
+}
+\end{lstlisting}
+
+\begin{notice}
+在实现基于表的模型时，当父模型有效时，columnCount() 应该返回 0。
+\end{notice}
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+该函数在 Qt4.1 中被引入。
+
+\begin{seeAlso}
+rowCount()。
+\end{seeAlso}
+
+[protected] QModelIndex QAbstractItemModel::createIndex(int row, int column, void *ptr = nullptr) const
+
+使用内部指针 ptr 为给定的 row 和 column 创建模型索引。
+
+当使用 QSortFilterProxyModel 时，它的索引有自己的内部指针。不建议在模型外部访问这个内部指针。使用 data() 函数代替。
+
+这个函数提供了一个一致的接口，模型子类必须使用这个接口来创建模型索引。
+
+参见 QModelIndex::internalId()。
+
+[pure virtual] QVariant QAbstractItemModel::data(const QModelIndex \&index, int role = Qt::DisplayRole) const
+
+返回指定角色 role 和 索引 index 的项数据。
+
+注意： 如果没有要返回的值，则返回无效的 QVariant，而不是返回 0。
+
+注意： 该函数可以通过元对象系统和 QML 调用。请参阅 Q\_INVOKABLE。
+
+参见 Qt::ItemDataRole、setData() 和 headerData()。
+
+dropMimeData
+
+[virtual] bool QAbstractItemModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex \&parent) const
+
+处理以给定操作 action 结束的拖放操作提供的数据 data。
+
+如果数据和操作被模型处理了则返回 true，否则返回 false。
+
+指定的行 row、列 column 和父索引 parent 指示模型中操作结束的项的位置。在正确的位置完成动作是模型的责任。
+
+例如，QTreeView 中的一个项上的拖放操作可以导致新项作为行 row、列 column 和父索引 parent 指定的项的子项插入，或者作为项的兄弟项插入。
+
+当行 row 和列 column 为 -1 时，这意味着放置的数据应该被认为是直接在 parent 上放置的。通常这意味着将数据附加为父项 parent 的子项。如果行 row 和列 column 大于或等于零，则表示放置发生在指定父索引 parent 的 row 和列 column 的前面。
+
+调用 mimeTypes() 成员来获取可接受的 MIME 类型列表。这个默认实现假定 mimeTypes() 是默认实现，它返回一个默认 MIME 类型。如果您在自定义模型中重新实现 mimeTypes() 以返回多个 MIME 类型，那么您必须重新实现此函数以使用它们。
+
+注意： 该函数可以通过元对象系统和 QML 调用。请参阅 Q\_INVOKABLE。
+
+参见 supportedDropActions、canDropMimeData() 和 在项视图中使用拖放。
+
+[protected] void QAbstractItemModel::endInsertColumns()
+
+结束列插入操作。
+
+在子类中重新实现 insertColumns()时，必须在将数据插入模型的底层数据存储之后调用此函数。
+
+\begin{seeAlso}
+beginInsertColumns()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::endInsertRows()
+
+结束行插入操作。
+
+在子类中重新实现 insertRows()时，必须在将数据插入模型的底层数据存储之后调用此函数。
+
+\begin{seeAlso}
+beginInsertRows()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::endMoveColumns()
+
+结束列移动操作。
+
+在实现子类时，必须在模型的底层数据存储中移动数据之后调用此函数。
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginMoveColumns()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::endMoveRows()
+
+结束行移动操作。
+
+在实现子类时，必须在模型的底层数据存储中移动数据之后调用此函数。
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginMoveRows()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::endRemoveColumns()
+
+结束列删除操作。
+
+在子类中重新实现 removeColumns() 时，必须在从模型的底层数据存储中删除数据之后调用此函数。
+
+\begin{seeAlso}
+beginRemoveColumns()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::endRemoveRows()
+
+结束行删除操作。
+
+在子类中重新实现 removeRows() 时，必须在从模型的底层数据存储中删除数据之后调用此函数。
+
+\begin{seeAlso}
+beginRemoveRows()。
+\end{seeAlso}
+
+[protected] void QAbstractItemModel::endResetModel()
+
+完成模型重置操作。
+
+在重置模型或代理模型中的任何内部数据结构后，必须调用此函数。
+
+该函数发出 modelReset() 信号。
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+beginResetModel()。
+\end{seeAlso}
+
+[virtual] void QAbstractItemModel::fetchMore(const QModelIndex \emph{\&parent})
+
+获取指定的 parent 父索引的项的任何可用的数据。
+
+如果递增地填充模型，则需要重新实现该函数。
+
+该函数的默认实现没有做任何事情。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+canFetchMore()。
+\end{seeAlso}
+  
+[virtual] Qt::ItemFlags QAbstractItemModel::flags(const QModelIndex \emph{\&index}) const
+
+返回给定索引的项标志。
+
+基类的实现返回启用项(ItemIsEnabled)和允许选择项(ItemIsSelectable)的标志的组合。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+Qt::ItemFlags。
+\end{seeAlso}
+
+[virtual] Qt::ItemFlags QAbstractItemModel::hasChildren(const QModelIndex \&parent = QModelIndex()) const
+
+如果父索引 parent 有任何子项则返回 true，否则返回 false。
+
+在父索引上使用 rowCount() 来查找子项的数量。
+
+\begin{notice}
+如果一个索引设置了 Qt::ItemNeverHasChildren 标志，那么用该索引调用该方法是未定义的行为。
+\end{notice}
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+parent() 和 index()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::hasIndex(int \emph{row}, int \emph{column}, const QModelIndex \&parent = QModelIndex()) const
+
+如果模型返回一个指定父索引 parent、行 row 和列 column 的有效 QModelIndex，则返回 true，否则返回 false。
+
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+[virtual] QVariant QAbstractItemModel::headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const
+
+返回标题中具有给定 orientation 和 section 的数据。
+
+对于水平标题，节号对应于列号。类似地，对于垂直标题，节号对应于行号。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+Qt::ItemDataRole、setHeaderData() 和 QHeaderView。
+\end{seeAlso}
+
+[pure virtual] QModelIndex QAbstractItemModel::index(int row, int column, const QModelIndex \&parent = QModelIndex()) const
+
+返回模型中指定 row、column 和 parent 索引的项的索引。
+
+在子类中重新实现此函数时，调用 createIndex() 来生成模型索引，其他组件可以使用这些索引来引用模型中的项。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+createIndex()。
+\end{seeAlso}
+
+bool QAbstractItemModel::insertColumn(int column, const QModelIndex \&parent = QModelIndex()) const
+
+在指定 parent 索引的子项的指定 column 之前插入一列。
+
+如果插入了该列，则返回 true；否则，返回 false。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+insertColumns()、insertRow() 和 removeColumn()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::insertColumns(int column, int
+count, const QModelIndex \&parent = QModelIndex()) const
+
+在支持此功能的模型上，在模型中的给定 column 之前插入 count 列新列。每个新列中的项将是由父模型索引 parent 表示的项的子项目。
+
+如果 column 为 0，则这些列将添加到任何现有列的前面。
+
+如果 column 为 columnCount()，则将这些列追加到任何现有列之后。
+
+如果 parent 没有子项，插入带有 count 列的单行。
+
+如果列成功插入，则返回 true，否则返回 false。
+
+基类的实现没有做任何事情，并且返回 false。
+
+如果您实现了自己的模型，希望支持插入，则可以重新实现此函数。或者，您可以提供自己的 API 来更改数据。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+insertRows()、removeColumns()、beginInsertColumns() 和 endInsertColumns()。
+\end{seeAlso}
+
+bool QAbstractItemModel::insertRow(int row, const QModelIndex \&parent = QModelIndex()) const
+
+在指定 parent 索引的子项的指定 row 之前插入一列。
+
+\begin{notice}
+该函数调用了虚函数 insertRows()。
+\end{notice}
+  
+如果插入了该行，则返回 true；否则，返回 false。
+
+\begin{seeAlso}
+insertRows()、insertColumn() 和 removeRow()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::insertRows(int row, int count, const QModelIndex \&parent = QModelIndex()) const
+
+\begin{notice}
+基类的实现没有做任何事情，并且返回 false。
+\end{notice}
+
+在支持此功能的模型上，将 count 行插入模型中给定的行之前。新行中的项将是由父模型索引 parent 表示的项的子项。
+
+如果 row 为 0，则这些行将添加到任何现有列的前面。
+
+如果 row 为 rowCount()，则将这些列追加到任何现有行之后。
+
+如果 parent 没有子项，插入带有 count 行的单列。
+
+如果列成功插入，则返回 true，否则返回 false。
+
+如果您实现了自己的模型，希望支持插入，则可以重新实现此函数。或者，您可以提供自己的 API 来更改数据。在任何一种情况下，您都需要调用 beginInsertRows() 和 endInsertRows() 来通知其他组件模型已经更改
+
+\begin{seeAlso}
+insertColumns()、removeRows()、beginInsertRows() 和 endInsertRows()。
+\end{seeAlso}
+
+[virtual] QMap<int, QVariant> QAbstractItemModel::itemData(const QModelIndex \&index) const
+
+为给定索引 index 处的项返回具有模型中所有预定义角色值的 map。
+
+如果希望扩展此函数的默认行为以在 map 中包含自定义角色，请重新实现此函数。
+
+\begin{seeAlso}
+setItemData()、Qt::ItemDataRole 和 data()。
+\end{seeAlso}
+  
+[virtual] QModelIndexList QAbstractItemModel::match(const QModelIndex \&start, int role, const QVariant \&value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const
+
+返回一列项的索引，这些索引在 start 索引的列中并且该索引下的数据在给定角色下存储的数据与指定值匹配。执行搜索的方式由给定的 flags 定义。返回的列表可能是空的。还要注意，如果使用了代理模型，列表中结果的顺序可能与模型中的顺序不一致。不能依赖结果的顺序。
+
+搜索从 start 索引开始，直到匹配数据项的数量等于 hits，搜索到达最后一行，或者再次搜索到达start—这取决于是否在 flags 中指定了 MatchWrap。如果希望搜索所有匹配项，请使用 hits = -1。
+
+默认情况下，此函数将对所有项执行基于字符串的包装比较，搜索以 value 指定的搜索项开头的项。 
+
+\begin{notice}
+这个函数的默认实现只搜索列。重新实现此函数以包含不同的搜索行为。
+\end{notice}
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+[virtual] QMimeData QAbstractItemModel::mimeData(const QModelIndexList \emph{\&indexes}) const
+
+返回一个对象，该对象包含与指定索引 indexes 列表对应的序列化数据项。用于描述编码数据的格式是从 mimeTypes() 函数获得的。这个默认实现使用 mimeTypes() 的默认实现返回的默认 MIME 类型。如果您在自定义模型中重新实现 mimeTypes() 以返回更多 MIME 类型，那么重新实现此函数以使用它们。
+
+如果 indexes 为空，或者没有受支持的 MIME 类型，则返回 0，而不是序列化的空列表。
+
+\begin{seeAlso}
+mimeTypes() 和 dropMimeData()。
+\end{seeAlso}
+
+[virtual] QStringList QAbstractItemModel::mimeTypes() const
+
+返回允许的 MIME 类型的列表。默认情况下，内置模型和视图使用内部 MIME 类型：application / x-qabstractitemmodeldatalist。
+
+在自定义模型中实现拖放支持时，如果您将以默认内部 MIME 类型以外的格式返回数据，请重新实现此函数以返回您的 MIME 类型列表。
+
+如果在自定义模型中重新实现这个函数，还必须重新实现调用它的成员函数: mimeData() 和 dropMimeData()。
+
+\begin{seeAlso}
+mimeData() 和 dropMimeData()。
+\end{seeAlso}
+
+bool QAbstractItemModel::moveColumn(const QModelIndex \&sourceParent, int sourceColumn, const QModelIndex \&destinationParent, int destinationChild)
+
+在支持此功能的模型上，将 sourceColumn从sourceParent 移到 destinationParent 下的 destinationChild。
+
+如果列被成功移动，则返回 true;否则返回 false。
+
+\begin{seeAlso}
+moveColumns() 和 moveRow()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::moveColumns(const QModelIndex \emph{\&sourceParent}, int \emph{sourceColumn}, int \emph{count}, const QModelIndex \emph{\&destinationParent}, int \emph{destinationChild})
+
+在支持此功能的模型上，将 count 列从父索引 sourceParent 下的给定 sourceColumn 移到父索引 destinationParent 下的 destinationChild 列。
+
+如果列被成功移动，则返回 true;否则返回 false。
+
+基类的实现没有做任何事情，并且返回 false。
+
+如果实现自己的模型，则如果要支持移动，则可以重新实现此功能。另外，您可以提供自己的 API 来更改数据。
+
+\begin{seeAlso}
+beginMoveColumns() 和 endMoveColumns()。
+\end{seeAlso}
+
+bool QAbstractItemModel::moveRow(const QModelIndex \&sourceParent, int sourceRow const QModelIndex \&destinationParent, int destinationChild)
+
+在支持此功能的模型上，将 sourceColumn从sourceParent 移到 destinationParent 下的 destinationChild。
+
+如果行被成功移动，则返回 true;否则返回 false。
+
+\begin{seeAlso}
+moveRows() 和 moveColumn()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::moveRows(const QModelIndex \&sourceParent, int sourceRow, int count, const QModelIndex \&destinationParent, int destinationChild)
+
+在支持此功能的模型上，将 count 行从父索引 sourceParent 下的给定 sourceColumn 移到父索引 destinationParent 下的 destinationChild 行。
+
+如果行被成功移动，则返回 true;否则返回 false。
+
+基类的实现没有做任何事情，并且返回 false。
+
+如果实现自己的模型，则如果要支持移动，则可以重新实现此功能。另外，您可以提供自己的 API 来更改数据。
+
+\begin{seeAlso}
+beginMoveRows() 和 endMoveRows()。
+\end{seeAlso}
+
+[pure virtual] bool QAbstractItemModel::parent(const QModelIndex \emph{\&index}) const
+
+返回具有给定索引 index 的模型项的父项。如果该项没有父项，则返回无效的 QModelIndex。
+
+在公开树数据结构的模型中使用的常见约定是，只有第一列中的项才有子级。对于这种情况，当在子类中重新实现此函数时，返回的 QModelIndex 的列将为0。
+
+在子类中重新实现这个函数时，要小心避免调用 QModelIndex 成员函数，比如 QModelIndex::parent()，因为模型的索引将简单地调用实现，从而导致无限递归。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+createIndex()。
+\end{seeAlso}
+
+[protected] QModelIndexList QAbstractItemModel::persistentIndexList() const
+
+返回作为模型中的持久索引存储的索引列表。
+
+该函数在 Qt4.2 中被引入。
+
+bool QAbstractItemModel::removeColumn(int column, const QModelIndex \&parent = QModelIndex())
+
+从指定的父项 parent 的子项中删除给定的列 column。
+
+如果删除了该列，则返回 true；否则返回 false。
+
+\begin{notice}[另外参阅]
+removeColumns()、removeRow()和insertColumn()。
+\end{notice}
+
+[virtual] bool QAbstractItemModel::removeColumns(int column, int count, const QModelIndex \&parent = QModelIndex())
+
+在支持此功能的模型上，从模型中删除以父项 parent 下给定列 column 开头的 count 列。
+
+如果列被成功删除，返回头 true；否则返回 false。
+
+基类的实现没有做任何事情并返回了 false。
+
+如果实现自己的模型，要支持删除，则可以重新实现此函数。 另外，您可以提供自己的 API 来更改数据。
+
+\begin{notice}[另外参阅]
+  removeColumn()、removeRows()、insertColumns()、beginRemoveColumns() 和 endRemoveColumns()。
+\end{notice}
+
+
+bool QAbstractItemModel::removeRow(int row, const QModelIndex \&parent = QModelIndex())
+
+从指定的父项 parent 的子项中删除给定的行 row。
+
+如果删除了该行，则返回 true；否则返回 false。
+
+这是一个调用 removeRows()的便利函数。QAbstractItemModel 的 removeRows()的实现不做任何事情。
+
+\begin{notice}[另外参阅]
+removeRows()、removeColumn()和insertRow()。
+\end{notice}
+
+[virtual] bool QAbstractItemModel::removeRows(int row, int count, const QModelIndex \&parent = QModelIndex())
+
+在支持此功能的模型上，从模型中删除以父项 parent 下给定列 row 开头的 count 行。
+
+如果行被成功删除，返回头 true；否则返回 false。
+
+基类的实现没有做任何事情并返回了 false。
+
+如果实现自己的模型，要支持删除，则可以重新实现此函数。 另外，您可以提供自己的 API 来更改数据。
+
+\begin{notice}[另外参阅]
+removeRow()、removeColumns()、insertColumns()、beginRemoveRows() 和 endRemoveRows()。
+\end{notice}
+
+[virtual] QHash<int, QByteArray> QAbstractItemModel::roleNames() const
+
+返回模型的角色名称。
+
+Qt 设置的默认角色名是：
+
+\begin{tabular}{|l|l|}
+\hline
+Qt Role& QML Role Name \\ 
+\hline
+Qt::DisplayRole	&display\\
+\hline
+Qt::DecorationRole&	decoration\\
+\hline
+Qt::EditRole&	edit\\
+\hline
+Qt::ToolTipRole	&toolTip\\
+\hline
+Qt::StatusTipRole&	statusTip\\
+\hline
+Qt::WhatsThisRole&	whatsThis\\
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+removeRow()、removeColumns()、insertColumns()、beginRemoveRows() 和 endRemoveRows()。
+\end{seeAlso}
+
+该函数在 Qt4.6 中被引入。
+
+\begin{seeAlso}
+setRoleNames()。
+\end{seeAlso}
+
+[pure virtual] int QAbstractItemModel::rowCount(const QModelIndex \&parent = QModelIndex()) const
+
+返回给定父节点 parent 下的行数。当父节点有效时，这意味着 rowCount 返回父节点的子节点数。 
+
+\begin{notice}
+在实现基于表的模型时，当父节点有效时，rowCount() 应该返回 0。
+\end{notice}
+
+\begin{seeAlso}
+setSupportedDragActions()、Qt::DropActions 和 在项视图中使用拖放。
+\end{seeAlso}
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+columnCount()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::setData(const QModelIndex \&index, const QVariant \&value, int role = Qt::EditRole)
+
+将索引 index 处的项的角色数据设置为 value。
+
+成功返回 true；否则返回 false。
+
+如果数据被成功设置，应该发出 dataChanged() 信号。
+
+基类的实现返回 false。对于可编辑的模型来说，该函数和 data() 必须被实现。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+Qt::ItemDataRole、data() 和 itemData()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant \&value, int role = Qt::EditRole)
+
+设置指定 section、orientation 和 role 标题的数据为 value。
+
+标题数据更新完成，返回 true；否则返回 false。
+
+在重新实现此函数时，必须显式发出 headerDataChanged() 信号。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+  
+\begin{seeAlso}
+Qt::ItemDataRole 和 headerData()。
+\end{seeAlso}
+
+[virtual] bool QAbstractItemModel::setItemData(const QModelIndex \&index, const QMap<int, QVariant> \&roles)
+
+对于每个 Qt::ItemDataRole，将索引 index 处的项目的角色数据设置为角色中的关联值。
+
+设置成功，返回 true；否则返回 false。
+
+不在角色中的角色将不会被修改。
+
+\begin{seeAlso}
+setData()、data() 和 itemData()。
+\end{seeAlso}
+
+[virtual] QModelIndex QAbstractItemModel::sibling(int \emph{row}, int \emph{column}, const QModelIndex \&) const
+
+返回索引 index 项的行和列上的同级索引，如果该位置上没有同级索引，则返回无效的 QModelIndex。
+
+sibling() 只是一个便捷函数，它找到项的父项，并使用它来检索指定行和列中子项的索引。
+
+可以选择性地重写此方法以进行特定于实现的优化。
+
+\begin{notice}
+该函数可以通过元对象系统和 QML 调用。
+\end{notice}
+
+\begin{seeAlso}
+Q\_INVOKABLE。
+\end{seeAlso}
+
+\begin{seeAlso}
+index()、QModelIndex::row() 和 QModelIndex::column()。
+\end{seeAlso}
+
+[virtual] void QAbstractItemModel::sort(int column, Qt::SortOrder order = Qt::AscendingOrder)
+
+按给定顺序 order 按列 column 对模型进行排序。
+
+基类实现不执行任何操作。
+
+[virtual] QSize QAbstractItemModel::span(const QModelIndex \emph{\&index}) const
+
+返回由索引 index 表示的项的行和列跨度。
+
+\begin{notice}
+目前没有使用span。
+\end{notice}
+
+[virtual] Qt::DropActions QAbstractItemModel::supportedDragActions() const
+
+返回此模型中数据支持的操作。
+
+默认实现返回 supportedDropActions()。如果希望支持其他操作，请重新实现此函数。
+
+当发生拖动时，QAbstractItemView::startDrag() 使用 supportedDragActions() 作为默认值。
+
+\begin{notice}
+目前没有使用span。
+\end{notice}
+
+\begin{seeAlso}
+setSupportedDragActions()、Qt::DropActions 和 在项视图中使用拖放。
+\end{seeAlso}
+
+[virtual] Qt::DropActions QAbstractItemModel::supportedDropActions() const
+
+返回此模型支持的放置动作。
+
+默认实现返回 Qt::CopyAction。如果希望支持其他操作，请重新实现此函数。您还必须重新实现 dropMimeData() 函数来处理额外的操作。
+
+该函数在 Qt4.2 中被引入。
+
+\begin{seeAlso}
+dropMimeData()、Qt::DropActions 和 在项视图中使用拖放。
+\end{seeAlso}

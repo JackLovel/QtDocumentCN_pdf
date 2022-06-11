@@ -1,0 +1,111 @@
+\chapter{QReadLocker}
+
+QReadLocker 是工具类，它简化了对读写锁，读访问的的锁定和解锁。\href{https://gitee.com/wcc210/QtDocumentCN/blob/master/Src/R/QReadLocker/QReadLocker.md#%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0}{更多...}
+
+\begin{tabular}{|l|l|}
+\hline
+属性 &	方法\\
+\hline
+头文件:& 	\#include <QReadLocker>\\
+\hline
+qmake:& 	QT += core\\
+\hline
+\end{tabular}
+
+\begin{notice}
+此类中全部函数可重入。
+\end{notice}
+
+\section{公共成员函数}
+
+\begin{tabular}{|l|m{23em}|}
+\hline
+类型 &	名称\\
+\hline
+ &	QReadLocker(QReadWrtiteLock \emph{*lock}) \\
+\hline
+ &	$\sim$QReadLocker() \\ 
+\hline
+QReadWriteLock * &	readWriteLock() const \\ 
+\hline
+void &	relock() \\ 
+\hline
+void &	unlock() \\
+\hline
+\end{tabular}
+
+\section{详细描述}
+
+QReadLocker（和 QWriteLocker）的目的是简化 QReadWriteLock 的锁定和解锁。锁定和解锁语句、异常处理代码是很容易出错的，而且很难调试。QReadLocker 可以确保在此类情况下，锁的状态始终定义良好。
+
+下面是一个使用 QReadLocker 锁定和解锁读写锁的示例：
+
+\begin{lstlisting}[language=C++]
+QReadWriteLock lock;
+
+QByteArray readData()
+{
+    QReadLocker locker(&lock);
+    ...
+    return data;
+}
+\end{lstlisting}
+
+等价于以下代码：
+
+\begin{lstlisting}[language=C++]
+ReadWriteLock lock;
+
+QByteArray readData()
+{
+    lock.lockForRead();
+    ...
+    lock.unlock();
+    return data;
+}
+\end{lstlisting}
+
+QMutexLocker 文档展示了使用locker对象来大大简化编程的示例。
+
+\begin{seeAlso}
+QWriteLocker、QReadWriteLock。
+\end{seeAlso}
+
+\section{成员函数文档}
+
+ReadLocker::QReadLocker(QReadWriteLock \emph{*lock})
+
+构造一个 QReadLocker 并锁定用于读取的锁。当 QReadLocker 被销毁时，锁将被解锁。如果 lock == nullptr，则 QReadLocker 不执行任何操作。
+
+
+\begin{seeAlso}
+QReadWriteLock::lockForRead()。
+\end{seeAlso}
+
+QReadLocker::$\sim$QReadLocker()
+
+销毁 QReadLocker 并解锁传递给构造函数的锁。
+
+\begin{seeAlso}
+QReadWriteLock::unlock()。
+\end{seeAlso}
+
+QReadWriteLock *QReadLocker::readWriteLock() const
+
+返回传递给构造函数的读写锁的指针。
+
+void QReadLocker::relock()
+
+重新锁定。
+
+\begin{seeAlso}
+unlock()。
+\end{seeAlso}
+
+void QReadLocker::unlock()
+
+解锁。
+
+\begin{seeAlso}
+QReadWriteLock::unlock()。
+\end{seeAlso}
