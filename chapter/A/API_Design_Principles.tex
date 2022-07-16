@@ -125,7 +125,7 @@ toolButton->iconSize(); // 返回 (52, 52)
 
 \end{notice}
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 	\item 传递一个特定值（如 QSIze()、-1 或 Qt::Alignment(0)）来指代“重置”；
 	\item 提供显示的 resetFoo() 或 unsetFoo() 函数。
 \end{compactitem}
@@ -220,7 +220,7 @@ virtual void setOverwriteMode( bool b ) { overWrite = b; }
 
 在 Qt 中，我们因为多种原因而尝试最小化虚函数的数量。每个虚函数调用都会让缺陷修复变得更难，因为会在调用图中插入一个不受控制的节点（使得调用结果无法预测）。人们会在虚函数中做非常疯狂的举措，例如：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 发送事件
 \item 发送信号
 \item 重入事件循环（例如，打开一个模态文件对话框）
@@ -229,7 +229,7 @@ virtual void setOverwriteMode( bool b ) { overWrite = b; }
 
 此外还有一些避免过度使用虚函数的原因：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 无法在不破坏二进制兼容性的前提下增加、移动或删除虚函数
 \item 无法简便地重写虚函数
 \item 编译器通常几乎不会内敛虚函数调用

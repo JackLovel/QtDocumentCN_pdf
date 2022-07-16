@@ -178,7 +178,7 @@ daysInMonth() 和 daysInYear() 函数返回一个月、一年里有几天。isLe
 
 \section{特别注意}
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 年数没有0 第0年的日期是非法的。公元后是正年份，公元前是负年份。\hl{QDate(1, 1, 1)} 的前一天是 \hl{QDate(-1, 12, 31)}。
 \item 合法的日期范围 日期内部存储为儒略日天号，使用连续的整数记录天数，公元前4714年11月24日是格里高利历第0天（儒略历的公元前4713年1月1日）。除了可以准确有效地表示绝对日期，此类也可以用来做不同日历系统的转换。儒略历天数可以通过 QDate::toJulianDay() 和 QDate::fromJulianDay()读写。 由于技术原因，储存的儒略历天号在 -784350574879~784354017364 之间，大概是公元前2亿年到公元后2亿年之间。
 \end{compactitem}

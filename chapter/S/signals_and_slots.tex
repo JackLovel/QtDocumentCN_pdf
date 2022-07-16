@@ -23,10 +23,10 @@ Qt 的控件包含大量预定义的信号，并且我们也可以编写控件�
 槽是指会在响应对应信号时被自动调用的函数；Qt 的控件包含大量预定义的槽，并且，
 编写控件的子类来添加自定义槽也是常见的做法，这样您便可以处理感兴趣的信号。
 
-\begin{figure}[hbt!]  
-\centering
-\includegraphics[width=0.5\textwidth]{eps/Signals_and_Slots.drawio.eps}
-\end{figure}
+% \begin{figure}[hbt!]  
+% \centering
+% \includegraphics[width=0.5\textwidth]{Signals_and_Slots.eps}
+% \end{figure}
 
 信号槽机制是类型安全的：信号的函数签名必须与接收它的槽函数签名一致
 （事实上，槽可以具有比它接收的信号更短的签名，因为允许忽略尾部的额外参数）。

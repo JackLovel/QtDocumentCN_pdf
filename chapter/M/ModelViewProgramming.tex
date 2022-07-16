@@ -52,8 +52,8 @@ MVC 由三种对象组成。模型是应用程序对象，视图是其在屏幕�
 
 模型、视图和委托之间通过信号槽通信。
 
-\begin{compactitem}
-	\item 数据源的数据发生改变时模型将发射信号通知视图。
+\begin{compactitem}[\arr]
+\item 数据源的数据发生改变时模型将发射信号通知视图。
 \item 用户交互发生改变时，视图将发射相应的信号。
 \item 在编辑期间，委托将发射信号来告知模型和视图有关编辑器的状态。
 \end{compactitem}
@@ -75,7 +75,7 @@ QAbstractItemModel 提供了一个数据接口，该接口足够灵活，可以�
 
 Qt提供了一些现成的模型，可用于处理数据项：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item QStringListModel 用于存储一列简单的 QString 类型的项目。
 \item QStandardItemModel 用于管理更复杂的树形结构项目，每个项目可以包含任意数据。
 \item QFileSystemModel 提供有关本地归档系统中文件和目录的信息。
@@ -304,7 +304,7 @@ QVariant value = model->data(index, role);
 
 \section{摘要}
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 模型索引以独立于任何底层数据结构的方式提供给视图和委托有关模型所提供项的位置的信息。
 \item 项通过其行号和列号以及其父项的模型索引检索出来。
 \item 模型索引是由模型根据其他组件（例如视图和委托）的请求构造出来的。
@@ -350,7 +350,7 @@ QString text = model->data(index, Qt::DisplayRole).toString();
 
 以上示例演示了从模型中检索数据的基本用法：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 模型的大小范围可以使用 rowCount() 和 columnCount 获取到。这些函数通常需要指定一个父项模型索引。
 \item 模型索引用于访问模型中的数据项。指定一个项需要行、列和父项的模型索引。
 \item 通过 \hl{QModelIndex()} 指定一个空的父项的索引来访问模型中的顶层项。

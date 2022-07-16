@@ -95,7 +95,7 @@ void	& qRegisterStaticPluginFunction(QStaticPlugin \emph{plugin}) \\
 QPluginLoader 提供对 Qt 插件的访问。
 Qt 插件存储在共享库（DLL）中，而相比使用 QLibrary 访问的共享库，它具有以下优点：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item QPluginLoader 检查插件是否链接到与应用程序相同的 Qt 版本。
 \item QPluginLoader 提供对根组件对象的直接访问（instance()），而无需手动解析C函数。
 \end{compactitem}

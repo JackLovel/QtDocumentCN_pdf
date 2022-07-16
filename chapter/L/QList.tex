@@ -259,7 +259,7 @@ QList，QLinkedList 和 QVector 提供了类似的接口和功能。 大部分�
 们之间是可以互相替换的，但可能会带来一些性能问题。这里有一个各自适用场
 景的总结：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 
 \item QVector 应当是你的默认首选。QVector 的性能通常要优于 QList, 因为 QVector 总是在内存中连续存储其元素，而 QList 则只会在sizeof(T) <= sizeof(void*) 且通过 Q\_DECLARE\_TYPEINFO 将 T 声明为 Q\_MOVABLE\_TYPE 或 Q\_PRIMITIVE\_TYPE 的情况下才会这么做，否则将会在堆上分配其元素的内存。QList 使用利弊分析 一文对此做了解释。
 \item    然而，QList 在 Qt API 中总是被用来传递参数和保存返回值，和这些 API 交互时请使用 QList。
