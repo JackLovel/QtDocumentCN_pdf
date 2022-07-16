@@ -15,7 +15,7 @@ moc 工具读取 C++ 源文件，若在其中找到包含 Q\_OBJECT 宏的类声
 该生成的源文件需要通过 \#include' 包含至对应类的源文件，
 或者更常见的是将其加入编译列表，并于对应类的实现一同链接。
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item QObject::metaObject() 返回该类对应的 元对象。
 \item QMetaObject::className() 在运行时以字符串形式返回该类的类名，并且不需要依赖 C++ 编译器的运行时类型信息(RTTI)支持；
 \item QObject::inherits() 函数返回该对象所属类型，是否派生自 QObject 继承树中的指定类型；

@@ -1,0 +1,270 @@
+\chapter{QTimeLine}
+
+QTimeLine类提供用于控制动画的时间线。
+
+\begin{tabular}{|r|l|}
+	\hline
+	属性 & 方法 \\
+	\hline
+	头文件 & \#include <QTimeLine>\\      
+	\hline
+	qmake & QT += core\\      
+	\hline
+	Since: 	& Qt 4.2\\ 
+	\hline
+	父类: &	QObject \\ 
+	\hline
+\end{tabular}
+
+\section{公共成员类型}
+
+\begin{tabular}{|r|m{32em}|}
+\hline
+类型 &	方法 \\
+\hline
+enum 	& TransformationType \{ TxNone, TxTranslate, TxScale, TxRotate, TxShear, TxProject \}\\
+\hline
+\end{tabular}
+
+
+\section{公共类型}
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+类型 	& 方法 \\ 
+\hline
+enum 	& Direction \{ Forward, Backward \} \\ 
+\hline
+enum  &	State \{ NotRunning, Paused, Running \} \\ 
+\hline
+\end{tabular}
+
+\section{属性}
+
+\begin{tabular}{|l|l|}
+\hline
+currentTime:int &	easingCurve:QEasingCurve \\ 
+\hline
+direction:Direction &	loopCount:int \\ 
+\hline
+duration:int 	& updateInterval:int \\ 
+\hline
+\end{tabular}
+
+\section{公共成员函数}
+
+\begin{longtable}{|l|m{25em}|}
+\hline
+返回类型 	&函数名\\
+\hline
+& QTimeLine(int duration = 1000, QObject *parent = nullptr) \\ 
+\hline
+virtual &	$\sim$QTimeLine() \\ 
+\hline
+int &	currentFrame() const \\ 
+\hline 
+int &	currentTime() const \\ 
+\hline
+qreal &	currentValue() const\\
+\hline
+QTimeLine::Direction &	direction() const \\ 
+\hline
+int 	& duration() const \\ 
+\hline
+QEasingCurve &	easingCurve() const \\ 
+\hline
+int &	endFrame() const \\ 
+\hline
+int &	frameForTime(int \emph{msec}) const \\ 
+\hline
+int &	loopCount() const \\ 
+\hline
+void &	setDirection(QTimeLine::Direction \emph{direction}) \\ 
+\hline
+void &	setDuration(int \emph{duration}) \\ 
+\hline
+void &	setEasingCurve(const QEasingCurve \emph{\&curve}) \\
+\hline
+void 	& setEndFrame(int \emph{frame}) \\ 
+\hline
+void &	setFrameRange(int \emph{startFrame}, int \emph{endFrame})  \\ 
+\hline
+void &	setLoopCount(int \emph{count}) \\ 
+\hline
+void &	setStartFrame(int \emph{frame}) \\
+\hline
+void &	setUpdateInterval(int \emph{interval}) \\ 
+\hline
+int &	startFrame() const \\ 
+\hline
+QTimeLine::State &	state() const \\ 
+\hline
+int  &	updateInterval() const \\ 
+\hline
+virtual qreal &	valueForTime(int \emph{msec}) const \\ 
+\hline	
+\end{longtable}
+
+\section{公共槽函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 &	函数名 \\ 
+	\hline
+	void  &	resume() \\ 
+	\hline
+	void &	setCurrentTime(int msec) \\ 
+	\hline
+	void &	setPaused(bool paused) \\ 
+	\hline
+	void 	&start() \\ 
+	\hline
+	void &	stop() \\ 
+	\hline
+	void &	toggleDirection() \\ 
+	\hline
+\end{tabular}
+
+
+% ss
+
+
+\section{信号}
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 &	函数名 \\ 
+	\hline
+	void  &	finished() \\ 
+	\hline
+	void 	&frameChanged(int \emph{frame}) \\ 
+	\hline
+	void 	&stateChanged(QTimeLine::State \emph{newState}) \\ 
+	\hline 
+	void 	&valueChanged(qreal \emph{value}) \\
+	\hline
+\end{tabular}
+
+\section{重写保护成员函数}
+
+\begin{tabular}{|r|l|}
+	\hline
+	返回类型 &	函数名 \\ 
+	\hline
+	virtual void &	timerEvent(QTimerEvent \emph{*event}) override\\ 
+	\hline
+\end{tabular}
+
+\section{详细介绍}
+
+它通常用于周期性地调用槽函数来使 GUI 控件设置动画效果。您可以通过以毫秒为单位为QTimeline的构造函数来构建时间线。
+时间轴的持续时间描述了动画将运行多长时间。然后通过调用setframerange（）设置合适的帧范围。
+最后将FrameChanged（）信号连接到您希望动画的窗口小部件中的合适插槽（例如，QProgressBar中的SetValue（））。
+当您继续调用 start ()时，QTimeLine 将进入 Running 状态，并开始定期发送 framecchanged ()信号 ，使您的小部件的连接属性的值从较低端增长到较高端，并以一个稳定的速率增长到帧范围的较高端。可以通过调用 setUpdateInterval ()来指定更新间隔。完成后，QTimeLine 进入 NotRunning 状态，并发出 finished ()。
+
+例子:
+
+\begin{lstlisting}[language=C++]
+...
+progressBar = new QProgressBar(this);
+progressBar->setRange(0, 100);
+
+// Construct a 1-second timeline with a frame range of 0 - 100
+QTimeLine *timeLine = new QTimeLine(1000, this);
+timeLine->setFrameRange(0, 100);
+connect(timeLine, &QTimeLine::frameChanged, progressBar, &QProgressBar::setValue);
+
+// Clicking the push button will start the progress bar animation
+pushButton = new QPushButton(tr("Start animation"), this);
+connect(pushButton, &QPushButton::clicked, timeLine, &QTimeLine::start);
+...
+\end{lstlisting}
+
+默认情况下，时间线从开始到结束运行一次，您必须在此时间线上再次调用 start ()以重新启动。要使时间线循环，可以调用 setLoopCount () ，传递在完成之前时间线应该运行的次数。还可以通过调用 setDirection ()更改方向，从而使时间线向后运行。您还可以在时间轴运行时调用 setestated ()来暂停和取消暂停。对于交互控制，提供了 setCurrentTime ()函数，它直接设置时间线的时间位置。尽管在 NotRunning 状态下最有用(例如，连接到 QSlider 中的 valueChanged ()信号) ，但是这个函数可以在任何时候调用。
+
+框架界面对于标准部件很有用，但 QTimeLine 可以用来控制任何类型的动画。QTimeLine 的核心在 valueForTime ()函数中，该函数在给定时间内生成介于0和1之间的值。此值通常用于描述动画的步骤，其中0是动画的第一步，1是最后一步。在运行时，QTimeLine 通过调用 valueForTime ()和发出 valueChanged ()生成0到1之间的值。默认情况下，valueForTime ()应用插值算法来生成这些值。可以通过调用 setEasingCurve ()从一组预定义的时间线算法中进行选择。
+
+请注意，默认情况下，QTimeLine 使用 QEasingCurve: : InOutSine，它提供一个缓慢增长的值，然后稳定增长，最后缓慢增长。对于自定义时间线，可以重新实现 valueForTime () ，在这种情况下，忽略 QTimeLine 的 easingCurve 属性。
+
+\begin{seeAlso}
+ QProgressBar 和 QProgressDialog.
+\end{seeAlso}
+
+\section{成员类型文档}
+
+enum QTimeLine::Direction
+
+此枚举描述处于 Running状态时的时间线方向。
+
+\begin{tabular}{|c|c|c|}
+\hline
+函数 &	值 & 	描述 \\
+\hline
+QTimeLine::Forward 	&0& 	“当前时间”随时间递增（即从0向终点/duration 移动）\\
+\hline
+QTimeLine::Backward &	1& 	”当前时间“随时间递减（即从终点/duration 向0移动）\\
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+setDirection().
+\end{seeAlso}
+
+enum QTimeLine::State
+
+此枚举描述时间线的状态。
+
+%%%%%%%%%
+
+
+\begin{tabular}{|c|c|c|}
+\hline
+函数 &	值 & 	描述 \\
+\hline
+QTimeLine::NotRunning &	0 &	时间线没有运行。这是 QTimeLine 的初始状态，状态 QTimeLine 在完成时重新进入。当前时间、帧和值保持不变，直到调用 setCurrentTime ()或调用 start ()启动时间线。\\
+\hline
+QTimeLine::Paused &	1 &	时间线暂停（即暂时暂停）。调用setPaused（false）将恢复时间线活动。 \\ 
+\hline
+QTimeLine::Running &	2 	&时间轴正在运行。虽然控件在事件循环中，QTimeline将以规则的间隔更新其当前时间，并在适当时发出ValueChanged（）和FrameChanged（）。\\
+\hline
+\end{tabular}
+
+\begin{seeAlso}
+state() and stateChanged().
+\end{seeAlso}
+
+\section{属性文档}
+
+currentTime : int
+
+此属性保存时间线的当前时间。
+
+当 QTimeLine 处于 Running 状态时，此值将作为时间轴持续时间和方向的函数不断更新。否则，它是上次调用 stop ()时的当前值，或者是由 setCurrentTime ()设置的值。
+
+默认情况下，此属性包含值0。
+
+访问函数:
+
+
+\begin{tabular}{|l|c|}
+\hline
+返回类型	& 函数名 \\ 
+\hline
+int &	currentTime() const \\ 
+\hline
+void& 	setCurrentTime(int \emph{msec}) \\ 
+\hline
+\end{tabular}
+
+direction : Direction
+
+该属性持有时间线的方向，当QTimeLine处于Running状态时。
+
+这个方向表示时间是从0向时间线持续时间移动，还是从持续时间的值开始，在调用start()后向0移动。
+
+默认情况下，这个属性被设置为Forward。
+
+访问函数:
+
+
+

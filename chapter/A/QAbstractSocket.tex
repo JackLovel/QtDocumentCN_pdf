@@ -212,7 +212,7 @@ virtual qint64&	writeData(const char *data, qint64 size) override\\
 QAbstractSocket 类是 QTcpSocket 类和 QUdpSocket 类的基类，包含了这两个
 类所有的常规功能。您可以通过以下两种方法使用一个套接字( Socket )：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 实例化一个 QTcpSocket 或者 QUdpSocket 对象
 \item 声明一个自定义套接字描述符，实例化 QAbstractSocket ，然后调用 setSocketDescriptor() 函数包装该自定义套接字描述符。
 \end{compactitem}
@@ -234,7 +234,7 @@ QAbstractSocket 的 API 统一了这两种协议之间的大部分差异。 例�
 QAbstractSocket 提供了一组函数，这些函数可以挂起调用线程，直到发出某些
 信号为止。 这些函数可用于实现阻塞套接字：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item waitForConnected() 阻塞套接字直到一个新的连接建立
 \item waitForReadyRead() 阻塞套接字直到有新的数据可以读取
 \item waitForBytesWritten() 阻塞套接字直到一个有效的荷载数据写入到了套接字

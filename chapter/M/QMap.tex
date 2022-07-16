@@ -17,7 +17,7 @@ QMap 类是一种模板类，提供基于红黑树的字典类结构。更多内
 	\hline
 \end{tabular}
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 所有成员列表，包括继承的成员
 \item 废弃的成员
 \end{compactitem}
@@ -205,7 +205,7 @@ QMap<Key, T> 是一种 Qt 泛型容器类。
 
 QMap 的功能与 QHash 非常相似。二者的区别在于：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item QHash 的平均查找速度比 QMap 快。（详情请看算法复杂度。）
 \item 遍历 QHash 时，元素的顺序是任意的。而遍历 QMap 时，元素总是按照键的顺序排好序的。
 \item QHash 的键类型必须提供 operator==() 运算符和全局的 qHash(Key) 函数。QMap 的键类型必须提供 operator<() 运算符来确定全序。从 Qt5.8.1 起，即使底层的 operator<() 运算符没有提供全序，使用指针作为键类型也是安全的。

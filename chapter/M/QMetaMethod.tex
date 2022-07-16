@@ -197,7 +197,7 @@ QGenericArgument val7 = QGenericArgument(),
 
 该动态调用可以是同步或异步的，由 connectionType 决定：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 若 type 是 Qt::DirectConnection，则该方法会被立即执行。
 \item 若 type 是 Qt::QueuedConnection，则会发送一个 QEvent ，该方法会在应用进入该对象所属线程的主事件循环后执行。
 \item 若 type 是 Qt::AutoConnection，当 object 与调用者处于相同线程中时，该方法会被同步执行，否则会被异步执行。

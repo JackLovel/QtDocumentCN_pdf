@@ -144,7 +144,7 @@ rcc -compress 2 -compress-algo zlib myresources.qrc
 
 \hl{rcc} 支持如下压缩算法和压缩等级：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item \hl{best}：使用下述算法中的最优者，并使用其最高压缩等级，以编译时的 CPU 时间为代价来获得最高压缩率。
     此参数在 XML 文件中可用于指明无论 \hl{rcc} 支持何种压缩算法，该文件都应被尽可能地压缩。
 \item \hl{zstd}：使用 Zstandard 库进行压缩。有效压缩等级为 1 至 19，1 为最低压缩率（最短 CPU 时间），19 为最高压缩率（最长 CPU 时间）。

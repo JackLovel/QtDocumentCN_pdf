@@ -137,7 +137,7 @@ QMetaObject 在应用编写中通常不需要，但在进行元编程时会非�
 
 最常用的成员函数有：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item className() 返回类的名称。
 \item superClass() 返回父类对应的元对象。
 \item method() 和 methodCount() 提供关于一个类的元方法（信号、槽和其它可动态调用的成员方法）。
@@ -393,7 +393,7 @@ bool QMetaObject::inherits(const QMetaObject \emph{*metaObject}) const
 
 该调用可以是同步或异步的，由 type 决定：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 若 type 是 Qt::DirectConnection，则该方法会被立即执行。
 \item 若 type 是 Qt::QueuedConnection，则会发送一个 QEvent ，该方法会在应用进入该对象所属线程的主事件循环后执行。
 \item 若 type 是 Qt::BlockingQueuedConnection，则该方法会通过与 Qt::QueuedConnection 相同的方式执行，

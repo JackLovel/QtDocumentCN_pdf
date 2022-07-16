@@ -616,7 +616,7 @@ CONFIG += no_keywords
 Qt 包含了在某些方面和容器相似的其他模板类。这些类没有提供迭代器，也无
 法在 \hl{foreach} 关键字中使用。
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item QCache<Key, T> 提供了一个缓存，用于保存与键类型Key相关联的类型T的对象。
 \item QContiguousCache 提供了一个高效的方式用于缓存那些通常以连续的方式访问的数据。
 \item QPair<T1, T2> 保存了一对元素。
@@ -632,7 +632,7 @@ Qt 包含了在某些方面和容器相似的其他模板类。这些类没有�
 
 为了描述算法复杂度，我们使用以下基于“大O”符号的术语：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 常量时间：O(1)。函数有常量时间复杂度表示无论容器中有多少元素，执行该函数的时间都是相等的。一个例子是 QLinkedList::insert())；
 \item 对数时间：O(log n)。函数有对数时间复杂度表示该函数的运行时间和容器中元素个数的对数成正比。一个例子是二分查找算法。
 \item 线性时间：O(n)。函数有线性时间复杂度表示该函数的运行时间和容器中元素的个数成正比。一个例子是 QVector::insert()。
@@ -700,7 +700,7 @@ QString onlyLetters(const QString &in)
 
 上面的数字可能有些奇怪，这里是分配的指导原则。
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item QString 每次分配 4 个字符指导达到 20 个字符。
 \item 从 20 到 4084 个字符，每次将当前的大小翻倍。更准确的说，是翻倍后再减去 12。（一些内存分配器在分配刚好两倍的内存时性能较差，因为它们需要使用每块内存块中的一些字节用于登记。
 \item 从 4084 开始，每次分配将会在原来的基础上增加 2048 个字符大小（4096 字节）。这么做的意义是现代操作系统在重新分配内存时并不会复制全部的数据，而仅仅是简单地将物理内存页重新排序,只有第一页和最后一页的数据需要复制。
@@ -716,7 +716,7 @@ QHash<Key, T> 则是完全不同。QHash 内部的哈希表每次增长两倍，
 定义调整，QVector, QHash<Key, T>, QSet, QString 和 QByteArray 提供了一
 个提供了三个方法用于检查和指定保存元素使用的内存量。
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item capacity() 用于返回已分配内存的元素个数（对于QHash 和 QSet，返回的是哈希表的簇的个数）。
 \item reserve(size) 用于显式的预分配 size 个元素大小的内存。
 \item squeeze() 用于释放所有没有用来保存元素的内存。
@@ -724,9 +724,3 @@ QHash<Key, T> 则是完全不同。QHash 内部的哈希表每次增长两倍，
 
 如果预先知道容器要保存元素的大概数量，可以提前调用 reserve() 方法分配
 内存，最后在填充完容器后，再调用 squeeze() 来释放多余的预分配内存。
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../../master"
-%%% End:
-

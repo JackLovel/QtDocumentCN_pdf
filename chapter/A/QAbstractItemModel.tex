@@ -349,7 +349,7 @@ insertColumns() 和 removeColumns() 的实现。在实现这些函数时，重�
 要在模型尺寸大小发生 之前 和 之后 将有关模型尺寸的更改通知所有连接的视
 图：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item insertRows() 的实现必须在将新行插入数据结构 之前 调用
   beginInsertRows()，然后立即 调用 endInsertRows()。
 \item insertColumns() 的实现必须在将新列插入数据结构　之前 调用
@@ -576,7 +576,7 @@ layoutChanged() 和 changePersistentIndex()。
 子类应在发​​出 layoutChanged() 信号之前更新所有持久模型索引。换句话说，
 当结构改变时：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item 发出 layoutAboutToBeChanged
 \item 记住将会改变的 QModelIndex
 \item 更新内部数据
@@ -1112,7 +1112,7 @@ bool QAbstractItemModel::checkIndex(const QModelIndex \&index, QAbstractItemMode
 
 此函数检查索引是否为此模型的合法模型索引。 合法模型索引要么是无效的模型索引，要么是具有以下所有条件的有效模型索引：
 
-\begin{compactitem}
+\begin{compactitem}[\arr]
 \item index 的模型就是 this；
 \item index 的行数大于等于零；
 \item index 的行数小于父索引的行数；
