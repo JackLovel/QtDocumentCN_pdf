@@ -342,7 +342,7 @@ QOpenGLShaderProgram类允许链接和使用OpenGL着色器程序。 \href{https
 
 \section{静态公共成员}
 
-\begin{tabular}[l]{|l|m{34em}|} 
+\begin{tabular}[l]{|l|m{24em}|} 
     \hline
     返回类型 & 函数 \\   
     \hline
@@ -376,7 +376,9 @@ program.bind();
 
 \subsection{编写便携式着色器}
 
-由于对标准顶点属性和统一变量的支持程度不同，着色器程序可能难以在OpenGL实现中重用。特别是，GLSL/ES缺少桌面OpenGL系统中存在的所有标准变量：gl\_Vertex, gl\_Normal, gl\_Color等。
+由于对标准顶点属性和统一变量的支持程度不同，着色器程序可能难以在OpenGL实现中重用。
+
+特别是，GLSL/ES缺少桌面OpenGL系统中存在的所有标准变量：gl\_Vertex, gl\_Normal, gl\_Color等。
 桌面OpenGL缺少变量限定符highp,mediump,lowp。
 
 QOpenGLShaderProgram 类通过在桌面OpenGL上为所有着色器程序添加以下行前缀，使编写可移植着色器的过程更容易:
@@ -486,6 +488,7 @@ addShaderFromSourceCode() 和 addCacheableShaderFromSourceFile()。
 \end{seeAlso}
 
 [since 5.9]bool QOpenGLShaderProgram::addCacheableShaderFromSourceCode(QOpenGLShader::ShaderType \emph{type}, const QByteArray \emph{\&source})
+
 这是一个重载的函数。
 
 将指定类型和源的着色器注册到此程序。与 addShaderFromSourceCode(),不同，此函数不执行编译。编译推迟到 link(), 并且可能根本不会发生, 因为link() 可能会使用来自Qt的着色器磁盘缓存的程序二进制文件。这通常会导致性能显著提供高。
@@ -501,6 +504,7 @@ addShaderFromSourceCode() 和 addCacheableShaderFromSourceFile()。
 \end{seeAlso}
 
 [since 5.9]bool QOpenGLShaderProgram::addCacheableShaderFromSourceCode(QOpenGLShader::ShaderType type, const QString \&source)
+
 这是一个重载的函数。
 
 将指定类型和源的着色器注册到此程序。与 addShaderFromSourceCode(),不同，此函数不执行编译。编译推迟到 link(), 并且可能根本不会发生, 因为link() 可能会使用来自Qt的着色器磁盘缓存的程序二进制文件。这通常会导致性能显著提供高。
@@ -514,6 +518,7 @@ addShaderFromSourceCode() 和 addCacheableShaderFromSourceFile()。
 另请参见 addShaderFromSourceCode() 和 addCacheableShaderFromSourceFile()。
 
 [since 5.9]bool QOpenGLShaderProgram::addCacheableShaderFromSourceFile(QOpenGLShader::ShaderType type, const QString \&fileName)
+
 将指定类型和文件名的着色器注册到此程序。与 addShaderFromSourceFile()不同， 此函数不执行编译。编译推迟到 link(), 并且可能根本不会发生, 因为link() 可能会使用来自Qt的着色器磁盘缓存的程序二进制文件。这通常会导致性能显著提供高。
 
 如果着色器已注册或在非缓存情况下成功编译，则返回true；如果有错误，则为false。可以通过log()检索编译错误信息。
@@ -532,6 +537,7 @@ bool QOpenGLShaderProgram::addShader(QOpenGLShader *shader)
 另请参见 addShaderFromSourceCode(), addShaderFromSourceFile(), removeShader(), link(), 和 removeAllShaders()。
 
 bool QOpenGLShaderProgram::addShaderFromSourceCode(QOpenGLShader::ShaderType type, const char *source)
+
 将源代码编译为指定类型的着色器并将其添加到此着色器程序中。true如果编译成功则返回，否则返回false。编译错误和警告将通过 log() 提供。
 
 此函数旨在成为快速将顶点和片段着色器添加到着色器程序的快捷方式，而无需先创建 QOpenGLShader 的实例。
@@ -539,6 +545,7 @@ bool QOpenGLShaderProgram::addShaderFromSourceCode(QOpenGLShader::ShaderType typ
 另请参见 addShader(), addShaderFromSourceFile(), removeShader(), link(), log(), 和removeAllShaders()。
 
 bool QOpenGLShaderProgram::addShaderFromSourceCode(QOpenGLShader::ShaderType type, const QByteArray \&source)
+
 这是一个重载的方法。
 
 将源代码编译为指定类型的着色器并将其添加到此着色器程序中。true如果编译成功则返回，否则返回false。编译错误和警告将通过 log() 提供。
@@ -566,6 +573,7 @@ bool QOpenGLShaderProgram::addShaderFromSourceFile(QOpenGLShader::ShaderType typ
 另请参见 addShader() 和 addShaderFromSourceCode()。
 
 int QOpenGLShaderProgram::attributeLocation(const char *name) const
+
 返回此着色器程序的参数列表中属性名称的位置。如果name不是此着色器程序的有效属性，则返回-1。
 
 另请参见 uniformLocation() 和 bindAttributeLocation()。
@@ -579,6 +587,7 @@ int QOpenGLShaderProgram::attributeLocation(const QByteArray \&name) const
 另请参见 uniformLocation() 和 bindAttributeLocation()。
 
 int QOpenGLShaderProgram::attributeLocation(const QString \&name) const
+
 这是一个重载方法。
 
 返回此着色器程序的参数列表中属性名称的位置。如果name不是此着色器程序的有效属性，则返回-1。
@@ -600,15 +609,19 @@ void QOpenGLShaderProgram::bindAttributeLocation(const char *name, int location)
 另请参见 attributeLocation()。
 
 void QOpenGLShaderProgram::bindAttributeLocation(const QByteArray \&name, int location)
+
 这是一个重载方法。
 
 将属性名称绑定到指定位置。该函数可以在程序链接之前或之后调用。链接程序时未明确绑定的任何属性都将自动分配位置。
 
 在程序链接后调用此函数时，需要重新链接程序才能使更改生效。
 
-另请参见 attributeLocation()。
+\begin{seeAlso}
+attributeLocation()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::bindAttributeLocation(const QString \&name, int location)
+
 这是一个重载方法。
 
 将属性名称绑定到指定位置。该函数可以在程序链接之前或之后调用。链接程序时未明确绑定的任何属性都将自动分配位置。
@@ -618,6 +631,7 @@ void QOpenGLShaderProgram::bindAttributeLocation(const QString \&name, int locat
 另请参见 attributeLocation()。
 
 [since 5.3]bool QOpenGLShaderProgram::create()
+
 请求立即创建着色器程序的id。成功则返回true，否则返回false。
 
 该函数主要用于将 QOpenGLShaderProgram 与直接在着色器程序id上操作的其它OpenGL函数相结合, 例如 GL\_OES\_get\_program\_binary。
@@ -641,6 +655,7 @@ QList QOpenGLShaderProgram::defaultInnerTessellationLevels() const
 另请参见 setDefaultInnerTessellationLevels() 和 defaultOuterTessellationLevels()。
 
 QList QOpenGLShaderProgram::defaultOuterTessellationLevels() const
+
 在曲面细分控制着色器不输出它们的情况下，返回由曲面细分图元生成器使用的默认外部曲面细分级别。有关OpenGL和Tessellation着色器的更多详细信息，请参阅 OpenGL Tessellation Shaders。
 
 返回描述外部细分级别的浮点 QList . 向量将始终具有四个元素，但并非所有元素都对每种镶嵌模式都有意义。
@@ -652,11 +667,13 @@ QList QOpenGLShaderProgram::defaultOuterTessellationLevels() const
 另请参见 setDefaultOuterTessellationLevels() 和 defaultInnerTessellationLevels()。
 
 void QOpenGLShaderProgram::disableAttributeArray(int location)
+
 在该着色器程序中的位置禁用顶点数组，该位置由先前调用 enableAttributeArray()启用。
 
 另请参见 enableAttributeArray(), setAttributeArray(), setAttributeValue(), 和 setUniformValue()。
 
 void QOpenGLShaderProgram::disableAttributeArray(const char *name)
+
 这是一个重载方法。
 
 禁用此着色器程序中名为name的顶点数组，该顶点数组由先前调用 enableAttributeArray()启用。
@@ -664,11 +681,13 @@ void QOpenGLShaderProgram::disableAttributeArray(const char *name)
 另请参见 enableAttributeArray(), setAttributeArray(), setAttributeValue(), 和 setUniformValue()。
 
 void QOpenGLShaderProgram::enableAttributeArray(int location)
+
 在此着色器程序中启用位于位置的顶点数组，以便着色器程序使用由 setAttributeArray() 在位置上设置的值。
 
 另请参见 disableAttributeArray(), setAttributeArray(), setAttributeValue(), 和 setUniformValue()。
 
 void QOpenGLShaderProgram::enableAttributeArray(const char *name)
+
 这是一个重载方法。
 
 在此着色器程序中启用名为name的顶点数组，以便着色器程序使用由 setAttributeArray() 对name设置的值。
@@ -676,16 +695,19 @@ void QOpenGLShaderProgram::enableAttributeArray(const char *name)
 另请参见 disableAttributeArray(), setAttributeArray(), setAttributeValue(), 和 setUniformValue()。
 
 [static]bool QOpenGLShaderProgram::hasOpenGLShaderPrograms(QOpenGLContext *context = nullptr)
+
 返回true 表示此系统支持以OpenGL着色语言 (GLSL)编写的着色器程序；否则为假。
 
 上下文用于解析GLSL扩展。 如果 context 是nullptr, 则使用QOpenGLContext::currentContext() 。
 
 bool QOpenGLShaderProgram::isLinked() const
+
 如果此着色器程序已链接，返回true；否则返回false。
 
 另请参见 link()。
 
 [virtual]bool QOpenGLShaderProgram::link()
+
 使用 addShader()将添加到此程序的着色器链接在一起。如果链接成功则返回true，否则返回false。如果链接失败，可以使用 log()检索错误消息。
 
 子类可以覆盖此函数以初始化属性和统一变量以用于特定着色器程序。
@@ -697,11 +719,13 @@ bool QOpenGLShaderProgram::isLinked() const
 另请参见 addShader() 和 log()。
 
 QString QOpenGLShaderProgram::log() const
+
 返回最后一个 link() 或 addShader() 期间发生的错误和警告，并带有明确指定的源代码。
 
 另请参见 link()。
 
 int QOpenGLShaderProgram::maxGeometryOutputVertices() const
+
 返回几何着色器可以输出多少顶点的硬件限制。
 
 int QOpenGLShaderProgram::patchVertexCount() const
@@ -763,6 +787,7 @@ void QOpenGLShaderProgram::setAttributeArray(int location, const QVector3D *valu
 另请参见 setAttributeValue(), setUniformValue(), enableAttributeArray(), 和 disableAttributeArray()。
 
 void QOpenGLShaderProgram::setAttributeArray(int location, const QVector4D *values, int stride = 0)
+
 在此着色器程序中的 location 上设置属性的四维顶点值数组。 stride 表示顶点之间的字节数。默认的 stride 值为零表示顶点密集地打包在 values 中。
 
 当在 location 上调用enableAttributeArray() 时. 该数组将变为活动状态。否则，将使用 setAttributeValue() 给location设置指定的值。
@@ -784,6 +809,7 @@ setAttributeBuffer() 函数可用于将属性数据设置为顶点缓冲区内�
 另请参见 setAttributeValue(), setUniformValue(), enableAttributeArray(), disableAttributeArray(), 和 setAttributeBuffer()。
 
 void QOpenGLShaderProgram::setAttributeArray(const char *name, const GLfloat *values, int tupleSize, int stride = 0)
+
 这是一个重载方法。
 
 在此着色器程序中设置名为 name的属性的顶点值数组 。 tupleSize 表示每个顶点的组件数 (1, 2, 3, 或 4), stride 表示顶点之间的字节数。 默认的 stride 值为0表示顶点密集地打包在values中。
@@ -793,6 +819,7 @@ void QOpenGLShaderProgram::setAttributeArray(const char *name, const GLfloat *va
 另请参见 setAttributeValue(), setUniformValue(), enableAttributeArray(), 和 disableAttributeArray()。
 
 void QOpenGLShaderProgram::setAttributeArray(const char *name, const QVector2D *values, int stride = 0)
+
 这是一个重载方法。
 
 在此程序中设置名为name的属性的二维顶点值数组。 stride 表示顶点之间的字节数。默认的stride 值为0表示顶点密集地打包在values中。
@@ -802,6 +829,7 @@ void QOpenGLShaderProgram::setAttributeArray(const char *name, const QVector2D *
 另请参见 setAttributeValue(), setUniformValue(), enableAttributeArray(), 和 disableAttributeArray()。
 
 void QOpenGLShaderProgram::setAttributeArray(const char *name, const QVector3D *values, int stride = 0)
+
 这是一个重载方法。
 
 在此程序中设置名为name的属性的三维顶点值数组。 stride 表示顶点之间的字节数。默认的stride 值为0表示顶点密集地打包在values中。
@@ -811,6 +839,7 @@ void QOpenGLShaderProgram::setAttributeArray(const char *name, const QVector3D *
 另请参见 setAttributeValue(), setUniformValue(), enableAttributeArray(), 和 disableAttributeArray()。
 
 void QOpenGLShaderProgram::setAttributeArray(const char *name, const QVector4D *values, int stride = 0)
+
 这是一个重载方法。
 
 在此程序中设置名为name的属性的四维顶点值数组。 stride 表示顶点之间的字节数。默认的stride 值为0表示顶点密集地打包在values中。
@@ -820,6 +849,7 @@ void QOpenGLShaderProgram::setAttributeArray(const char *name, const QVector4D *
 另请参见 setAttributeValue(), setUniformValue(), enableAttributeArray(), 和 disableAttributeArray()。
 
 void QOpenGLShaderProgram::setAttributeArray(const char *name, GLenum type, const void *values, int tupleSize, int stride = 0)
+
 这是一个重载方法。
 
 在此着色器程序中设置名为 name 的属性的顶点值数组. stride 表示顶点之间的字节数。默认的stride 值为0表示顶点密集地打包在values中。
@@ -878,31 +908,37 @@ void QOpenGLShaderProgram::setAttributeValue(int location, GLfloat x, GLfloat y,
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(int location, const QVector2D \&value)
+
 Sets the attribute at location in the current context to value.
 
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(int location, const QVector3D \&value)
+
 将当前上下文中的 location 的属性设置为 value 。
 
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(int location, const QVector4D \&value)
+
 将当前上下文中的 location 的属性设置为 value 。
 
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(int location, const QColor \&value)
+
 将当前上下文中的 location 的属性设置为 value 。
 
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(int location, const GLfloat *values, int columns, int rows)
+
 将当前上下文中location的属性设置为 values 的内容，其中包含 columns 元素，每个元素由 rows 元素组成。行值应为1、2、3或4。此函数通常用于设置矩阵值和列向量。
 
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat value)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为 values 。
@@ -910,6 +946,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat value)
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat x, GLfloat y)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为2D 向量 (x, y)。
@@ -917,6 +954,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat x, GLfloa
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat x, GLfloat y, GLfloat z)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为3D 向量 (x, y, z)。
@@ -924,6 +962,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat x, GLfloa
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为4D 向量 (x, y, z, w)。
@@ -931,6 +970,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, GLfloat x, GLfloa
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, const QVector2D \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为 values 。
@@ -938,6 +978,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, const QVector2D \
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, const QVector3D \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为 values 。
@@ -945,6 +986,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, const QVector3D \
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, const QVector4D \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为 values 。
@@ -952,6 +994,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, const QVector4D \
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, const QColor \&value)
+1
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为 values 。
@@ -959,6 +1002,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, const QColor \&va
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setAttributeValue(const char *name, const GLfloat *values, int columns, int rows)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的属性设置为 values 的内容，其中包含 columns 元素，每个元素由 rows 元素组成。行值应为1、2、3或4。此函数通常用于设置矩阵值和列向量。
@@ -966,6 +1010,7 @@ void QOpenGLShaderProgram::setAttributeValue(const char *name, const GLfloat *va
 另请参见 setUniformValue()。
 
 void QOpenGLShaderProgram::setDefaultInnerTessellationLevels(const QList \&levels)
+
 设置在曲面细分控制着色器未将其输出到 levels 时由曲面细分图元生成器使用的默认外部曲面细分级别。有关 OpenG 和 Tessellation 着色器的更多详细信息，请参阅 OpenGL Tessellation Shaders.
 
 levels 参数应该是一个由2个浮点数组成的 QList 。并非所有值对所有细分模式都有意义。如果您指定的向量少于2个元素，则其余元素将被赋予默认值 1。
@@ -977,6 +1022,7 @@ levels 参数应该是一个由2个浮点数组成的 QList 。并非所有值�
 另请参见 defaultInnerTessellationLevels() 和 setDefaultOuterTessellationLevels()。
 
 void QOpenGLShaderProgram::setDefaultOuterTessellationLevels(const QList \&levels)
+
 设置在曲面细分控制着色器未将其输出到 levels 时由曲面细分图元生成器使用的默认外部曲面细分级别。有关 OpenG 和 Tessellation 着色器的更多详细信息，请参阅 OpenGL Tessellation Shaders.
 
 levels 参数应该是一个由4个浮点数组成的 QList 。并非所有值对所有细分模式都有意义。如果您指定的向量少于4个元素，则其余元素将被赋予默认值 1。
@@ -998,16 +1044,19 @@ void QOpenGLShaderProgram::setPatchVertexCount(int count)
 另请参见 patchVertexCount()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat value)
+
 将当前上下文中 location 的统一变量设置为 value.
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLint value)
+
 将当前上下文中 location 的统一变量设置为 value.
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QColor \&color)
+
 这是一个重载方法。
 
 将当前上下文中名为name 关联的统一变量设置为 color 的红色、绿色、蓝色和alpha分量。
@@ -1015,6 +1064,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QColor \&colo
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QPoint \&point)
+
 这是一个重载方法。
 
 将当前上下文中名为name 关联的统一变量设置为 point 的x和y坐标。
@@ -1022,6 +1072,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QPoint \&poin
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QPointF \&point)
+
 这是一个重载方法。
 
 将当前上下文中名为name 关联的统一变量设置为 point 的x和y坐标。
@@ -1029,6 +1080,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QPointF \&poi
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QSize \&size)
+
 这是一个重载方法。
 
 将当前上下文中名为name 关联的统一变量设置为 给定size的宽度和高度.
@@ -1036,6 +1088,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QSize \&size)
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QSizeF \&size)
+
 这是一个重载方法。
 
 将当前上下文中名为name 关联的统一变量设置为 给定size的宽度和高度.
@@ -1043,6 +1096,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QSizeF \&size
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix2x2 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 2x2 矩阵 value.
@@ -1050,6 +1104,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix2x2 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix2x3 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 2x3 矩阵 value.
@@ -1068,6 +1123,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix2x4 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x2 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 3x2 矩阵 value.
@@ -1077,6 +1133,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x2 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x3 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 3x3 矩阵 value.
@@ -1084,6 +1141,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x3 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x4 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 3x4 矩阵 value.
@@ -1102,6 +1160,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x2 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x3 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 4x3 矩阵 value.
@@ -1111,6 +1170,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x3 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x4 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 4x4 矩阵 value.
@@ -1118,6 +1178,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x4 \&
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [2][2] value = 2)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 2x2 矩阵 value. 矩阵元素必须以列优先顺序指定
@@ -1125,6 +1186,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [2][2
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [3][3] value = 3)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 3x3 矩阵 value. 矩阵元素必须以列优先顺序指定
@@ -1132,6 +1194,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [3][3
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [4][4] value = 4)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 4x4 矩阵 value. 矩阵元素必须以列优先顺序指定.
@@ -1139,6 +1202,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [4][4
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QTransform \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为指定 QTransform 值的 3x3 变换矩阵 value 。
@@ -1146,6 +1210,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QTransform \&
 要将 QTransform value 设置为着色器中的 4x4 矩阵，请使用 setUniformValue(name, QMatrix4x4(value)).
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLuint value)
+
 将当前上下文中 location 的 uniform 变量设置为 value. 设置采样器值时应使用此功能。
 
 注意： 此函数不知道现在OpenGL 版本中对 unsigned int 的支持，因此将 value 视为 GLint 并调用 glUniform1i.
@@ -1153,36 +1218,43 @@ void QOpenGLShaderProgram::setUniformValue(int location, GLuint value)
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat x, GLfloat y)
+
 将当前上下文中 location 的 uniform 变量设置为 2D 向量 (x, y).
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat x, GLfloat y, GLfloat z)
+
 将当前上下文中 location 的 uniform 变量设置为 3D 向量 (x, y, z).
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+
 将当前上下文中 location 的 uniform 变量设置为 4D 向量 (x, y, z, w).
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QVector2D \&value)
+
 将当前上下文中 location 的 uniform 变量设置为value 。
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QVector3D \&value)
+
 将当前上下文中 location 的 uniform 变量设置为value 。
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QVector4D \&value)
+
 将当前上下文中 location 的 uniform 变量设置为value 。
 
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QColor \&color)
+
 将当前上下文中的 location 的 uniform 变量设置为 color的红色、绿色、蓝色和alpha分量。
 
 另请参见 setAttributeValue()。
@@ -1309,6 +1381,7 @@ void QOpenGLShaderProgram::setUniformValue(int location, const QTransform \&valu
 要将 QTransform 值设置为着色器中的 4x4 矩阵, 请使用 setUniformValue(location, QMatrix4x4(value)).
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat value)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的统一变量设置为 value 。
@@ -1374,6 +1447,7 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector3D \&v
 另请参见 setAttributeValue()。
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector4D \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为 name 的统一变量设置为values。
@@ -1446,31 +1520,44 @@ void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix3x3 *
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 3*3 矩阵元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix3x4 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 3*4 矩阵元素。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix4x2 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 4*2 矩阵元素。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix4x3 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 4*3 矩阵元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix4x4 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 4*4矩阵元素。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const GLfloat *values, int count, int tupleSize)
 
@@ -1478,7 +1565,9 @@ void QOpenGLShaderProgram::setUniformValueArray(const char *name, const GLfloat 
 
 将当前上下文中名为 name 的统一变量数组设置为values的 count元素。每个元素都有tupleSize 组件。 tupleSize 必须为 1, 2, 3, 或 4.
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const GLint *values, int count)
 
@@ -1486,7 +1575,10 @@ void QOpenGLShaderProgram::setUniformValueArray(const char *name, const GLint *v
 
 将当前上下文中名为 name 的统一变量数组设置为values的 count元素。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const GLuint *values, int count)
 
@@ -1494,7 +1586,9 @@ void QOpenGLShaderProgram::setUniformValueArray(const char *name, const GLuint *
 
 将当前上下文中名为 name 的统一变量数组设置为values的 count元素。设置采样器值数组时应使用此重载。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QVector2D *values, int count)
 
@@ -1502,7 +1596,10 @@ void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QVector2
 
 将当前上下文中名为 name 的统一变量数组设置为values的 count 2D向量元素。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QVector3D *values, int count)
 
@@ -1510,7 +1607,9 @@ void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QVector3
 
 将当前上下文中名为 name 的统一变量数组设置为values的 count 3D向量元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QVector4D *values, int count)
 
@@ -1518,7 +1617,9 @@ void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QVector4
 
 将当前上下文中名为 name 的统一变量数组设置为values的 count 4D向量元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(const char *name, const QMatrix2x2 *values, int count)
 
