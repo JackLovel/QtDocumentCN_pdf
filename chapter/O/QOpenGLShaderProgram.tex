@@ -1386,7 +1386,9 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat value)
 
 将当前上下文中名为 name 的统一变量设置为 value 。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, GLint value)
 
@@ -1394,7 +1396,9 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, GLint value)
 
 将当前上下文中名为 name 的统一变量设置为 value 。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, GLuint value)
 
@@ -1402,9 +1406,13 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, GLuint value)
 
 将当前上下文中名为 name 的统一变量设置为 value 。设置采样器值时应使用此功能。
 
-注意： 此函数不知道现代 OpenGL版本中对 unsigned int的支持，因此将 values 视为 GLint 并调用 glUniform1iv.
+\begin{notice}
+此函数不知道现代 OpenGL版本中对 unsigned int的支持，因此将 values 视为 GLint 并调用 glUniform1iv.
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat x, GLfloat y)
 
@@ -1412,7 +1420,9 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat x, GLfloat 
 
 将当前上下文中名为 name 的统一变量设置为2D向量 (x, y,)。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat x, GLfloat y, GLfloat z)
 
@@ -1420,7 +1430,10 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat x, GLfloat 
 
 将当前上下文中名为 name 的统一变量设置为3D向量 (x, y, z,)。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 
@@ -1428,7 +1441,9 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, GLfloat x, GLfloat 
 
 将当前上下文中名为 name 的统一变量设置为4D向量 (x, y, z, w)。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector2D \&value)
 
@@ -1436,7 +1451,10 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector2D \&v
 
 将当前上下文中名为 name 的统一变量设置为values。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector3D \&value)
 
@@ -1444,7 +1462,9 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector3D \&v
 
 将当前上下文中名为 name 的统一变量设置为values。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector4D \&value)
 
@@ -1452,69 +1472,94 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QVector4D \&v
 
 将当前上下文中名为 name 的统一变量设置为values。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const GLfloat *values, int count, int tupleSize)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 元素。每个元素都有tupleSize 数组。 tupleSize 必须为 1, 2, 3, 或 4。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const GLint *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const GLuint *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 元素。设置采样器值数组时应使用此
 
-注意： 此函数不知道现代 OpenGL版本中对 unsigned int的支持，因此将 values 视为 GLint 并调用 glUniform1iv.
+\begin{notice}
+此函数不知道现代 OpenGL版本中对 unsigned int的支持，因此将 values 视为 GLint 并调用 glUniform1iv.
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QVector2D *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 2D向量元素。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QVector3D *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 3D向量元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QVector4D *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 4D向量元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix2x2 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 2*2 矩阵元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix2x3 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 2*3 矩阵元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix2x4 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 2*4 矩阵元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix3x2 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 3*2 矩阵元素。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix3x3 *values, int count)
 
@@ -1527,7 +1572,6 @@ setAttributeValue()。
 void QOpenGLShaderProgram::setUniformValueArray(int location, const QMatrix3x4 *values, int count)
 
 将当前上下文中名为 location 的统一变量数组设置为values的 count 3*4 矩阵元素。
-
 
 \begin{seeAlso}
 setAttributeValue()。
