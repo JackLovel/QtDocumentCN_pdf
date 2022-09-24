@@ -1109,18 +1109,28 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix2x3 \&
 
 将当前上下文中名为name 的统一变量设置为 2x3 矩阵 value.
 
-注意： 此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat2*3的GLSL类型。相反，它将统一视为vec3的数组。
+\begin{notice}
+此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat2*3的GLSL类型。相反，它将统一视为vec3的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix2x4 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 2x4 矩阵 value.
 
-注意： 此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat2*4的GLSL类型。相反，它将统一视为vec4的数组。
 
-另请参见 setAttributeValue()。
+\begin{notice}
+此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat2*4的GLSL类型。相反，它将统一视为vec4的数组。
+\end{notice}
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x2 \&value)
 
@@ -1128,9 +1138,15 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x2 \&
 
 将当前上下文中名为name 的统一变量设置为 3x2 矩阵 value.
 
-注意： 此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*3的GLSL类型。相反，它将统一视为vec4的数组。
 
-另请参见 setAttributeValue()。
+\begin{notice}
+此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*3的GLSL类型。相反，它将统一视为vec4的数组。
+\end{notice}
+
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x3 \&value)
 
@@ -1138,7 +1154,9 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x3 \&
 
 将当前上下文中名为name 的统一变量设置为 3x3 矩阵 value.
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x4 \&value)
 
@@ -1146,18 +1164,29 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix3x4 \&
 
 将当前上下文中名为name 的统一变量设置为 3x4 矩阵 value.
 
-注意： 此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*3的GLSL类型。相反，它将统一视为vec4的数组。
+\begin{notice}
+此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*3的GLSL类型。相反，它将统一视为vec4的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x2 \&value)
+
 这是一个重载方法。
 
 将当前上下文中名为name 的统一变量设置为 4x2 矩阵 value.
 
-注意： 此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*2的GLSL类型。相反，它将统一视为vec2的数组。
 
-另请参见 setAttributeValue()。
+\begin{notice}
+此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*2的GLSL类型。相反，它将统一视为vec2的数组。
+\end{notice}
+
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x3 \&value)
 
@@ -1165,9 +1194,14 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x3 \&
 
 将当前上下文中名为name 的统一变量设置为 4x3 矩阵 value.
 
-注意： 此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*3的GLSL类型。相反，它将统一视为vec3的数组。
 
-另请参见 setAttributeValue()。
+\begin{notice}
+此函数不知道非平方矩阵支持，即现代OpenGL版本中存在的类似mat4*3的GLSL类型。相反，它将统一视为vec3的数组。
+\end{notice}
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x4 \&value)
 
@@ -1175,7 +1209,10 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const QMatrix4x4 \&
 
 将当前上下文中名为name 的统一变量设置为 4x4 矩阵 value.
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [2][2] value = 2)
 
@@ -1183,7 +1220,10 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [2][2
 
 将当前上下文中名为name 的统一变量设置为 2x2 矩阵 value. 矩阵元素必须以列优先顺序指定
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [3][3] value = 3)
 
@@ -1191,7 +1231,10 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [3][3
 
 将当前上下文中名为name 的统一变量设置为 3x3 矩阵 value. 矩阵元素必须以列优先顺序指定
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [4][4] value = 4)
 
@@ -1199,7 +1242,10 @@ void QOpenGLShaderProgram::setUniformValue(const char *name, const GLfloat [4][4
 
 将当前上下文中名为name 的统一变量设置为 4x4 矩阵 value. 矩阵元素必须以列优先顺序指定.
 
+
+\begin{seeAlso}
 另请参见 setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(const char *name, const QTransform \&value)
 
@@ -1213,142 +1259,209 @@ void QOpenGLShaderProgram::setUniformValue(int location, GLuint value)
 
 将当前上下文中 location 的 uniform 变量设置为 value. 设置采样器值时应使用此功能。
 
-注意： 此函数不知道现在OpenGL 版本中对 unsigned int 的支持，因此将 value 视为 GLint 并调用 glUniform1i.
 
-另请参见 setAttributeValue()。
+\begin{notice}
+此函数不知道现在OpenGL 版本中对 unsigned int 的支持，因此将 value 视为 GLint 并调用 glUniform1i.
+\end{notice}
+
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat x, GLfloat y)
 
 将当前上下文中 location 的 uniform 变量设置为 2D 向量 (x, y).
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat x, GLfloat y, GLfloat z)
 
 将当前上下文中 location 的 uniform 变量设置为 3D 向量 (x, y, z).
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 
 将当前上下文中 location 的 uniform 变量设置为 4D 向量 (x, y, z, w).
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QVector2D \&value)
 
 将当前上下文中 location 的 uniform 变量设置为value 。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QVector3D \&value)
 
 将当前上下文中 location 的 uniform 变量设置为value 。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QVector4D \&value)
 
 将当前上下文中 location 的 uniform 变量设置为value 。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QColor \&color)
 
 将当前上下文中的 location 的 uniform 变量设置为 color的红色、绿色、蓝色和alpha分量。
 
-另请参见 setAttributeValue()。
+
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QPoint \&point)
 
 将当前上下文中 location 的 uniform 变量设置为 point 的x和y坐标。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QPointF \&point)
 
 
 将当前上下文中 location 的 uniform 变量设置为 point 的x和y坐标。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QSize \&size)
 
 将当前上下文中 location 的 uniform 变量设置为给定size的宽度和高度 。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QSizeF \&size)
 
 将当前上下文中 location 的 uniform 变量设置为给定size的宽度和高度 。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix2x2 \&value)
 
 将当前上下文中 location 的统一变量设置为2*2矩阵 value 。
 
-另请参见 setAttributeValue()。
+
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix2x3 \&value)
 
 将当前上下文中 location 的统一变量设置为2*3矩阵 value 。
 
-注意： 此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat2x3 。相反，它将统一视为vec3的数组。
+\begin{notice}
+此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat2x3 。相反，它将统一视为vec3的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix2x4 \&value)
 
 将当前上下文中 location 的统一变量设置为2*4矩阵 value 。
 
-注意： 此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat2x4 。相反，它将统一视为vec4的数组。
+\begin{notice}
+此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat2x4 。相反，它将统一视为vec4的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix3x2 \&value)
 
 将当前上下文中 location 的统一变量设置为3*2矩阵 value 。
 
-注意： 此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat3x2 。相反，它将统一视为vec2的数组。
+\begin{notice}
+此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat3x2 。相反，它将统一视为vec2的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix3x3 \&value)
 
 将当前上下文中 location 的统一变量设置为3*3矩阵 value 。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix3x4 \&value)
 
 将当前上下文中 location 的统一变量设置为3*4矩阵 value 。
 
-注意： 此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat3x4 。相反，它将统一视为vec4的数组。
+\begin{notice}
+此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat3x4 。相反，它将统一视为vec4的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix4x2 \&value)
 
 将当前上下文中 location 的统一变量设置为4*2矩阵 value 。
 
-注意： 此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat4x2 。相反，它将统一视为vec2的数组。
+\begin{notice}
+此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat4x2 。相反，它将统一视为vec2的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix4x3 \&value)
 
 将当前上下文中 location 的统一变量设置为4*3矩阵 value 。
 
-注意： 此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat4x3。相反，它将统一视为vec3的数组。
+\begin{notice}
+此函数不知道非方阵支持，即现代OpenGL版本中存在的GLSL类型，如 mat4x3。相反，它将统一视为vec3的数组。
+\end{notice}
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QMatrix4x4 \&value)
 
 将当前上下文中 location 的统一变量设置为4*4矩阵 value 。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const GLfloat [2][2] value = 2)
 
@@ -1356,7 +1469,9 @@ void QOpenGLShaderProgram::setUniformValue(int location, const GLfloat [2][2] va
 
 将当前上下文中 location 的统一变量设置为2*2矩阵 value. 矩阵元素必须以列优先顺序指定。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const GLfloat [3][3] value = 3)
 
@@ -1364,7 +1479,9 @@ void QOpenGLShaderProgram::setUniformValue(int location, const GLfloat [3][3] va
 
 将当前上下文中 location 的统一变量设置为3*3矩阵 value. 矩阵元素必须以列优先顺序指定。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const GLfloat [4][4] value = 4)
 
@@ -1372,7 +1489,9 @@ void QOpenGLShaderProgram::setUniformValue(int location, const GLfloat [4][4] va
 
 将当前上下文中 location 的统一变量设置为4*4矩阵 value. 矩阵元素必须以列优先顺序指定。
 
-另请参见 setAttributeValue()。
+\begin{seeAlso}
+setAttributeValue()。
+\end{seeAlso}
 
 void QOpenGLShaderProgram::setUniformValue(int location, const QTransform \&value)
 
