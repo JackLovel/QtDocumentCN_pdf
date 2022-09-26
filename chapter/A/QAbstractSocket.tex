@@ -221,7 +221,7 @@ TCP（传输控制协议）是一种可靠的，面向流，面向连接的传�
 
 QAbstractSocket 的 API 统一了这两种协议之间的大部分差异。 例如，尽管 UDP 是无连接的，但 connectToHost() 为 UDP 套接字建立了虚拟连接，使您可以忽略底层协议，以几乎相同的方式使用 QAbstractSocket 类。 在 QAbstractSocket 类的内部实现中，QAbstractSocket 记录了传递给 connectToHost() 的地址和端口，并且能在调用 read() 和 write() 之类的成员函数时使用这些值。
 
-任何情况下，QAbstractSocket 类都有一个状态（ state ，该值可以由 state() 成员函数的返回值获得）。 初始状态为未连接（ QAbstractSocket::UnconnectedState ）状态。 调用 connectToHost() 成员函数连接主机后，套接字会首先进入寻找主机（ QAbstractSocket::HostLookupState ）状态。 如果找到了主机，则 QAbstractSocket 会进入连接中（ QAbstractSocket::ConnectingState ）状态，并发送 hostFound() 信号。 建立连接后，它将进入已连接（ QAbstractSocket::ConnectedState ）状态并发送 connected() 信号。 如果在以上列出任何阶段发生了错误，则会发出 errorOccurred() 信号。 每当状态发生更改时，QAbstractSocket 都会发出 stateChanged() 信号。 为方便起见，当套接字已准备好进行读取和写入数据操作时，isValid() 成员函数的返回值为 true 。但是要注意一下，在进行读写操作之前，套接字的状态必须为已连接（ QAbstractSocket :: ConnectedState ）状态。
+任何情况下，QAbstractSocket 类都有一个状态（ state ，该值可以由 state() 成员函数的返回值获得）。 初始状态为未连接（ QAbstractSocket::UnconnectedState ）状态。 调用 connectToHost() 成员函数连接主机后，套接字会首先进入寻找主机（ QAbstractSocket::HostLookupState ）状态。 如果找到了主机，则 QAbstractSocket 会进入连接中（ QAbstractSocket::ConnectingState ）状态，并发送 hostFound() 信号。 建立连接后，它将进入已连接（ QAbstractSocket::ConnectedState ）状态并发送 connected() 信号。 如果在以上列出任何阶段发生了错误，则会发出 errorOccurred() 信号。 每当状态发生更改时，QAbstractSocket 都会发出 stateChanged() 信号。 为方便起见，当套接字已准备好进行读取和写入数据操作时，isValid() 成员函数的返回值为 true 。但是要注意一下，在进行读写操作之前，套接字的状态必须为已连接（ QAbstractSocket::ConnectedState ）状态。
 
 您可以通过调用 read() 或 write() 来进行数据读写操作，同时为了方便进行特殊的数据读入操作，您还可以使用 QAbstractSocket 的父类 QIODevice 提供的成员函数 readLine() 和 readAll() 。当我们需要以字节为单位进行数据读写操作时，可以使用 QAbstractSocket 的父类 QIODevice 提供的成员函数 getChar()，putChar() 和 ungetChar() 。 待数据写入套接字后，QAbstractSocket 会发出继承自父类 QIODevice 的信号 bytesWritten() 。请特别注意一下，Qt并不限制写缓冲区的大小。 您可以通过监听 bytesWritten() 信号来监视其大小。
 

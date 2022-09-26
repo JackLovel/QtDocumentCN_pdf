@@ -1619,9 +1619,9 @@ bool QAbstractItemModel::removeColumn(int column, const QModelIndex \&parent = Q
 
 如果删除了该列，则返回 true；否则返回 false。
 
-\begin{notice}
+\begin{seeAlso}
 removeColumns()、removeRow()和insertColumn()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::removeColumns(int column, int count, const QModelIndex \&parent = QModelIndex())
 
@@ -1633,10 +1633,9 @@ removeColumns()、removeRow()和insertColumn()。
 
 如果实现自己的模型，要支持删除，则可以重新实现此函数。 另外，您可以提供自己的 API 来更改数据。
 
-\begin{notice}
-  removeColumn()、removeRows()、insertColumns()、beginRemoveColumns() 和 endRemoveColumns()。
-\end{notice}
-
+\begin{seeAlso}
+removeColumn()、removeRows()、insertColumns()、beginRemoveColumns() 和 endRemoveColumns()。
+\end{seeAlso}
 
 bool QAbstractItemModel::removeRow(int row, const QModelIndex \&parent = QModelIndex())
 
@@ -1646,9 +1645,9 @@ bool QAbstractItemModel::removeRow(int row, const QModelIndex \&parent = QModelI
 
 这是一个调用 removeRows()的便利函数。QAbstractItemModel 的 removeRows()的实现不做任何事情。
 
-\begin{notice}
+\begin{seeAlso}
 removeRows()、removeColumn()和insertRow()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] bool QAbstractItemModel::removeRows(int row, int count, const QModelIndex \&parent = QModelIndex())
 
@@ -1660,9 +1659,9 @@ removeRows()、removeColumn()和insertRow()。
 
 如果实现自己的模型，要支持删除，则可以重新实现此函数。 另外，您可以提供自己的 API 来更改数据。
 
-\begin{notice}
+\begin{seeAlso}
 removeRow()、removeColumns()、insertColumns()、beginRemoveRows() 和 endRemoveRows()。
-\end{notice}
+\end{seeAlso}
 
 [virtual] QHash<int, QByteArray> QAbstractItemModel::roleNames() const
 
