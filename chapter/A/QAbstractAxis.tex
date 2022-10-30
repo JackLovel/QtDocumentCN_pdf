@@ -220,7 +220,7 @@ virtual AxisType &type() const = 0\\
 
 \section{信号}
 
-\begin{tabular}{|r|l|}
+\begin{longtable}[l]{|r|l|}
 \hline 
 类型 & 函数名\\
 \hline
@@ -274,7 +274,7 @@ void&	titleVisibleChanged(bool visible)\\
 \hline
 void&	visibleChanged(bool visible)\\
 \hline
-\end{tabular}
+\end{longtable}
 
 \section{详细说明}
 
@@ -285,6 +285,7 @@ QAbstractAxis是专门用于处理坐标轴的基类。
 每个轴的元素（比如轴线，标题，标签，网格线，阴影，可见性）都是可以控制的。
 
 成员变量
+
 enum QAbstractAxis::AxisType flags QAbstractAxis::AxisTypes
 
 这个枚举类型指定了轴对象的类型
@@ -959,7 +960,7 @@ QFont QAbstractAxis::labelsFont() const
 setLabelsFont()。
 \end{seeAlso}
 
-void QAbstractAxis :: labelsFontChanged（const QFont \emph{\&font}）[信号] 
+void QAbstractAxis::labelsFontChanged（const QFont \emph{\&font}）[信号] 
 
 当坐标轴的字体改变时，会发出此信号。 属性labelsFont的通知信号。
 

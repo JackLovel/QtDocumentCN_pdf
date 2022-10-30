@@ -45,11 +45,15 @@
 % 标题页
 \title{Qt中文文档翻译}
 \author{作者：\href{https://github.com/QtDocumentCN}{QtDocumentCN}}
-\CTEXoptions[today=small]
- % 标题左对齐
+\ctexset{ today = small }
+% 标题左对齐
 \CTEXsetup[format={\Large}]{section}
 % \ctexset{ section = {format = {\Large}}
-
+\ctexset{
+% chapter/format = \sffamily\raggedright,
+section/format += \sffamily\Large,
+% subsection/format += \fbox,
+}
 % 首行缩进两个字符
 %\setlength{\parindent}{2em}
 %\CTEXindent 
