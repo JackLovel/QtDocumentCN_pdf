@@ -19,3 +19,8 @@
 
 % 不输出标题编号
 \newcommand\specialsectioning{\setcounter{secnumdepth}{-1}}
+
+% 调整item的之间的间距
+\newenvironment{itemSpace}{}{}
+% \BeforeBeginEnvironment{itemSpace}{\vspace{1.3em}}
+\AfterEndEnvironment{itemSpace}{\vspace{1.3em}}
