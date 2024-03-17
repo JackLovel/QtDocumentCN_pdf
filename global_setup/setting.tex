@@ -1,47 +1,41 @@
-\ctexset{section/format += \raggedright}
-
-% \newfontfamily\consolas{Fira Code}
 \newfontfamily\consolas{Source Code Pro}
 % \newfontfamily\consolas{JetBrainsMono-Regular}
-
 % green
 \definecolor{mygreen}{rgb}{0, 0.6, 0}
 % 设定版本宽度和高度
 \geometry{papersize={35cm, 25cm}}
 % 页边距
 \geometry{left=2.5cm,right=2.5cm,top=2.0cm,bottom=2cm}
-
 % 页眉页脚
 \pagestyle{empty}
-
 % 设定代码环境
 % \newfontfamily\fira{Fira Mono}
 \newfontfamily\lstFont{Sarasa Fixed CL Light}
 \lstset{
 	basicstyle=\small\lstFont,
 	showstringspaces=false, % 支掉空体系时产生的下划线的空格标志
-	numberstyle=\tiny\lstFont, 
+	numberstyle=\tiny\lstFont,
 	keywordstyle=\color{blue!70},
 	commentstyle=\color{mygreen},
-	frame=shadowbox, 
+	frame=shadowbox,
 	rulesepcolor= \color{ red!20!green!20!blue!20},
-	columns=flexible, 
+	columns=flexible,
 	linewidth=.8\linewidth,
 	numbers=left,
 	tabsize=2, % set tab size= 2 space
 	% 整体距左侧边线的距离为2em
 	% xleftmargin=2em,
 	% xrightmargin=2em,
-} 
+}
 
 
 % 定义表格列宽
 \newcolumntype{L}[1]{>{\vspace{0.5em}\begin{minipage}{#1}\raggedright\let\newline\\
-\arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
+				\arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
 \newcolumntype{R}[1]{>{\vspace{0.5em}\begin{minipage}{#1}\raggedleft\let\newline\\
-\arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
+				\arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
 \newcolumntype{C}[1]{>{\vspace{0.5em}\begin{minipage}{#1}\centering\let\newline\\
-\arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
+				\arraybackslash\hspace{0pt}}m{#1}<{\end{minipage}\vspace{0.5em}}}
 
 % 中文设置
 \setCJKmainfont{SourceHanSerifCN-Light}
@@ -53,18 +47,15 @@
 % 标题页
 \title{Qt中文文档翻译}
 \author{作者：\href{https://github.com/QtDocumentCN}{QtDocumentCN}}
-\ctexset{ today = small }
 % 标题左对齐
-\CTEXsetup[format={\Large}]{section}
-% \ctexset{ section = {format = {\Large}}
-\ctexset{
-% chapter/format = \sffamily\raggedright,
-section/format += \sffamily\Large,
-% subsection/format += \fbox,
+\ctexset { 
+	today = small,
+	section = {
+		 format={\raggedright \sffamily\Large} 
+	} 
 }
-% 首行缩进两个字符
-%\setlength{\parindent}{2em}
-%\CTEXindent 
-\CTEXnoindent % 取消首行缩进
 
+
+% 首行缩进两个字符
+\setlength{\parindent}{0em}
 \setlength{\headheight}{20pt}
