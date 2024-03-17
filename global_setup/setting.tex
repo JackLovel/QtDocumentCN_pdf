@@ -15,17 +15,23 @@
 \pagestyle{empty}
 
 % 设定代码环境
-\newfontfamily\fira{Fira Code}
+% \newfontfamily\fira{Fira Mono}
+\newfontfamily\lstFont{Sarasa Fixed CL Light}
 \lstset{
-	basicstyle=\small\fira,
-	numberstyle= \tiny\fira, 
-	keywordstyle= \color{ blue!70},
+	basicstyle=\small\lstFont,
+	showstringspaces=false, % 支掉空体系时产生的下划线的空格标志
+	numberstyle=\tiny\lstFont, 
+	keywordstyle=\color{blue!70},
 	commentstyle=\color{mygreen},
 	frame=shadowbox, 
 	rulesepcolor= \color{ red!20!green!20!blue!20},
 	columns=flexible, 
-	% linewidth=1.1\linewidth,
-	linewidth=\linewidth,
+	linewidth=.8\linewidth,
+	numbers=left,
+	tabsize=2, % set tab size= 2 space
+	% 整体距左侧边线的距离为2em
+	% xleftmargin=2em,
+	% xrightmargin=2em,
 } 
 
 

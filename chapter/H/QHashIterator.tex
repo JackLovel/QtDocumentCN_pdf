@@ -7,7 +7,7 @@ QHashIterator 类为 QHash 和 QMultiHash 提供 Java 风格的常量迭代器�
 
 \begin{tabular}{|r|l|}
 	\hline
-头文件: &	\#include\\
+头文件: &	\#include <QHashIterator>\\
 \hline
 qmake: &	QT += core\\
 	\hline
@@ -87,7 +87,7 @@ next() 函数返回哈希表中的下一个元素并将迭代器前移。key() �
 \begin{lstlisting}[language=C++]
 QHashIterator<int, QWidget *> i(hash);
 while (i.findNext(widget)) {
-    qDebug() << "Found widget " << widget << " under key "
+    qDebug() << "Found widget  " << widget << " under key "
              << i.key();
 }
 \end{lstlisting}
